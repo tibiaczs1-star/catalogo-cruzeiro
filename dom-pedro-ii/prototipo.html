@@ -1,0 +1,3152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#B51D2D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DPII Voice">
+  <meta name="description" content="Painel do aluno do Colégio Dom Pedro II — CZS Sul. Dúvidas, atividades, materiais, apoio e comunicação em um só app.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/favicon.png" type="image/png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/app.css">
+  <title>Dom Pedro II Voice</title>
+<link rel="stylesheet" href="assets/minimal.css">
+<link rel="stylesheet" href="assets/firehouse.css">
+<link rel="stylesheet" href="assets/vibrant.css">
+<link rel="stylesheet" href="assets/accessibility.css">
+<script defer src="assets/accessibility.js"></script>
+</head>
+<body class="cinema-mode">
+<script defer src="assets/loading-intro.js"></script>
+<div class="app" inert>
+  <a class="skip-main" href="#pageTitle">Ir para o conteúdo</a>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+    <div class="brand">
+      <img class="seal crest" src="assets/brand/crest-128.png" alt="Brasão do Colégio Dom Pedro II">
+
+    </div>
+
+    <div class="nav-label">Estudar</div>
+    <nav>
+      <button type="button" class="active" data-view="inicio">
+        <img class="action-icon" src="assets/firehouse/home.webp" width="24" height="24" alt="" aria-hidden="true">
+        Início
+      </button>
+      <button type="button" data-view="reforco">
+        <img class="action-icon" src="assets/firehouse/mic.webp" width="24" height="24" alt="" aria-hidden="true">
+        Minha dúvida
+      </button>
+      <button type="button" data-view="atividades">
+        <img class="action-icon" src="assets/firehouse/tasks.webp" width="24" height="24" alt="" aria-hidden="true">
+        Atividades
+      </button>
+      <button type="button" data-view="materiais">
+        <img class="action-icon" src="assets/firehouse/book.webp" width="24" height="24" alt="" aria-hidden="true">
+        Materiais
+      </button>
+    </nav>
+
+    <div class="nav-label">Conviver</div>
+    <nav>
+      <button type="button" data-view="conversas">
+        <img class="action-icon" src="assets/firehouse/chat.webp" width="24" height="24" alt="" aria-hidden="true">
+        Conversas
+      </button>
+      <button type="button" data-view="apoio">
+        <img class="action-icon" src="assets/firehouse/care.webp" width="24" height="24" alt="" aria-hidden="true">
+        Lugar de Falar
+      </button>
+      <button type="button" data-view="campanhas">
+        <img class="action-icon" src="assets/firehouse/news.webp" width="24" height="24" alt="" aria-hidden="true">
+        Campanhas
+      </button>
+    </nav>
+
+    <div class="nav-label">Escola</div>
+    <nav>
+      <button type="button" data-view="noticias">
+        <img class="action-icon" src="assets/firehouse/bell.webp" width="24" height="24" alt="" aria-hidden="true">
+        Notícias
+      </button>
+      <button type="button" data-view="manual">
+        <img class="action-icon" src="assets/firehouse/book.webp" width="24" height="24" alt="" aria-hidden="true">
+        Manual
+      </button>
+      <button type="button" data-view="escola">
+        <img class="action-icon" src="assets/firehouse/school.webp" width="24" height="24" alt="" aria-hidden="true">
+        A Escola
+      </button>
+    </nav>
+
+    <nav><button id="studentLogout" type="button"><img class="action-icon" src="assets/firehouse/door.webp" width="24" height="24" alt="" aria-hidden="true"><span>Sair</span></button></nav>
+    <div class="side-foot">
+      <p><b>Saber, Honra e Disciplina</b><br>Dom Pedro II Voice · Versão piloto: envie sua dúvida, ouça a aula narrada, avalie e baixe o material. Seus dados de estudo ficam no aparelho.</p>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main" id="mainContent">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="sidebar"><img class="action-icon" src="assets/firehouse/menu.webp" width="24" height="24" alt="" aria-hidden="true"></button>
+        <div>
+          <div id="pageTitle" role="heading" aria-level="1" tabindex="-1">Início</div>
+          <div class="crumb" id="pageCrumb"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button type="button" class="cinema-pill" id="appBgmToggle" aria-label="Tocar ou pausar Hino dos Bombeiros 16-bit" aria-pressed="false" title="Hino dos Bombeiros 16-bit">🎵<span class="cinema-lbl"> Hino</span></button>
+        <button type="button" class="cinema-pill" id="appCinemaToggle" aria-label="Alternar tema" title="Alternar tema">☀️<span class="cinema-lbl"> Claro</span></button>
+        <button type="button" class="sos-top" id="openEmergencyTop" aria-label="SOS, preciso de ajuda agora"><img class="action-icon" src="assets/firehouse/sos.webp" width="24" height="24" alt="" aria-hidden="true"><span>SOS</span></button>
+        <button class="btn install-pill sm" id="installApp" type="button" aria-label="Instalar aplicativo no celular"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 7v7m0 0-3-3m3 3 3-3M9 18h6"/></svg><span>Baixar app</span></button>
+        <div class="user">
+          <div class="who">
+            <b id="userName">Aluno Demonstração</b>
+            <small id="userMeta">8º ano</small>
+          </div>
+          <button class="avatar" id="avatar" type="button" aria-label="Alterar meu avatar">AD</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <details class="accessibility-options">
+          <summary>Acessibilidade</summary>
+          <div class="accessibility-panel">
+            <label><input type="checkbox" data-accessibility="largeText"> Texto ampliado</label>
+            <label><input type="checkbox" data-accessibility="highContrast"> Alto contraste</label>
+            <label><input type="checkbox" class="sound-toggle-cb" data-sound-toggle checked> Sons da interface</label>
+            <p>Você também pode usar o leitor de tela do seu aparelho. No iPhone, procure VoiceOver. No Android, procure TalkBack.</p>
+          </div>
+        </details>
+
+      <!-- ================= INÍCIO ================= -->
+      <section class="view active" id="inicio">
+        <header class="cadet-cover">
+          <img src="assets/firehouse/patio-cadetes-cartoon.webp" alt="" fetchpriority="high" width="1440" height="720">
+          <h1>Dom Pedro II<br>Voice</h1>
+        </header>
+        <div class="cadet-actions">
+          <button type="button" class="btn primary go" data-view="reforco"><img src="assets/firehouse/mic.webp" alt=""> Fazer uma pergunta</button>
+          <button type="button" class="btn go" data-view="materiais"><img src="assets/firehouse/book.webp" alt=""> Meus materiais</button>
+        </div>
+
+        <div class="stats" id="homeStats">
+          <div class="stat">
+            <div class="ring">📦</div>
+            <div><div class="num" id="statMaterials">—</div><div class="lbl">Materiais disponíveis</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <div><h2>Meu espaço</h2></div>
+            <button type="button" class="btn ghost sm" id="homeTeachersShortcut">👩‍🏫 Profª Naira · Voz Clonada</button>
+          </div>
+          <div class="bento">
+            <button type="button" class="tile span2 tint-navy go" data-view="reforco">
+              <img class="action-icon" src="assets/firehouse/mic.webp" width="24" height="24" alt="" aria-hidden="true">
+              <span><b>Enviar dúvida</b><small>Grave ou escreva o que ficou difícil</small></span>
+            </button>
+            <button type="button" class="tile span2 go" data-view="atividades">
+              <img class="action-icon" src="assets/firehouse/tasks.webp" width="24" height="24" alt="" aria-hidden="true">
+              <span><b>Minhas atividades</b><small id="tileTasks">Em breve: organize suas atividades</small></span>
+            </button>
+            <button type="button" class="tile span2 tint-gold go" data-view="materiais">
+              <img class="action-icon" src="assets/firehouse/book.webp" width="24" height="24" alt="" aria-hidden="true">
+              <span><b>Biblioteca</b><small>Reforços e resumos revisados</small></span>
+            </button>
+            <button type="button" class="tile span2 go" data-view="apoio">
+              <img class="action-icon" src="assets/firehouse/care.webp" width="24" height="24" alt="" aria-hidden="true">
+              <span><b>Lugar de Falar</b><small>Converse com sua identidade protegida</small></span>
+            </button>
+            <button type="button" class="tile span2 go" data-view="noticias">
+              <img class="action-icon" src="assets/firehouse/bell.webp" width="24" height="24" alt="" aria-hidden="true">
+              <span><b>Notícias</b><small>O que acontece no campus</small></span>
+            </button>
+            <button type="button" class="tile span2 go" data-view="escola">
+              <img class="action-icon" src="assets/firehouse/school.webp" width="24" height="24" alt="" aria-hidden="true">
+              <span><b>A Escola</b><small>Conheça e visite o site oficial</small></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <div><h2>Reforços recentes</h2><p>Conteúdos liberados para você</p></div>
+            <button type="button" class="btn ghost sm go" data-view="materiais"><img class="action-icon" src="assets/firehouse/book.webp" width="24" height="24" alt="" aria-hidden="true"><span>Ver todos</span></button>
+          </div>
+          <div class="grid g2" id="recentMaterials"></div>
+        </div>
+      </section>
+
+      <!-- ================= REFORÇO ================= -->
+      <section class="view" id="reforco">
+        <div class="view-head">
+          <span class="eyebrow">Reforço personalizado</span>
+          <h1>O que vamos aprender?</h1>
+          <p>Explique com suas palavras — do jeito que for mais fácil. Você pode revisar o áudio antes de enviar.</p>
+        </div>
+
+        <div class="grid g2">
+          <div class="panel">
+            <h2>Falar</h2>
+            <p class="muted small" style="margin-top:4px">Toque no microfone para gravar. Toque de novo para encerrar.</p>
+            <div class="record-wrap">
+              <button type="button" id="recordBtn" class="record" aria-label="Gravar dúvida por voz"><img class="action-icon" src="assets/firehouse/mic.webp" width="24" height="24" alt="" aria-hidden="true"></button>
+              <div class="record-live" id="recordLive" hidden role="status" aria-live="polite">
+                <span class="rec-dot" aria-hidden="true"></span>
+                <span class="rec-waves" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="rec-label">Gravando sua voz</span>
+                <span class="rec-time" id="recordTime">0:00</span>
+              </div>
+              <div class="record-status" id="recordStatus" role="status">Toque para gravar</div>
+              <button type="button" id="discardAudio" class="btn ghost sm" hidden><img class="action-icon" src="assets/firehouse/mic.webp" width="24" height="24" alt="" aria-hidden="true"><span>Remover áudio</span></button>
+              <span class="pill soft">🔒 Áudio protegido</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Escrever</h2>
+            <label for="subject">Matéria</label>
+            <select id="subject">
+              <option value="Português" selected>Português &amp; Redação — Profª Naira · Voz Clonada</option>
+              <option value="Matemática">Matemática</option>
+              <option value="Ciências">Ciências</option>
+              <option value="História">História</option>
+              <option value="Geografia">Geografia</option>
+              <option value="Biologia">Biologia</option>
+              <option value="Física">Física</option>
+              <option value="Química">Química</option>
+              <option value="Inglês">Inglês</option>
+              <option value="Espanhol">Espanhol</option>
+              <option value="Educação Física">Educação Física</option>
+              <option value="Arte">Arte</option>
+              <option value="Filosofia">Filosofia</option>
+              <option value="Sociologia">Sociologia</option>
+            </select>
+            <label for="askVoiceSelect">Voz da explicação</label>
+            <select id="askVoiceSelect">
+              <option value="">Automático pela matéria (Profª Naira em Português)</option>
+            </select>
+            <small>Use um exemplo sem dados pessoais.</small>
+            <label for="doubt">Conte o que ficou difícil</label>
+            <textarea id="doubt" placeholder="Ex.: Entendi como isolar o x, mas não sei quando trocar o sinal..."></textarea>
+            <button type="button" id="sendDoubt" class="btn primary block" style="margin-top:16px"><img class="action-icon" src="assets/firehouse/send.webp" width="24" height="24" alt="" aria-hidden="true"><span>Enviar dúvida</span></button>
+          </div>
+        </div>
+
+        <div id="doubtChecklist" class="card card-pad" hidden style="margin:14px 0;background:linear-gradient(135deg,#fffaf3,#fff);border:2px solid #ead8c3;border-radius:18px;overflow:hidden;box-shadow:0 8px 22px rgba(139,30,45,.07);">
+          <style>
+            @keyframes conveyorMove { from { background-position: 0 0; } to { background-position: 44px 0; } }
+            @keyframes flowBeam { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+            @keyframes blinkRed { 0%,100% { box-shadow: 0 0 6px #e63946, 0 0 16px rgba(230,57,70,.85); opacity:1; transform:scale(1.06); } 50% { box-shadow: 0 0 2px #e63946; opacity:.45; transform:scale(.95); } }
+            @keyframes blinkAmber { 0%,100% { box-shadow: 0 0 6px #f5b51b, 0 0 16px rgba(245,181,27,.9); opacity:1; transform:scale(1.06); } 50% { box-shadow: 0 0 2px #f5b51b; opacity:.45; transform:scale(.95); } }
+            @keyframes blinkGreen { 0%,100% { box-shadow: 0 0 8px #24a148, 0 0 18px rgba(36,161,72,.9); opacity:1; transform:scale(1.08); } 50% { box-shadow: 0 0 4px #24a148; opacity:.72; transform:scale(.98); } }
+            .conveyor-track { height: 10px; border-radius: 999px; background: repeating-linear-gradient(90deg,#d8bea2 0 12px,#f7efe4 12px 22px); background-size: 44px 10px; animation: conveyorMove 1s linear infinite; margin: 10px 0 6px; position: relative; overflow: hidden; border:1px solid #d5bca0; }
+            .conveyor-track.done { animation: none; background: linear-gradient(90deg,#24a148,#5ec27c); border-color:#1f7a39; }
+            .conveyor-fill { height: 7px; border-radius: 999px; background:#efe5d8; overflow:hidden; margin-bottom:12px; }
+            .conveyor-fill-bar { height:100%; border-radius:999px; background:linear-gradient(90deg,#d62828,#f5b51b,#24a148); transition:width .4s ease; }
+            .cadet-flow-row { display:grid; grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr) 26px minmax(0,1fr); align-items:stretch; gap:4px; margin-top:4px; }
+            .cadet-stage-card { background:#fffcf7; border:1.5px solid #e7d7c5; border-radius:14px; padding:8px 6px 10px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:5px; transition:all .3s ease; min-width:0; }
+            .cadet-stage-card.is-active { border-color:#8b1e2d; background:linear-gradient(180deg,#fff9ed,#fff); box-shadow:0 6px 16px rgba(139,30,45,.12); }
+            .cadet-stage-card.is-complete { border-color:#9bd3aa; background:linear-gradient(180deg,#f3fbf5,#fff); }
+            .cadet-stage-card img { height:102px; width:auto; max-width:100%; object-fit:contain; filter:drop-shadow(0 4px 6px rgba(45,33,30,.12)); transition:transform .3s ease, opacity .3s ease; }
+            .cadet-stage-card:not(.is-active):not(.is-complete) img { opacity:.58; filter:grayscale(.3); }
+            .cadet-stage-card.is-active img { transform:translateY(-2px) scale(1.03); }
+            .cadet-stage-title { font-size:11.5px; font-weight:800; color:#4b2b27; line-height:1.2; }
+            .cadet-stage-sub { font-size:10px; color:#775c55; line-height:1.15; }
+            .traffic-bezel { display:inline-flex; align-items:center; justify-content:center; gap:5px; background:#231817; padding:4px 8px; border-radius:999px; margin-top:auto; border:1px solid #48322f; box-shadow:inset 0 1px 2px rgba(0,0,0,.5); }
+            .traffic-led { width:11px; height:11px; border-radius:50%; background:#433533; transition:all .25s ease; }
+            .traffic-led.red.on { background:radial-gradient(circle at 35% 35%,#ff9aa2,#e63946); animation:blinkRed .85s ease-in-out infinite; }
+            .traffic-led.amber.on { background:radial-gradient(circle at 35% 35%,#ffe89c,#f5b51b); animation:blinkAmber .85s ease-in-out infinite; }
+            .traffic-led.green.on { background:radial-gradient(circle at 35% 35%,#95f5b3,#24a148); animation:blinkGreen 1.1s ease-in-out infinite; }
+            .traffic-led.solid-ok { background:radial-gradient(circle at 35% 35%,#95f5b3,#24a148); box-shadow:0 0 6px rgba(36,161,72,.55); }
+            .flow-connector { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-width:0; }
+            .flow-wire { width:100%; height:5px; border-radius:999px; background:#e7d7c5; position:relative; overflow:hidden; }
+            .flow-wire.active { background:linear-gradient(90deg,#e63946,#f5b51b,#24a148,#e63946); background-size:200% 100%; animation:flowBeam 1.1s linear infinite; }
+            .flow-wire.done { background:#35ab58; }
+            .flow-arrow { font-size:13px; font-weight:900; color:#8b1e2d; line-height:1; }
+            .rating-stars { display:inline-flex; gap:4px; flex-wrap:wrap; align-items:center; }
+            .star-btn { border:1.5px solid #dfd0c0; background:#fff; color:#6d544d; border-radius:10px; padding:6px 10px; font-weight:800; font-size:13px; cursor:pointer; transition:all .2s ease; }
+            .star-btn.active { background:#fff3d1; border-color:#e5a93b; color:#8b1e2d; box-shadow:0 2px 8px rgba(229,169,59,.35); }
+            #lessonActions[hidden], #doubtChecklist[hidden] { display: none !important; }
+            .lesson-actions-card { margin-top:16px;padding:14px;border-radius:16px;background:#fffdf9;border:1.5px solid #ead8c3;display:flex;flex-direction:column;gap:12px; }
+            @media(max-width:520px){
+              .cadet-flow-row { grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr); gap:2px; }
+              .cadet-stage-card { padding:6px 3px 8px; }
+              .cadet-stage-card img { height:82px; }
+              .cadet-stage-title { font-size:10.5px; }
+              .cadet-stage-sub { font-size:9.5px; }
+              .flow-arrow { font-size:11px; }
+            }
+          </style>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:180px;">
+              <strong id="doubtChecklistTitle" style="display:block;font-size:15px;color:#8b1e2d;">Enviando sua pergunta…</strong>
+              <span id="doubtChecklistSub" class="small muted">Cadetes em prontidão preparando seu roteiro e áudio.</span>
+            </div>
+            <span id="doubtProgressPct" class="pill warn" style="font-weight:800;">30%</span>
+          </div>
+          <div id="conveyorTrack" class="conveyor-track" aria-hidden="true"></div>
+          <div class="conveyor-fill" aria-hidden="true"><div id="doubtProgressBar" class="conveyor-fill-bar" style="width:30%;"></div></div>
+          <div class="cadet-flow-row" aria-label="Fluxo ilustrado da dúvida">
+            <div id="stepSent" class="cadet-stage-card is-active">
+              <img src="assets/firehouse/cadete-enviando.png" alt="Cadete em posição de mãos para baixo enviando dúvida" width="120" height="320">
+              <div class="cadet-stage-title">1. Enviando</div>
+              <div class="cadet-stage-sub">Mãos p/ baixo</div>
+              <div class="traffic-bezel" title="Sinal de envio">
+                <span id="ledSentRed" class="traffic-led red on"></span>
+                <span id="ledSentGreen" class="traffic-led green"></span>
+              </div>
+            </div>
+            <div class="flow-connector" aria-hidden="true">
+              <span class="flow-arrow">➜</span>
+              <div id="flowWire1" class="flow-wire active"></div>
+            </div>
+            <div id="stepProc" class="cadet-stage-card">
+              <img src="assets/firehouse/cadete-gerando.png" alt="Cadete com a mão no peito indicando backend trabalhando e gerando" width="120" height="320">
+              <div class="cadet-stage-title">2. Gerando</div>
+              <div class="cadet-stage-sub">Mão no peito</div>
+              <div class="traffic-bezel" title="Sinal de processamento">
+                <span id="ledProcAmber" class="traffic-led amber"></span>
+                <span id="ledProcGreen" class="traffic-led green"></span>
+              </div>
+            </div>
+            <div class="flow-connector" aria-hidden="true">
+              <span class="flow-arrow">➜</span>
+              <div id="flowWire2" class="flow-wire"></div>
+            </div>
+            <div id="stepDone" class="cadet-stage-card">
+              <img src="assets/firehouse/cadete-pronto.png" alt="Cadete em sentido fazendo continência com material pronto" width="120" height="320">
+              <div class="cadet-stage-title">3. Material pronto</div>
+              <div class="cadet-stage-sub">Em sentido</div>
+              <div class="traffic-bezel" title="Sinal de material pronto">
+                <span id="ledDoneAmber" class="traffic-led amber"></span>
+                <span id="ledDoneGreen" class="traffic-led green"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="lessonState" role="status"></div>
+        <button type="button" id="newQuestion" class="btn ghost block" hidden style="margin-top:12px;background:linear-gradient(135deg,#fff,#fff6eb);color:#8b1e2d;border:2px solid #8b1e2d;box-shadow:0 4px 12px rgba(139,30,45,.08);">✏️ Quer perguntar outra coisa? Fazer nova pergunta</button>
+        <div id="reforcoFeedback" class="card card-pad" style="margin-top:20px; display:none; border-left: 4px solid #f5b51b;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+            <b id="reforcoTeacher" style="font-size:16px;">Professor</b>
+            <span id="reforcoSource" class="pill ok"></span>
+          </div>
+          <div id="lessonStep" aria-live="polite"><h3 id="explanationTitle" tabindex="-1"></h3><p id="reforcoAnswer" style="margin:12px 0; font-size:15px; line-height:1.55; color:var(--text); white-space:pre-wrap"></p><div id="lessonVisual"></div></div>
+          <div id="lessonNavigation" class="lesson-navigation" hidden><button type="button" id="lessonPrevious" class="btn ghost sm">Anterior</button><span id="lessonProgress"></span><button type="button" id="lessonNext" class="btn ghost sm">Próxima</button></div>
+          <div style="margin-top:14px;padding:12px;border-radius:14px;background:#fffaf2;border:1px solid #ead8c3;">
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+              <label for="doubtVoiceSelect" style="font-size:13px;font-weight:700;color:#8b1e2d;margin:0;">🎙️ Voz do professor:</label>
+              <select id="doubtVoiceSelect" style="flex:1 1 170px;min-width:0;max-width:100%;padding:7px 10px;border-radius:10px;border:1.5px solid #d8c2ac;background:#fff;font-size:13px;"></select>
+              <small class="muted" id="reforcoVoiceBadge">Aula narrada completa (5 a 10 min)</small>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button id="reforcoPlayBtn" type="button" class="btn primary sm"><img class="action-icon" src="assets/firehouse/audio.webp" width="24" height="24" alt="" aria-hidden="true"><span>Ouvir etapa</span></button>
+              <button id="playFullLessonBtn" type="button" class="btn ghost sm" style="border-color:#8b1e2d;color:#8b1e2d;">▶ Ouvir resposta</button>
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#5f463e;margin:0;cursor:pointer;">
+                <input id="continuousAudioToggle" type="checkbox" checked style="width:auto;margin:0;">
+                Seguir etapas
+              </label>
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--accent);margin:0;cursor:pointer;">
+                <input id="autoNarrateToggle" type="checkbox" checked style="width:auto;margin:0;">
+                🎙️ Cria voz e fala sozinho
+              </label>
+            </div>
+            <div id="audioPlayer" class="audio-player" hidden>
+  <button type="button" id="audioPlayToggle" class="audio-play" aria-label="Reproduzir ou pausar a narração">▶</button>
+  <span id="audioCurrent" class="audio-time">0:00</span>
+  <input type="range" id="audioSeek" class="audio-seek" min="0" max="100" value="0" step="0.1" aria-label="Progresso da narração">
+  <span id="audioDuration" class="audio-time">0:00</span>
+  <button type="button" id="audioSpeedBtn" class="audio-speed-btn" aria-label="Velocidade da narração" title="Velocidade">1x</button>
+  <div class="audio-eq" id="audioEq" aria-hidden="true" title="Equalizador de voz neural">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </div>
+  <audio id="reforcoAudio" preload="metadata" style="display:none;"></audio>
+</div>
+          </div>
+        </div>
+
+        <div id="lessonActions" class="lesson-actions-card" hidden>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <div>
+              <strong style="color:#8b1e2d;font-size:.95rem;display:block;">Avalie esta explicação antes de confirmar</strong>
+              <span class="small muted">Dê sua nota de 1 a 5, diga o que pode melhorar se precisar e clique em Confirmar — ou peça para refazer.</span>
+            </div>
+            <span id="ratingStatusBadge" class="pill soft">Aguardando confirmação</span>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div id="ratingStars" class="rating-stars" role="group" aria-label="Nota de 1 a 5 estrelas">
+              <button type="button" class="star-btn" data-value="1" title="1 · Não gostei">★ 1</button>
+              <button type="button" class="star-btn" data-value="2" title="2 · Confuso">★ 2</button>
+              <button type="button" class="star-btn" data-value="3" title="3 · Regular">★ 3</button>
+              <button type="button" class="star-btn" data-value="4" title="4 · Bom">★ 4</button>
+              <button type="button" class="star-btn" data-value="5" title="5 · Gostei muito">★ 5</button>
+            </div>
+            <label style="font-size:.84rem;color:#6b554b;display:flex;align-items:center;gap:6px;margin:0;">
+              <span>Nota:</span>
+              <select id="rating" style="min-height:38px;border-radius:10px;padding:4px 10px;max-width:100%;">
+                <option value="">Escolher nota</option>
+                <option value="1">1 · Não gostei</option>
+                <option value="2">2 · Confuso</option>
+                <option value="3">3 · Regular</option>
+                <option value="4">4 · Bom</option>
+                <option value="5">5 · Gostei muito</option>
+              </select>
+            </label>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <input id="ratingFeedbackInput" type="text" placeholder="Opcional: diga o que quer que o professor melhore (ex.: explique mais devagar com exemplo)" style="flex:1 1 200px;min-width:0;min-height:40px;padding:8px 12px;border-radius:12px;border:1.5px solid #e2d1be;background:#fff;font-size:.88rem;color:#3d1b20;">
+            <button type="button" class="btn primary sm" id="confirmRatingBtn" style="min-height:40px;">✓ Confirmar avaliação</button>
+            <button type="button" class="btn ghost sm" id="redoLessonBtn" style="min-height:40px;border-color:#d49a1a;color:#8a4f00;background:#fff8e6;">🔄 Refazer explicação</button>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding-top:8px;border-top:1px dashed #ead8c3;">
+            <button type="button" class="btn ghost sm" id="downloadLesson">📥 Baixar PDF + Áudio</button>
+            <button type="button" class="btn ghost sm" id="downloadStudyZip">📦 Pacote ZIP (PDF + Áudio)</button>
+            <button type="button" class="btn ghost sm" id="saveLesson">💾 Guardar explicação</button>
+            <button type="button" class="btn primary sm" id="shareLesson">Enviar para a turma</button>
+          </div>
+        </div>
+
+        <div id="savedNotebookCard" class="card card-pad" style="margin-top:20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <div>
+              <h2 style="margin:0;font-size:17px;">📚 Meu Caderno Salvo no Aparelho</h2>
+              <p class="small muted" style="margin:3px 0 0;">Suas explicações ficam guardadas aqui neste dispositivo para reabrir com 1 toque.</p>
+            </div>
+            <span id="notebookCountPill" class="pill soft">0 salvas</span>
+          </div>
+          <div id="savedNotebookList" class="notebook-grid">
+            <p class="small muted" style="margin:0;">Envie sua primeira dúvida acima — ela será salva aqui automaticamente.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ATIVIDADES ================= -->
+      <section class="view" id="atividades">
+        <div class="view-head" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div>
+            <span class="eyebrow">Organização semanal</span>
+            <h1>Minhas atividades</h1>
+            <p>Acompanhe atividades enviadas pela escola, confira prazos e marque o que concluiu.</p>
+          </div>
+          <span id="taskCount" class="pill soft" style="background:rgba(255,255,255,.18)!important;color:#fff!important;border-color:rgba(255,255,255,.3)!important;">0 pendentes</span>
+        </div>
+        <div id="lateAlert" class="alert" hidden style="margin-bottom:16px;">
+          <span class="ai" aria-hidden="true">⏰</span>
+          <div><b>Você tem atividade(s) com prazo vencido.</b><br>Conclua ou organize suas prioridades abaixo.</div>
+        </div>
+        <div class="panel">
+          <div id="taskList"><p class="muted small">Carregando atividades…</p></div>
+        </div>
+      </section>
+
+      <!-- ================= MATERIAIS ================= -->
+      <section class="view" id="materiais">
+        <div class="view-head" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;">
+          <div>
+            <span class="eyebrow">Biblioteca da escola</span>
+            <h1>Materiais de apoio</h1>
+            <p>Clique em <b>Estudar</b> para abrir o material completo. Itens compartilhados passam por revisão real da escola antes de ir para a turma.</p>
+          </div>
+          <img src="assets/firehouse/estudo-premium.png" alt="Ilustração da biblioteca de estudos" width="96" height="72" style="border-radius:14px;object-fit:cover;border:2px solid #ead8c3;box-shadow:0 6px 16px rgba(139,30,45,.08);">
+        </div>
+
+        <div id="pendingMaterialsBox" class="card card-pad" style="margin-bottom:18px;background:linear-gradient(135deg,#fff8ec,#fff);border:1.5px solid #edd49a;border-radius:18px;">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <img src="assets/firehouse/school.webp" alt="" width="34" height="34" style="flex-shrink:0;">
+            <div style="flex:1;min-width:200px;">
+              <strong style="color:#8b1e2d;display:block;font-size:15px;">⏳ Esperando aprovação para levar pra turma</strong>
+              <span class="small muted">Acompanhe os reforços que você enviou para a revisão da equipe escolar.</span>
+            </div>
+            <span id="pendingCountPill" class="pill warn">0 aguardando</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0;">
+            <div style="height:6px;border-radius:999px;background:#2f9e53;"></div>
+            <div id="pendingStageMid" style="height:6px;border-radius:999px;background:#f0cf7b;"></div>
+            <div style="height:6px;border-radius:999px;background:#e6ddd2;"></div>
+          </div>
+          <div id="pendingMaterialsList" class="grid g2" style="margin-top:8px;">
+            <p class="muted small" style="margin:0;">Nenhum material seu aguardando aprovação no momento. Na aba <b>Reforço</b>, clique em <b>Enviar para a turma</b> para sugerir um conteúdo!</p>
+          </div>
+        </div>
+
+        <div class="searchbar">
+          <span class="si" aria-hidden="true">⌕</span>
+          <input id="materialSearch" list="materialSuggestions" placeholder="Buscar por assunto ou matéria…" aria-label="Buscar material">
+          <datalist id="materialSuggestions"></datalist>
+        </div>
+        <div class="filters" id="materialFilters" style="align-items:center;">
+          <select id="materialSubject" aria-label="Filtrar por matéria" style="width:auto;min-width:190px;max-width:100%;padding:8px 12px;border-radius:999px;">
+            <option value="todas">Todas as matérias</option>
+          </select>
+          <button type="button" class="filter active" data-filter="todos">Todos</button>
+          <button type="button" class="filter" data-filter="reforço">Reforços</button>
+          <button type="button" class="filter" data-filter="material">Materiais</button>
+          <button type="button" class="filter" data-filter="guia">Guias</button>
+        </div>
+        <div class="grid g3" id="materialGrid">
+          <p class="muted small">Carregando materiais…</p>
+        </div>
+      </section>
+
+      <!-- ================= CONVERSAS ================= -->
+      <section class="view" id="conversas">
+        <div class="view-head">
+          <span class="eyebrow">Comunicação escolar</span>
+          <h1>Conversas</h1>
+          <p>Canais moderados e vinculados à escola, no lugar dos grupos sem controle.</p>
+        </div>
+
+        <div class="chat">
+          <div class="channels" id="channels">
+            <div class="channel active" data-channel="geral"><span class="hash">#</span> Geral da turma</div>
+            <div class="channel" data-channel="matematica"><span class="hash">#</span> Matemática</div>
+            <div class="channel" data-channel="esportes"><span class="hash">#</span> Esportes</div>
+            <div class="channel" data-channel="avisos"><span class="hash">#</span> Avisos oficiais</div>
+          </div>
+          <div class="messages">
+            <div class="msgs-scroll" id="messages"><p class="muted small">Carregando mensagens…</p></div>
+            <div class="composer">
+              <input id="chatInput" placeholder="Escreva uma mensagem…" aria-label="Mensagem do canal">
+              <button type="button" id="chatSend" class="btn"><img class="action-icon" src="assets/firehouse/send.webp" width="24" height="24" alt="" aria-hidden="true"><span>Enviar</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= APOIO ================= -->
+      <section class="view" id="apoio">
+        <div class="view-head">
+          <span class="eyebrow">Acolhimento</span>
+          <h1>Lugar de Falar</h1>
+          <p>Um espaço seguro para conversar com a equipe da escola. Você escolhe como e com quem falar.</p>
+        </div>
+
+        <div class="grid g2">
+          <div class="panel">
+            <div class="privacy" style="margin-bottom:18px">
+              <b>Sua identidade aparece como “<span id="aliasLabel">Estudante Horizonte 27</span>”.</b><br>
+              A equipe destinatária vê um pseudônimo. Isso não é anonimato absoluto: a escola mantém o vínculo protegido com sua conta. Em risco grave e imediato, a equipe pode seguir o protocolo de proteção — e vai te explicar isso.
+            </div>
+            <h3>Como você está? (opcional)</h3>
+            <p class="small muted">Você escolhe o que compartilhar. Sua voz não é usada para adivinhar sentimentos.</p>
+            <label for="wellFeeling">Hoje estou</label><select id="wellFeeling"><option value="">Escolha se quiser</option><option>Bem</option><option>Triste</option><option>Preocupado(a)</option><option>Animado(a)</option><option>Quero conversar</option></select>
+            <label for="wellTo">Compartilhar com</label><select id="wellTo"><option value="teacher">Meus professores vinculados</option><option value="direction">Direção (com pseudônimo)</option></select>
+            <label for="wellNote">Quer contar algo? (opcional)</label><textarea id="wellNote" maxlength="500"></textarea>
+            <label><input type="checkbox" id="wellConsent" style="width:auto"> Quero compartilhar este relato com a equipe escolhida.</label>
+            <button type="button" class="btn block" id="wellSend"><img class="action-icon" src="assets/firehouse/care.webp" width="24" height="24" alt="" aria-hidden="true"><span>Compartilhar como estou</span></button><hr>
+            <label for="supportTo">Com quem deseja falar?</label>
+            <select id="supportTo">
+              <option>Coordenação pedagógica</option>
+              <option>Direção</option>
+
+            </select>
+            <label for="supportText">Sua mensagem</label>
+            <textarea id="supportText" placeholder="Escreva no seu tempo. Este canal não faz diagnóstico médico ou psicológico."></textarea>
+            <button type="button" id="supportSend" class="btn block" style="margin-top:16px"><img class="action-icon" src="assets/firehouse/send.webp" width="24" height="24" alt="" aria-hidden="true"><span>Enviar com identidade protegida</span></button>
+          </div>
+
+          <div class="card card-pad">
+            <div class="til-ico" style="width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:21px;background:var(--info-bg)">🛡️</div>
+            <h2 style="margin-top:14px">Como funciona</h2>
+            <p class="small muted" style="margin-top:6px">Somente alunos ativos e cadastrados acessam o canal. A equipe destinatária precisa ser autorizada pela escola.</p>
+            <p class="small muted" style="margin-top:10px">As mensagens são registradas para acompanhamento e proteção, com acesso mínimo necessário.</p>
+            <p class="small muted" style="margin-top:10px">A análise automática pode ajudar a priorizar, mas nunca diagnostica nem decide sozinha.</p>
+            <button type="button" class="btn danger block" id="openEmergency2" style="margin-top:20px"><img class="action-icon" src="assets/firehouse/sos.webp" width="24" height="24" alt="" aria-hidden="true"><span>Preciso de ajuda agora</span></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CAMPANHAS ================= -->
+      <section class="view" id="campanhas">
+        <div class="view-head">
+          <span class="eyebrow">Campanhas</span>
+          <h1>Participar e compartilhar</h1>
+          <p>Campanhas criadas e aprovadas pela escola. Regras claras e transparentes — nunca substituto das suas notas.</p>
+        </div>
+        <div class="grid g2" id="campaignGrid">
+          <p class="muted small">Carregando campanhas…</p>
+        </div>
+
+        <div class="card card-pad" style="margin-top:18px">
+          <h2>Minha microaula</h2>
+          <p class="small muted" style="margin-top:6px">Envie um tema e um roteiro. Um professor revisa fontes e privacidade antes de qualquer publicação.</p>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px">
+            <button type="button" class="btn primary" id="openLesson"><img class="action-icon" src="assets/firehouse/book.webp" width="24" height="24" alt="" aria-hidden="true"><span>Criar microaula</span></button>
+            <span class="pill warn" id="myLessonState">Nada enviado ainda</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= NOTÍCIAS ================= -->
+      <section class="view" id="noticias">
+        <div class="view-head">
+          <span class="eyebrow">Portal escolar</span>
+          <h1>Notícias da escola</h1>
+          <p>Conquistas, projetos e avisos publicados pela comunicação oficial do campus. As notícias são trazidas automaticamente do site da escola.</p>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px;">
+          <span id="newsSyncStatus" class="small muted">Sincronizando com o site da escola…</span>
+          <button type="button" class="btn ghost sm" id="newsRefreshBtn">🔄 Atualizar notícias</button>
+        </div>
+        <div class="grid g3" id="newsGrid"><p class="muted small">Carregando notícias…</p></div>
+      </section>
+
+      <!-- ================= MANUAL ================= -->
+      <section class="view" id="manual">
+        <div class="view-head">
+          <span class="eyebrow">Guia do estudante</span>
+          <h1>Manual de uso</h1>
+          <p>O que cada função faz, como usar e o que ainda é simulação neste protótipo.</p>
+          <button class="btn primary" id="openTutorialBtn" type="button"><img class="action-icon" src="assets/firehouse/book.webp" width="24" height="24" alt="" aria-hidden="true"><span>Ver tutorial rápido</span></button>
+        </div>
+
+        <div class="card card-pad" style="margin-bottom:18px">
+          <div class="grid g4" style="gap:10px">
+            <a class="help" href="#manual-estudar" style="display:block"><b>📚 Estudar</b><span>Dúvida, atividades, materiais</span></a>
+            <a class="help" href="#manual-conviver" style="display:block"><b>🤝 Conviver</b><span>Conversas, apoio, campanhas</span></a>
+            <a class="help" href="#manual-escola" style="display:block"><b>🏛️ Escola</b><span>Notícias, site, voz local</span></a>
+            <a class="help" href="#manual-limites" style="display:block"><b>⚖️ Limites</b><span>O que ainda é simulado</span></a>
+          </div>
+        </div>
+
+        <h2 id="manual-estudar" style="margin-bottom:12px">1. Estudar</h2>
+        <div class="grid g2" style="margin-bottom:26px">
+          <article class="card card-pad">
+            <h3>🎙️ Minha dúvida</h3>
+            <p class="small muted" style="margin-top:6px">Grave pelo microfone ou escreva. O áudio é transcrito no próprio computador e a dúvida entra na fila da escola.</p>
+            <ul class="small muted" style="margin:10px 0 0;padding-left:18px;line-height:1.7">
+              <li>Voz: toque no botão, fale e toque de novo.</li>
+              <li>Texto é opcional quando há áudio.</li>
+              <li>Status: recebida → material preparado → revisão → liberado.</li>
+            </ul>
+          </article>
+          <article class="card card-pad">
+            <h3>✅ Atividades</h3>
+            <p class="small muted" style="margin-top:6px">Lista com prazos, conclusão salva no servidor e alerta de atraso que fica na tela até resolver.</p>
+            <p class="small muted" style="margin-top:10px">Concluir uma tarefa atualiza os números do Início na hora.</p>
+          </article>
+          <article class="card card-pad">
+            <h3>📘 Materiais</h3>
+            <p class="small muted" style="margin-top:6px">Biblioteca revisada pela escola, com busca e filtro por tipo (reforço, material, guia).</p>
+          </article>
+          <article class="card card-pad">
+            <h3>🎧 Voz local</h3>
+            <p class="small muted" style="margin-top:6px">Sua pergunta é transcrita no aparelho quando possível. A resposta em áudio usa vozes em português e traz o roteiro completo da aula (5 a 10 min), com PDF para download.</p>
+            <p class="small muted" style="margin-top:10px">A primeira transcrição demora mais porque o modelo é carregado na memória.</p>
+          </article>
+        </div>
+
+        <h2 id="manual-conviver" style="margin-bottom:12px">2. Conviver</h2>
+        <div class="grid g2" style="margin-bottom:26px">
+          <article class="card card-pad">
+            <h3>💬 Conversas</h3>
+            <p class="small muted" style="margin-top:6px">Canais da turma e da escola com histórico no banco local. Substitui grupos sem moderação.</p>
+          </article>
+          <article class="card card-pad">
+            <h3>♡ Lugar de Falar</h3>
+            <p class="small muted" style="margin-top:6px">Mensagem com identidade protegida para a equipe escolhida. A escola vê o apelido, nunca seu nome.</p>
+            <p class="small muted" style="margin-top:10px">O canal não faz diagnóstico. Em risco imediato, siga o protocolo e ligue para os serviços do SOS.</p>
+          </article>
+          <article class="card card-pad">
+            <h3>★ Campanhas</h3>
+            <p class="small muted" style="margin-top:6px">Campanhas ativas criadas pela gestão. Você também pode enviar uma microaula para revisão.</p>
+          </article>
+          <article class="card card-pad">
+            <h3><img class="action-icon" src="assets/firehouse/sos.webp" width="24" height="24" alt="" aria-hidden="true"><span>SOS</span></h3>
+            <p class="small muted" style="margin-top:6px">Disponível em todas as telas. Reúne 190, 192, Disque 100, adulto de confiança e aviso à escola.</p>
+          </article>
+        </div>
+
+        <h2 id="manual-escola" style="margin-bottom:12px">3. Escola</h2>
+        <div class="grid g2" style="margin-bottom:26px">
+          <article class="card card-pad">
+            <h3>📰 Notícias</h3>
+            <p class="small muted" style="margin-top:6px">Feed sincronizado com as publicações oficiais do campus. Toque para abrir a matéria no site.</p>
+          </article>
+          <article class="card card-pad">
+            <h3>🏛️ A Escola</h3>
+            <p class="small muted" style="margin-top:6px">Landing com a fachada, números e atalhos. O botão abre o site oficial em uma nova aba.</p>
+          </article>
+        </div>
+
+        <h2 id="manual-limites" style="margin-bottom:12px">4. O que ainda é simulado</h2>
+        <div class="alert info">
+          <span class="ai">ℹ️</span>
+          <div>
+            <b>Entrega da versão piloto - o que está pronto e o que é simulado.</b>
+            <ul style="margin:8px 0 0;padding-left:18px;line-height:1.7">
+              <li><b>Pronto:</b> envio de dúvida por texto ou voz, explicação com texto, áudio narrado de 5 a 10 minutos e PDF para download, avaliação de 1 a 5 estrelas, materiais com revisão da escola e notícias sincronizadas com o site oficial.</li>
+              <li><b>Pronto:</b> o app avisa quando a narração termina, sugere voltar em alguns minutos e guarda sua explicação no aparelho. Sons e animações podem ser desligados nas opções de acessibilidade.</li>
+              <li><b>Piloto:</b> o login é de demonstração e não substitui o sistema oficial do colégio. Use apenas dados de teste - não insira informações reais de alunos.</li>
+              <li><b>Privacidade:</b> quando o tutor de IA está ativo, segue apenas a matéria e o texto da dúvida, sem dados pessoais. Sem tutor, a resposta vem do conteúdo local ou segue para revisão do professor.</li>
+              <li><b>Revisão:</b> perguntas com nota baixa e materiais enviados para a turma passam pela equipe escolar antes de serem publicados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= A ESCOLA ================= -->
+      <section class="view" id="escola">
+        <div class="site-hero">
+          <img src="assets/brand/escola-hero.jpg" alt="Entrada do Colégio Militar Dom Pedro II — Campus CZS Sul">
+          <span class="site-hero-tag"><span class="dot"></span>Campus CZS Sul</span>
+        </div>
+        <div class="site-hero-copy">
+          <span class="site-motto">Saber, Honra e Disciplina</span>
+          <h1>Colégio Militar Dom Pedro II</h1>
+          <p>Campus CZS Sul · Cruzeiro do Sul — AC. Unidade de ensino do CBMAC que forma cidadãos conscientes, preparados para o futuro e comprometidos com a sociedade.</p>
+          <div class="site-actions">
+            <a class="btn gold" href="https://colegiodompedro2czs.com.br/site-cmdpii/index.html" target="_blank" rel="noopener noreferrer">Visitar o site oficial ↗</a>
+            <a class="btn ghost" href="https://colegiodompedro2czs.com.br/site-cmdpii/noticias.html" target="_blank" rel="noopener noreferrer">Ver notícias do campus</a>
+          </div>
+        </div>
+
+        <div class="stat-strip">
+          <div class="card card-pad"><div class="big">878</div><div class="small muted">Alunos matriculados</div></div>
+          <div class="card card-pad"><div class="big">7</div><div class="small muted">Anos de história</div></div>
+          <div class="card card-pad"><div class="big">38</div><div class="small muted">Prêmios conquistados</div></div>
+        </div>
+
+        <div class="card card-pad" id="teachersRosterCard" style="margin-top:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <div>
+              <h2>👩‍🏫 Profª Naira · Voz Clonada Real</h2>
+              <p class="small muted" style="margin-top:4px">Profª Naira Vieira da Costa — única professora com voz clonada zero-shot (OmniVoice). Língua Portuguesa &amp; Redação.</p>
+            </div>
+            <span id="teachersCountPill" class="pill ok">1 professora</span>
+          </div>
+          <div class="searchbar" style="margin-top:14px;margin-bottom:4px;">
+            <span class="si" aria-hidden="true">⌕</span>
+            <input id="profSearch" type="search" placeholder="Buscar por nome, matéria ou turno (ex.: Naira, Matemática)…" aria-label="Buscar professor">
+          </div>
+          <div id="professoresList" class="prof-grid">
+            <p class="muted small">Carregando professores…</p>
+          </div>
+        </div>
+
+        <div class="grid g2" style="margin-top:24px">
+          <div class="card card-pad">
+            <h2>Sobre o campus</h2>
+            <p class="small muted" style="margin-top:8px">O Colégio Dom Pedro II une excelência acadêmica, disciplina e formação cidadã. O campus de Cruzeiro do Sul participa de olimpíadas, competições esportivas e projetos comunitários que colocam os estudantes em destaque no Acre e no Brasil.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+              <a class="link-out" href="https://colegiodompedro2czs.com.br/site-cmdpii/historia.html" target="_blank" rel="noopener noreferrer">🏛️ História da instituição ↗</a>
+              <a class="link-out" href="https://colegiodompedro2czs.com.br/site-cmdpii/professores.html" target="_blank" rel="noopener noreferrer">👩‍🏫 Professores ↗</a>
+              <a class="link-out" href="https://colegiodompedro2czs.com.br/site-cmdpii/galeria.html" target="_blank" rel="noopener noreferrer">🖼️ Galeria de fotos ↗</a>
+              <a class="link-out" href="https://colegiodompedro2czs.com.br/site-cmdpii/contato.html" target="_blank" rel="noopener noreferrer">📍 Contato e localização ↗</a>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h2>Atalhos oficiais</h2>
+            <p class="small muted" style="margin-top:8px">Links que abrem o site institucional do colégio em uma nova aba.</p>
+            <div class="grid g2" style="margin-top:16px;gap:10px">
+              <a class="help" href="https://colegiodompedro2czs.com.br/site-cmdpii/noticias.html" target="_blank" rel="noopener noreferrer"><b>📢 Notícias</b><span>Comunicados e conquistas</span></a>
+              <a class="help" href="https://colegiodompedro2czs.com.br/site-cmdpii/interclasse.html" target="_blank" rel="noopener noreferrer"><b>🏆 Interclasse</b><span>Jogos e resultados</span></a>
+              <a class="help" href="https://colegiodompedro2czs.com.br/site-cmdpii/corpo-alunos.html" target="_blank" rel="noopener noreferrer"><b>📚 Corpo de Alunos</b><span>Organização estudantil</span></a>
+              <a class="help" href="https://colegiodompedro2czs.com.br/site-cmdpii/direcao.html" target="_blank" rel="noopener noreferrer"><b>🎓 Direção</b><span>Equipe gestora</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <div><h2>Momentos do campus</h2><p>Do site oficial da escola</p></div>
+          </div>
+          <div class="gallery">
+            <figure><img src="assets/brand/desfile-sm.jpg" alt="Desfile cívico dos estudantes" loading="lazy"></figure>
+            <figure><img src="assets/brand/podium-sm.jpg" alt="Torneio de xadrez do campus" loading="lazy"></figure>
+            <figure><img src="assets/brand/campus.jpg" alt="Entrada do colégio" loading="lazy"></figure>
+            <figure><img src="assets/brand/site-preview.jpg" alt="Página inicial do site oficial" loading="lazy"></figure>
+          </div>
+        </div>
+
+        <div class="card card-pad" style="margin-top:24px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+          <div>
+            <h2>Quer conhecer a escola por completo?</h2>
+            <p class="small muted" style="margin-top:6px">História, direção, professores, galeria e contato estão no site oficial.</p>
+          </div>
+          <a class="btn gold" href="https://colegiodompedro2czs.com.br/site-cmdpii/index.html" target="_blank" rel="noopener noreferrer">Abrir site oficial ↗</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="tutorialModal" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+  <div class="dialog tutorial-dialog" style="max-width:560px;">
+    <div class="dialog-head">
+      <div><span class="eyebrow" style="color:var(--gold-dark);font-weight:700;">Guia rápido</span><h2 id="tutorialTitle" style="margin:2px 0 0;">Vamos começar?</h2></div>
+      <button type="button" class="close" data-close="tutorialModal" aria-label="Fechar tutorial">&times;</button>
+    </div>
+    <div class="tutorial-bar" aria-hidden="true"><div id="tutorialBarFill"></div></div>
+    <p id="tutorialProgress" class="small muted" style="margin:10px 0 4px;"></p>
+    <div class="guide-stage">
+      <div class="guide-dog" id="guideDog" aria-hidden="true">
+        <svg viewBox="0 0 120 120" width="104" height="104" role="img" aria-label="Cão guia do Dom Pedro II Voice">
+          <ellipse cx="60" cy="112" rx="34" ry="6" fill="rgba(0,0,0,.12)"/>
+          <path d="M32 70 Q20 40 34 26 Q46 14 60 22 Q74 14 86 26 Q100 40 88 70 Z" fill="#7b4a2d"/>
+          <path d="M30 34 Q16 18 22 12 Q34 12 42 28 Z" fill="#5d3620"/>
+          <path d="M90 34 Q104 18 98 12 Q86 12 78 28 Z" fill="#5d3620"/>
+          <ellipse cx="60" cy="62" rx="30" ry="30" fill="#9a6038"/>
+          <ellipse cx="60" cy="76" rx="18" ry="14" fill="#e2c39c"/>
+          <circle cx="48" cy="56" r="4" fill="#241a12"/><circle cx="72" cy="56" r="4" fill="#241a12"/>
+          <circle cx="49" cy="55" r="1.4" fill="#fff"/><circle cx="73" cy="55" r="1.4" fill="#fff"/>
+          <ellipse cx="60" cy="70" rx="6" ry="4" fill="#241a12"/>
+          <path d="M60 74 Q60 80 54 82 M60 74 Q60 80 66 82" stroke="#5d3620" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M44 88 Q60 104 76 88 L76 100 Q60 112 44 100 Z" fill="#b51d2d"/>
+          <circle cx="60" cy="96" r="4" fill="#e7ad18"/>
+          <rect x="40" y="102" width="40" height="8" rx="4" fill="#8e1623"/>
+        </svg>
+        <span class="guide-name">Cadete Guia</span>
+      </div>
+      <div class="guide-arrow" aria-hidden="true">➜</div>
+      <div class="guide-bubble" aria-live="polite">
+        <span class="guide-bub-title" id="tutorialStep"></span>
+        <span class="guide-bub-text" id="tutorialText"></span>
+        <span class="guide-bub-tip" id="tutorialTip"></span>
+      </div>
+    </div>
+    <p id="tutorialProgressFoot" class="small muted" style="margin:10px 0 0;"></p>
+    <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;">
+      <button type="button" class="btn ghost" id="tutorialSkip">Pular tutorial</button>
+      <div style="display:flex;gap:8px;">
+        <button type="button" class="btn ghost" id="tutorialPrevious">Voltar</button>
+        <button type="button" class="btn primary" id="tutorialNext">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: PERFIL ============ -->
+<div class="modal" id="onboardingModal" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
+  <div class="dialog onboarding-dialog" style="max-width:720px; width:100%; max-height:88vh; padding:24px;">
+    <div class="dialog-head" style="align-items:center; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:16px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        
+        <div>
+          <span class="eyebrow" style="color:var(--gold-dark); font-weight:700;">Bem-vindo(a) ao Dom Pedro II!</span>
+          <h2 id="onboardingTitle" style="margin:2px 0 0; font-size:20px;">Seu espaço, do seu jeito</h2>
+        </div>
+      </div>
+      <button type="button" class="close" data-close="onboardingModal" aria-label="Fechar">&times;</button>
+    </div>
+
+    <div class="onboarding-steps" style="display:flex; flex-direction:column; gap:18px;">
+      <p class="sub" style="margin:0; font-size:14px; color:var(--ink-light);">
+        Escolha seu avatar e quem vai acompanhar você nos estudos.
+      </p>
+
+      <!-- PASSO 1: ESCOLHA DO AVATAR -->
+      <div>
+        <h3 style="font-size:14px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+          <span>🎨</span> 1. Escolha seu avatar
+        </h3>
+        <div class="avatar-grid" id="avatarGrid">
+          <!-- Gerado via JS -->
+        </div>
+      </div>
+
+      <fieldset class="instructor-choice">
+        <legend>2. Sua professora padrão</legend>
+        <p class="small muted">As respostas em áudio são narradas pela Profª Naira com voz clonada real (OmniVoice Zero-Shot).</p>
+        <div class="instructor-grid">
+          <div class="instructor-card"><label><input type="radio" name="instructor" value="naira" checked> 👩‍🏫 Profª Naira (Língua Portuguesa · Voz Real)</label></div>
+        </div>
+      </fieldset>
+      <details class="onboarding-extra"><summary>Preferências de estudo (opcional)</summary>
+      <div style="padding:16px 0;">
+        <h3 style="font-size:14px; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+          <span>🧠</span> 2. Conte como você gosta de aprender
+        </h3>
+        
+        <div class="onboarding-fields" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div>
+            <label for="obNickname" style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Como você gosta de ser chamado(a)?</label>
+            <input id="obNickname" placeholder="Ex.: Raiane, Dudu, Bia..." style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid var(--line); background:var(--paper);">
+          </div>
+          <div>
+            <label for="obFavSubject" style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Matéria favorita / fascinante:</label>
+            <select id="obFavSubject" style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid var(--line); background:var(--paper);">
+              <option value="">Prefiro responder depois</option>
+              <option value="História">História (Acre, Guerras, Civilizações)</option>
+              <option value="Geografia">Geografia (Rios, Clima, Cidades)</option>
+              <option value="Ciências / Biologia">Ciências / Biologia (Natureza, Corpo)</option>
+              <option value="Matemática">Matemática (Cálculos, Desafios)</option>
+              <option value="Português / Redação">Português / Redação (Textos, Poesia)</option>
+              <option value="Artes">Artes (Cores, Teatro, Desenho)</option>
+              <option value="Educação Física">Educação Física (Esportes, Movimento)</option>
+              <option value="Língua Espanhola / Inglesa">Línguas Estrangeiras</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="onboarding-fields" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+          <div>
+            <label for="obHardSubject" style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Matéria que quer mais reforço:</label>
+            <select id="obHardSubject" style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid var(--line); background:var(--paper);">
+              <option value="">Prefiro responder depois</option>
+              <option value="Matemática">Matemática / Física</option>
+              <option value="Português / Gramática">Português / Gramática</option>
+              <option value="Química">Química</option>
+              <option value="História">História</option>
+              <option value="Geografia">Geografia</option>
+              <option value="Língua Estrangeira">Inglês / Espanhol</option>
+              <option value="Nenhuma">Estou tranquilo em todas</option>
+            </select>
+          </div>
+          <div>
+            <label for="obLearningStyle" style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Como você absorve e aprende melhor?</label>
+            <select id="obLearningStyle" style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid var(--line); background:var(--paper);">
+              <option value="">Prefiro responder depois</option>
+              <option value="auditivo">🎙️ Ouvindo o professor falar em áudio</option>
+              <option value="visual">🖼️ Vendo mapas mentais e esquemas</option>
+              <option value="leitura">📖 Lendo resumos curtos e diretos</option>
+              <option value="pratico">✍️ Fazendo exercícios e desafios práticos</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <label for="obInterests" style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">O que você mais ama fazer no seu tempo livre?</label>
+          <input id="obInterests" placeholder="Ex.: Desenhar, futebol, videogame, ouvir música, pescar no rio..." style="width:100%; padding:9px 12px; border-radius:8px; border:1px solid var(--line); background:var(--paper);">
+        </div>
+
+
+      </div>
+
+      </details>
+      <div style="display:flex; justify-content:flex-end; align-items:center; margin-top:4px;">
+        <button type="button" id="saveOnboardingBtn" class="btn primary" style="font-size:14px; font-weight:700; padding:10px 22px;">
+          Salvar e começar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SOS ============ -->
+<button type="button" class="emergency" id="openEmergency" inert aria-label="SOS, preciso de ajuda agora"><img class="action-icon" src="assets/firehouse/sos.webp" width="24" height="24" alt="" aria-hidden="true"><span>SOS</span></button>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="bottom" inert aria-label="Navegação rápida">
+  <button type="button" class="active" data-view="inicio"><img class="action-icon" src="assets/firehouse/home.webp" width="24" height="24" alt="" aria-hidden="true">Início</button>
+  <button type="button" data-view="reforco"><img class="action-icon" src="assets/firehouse/mic.webp" width="24" height="24" alt="" aria-hidden="true">Dúvida</button>
+  <button type="button" data-view="atividades"><img class="action-icon" src="assets/firehouse/tasks.webp" width="24" height="24" alt="" aria-hidden="true">Tarefas</button>
+  <button type="button" data-view="conversas"><img class="action-icon" src="assets/firehouse/chat.webp" width="24" height="24" alt="" aria-hidden="true">Chat</button>
+  <button type="button" data-view="escola"><img class="action-icon" src="assets/firehouse/school.webp" width="24" height="24" alt="" aria-hidden="true">Escola</button>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============ MODAL: INSTALAR APP ============ -->
+<div class="modal" id="installModal" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+  <div class="dialog">
+    <div class="dialog-head">
+      <div><span class="eyebrow">Acesso rápido</span><h2 id="installTitle">Instalar o Dom Pedro II Voice</h2></div>
+      <button type="button" class="close" data-close="installModal" aria-label="Fechar">×</button>
+    </div>
+    <p class="small muted">Leve o Dom Pedro II Voice para a tela inicial do seu aparelho para abrir como aplicativo:</p>
+    <div style="display:grid;gap:10px;margin-top:12px">
+      <div class="card card-pad"><b>Android (Chrome)</b><p class="small muted" style="margin-top:4px">Toque no menu <strong>⋮</strong> no canto superior direito e escolha <strong>Instalar aplicativo</strong> ou <strong>Adicionar à tela inicial</strong>.</p></div>
+      <div class="card card-pad"><b>iPhone / iPad (Safari)</b><p class="small muted" style="margin-top:4px">Toque no ícone <strong>Compartilhar</strong> na barra inferior e depois em <strong>Adicionar à Tela de Início</strong>.</p></div>
+      <div class="card card-pad"><b>Computador (Chrome / Edge)</b><p class="small muted" style="margin-top:4px">Clique no ícone de instalação na barra de endereços ou fixe esta página nos favoritos.</p></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:16px">
+      <button class="btn primary" type="button" data-close="installModal">Entendi</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: EMERGÊNCIA ============ -->
+<div class="modal" id="emergencyModal" role="dialog" aria-modal="true" aria-labelledby="emergencyTitle">
+  <div class="dialog">
+    <div class="dialog-head">
+      <div><span class="eyebrow">Situação de perigo</span><h2 id="emergencyTitle">Preciso de ajuda agora</h2></div>
+      <button type="button" class="close" data-close="emergencyModal" aria-label="Fechar">×</button>
+    </div>
+    <p>Em perigo imediato, vá para um lugar seguro, se puder, e ligue. Se tiver um adulto de confiança por perto, peça ajuda.</p>
+    <div class="help-grid">
+      <a class="help fire-call" href="tel:193"><img class="action-icon" src="assets/firehouse/sos.webp" width="24" height="24" alt="" aria-hidden="true"><b>193 · Corpo de Bombeiros</b><span>Incêndios, acidentes e resgates</span></a>
+      <a class="help" href="tel:190"><img class="action-icon" src="assets/firehouse/bell.webp" width="24" height="24" alt="" aria-hidden="true"><b>190 · Polícia Militar</b><span>Violência ou ameaça imediata</span></a>
+      <a class="help" href="tel:192"><img class="action-icon" src="assets/firehouse/care.webp" width="24" height="24" alt="" aria-hidden="true"><b>192 · SAMU</b><span>Emergência médica</span></a>
+      <a class="help" href="tel:100"><img class="action-icon" src="assets/firehouse/chat.webp" width="24" height="24" alt="" aria-hidden="true"><b>100 · Direitos Humanos</b><span>Denúncias de violações de direitos</span></a>
+    </div>
+    <p class="small muted">Toque no número para abrir o discador do celular.</p>
+  </div>
+</div>
+
+<!-- ============ MODAL: LEITOR DE MATERIAL ============ -->
+<div class="modal" id="materialModal" role="dialog" aria-modal="true" aria-labelledby="matModalTitle">
+  <div class="dialog" style="max-width:640px;">
+    <div class="dialog-head" style="gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img id="matModalAvatar" src="assets/avatars/gatao.png" alt="" width="48" height="48" style="border-radius:14px;object-fit:cover;border:2px solid #ead8c3;">
+        <div>
+          <span class="eyebrow" id="matModalSubject">Disciplina</span>
+          <h2 id="matModalTitle" style="font-size:19px;">Material de apoio</h2>
+        </div>
+      </div>
+      <button type="button" class="close" data-close="materialModal" aria-label="Fechar">×</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+      <span id="matModalStatus" class="pill ok">✓ Revisado pela escola</span>
+      <span id="matModalStepLabel" class="small muted">Progresso de leitura: 50%</span>
+    </div>
+    <div style="height:8px;border-radius:999px;background:#efe6da;overflow:hidden;margin-bottom:14px;">
+      <div id="matModalProgress" style="width:50%;height:100%;border-radius:999px;background:linear-gradient(90deg,#8b1e2d,#f5b51b);transition:width .35s ease;"></div>
+    </div>
+    <div style="background:#fffaf2;border:1px solid #ead8c3;border-radius:14px;padding:12px 14px;margin-bottom:12px;">
+      <div class="small muted" style="font-weight:700;margin-bottom:4px;">💡 Tema / Pergunta-chave</div>
+      <div id="matModalQuestion" style="font-weight:700;color:#8b1e2d;"></div>
+    </div>
+    <div id="matModalBody" style="font-size:15px;line-height:1.65;color:var(--text);white-space:pre-wrap;background:#fff;border:1px solid #eee5da;border-radius:14px;padding:14px;"></div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+      <label for="matModalVoiceSelect" style="font-size:12.5px;font-weight:700;color:#8b1e2d;margin:0;">🎙️ Voz:</label>
+      <select id="matModalVoiceSelect" style="flex:1 1 160px;min-width:0;max-width:100%;padding:6px 10px;border-radius:10px;border:1.5px solid #d8c2ac;background:#fff;font-size:13px;"></select>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px;">
+      <button id="matModalPlayBtn" type="button" class="btn primary sm"><img class="action-icon" src="assets/firehouse/audio.webp" width="22" height="22" alt="" aria-hidden="true"><span>Ouvir explicação</span></button>
+      <button id="matModalDownloadBtn" type="button" class="btn ghost sm">📥 Baixar PDF + Áudio</button>
+      <button id="matModalDoneBtn" type="button" class="btn ghost sm">✓ Marcar como estudado</button>
+      <button id="matModalAskBtn" type="button" class="btn ghost sm">🎯 Perguntar sobre isso</button>
+      <audio id="materialModalAudio" controls style="display:none;height:36px;width:100%;margin-top:6px;"></audio>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: MICROAULA ============ -->
+<div class="modal" id="lessonModal" role="dialog" aria-modal="true" aria-labelledby="lessonTitle">
+  <div class="dialog">
+    <div class="dialog-head">
+      <div><span class="eyebrow">Campanha</span><h2 id="lessonTitle">Criar microaula</h2></div>
+      <button type="button" class="close" data-close="lessonModal" aria-label="Fechar">×</button>
+    </div>
+    <label for="lessonTitleInput">Título</label>
+    <input id="lessonTitleInput" placeholder="Ex.: Como entender porcentagem">
+    <label for="lessonScript">Roteiro</label>
+    <textarea id="lessonScript" placeholder="Apresente o assunto, dê um exemplo e proponha uma pergunta…"></textarea>
+    <label for="lessonFormat">Formato</label>
+    <select id="lessonFormat"><option>Vídeo curto</option><option>Áudio com slides</option><option>Texto ilustrado</option></select>
+    <div class="privacy" style="margin-top:18px"><b>Fluxo obrigatório:</b> rascunho → revisão do professor → ajustes → publicação.</div>
+    <button type="button" id="sendLesson" class="btn primary block" style="margin-top:16px"><img class="action-icon" src="assets/firehouse/send.webp" width="24" height="24" alt="" aria-hidden="true"><span>Enviar para revisão</span></button>
+  </div>
+</div>
+
+<!-- ============ MODAL: FIM DA NARRAÇÃO ============ -->
+<div class="modal" id="audioDoneModal" role="dialog" aria-modal="true" aria-labelledby="audioDoneTitle">
+  <div class="dialog" style="max-width:440px;text-align:center;">
+    <div class="dialog-head" style="justify-content:center;">
+      <div><span class="eyebrow">Aula concluída</span><h2 id="audioDoneTitle">Você terminou a narração ✅</h2></div>
+      <button type="button" class="close" data-close="audioDoneModal" aria-label="Fechar">×</button>
+    </div>
+    <p style="font-size:15px;line-height:1.6;color:var(--text);margin:6px 0 14px;">
+      A explicação em áudio chegou ao fim. Revise o roteiro em texto, ouça outra etapa quando quiser e volte em alguns minutos para fixar o conteúdo.
+    </p>
+    <div class="pill ok" style="display:inline-block;margin-bottom:16px;">⏰ Volte em alguns minutos para revisar</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+      <button type="button" class="btn primary sm" id="audioDoneReplay">🔊 Ouvir outra vez</button>
+      <button type="button" class="btn ghost sm" data-close="audioDoneModal">Fechar e continuar estudando</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: LOGIN ============ -->
+<div class="modal open" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="dialog login-dialog">
+    <div class="login-form">
+      <header class="entry-banner"><img src="assets/brand/crest-256.png" alt="Brasão da escola"><h2 id="loginTitle">Entrada do aluno</h2></header>
+      <details class="accessibility-options">
+          <summary>Acessibilidade</summary>
+          <div class="accessibility-panel">
+            <label><input type="checkbox" data-accessibility="largeText"> Texto ampliado</label>
+            <label><input type="checkbox" data-accessibility="highContrast"> Alto contraste</label>
+            <label><input type="checkbox" class="sound-toggle-cb" data-sound-toggle checked> Sons da interface</label>
+            <p>Você também pode usar o leitor de tela do seu aparelho. No iPhone, procure VoiceOver. No Android, procure TalkBack.</p>
+          </div>
+        </details>
+      <details id="serverConfig" hidden><summary>Conexão com a escola</summary>
+        <label for="serverUrl">Servidor da escola</label>
+        <input id="serverUrl" type="url" placeholder="https://app.suaescola.br">
+      </details>
+      <form id="studentLogin" autocomplete="off">
+        <div class="login-field-grid">
+          <div><label for="firstName">Primeiro nome</label><input id="firstName" autocomplete="off" maxlength="80" required></div>
+          <div><label for="secondName">Segundo nome</label><input id="secondName" autocomplete="off" maxlength="80" required></div>
+        </div>
+        <label for="studentGrade">Série</label>
+        <select id="studentGrade" required><option value="">Selecione sua série e turma</option><option value="8º ano">8º ano — demonstração</option><option value="6º Ano A — Ensino Fundamental">6º Ano A — Ensino Fundamental</option><option value="6º Ano B — Ensino Fundamental">6º Ano B — Ensino Fundamental</option><option value="6º Ano C — Ensino Fundamental">6º Ano C — Ensino Fundamental</option><option value="7º Ano A — Ensino Fundamental">7º Ano A — Ensino Fundamental</option><option value="7º Ano B — Ensino Fundamental">7º Ano B — Ensino Fundamental</option><option value="7º Ano C — Ensino Fundamental">7º Ano C — Ensino Fundamental</option><option value="8º Ano A — Ensino Fundamental">8º Ano A — Ensino Fundamental</option><option value="8º Ano B — Ensino Fundamental">8º Ano B — Ensino Fundamental</option><option value="8º Ano C — Ensino Fundamental">8º Ano C — Ensino Fundamental</option><option value="8º Ano D — Ensino Fundamental">8º Ano D — Ensino Fundamental</option><option value="9º Ano A — Ensino Fundamental">9º Ano A — Ensino Fundamental</option><option value="9º Ano B — Ensino Fundamental">9º Ano B — Ensino Fundamental</option><option value="1ª Série A — Ensino Médio">1ª Série A — Ensino Médio</option><option value="1ª Série B — Ensino Médio">1ª Série B — Ensino Médio</option><option value="1ª Série C — Ensino Médio">1ª Série C — Ensino Médio</option><option value="1ª Série D — Ensino Médio">1ª Série D — Ensino Médio</option><option value="2ª Série A — Ensino Médio">2ª Série A — Ensino Médio</option><option value="2ª Série B — Ensino Médio">2ª Série B — Ensino Médio</option><option value="2ª Série C — Ensino Médio">2ª Série C — Ensino Médio</option><option value="2ª Série D — Ensino Médio">2ª Série D — Ensino Médio</option><option value="3ª Série A — Ensino Médio">3ª Série A — Ensino Médio</option><option value="3ª Série B — Ensino Médio">3ª Série B — Ensino Médio</option><option value="3ª Série C — Ensino Médio">3ª Série C — Ensino Médio</option></select>
+        <div id="passwordFields">
+          <label for="studentPassword">Senha</label>
+          <input id="studentPassword" type="password" autocomplete="current-password" maxlength="200" required>
+        </div>
+        <div id="demoHint" hidden><p class="field-note">Acesso imediato de demonstração (8º ano · sem precisar preencher matrícula):</p><button class="btn gold block demo-cta-btn" id="fillDemoStudent" type="button">⚡ Entrar com 1 Toque · Aluno Teste</button></div>
+        <p id="loginError" class="field-note" role="status"></p>
+        <button id="loginButton" class="btn primary block" type="submit"><img class="action-icon" src="assets/firehouse/door.webp" width="24" height="24" alt="" aria-hidden="true"><span>Entrar</span></button>
+        <button id="recoveryMode" class="auth-link" type="button"><img class="action-icon" src="assets/firehouse/key.webp" width="24" height="24" alt="" aria-hidden="true"><span>Esqueci minha senha</span></button>
+      </form>
+      <details id="temporaryAccess">
+        <summary>Já recebi a senha temporária</summary>
+        <form id="resetStudent">
+          <label for="temporaryPassword">Senha temporária</label>
+          <input id="temporaryPassword" name="temporaryPassword" autocomplete="one-time-code" required maxlength="16">
+          <label for="newStudentPassword">Nova senha</label>
+          <input id="newStudentPassword" name="newPassword" type="password" autocomplete="new-password" minlength="10" maxlength="200" required>
+          <button class="btn block" type="submit"><img class="action-icon" src="assets/firehouse/key.webp" width="24" height="24" alt="" aria-hidden="true"><span>Salvar nova senha</span></button>
+          <p id="resetMessage" class="field-note" role="status"></p>
+        </form>
+      </details>
+      <a class="auth-link team-link" href="equipe.html">Painel da equipe escolar</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const nativeApp = !!window.Capacitor?.isNativePlatform?.() || location.protocol === 'file:' || location.hostname === 'localhost' && location.protocol === 'https:';
+  if (location.protocol === 'file:' && !window.Capacitor?.isNativePlatform?.()) {
+    location.replace('http://localhost:8787/prototipo.html');
+    return;
+  }
+  let API_BASE = nativeApp ? (localStorage.getItem('escolaVivaApi') || '') : (location.pathname.startsWith('/dom-pedro-ii') ? '/dom-pedro-ii' : '');
+  let token = localStorage.getItem('escolaVivaToken') || '';
+  let recordedAudio = null, mediaRecorder = null;
+  let activeChannel = 'geral';
+
+  const titles = {
+    inicio: ['Início', 'Campus CZS Sul'],
+    reforco: ['Minha dúvida', 'Reforço personalizado'],
+    atividades: ['Atividades', 'Organização'],
+    materiais: ['Materiais', 'Biblioteca da escola'],
+    conversas: ['Conversas', 'Comunicação escolar'],
+    apoio: ['Lugar de Falar', 'Acolhimento'],
+    campanhas: ['Campanhas', 'Campanha do mês'],
+    noticias: ['Notícias', 'Portal escolar'],
+    manual: ['Manual', 'Guia do estudante'],
+    escola: ['A Escola', 'Colégio Dom Pedro II']
+  };
+
+  const $ = id => document.getElementById(id);
+  const modalFocus = new Map();
+  const appRegions = [...document.querySelectorAll('.app,.bottom,#openEmergency')];
+
+  function activeModal() {
+    return ($('loginModal').classList.contains('open')
+      ? $('loginModal') : [...document.querySelectorAll('.modal.open')].at(-1));
+  }
+
+  function syncModalFocus(returnTo) {
+    if ($('school-intro')) return;
+    const modal = activeModal();
+    appRegions.forEach(region => { region.inert = Boolean(modal); });
+    document.querySelectorAll('.modal').forEach(dialog => { dialog.inert = dialog !== modal; });
+    if (modal) {
+      const heading = $(modal.getAttribute('aria-labelledby'));
+      heading.tabIndex = -1;
+      heading.focus({preventScroll:true});
+    } else if (returnTo?.isConnected && returnTo.getClientRects().length && !returnTo.closest('[inert]')) {
+      returnTo.focus({preventScroll:true});
+    } else {
+      $('pageTitle').focus({preventScroll:true});
+    }
+  }
+
+  function openModal(id) {
+    if ($(id).classList.contains('open')) return;
+    if (id === 'tutorialModal') tutorialPage(0);
+    modalFocus.set(id, document.activeElement);
+    $(id).classList.add('open');
+    syncModalFocus();
+  }
+
+  function closeModal(id) {
+    $(id).querySelectorAll('audio').forEach(audio => audio.pause());
+    $(id).classList.remove('open');
+    syncModalFocus(modalFocus.get(id));
+    modalFocus.delete(id);
+  }
+
+  // Som sutil em todos os botões e links de navegação (sem duplicar em ações com som próprio).
+  document.addEventListener('click', event => {
+    const el = event.target.closest('button, a.btn, [role="button"]');
+    if (el && !el.dataset.somProprio) uiSound.tap();
+  }, true);
+  document.addEventListener('escola:intro-end', () => syncModalFocus());
+  // Esc fecha o modal ativo; Space controla o áudio quando não há modal aberto.
+  document.addEventListener('keydown', event => {
+    const modal = activeModal();
+    if (event.key === 'Escape' && modal) {
+      const id = modal.id;
+      if (!['onboardingModal','tutorialModal'].includes(id)) { closeModal(id); event.preventDefault(); }
+      return;
+    }
+    if (!modal && event.code === 'Space' && !['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement?.tagName)) {
+      const audio = $('reforcoAudio');
+      if (audio?.getAttribute('src')) { event.preventDefault(); audio.paused ? audio.play().catch(() => {}) : audio.pause(); }
+    }
+  });
+  const toast = $('toast');
+  /* ---------- Sons de interface (Web Audio, sem arquivos externos) ---------- */
+  const uiSound = (() => {
+    let ctx = null;
+    let enabled = localStorage.getItem('ui-sound') !== 'off';
+    const ac = () => {
+      if (!ctx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        ctx = new AC();
+      }
+      if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+      return ctx;
+    };
+    const tone = (freq, dur, type = 'sine', gain = 0.05, delay = 0) => {
+      const c = ac(); if (!c || !enabled) return;
+      const t = c.currentTime + delay;
+      const osc = c.createOscillator(), g = c.createGain();
+      osc.type = type; osc.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(gain, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      osc.connect(g); g.connect(c.destination);
+      osc.start(t); osc.stop(t + dur + 0.02);
+    };
+    return {
+      tap: () => tone(520, 0.07, 'sine', 0.035),
+      send: () => { tone(440, 0.10, 'sine', 0.05); tone(660, 0.12, 'sine', 0.045, 0.08); },
+      success: () => { tone(523, 0.12, 'sine', 0.05); tone(659, 0.12, 'sine', 0.05, 0.10); tone(784, 0.20, 'sine', 0.05, 0.20); },
+      notify: () => { tone(880, 0.10, 'triangle', 0.04); tone(1174, 0.14, 'triangle', 0.035, 0.09); },
+      error: () => { tone(220, 0.18, 'triangle', 0.045); tone(165, 0.22, 'triangle', 0.04, 0.10); },
+      toggle: (on) => { enabled = on; localStorage.setItem('ui-sound', on ? 'on' : 'off'); if (on) tone(660, 0.08); },
+      isOn: () => enabled
+    };
+  })();
+
+  document.querySelectorAll('[data-sound-toggle]').forEach(cb => {
+    cb.checked = uiSound.isOn();
+    cb.onchange = () => {
+      uiSound.toggle(cb.checked);
+      document.querySelectorAll('[data-sound-toggle]').forEach(other => { other.checked = cb.checked; });
+    };
+  });
+
+  /* ---------- Modo Cinema (Padrão), Hino 16-bit, Velocidade de Voz & Auto-Narração ---------- */
+  let appBgmAudio = null;
+  let appBgmUserOn = false;
+  function duckAppBgm(speaking) {
+    if (!appBgmAudio || !appBgmUserOn) return;
+    if (speaking) {
+      appBgmAudio.pause();
+    } else if ($('appBgmToggle')?.getAttribute('aria-pressed') === 'true') {
+      appBgmAudio.volume = 0.22;
+      appBgmAudio.play().catch(() => {});
+    }
+  }
+  (function initAppCinemaAndSpeed() {
+    const toggleBtn = $('appCinemaToggle');
+    const syncBtn = active => {
+      if (!toggleBtn) return;
+      toggleBtn.innerHTML = (active ? '☀️' : '🎬') + '<span class="cinema-lbl">' + (active ? ' Claro' : ' Cinema') + '</span>';
+      toggleBtn.setAttribute('aria-pressed', String(active));
+    };
+    const isCinema = localStorage.getItem('portalTheme') !== 'light';
+    document.body.classList.toggle('cinema-mode', isCinema);
+    syncBtn(isCinema);
+    if (toggleBtn) {
+      toggleBtn.onclick = () => {
+        const active = document.body.classList.toggle('cinema-mode');
+        localStorage.setItem('portalTheme', active ? 'cinema' : 'light');
+        syncBtn(active);
+      };
+    }
+
+    const bgmBtn = $('appBgmToggle');
+    if (bgmBtn) {
+      appBgmAudio = new Audio('assets/audio/hino-bombeiros-16bit.mp3');
+      appBgmAudio.loop = true;
+      appBgmAudio.volume = 0.22;
+      const syncBgmBtn = on => {
+        bgmBtn.setAttribute('aria-pressed', String(on));
+        bgmBtn.innerHTML = (on ? '⏸️' : '🎵') + '<span class="cinema-lbl"> Hino</span>';
+      };
+      bgmBtn.onclick = () => {
+        if (appBgmUserOn && !appBgmAudio.paused) {
+          appBgmUserOn = false;
+          appBgmAudio.pause();
+          syncBgmBtn(false);
+        } else {
+          appBgmUserOn = true;
+          appBgmAudio.play().then(() => syncBgmBtn(true)).catch(() => { appBgmUserOn = false; syncBgmBtn(false); });
+        }
+      };
+      [$('reforcoAudio'), $('materialModalAudio')].forEach(aud => {
+        if (!aud) return;
+        aud.addEventListener('play', () => duckAppBgm(true));
+        aud.addEventListener('pause', () => duckAppBgm(false));
+        aud.addEventListener('ended', () => duckAppBgm(false));
+      });
+    }
+
+    const autoCb = $('autoNarrateToggle');
+    if (autoCb) {
+      const savedAuto = localStorage.getItem('dpii_auto_narrate');
+      autoCb.checked = savedAuto === null ? true : savedAuto === '1';
+      autoCb.onchange = () => localStorage.setItem('dpii_auto_narrate', autoCb.checked ? '1' : '0');
+    }
+  })();
+
+  const speeds = [1, 1.15, 0.9];
+  let audioSpeedIdx = Math.max(0, speeds.indexOf(Number(localStorage.getItem('dpii_audio_speed') || 1)));
+  function applyAudioSpeed(audio) {
+    const rate = speeds[audioSpeedIdx] || 1;
+    if (audio) audio.playbackRate = rate;
+    if ($('audioSpeedBtn')) $('audioSpeedBtn').textContent = rate + 'x';
+  }
+  if ($('audioSpeedBtn')) {
+    applyAudioSpeed($('reforcoAudio'));
+    $('audioSpeedBtn').onclick = () => {
+      audioSpeedIdx = (audioSpeedIdx + 1) % speeds.length;
+      localStorage.setItem('dpii_audio_speed', String(speeds[audioSpeedIdx]));
+      applyAudioSpeed($('reforcoAudio'));
+    };
+  }
+  const SILENT_WAV_URI = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+  function unlockReforcoAudioForIOS() {
+    const a = $('reforcoAudio');
+    if (!a) return;
+    try {
+      if (!a.getAttribute('src')) {
+        a.src = SILENT_WAV_URI;
+        const p = a.play();
+        if (p?.then) p.then(() => { a.pause(); a.currentTime = 0; a.removeAttribute('src'); }).catch(() => { a.removeAttribute('src'); });
+      }
+    } catch (_) {}
+  }
+
+  function notify(text) { toast.textContent = text; toast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 3200); }
+  function fmtAudioTime(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
+    const m = Math.floor(seconds / 60), s = Math.floor(seconds % 60);
+    return m + ':' + String(s).padStart(2, '0');
+  }
+  function setupAudioPlayer(audio) {
+    if (!audio || audio.dataset.playerWired === '1') return;
+    audio.dataset.playerWired = '1';
+    const seek = $('audioSeek'), cur = $('audioCurrent'), dur = $('audioDuration'), playBtn = $('audioPlayToggle'), eq = $('audioEq');
+    if (!seek || !cur || !playBtn) return;
+    audio.addEventListener('loadedmetadata', () => {
+      if (dur) dur.textContent = fmtAudioTime(audio.duration);
+      applyAudioSpeed(audio);
+    });
+    audio.addEventListener('timeupdate', () => {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      seek.value = pct;
+      cur.textContent = fmtAudioTime(audio.currentTime);
+      seek.style.setProperty('--pct', pct + '%');
+    });
+    audio.addEventListener('play', () => {
+      applyAudioSpeed(audio);
+      playBtn.textContent = '❚❚';
+      playBtn.setAttribute('aria-label', 'Pausar a narração');
+      if (eq) eq.classList.add('playing');
+    });
+    audio.addEventListener('pause', () => {
+      playBtn.textContent = '▶';
+      playBtn.setAttribute('aria-label', 'Reproduzir a narração');
+      if (eq) eq.classList.remove('playing');
+    });
+    audio.addEventListener('ended', () => {
+      if (eq) eq.classList.remove('playing');
+    });
+    playBtn.onclick = () => { if (!audio.getAttribute('src')) return; audio.paused ? audio.play().catch(() => {}) : audio.pause(); };
+    seek.oninput = () => { if (audio.duration) audio.currentTime = (Number(seek.value) / 100) * audio.duration; };
+  }
+  // Aviso de término da narração: pop-up + notificação do sistema quando permitido.
+  function avisarFimAudio() {
+    const baseTitle = document.title;
+    uiSound.notify();
+    notify('✅ Narração concluída. Volte em alguns minutos para revisar.');
+    try {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Aula concluída ✅', { body: 'Você terminou a narração. Volte em alguns minutos para revisar.' });
+      } else if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission().then(p => {
+          if (p === 'granted') new Notification('Aula concluída ✅', { body: 'Volte em alguns minutos para revisar.' });
+        }).catch(() => {});
+      }
+    } catch {}
+    if (document.visibilityState === 'hidden' || !document.hasFocus()) {
+      let n = 0;
+      const blink = setInterval(() => {
+        document.title = (n++ % 2 ? '✅ Narração concluída' : baseTitle);
+        if (n > 12 || (document.visibilityState === 'visible' && document.hasFocus())) { clearInterval(blink); document.title = baseTitle; }
+      }, 800);
+    }
+    openModal('audioDoneModal');
+  }
+  function escapeHtml(value) { const n = document.createElement('div'); n.textContent = String(value ?? ''); return n.innerHTML; }
+  function initials(name) { return String(name || 'AL').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase(); }
+
+  /* ---------- Navegação ---------- */
+  const composer = $('subject').closest('.grid');
+  let composing = false, submitting = false;
+  function lessonState(message, writing) {
+    composer.style.display = writing ? '' : 'none';
+    $('lessonState').textContent = message;
+    $('newQuestion').hidden = writing || submitting;
+  }
+  $('newQuestion').onclick = () => {
+    composing = true;
+    $('lessonActions').hidden = true;
+    $('reforcoFeedback').style.display = 'none';
+    $('reforcoAudio').pause();
+    if ($('audioPlayer')) $('audioPlayer').hidden = true;
+    lessonState('', true);
+    if ($('doubtChecklist')) $('doubtChecklist').hidden = true;
+    $('subject').focus();
+  };
+  /* ---------- Caderno Persistente no Aparelho ("App com Memória") ---------- */
+  function readNotebook() {
+    try {
+      const list = JSON.parse(localStorage.getItem('dpii_notebook_v1') || '[]');
+      return Array.isArray(list) ? list : [];
+    } catch { return []; }
+  }
+  function saveToNotebook(entry) {
+    if (!entry?.answer) return;
+    try {
+      let lessonObj = entry.lesson || null;
+      if (!lessonObj && entry.lesson_json) {
+        try { lessonObj = JSON.parse(entry.lesson_json); } catch {}
+      }
+      const clean = {
+        id: entry.id,
+        subject: entry.subject || 'Estudo',
+        text: entry.text || '',
+        answer: entry.answer,
+        lesson: lessonObj,
+        voice: entry.voice || 'prof_naira',
+        instructor: 'naira',
+        status: entry.status || 'suggested',
+        redo_count: entry.redo_count || 0,
+        source: entry.source || 'local_tutor',
+        created_at: entry.created_at || new Date().toISOString()
+      };
+      const prev = readNotebook().filter(x => String(x.id) !== String(clean.id));
+      prev.unshift(clean);
+      localStorage.setItem('dpii_notebook_v1', JSON.stringify(prev.slice(0, 25)));
+      renderSavedNotebook();
+    } catch {}
+  }
+  function renderSavedNotebook() {
+    const wrap = $('savedNotebookList');
+    const pill = $('notebookCountPill');
+    if (!wrap) return;
+    const list = readNotebook();
+    if (pill) pill.textContent = `${list.length} salva${list.length === 1 ? '' : 's'}`;
+    wrap.replaceChildren();
+    if (!list.length) {
+      wrap.innerHTML = '<p class="small muted" style="margin:0;">Envie sua primeira dúvida acima — ela será salva aqui automaticamente.</p>';
+      return;
+    }
+    list.forEach(item => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'notebook-card';
+      const titleText = item.text || item.lesson?.steps?.[0]?.title || 'Aula salva';
+      const isNaira = item.voice === 'prof_naira' || item.instructor === 'naira';
+      btn.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;width:100%;">
+          <span class="pill soft" style="font-size:11px;">${escapeHtml(item.subject || 'Estudo')}</span>
+          <span style="font-size:11px;color:var(--muted);">${isNaira ? '🎙️ Profª Naira' : '🎧 Professor'}</span>
+        </div>
+        <strong style="font-size:13.5px;color:var(--ink);line-height:1.3;">${escapeHtml(String(titleText).slice(0, 88))}</strong>
+        <span class="small muted" style="font-size:11.5px;">Toque para reabrir explicação, PDF e áudio</span>
+      `;
+      btn.onclick = () => {
+        composing = false;
+        presentLesson(item, { isNewAnswer: false });
+        $('reforcoFeedback')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      wrap.append(btn);
+    });
+  }
+  renderSavedNotebook();
+
+  let displayedLesson = '';
+  let checkingLesson = false;
+  async function restoreLesson() {
+    renderSavedNotebook();
+    if (!token) {
+      const localSaved = localStorage.getItem('dpii_last_lesson');
+      if (localSaved && !displayedLesson) {
+        try {
+          const parsed = JSON.parse(localSaved);
+          if (parsed?.answer) presentLesson(parsed, { isNewAnswer: false });
+        } catch (_) {}
+      }
+      return;
+    }
+    if (checkingLesson) return;
+    const session = token;
+    checkingLesson = true;
+    try {
+      const {doubts} = await api('/api/doubts');
+      if (Array.isArray(doubts) && doubts.length) {
+        doubts.filter(d => d.answer).slice(0, 10).reverse().forEach(d => {
+          let l = null;
+          try { l = d.lesson_json ? JSON.parse(d.lesson_json) : null; } catch {}
+          saveToNotebook({ ...d, lesson: l, instructor: 'naira' });
+        });
+      }
+      const row = doubts && doubts[0];
+      if (!row) {
+        const localSaved = localStorage.getItem('dpii_last_lesson');
+        if (localSaved && !displayedLesson) {
+          try {
+            const parsed = JSON.parse(localSaved);
+            if (parsed?.answer) presentLesson(parsed, { isNewAnswer: false });
+          } catch (_) {}
+        }
+        return;
+      }
+      const reforcoActive = $('reforco').classList.contains('active');
+      document.querySelectorAll('button[data-view="reforco"]').forEach(btn => {
+        let dot = btn.querySelector('.nav-badge');
+        if (row.answer && !reforcoActive) {
+          if (!dot) {
+            dot = document.createElement('span');
+            dot.className = 'nav-badge';
+            dot.textContent = '1';
+            dot.style.cssText = 'margin-left:6px;background:#b51d2d;color:#fff;border-radius:999px;padding:1px 6px;font-size:11px;font-weight:800;';
+            btn.append(dot);
+          }
+        } else if (dot) {
+          dot.remove();
+        }
+      });
+      if (!reforcoActive || composing || submitting || session !== token || displayedLesson === session + '/' + row.id + '/' + row.status + '/' + (row.redo_count || 0) + '/' + (row.confirmed_at || '')) return;
+      let parsedLesson = null;
+      try { parsedLesson = row.lesson_json ? JSON.parse(row.lesson_json) : null; } catch {}
+      presentLesson({...row, lesson: parsedLesson,
+        instructor: 'naira'}, { isNewAnswer: false });
+    } catch {} finally { checkingLesson = false; }
+  }
+  setInterval(() => { if (!document.hidden) restoreLesson(); }, 6000);
+
+  let cachedVoicesList = null;
+  let selectedDoubtVoice = '';
+  const FALLBACK_VOICES = [
+    { id: 'prof_naira', label: 'Profª Naira (Língua Portuguesa · Voz Clonada Real)', gender: 'F', engine: 'omnivoice-clone' },
+  ];
+  function populateVoiceSelect(sel, voices, preferredId, keepFirstAuto = false) {
+    if (!sel) return;
+    const prev = preferredId !== undefined ? preferredId : sel.value;
+    const autoOpt = keepFirstAuto ? sel.querySelector('option[value=""]')?.cloneNode(true) : null;
+    sel.replaceChildren();
+    if (autoOpt) sel.appendChild(autoOpt);
+    voices.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.id;
+      opt.textContent = v.label || v.id;
+      sel.appendChild(opt);
+    });
+    if (prev && Array.from(sel.options).some(o => o.value === prev)) {
+      sel.value = prev;
+    } else if (sel.options.length) {
+      sel.selectedIndex = 0;
+    }
+  }
+  async function loadVoicesCatalog(preferredDoubtVoice) {
+    if (!cachedVoicesList) {
+      try {
+        const res = await api('/api/voices');
+        if (Array.isArray(res?.voices) && res.voices.length) cachedVoicesList = res.voices;
+      } catch {}
+    }
+    const list = cachedVoicesList || FALLBACK_VOICES;
+    populateVoiceSelect($('doubtVoiceSelect'), list, preferredDoubtVoice || selectedDoubtVoice, false);
+    populateVoiceSelect($('askVoiceSelect'), list, $('askVoiceSelect')?.value || '', true);
+    populateVoiceSelect($('matModalVoiceSelect'), list, undefined, false);
+    return list;
+  }
+
+  function setChecklistStage(stage, title, sub) {
+    const cl = $('doubtChecklist');
+    if (!cl) return;
+    cl.hidden = false;
+    const pctMap = { sending: '30%', processing: '65%', done: '100%' };
+    const pct = pctMap[stage] || '30%';
+    const isDone = stage === 'done';
+    const isProcOrDone = stage === 'processing' || isDone;
+    $('conveyorTrack')?.classList.toggle('done', isDone);
+    if ($('doubtProgressBar')) {
+      $('doubtProgressBar').style.width = pct;
+      $('doubtProgressBar').classList.toggle('done', isDone);
+    }
+    if ($('doubtProgressPct')) {
+      $('doubtProgressPct').textContent = pct;
+      $('doubtProgressPct').className = 'pill ' + (isDone ? 'ok' : 'warn');
+    }
+    if (title && $('doubtChecklistTitle')) $('doubtChecklistTitle').textContent = title;
+    if (sub && $('doubtChecklistSub')) $('doubtChecklistSub').textContent = sub;
+
+    const sentCard = $('stepSent'), procCard = $('stepProc'), doneCard = $('stepDone');
+    if (sentCard) {
+      sentCard.classList.toggle('is-active', stage === 'sending');
+      sentCard.classList.toggle('is-complete', isProcOrDone);
+    }
+    if (procCard) {
+      procCard.classList.toggle('is-active', stage === 'processing');
+      procCard.classList.toggle('is-complete', isDone);
+    }
+    if (doneCard) {
+      doneCard.classList.toggle('is-active', false);
+      doneCard.classList.toggle('is-complete', isDone);
+    }
+
+    $('flowWire1')?.classList.toggle('active', stage === 'sending');
+    $('flowWire1')?.classList.toggle('done', isProcOrDone);
+    $('flowWire2')?.classList.toggle('active', stage === 'processing');
+    $('flowWire2')?.classList.toggle('done', isDone);
+
+    $('ledSentRed')?.classList.toggle('on', stage === 'sending');
+    $('ledSentGreen')?.classList.toggle('solid-ok', isProcOrDone);
+    $('ledSentGreen')?.classList.remove('on');
+
+    $('ledProcAmber')?.classList.toggle('on', stage === 'processing');
+    $('ledProcGreen')?.classList.toggle('solid-ok', isDone);
+    $('ledProcGreen')?.classList.remove('on');
+
+    $('ledDoneAmber')?.classList.toggle('on', stage === 'processing');
+    $('ledDoneGreen')?.classList.toggle('on', isDone);
+    $('ledDoneGreen')?.classList.toggle('solid-ok', isDone);
+  }
+
+  async function downloadAuthedFile(path, filename) {
+    const response = await fetch(API_BASE + path, {
+      headers: { Authorization: 'Bearer ' + token },
+      signal: AbortSignal.timeout(125000)
+    });
+    if (!response.ok) throw new Error('Falha ao baixar arquivo (' + response.status + ')');
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  }
+
+  // Aviso quando a resposta chega e o aluno está em outra aba / outro app
+  function alertLessonReady(id) {
+    const baseTitle = document.title;
+    if (document.visibilityState === 'hidden' || !document.hasFocus()) {
+      try { if ('Notification' in window && Notification.permission === 'granted') new Notification('Explicação pronta!', { body: 'Sua explicação chegou. Toque para ver.' }); } catch {}
+      let n = 0;
+      const blink = setInterval(() => {
+        document.title = (n++ % 2 ? '🔔 Explicação pronta' : baseTitle);
+        if (n > 12 || (document.visibilityState === 'visible' && document.hasFocus())) { clearInterval(blink); document.title = baseTitle; }
+      }, 800);
+    }
+  }
+
+  function presentLesson(result, opts = {}) {
+    displayedLesson = token + '/' + result.id + '/' + result.status + '/' + (result.redo_count || 0) + '/' + (result.confirmed_at || '');
+    const done = Boolean(result.answer);
+    setChecklistStage(
+      done ? 'done' : 'processing',
+      done ? 'Material pronto!' : 'Backend gerando explicação detalhada…',
+      done ? 'Os 3 cadetes finalizaram o roteiro completo e o áudio da aula.' : 'Cadete em espera processando o roteiro completo e o áudio.'
+    );
+    lessonState(done ? 'Sua explicação completa chegou.' : 'Dúvida recebida. Aguardando resposta da escola.', false);
+    if ($('newQuestion')) $('newQuestion').hidden = false;
+    $('lessonActions').hidden = !result.answer;
+    if (done) {
+      uiSound.success();
+      if (opts.isNewAnswer) alertLessonReady(result.id);
+
+      // Salva na memória do aparelho ("App sem memória" resolvido)
+      try {
+        localStorage.setItem('dpii_last_lesson', JSON.stringify(result));
+      } catch (_) {}
+      saveToNotebook(result);
+
+      if (opts.isNewAnswer) {
+        setTimeout(() => {
+          try {
+            if (result.material_id) openMaterialReader(result.material_id);
+            else {
+              const step = $('lessonStep');
+              if (step) {
+                step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                $('explanationTitle')?.focus?.({ preventScroll: true });
+              }
+            }
+          } catch {}
+        }, 700);
+      }
+
+      // AUTO-NARRAÇÃO ("Cria voz sozinha"): apenas para resposta nova, começando pela Etapa 0 pré-aquecida!
+      const shouldAutoSpeak = Boolean(opts.isNewAnswer) && ($('autoNarrateToggle') ? $('autoNarrateToggle').checked : true);
+      if (shouldAutoSpeak) {
+        setTimeout(() => {
+          if (!$('reforco').classList.contains('active')) showView('reforco');
+          const isNaira = result.voice === 'prof_naira' || result.instructor === 'naira' || (result.subject && /portugu/i.test(result.subject));
+          const vLabel = isNaira ? 'Profª Naira' : 'Professor';
+          notify('🎙️ ' + vLabel + ' criando voz e iniciando explicação...');
+          if ($('continuousAudioToggle')) $('continuousAudioToggle').checked = true;
+          const play = $('reforcoPlayBtn');
+          if (play) play.click();
+        }, 900);
+      }
+    }
+
+    const save = body => api('/api/doubts/' + result.id + '/reaction', { method: 'POST', body: JSON.stringify(body) });
+    const badge = $('ratingStatusBadge');
+    const feedbackInput = $('ratingFeedbackInput');
+    const ratingSel = $('rating');
+    const confirmBtn = $('confirmRatingBtn');
+    const redoBtn = $('redoLessonBtn');
+    const syncStars = val => {
+      const n = Number(val || 0);
+      if (ratingSel) ratingSel.value = n ? String(n) : '';
+      document.querySelectorAll('#ratingStars .star-btn').forEach(btn => {
+        btn.classList.toggle('active', n > 0 && Number(btn.dataset.value) <= n);
+      });
+    };
+    syncStars(result.rating || '');
+    if (feedbackInput) feedbackInput.value = result.feedback_note || '';
+    if (badge) {
+      if (result.confirmed_at) {
+        badge.textContent = (result.redo_count > 0 ? '✓ Confirmado (Refeito #' + result.redo_count + ')' : '✓ Avaliação confirmada');
+        badge.className = 'pill ok';
+      } else if (result.redo_count > 0) {
+        badge.textContent = 'Explicação refeita #' + result.redo_count;
+        badge.className = 'pill warn';
+      } else {
+        badge.textContent = 'Aguardando confirmação';
+        badge.className = 'pill soft';
+      }
+    }
+    document.querySelectorAll('#ratingStars .star-btn').forEach(btn => {
+      btn.onclick = () => {
+        syncStars(btn.dataset.value);
+        if (badge) { badge.textContent = 'Nota ' + btn.dataset.value + ' marcada — toque em Confirmar'; badge.className = 'pill warn'; }
+      };
+    });
+    if (ratingSel) {
+      ratingSel.onchange = () => {
+        syncStars(ratingSel.value);
+        if (badge && ratingSel.value) { badge.textContent = 'Nota ' + ratingSel.value + ' marcada — toque em Confirmar'; badge.className = 'pill warn'; }
+      };
+    }
+    if (confirmBtn) {
+      confirmBtn.onclick = async () => {
+        const chosenRating = Number(ratingSel?.value || 0);
+        if (chosenRating < 1 || chosenRating > 5) {
+          notify('Escolha uma nota de 1 a 5 estrelas antes de confirmar.');
+          return;
+        }
+        confirmBtn.disabled = true;
+        try {
+          const note = feedbackInput?.value.trim() || '';
+          const res = await save({ rating: chosenRating, feedbackNote: note });
+          if (badge) {
+            badge.textContent = res.suggestRedo
+              ? 'Nota ' + chosenRating + ' confirmada — toque em Refazer para melhorar'
+              : '✓ Avaliação confirmada (' + chosenRating + '/5)';
+            badge.className = 'pill ' + (res.suggestRedo ? 'warn' : 'ok');
+          }
+          uiSound.success();
+          if (res.suggestRedo && redoBtn) {
+            redoBtn.style.boxShadow = '0 0 0 3px rgba(212,154,26,.35)';
+            notify('Avaliação confirmada! Como a nota foi baixa, clique em "Refazer explicação" para o backend gerar uma versão mais simples.');
+          } else {
+            notify('Avaliação confirmada e registrada no servidor!');
+          }
+        } catch (e) { notify(e.message); }
+        finally { confirmBtn.disabled = false; }
+      };
+    }
+    if (redoBtn) {
+      redoBtn.onclick = async () => {
+        unlockReforcoAudioForIOS();
+        redoBtn.disabled = true;
+        if (confirmBtn) confirmBtn.disabled = true;
+        setChecklistStage('processing', 'Refazendo sua explicação no backend…', 'Simplificando o texto, adicionando novos exemplos e atualizando o áudio.');
+        try {
+          const note = feedbackInput?.value.trim() || '';
+          const v = $('doubtVoiceSelect')?.value || selectedDoubtVoice || result.voice || '';
+          const redone = await api('/api/doubts/' + result.id + '/redo', {
+            method: 'POST',
+            body: JSON.stringify({ feedbackNote: note, detailMode: 'simpler', voice: v })
+          });
+          let parsed = null;
+          try { parsed = typeof redone.lesson === 'object' ? redone.lesson : JSON.parse(redone.lesson_json || 'null'); } catch {}
+          presentLesson({ ...result, ...redone, lesson: parsed || redone.lesson }, { isNewAnswer: true });
+          notify('Explicação refeita com sucesso em uma versão mais clara!');
+        } catch (e) {
+          setChecklistStage('done', 'Material pronto!', 'Não foi possível refazer agora; sua explicação anterior segue disponível.');
+          notify(e.message);
+        } finally {
+          redoBtn.disabled = false;
+          if (confirmBtn) confirmBtn.disabled = false;
+        }
+      };
+    }
+
+    const share = $('shareLesson');
+    share.disabled = Boolean(result.shared);
+    share.textContent = result.shared ? 'Enviado para revisão' : 'Enviar para a turma';
+    share.onclick = async () => {
+      share.disabled = true;
+      try {
+        await save({ share: true });
+        share.textContent = 'Enviado para revisão';
+        notify('Enviado para aprovação! Acompanhe em Materiais → Esperando aprovação para a turma.');
+        loadMaterials().catch(() => {});
+      }
+      catch (e) { share.disabled = false; notify(e.message); }
+    };
+
+    const saveBtn = $('saveLesson');
+    if (saveBtn) {
+      saveBtn.onclick = () => {
+        try {
+          const key = 'savedLesson:' + result.id;
+          const payload = { id: result.id, subject: result.subject || '', title: result.title || '', answer: result.answer || '', createdAt: new Date().toISOString() };
+          localStorage.setItem(key, JSON.stringify(payload));
+          const saved = JSON.parse(localStorage.getItem('savedLessons') || '[]');
+          if (!saved.includes(result.id)) saved.push(result.id);
+          localStorage.setItem('savedLessons', JSON.stringify(saved));
+          saveBtn.textContent = '💾 Guardado neste aparelho';
+          notify('Explicação guardada neste aparelho para consulta depois.');
+        } catch (e) { notify('Não foi possível guardar: ' + e.message); }
+      };
+    }
+
+    const formatBadge = (vId, labelText) => {
+      if (vId === 'prof_naira') return '🎙️ Voz Clonada Real · Profª Naira · Aula narrada completa';
+      return 'Voz: ' + String(labelText || vId).split('(')[0].trim() + ' · Aula narrada completa';
+    };
+    const activeVoice = () => ($('doubtVoiceSelect')?.value || selectedDoubtVoice || result.voice || 'prof_naira').trim();
+    const dlBtn = $('downloadLesson');
+    if (dlBtn) {
+      dlBtn.onclick = async () => {
+        const orig = dlBtn.textContent;
+        dlBtn.disabled = true;
+        dlBtn.textContent = '⏳ Gerando PDF + Áudio…';
+        try {
+          const v = encodeURIComponent(activeVoice());
+          await downloadAuthedFile('/api/doubts/' + result.id + '/pdf?voice=' + v, 'roteiro-estudo-' + result.id + '.pdf');
+          await downloadAuthedFile('/api/doubts/' + result.id + '/speak?full=1&voice=' + v, 'aula-narrada-' + result.id + '.wav');
+          notify('PDF de estudo e áudio completo da aula baixados!');
+        } catch (e) {
+          notify(e.message || 'Erro ao baixar PDF e áudio.');
+        } finally {
+          dlBtn.disabled = false;
+          dlBtn.textContent = orig;
+        }
+      };
+    }
+    const zipBtn = $('downloadStudyZip');
+    if (zipBtn) {
+      zipBtn.onclick = async () => {
+        const orig = zipBtn.textContent;
+        zipBtn.disabled = true;
+        zipBtn.textContent = '⏳ Compactando ZIP…';
+        try {
+          const v = encodeURIComponent(activeVoice());
+          await downloadAuthedFile('/api/doubts/' + result.id + '/study-pack?voice=' + v, 'pacote-estudo-' + result.id + '.zip');
+          notify('Pacote ZIP (PDF + Áudio) baixado!');
+        } catch (e) {
+          notify(e.message || 'Erro ao baixar pacote ZIP.');
+        } finally {
+          zipBtn.disabled = false;
+          zipBtn.textContent = orig;
+        }
+      };
+    }
+
+    const feedback = $('reforcoFeedback');
+    const audio = $('reforcoAudio');
+    setupAudioPlayer(audio);
+    const showAudioPlayer = () => {
+      const player = $('audioPlayer');
+      if (player) player.hidden = false;
+      const dur = $('audioDuration');
+      if (dur) dur.textContent = Number.isFinite(audio.duration) ? fmtAudioTime(audio.duration) : '--:--';
+    };
+    const resetAudio = () => {
+      if (audio.src && audio.src.startsWith('blob:')) URL.revokeObjectURL(audio.src);
+      audio.pause();
+      audio.removeAttribute('src');
+      delete audio.dataset.audioKey;
+      delete audio.dataset.mode;
+      audio.load();
+      const player = $('audioPlayer');
+      if (player) player.hidden = true;
+      const seek = $('audioSeek');
+      if (seek) seek.value = 0;
+      const cur = $('audioCurrent');
+      if (cur) cur.textContent = '0:00';
+      const playBtn = $('audioPlayToggle');
+      if (playBtn) playBtn.textContent = '▶';
+    };
+    resetAudio();
+    feedback.style.display = result.answer ? 'block' : 'none';
+    if (!result.answer) notify('Sua dúvida foi encaminhada à escola. A explicação automática está indisponível; aguarde a orientação do professor.');
+    if (result.answer) {
+      loadVoicesCatalog(selectedDoubtVoice || result.voice || '').then(() => {
+        if ($('doubtVoiceSelect') && $('reforcoVoiceBadge')) {
+          const vId = activeVoice();
+          const lbl = $('doubtVoiceSelect').selectedOptions?.[0]?.textContent || vId;
+          $('reforcoVoiceBadge').textContent = formatBadge(vId, lbl);
+        }
+      });
+      if ($('doubtVoiceSelect')) {
+        $('doubtVoiceSelect').onchange = () => {
+          selectedDoubtVoice = $('doubtVoiceSelect').value;
+          resetAudio();
+          const lbl = $('doubtVoiceSelect').selectedOptions?.[0]?.textContent || selectedDoubtVoice;
+          if ($('reforcoVoiceBadge')) $('reforcoVoiceBadge').textContent = formatBadge(selectedDoubtVoice, lbl);
+        };
+      }
+      $('reforcoSource').textContent = result.source === 'school' ? 'Resposta da escola'
+        : result.source === 'ai_tutor' ? 'Para estudar' : result.source === 'local_tutor' ? 'Roteiro da aula' : 'Material de reforço';
+      $('reforcoTeacher').textContent = (result.redo_count > 0 ? '✨ Versão Refeita · ' : '') + 'Profª Naira (Língua Portuguesa · Voz Real)';
+      const steps = result.lesson?.steps || [{ title: 'Explicação', text: result.answer.replace(/^\[(Prof\.|Profa\.)[^\]]+\]:\s*/, ''), visual: { kind: 'none', items: [] } }];
+      let currentStep = 0;
+      const play = $('reforcoPlayBtn');
+      const playFull = $('playFullLessonBtn');
+      const renderStep = () => {
+        window.speechSynthesis?.cancel();
+        const step = steps[currentStep];
+        $('explanationTitle').textContent = step.title;
+        $('reforcoAnswer').textContent = step.text;
+        const visual = $('lessonVisual'); visual.replaceChildren();
+        if (step.visual && step.visual.kind !== 'none' && step.visual.items.length) {
+          const list = document.createElement(step.visual.kind === 'sequence' ? 'ol' : 'ul');
+          list.className = 'lesson-diagram';
+          list.setAttribute('aria-label', step.visual.kind === 'sequence' ? 'Sequência explicativa' : 'Comparação');
+          step.visual.items.forEach(item => { const li = document.createElement('li'); li.textContent = item; list.appendChild(li); });
+          visual.appendChild(list);
+        }
+        $('lessonNavigation').hidden = steps.length < 2;
+        $('lessonPrevious').disabled = currentStep === 0;
+        $('lessonNext').disabled = currentStep === steps.length - 1;
+        $('lessonProgress').textContent = `Etapa ${currentStep + 1} de ${steps.length}`;
+        resetAudio();
+      };
+      $('lessonPrevious').onclick = () => { if (currentStep > 0) { currentStep--; renderStep(); $('explanationTitle').focus(); } };
+      $('lessonNext').onclick = () => { if (currentStep < steps.length - 1) { currentStep++; renderStep(); $('explanationTitle').focus(); } };
+      renderStep();
+
+      audio.onended = () => {
+        if (audio.dataset.mode === 'step' && $('continuousAudioToggle')?.checked && currentStep < steps.length - 1) {
+          currentStep++;
+          renderStep();
+          play?.click();
+          return;
+        }
+        avisarFimAudio();
+      };
+      const replayBtn = $('audioDoneReplay');
+      if (replayBtn) replayBtn.onclick = () => { closeModal('audioDoneModal'); (audio.dataset.mode === 'full' ? playFull : play)?.click(); };
+
+      play.onclick = async () => {
+        play.disabled = true;
+        const requestedStep = currentStep;
+        const vId = activeVoice();
+        const cacheKey = 'step:' + requestedStep + ':' + vId + ':' + (result.redo_count || 0);
+        try {
+          if (!audio.hasAttribute('src') || audio.dataset.audioKey !== cacheKey) {
+            const q = (result.lesson ? '?step=' + currentStep + '&' : '?') + 'voice=' + encodeURIComponent(vId);
+            const response = await fetch(API_BASE + '/api/doubts/' + result.id + '/speak' + q, {
+              headers: { Authorization: 'Bearer ' + token }, signal: AbortSignal.timeout(125000)
+            });
+            if (!response.ok) throw new Error('Voz indisponível');
+            const blob = await response.blob();
+            if (requestedStep !== currentStep || !$('reforco').classList.contains('active')) return;
+            resetAudio();
+            audio.src = URL.createObjectURL(blob);
+            audio.dataset.audioKey = cacheKey;
+            audio.dataset.mode = 'step';
+            showAudioPlayer();
+          }
+          await audio.play();
+        } catch {
+          notify('Não foi possível gerar a voz agora. Sua explicação continua disponível. Toque em Ouvir para tentar novamente.');
+        } finally {
+          play.disabled = false;
+        }
+      };
+
+      if (playFull) {
+        playFull.onclick = async () => {
+          const orig = playFull.textContent;
+          playFull.disabled = true;
+          playFull.textContent = '⏳ Preparando resposta…';
+          const vId = activeVoice();
+          const cacheKey = 'full:' + vId + ':' + (result.redo_count || 0);
+          try {
+            if (!audio.hasAttribute('src') || audio.dataset.audioKey !== cacheKey) {
+              const response = await fetch(API_BASE + '/api/doubts/' + result.id + '/speak?full=1&voice=' + encodeURIComponent(vId), {
+                headers: { Authorization: 'Bearer ' + token }, signal: AbortSignal.timeout(125000)
+              });
+              if (!response.ok) throw new Error('Voz indisponível');
+              const blob = await response.blob();
+              if (!$('reforco').classList.contains('active')) return;
+              resetAudio();
+              audio.src = URL.createObjectURL(blob);
+              audio.dataset.audioKey = cacheKey;
+              audio.dataset.mode = 'full';
+              showAudioPlayer();
+            }
+            await audio.play();
+          } catch {
+            notify('Não foi possível gerar a narração completa agora. Tente ouvir por etapas.');
+          } finally {
+            playFull.disabled = false;
+            playFull.textContent = orig;
+          }
+        };
+      }
+    }
+  }
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === id));
+    document.querySelectorAll('nav button[data-view]').forEach(button => {
+      const current = button.dataset.view === id;
+      button.classList.toggle('active', current);
+      if (current) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+    });
+    const meta = titles[id] || ['Painel', 'Campus CZS Sul'];
+    $('pageTitle').textContent = meta[0];
+    $('pageCrumb').textContent = meta[1];
+    setDrawer(false);
+    window.scrollTo(0, 0);
+    $('pageTitle').focus({preventScroll:true});
+    if (id === 'reforco') restoreLesson();
+    else { $('reforcoAudio').pause(); window.speechSynthesis?.cancel(); }
+    if (id === 'atividades') loadTasks().catch(() => {});
+    if (id === 'materiais') loadMaterials().catch(() => {});
+    if (id === 'conversas') loadMessages().catch(() => {});
+    if (id === 'noticias') loadNews().catch(() => {});
+    if (id === 'campanhas') loadCampaigns().catch(() => {});
+    if (id === 'escola') loadTeachers().catch(() => {});
+  }
+  document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
+  if ($('homeTeachersShortcut')) {
+    $('homeTeachersShortcut').onclick = () => {
+      showView('escola');
+      setTimeout(() => $('teachersRosterCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+    };
+  }
+  function setDrawer(open, returnFocus = false) {
+    document.body.classList.toggle('drawer-open', open);
+    $('menuBtn').setAttribute('aria-expanded', String(open));
+    if (open) document.querySelector('#sidebar nav button.active')?.focus();
+    else if (returnFocus) $('menuBtn').focus();
+  }
+  $('menuBtn').onclick = () => {
+    const open = !document.body.classList.contains('drawer-open');
+    setDrawer(open, !open);
+  };
+  $('scrim').onclick = () => setDrawer(false, true);
+  document.querySelectorAll('nav button.active[data-view]').forEach(button => button.setAttribute('aria-current', 'page'));
+  document.querySelector('.skip-main').onclick = event => {
+    event.preventDefault();
+    $('pageTitle').focus();
+  };
+
+  /* ---------- API ---------- */
+  async function api(path, options = {}) {
+    const headers = new Headers(options.headers || {});
+    if (token) headers.set('Authorization', 'Bearer ' + token);
+    if (options.body && !(options.body instanceof FormData)) headers.set('Content-Type', 'application/json');
+    const response = await fetch(API_BASE + path, { ...options, headers });
+    const data = response.status === 204 ? {} : await response.json().catch(() => ({}));
+    if (response.status === 401) {
+      if (localStorage.getItem('dpii_demo_mode') === '1' && !options._retried && path !== '/api/auth/demo') {
+        try {
+          const demoRes = await fetch(API_BASE + '/api/auth/demo', { method: 'POST' });
+          if (demoRes.ok) {
+            const demoData = await demoRes.json();
+            if (demoData?.token) {
+              token = demoData.token;
+              localStorage.setItem('escolaVivaToken', token);
+              if (demoData.user) applyUser(demoData.user);
+              return api(path, { ...options, _retried: true });
+            }
+          }
+        } catch {}
+      }
+      token = ''; localStorage.removeItem('escolaVivaToken');
+      openModal('loginModal');
+    }
+    if (!response.ok) throw new Error(data.error || 'Não foi possível concluir.');
+    return data;
+  }
+
+  /* ---------- Login ---------- */
+  let requestingPassword = false;
+  $('serverConfig').hidden = !nativeApp;
+  $('serverUrl').value = API_BASE;
+  function configureServer() {
+    if (!nativeApp) return;
+    let base;
+    try { base = new URL($('serverUrl').value.trim()); }
+    catch { $('serverConfig').open = true; throw new Error('Em Conexão com a escola, informe o endereço completo fornecido pela direção.'); }
+    if (base.username || base.password || !['http:', 'https:'].includes(base.protocol)) {
+      throw new Error('Informe o endereço do servidor da escola.');
+    }
+    API_BASE = base.origin;
+    localStorage.setItem('escolaVivaApi', API_BASE);
+  }
+  async function loadStudentGrades() {
+    if (nativeApp && !API_BASE) return;
+    try {
+      const response = await fetch(API_BASE + '/api/auth/student/grades');
+      if (!response.ok) return;
+      const {grades} = await response.json();
+      const select = $('studentGrade');
+      for (const grade of grades) {
+        if (![...select.options].some(option => option.value === grade)) select.add(new Option(grade, grade));
+      }
+    } catch {}
+  }
+  $('serverUrl').addEventListener('change', () => { try { configureServer(); loadStudentGrades(); } catch {} });
+  loadStudentGrades();
+  async function refreshDemoHint() {
+    if (nativeApp && !API_BASE) return;
+    try { $('demoHint').hidden = (await api('/api/health')).demoMode !== true; } catch {}
+  }
+  $('fillDemoStudent').onclick = () => {
+    localStorage.setItem('dpii_demo_mode', '1');
+    $('firstName').value = 'admin'; $('secondName').value = 'admin';
+    $('studentGrade').value = '8º ano'; $('studentPassword').value = 'admin';
+    if (requestingPassword) $('recoveryMode').click();
+    $('studentLogin').requestSubmit();
+  };
+  refreshDemoHint();
+  $('studentLogout').onclick = async () => {
+    if (!token) return;
+    $('studentLogout').disabled = true;
+    try { await api('/api/auth/logout', {method:'POST', signal:AbortSignal.timeout(4000)}); } catch {}
+    localStorage.removeItem('escolaVivaToken');
+    localStorage.removeItem('dpii_demo_mode');
+    location.reload();
+  };
+  $('recoveryMode').onclick = () => {
+    requestingPassword = !requestingPassword;
+    $('passwordFields').hidden = requestingPassword;
+    $('studentPassword').required = !requestingPassword;
+    ($('loginButton').querySelector('span') || $('loginButton')).textContent = requestingPassword ? 'Pedir troca à escola' : 'Entrar';
+    ($('recoveryMode').querySelector('span') || $('recoveryMode')).textContent = requestingPassword ? 'Voltar para entrar' : 'Esqueci minha senha';
+    $('loginError').textContent = '';
+    $('firstName').focus();
+  };
+  $('studentLogin').onsubmit = async event => {
+    event.preventDefault();
+    const button = $('loginButton'), message = $('loginError');
+    button.disabled = true;
+    $('recoveryMode').disabled = true;
+    message.textContent = '';
+    try {
+      configureServer();
+      const fields = {firstName:$('firstName').value, secondName:$('secondName').value, grade:$('studentGrade').value};
+      if (requestingPassword) {
+        const request = await api('/api/auth/student/password-requests', {method:'POST', body:JSON.stringify(fields)});
+        const deadline = new Date(request.expiresAt).toLocaleString('pt-BR');
+        message.textContent = 'Protocolo ' + request.protocol + '. Leve o protocolo à escola para confirmar seu cadastro e definir a nova senha até ' + deadline + '.';
+        return;
+      }
+      fields.password = $('studentPassword').value;
+      if (String(fields.firstName).trim().toLowerCase() === 'admin' && String(fields.secondName).trim().toLowerCase() === 'admin') {
+        localStorage.setItem('dpii_demo_mode', '1');
+      } else {
+        localStorage.removeItem('dpii_demo_mode');
+      }
+      const data = await api('/api/auth/student', {method:'POST', body:JSON.stringify(fields)});
+      token = data.token;
+      localStorage.setItem('escolaVivaToken', token);
+      $('studentLogin').reset();
+      closeModal('loginModal');
+      applyUser(data.user);
+      notify('Acesso confirmado. Bem-vindo!');
+      await loadAll();
+      if (data.user.first_login) setTimeout(() => openOnboardingModal(data.user), 600);
+    } catch (error) {
+      message.textContent = error.message;
+    } finally {
+      button.disabled = false;
+      $('recoveryMode').disabled = false;
+    }
+  };
+  $('resetStudent').onsubmit = async event => {
+    event.preventDefault();
+    const form = event.currentTarget, message = $('resetMessage');
+    event.submitter.disabled = true;
+    message.textContent = '';
+    try {
+      configureServer();
+      await api('/api/auth/student/password-reset', {method:'POST', body:JSON.stringify(Object.fromEntries(new FormData(form)))});
+      form.reset();
+      if (requestingPassword) $('recoveryMode').click();
+      $('temporaryAccess').open = false;
+      $('loginError').textContent = 'Senha atualizada. Você já pode entrar.';
+      $('firstName').focus();
+    } catch (error) {
+      message.textContent = error.message;
+    } finally {
+      event.submitter.disabled = false;
+    }
+  };
+
+  const AVATARES = [
+    { id: 'gatao', name: 'Lucas', descricao: 'cabelo curto ondulado' },
+    { id: 'onca', name: 'Mariana', descricao: 'cabelo cacheado preso' },
+    { id: 'gaviao', name: 'Rafael', descricao: 'cachos curtos e óculos escuros de grau' },
+    { id: 'boto', name: 'Camila', descricao: 'cabelo comprido e óculos claros' },
+    { id: 'arara', name: 'Sofia', descricao: 'cachos soltos' },
+    { id: 'preguica', name: 'Beatriz', descricao: 'cabelo castanho e aparelho' },
+    { id: 'quelonio', name: 'Lara', descricao: 'duas tranças' },
+    { id: 'curupira', name: 'Gabriel', descricao: 'cabelo crespo curto' },
+  ];
+  let selectedAvatar = 'gatao';
+  let selectedFeeling = '';
+
+  function avatarMarkup(id) { return `<img src="assets/avatars/${AVATARES.some(a=>a.id===id)?id:'gatao'}.png" width="48" height="48" alt="Meu avatar">`; }
+  window.openOnboardingModal = openOnboardingModal;
+  window.showView = showView;
+  window.applyUser = applyUser;
+  let onboardingFirstLogin = false;
+  const guide = [
+    ['🎙️','Envie sua dúvida','Em Minha dúvida, escolha a matéria, escreva ou grave sua pergunta e toque em Enviar. Você vai ver 3 sinais: enviando, gerando e material pronto.','Dica: fale devagar e com o enunciado completo. Isso ajuda a escola a responder melhor.'],
+    ['🎧','Ouça e leia a aula','Quando a resposta chegar, toque em Ouvir resposta. A narração completa tem de 5 a 10 minutos, com texto, áudio e PDF para baixar.','Dica: use a barra do player para voltar a qualquer ponto da explicação.'],
+    ['⭐','Avalie e peça ajustes','Dê uma nota de 1 a 5. Se algo não ficou claro, escreva o que melhorar ou toque em Refazer explicação para receber uma versão mais simples.','Dica: sua nota ajuda a escola a melhorar o material para a turma.'],
+    ['📚','Estude e compartilhe','Use Baixar PDF + Áudio para estudar depois, Guardar explicação para manter no aparelho ou Enviar para a turma (passa por revisão da escola).','Dica: materiais compartilhados só viram apoio da turma após aprovação da direção.'],
+    ['🌿','Cuide de você','Em Lugar de Falar você conversa com a equipe com identidade protegida. Em Notícias, acompanha o site oficial da escola. No SOS, há apoio imediato.','Pronto! Você pode rever este guia no Manual quando quiser. Bons estudos!']
+  ];
+  let guideIndex = 0;
+  function tutorialPage(index) {
+    guideIndex = index;
+    const pct = Math.round(((index + 1) / guide.length) * 100);
+    const progText = 'Passo ' + (index + 1) + ' de ' + guide.length + ' - ' + pct + '%';
+    $('tutorialProgress').textContent = progText;
+    if ($('tutorialProgressFoot')) $('tutorialProgressFoot').textContent = progText;
+    $('tutorialBarFill').style.width = pct + '%';
+    $('tutorialStep').textContent = guide[index][1];
+    $('tutorialText').textContent = guide[index][2];
+    $('tutorialTip').textContent = guide[index][3];
+    // O cão guia "fala": anima e narra a fala em voz alta quando possível.
+    const dog = $('guideDog');
+    if (dog) { dog.classList.remove('falando'); void dog.offsetWidth; dog.classList.add('falando'); }
+    try {
+      window.speechSynthesis?.cancel();
+      if ('speechSynthesis' in window && localStorage.getItem('ui-sound') !== 'off') {
+        const fala = new SpeechSynthesisUtterance(guide[index][1] + '. ' + guide[index][2]);
+        fala.lang = 'pt-BR'; fala.rate = 1.02; fala.pitch = 1.1;
+        window.speechSynthesis.speak(fala);
+      }
+    } catch {}
+    $('tutorialPrevious').disabled = index === 0;
+    $('tutorialNext').textContent = index === guide.length - 1 ? 'Concluir guia ✓' : 'Continuar';
+  }
+  function fecharTutorial() { try { window.speechSynthesis?.cancel(); } catch {} localStorage.setItem('tutorial-visto', '1'); closeModal('tutorialModal'); }
+  $('tutorialPrevious').onclick = () => tutorialPage(guideIndex - 1);
+  $('tutorialNext').onclick = () => guideIndex === guide.length - 1 ? fecharTutorial() : tutorialPage(guideIndex + 1);
+  $('tutorialSkip').onclick = fecharTutorial;
+  $('openTutorialBtn').onclick = () => { tutorialPage(0); openModal('tutorialModal'); };
+  function openOnboardingModal(user = {}) {
+    onboardingFirstLogin = Boolean(user.first_login);
+    selectedAvatar = user.avatar || 'gatao';
+    const grid = $('avatarGrid');
+    grid.innerHTML = '';
+
+    AVATARES.forEach(av => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.setAttribute('aria-label', `Escolher avatar ${av.name}, ${av.descricao}`);
+      card.setAttribute('aria-pressed', String(av.id === selectedAvatar));
+      card.className = `avatar-card ${av.id === selectedAvatar ? 'selected' : ''}`;
+      card.innerHTML = `<span class="av-emoji"><img src="assets/avatars/${av.id}.png" width="76" height="76" alt="${av.name}"></span><span class="av-name">${av.name}</span>`;
+      card.onclick = () => {
+        grid.querySelectorAll('.avatar-card').forEach(c => {c.classList.remove('selected');c.setAttribute('aria-pressed','false');});
+        card.setAttribute('aria-pressed','true');
+        card.classList.add('selected');
+        selectedAvatar = av.id;
+      };
+      grid.appendChild(card);
+    });
+
+    $('obNickname').value = user.nickname || (user.name ? user.name.split(' ')[0] : '');
+    for (const [id, key] of [['obFavSubject','fav_subject'], ['obHardSubject','hard_subject'], ['obLearningStyle','learning_style'], ['obInterests','interests']]) $(id).value = user[key] || '';
+    const chosenInstr = 'naira';
+    const instrRadio = document.querySelector(`input[name="instructor"][value="${chosenInstr}"]`);
+    if (instrRadio) instrRadio.checked = true;
+
+    openModal('onboardingModal');
+  }
+
+  $('saveOnboardingBtn').onclick = async () => {
+    const btn = $('saveOnboardingBtn');
+    btn.disabled = true;
+    btn.textContent = 'Salvando perfil...';
+    try {
+      const res = await api('/api/me/profile', {
+        method: 'POST',
+        body: JSON.stringify({
+          avatar: selectedAvatar,
+          instructor_voice: document.querySelector('input[name="instructor"]:checked').value,
+          nickname: $('obNickname').value.trim(),
+          fav_subject: $('obFavSubject').value,
+          hard_subject: $('obHardSubject').value,
+          learning_style: $('obLearningStyle').value,
+          interests: $('obInterests').value.trim()
+        })
+      });
+
+      closeModal('onboardingModal');
+      if (onboardingFirstLogin) openModal('tutorialModal');
+      notify('Seu perfil está pronto!');
+      $('avatar').innerHTML = avatarMarkup(res.avatar);
+      $('avatar').title = 'Alterar meu avatar';
+      if (res.nickname) $('userName').textContent = res.nickname;
+
+    } catch(err) {
+      notify('Erro ao salvar perfil: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Salvar e começar';
+    }
+  };
+
+  $('avatar').style.cursor = 'pointer';
+  $('avatar').onclick = () => {
+    api('/api/me/profile').then(data => {
+      openOnboardingModal({ ...data.profile, avatar: data.avatar, first_login: data.first_login });
+    }).catch(() => openOnboardingModal({}));
+  };
+
+  /* ---------- Professores & Vozes ---------- */
+  let cachedTeachers = [];
+  async function loadTeachers() {
+    const list = $('professoresList');
+    if (!list) return;
+    try {
+      const data = await api('/api/teachers');
+      cachedTeachers = data.teachers || [];
+      renderTeachers(cachedTeachers);
+    } catch(err) {
+      list.innerHTML = `<p class="muted">Não foi possível carregar o quadro de professores: ${escapeHtml(err.message)}</p>`;
+    }
+  }
+
+  function renderTeachers(teachers) {
+    const list = $('professoresList');
+    if (!list) return;
+    list.innerHTML = '';
+    if ($('teachersCountPill')) $('teachersCountPill').textContent = `${teachers.length} profissionais`;
+    if (!teachers.length) {
+      list.innerHTML = '<p class="muted">Nenhum professor encontrado para os critérios de busca.</p>';
+      return;
+    }
+
+    const matchSubject = disc => {
+      const d = String(disc || '').toLowerCase();
+      const opts = [...($('subject')?.options || [])].map(o => o.value);
+      return opts.find(v => d.includes(v.toLowerCase())) || 'Português';
+    };
+
+    teachers.forEach(p => {
+      const card = document.createElement('div');
+      const isNairaReal = p.id === 43 || p.voice_preset === 'prof_naira';
+      const isFem = !p.voice_preset.includes('fallback');
+      card.className = 'prof-card' + (isNairaReal ? ' is-naira-card' : '');
+      const cleanName = p.name.split(',')[0].trim();
+      const emoji = isFem ? '👩‍🏫' : '👨‍🏫';
+      const badgeText = isNairaReal ? '🎙️ Voz Real Clonada' : '🎙️ Prévia Neural';
+      const badgeClass = isNairaReal ? 'prof-voice-badge real-voice' : 'prof-voice-badge';
+
+      card.innerHTML = `
+        <div class="prof-header">
+          <span style="font-size:30px; line-height:1;">${emoji}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; flex-wrap:wrap;">
+              <h3 style="margin:0; font-size:15px; font-weight:700;">${escapeHtml(cleanName)}</h3>
+              <span class="${badgeClass}">${badgeText}</span>
+            </div>
+            <div style="font-size:13px; font-weight:600; color:var(--red-600); margin-top:2px;">
+              ${escapeHtml(p.disciplines)}
+            </div>
+            <div style="font-size:11.5px; color:var(--muted); margin-top:4px;">
+              <b>Atuação:</b> ${escapeHtml(p.turmas || 'Turmas diversas')} · <b>Turno:</b> ${escapeHtml(p.shift || '1º/2º')}
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:10px; margin-top:4px;">
+          <button type="button" class="btn ghost sm play-voice-btn" data-id="${p.id}" style="padding:6px 12px; font-size:12px;">
+            ▶️ Ouvir
+          </button>
+          <button type="button" class="btn primary sm ask-prof-btn" style="padding:6px 12px; font-size:12px;">
+            🎯 Perguntar
+          </button>
+        </div>
+      `;
+
+      card.querySelector('.play-voice-btn').onclick = async (e) => {
+        const btn = e.currentTarget;
+        const origText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '⏳ Gerando voz...';
+        try {
+          let response;
+          if (isNairaReal) {
+            response = await fetch('assets/audio/professora_naira.mp3');
+          } else if (token) {
+            response = await fetch(API_BASE + '/api/teachers/' + p.id + '/speak', {
+              headers: { Authorization: 'Bearer ' + token },
+              signal: AbortSignal.timeout(45000)
+            });
+          }
+          if (!response || !response.ok) {
+            response = await fetch('assets/audio/' + (isFem ? 'feminina' : 'masculina') + '.mp3?v=22');
+          }
+          if (!response.ok) throw new Error('Voz indisponível no momento.');
+          const url = URL.createObjectURL(await response.blob());
+          const audio = new Audio(url);
+          const done = () => { duckAppBgm(false); URL.revokeObjectURL(url); btn.disabled = false; btn.innerHTML = origText; };
+          duckAppBgm(true);
+          audio.onended = done;
+          audio.onerror = () => { done(); notify('Não foi possível reproduzir o áudio.'); };
+          try { await audio.play(); } catch (err) { done(); throw err; }
+        } catch (err) {
+          btn.disabled = false;
+          btn.innerHTML = origText;
+          notify('Erro ao reproduzir voz: ' + err.message);
+        }
+      };
+
+      card.querySelector('.ask-prof-btn').onclick = async () => {
+        const subj = matchSubject(p.disciplines);
+        showView('reforco');
+        if ($('newQuestion') && !$('newQuestion').hidden) $('newQuestion').click();
+        if ($('subject')) $('subject').value = subj;
+        await loadVoicesCatalog().catch(() => {});
+        if ($('askVoiceSelect') && Array.from($('askVoiceSelect').options).some(o => o.value === p.voice_preset)) {
+          $('askVoiceSelect').value = p.voice_preset;
+        }
+        if ($('doubt')) {
+          $('doubt').focus();
+          notify(`Pronto! Escreva ou grave sua pergunta para ${cleanName} (${subj}).`);
+        }
+      };
+
+      list.appendChild(card);
+    });
+  }
+
+  if ($('profSearch')) $('profSearch').oninput = (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q) return renderTeachers(cachedTeachers);
+    const filtered = cachedTeachers.filter(p => 
+      p.name.toLowerCase().includes(q) ||
+      p.disciplines.toLowerCase().includes(q) ||
+      (p.turmas && p.turmas.toLowerCase().includes(q))
+    );
+    renderTeachers(filtered);
+  };
+
+  function applyUser(user) {
+    $('userName').textContent = user.nickname || user.name || 'Aluno';
+    $('userMeta').textContent = user.grade || (user.role === 'admin' ? 'Gestão' : 'Estudante');
+    if (user.avatar) {
+      $('avatar').innerHTML = avatarMarkup(user.avatar);
+      $('avatar').title = 'Alterar meu avatar';
+    } else {
+      $('avatar').textContent = initials(user.name);
+    }
+    if (user.alias) $('aliasLabel').textContent = user.alias;
+  }
+
+  /* ---------- Carga geral ---------- */
+  async function loadAll() {
+    await Promise.allSettled([loadStats(), loadTasks(), loadMaterials(), loadMessages(), loadNews(), loadCampaigns(), loadTeachers(), loadVoicesCatalog()]);
+  }
+
+  async function loadStats() {
+    const s = await api('/api/summary');
+    $('statMaterials').textContent = s.materials;
+  }
+
+  /* ---------- Atividades ---------- */
+  async function loadTasks() {
+    const { tasks } = await api('/api/tasks');
+    const list = $('taskList');
+    if (!list) return;
+    list.replaceChildren();
+    const pending = tasks.filter(t => !t.completed).length;
+    const late = tasks.filter(t => !t.completed && t.due_at && new Date(t.due_at) < new Date()).length;
+    if ($('taskCount')) $('taskCount').textContent = `${pending} pendente${pending === 1 ? '' : 's'}`;
+    if ($('lateAlert')) $('lateAlert').hidden = late === 0;
+    if ($('tileTasks')) {
+      $('tileTasks').textContent = pending
+        ? `${pending} pendente${pending === 1 ? '' : 's'}${late ? ' (' + late + ' atrasada' + (late === 1 ? '' : 's') + ')' : ''}`
+        : 'Todas concluídas ✓';
+    }
+
+    if (!tasks.length) {
+      list.innerHTML = '<p class="muted small">Nenhuma atividade cadastrada ainda.</p>';
+      return;
+    }
+    tasks.forEach(task => {
+      const row = document.createElement('div');
+      row.className = 'task' + (task.completed ? ' done' : '');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox'; checkbox.className = 'check'; checkbox.checked = Boolean(task.completed);
+      const body = document.createElement('div'); body.className = 'task-body';
+      const isLate = task.due_at && !task.completed && new Date(task.due_at) < new Date();
+      const pill = document.createElement('span');
+      pill.className = 'pill ' + (task.completed ? 'ok' : isLate ? 'late' : 'warn');
+      pill.textContent = task.completed ? 'Concluída' : isLate ? 'Atrasada' : 'Pendente';
+      const title = document.createElement('h3'); title.textContent = task.title; title.style.marginTop = '6px';
+      const meta = document.createElement('div'); meta.className = 'meta';
+      meta.textContent = task.subject + (task.due_at ? ' · ' + new Date(task.due_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : '');
+      body.append(pill, title, meta);
+      row.append(checkbox, body);
+      list.append(row);
+      checkbox.onchange = async () => {
+        try {
+          await api('/api/tasks/' + task.id, { method: 'PATCH', body: JSON.stringify({ completed: checkbox.checked }) });
+          row.classList.toggle('done', checkbox.checked);
+          notify(checkbox.checked ? 'Atividade concluída ✓' : 'Atividade reaberta');
+          await loadTasks(); await loadStats();
+        } catch (e) { checkbox.checked = !checkbox.checked; notify(e.message); }
+      };
+    });
+  }
+
+  /* ---------- Materiais ---------- */
+  const materialIcons = { 'reforço': '🎧', material: '📘', guia: '🧭' };
+  const materialAvatars = ['assets/avatars/gatao.png', 'assets/avatars/arara.png', 'assets/avatars/curupira.png', 'assets/avatars/boto.png', 'assets/avatars/onca.png', 'assets/avatars/preguica.png', 'assets/avatars/quelonio.png'];
+  let materialFilter = 'todos';
+  function materialAvatarFor(m) {
+    const key = [...String(m.subject || m.title || '')].reduce((s, c) => s + c.charCodeAt(0), 0);
+    return materialAvatars[key % materialAvatars.length];
+  }
+  function materialStatusLabel(m) {
+    if (m.published === 0) return { text: '⏳ Esperando aprovação para a turma', cls: 'warn' };
+    if (m.reviewed_by) return { text: '✓ Revisado por ' + m.reviewed_by, cls: 'ok' };
+    if (m.shared_doubt_id) return { text: '✓ Revisado pela escola', cls: 'ok' };
+    return { text: '🏛️ Acervo escolar · CZS', cls: 'soft' };
+  }
+  async function openMaterialReader(id) {
+    try {
+      const { material } = await api('/api/materials/' + id);
+      const st = materialStatusLabel(material);
+      const cleanTitle = String(material.title || '').replace(/^\[Voz:\s*[^\]]+\]\s*/i, '').trim();
+      $('matModalAvatar').src = materialAvatarFor(material);
+      $('matModalSubject').textContent = material.subject || 'Disciplina';
+      $('matModalTitle').textContent = cleanTitle;
+      $('matModalStatus').textContent = st.text;
+      $('matModalStatus').className = 'pill ' + st.cls;
+      $('matModalQuestion').textContent = material.question_text || cleanTitle;
+      $('matModalBody').textContent = material.full_text || material.description || '';
+      $('matModalProgress').style.width = '55%';
+      $('matModalStepLabel').textContent = 'Progresso de leitura: 55%';
+      const audio = $('materialModalAudio');
+      const resetMatAudio = () => {
+        if (audio.src && audio.src.startsWith('blob:')) URL.revokeObjectURL(audio.src);
+        audio.pause(); audio.removeAttribute('src'); delete audio.dataset.voiceKey; audio.load(); audio.style.display = 'none';
+      };
+      resetMatAudio();
+      loadVoicesCatalog(material.voice_hint || 'daniel').catch(() => {});
+      if ($('matModalVoiceSelect')) {
+        $('matModalVoiceSelect').onchange = () => resetMatAudio();
+      }
+
+      $('matModalPlayBtn').onclick = async () => {
+        const btn = $('matModalPlayBtn');
+        const vId = ($('matModalVoiceSelect')?.value || material.voice_hint || 'daniel').trim();
+        btn.disabled = true;
+        try {
+          if (!audio.hasAttribute('src') || audio.dataset.voiceKey !== vId) {
+            const res = await fetch(API_BASE + '/api/materials/' + material.id + '/speak?voice=' + encodeURIComponent(vId), {
+              headers: { Authorization: 'Bearer ' + token },
+              signal: AbortSignal.timeout(125000)
+            });
+            if (!res.ok) throw new Error('Voz indisponível');
+            resetMatAudio();
+            audio.src = URL.createObjectURL(await res.blob());
+            audio.dataset.voiceKey = vId;
+            audio.style.display = 'block';
+          }
+          await audio.play();
+          $('matModalProgress').style.width = '85%';
+          $('matModalStepLabel').textContent = 'Progresso de leitura: 85% (ouvindo)';
+        } catch {
+          notify('Não foi possível reproduzir o áudio agora; o texto completo segue disponível.');
+        } finally {
+          btn.disabled = false;
+        }
+      };
+      if ($('matModalDownloadBtn')) {
+        $('matModalDownloadBtn').onclick = async () => {
+          const btn = $('matModalDownloadBtn');
+          const orig = btn.textContent;
+          const vId = ($('matModalVoiceSelect')?.value || material.voice_hint || 'daniel').trim();
+          btn.disabled = true;
+          btn.textContent = '⏳ Gerando PDF + Áudio…';
+          try {
+            await downloadAuthedFile('/api/materials/' + material.id + '/pdf', 'material-' + material.id + '.pdf');
+            await downloadAuthedFile('/api/materials/' + material.id + '/speak?voice=' + encodeURIComponent(vId), 'material-' + material.id + '.wav');
+            notify('PDF e áudio do material baixados!');
+          } catch (e) {
+            notify(e.message || 'Não foi possível baixar o material.');
+          } finally {
+            btn.disabled = false;
+            btn.textContent = orig;
+          }
+        };
+      }
+      $('matModalDoneBtn').onclick = () => {
+        $('matModalProgress').style.width = '100%';
+        $('matModalStepLabel').textContent = 'Estudo concluído ✓ (100%)';
+        notify('Material marcado como estudado!');
+      };
+      $('matModalAskBtn').onclick = () => {
+        closeModal('materialModal');
+        showView('reforco');
+        if ($('newQuestion') && !$('newQuestion').hidden) $('newQuestion').click();
+        if ($('subject')) $('subject').value = material.subject || 'Português';
+        if ($('doubt')) {
+          $('doubt').value = 'Quero aprofundar sobre: ' + cleanTitle;
+          $('doubt').focus();
+        }
+      };
+      openModal('materialModal');
+    } catch (e) {
+      notify(e.message || 'Não foi possível abrir o material.');
+    }
+  }
+  async function loadMaterials() {
+    const { materials = [], pendingMaterials = [] } = await api('/api/materials');
+    const pendList = $('pendingMaterialsList');
+    const pendPill = $('pendingCountPill');
+    if (pendList && pendPill) {
+      pendPill.textContent = pendingMaterials.length
+        ? `${pendingMaterials.length} aguardando aprovação`
+        : '0 aguardando';
+      pendList.replaceChildren();
+      if (!pendingMaterials.length) {
+        pendList.innerHTML = '<p class="muted small" style="margin:0;grid-column:1/-1;">Nenhum material seu aguardando aprovação no momento. Na aba <b>Reforço</b>, clique em <b>Enviar para a turma</b> para sugerir um conteúdo!</p>';
+      } else {
+        pendingMaterials.forEach(pm => pendList.append(materialCard(pm, true)));
+      }
+    }
+    const grid = $('materialGrid');
+    const recent = $('recentMaterials');
+    grid.replaceChildren(); recent.replaceChildren();
+    if (!materials.length) {
+      grid.innerHTML = '<p class="muted small">Nenhum material publicado ainda.</p>';
+      return;
+    }
+    const subjects = [...new Set(materials.map(m => (m.subject || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    const subjSelect = $('materialSubject');
+    if (subjSelect) {
+      subjSelect.innerHTML = '<option value="todas">Todas as matérias</option>' +
+        subjects.map(s => `<option value="${escapeHtml(s.toLowerCase())}">${escapeHtml(s)}</option>`).join('');
+      subjSelect.onchange = applyMaterialFilter;
+    }
+    const suggestions = $('materialSuggestions');
+    if (suggestions) {
+      const items = [...new Set([...subjects, ...materials.map(m => (m.title || '').trim()).filter(Boolean)])];
+      suggestions.innerHTML = items.map(v => `<option value="${escapeHtml(v)}"></option>`).join('');
+    }
+    materials.forEach(m => {
+      grid.append(materialCard(m));
+    });
+    materials.slice(0, 2).forEach(m => recent.append(materialCard(m, true)));
+    applyMaterialFilter();
+    const search = $('materialSearch');
+    search.oninput = applyMaterialFilter;
+    document.querySelectorAll('#materialFilters .filter').forEach(f => {
+      f.onclick = () => {
+        materialFilter = f.dataset.filter;
+        document.querySelectorAll('#materialFilters .filter').forEach(x => x.classList.toggle('active', x === f));
+        applyMaterialFilter();
+      };
+    });
+  }
+  function materialCard(m, compact) {
+    const el = document.createElement(compact ? 'div' : 'article');
+    el.className = 'card material';
+    el.dataset.kind = m.kind;
+    el.dataset.subject = (m.subject || '').toLowerCase();
+    el.dataset.text = (m.title + ' ' + m.subject + ' ' + m.description).toLowerCase();
+    const st = materialStatusLabel(m);
+    const av = materialAvatarFor(m);
+    const barColor = m.published === 0 ? '#e5a93b' : m.kind === 'reforço' ? '#8b1e2d' : m.kind === 'guia' ? '#2c6b4f' : '#b87614';
+    el.innerHTML = `
+      <div style="height:5px;border-radius:999px;background:${barColor};margin-bottom:10px;opacity:.85;"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="${av}" alt="" width="38" height="38" style="border-radius:11px;object-fit:cover;border:1.5px solid #ead8c3;">
+          <span class="pill soft">${escapeHtml(m.subject)}</span>
+        </div>
+        <div class="mico" style="margin:0;">${materialIcons[m.kind] || '📄'}</div>
+      </div>
+      <div>
+        <h3 style="margin-top:10px">${escapeHtml(m.title)}</h3>
+        <p>${escapeHtml(m.description)}</p>
+      </div>
+      <div class="mfoot">
+        <span class="pill ${st.cls}" style="font-size:11px;">${escapeHtml(st.text)}</span>
+        <button type="button" class="btn ${m.published === 0 ? 'ghost' : 'primary'} sm">${m.published === 0 ? 'Visualizar' : m.kind === 'reforço' ? 'Estudar' : 'Abrir'}</button>
+      </div>`;
+    el.querySelector('button').onclick = () => openMaterialReader(m.id);
+    return el;
+  }
+  function applyMaterialFilter() {
+    const q = ($('materialSearch').value || '').toLowerCase();
+    const subj = ($('materialSubject')?.value || 'todas').toLowerCase();
+    document.querySelectorAll('#materialGrid .material').forEach(card => {
+      const okKind = materialFilter === 'todos' || card.dataset.kind === materialFilter;
+      const okSubject = subj === 'todas' || card.dataset.subject === subj;
+      const okText = !q || card.dataset.text.includes(q);
+      card.style.display = okKind && okSubject && okText ? '' : 'none';
+    });
+  }
+
+  /* ---------- Conversas ---------- */
+  document.querySelectorAll('.channel').forEach(ch => {
+    ch.onclick = async () => {
+      activeChannel = ch.dataset.channel;
+      document.querySelectorAll('.channel').forEach(c => c.classList.toggle('active', c === ch));
+      await loadMessages();
+    };
+  });
+  async function loadMessages() {
+    const { messages } = await api('/api/messages?channel=' + encodeURIComponent(activeChannel));
+    const area = $('messages');
+    area.replaceChildren();
+    if (!messages.length) {
+      area.innerHTML = '<p class="muted small">Nenhuma mensagem neste canal ainda. Comece a conversa!</p>';
+      return;
+    }
+    messages.forEach(message => {
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble' + (message.author === $('userName').textContent ? ' me' : '');
+      const name = document.createElement('b');
+      name.textContent = message.author;
+      const text = document.createElement('div');
+      text.textContent = message.body;
+      bubble.append(name, text);
+      area.append(bubble);
+    });
+    area.scrollTop = area.scrollHeight;
+  }
+  $('chatSend').onclick = async () => {
+    const input = $('chatInput'), body = input.value.trim();
+    if (!body) return;
+    try {
+      await api('/api/messages', { method: 'POST', body: JSON.stringify({ channel: activeChannel, body }) });
+      input.value = ''; await loadMessages(); notify('Mensagem enviada ao canal');
+    } catch (e) { notify(e.message); }
+  };
+  $('chatInput').addEventListener('keydown', e => { if (e.key === 'Enter') $('chatSend').click(); });
+
+  /* ---------- Notícias ---------- */
+  const fmtDate = iso => new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+  let newsSyncTimer = null;
+  function newsStatusLabel(sync) {
+    const el = $('newsSyncStatus');
+    if (!el) return;
+    if (sync?.ok) {
+      const when = sync.at ? new Date(sync.at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
+      el.textContent = `✓ Atualizado do site da escola${when ? ' às ' + when : ''} · ${sync.synced} notícias`;
+    } else if (sync?.error) {
+      el.textContent = 'Usando últimas notícias salvas (site da escola indisponível).';
+    } else {
+      el.textContent = 'Sincronizando com o site da escola…';
+    }
+  }
+  async function refreshNews() {
+    const btn = $('newsRefreshBtn');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Atualizando…'; }
+    try {
+      await api('/api/news/refresh', { method: 'POST' });
+      await loadNews();
+    } catch (e) { notify('Não foi possível atualizar agora. ' + (e.message || '')); }
+    finally { if (btn) { btn.disabled = false; btn.textContent = '🔄 Atualizar notícias'; } }
+  }
+  async function loadNews() {
+    const { news, sync } = await api('/api/news');
+    newsStatusLabel(sync);
+    const grid = $('newsGrid');
+    grid.replaceChildren();
+    if (!news.length) { grid.innerHTML = '<p class="muted small">Sem notícias publicadas.</p>'; return; }
+    news.forEach(item => {
+      const card = document.createElement('article');
+      card.className = 'card news';
+      card.innerHTML = `
+        <div class="news-img">${item.image_url ? `<img src="${escapeHtml(item.image_url)}" alt="" loading="lazy" onerror="this.remove()">` : ''}
+          <span class="pill dark tag">${escapeHtml(item.category)}</span></div>
+        <div class="nbody">
+          <h3>${escapeHtml(item.title)}</h3>
+          <p class="small muted">${escapeHtml(item.summary)}</p>
+          <div class="ndate">${fmtDate(item.published_at)} · ${escapeHtml(item.source || 'Portal CMDPII')}</div>
+        </div>`;
+      card.style.cursor = 'pointer';
+      card.onclick = () => item.link_url && window.open(item.link_url, '_blank', 'noopener');
+      grid.append(card);
+    });
+  }
+
+  // Atualização automática: ao abrir o app, ao voltar para a aba e a cada 10 minutos.
+  if ($('newsRefreshBtn')) $('newsRefreshBtn').onclick = refreshNews;
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && (location.hash === '#noticias' || document.querySelector('#noticias:not([hidden])'))) loadNews().catch(() => {});
+  });
+  newsSyncTimer = setInterval(() => loadNews().catch(() => {}), 10 * 60 * 1000);
+
+  /* ---------- Gravação ---------- */
+  const recordButton = $('recordBtn');
+  document.querySelectorAll('.instructor-card audio').forEach(audio => {
+    audio.addEventListener('play', () => document.querySelectorAll('.instructor-card audio').forEach(other => { if (other !== audio) other.pause(); }));
+  });
+  document.querySelectorAll('input[name="instructor"]').forEach(input => {
+    input.addEventListener('change', () => document.querySelectorAll('.instructor-card audio').forEach(audio => audio.pause()));
+  });
+
+  const recordStatus = $('recordStatus');
+  const discardAudio = $('discardAudio');
+  const sendDoubt = $('sendDoubt');
+  const recordLive = $('recordLive');
+  const recordTime = $('recordTime');
+  let recordTimer = null, recordStartedAt = 0;
+  const startRecordIndicator = () => {
+    if (!recordLive) return;
+    recordLive.hidden = false;
+    recordStartedAt = Date.now();
+    const tick = () => { if (recordTime) recordTime.textContent = fmtAudioTime((Date.now() - recordStartedAt) / 1000); };
+    tick();
+    clearInterval(recordTimer);
+    recordTimer = setInterval(tick, 500);
+  };
+  const stopRecordIndicator = () => {
+    clearInterval(recordTimer); recordTimer = null;
+    if (recordLive) recordLive.hidden = true;
+  };
+
+  function audioFilename(blob) {
+    const mime = blob.type.split(';')[0];
+    const extension = { 'audio/mp4': 'm4a', 'audio/ogg': 'ogg', 'audio/wav': 'wav' }[mime] || 'webm';
+    return 'duvida.' + extension;
+  }
+
+  let activeRecognition = null, serverSttTried = false;
+  discardAudio.onclick = () => {
+    recordedAudio = null;
+    serverSttTried = false;
+    discardAudio.hidden = true;
+    recordStatus.textContent = 'Toque para gravar';
+  };
+
+  recordButton.onclick = async () => {
+    if (mediaRecorder?.state === 'recording') {
+      recordButton.disabled = true;
+      try { activeRecognition?.stop(); } catch {}
+      mediaRecorder.stop();
+      return;
+    }
+
+    recordButton.disabled = true;
+    sendDoubt.disabled = true;
+    discardAudio.disabled = true;
+    serverSttTried = false;
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const chunks = [];
+      const recorder = new MediaRecorder(stream);
+      mediaRecorder = recorder;
+
+      // STT Híbrido no Navegador (transcrição ao vivo em pt-BR sem gastar RAM do servidor)
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const box = $('doubt');
+      const baseText = box ? box.value.trim() : '';
+      let recognizedFinal = '';
+      if (SR && box) {
+        try {
+          activeRecognition = new SR();
+          activeRecognition.lang = 'pt-BR';
+          activeRecognition.continuous = true;
+          activeRecognition.interimResults = true;
+          activeRecognition.onresult = ev => {
+            let finalPart = '', interimPart = '';
+            for (let i = ev.resultIndex; i < ev.results.length; i++) {
+              const t = ev.results[i][0]?.transcript || '';
+              if (ev.results[i].isFinal) recognizedFinal += (recognizedFinal ? ' ' : '') + t.trim();
+              else interimPart += t;
+            }
+            const spoken = [recognizedFinal, interimPart.trim()].filter(Boolean).join(' ').trim();
+            box.value = [baseText, spoken].filter(Boolean).join(' ');
+          };
+          activeRecognition.onerror = () => {};
+          activeRecognition.start();
+        } catch { activeRecognition = null; }
+      }
+
+      recorder.ondataavailable = event => { if (event.data.size) chunks.push(event.data); };
+      recorder.onstop = async () => {
+        mediaRecorder = null;
+        try { activeRecognition?.stop(); } catch {}
+        activeRecognition = null;
+        stopRecordIndicator();
+        stream.getTracks().forEach(track => track.stop());
+        recordButton.classList.remove('recording');
+        recordButton.setAttribute('aria-label', 'Gravar dúvida por voz');
+        try {
+          const blob = new Blob(chunks, { type: recorder.mimeType || chunks[0]?.type || 'audio/webm' });
+          if (!blob.size) {
+            recordStatus.textContent = recordedAudio ? 'Mantivemos a gravação anterior.' : 'Nenhum áudio gravado. Tente de novo.';
+            return;
+          }
+          recordedAudio = blob;
+          discardAudio.hidden = false;
+          if ($('doubt')?.value.trim()) {
+            recordStatus.textContent = 'Áudio pronto e transcrito ao vivo. Confira o texto antes de enviar.';
+          } else {
+            recordStatus.textContent = 'Áudio gravado. Transformando em texto; aguarde alguns segundos…';
+            serverSttTried = true;
+            await requestTranscription(blob);
+          }
+        } finally {
+          recordButton.disabled = false;
+          sendDoubt.disabled = false;
+          discardAudio.disabled = false;
+        }
+      };
+      recorder.start();
+      recordButton.disabled = false;
+      recordButton.classList.add('recording');
+      recordButton.setAttribute('aria-label', 'Parar gravação');
+      recordStatus.textContent = 'Gravando… fale sua dúvida e toque para concluir';
+      startRecordIndicator();
+    } catch {
+      try { activeRecognition?.stop(); } catch {}
+      activeRecognition = null;
+      stream?.getTracks().forEach(track => track.stop());
+      mediaRecorder = null;
+      stopRecordIndicator();
+      recordButton.disabled = false;
+      sendDoubt.disabled = false;
+      discardAudio.disabled = false;
+      notify('Não consegui abrir o microfone. Confira a permissão ou escreva sua dúvida.');
+    }
+  };
+
+  async function requestTranscription(blob) {
+    try {
+      const form = new FormData();
+      form.set('audio', blob, audioFilename(blob));
+      const data = await api('/api/voice/transcribe', { method: 'POST', body: form, signal: AbortSignal.timeout(120000) });
+      if (data.text) {
+        const box = $('doubt');
+        box.value = [box.value.trim(), data.text].filter(Boolean).join(' ');
+        recordStatus.textContent = 'Áudio pronto. Confira o texto antes de enviar.';
+      } else {
+        recordStatus.textContent = 'Áudio pronto. Você também pode escrever sua dúvida.';
+      }
+    } catch {
+      recordStatus.textContent = 'Áudio pronto. A transcrição não ficou disponível; escreva sua dúvida ou envie a gravação para a escola.';
+    }
+  }
+
+  sendDoubt.onclick = async () => {
+    const box = $('doubt');
+    const subject = $('subject');
+    if (!box.value.trim() && !recordedAudio) {
+      notify('Escreva ou grave sua dúvida.');
+      return;
+    }
+    unlockReforcoAudioForIOS();
+    const form = new FormData();
+    form.set('subject', subject.value);
+    form.set('text', box.value);
+    const chosenVoice = ($('askVoiceSelect')?.value || '').trim();
+    selectedDoubtVoice = chosenVoice;
+    if (chosenVoice) form.set('voice', chosenVoice);
+    if (recordedAudio) {
+      form.set('audio', recordedAudio, audioFilename(recordedAudio));
+      if (box.value.trim() || serverSttTried) form.set('transcription_attempted', '1');
+    }
+    sendDoubt.disabled = true;
+    recordButton.disabled = true;
+    discardAudio.disabled = true;
+    box.readOnly = true;
+    subject.disabled = true;
+    sendDoubt.querySelector('span').textContent = 'Enviando sua dúvida…';
+    submitting = true;
+    uiSound.send();
+    setChecklistStage('sending', '1. Enviando sua dúvida…', 'Cadete com mãos para baixo transmitindo sua pergunta.');
+    lessonState('Preparando sua explicação completa…', false);
+    const procTimer = setTimeout(() => {
+      if (submitting) {
+        setChecklistStage('processing', '2. Backend trabalhando e gerando…', 'Cadete com a mão no peito gerando explicação focada na sua pergunta.');
+      }
+    }, 2000);
+    try {
+      const result = await api('/api/doubts', { method: 'POST', body: form });
+      clearTimeout(procTimer);
+      submitting = false; composing = false;
+      box.value = '';
+      recordedAudio = null;
+      serverSttTried = false;
+      discardAudio.hidden = true;
+      recordStatus.textContent = 'Toque para gravar';
+      notify('Dúvida recebida! Iniciando explicação narrada.');
+
+      presentLesson(result, { isNewAnswer: true });
+    } catch (error) {
+      clearTimeout(procTimer);
+      submitting = false; composing = true; lessonState('', true);
+      if ($('doubtChecklist')) $('doubtChecklist').hidden = true;
+      uiSound.error();
+      notify(error instanceof TypeError ? 'Conexão indisponível. Sua dúvida segue aqui para tentar de novo.' : error.message);
+    } finally {
+      sendDoubt.disabled = false;
+      recordButton.disabled = false;
+      discardAudio.disabled = false;
+      box.readOnly = false;
+      subject.disabled = false;
+      sendDoubt.querySelector('span').textContent = 'Enviar dúvida';
+    }
+  };
+
+  /* ---------- Apoio ---------- */
+  $('wellSend').onclick=async()=>{try{await api('/api/wellbeing',{method:'POST',body:JSON.stringify({feeling:$('wellFeeling').value,recipient:$('wellTo').value,note:$('wellNote').value,consent:$('wellConsent').checked})});$('wellNote').value='';$('wellConsent').checked=false;notify('Relato compartilhado com a equipe escolhida.');}catch(e){notify(e.message);}};
+  $('supportSend').onclick = async () => {
+    try {
+      const body = $('supportText').value;
+      const result = await api('/api/support', { method: 'POST', body: JSON.stringify({ recipient: $('supportTo').value, body }) });
+      $('supportText').value = '';
+      notify(result.priority === 'urgent' ? 'Mensagem recebida com prioridade de proteção' : 'Mensagem protegida recebida pela escola');
+    } catch (e) { notify(e.message); }
+  };
+
+  /* ---------- Campanhas ---------- */
+  const campaignIcons = { indicacao: '🔗', microaula: '🎓', participacao: '★' };
+  async function loadCampaigns() {
+    const grid = $('campaignGrid');
+    try {
+      const { campaigns } = await api('/api/campaigns');
+      grid.replaceChildren();
+      if (!campaigns.length) {
+        grid.innerHTML = '<p class="muted small">Nenhuma campanha ativa agora.</p>';
+        return;
+      }
+      campaigns.forEach(campaign => {
+        const card = document.createElement('article');
+        card.className = 'card card-pad';
+        card.innerHTML = `
+          <div class="til-ico" style="width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:21px;background:var(--gold-100)">${campaignIcons[campaign.kind] || '★'}</div>
+          <h2 style="margin-top:14px">${escapeHtml(campaign.title)}</h2>
+          <p class="small muted" style="margin-top:6px">${escapeHtml(campaign.description)}</p>
+          ${campaign.reward ? `<p class="small" style="margin-top:12px"><span class="pill ok">Recompensa</span> ${escapeHtml(campaign.reward)}</p>` : ''}
+          <p class="small muted" style="margin-top:10px">${campaign.starts_at ? campaign.starts_at : ''}${campaign.ends_at ? ' → ' + campaign.ends_at : ''}</p>`;
+        grid.append(card);
+      });
+    } catch (error) {
+      grid.innerHTML = '<p class="muted small">Não foi possível carregar as campanhas.</p>';
+    }
+  }
+  /* ---------- Modais ---------- */
+  $('openEmergency').onclick = () => openModal('emergencyModal');
+  $('openEmergencyTop').onclick = () => openModal('emergencyModal');
+  $('openEmergency2').onclick = () => openModal('emergencyModal');
+  $('openLesson').onclick = () => openModal('lessonModal');
+  document.querySelectorAll('[data-close]').forEach(button => button.onclick = () => closeModal(button.dataset.close));
+  document.querySelectorAll('.modal:not(#loginModal)').forEach(modal => modal.onclick = event => {
+    if (event.target === modal) closeModal(modal.id);
+  });
+  document.addEventListener('keydown', event => {
+    if ($('school-intro')) return;
+    const modal = activeModal();
+    if (event.key === 'Escape') {
+      if (modal && modal.id !== 'loginModal') closeModal(modal.id);
+      else if (!modal && document.body.classList.contains('drawer-open')) setDrawer(false, true);
+      return;
+    }
+    if (event.key !== 'Tab' || !modal) return;
+    const stops = [...modal.querySelectorAll('a[href],button,input,select,textarea,summary,audio[controls]')]
+      .filter(element => !element.disabled && element.getClientRects().length && getComputedStyle(element).visibility === 'visible');
+    const first = stops[0], last = stops.at(-1);
+    const focused = document.activeElement;
+    if (!first || (event.shiftKey && (focused === first || !stops.includes(focused))) || (!event.shiftKey && focused === last)) {
+      event.preventDefault();
+      (event.shiftKey ? last : first)?.focus();
+    }
+  });
+  $('sendLesson').onclick = async () => {
+    try {
+      const result = await api('/api/micro-lessons', {
+        method: 'POST',
+        body: JSON.stringify({ title: $('lessonTitleInput').value, script: $('lessonScript').value, format: $('lessonFormat').value })
+      });
+      closeModal('lessonModal');
+      $('myLessonState').textContent = `Microaula #${result.id} em revisão`;
+      $('myLessonState').className = 'pill warn';
+      notify(`Microaula #${result.id} enviada para revisão`);
+    } catch (e) { notify(e.message); }
+  };
+
+  /* ---------- PWA ---------- */
+  let installPrompt;
+  const installButton = $('installApp');
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault(); installPrompt = event; installButton.hidden = false;
+  });
+  installButton.addEventListener('click', async () => {
+    if (installPrompt) {
+      installPrompt.prompt();
+      await installPrompt.userChoice;
+      installPrompt = null;
+      return;
+    }
+    openModal('installModal');
+  });
+  window.addEventListener('appinstalled', () => notify('App instalado neste dispositivo'));
+  if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+
+  /* ---------- Sessão ---------- */
+  syncModalFocus();
+  if (token) {
+    api('/api/me')
+      .then(({ user }) => { closeModal('loginModal'); applyUser(user); loadAll(); if (user.first_login) setTimeout(() => openOnboardingModal(user), 600); })
+      .catch(() => {});
+  }
+})();
+</script>
+</body>
+</html>

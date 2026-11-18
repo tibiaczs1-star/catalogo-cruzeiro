@@ -1,0 +1,32 @@
+{
+  "name": "dpii-aluno",
+  "version": "0.3.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "description": "Painel do aluno do Colégio Dom Pedro II — CZS Sul (protótipo local com voz offline)",
+  "scripts": {
+    "start": "node server/server.mjs",
+    "seed:alunos": "node scripts/seed-alunos.mjs",
+    "stress": "node scripts/stress-test.mjs http://localhost:8787 100 2",
+    "voice:warm": "node scripts/warm-voice.mjs",
+    "test:backend": "node scripts/smoke-backend.mjs",
+    "check": "node scripts/check-app.mjs",
+    "build:web": "node scripts/prepare-web.mjs",
+    "android:prepare": "npm run build:web && npx cap sync android",
+    "android:open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
+    "@huggingface/transformers": "^4.3.2",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "helmet": "^8.3.0",
+    "multer": "^2.5.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}

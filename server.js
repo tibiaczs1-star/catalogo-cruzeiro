@@ -27,6 +27,7 @@ const { createMundoAppleServerIntegration } = require("./mundoapple/server-integ
 const { createGarraAdminServerIntegration } = require("./garra-admin/server-integration");
 const { createArizonaRanchIntegration } = require("./arizona-ranch");
 const { createCashierIntegration } = require("./cashier");
+const { createDomPedroServerIntegration } = require("./dom-pedro-ii/server-integration");
 const { decorateNewsItem, orderPortalStories } = require("./editorial-scope");
 let ashotelariaIntegration = null;
 let ashotelariaApiHandler = null;
@@ -34,6 +35,7 @@ let mundoAppleIntegration = null;
 let garraAdminIntegration = null;
 let arizonaRanchIntegration = null;
 let cashierIntegration = null;
+let domPedroIntegration = null;
 const ASHOTELARIA_ENABLED = String(process.env.ASHOTELARIA_ENABLED ?? "").trim().toLowerCase() === "true";
 const vm = require("vm");
 const zlib = require("zlib");
@@ -149,6 +151,7 @@ garraAdminIntegration = createGarraAdminServerIntegration({
   getActor: () => "catalogo-admin",
 });
 cashierIntegration = createCashierIntegration({ dataDir: DATA_DIR, environment: process.env });
+domPedroIntegration = createDomPedroServerIntegration({ dataDir: DATA_DIR });
 arizonaRanchIntegration = createArizonaRanchIntegration({
   rootDir: ROOT_DIR,
   dataDir: DATA_DIR,
@@ -22155,6 +22158,10 @@ const server = http.createServer(async (req, res) => {
   }
   if (pathname === ANGEL_PREFIX || pathname.startsWith(`${ANGEL_PREFIX}/`)) {
     return handleAngelStatic(req, res, pathname);
+  }
+
+  if (domPedroIntegration && (pathname === "/dom-pedro-ii" || pathname.startsWith("/dom-pedro-ii/"))) {
+    return domPedroIntegration.handleRequest(req, res, pathname);
   }
 
   if (pathname.startsWith("/api/") || pathname === "/health") {

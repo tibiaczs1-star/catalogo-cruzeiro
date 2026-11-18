@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#b51d2d">
+<link rel="icon" href="icons/favicon.png" type="image/png">
+<meta name="description" content="Dom Pedro II Voice: envie sua dúvida, ouça a aula narrada, avalie e baixe o material. Conheça as funções e assista aos tutoriais.">
+<title>Dom Pedro II Voice · Colégio Dom Pedro II</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/portal.css">
+</head>
+<body class="cinema-mode">
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="top">
+  <a class="brand" href="portal.html" aria-label="Dom Pedro II Voice, início">
+    <img src="assets/brand/crest-128.png" width="48" height="48" alt="Brasão da escola">
+    <span>Dom Pedro II Voice<small>Colégio Dom Pedro II · CZS Sul</small></span>
+  </a>
+  <span class="badge">VERSÃO PILOTO</span>
+  <nav class="topnav" aria-label="Seções">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#tutoriais">Vídeos</a>
+    <a href="#funcoes">Funções</a>
+    <a href="#galeria">Galeria</a>
+  </nav>
+  <button type="button" class="bgm-toggle" id="portalBgmBtn" aria-label="Tocar ou pausar Hino dos Bombeiros 16-bit" aria-pressed="false">🎵 Hino 16-bit</button>
+  <button type="button" class="cinema-toggle" id="cinemaToggle" aria-label="Alternar tema">☀️ Modo Claro</button>
+  <a class="team" href="equipe.html">Equipe escolar</a>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="welcome" aria-labelledby="titulo">
+    <div class="welcome-copy">
+      <p class="eyebrow">SEU ESPAÇO PARA APRENDER · COLÉGIO DOM PEDRO II</p>
+      <h1 id="titulo">Toda pergunta<br><span class="hero-gradient">vira uma aula.</span></h1>
+      <p>Conte o que ficou difícil por voz ou texto. Ouça a explicação real da Profª Naira, estude no ritmo de um app nativo, baixe o PDF e guarde tudo no aparelho.</p>
+      <div class="hero-pills">
+        <span>🎙️ Voz Clonada da Profª Naira</span>
+        <span>📱 Estilo App iOS/Android</span>
+        <span>🎵 Hino 16-bit</span>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-glow" href="prototipo.html">🎧 Abrir o Aplicativo Agora <span aria-hidden="true">→</span></a>
+        <a class="button ghost" href="#tutoriais">Ver Reels do app <span aria-hidden="true">▸</span></a>
+      </div>
+      <p class="hero-note">🎧 Narração completa · 📄 PDF + ZIP offline · 👩‍🏫 Profª Naira · Voz Clonada Real</p>
+    </div>
+    <figure>
+      <img src="assets/firehouse/patio-cadetes-cartoon.webp" width="1440" height="720" alt="Cadetes cartoon de farda cinza e boina vermelha reunidos no pátio com as bandeiras do Acre e do Brasil.">
+      <div class="hero-float-card" aria-hidden="true">
+        <span class="hero-float-dot"></span>
+        <div>
+          <strong>🎙️ Profª Naira · Português</strong>
+          <small>Aula pronta em segundos · Caderno offline</small>
+        </div>
+      </div>
+      <figcaption>Os cadetes do Dom Pedro II prontos para ajudar no seu estudo.</figcaption>
+    </figure>
+  </section>
+
+  <!-- CINEMA STATS BAR -->
+  <section class="cinema-stats" aria-label="Estatísticas e destaques do aplicativo">
+    <div class="stats-track">
+      <div class="stat-card">
+        <span class="stat-number" data-target="1">0</span>
+        <span class="stat-label">Voz Clonada Real</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="100" data-suffix="%">0%</span>
+        <span class="stat-label">Gratuito & Seguro</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="10" data-suffix=" min">0 min</span>
+        <span class="stat-label">Aulas Narradas + PDF</span>
+      </div>
+      <div class="stat-card stat-brand">
+        <span class="stat-badge">Acre · CZS Sul</span>
+        <span class="stat-label">Colégio Dom Pedro II</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section" id="como-funciona" aria-labelledby="como-titulo">
+    <div class="section-head">
+      <p class="eyebrow">COMO FUNCIONA</p>
+      <h2 id="como-titulo">Três passos. Do seu jeito.</h2>
+      <p>Você pergunta, o app prepara a aula e você avalia. Simples assim.</p>
+    </div>
+    <div class="steps">
+      <article>
+        <div class="step-visual"><img src="assets/firehouse/cadete-enviando.png" alt="Cadete enviando a dúvida" width="120" height="320"></div>
+        <span>01 · PERGUNTE</span>
+        <h3>Sua dúvida tem lugar aqui.</h3>
+        <p>Escolha a matéria, escreva ou grave sua pergunta. Acompanhe os sinais: enviando, gerando e material pronto.</p>
+      </article>
+      <article>
+        <div class="step-visual"><img src="assets/firehouse/cadete-gerando.png" alt="Cadete gerando a explicação" width="120" height="320"></div>
+        <span>02 · ENTENDA</span>
+        <h3>Leia. Ouça. Tente de novo.</h3>
+        <p>A explicação chega com texto, áudio narrado de 5 a 10 minutos e PDF. Use o player para voltar a qualquer ponto.</p>
+      </article>
+      <article>
+        <div class="step-visual"><img src="assets/firehouse/cadete-pronto.png" alt="Cadete com material pronto" width="120" height="320"></div>
+        <span>03 · CONTINUE</span>
+        <h3>Aprenda no seu ritmo.</h3>
+        <p>Dê sua nota, guarde a explicação no aparelho e volte em alguns minutos para revisar. O material passa por revisão da escola.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- VÍDEOS TUTORIAIS (REELS 9:16 MOSTRANDO O APP REAL) -->
+  <section class="section videos" id="tutoriais" aria-labelledby="video-titulo">
+    <div class="section-head">
+      <p class="eyebrow">ASSISTA NO FORMATO REELS · 9:16</p>
+      <h2 id="video-titulo">Veja o app funcionando por dentro</h2>
+      <p>Quatro vídeos verticais estilo Instagram Reels narrados pela voz clonada da Profª Naira ao som 16-bit de Soldados do Fogo.</p>
+    </div>
+    <div class="reels-showcase">
+      <article class="reel-card">
+        <div class="reel-top">
+          <span class="reel-user"><img src="assets/brand/crest-128.png" alt="" width="24" height="24"> @cmdpii.czs</span>
+          <span class="reel-pill">REEL · TOUR 15s</span>
+        </div>
+        <div class="reel-video-wrap">
+          <video controls playsinline preload="none" poster="assets/videos/poster-reel-apresentacao.webp" aria-label="Tour completo do Dom Pedro II Voice em formato vertical">
+            <source src="assets/videos/reel-apresentacao.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+        <div class="reel-meta">
+          <h3>Tour completo do app</h3>
+          <p>Da pergunta em voz até a aula pronta da Profª Naira e o PDF offline.</p>
+          <button type="button" class="btn-theater" data-reel="1" data-src="assets/videos/reel-apresentacao.mp4" data-title="Tour Completo · Dom Pedro II Voice (9:16)" data-desc="Interface real do aplicativo em funcionamento, com voz da Profª Naira e trilha 16-bit.">📱 Tela Cheia</button>
+        </div>
+      </article>
+
+      <article class="reel-card">
+        <div class="reel-top">
+          <span class="reel-user"><img src="assets/brand/crest-128.png" alt="" width="24" height="24"> @cmdpii.czs</span>
+          <span class="reel-pill">PASSO 01</span>
+        </div>
+        <div class="reel-video-wrap">
+          <video controls playsinline preload="none" poster="assets/videos/poster-reel-1.webp" aria-label="Passo 1: enviar dúvida no aplicativo">
+            <source src="assets/videos/reel-1-pergunte.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+        <div class="reel-meta">
+          <h3>Pergunte por voz ou texto</h3>
+          <p>Microfone com transcrição ao vivo e semáforo dos 3 cadetes.</p>
+          <button type="button" class="btn-theater" data-reel="1" data-src="assets/videos/reel-1-pergunte.mp4" data-title="Passo 1 · Pergunte por voz ou texto" data-desc="Veja como gravar sua dúvida e acompanhar os 3 cadetes em tempo real.">📱 Tela Cheia</button>
+        </div>
+      </article>
+
+      <article class="reel-card">
+        <div class="reel-top">
+          <span class="reel-user"><img src="assets/brand/crest-128.png" alt="" width="24" height="24"> @cmdpii.czs</span>
+          <span class="reel-pill">PASSO 02</span>
+        </div>
+        <div class="reel-video-wrap">
+          <video controls playsinline preload="none" poster="assets/videos/poster-reel-2.webp" aria-label="Passo 2: ouvir aula narrada e baixar PDF">
+            <source src="assets/videos/reel-2-ouca.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+        <div class="reel-meta">
+          <h3>Voz da Profª Naira + PDF</h3>
+          <p>Explicação passo a passo com controle de velocidade e pacote ZIP.</p>
+          <button type="button" class="btn-theater" data-reel="1" data-src="assets/videos/reel-2-ouca.mp4" data-title="Passo 2 · Aula narrada e PDF" data-desc="Player moderno com voz clonada, etapas e download do material.">📱 Tela Cheia</button>
+        </div>
+      </article>
+
+      <article class="reel-card">
+        <div class="reel-top">
+          <span class="reel-user"><img src="assets/brand/crest-128.png" alt="" width="24" height="24"> @cmdpii.czs</span>
+          <span class="reel-pill">PASSO 03</span>
+        </div>
+        <div class="reel-video-wrap">
+          <video controls playsinline preload="none" poster="assets/videos/poster-reel-3.webp" aria-label="Passo 3: avaliar, salvar no caderno e falar com professores">
+            <source src="assets/videos/reel-3-avaliacao.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+        <div class="reel-meta">
+          <h3>Caderno &amp; Profª Naira</h3>
+          <p>Avalie com 5 estrelas, guarde offline e ouça a voz real clonada da Profª Naira.</p>
+          <button type="button" class="btn-theater" data-reel="1" data-src="assets/videos/reel-3-avaliacao.mp4" data-title="Passo 3 · Memória e Voz Real" data-desc="Avaliação em estrelas, caderno salvo e a voz clonada da Profª Naira.">📱 Tela Cheia</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FUNÇÕES -->
+  <section class="section" id="funcoes" aria-labelledby="func-titulo">
+    <div class="section-head">
+      <p class="eyebrow">TUDO QUE O APP FAZ</p>
+      <h2 id="func-titulo">Conheça as funções</h2>
+      <p>Cada recurso foi pensado para ajudar você a estudar com calma e segurança.</p>
+    </div>
+    <div class="feature-grid">
+      <article><img src="assets/firehouse/mic.webp" alt="" width="40" height="40"><h3>Pergunte por voz ou texto</h3><p>Grave sua pergunta ou escreva. A transcrição acontece no aparelho quando possível.</p></article>
+      <article><img src="assets/firehouse/audio.webp" alt="" width="40" height="40"><h3>Aula narrada de 5 a 10 min</h3><p>Voz em português, com player e barra de progresso para voltar a qualquer ponto.</p></article>
+      <article><img src="assets/firehouse/book.webp" alt="" width="40" height="40"><h3>Texto e PDF para baixar</h3><p>O roteiro completo da aula também vem em PDF e no pacote ZIP com o áudio.</p></article>
+      <article><img src="assets/firehouse/tasks.webp" alt="" width="40" height="40"><h3>Avaliação de 1 a 5</h3><p>Sua nota ajuda a escola a melhorar. Nota baixa gera uma versão mais simples.</p></article>
+      <article><img src="assets/firehouse/news.webp" alt="" width="40" height="40"><h3>Notícias da escola</h3><p>As notícias chegam automaticamente do site oficial do Colégio Dom Pedro II.</p></article>
+      <article><img src="assets/firehouse/care.webp" alt="" width="40" height="40"><h3>Lugar de Falar e SOS</h3><p>Converse com a equipe com identidade protegida. Em risco imediato, há apoio no SOS.</p></article>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="section" id="galeria" aria-labelledby="gal-titulo">
+    <div class="section-head">
+      <p class="eyebrow">O COLÉGIO</p>
+      <h2 id="gal-titulo">Um pouco da nossa escola</h2>
+      <p>Imagens do campus CZS Sul e dos cadetes que inspiram este app.</p>
+    </div>
+    <div class="gallery">
+      <figure><img src="assets/brand/escola-hero.jpg" alt="Fachada do Colégio Dom Pedro II" loading="lazy"><figcaption>Nosso campus</figcaption></figure>
+      <figure><img src="assets/brand/desfile.jpg" alt="Desfile cívico dos cadetes" loading="lazy"><figcaption>Desfile cívico</figcaption></figure>
+      <figure><img src="assets/brand/interclasse.jpg" alt="Estudantes em competição interclasse" loading="lazy"><figcaption>Interclasse</figcaption></figure>
+      <figure><img src="assets/firehouse/tres-cadetes.png" alt="Ilustração dos três cadetes" loading="lazy"><figcaption>Os três cadetes</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- INSTALAÇÃO -->
+  <section class="install" id="instalar" aria-labelledby="instalar-titulo">
+    <div>
+      <p class="eyebrow">NO CELULAR E NO COMPUTADOR</p>
+      <h2 id="instalar-titulo">Seu estudo vai com você.</h2>
+      <p>A versão web abre no navegador. No celular, você também pode adicionar o app à tela inicial.</p>
+    </div>
+    <div class="devices">
+      <article><h3>iPhone e iPad</h3><p>Abra no Safari. Toque em <strong>Compartilhar</strong> e depois em <strong>Adicionar à Tela de Início</strong>.</p><a href="prototipo.html">Abrir no iPhone <span aria-hidden="true">↗</span></a><small>Versão web instalável.</small></article>
+      <article><h3>Android</h3><p>Baixe o instalador e abra o arquivo. Se pedir, permita a instalação.</p><a href="/downloads/DomPedroIIVoice-Android-teste.apk" download>Baixar para Android <span aria-hidden="true">↗</span></a><small>APK de teste · aproximadamente 17 MB.</small></article>
+      <article><h3>Computador</h3><p>Use o app direto no navegador, com espaço para ler e acompanhar as explicações.</p><a href="prototipo.html">Abrir versão web <span aria-hidden="true">↗</span></a><small>Sem instalação.</small></article>
+    </div>
+  </section>
+
+  <aside class="test-note">
+    <strong>Entrega da versão piloto.</strong>
+    <p>Envio de dúvida, aula narrada de 5 a 10 minutos, PDF, avaliação, materiais com revisão da escola e notícias do site oficial já estão funcionando. O login é de demonstração — use apenas dados de teste e não insira informações reais de alunos. Seus dados de estudo ficam no aparelho.</p>
+  </aside>
+</main>
+
+<footer>
+  <span>Dom Pedro II Voice · Colégio Dom Pedro II · Saber, Honra e Disciplina</span>
+  <a href="equipe.html">Acesso da equipe escolar</a>
+</footer>
+
+  <!-- CINEMATOGRAPHIC THEATER LIGHTBOX -->
+  <div id="videoTheaterModal" class="theater-modal" hidden aria-hidden="true" role="dialog" aria-label="Sala de Cinema">
+    <div class="theater-backdrop" id="theaterBackdrop"></div>
+    <div class="theater-dialog">
+      <button type="button" class="theater-close" id="theaterClose" aria-label="Fechar Cinema">✕</button>
+      <div class="theater-frame">
+        <video id="theaterVideo" controls playsinline></video>
+        <img id="theaterImage" hidden alt="">
+      </div>
+      <div class="theater-caption">
+        <h3 id="theaterTitle">Título do Vídeo</h3>
+        <p id="theaterDesc">Descrição da aula...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-app-dock">
+    <a href="prototipo.html" class="cta">🎧 Abrir Dom Pedro II Voice</a>
+  </div>
+
+  <script src="assets/portal.js" defer></script>
+</body>
+</html>
