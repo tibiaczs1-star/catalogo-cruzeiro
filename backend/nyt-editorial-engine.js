@@ -3,6 +3,8 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
+const dossierMemoryCache = new Map();
+
 const PT_STOPWORDS = new Set([
   "de", "da", "do", "das", "dos", "em", "no", "na", "nos", "nas", "um", "uma",
   "uns", "umas", "por", "para", "com", "sem", "sob", "sobre", "entre", "ate",
@@ -11,11 +13,38 @@ const PT_STOPWORDS = new Set([
   "ser", "sao", "esta", "estao", "tem", "ter", "vai", "vao", "pode", "podem",
   "nesta", "neste", "nessa", "nesse", "isso", "isto", "aquele", "aquela",
   "cruzeiro", "sul", "acre", "jurua", "vale", "estado", "governo", "prefeitura",
-  "ano", "anos", "dia", "dias", "hoje", "ontem", "amanha", "feira", "Durante"
+  "ano", "anos", "dia", "dias", "hoje", "ontem", "amanha", "feira", "durante"
 ]);
 
 const LOW_QUALITY_RE =
   /lei\s+org[aâ]nica|selo\s+qualidade|e-saj|confer[eê]ncia\s+de\s+documentos|documentos\s+e-saj|\[vc_row\]|\[\/vc_|<script|lorem\s+ipsum|^sem\s+t[ií]tulo$/i;
+
+const GLOSSARY_TERMS = [
+  { key: "MPAC", term: "MPAC", definition: "Ministério Público do Estado do Acre — órgão responsável pela fiscalização da lei, defesa do patrimônio público e direitos dos cidadãos." },
+  { key: "SEMSA", term: "SEMSA", definition: "Secretaria Municipal de Saúde — pasta responsável pelas unidades básicas de saúde, vacinação e vigilância epidemiológica municipal." },
+  { key: "SESACRE", term: "SESACRE", definition: "Secretaria de Estado de Saúde do Acre — administra hospitais regionais (como o Hospital do Juruá) e maternidades estaduais." },
+  { key: "DERACRE", term: "DERACRE", definition: "Departamento de Estradas de Rodagem, Infraestrutura Hidroviária e Aeroportuária do Acre — responsável pela BR-364, ramais e pistas de pouso." },
+  { key: "IPAM", term: "IPAM", definition: "Instituto de Pesquisa Ambiental da Amazônia — organização científica que atua em desenvolvimento rural sustentável na Amazônia." },
+  { key: "UFAC", term: "UFAC", definition: "Universidade Federal do Acre (Campus Floresta em Cruzeiro do Sul)." },
+  { key: "IFAC", term: "IFAC", definition: "Instituto Federal do Acre — ensino técnico e superior no Vale do Juruá." },
+  { key: "SINE", term: "SINE", definition: "Sistema Nacional de Emprego — intermediação de vagas de trabalho e seguro-desemprego." },
+  { key: "INEXIGIBILIDADE", term: "Inexigibilidade / Pregão", definition: "Modalidade de contratação pública prevista na Lei de Licitações quando há inviabilidade de competição ou leilão eletrônico de menor preço." },
+  { key: "MEDIDA PROTETIVA", term: "Medida Protetiva", definition: "Ordem judicial de urgência prevista na Lei Maria da Penha que proíbe o agressor de se aproximar ou manter contato com a vítima." }
+];
+
+function invalidateDossierCache(slug = "") {
+  if (slug) dossierMemoryCache.delete(slug);
+  else dossierMemoryCache.clear();
+}
+
+function writeJsonAtomic(filePath, data) {
+  try {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    const tmp = `${filePath}.tmp`;
+    fs.writeFileSync(tmp, JSON.stringify(data, null, 2), "utf8");
+    fs.renameSync(tmp, filePath);
+  } catch (_e) {}
+}
 
 function stripAccents(value = "") {
   return String(value || "")
@@ -27,6 +56,9 @@ function cleanText(value = "") {
   return String(value || "")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/gi, " ")
+    .replace(/&#8211;|&#8212;|&ndash;|&mdash;/gi, "—")
+    .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;/gi, '"')
+    .replace(/&#8216;|&#8217;|&lsquo;|&rsquo;/gi, "'")
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')
     .replace(/&#39;/gi, "'")
@@ -42,6 +74,24 @@ function escapeXml(value = "") {
     '"': "&quot;",
     "'": "&#39;"
   }[ch]));
+}
+
+function detectMunicipality(text = "") {
+  const s = stripAccents(String(text || "").toLowerCase());
+  if (s.includes("mancio lima")) return "Mâncio Lima";
+  if (s.includes("rodrigues alves")) return "Rodrigues Alves";
+  if (s.includes("porto walter")) return "Porto Walter";
+  if (s.includes("marechal thaumaturgo")) return "Marechal Thaumaturgo";
+  if (s.includes("guajara")) return "Guajará";
+  if (s.includes("tarauaca")) return "Tarauacá";
+  if (s.includes("feijo")) return "Feijó";
+  if (s.includes("rio branco")) return "Rio Branco";
+  return "Cruzeiro do Sul";
+}
+
+function detectGlossary(text = "") {
+  const upper = stripAccents(String(text || "").toUpperCase());
+  return GLOSSARY_TERMS.filter((g) => upper.includes(g.key));
 }
 
 function normalizeTopicTokens(text = "") {
@@ -84,8 +134,8 @@ function areStoriesSameEvent(a = {}, b = {}) {
     return false;
   }
 
-  const tokensA = normalizeTopicTokens(a.title || "");
-  const tokensB = normalizeTopicTokens(b.title || "");
+  const tokensA = a._tokens || normalizeTopicTokens(a.title || "");
+  const tokensB = b._tokens || normalizeTopicTokens(b.title || "");
   if (tokensA.length < 3 || tokensB.length < 3) return false;
 
   const setA = new Set(tokensA);
@@ -100,7 +150,6 @@ function areStoriesSameEvent(a = {}, b = {}) {
   if (jaccard >= 0.34) return true;
   if (shared >= 3 && Math.min(setA.size, setB.size) <= 6) return true;
 
-  // Confronto complementar com lead/resumo quando 2 tokens fortes do título batem
   if (shared >= 2) {
     const bodyTokensA = new Set(normalizeTopicTokens(`${a.title} ${a.summary || a.lede || ""}`));
     const bodyTokensB = new Set(normalizeTopicTokens(`${b.title} ${b.summary || b.lede || ""}`));
@@ -165,32 +214,47 @@ function loadPublishedEditorArticles(dataDir) {
   try {
     const state = JSON.parse(fs.readFileSync(file, "utf8"));
     const list = Array.isArray(state?.articles) ? state.articles : [];
+    const now = Date.now();
     return list
-      .filter((a) => a && a.status === "Publicada" && a.title)
-      .sort((a, b) => (Number(b.level || 0) - Number(a.level || 0)) || String(b.published || "").localeCompare(String(a.published || "")))
+      .filter((a) => {
+        if (!a || a.status !== "Publicada" || !a.title) return false;
+        if (a.scheduledFor && Date.parse(a.scheduledFor) > now) return false;
+        return true;
+      })
+      .sort((a, b) => (Number(b.pinned ? 1 : 0) - Number(a.pinned ? 1 : 0)) || (Number(b.level || 0) - Number(a.level || 0)) || String(b.published || "").localeCompare(String(a.published || "")))
       .map((a) => {
         const slug = `redacao-${a.id}`;
         const paragraphs = String(a.content || "")
           .split(/\r?\n\r?\n+/)
           .map((p) => cleanText(p))
           .filter(Boolean);
-        const summary = paragraphs[0] ? paragraphs[0].slice(0, 240) : cleanText(a.content || "").slice(0, 240);
+        const summary = cleanText(a.nutGraph || paragraphs[0] || a.content || "").slice(0, 240);
         const hasImage = Boolean(a.media && String(a.mediaType || a.media?.type || "").startsWith("image/"));
+        const motifQuery = a.illustrationMotif ? `?motif=${encodeURIComponent(a.illustrationMotif)}` : "";
         const imageUrl = hasImage
           ? `/api/editores/midia/${encodeURIComponent(a.id)}`
-          : `/api/articles/${encodeURIComponent(slug)}/illustration.svg`;
+          : `/api/articles/${encodeURIComponent(slug)}/illustration.svg${motifQuery}`;
         const level = Number(a.level || 0);
+        const municipality = a.municipality || detectMunicipality(`${a.title} ${a.content}`);
         return {
           id: slug,
           newsroomId: String(a.id),
           slug,
           isOriginal: true,
+          pinned: Boolean(a.pinned),
+          urgent: Boolean(a.urgent),
+          exclusive: Boolean(a.exclusive),
           newsroomLevel: level,
+          municipality,
           editorialBadge: level === 2 ? "Manchete Original • Redação CZS" : level === 1 ? "Destaque Original • Redação CZS" : "Reportagem Original • Redação CZS",
           title: cleanText(a.title),
           subtitle: summary,
           lede: summary,
           summary,
+          nutGraph: cleanText(a.nutGraph || ""),
+          customVerifiedFact: cleanText(a.customVerifiedFact || ""),
+          customInconsistency: cleanText(a.customInconsistency || ""),
+          illustrationMotif: a.illustrationMotif || "",
           body: paragraphs.length ? paragraphs : [cleanText(a.content || "")],
           rawContent: String(a.content || ""),
           category: a.category || (level === 2 ? "Manchete CZS" : "Redação CZS"),
@@ -199,14 +263,16 @@ function loadPublishedEditorArticles(dataDir) {
           sourceLabel: `Por ${a.author || "Redação CZS"} • Apuração própria`,
           sourceUrl: `/noticia.html?slug=${encodeURIComponent(slug)}`,
           publishedAt: a.published || a.created || new Date().toISOString(),
+          updatedAt: a.updatedAt || "",
           date: formatPtDate(a.published || a.created),
           readMin: Math.max(2, Math.round(cleanText(a.content || "").split(/\s+/).length / 180)),
           imageUrl,
           feedImageUrl: imageUrl,
           sourceImageUrl: imageUrl,
+          imageCredit: cleanText(a.imageCredit || (hasImage ? "Foto captada • Redação CZS" : "Ilustração Editorial Vetorial • Catálogo CZS")),
           hasCapturedPhoto: hasImage,
           mediaKind: hasImage ? "foto-captada" : "ilustracao-editorial",
-          priority: 5000 + level * 500,
+          priority: 5000 + (a.pinned ? 1000 : 0) + level * 500,
           comparedOutlets: [],
           crossSources: [
             {
@@ -224,28 +290,52 @@ function loadPublishedEditorArticles(dataDir) {
 function mergeEditorAndDeduplicateReplicas(editorArticles = [], externalItems = []) {
   const accepted = [];
   const seenSlugs = new Set();
+  const tokenBuckets = new Map();
 
-  // 1. Soberania das matérias originais do editor
+  const indexAcceptedStory = (story) => {
+    const tokens = normalizeTopicTokens(story.title || "");
+    story._tokens = tokens;
+    for (const tk of tokens) {
+      if (!tokenBuckets.has(tk)) tokenBuckets.set(tk, []);
+      tokenBuckets.get(tk).push(story);
+    }
+  };
+
+  const findMatchingEvent = (candidate) => {
+    const tokens = normalizeTopicTokens(candidate.title || "");
+    candidate._tokens = tokens;
+    const checked = new Set();
+    for (const tk of tokens) {
+      const bucket = tokenBuckets.get(tk);
+      if (!bucket) continue;
+      for (const existing of bucket) {
+        if (checked.has(existing)) continue;
+        checked.add(existing);
+        if (areStoriesSameEvent(existing, candidate)) return existing;
+      }
+    }
+    return null;
+  };
+
   for (const ed of editorArticles) {
     if (!ed || !ed.slug || seenSlugs.has(ed.slug)) continue;
     seenSlugs.add(ed.slug);
-    accepted.push({
+    const copy = {
       ...ed,
       comparedOutlets: Array.isArray(ed.comparedOutlets) ? [...ed.comparedOutlets] : [],
       crossSources: Array.isArray(ed.crossSources) ? [...ed.crossSources] : []
-    });
+    };
+    accepted.push(copy);
+    indexAcceptedStory(copy);
   }
 
-  // 2. Processa matérias externas: filtra qualidade e absorve réplicas nas originais/primárias
   for (const rawItem of externalItems) {
     if (!passesEditorialQualityGate(rawItem)) continue;
     const slug = String(rawItem.slug || rawItem.id || "").trim();
     if (!slug || seenSlugs.has(slug)) continue;
 
-    const match = accepted.find((existing) => areStoriesSameEvent(existing, rawItem));
+    const match = findMatchingEvent(rawItem);
     if (match) {
-      // Se já existe matéria original (ou matéria primária consolidada) sobre o fato:
-      // Apaga a réplica do feed e absorve a fonte para checagem de fatos e incoerências!
       const outletName = cleanText(rawItem.sourceName || rawItem.sourceLabel || "Veículo externo");
       const outletUrl = String(rawItem.sourceUrl || rawItem.url || "").trim();
       match.comparedOutlets = match.comparedOutlets || [];
@@ -261,7 +351,6 @@ function mergeEditorAndDeduplicateReplicas(editorArticles = [], externalItems = 
       if (!match.crossSources.some((s) => s.name === outletName || (outletUrl && s.url === outletUrl))) {
         match.crossSources.push({ name: outletName, url: outletUrl });
       }
-      // Se a matéria primária não tinha foto captada e a réplica tem foto real captada, aproveita a foto real com crédito
       if (!match.hasCapturedPhoto) {
         const replicaPhoto = rawItem.imageUrl || rawItem.feedImageUrl || rawItem.sourceImageUrl || "";
         if (isCapturedRealPhoto(replicaPhoto)) {
@@ -276,16 +365,19 @@ function mergeEditorAndDeduplicateReplicas(editorArticles = [], externalItems = 
       continue;
     }
 
-    // Não é réplica: consolida como matéria autoral checada pelo CZS
     seenSlugs.add(slug);
     const currentPhoto = rawItem.imageUrl || rawItem.feedImageUrl || rawItem.sourceImageUrl || "";
     const hasPhoto = isCapturedRealPhoto(currentPhoto);
     const illustrationUrl = `/api/articles/${encodeURIComponent(slug)}/illustration.svg`;
     const finalImage = hasPhoto ? currentPhoto : illustrationUrl;
+    const municipality = rawItem.municipality || detectMunicipality(`${rawItem.title || ""} ${rawItem.summary || ""}`);
 
-    accepted.push({
+    const cleanStory = {
       ...rawItem,
       slug,
+      title: cleanText(rawItem.title || ""),
+      summary: cleanText(rawItem.summary || rawItem.lede || rawItem.subtitle || ""),
+      municipality,
       hasCapturedPhoto: hasPhoto,
       mediaKind: hasPhoto ? "foto-captada" : "ilustracao-editorial",
       imageUrl: finalImage,
@@ -299,9 +391,14 @@ function mergeEditorAndDeduplicateReplicas(editorArticles = [], externalItems = 
               url: String(rawItem.sourceUrl || "")
             }
           ]
-    });
+    };
+    accepted.push(cleanStory);
+    indexAcceptedStory(cleanStory);
   }
 
+  for (const item of accepted) {
+    delete item._tokens;
+  }
   return accepted;
 }
 
@@ -325,13 +422,20 @@ function detectCrossOutletInconsistencies(primaryStory = {}, relatedStories = []
 
   const inconsistencies = [];
 
+  if (primaryStory.customInconsistency) {
+    inconsistencies.push({
+      topic: "Apontamento Direto da Redação CZS",
+      comparison: cleanText(primaryStory.customInconsistency),
+      editorialFinding: "Incoerência verificada e documentada manualmente pelo editor responsável."
+    });
+  }
+
   if (outlets.length >= 2) {
     const byOutlet = outlets.map((o) => ({
       ...o,
       extracted: extractNumbersAndValues(o.text)
     }));
 
-    // 1. Confronta valores em Reais (R$)
     const withCurrency = byOutlet.filter((o) => o.extracted.currency.length > 0);
     if (withCurrency.length >= 2) {
       const firstVal = withCurrency[0].extracted.currency.join(", ");
@@ -348,7 +452,6 @@ function detectCrossOutletInconsistencies(primaryStory = {}, relatedStories = []
       }
     }
 
-    // 2. Confronta quantidades e números (vagas, famílias, kg, casos, etc.)
     const withQuantities = byOutlet.filter((o) => o.extracted.quantities.length > 0);
     if (withQuantities.length >= 2) {
       const q0 = withQuantities[0].extracted.quantities.join(", ");
@@ -365,7 +468,6 @@ function detectCrossOutletInconsistencies(primaryStory = {}, relatedStories = []
       }
     }
 
-    // 3. Confronta omissão de dados quantitativos ou enquadramento no título
     if (inconsistencies.length === 0) {
       const a = byOutlet[0];
       const b = byOutlet[1];
@@ -410,6 +512,7 @@ function synthesizeAuthorialNytParagraphs(story = {}, relatedStories = [], incon
     : [];
   const sourceName = cleanText(story.sourceName || "apuração local");
   const category = cleanText(story.category || "Cotidiano");
+  const municipality = (story.municipality || detectMunicipality(`${title} ${rawSummary}`)).toUpperCase();
   const allSources = [
     sourceName,
     ...(Array.isArray(relatedStories) ? relatedStories.map((r) => cleanText(r.sourceName || "")) : []),
@@ -423,22 +526,20 @@ function synthesizeAuthorialNytParagraphs(story = {}, relatedStories = [], incon
 
   const paragraphs = [];
 
-  // Parágrafo 1 (Lede autoral contextualizado - sem copiar cacoetes de release)
   if (rawSummary && rawSummary.toLowerCase() !== title.toLowerCase()) {
     const cleanLede = rawSummary
       .replace(/^a informa[cç][aã]o vem[^.]*\.\s*/i, "")
       .replace(/^fonte:\s*[^.]*\.\s*/i, "")
       .trim();
     paragraphs.push(
-      `CRUZEIRO DO SUL — ${cleanLede}${cleanLede.endsWith(".") ? "" : "."}`
+      `${municipality} — ${cleanLede}${cleanLede.endsWith(".") ? "" : "."}`
     );
   } else {
     paragraphs.push(
-      `CRUZEIRO DO SUL — A reportagem do Catálogo CZS verificou os desdobramentos sobre "${title}", tema que mobiliza a agenda de ${category.toLowerCase()} na região do Vale do Juruá e no Acre.`
+      `${municipality} — A reportagem do Catálogo CZS verificou os desdobramentos sobre "${title}", tema que mobiliza a agenda de ${category.toLowerCase()} na região do Vale do Juruá e no Acre.`
     );
   }
 
-  // Parágrafo 2 (Desenvolvimento a partir dos fatos extras e corpo)
   const extraSentences = [];
   for (const p of rawBody) {
     if (!p || p.length < 35) continue;
@@ -461,7 +562,6 @@ function synthesizeAuthorialNytParagraphs(story = {}, relatedStories = [], incon
     );
   }
 
-  // Parágrafo 3 (Metodologia de checagem e transparência de fontes padrão NYT)
   if (uniqueSources.length > 1) {
     paragraphs.push(
       `Para consolidar esta matéria e eliminar réplicas repetidas no feed, o sistema editorial do Catálogo CZS confrontou os relatos de ${uniqueSources.join(", ")}.${
@@ -480,6 +580,9 @@ function synthesizeAuthorialNytParagraphs(story = {}, relatedStories = [], incon
 }
 
 function buildNutGraph(story = {}, relatedStories = [], inconsistencies = []) {
+  if (story.nutGraph && cleanText(story.nutGraph).length > 15) {
+    return cleanText(story.nutGraph);
+  }
   const category = cleanText(story.category || "Notícias").toLowerCase();
   const nums = extractNumbersAndValues(`${story.title || ""} ${story.summary || ""}`);
   const figures = [...nums.currency, ...nums.quantities];
@@ -508,7 +611,42 @@ function buildNutGraph(story = {}, relatedStories = [], inconsistencies = []) {
   return `${impact}${figures.length ? ` Dados-chave verificados: ${figures.slice(0, 3).join(", ")}.` : ""} (${outletCount} ${outletCount > 1 ? "fontes cruzadas" : "fonte verificada"}${inconsistencies.length ? ` • ${inconsistencies.length} ponto(s) de divergência explicitado(s)` : ""}).`;
 }
 
+function buildOpenQuestions(story = {}) {
+  const combined = `${story.category || ""} ${story.title || ""}`.toLowerCase();
+  if (/pol[ií]cia|delegacia|crime|pris|apreen|justi/i.test(combined)) {
+    return [
+      "Quais são os próximos prazos do inquérito policial ou da audiência de custódia na comarca local?",
+      "Houve pronunciamento da defesa ou nota complementar da Secretaria de Segurança Pública?",
+      "Que medidas preventivas adicionais serão adotadas no local da ocorrência?"
+    ];
+  }
+  if (/sa[uú]de|surto|hospital|vacina|catapora/i.test(combined)) {
+    return [
+      "Qual é o cronograma atualizado de bloqueio vacinal e atendimento nas unidades básicas de saúde?",
+      "Há previsão de reforço de profissionais ou insumos para os bairros mais atingidos?",
+      "Quais são os protocolos recomendados pela Vigilância Epidemiológica para escolas e famílias?"
+    ];
+  }
+  if (/prefeitura|obra|deslizamento|assist[eê]ncia|fam[ií]lias/i.test(combined)) {
+    return [
+      "Qual é o prazo oficial estipulado pelo poder público para conclusão do atendimento ou intervenção na área?",
+      "Qual a dotação orçamentária e a fonte dos recursos empregados na ação?",
+      "Como os moradores afetados podem acionar formalmente a Defesa Civil ou secretaria responsável?"
+    ];
+  }
+  return [
+    "Quais serão os próximos passos práticos e prazos de execução anunciados pelos órgãos responsáveis?",
+    "Existe documento técnico, portaria ou edital complementar pendente de publicação oficial?",
+    "Como a comunidade de Cruzeiro do Sul pode fiscalizar os resultados desta medida?"
+  ];
+}
+
 function buildAuthorialNytDossier(story = {}, allStories = [], options = {}) {
+  const slug = String(story.slug || story.id || "materia").trim();
+  if (!options.forceRefresh && dossierMemoryCache.has(slug)) {
+    return dossierMemoryCache.get(slug);
+  }
+
   const dataDir = options.dataDir;
   const cacheFile = dataDir ? path.join(dataDir, "editorial-dossiers.json") : "";
   let cache = {};
@@ -520,15 +658,17 @@ function buildAuthorialNytDossier(story = {}, allStories = [], options = {}) {
     }
   }
 
-  const slug = String(story.slug || story.id || "materia").trim();
-  if (!options.forceRefresh && cache[slug] && cache[slug].authorialBody?.length) {
+  if (!options.forceRefresh && cache[slug] && cache[slug].authorialBody?.length && cache[slug].quickSummary30s) {
+    dossierMemoryCache.set(slug, cache[slug]);
     return cache[slug];
   }
 
-  // Encontra réplicas ou matérias correlatas no acervo para comparação multi-fonte
   const related = [
     ...(Array.isArray(story.comparedOutlets) ? story.comparedOutlets : [])
   ];
+  const timeline = [];
+  const storyTokens = new Set(normalizeTopicTokens(story.title || ""));
+
   for (const candidate of Array.isArray(allStories) ? allStories : []) {
     if (!candidate || candidate.slug === slug) continue;
     if (areStoriesSameEvent(story, candidate)) {
@@ -543,43 +683,86 @@ function buildAuthorialNytDossier(story = {}, allStories = [], options = {}) {
           bodyText: Array.isArray(candidate.body) ? candidate.body.join(" ") : ""
         });
       }
+    } else if (timeline.length < 4) {
+      const candTokens = normalizeTopicTokens(candidate.title || "");
+      let overlap = 0;
+      for (const tk of candTokens) if (storyTokens.has(tk)) overlap++;
+      if (overlap >= 1 && (candidate.category === story.category || overlap >= 2)) {
+        timeline.push({
+          slug: candidate.slug,
+          title: cleanText(candidate.title),
+          date: candidate.date || formatPtDate(candidate.publishedAt),
+          sourceName: cleanText(candidate.sourceName || "Catálogo CZS")
+        });
+      }
     }
   }
 
   const inconsistencies = detectCrossOutletInconsistencies(story, related);
   const authorialBody = synthesizeAuthorialNytParagraphs(story, related, inconsistencies);
   const nutGraph = buildNutGraph(story, related, inconsistencies);
+  const municipality = story.municipality || detectMunicipality(`${story.title} ${story.summary || ""}`);
+  const fullTextForAnalysis = `${story.title || ""} ${story.summary || ""} ${authorialBody.join(" ")}`;
+  const nums = extractNumbersAndValues(fullTextForAnalysis);
+  const glossary = detectGlossary(fullTextForAnalysis);
 
-  const nums = extractNumbersAndValues(`${story.title || ""} ${story.summary || ""} ${authorialBody.join(" ")}`);
   const verifiedFacts = [
-    `Fato central apurado: ${cleanText(story.title)}.`,
+    ...(story.customVerifiedFact ? [cleanText(story.customVerifiedFact)] : []),
+    `Fato central apurado em ${municipality}: ${cleanText(story.title)}.`,
     ...(nums.currency.length ? [`Valores financeiros registrados na documentação/apuração: ${nums.currency.join(", ")}.`] : []),
     ...(nums.quantities.length ? [`Quantitativos e indicadores verificados: ${nums.quantities.join(", ")}.`] : []),
-    `Localidade e escopo de impacto: ${cleanText(story.category || "Cruzeiro do Sul / Vale do Juruá")} (${story.date || "Novembro de 2026"}).`
+    `Escopo editorial: ${cleanText(story.category || "Cruzeiro do Sul / Vale do Juruá")} (${story.date || "Novembro de 2026"}).`
   ];
 
   const sourcesChecked = [
     {
       name: cleanText(story.sourceName || "Redação Catálogo CZS"),
       url: String(story.sourceUrl || `/noticia.html?slug=${encodeURIComponent(slug)}`),
-      role: story.isOriginal ? "Reportagem Original (Soberana)" : "Fonte Primária Consultada"
+      role: story.isOriginal ? "Reportagem Original (Soberana)" : "Fonte Primária Consultada",
+      trustTier: story.isOriginal || /prefeitura|governo|agencia|diario|mpac/i.test(story.sourceName || "") ? "Fonte Oficial / Primária" : "Redação Jornalística"
     },
     ...related.map((r) => ({
       name: r.sourceName,
       url: r.sourceUrl || "",
-      role: "Fonte Cruzada (Réplica absorvida e comparada)"
+      role: "Fonte Cruzada (Réplica absorvida e comparada)",
+      trustTier: "Veículo Comparado"
     }))
   ];
+
+  const headlinesComparison = [
+    { outlet: cleanText(story.sourceName || "Redação Catálogo CZS"), headline: cleanText(story.title), date: story.date || "18 de nov. de 2026" },
+    ...related.map((r) => ({ outlet: r.sourceName, headline: r.title, date: r.date || story.date || "18 de nov. de 2026" }))
+  ];
+
+  const keyNumberSummary = [...nums.currency, ...nums.quantities, ...nums.percentages].slice(0, 3).join(" • ") || `${sourcesChecked.length} fonte(s) verificada(s)`;
+  const ageMs = storyTimestamp(story) ? Date.now() - storyTimestamp(story) : 0;
+  const isStale = ageMs > 7 * 24 * 3600 * 1000;
 
   const dossier = {
     slug,
     isOriginal: Boolean(story.isOriginal),
+    municipality,
     editorialStandard: "The New York Times + Semafor Fact-Check",
     headline: cleanText(story.title),
     nutGraph,
+    quickSummary30s: {
+      fact: cleanText(story.title),
+      keyNumber: keyNumberSummary,
+      impact: nutGraph
+    },
+    coverageThermometer:
+      sourcesChecked.length >= 3
+        ? "Consenso Multi-Fonte (3+ veículos cruzados)"
+        : sourcesChecked.length === 2
+        ? "Dupla Checagem (2 veículos confrontados)"
+        : story.isOriginal
+        ? "Apuração Exclusiva • Redação CZS"
+        : "Monitoramento Verificado CZS",
+    freshnessAlert: isStale ? "Atenção: Esta reportagem tem mais de 7 dias. Verifique o arquivo para desdobramentos mais recentes." : "",
     authorialBody,
     mediaKind: story.hasCapturedPhoto ? "foto-captada" : "ilustracao-editorial",
     imageUrl: story.imageUrl || `/api/articles/${encodeURIComponent(slug)}/illustration.svg`,
+    imageCredit: story.imageCredit || (story.hasCapturedPhoto ? `Foto captada / ${story.sourceName || "Catálogo CZS"}` : "Ilustração Editorial Vetorial • Catálogo CZS"),
     factCheck: {
       status: inconsistencies.length > 0 ? "divergencia-entre-jornais" : story.isOriginal ? "original-verificado" : "fato-checado",
       label:
@@ -595,17 +778,18 @@ function buildAuthorialNytDossier(story = {}, allStories = [], options = {}) {
       sourcesChecked
     },
     inconsistencies,
+    headlinesComparison,
+    openQuestions: buildOpenQuestions(story),
+    glossary,
+    timeline,
+    errata: story.updatedAt ? `Matéria revisada e atualizada pela Redação CZS em ${formatPtDate(story.updatedAt)}.` : "",
     updatedAt: new Date().toISOString()
   };
 
+  dossierMemoryCache.set(slug, dossier);
   if (cacheFile) {
-    try {
-      cache[slug] = dossier;
-      fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
-      fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), "utf8");
-    } catch (_e) {
-      // ignore disk errors
-    }
+    cache[slug] = dossier;
+    writeJsonAtomic(cacheFile, cache);
   }
 
   return dossier;
@@ -668,6 +852,7 @@ async function enrichDossierWithAi(story = {}, currentDossier = {}, aiCallFn, da
       updatedAt: new Date().toISOString()
     };
 
+    dossierMemoryCache.set(currentDossier.slug, updated);
     if (dataDir) {
       const cacheFile = path.join(dataDir, "editorial-dossiers.json");
       let cache = {};
@@ -677,7 +862,7 @@ async function enrichDossierWithAi(story = {}, currentDossier = {}, aiCallFn, da
         } catch (_e) {}
       }
       cache[currentDossier.slug] = updated;
-      fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), "utf8");
+      writeJsonAtomic(cacheFile, cache);
     }
     return updated;
   } catch (_err) {
@@ -705,30 +890,35 @@ function wrapSvgLines(text = "", maxChars = 42, maxLines = 3) {
   return lines;
 }
 
-function buildEditorialIllustrationSvg(story = {}) {
+function buildEditorialIllustrationSvg(story = {}, requestedMotif = "") {
   const category = cleanText(story.category || "Reportagem CZS").toUpperCase();
   const title = cleanText(story.title || "Catálogo Cruzeiro do Sul");
   const source = cleanText(story.sourceName || "Redação Catálogo CZS").toUpperCase();
   const date = cleanText(story.date || "18 NOV 2026").toUpperCase();
   const combined = `${category} ${title}`.toLowerCase();
 
-  let motif = "city";
+  let motif = ["justice", "river", "health", "education", "economy", "city"].includes(requestedMotif || story.illustrationMotif)
+    ? (requestedMotif || story.illustrationMotif)
+    : "city";
   let accent = "#8b1e1e";
-  if (/pol[ií]cia|justi|delegacia|crime|seguran|pris|apreen/i.test(combined)) {
-    motif = "justice";
-    accent = "#7c1d1d";
-  } else if (/rio|jurua|clima|chuva|deslizamento|ambiente|floresta|natureza/i.test(combined)) {
-    motif = "river";
-    accent = "#1b4332";
-  } else if (/sa[uú]de|hospital|vacina|surto|catapora|maternidade/i.test(combined)) {
-    motif = "health";
-    accent = "#7f1d1d";
-  } else if (/educa|escola|aluno|faculdade|aula|universidade/i.test(combined)) {
-    motif = "education";
-    accent = "#1e3a5f";
-  } else if (/economia|emprego|vaga|feir[aã]o|neg[oó]cio|rural|produ/i.test(combined)) {
-    motif = "economy";
-    accent = "#5c3d1e";
+
+  if (!requestedMotif && !story.illustrationMotif) {
+    if (/pol[ií]cia|justi|delegacia|crime|seguran|pris|apreen/i.test(combined)) {
+      motif = "justice";
+      accent = "#7c1d1d";
+    } else if (/rio|jurua|clima|chuva|deslizamento|ambiente|floresta|natureza/i.test(combined)) {
+      motif = "river";
+      accent = "#1b4332";
+    } else if (/sa[uú]de|hospital|vacina|surto|catapora|maternidade/i.test(combined)) {
+      motif = "health";
+      accent = "#7f1d1d";
+    } else if (/educa|escola|aluno|faculdade|aula|universidade/i.test(combined)) {
+      motif = "education";
+      accent = "#1e3a5f";
+    } else if (/economia|emprego|vaga|feir[aã]o|neg[oó]cio|rural|produ/i.test(combined)) {
+      motif = "economy";
+      accent = "#5c3d1e";
+    }
   }
 
   const motifSvg = {
@@ -811,6 +1001,10 @@ module.exports = {
   areStoriesSameEvent,
   passesEditorialQualityGate,
   isCapturedRealPhoto,
+  detectMunicipality,
+  detectGlossary,
+  invalidateDossierCache,
+  writeJsonAtomic,
   loadPublishedEditorArticles,
   mergeEditorAndDeduplicateReplicas,
   detectCrossOutletInconsistencies,

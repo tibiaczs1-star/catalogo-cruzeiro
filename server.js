@@ -18430,12 +18430,30 @@ async function handleApi(req, res, pathname, searchParams) {
     if (req.method === "GET" && action === "illustration.svg") {
       const all = getUnifiedStories();
       const story = findArticleBySlug(rawSlug, all) || { slug: rawSlug, title: rawSlug.replace(/-/g, " "), category: "Reportagem CZS" };
-      const svg = nytEditorialEngine.buildEditorialIllustrationSvg(story);
+      const motif = searchParams.get("motif") || "";
+      const svg = nytEditorialEngine.buildEditorialIllustrationSvg(story, motif);
+      const etag = "W/\"" + Buffer.byteLength(svg) + "-" + rawSlug.slice(0, 24) + "\"";
+      if (req.headers["if-none-match"] === etag) {
+        res.writeHead(304);
+        return res.end();
+      }
       res.writeHead(200, {
         "Content-Type": "image/svg+xml; charset=utf-8",
-        "Cache-Control": "public, max-age=3600"
+        "Cache-Control": "public, max-age=3600",
+        ETag: etag
       });
       return res.end(svg);
+    }
+
+    if (req.method === "POST" && action === "comments" && parts[2] === "upvote") {
+      const body = await parseBody(req);
+      const comments = readJson(path.join(DATA_DIR, "comments.json"), []);
+      const list = Array.isArray(comments) ? comments : [];
+      const target = list.find((c) => c && c.id === body.id);
+      if (!target) return sendJson(res, 404, { ok: false, error: "Comentário não encontrado." });
+      target.upvotes = Number(target.upvotes || 0) + 1;
+      nytEditorialEngine.writeJsonAtomic(path.join(DATA_DIR, "comments.json"), list);
+      return sendJson(res, 200, { ok: true, id: target.id, upvotes: target.upvotes });
     }
 
     if (req.method === "GET" && action === "comments") {
@@ -18452,6 +18470,9 @@ async function handleApi(req, res, pathname, searchParams) {
           contributionType: c.contributionType || "relato",
           badge: nytEditorialEngine.cleanText(c.badge || "Cidadão local").slice(0, 80),
           message: nytEditorialEngine.cleanText(c.message || c.text || "").slice(0, 1200),
+          evidenceUrl: String(c.evidenceUrl || "").slice(0, 300),
+          upvotes: Number(c.upvotes || 0),
+          verifiedByEditor: Boolean(c.verifiedByEditor),
           createdAt: c.createdAt || new Date().toISOString()
         }));
       return sendJson(res, 200, { ok: true, slug: rawSlug, total: filtered.length, items: filtered });
@@ -18483,6 +18504,9 @@ async function handleApi(req, res, pathname, searchParams) {
         badge: badgeMap[contributionType] + " • " + neighborhood,
         message,
         text: message,
+        evidenceUrl: /^https?:\/\//i.test(String(body.evidenceUrl || "").trim()) ? String(body.evidenceUrl).trim().slice(0, 300) : "",
+        upvotes: 0,
+        verifiedByEditor: false,
         status: "published",
         createdAt: new Date().toISOString()
       };
@@ -22427,7 +22451,7 @@ const server = http.createServer(async (req, res) => {
     return domPedroIntegration.handleRequest(req, res, pathname);
   }
 
-  if (pathname.startsWith("/api/") || pathname === "/health") {
+  if (pathname.startsWith("/api/") || pathname === "/health" || pathname === "/healthz" || pathname === "/rss.xml") {
     return handleApi(req, res, pathname, requestUrl.searchParams);
   }
 

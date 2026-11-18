@@ -86,12 +86,24 @@ function textEditor(panel, titleInput) {
   const previewBody=element('div','',preview);
   const statsBar=element('div','',box); statsBar.className='editor-stats';
   const DRAFT_KEY='czs_editor_draft_v1';
+  const HISTORY_KEY='czs_editor_history_v1';
+  function pushHistorySnap() {
+    if(!textarea.value.trim()) return;
+    try {
+      const h=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
+      if(!h.length || h[h.length-1].content!==textarea.value) {
+        h.push({title:titleInput?.value||'',content:textarea.value,at:Date.now()});
+        localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(-5)));
+      }
+    } catch {}
+  }
   function refresh(saveDraft=true) {
     previewBody.replaceChildren();
     formattedContent(previewBody,textarea.value);
     const words=(textarea.value.trim()?textarea.value.trim().split(/\s+/).length:0);
     const mins=Math.max(1,Math.ceil(words/180));
-    statsBar.textContent=`${words} palavra(s) · ${textarea.value.length}/40000 caracteres · ~${mins} min de leitura · Rascunho salvo localmente`;
+    const nums=(textarea.value.match(/R\$\s*[\d.,]+|\b\d+(?:[.,]\d+)?%|\b\d{1,4}\/\d{2,4}\b/g)||[]);
+    statsBar.textContent=`${words} palavra(s) · ${textarea.value.length}/40000 chars · ~${mins} min · Fact-Lint: ${nums.length} dado(s) numérico(s) [${nums.slice(0,4).join(', ')}]`;
     if(saveDraft && (textarea.value.trim() || titleInput?.value.trim())) {
       try { localStorage.setItem(DRAFT_KEY, JSON.stringify({title:titleInput?.value||'',content:textarea.value,savedAt:Date.now()})); } catch {}
     }
@@ -126,6 +138,18 @@ function textEditor(panel, titleInput) {
   control('Lista numerada',()=>wrap('\n\n1. ','\n\n','item'));
   control('Citação',()=>wrap('\n\n> ','\n\n','citação'));
   control('Bloco Essencial',()=>wrap('\n\n> **O essencial:** ','\n\n','Resumo direto em 1 frase.'));
+  control('Quadro Comparativo',()=>{
+    pushHistorySnap();
+    wrap('\n\n## Comparação de Dados\n- **Dado Oficial / CZS:** \n- **O que outros jornais publicaram:** \n- **Veredito da Checagem:** ','\n\n','');
+  });
+  control('⏪ Desfazer versão',()=>{
+    try {
+      const h=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
+      const prev=h.pop();
+      localStorage.setItem(HISTORY_KEY,JSON.stringify(h));
+      if(prev){ textarea.value=prev.content; if(titleInput&&prev.title)titleInput.value=prev.title; refresh(true); status.textContent='Versão anterior restaurada.'; }
+    } catch {}
+  });
   const colorLabel=element('label','Cor do texto',toolbar); colorLabel.className='editor-color';
   const color=element('input','',colorLabel); color.type='color'; color.value='#b91c1c'; color.setAttribute('aria-label','Escolher cor do texto');
   let savedStart=0,savedEnd=0;
@@ -328,6 +352,15 @@ async function render() {
         element('p',c.message||c.text||'',card);
         const vBtn=element('button',c.verifiedByEditor?'Remover selo de verificado':'✓ Destacar como Relato Verificado',card);
         vBtn.onclick=async()=>{await api('/comentarios/moderar',{id:c.id,action:'verify'});await render();};
+        const pBtn=element('button','📝 Transformar Relato em Pauta',card);
+        pBtn.onclick=()=>{
+          localStorage.setItem('czs_editor_draft_v1',JSON.stringify({
+            title:'Moradores de '+(c.neighborhood||'Cruzeiro do Sul')+' relatam situação sobre '+(c.articleSlug||'demanda comunitária'),
+            content:'Relato cidadão enviado por '+(c.name||'Morador')+' ('+(c.neighborhood||'Cruzeiro do Sul')+'):\n"'+(c.message||c.text||'')+'"\n\n[Clique em "🔎 Estudar Fontes & Incoerências (NYT)" para estruturar a reportagem]',
+            savedAt:Date.now()
+          }));
+          tab='Nova matéria'; render();
+        };
         const dBtn=element('button','🗑️ Excluir comentário',card);
         dBtn.onclick=async()=>{await api('/comentarios/moderar',{id:c.id,action:'delete'});await render();};
       });
@@ -398,7 +431,14 @@ async function render() {
   },user.chief?'Publicar agora':'Enviar para revisão');
   const titleInput=field(submission.panel,'Título','title'); titleInput.maxLength=160;
   const catSelect=field(submission.panel,'Editoria / Categoria','category'); catSelect.required=false; catSelect.placeholder='Ex.: Cruzeiro do Sul, Polícia, Saúde, Educação, Economia'; catSelect.value='Cruzeiro do Sul';
+  const munInput=field(submission.panel,'Município / Localidade','municipality'); munInput.required=false; munInput.value='Cruzeiro do Sul';
   const nutInput=field(submission.panel,'Por que importa (Nut Graph — opcional)','nutGraph'); nutInput.required=false; nutInput.maxLength=400; nutInput.placeholder='1 frase explicando o impacto direto para o morador de Cruzeiro do Sul / Juruá';
+  const factInput=field(submission.panel,'Fato Verificado Principal (opcional — destaque no quadro de checagem)','customVerifiedFact'); factInput.required=false; factInput.maxLength=400;
+  const incInput=field(submission.panel,'Apontar Incoerência / Divergência de outros jornais (opcional)','customInconsistency'); incInput.required=false; incInput.maxLength=500;
+  const creditInput=field(submission.panel,'Crédito da Foto / Legenda (opcional)','imageCredit'); creditInput.required=false; creditInput.maxLength=160;
+  const motifWrap=element('label','Tema da Ilustração Editorial NYT (usado quando sem foto)',submission.panel);
+  const motifSelect=element('select','',motifWrap); motifSelect.name='illustrationMotif';
+  [['Automático pelo tema',''],['Cidade & Infraestrutura','city'],['Justiça & Segurança','justice'],['Rio Juruá & Clima','river'],['Saúde Pública','health'],['Educação & Ciência','education'],['Economia & Trabalho','economy']].forEach(([l,v])=>motifSelect.add(new Option(l,v)));
   const importBar=element('div','',submission.panel); importBar.className='editor-ai-bar';
   const urlToImport=element('input','',importBar); urlToImport.type='url'; urlToImport.placeholder='Cole o link (https://...) de outro jornal para importar e checar fatos'; urlToImport.style.flex='1';
   const importBtn=element('button','🔗 Importar Fatos da URL',importBar); importBtn.type='button';

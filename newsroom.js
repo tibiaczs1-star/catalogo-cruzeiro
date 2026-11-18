@@ -209,9 +209,17 @@ module.exports = function newsroom(directory, options = {}) {
         }
         const id=crypto.randomUUID();
         const category=String(body.category||'Redação CZS').trim().slice(0,60)||'Redação CZS';
+        const municipality=String(body.municipality||'Cruzeiro do Sul').trim().slice(0,60)||'Cruzeiro do Sul';
         const nutGraph=String(body.nutGraph||'').trim().slice(0,500);
         const imageCredit=String(body.imageCredit||'').trim().slice(0,160);
-        state.articles.push({id,title,content,category,nutGraph,imageCredit,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
+        const customVerifiedFact=String(body.customVerifiedFact||'').trim().slice(0,400);
+        const customInconsistency=String(body.customInconsistency||'').trim().slice(0,500);
+        const illustrationMotif=String(body.illustrationMotif||'').trim().slice(0,30);
+        const scheduledFor=body.scheduledFor?String(body.scheduledFor).trim().slice(0,40):'';
+        const pinned=Boolean(body.pinned);
+        const urgent=Boolean(body.urgent);
+        const exclusive=Boolean(body.exclusive);
+        state.articles.push({id,title,content,category,municipality,nutGraph,imageCredit,customVerifiedFact,customInconsistency,illustrationMotif,scheduledFor,pinned,urgent,exclusive,level,media,mediaType:media?.type,author:user.name,status:chief?'Publicada':'Em revisão',created:new Date().toISOString(),published:chief?new Date().toISOString():undefined});
         save(state);
         return send(201,{ok:true,id});
       }
