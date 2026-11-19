@@ -377,8 +377,13 @@ app.post('/api/auth/demo', (req, res) => {
 });
 app.post('/api/auth/login', async (req, res, next) => {
   try {
-  const school = cleanText(req.body.schoolCode, 30).toUpperCase();
-  const registration = cleanText(req.body.registration, 50);
+  const rawSchool = cleanText(req.body.schoolCode, 30).toUpperCase();
+  const rawReg = cleanText(req.body.registration, 50);
+  const rawPass = String(req.body.password || '');
+  const normAdmin = v => ['ADMIN', 'AMDIN'].includes(String(v || '').trim().toUpperCase());
+  const school = (demoMode && normAdmin(rawSchool)) ? 'ADMIN' : rawSchool;
+  const registration = (demoMode && normAdmin(rawReg)) ? 'admin' : rawReg;
+  const password = (demoMode && normAdmin(rawPass)) ? 'admin' : rawPass;
   if (school === 'VIVA001' && registration.toUpperCase() === 'ADMIN001') return res.status(401).json({ error: 'Escola, matrícula ou senha inválida.' });
   const allowDemoSchoolAlias = demoMode && ['ADMIN', 'VIVA001', 'CMDPII', 'DPII', 'DOMPEDRO', 'DOMPEDROII'].includes(school);
   const user = allowDemoSchoolAlias
@@ -386,7 +391,7 @@ app.post('/api/auth/login', async (req, res, next) => {
         WHERE s.id=1 AND LOWER(u.registration)=LOWER(?)`).get(registration)
     : db.prepare(`SELECT u.*,s.name school_name FROM users u JOIN schools s ON s.id=u.school_id
         WHERE UPPER(s.code)=? AND LOWER(u.registration)=LOWER(?)`).get(school, registration);
-  if (!user || user.role === 'student' || !user.active || !(await passwordMatchesAsync(String(req.body.password || ''), user.password_hash))) return res.status(401).json({ error: 'Escola, matrícula ou senha inválida.' });
+  if (!user || user.role === 'student' || !user.active || !(await passwordMatchesAsync(password, user.password_hash))) return res.status(401).json({ error: 'Escola, matrícula ou senha inválida.' });
   res.json(makeSession(user));
   } catch (error) { next(error); }
 });

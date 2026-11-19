@@ -3,7 +3,7 @@ if (localStorage.getItem('portalTheme') !== 'light') document.body.classList.add
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const native=!!window.Capacitor?.isNativePlatform?.()||location.protocol==='file:'||location.hostname==='localhost'&&location.protocol==='https:';
 let base=native?(localStorage.getItem('escolaVivaApi')||''):(location.pathname.startsWith('/dom-pedro-ii')?'/dom-pedro-ii':''),token=localStorage.getItem('escolaVivaTeamToken')||'',user;
-$('urlLabel').hidden=!native;$('server').value=base;
+$('urlLabel').hidden=!native;$('server').disabled=!native;$('server').value=native?base:'';
 const say=text=>{$('message').textContent=text;};
 async function api(path,body,method='POST'){const r=await fetch(base+path,{method:body===undefined?'GET':method,headers:{Authorization:'Bearer '+token,...(body!==undefined?{'Content-Type':'application/json'}:{})},body:body===undefined?undefined:JSON.stringify(body)});const d=await r.json().catch(()=>({}));if(r.status===401){token='';localStorage.removeItem('escolaVivaTeamToken');$('login').hidden=false;$('workspace').hidden=true;}if(!r.ok)throw Error(d.error||'Não foi possível concluir a operação.');return d;}
 const card=(title,body)=>`<section class="team-card"><h3>${esc(title)}</h3>${body}</section>`;
@@ -75,6 +75,7 @@ async function load(){
 }
 async function submit(path,body,method){try{await api(path,body,method);say('Salvo com sucesso.');await load();}catch(e){say(e.message);}}
 $('login').onsubmit=async e=>{e.preventDefault();try{if(native){base=$('server').value.trim().replace(/\/$/,'');const u=new URL(base);if(!['http:','https:'].includes(u.protocol)||u.username||u.password)throw Error('Servidor inválido');localStorage.setItem('escolaVivaApi',base);}const fields=Object.fromEntries(new FormData(e.target));const d=await api('/api/auth/login',fields);token=d.token;user=d.user;if(user.role==='student'){localStorage.setItem('escolaVivaToken',token);location.href='prototipo.html';return;}localStorage.setItem('escolaVivaTeamToken',token);await load();say('Acesso confirmado.');}catch(e){say(e.message);}};
+if($('quickAdminBtn'))$('quickAdminBtn').onclick=()=>{const f=$('login');if(f){f.elements.schoolCode.value='admin';f.elements.registration.value='admin';f.elements.password.value='admin';f.requestSubmit();}};
 $('refresh').onclick=()=>load().catch(e=>say(e.message));$('logout').onclick=async()=>{try{await api('/api/auth/logout',{});}catch{}token='';user=null;localStorage.removeItem('escolaVivaTeamToken');$('workspace').hidden=true;$('login').hidden=false;say('Sessão encerrada.');};
 if(token)load().catch(e=>say(e.message));
 })();
