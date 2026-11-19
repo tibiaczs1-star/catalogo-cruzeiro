@@ -22,7 +22,7 @@
 <script defer src="assets/accessibility.js"></script>
 </head>
 <body class="cinema-mode">
-<script defer src="assets/loading-intro.js"></script>
+<script defer src="assets/loading-intro.js?v=46"></script>
 <div class="app" inert>
   <a class="skip-main" href="#pageTitle">Ir para o conteúdo</a>
   <div class="scrim" id="scrim"></div>
@@ -209,6 +209,7 @@
                 <span class="rec-time" id="recordTime">0:00</span>
               </div>
               <div class="record-status" id="recordStatus" role="status">Toque para gravar</div>
+              <button type="button" id="unlockMicBtn" class="btn ghost sm" style="min-height:36px;">🎙️ Liberar microfone</button>
               <button type="button" id="discardAudio" class="btn ghost sm" hidden><img class="action-icon" src="assets/firehouse/mic.webp" width="24" height="24" alt="" aria-hidden="true"><span>Remover áudio</span></button>
               <span class="pill soft">🔒 Áudio protegido</span>
             </div>
@@ -1403,20 +1404,20 @@
   /* ---------- Navegação ---------- */
   const composer = $('subject').closest('.grid');
   let composing = false, submitting = false;
+  let persistentDemoActive = false, demoSessionPromise = null;
   function lessonState(message, writing) {
-    composer.style.display = writing ? '' : 'none';
+    composer.style.display = '';
     $('lessonState').textContent = message;
-    $('newQuestion').hidden = writing || submitting;
+    $('newQuestion').hidden = !message || submitting;
   }
   $('newQuestion').onclick = () => {
     composing = true;
-    $('lessonActions').hidden = true;
-    $('reforcoFeedback').style.display = 'none';
-    $('reforcoAudio').pause();
-    if ($('audioPlayer')) $('audioPlayer').hidden = true;
+    if ($('doubt')) $('doubt').value = '';
+    if ($('discardAudio') && !$('discardAudio').hidden) $('discardAudio').click();
     lessonState('', true);
     if ($('doubtChecklist')) $('doubtChecklist').hidden = true;
-    $('subject').focus();
+    composer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if ($('doubt')) $('doubt').focus();
   };
   /* ---------- Caderno Persistente no Aparelho ("App com Memória") ---------- */
   function readNotebook() {
@@ -1489,10 +1490,12 @@
   let displayedLesson = '';
   let checkingLesson = false;
   async function restoreLesson() {
+    composer.style.display = '';
     renderSavedNotebook();
-    if (!token) {
+    const busyComposing = Boolean(submitting || mediaRecorder?.state === 'recording' || recordedAudio || $('doubt')?.value.trim());
+    if (!token && !persistentDemoActive) {
       const localSaved = localStorage.getItem('dpii_last_lesson');
-      if (localSaved && !displayedLesson) {
+      if (localSaved && !displayedLesson && !busyComposing) {
         try {
           const parsed = JSON.parse(localSaved);
           if (parsed?.answer) presentLesson(parsed, { isNewAnswer: false });
@@ -1500,7 +1503,7 @@
       }
       return;
     }
-    if (checkingLesson) return;
+    if (checkingLesson || busyComposing) return;
     const session = token;
     checkingLesson = true;
     try {
@@ -1515,7 +1518,7 @@
       const row = doubts && doubts[0];
       if (!row) {
         const localSaved = localStorage.getItem('dpii_last_lesson');
-        if (localSaved && !displayedLesson) {
+        if (localSaved && !displayedLesson && !busyComposing) {
           try {
             const parsed = JSON.parse(localSaved);
             if (parsed?.answer) presentLesson(parsed, { isNewAnswer: false });
@@ -1538,7 +1541,8 @@
           dot.remove();
         }
       });
-      if (!reforcoActive || composing || submitting || session !== token || displayedLesson === session + '/' + row.id + '/' + row.status + '/' + (row.redo_count || 0) + '/' + (row.confirmed_at || '')) return;
+      const stillBusy = Boolean(submitting || mediaRecorder?.state === 'recording' || recordedAudio || $('doubt')?.value.trim());
+      if (!reforcoActive || stillBusy || displayedLesson === (token || 'demo') + '/' + row.id + '/' + row.status + '/' + (row.redo_count || 0) + '/' + (row.confirmed_at || '')) return;
       let parsedLesson = null;
       try { parsedLesson = row.lesson_json ? JSON.parse(row.lesson_json) : null; } catch {}
       presentLesson({...row, lesson: parsedLesson,
@@ -1637,8 +1641,7 @@
   }
 
   async function downloadAuthedFile(path, filename) {
-    const response = await fetch(API_BASE + path, {
-      headers: { Authorization: 'Bearer ' + token },
+    const response = await fetchAuthed(path, {
       signal: AbortSignal.timeout(125000)
     });
     if (!response.ok) throw new Error('Falha ao baixar arquivo (' + response.status + ')');
@@ -1667,7 +1670,7 @@
   }
 
   function presentLesson(result, opts = {}) {
-    displayedLesson = token + '/' + result.id + '/' + result.status + '/' + (result.redo_count || 0) + '/' + (result.confirmed_at || '');
+    displayedLesson = (token || 'demo') + '/' + result.id + '/' + result.status + '/' + (result.redo_count || 0) + '/' + (result.confirmed_at || '');
     const done = Boolean(result.answer);
     setChecklistStage(
       done ? 'done' : 'processing',
@@ -1970,6 +1973,16 @@
       const replayBtn = $('audioDoneReplay');
       if (replayBtn) replayBtn.onclick = () => { closeModal('audioDoneModal'); (audio.dataset.mode === 'full' ? playFull : play)?.click(); };
 
+      const applyVoiceEngineHeader = response => {
+        const engine = response?.headers?.get?.('X-Voice-Engine') || '';
+        if (!$('reforcoVoiceBadge') || !engine) return;
+        if (engine === 'omnivoice-clone') {
+          $('reforcoVoiceBadge').textContent = '🎙️ Voz Clonada Real Confirmada · Profª Naira (OmniVoice)';
+        } else {
+          $('reforcoVoiceBadge').textContent = '🎧 Profª Naira · Fallback Neural (' + (engine === 'edge-cinema' ? 'Edge Cinema' : engine.toUpperCase()) + ')';
+        }
+      };
+
       play.onclick = async () => {
         play.disabled = true;
         const requestedStep = currentStep;
@@ -1978,10 +1991,11 @@
         try {
           if (!audio.hasAttribute('src') || audio.dataset.audioKey !== cacheKey) {
             const q = (result.lesson ? '?step=' + currentStep + '&' : '?') + 'voice=' + encodeURIComponent(vId);
-            const response = await fetch(API_BASE + '/api/doubts/' + result.id + '/speak' + q, {
-              headers: { Authorization: 'Bearer ' + token }, signal: AbortSignal.timeout(125000)
+            const response = await fetchAuthed('/api/doubts/' + result.id + '/speak' + q, {
+              signal: AbortSignal.timeout(125000)
             });
             if (!response.ok) throw new Error('Voz indisponível');
+            applyVoiceEngineHeader(response);
             const blob = await response.blob();
             if (requestedStep !== currentStep || !$('reforco').classList.contains('active')) return;
             resetAudio();
@@ -2007,10 +2021,11 @@
           const cacheKey = 'full:' + vId + ':' + (result.redo_count || 0);
           try {
             if (!audio.hasAttribute('src') || audio.dataset.audioKey !== cacheKey) {
-              const response = await fetch(API_BASE + '/api/doubts/' + result.id + '/speak?full=1&voice=' + encodeURIComponent(vId), {
-                headers: { Authorization: 'Bearer ' + token }, signal: AbortSignal.timeout(125000)
+              const response = await fetchAuthed('/api/doubts/' + result.id + '/speak?full=1&voice=' + encodeURIComponent(vId), {
+                signal: AbortSignal.timeout(125000)
               });
               if (!response.ok) throw new Error('Voz indisponível');
+              applyVoiceEngineHeader(response);
               const blob = await response.blob();
               if (!$('reforco').classList.contains('active')) return;
               resetAudio();
@@ -2044,7 +2059,11 @@
     setDrawer(false);
     window.scrollTo(0, 0);
     $('pageTitle').focus({preventScroll:true});
-    if (id === 'reforco') restoreLesson();
+    if (id === 'reforco') {
+      composer.style.display = '';
+      restoreLesson();
+      if (typeof tryAutoUnlockMic === 'function') tryAutoUnlockMic();
+    }
     else { $('reforcoAudio').pause(); window.speechSynthesis?.cancel(); }
     if (id === 'atividades') loadTasks().catch(() => {});
     if (id === 'materiais') loadMaterials().catch(() => {});
@@ -2077,26 +2096,68 @@
     $('pageTitle').focus();
   };
 
-  /* ---------- API ---------- */
+  /* ---------- API & Sessão Demo Persistente ---------- */
+  function syncLogoutButtonLabel() {
+    const btn = $('studentLogout');
+    if (!btn) return;
+    const sp = btn.querySelector('span') || btn;
+    sp.textContent = (persistentDemoActive && localStorage.getItem('dpii_demo_mode') === '1') ? 'Trocar conta' : 'Sair';
+  }
+
+  async function ensurePersistentDemoSession() {
+    if (demoSessionPromise) return demoSessionPromise;
+    demoSessionPromise = (async () => {
+      const demoRes = await fetch(API_BASE + '/api/auth/demo', { method: 'POST', credentials: 'same-origin' });
+      if (!demoRes.ok) throw new Error('Aluno de demonstração indisponível.');
+      const demoData = await demoRes.json();
+      if (demoData?.token) {
+        token = demoData.token;
+        localStorage.setItem('escolaVivaToken', token);
+        localStorage.setItem('dpii_demo_mode', '1');
+        sessionStorage.removeItem('dpii_manual_login');
+      }
+      if (demoData?.user) applyUser(demoData.user);
+      closeModal('loginModal');
+      syncLogoutButtonLabel();
+      return demoData;
+    })().finally(() => { demoSessionPromise = null; });
+    return demoSessionPromise;
+  }
+
+  async function fetchAuthed(path, options = {}) {
+    const useDemo = (persistentDemoActive || localStorage.getItem('dpii_demo_mode') === '1') && sessionStorage.getItem('dpii_manual_login') !== '1';
+    if (!token && useDemo) {
+      try { await ensurePersistentDemoSession(); } catch {}
+    }
+    const headers = new Headers(options.headers || {});
+    if (token) headers.set('Authorization', 'Bearer ' + token);
+    let response = await fetch(API_BASE + path, { credentials: 'same-origin', ...options, headers });
+    if (response.status === 401 && useDemo && !options._retried) {
+      try {
+        await ensurePersistentDemoSession();
+        const retryHeaders = new Headers(options.headers || {});
+        if (token) retryHeaders.set('Authorization', 'Bearer ' + token);
+        response = await fetch(API_BASE + path, { credentials: 'same-origin', ...options, headers: retryHeaders, _retried: true });
+      } catch {}
+    }
+    return response;
+  }
+
   async function api(path, options = {}) {
+    const useDemo = (persistentDemoActive || localStorage.getItem('dpii_demo_mode') === '1') && sessionStorage.getItem('dpii_manual_login') !== '1';
+    if (!token && useDemo && path !== '/api/auth/demo' && path !== '/api/health') {
+      try { await ensurePersistentDemoSession(); } catch {}
+    }
     const headers = new Headers(options.headers || {});
     if (token) headers.set('Authorization', 'Bearer ' + token);
     if (options.body && !(options.body instanceof FormData)) headers.set('Content-Type', 'application/json');
-    const response = await fetch(API_BASE + path, { ...options, headers });
+    const response = await fetch(API_BASE + path, { credentials: 'same-origin', ...options, headers });
     const data = response.status === 204 ? {} : await response.json().catch(() => ({}));
     if (response.status === 401) {
-      if (localStorage.getItem('dpii_demo_mode') === '1' && !options._retried && path !== '/api/auth/demo') {
+      if (useDemo && !options._retried && path !== '/api/auth/demo') {
         try {
-          const demoRes = await fetch(API_BASE + '/api/auth/demo', { method: 'POST' });
-          if (demoRes.ok) {
-            const demoData = await demoRes.json();
-            if (demoData?.token) {
-              token = demoData.token;
-              localStorage.setItem('escolaVivaToken', token);
-              if (demoData.user) applyUser(demoData.user);
-              return api(path, { ...options, _retried: true });
-            }
-          }
+          await ensurePersistentDemoSession();
+          return api(path, { ...options, _retried: true });
         } catch {}
       }
       token = ''; localStorage.removeItem('escolaVivaToken');
@@ -2136,23 +2197,43 @@
   $('serverUrl').addEventListener('change', () => { try { configureServer(); loadStudentGrades(); } catch {} });
   loadStudentGrades();
   async function refreshDemoHint() {
-    if (nativeApp && !API_BASE) return;
-    try { $('demoHint').hidden = (await api('/api/health')).demoMode !== true; } catch {}
+    if (nativeApp && !API_BASE) return null;
+    try {
+      const health = await api('/api/health');
+      persistentDemoActive = health.persistentDemo === true;
+      $('demoHint').hidden = health.demoMode !== true;
+      syncLogoutButtonLabel();
+      return health;
+    } catch { return null; }
   }
-  $('fillDemoStudent').onclick = () => {
-    localStorage.setItem('dpii_demo_mode', '1');
-    $('firstName').value = 'admin'; $('secondName').value = 'admin';
-    $('studentGrade').value = '8º ano'; $('studentPassword').value = 'admin';
-    if (requestingPassword) $('recoveryMode').click();
-    $('studentLogin').requestSubmit();
+  $('fillDemoStudent').onclick = async () => {
+    const btn = $('fillDemoStudent');
+    if (btn) btn.disabled = true;
+    try {
+      configureServer();
+      sessionStorage.removeItem('dpii_manual_login');
+      await ensurePersistentDemoSession();
+      notify('Acesso confirmado · Aluno Teste persistente!');
+      await loadAll();
+    } catch (err) {
+      if ($('loginError')) $('loginError').textContent = err.message || 'Falha ao entrar no modo demonstração.';
+    } finally {
+      if (btn) btn.disabled = false;
+    }
   };
-  refreshDemoHint();
   $('studentLogout').onclick = async () => {
-    if (!token) return;
     $('studentLogout').disabled = true;
     try { await api('/api/auth/logout', {method:'POST', signal:AbortSignal.timeout(4000)}); } catch {}
+    token = '';
     localStorage.removeItem('escolaVivaToken');
     localStorage.removeItem('dpii_demo_mode');
+    if (persistentDemoActive) {
+      sessionStorage.setItem('dpii_manual_login', '1');
+      $('studentLogout').disabled = false;
+      syncLogoutButtonLabel();
+      openModal('loginModal');
+      return;
+    }
     location.reload();
   };
   $('recoveryMode').onclick = () => {
@@ -2422,9 +2503,8 @@
           let response;
           if (isNairaReal) {
             response = await fetch('assets/audio/professora_naira.mp3');
-          } else if (token) {
-            response = await fetch(API_BASE + '/api/teachers/' + p.id + '/speak', {
-              headers: { Authorization: 'Bearer ' + token },
+          } else if (token || persistentDemoActive) {
+            response = await fetchAuthed('/api/teachers/' + p.id + '/speak', {
               signal: AbortSignal.timeout(45000)
             });
           }
@@ -2590,8 +2670,7 @@
         btn.disabled = true;
         try {
           if (!audio.hasAttribute('src') || audio.dataset.voiceKey !== vId) {
-            const res = await fetch(API_BASE + '/api/materials/' + material.id + '/speak?voice=' + encodeURIComponent(vId), {
-              headers: { Authorization: 'Bearer ' + token },
+            const res = await fetchAuthed('/api/materials/' + material.id + '/speak?voice=' + encodeURIComponent(vId), {
               signal: AbortSignal.timeout(125000)
             });
             if (!res.ok) throw new Error('Voz indisponível');
@@ -2859,24 +2938,180 @@
   };
 
   function audioFilename(blob) {
-    const mime = blob.type.split(';')[0];
+    const mime = (blob?.type || '').split(';')[0];
     const extension = { 'audio/mp4': 'm4a', 'audio/ogg': 'ogg', 'audio/wav': 'wav' }[mime] || 'webm';
     return 'duvida.' + extension;
   }
+
+  function pickRecorderMimeType() {
+    if (typeof MediaRecorder === 'undefined' || typeof MediaRecorder.isTypeSupported !== 'function') return '';
+    for (const mime of ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus', 'audio/ogg']) {
+      try { if (MediaRecorder.isTypeSupported(mime)) return mime; } catch {}
+    }
+    return '';
+  }
+
+  const unlockMicBtn = $('unlockMicBtn');
+  let micPermissionState = 'prompt';
+  let micPreRequested = false;
+  let dictationOnlyActive = false;
+
+  function updateMicBadge(state) {
+    micPermissionState = state || micPermissionState;
+    if (unlockMicBtn) {
+      if (micPermissionState === 'granted') {
+        unlockMicBtn.textContent = '✅ Microfone liberado';
+        unlockMicBtn.setAttribute('aria-pressed', 'true');
+      } else if (micPermissionState === 'denied') {
+        unlockMicBtn.textContent = '🔒 Microfone bloqueado (toque p/ ajuda)';
+        unlockMicBtn.setAttribute('aria-pressed', 'false');
+      } else {
+        unlockMicBtn.textContent = '🎙️ Liberar microfone';
+        unlockMicBtn.setAttribute('aria-pressed', 'false');
+      }
+    }
+    if (recordStatus && !recordedAudio && mediaRecorder?.state !== 'recording' && !dictationOnlyActive) {
+      if (micPermissionState === 'granted') {
+        recordStatus.textContent = 'Microfone liberado · Toque para gravar';
+      }
+    }
+  }
+
+  async function checkMicPermission() {
+    try {
+      if (!navigator.permissions?.query) return;
+      const perm = await navigator.permissions.query({ name: 'microphone' });
+      updateMicBadge(perm.state);
+      perm.onchange = () => updateMicBadge(perm.state);
+    } catch {}
+  }
+
+  async function requestMicAccess({ silent = false } = {}) {
+    if (!window.isSecureContext) {
+      if (!silent) notify('O microfone exige conexão segura (HTTPS ou localhost).');
+      return false;
+    }
+    if (!navigator.mediaDevices?.getUserMedia) {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SR) {
+        updateMicBadge('granted');
+        if (!silent) notify('Ditado por voz liberado! Toque no microfone para falar.');
+        return true;
+      }
+      if (!silent) notify('Seu navegador não disponibilizou o microfone. Você pode escrever sua dúvida.');
+      return false;
+    }
+    try {
+      const probe = await navigator.mediaDevices.getUserMedia({ audio: true });
+      probe.getTracks().forEach(t => t.stop());
+      updateMicBadge('granted');
+      if (!silent) notify('🎙️ Microfone liberado e pronto para gravar sua dúvida!');
+      return true;
+    } catch (err) {
+      const name = String(err?.name || '');
+      if (name === 'NotAllowedError' || name === 'PermissionDeniedError') {
+        updateMicBadge('denied');
+        if (!silent) notify('Permissão do microfone bloqueada. Toque no ícone de cadeado da barra de endereço para permitir o microfone.');
+      } else if (name === 'NotFoundError' || name === 'DevicesNotFoundError') {
+        if (!silent) notify('Nenhum microfone foi detectado neste aparelho. Escreva sua dúvida ao lado.');
+      } else if (!silent) {
+        notify('Não foi possível liberar o microfone agora. Tente tocar no botão de gravar ou escreva sua dúvida.');
+      }
+      return false;
+    }
+  }
+
+  function tryAutoUnlockMic() {
+    if (micPermissionState === 'prompt' && !micPreRequested) {
+      micPreRequested = true;
+      requestMicAccess({ silent: true }).catch(() => {});
+    }
+  }
+
+  if (unlockMicBtn) {
+    unlockMicBtn.onclick = () => requestMicAccess({ silent: false });
+  }
+  document.addEventListener('escola:intro-end', () => {
+    checkMicPermission();
+  });
+  document.querySelector('.app')?.addEventListener('pointerdown', () => {
+    tryAutoUnlockMic();
+  }, { once: true });
 
   let activeRecognition = null, serverSttTried = false;
   discardAudio.onclick = () => {
     recordedAudio = null;
     serverSttTried = false;
     discardAudio.hidden = true;
-    recordStatus.textContent = 'Toque para gravar';
+    recordStatus.textContent = micPermissionState === 'granted' ? 'Microfone liberado · Toque para gravar' : 'Toque para gravar';
   };
 
   recordButton.onclick = async () => {
-    if (mediaRecorder?.state === 'recording') {
+    if (mediaRecorder?.state === 'recording' || dictationOnlyActive) {
       recordButton.disabled = true;
+      dictationOnlyActive = false;
       try { activeRecognition?.stop(); } catch {}
-      mediaRecorder.stop();
+      if (mediaRecorder?.state === 'recording') {
+        mediaRecorder.stop();
+      } else {
+        stopRecordIndicator();
+        recordButton.classList.remove('recording');
+        recordButton.setAttribute('aria-label', 'Gravar dúvida por voz');
+        recordButton.disabled = false;
+        sendDoubt.disabled = false;
+        discardAudio.disabled = false;
+        recordStatus.textContent = $('doubt')?.value.trim() ? 'Ditado concluído. Confira o texto antes de enviar.' : 'Toque para gravar';
+      }
+      return;
+    }
+
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if ((!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') && SR) {
+      try {
+        const box = $('doubt');
+        const baseText = box ? box.value.trim() : '';
+        let recognizedFinal = '';
+        activeRecognition = new SR();
+        activeRecognition.lang = 'pt-BR';
+        activeRecognition.continuous = true;
+        activeRecognition.interimResults = true;
+        activeRecognition.onresult = ev => {
+          let interimPart = '';
+          for (let i = ev.resultIndex; i < ev.results.length; i++) {
+            const t = ev.results[i][0]?.transcript || '';
+            if (ev.results[i].isFinal) recognizedFinal += (recognizedFinal ? ' ' : '') + t.trim();
+            else interimPart += t;
+          }
+          const spoken = [recognizedFinal, interimPart.trim()].filter(Boolean).join(' ').trim();
+          if (box) box.value = [baseText, spoken].filter(Boolean).join(' ');
+        };
+        activeRecognition.onerror = () => {};
+        activeRecognition.onend = () => {
+          if (dictationOnlyActive) {
+            dictationOnlyActive = false;
+            stopRecordIndicator();
+            recordButton.classList.remove('recording');
+            recordButton.setAttribute('aria-label', 'Gravar dúvida por voz');
+            recordStatus.textContent = box?.value.trim() ? 'Ditado pronto. Confira o texto antes de enviar.' : 'Toque para gravar';
+          }
+        };
+        dictationOnlyActive = true;
+        activeRecognition.start();
+        updateMicBadge('granted');
+        recordButton.classList.add('recording');
+        recordButton.setAttribute('aria-label', 'Parar gravação');
+        recordStatus.textContent = 'Ouvindo sua voz… fale sua dúvida e toque para concluir';
+        startRecordIndicator();
+        return;
+      } catch {}
+    }
+
+    if (!window.isSecureContext) {
+      notify('O microfone exige conexão segura (HTTPS ou localhost).');
+      return;
+    }
+    if (!navigator.mediaDevices?.getUserMedia) {
+      notify('Seu navegador não suporta gravação de áudio aqui. Escreva sua dúvida no campo ao lado.');
       return;
     }
 
@@ -2887,12 +3122,13 @@
     let stream;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      updateMicBadge('granted');
       const chunks = [];
-      const recorder = new MediaRecorder(stream);
+      const chosenMime = pickRecorderMimeType();
+      const recorder = chosenMime ? new MediaRecorder(stream, { mimeType: chosenMime }) : new MediaRecorder(stream);
       mediaRecorder = recorder;
 
       // STT Híbrido no Navegador (transcrição ao vivo em pt-BR sem gastar RAM do servidor)
-      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       const box = $('doubt');
       const baseText = box ? box.value.trim() : '';
       let recognizedFinal = '';
@@ -2903,7 +3139,7 @@
           activeRecognition.continuous = true;
           activeRecognition.interimResults = true;
           activeRecognition.onresult = ev => {
-            let finalPart = '', interimPart = '';
+            let interimPart = '';
             for (let i = ev.resultIndex; i < ev.results.length; i++) {
               const t = ev.results[i][0]?.transcript || '';
               if (ev.results[i].isFinal) recognizedFinal += (recognizedFinal ? ' ' : '') + t.trim();
@@ -2917,7 +3153,7 @@
         } catch { activeRecognition = null; }
       }
 
-      recorder.ondataavailable = event => { if (event.data.size) chunks.push(event.data); };
+      recorder.ondataavailable = event => { if (event.data && event.data.size) chunks.push(event.data); };
       recorder.onstop = async () => {
         mediaRecorder = null;
         try { activeRecognition?.stop(); } catch {}
@@ -2927,7 +3163,8 @@
         recordButton.classList.remove('recording');
         recordButton.setAttribute('aria-label', 'Gravar dúvida por voz');
         try {
-          const blob = new Blob(chunks, { type: recorder.mimeType || chunks[0]?.type || 'audio/webm' });
+          const rawMime = (recorder.mimeType || chunks[0]?.type || chosenMime || 'audio/webm').replace(/^video\/webm/i, 'audio/webm');
+          const blob = new Blob(chunks, { type: rawMime });
           if (!blob.size) {
             recordStatus.textContent = recordedAudio ? 'Mantivemos a gravação anterior.' : 'Nenhum áudio gravado. Tente de novo.';
             return;
@@ -2953,7 +3190,7 @@
       recordButton.setAttribute('aria-label', 'Parar gravação');
       recordStatus.textContent = 'Gravando… fale sua dúvida e toque para concluir';
       startRecordIndicator();
-    } catch {
+    } catch (err) {
       try { activeRecognition?.stop(); } catch {}
       activeRecognition = null;
       stream?.getTracks().forEach(track => track.stop());
@@ -2962,7 +3199,15 @@
       recordButton.disabled = false;
       sendDoubt.disabled = false;
       discardAudio.disabled = false;
-      notify('Não consegui abrir o microfone. Confira a permissão ou escreva sua dúvida.');
+      const errName = String(err?.name || '');
+      if (errName === 'NotAllowedError' || errName === 'PermissionDeniedError') {
+        updateMicBadge('denied');
+        notify('Permissão do microfone negada. Clique no cadeado na barra de endereço para liberar o microfone.');
+      } else if (errName === 'NotFoundError' || errName === 'DevicesNotFoundError') {
+        notify('Nenhum microfone encontrado neste aparelho. Escreva sua dúvida no campo ao lado.');
+      } else {
+        notify('Não consegui abrir o microfone. Toque em "Liberar microfone" ou escreva sua dúvida.');
+      }
     }
   };
 
@@ -3140,12 +3385,29 @@
   if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 
   /* ---------- Sessão ---------- */
+  checkMicPermission();
   syncModalFocus();
-  if (token) {
-    api('/api/me')
-      .then(({ user }) => { closeModal('loginModal'); applyUser(user); loadAll(); if (user.first_login) setTimeout(() => openOnboardingModal(user), 600); })
-      .catch(() => {});
-  }
+  (async function initSession() {
+    const health = await refreshDemoHint();
+    if (token) {
+      try {
+        const { user } = await api('/api/me');
+        closeModal('loginModal');
+        applyUser(user);
+        syncLogoutButtonLabel();
+        await loadAll();
+        if (user.first_login && !persistentDemoActive) setTimeout(() => openOnboardingModal(user), 600);
+        return;
+      } catch {}
+    }
+    if ((persistentDemoActive || health?.persistentDemo) && sessionStorage.getItem('dpii_manual_login') !== '1') {
+      try {
+        await ensurePersistentDemoSession();
+        await loadAll();
+        return;
+      } catch {}
+    }
+  })();
 })();
 </script>
 </body>

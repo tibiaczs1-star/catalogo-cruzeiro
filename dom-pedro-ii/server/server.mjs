@@ -17,7 +17,7 @@ import { registerTeacherVoice, getApprovedTeacherSample } from './teacher-voice.
 import { TEACHERS_SEED } from './teachers-seed.mjs';
 import { buildCache } from './cache.mjs';
 import { demoAnswer } from './demo-answers.mjs';
-import { tutorAnswer } from './tutor.mjs';
+import { tutorAnswer, hasTutorConfigured } from './tutor.mjs';
 import { buildLongLesson, lessonToDynamicNarration, lessonToFullNarration } from './lesson-builder.mjs';
 import { doubtToPdfBuffer, materialToPdfBuffer, buildZipBuffer } from './pdf.mjs';
 import { FFMPEG_BIN } from './ffmpeg-bin.mjs';
@@ -26,6 +26,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
 const dataDir = resolve(process.env.ESCOLA_DATA_DIR || join(root, 'local-data'));
 const demoMode = process.env.DEMO_MODE === '1';
+const persistentDemoStudent = demoMode && process.env.PERSISTENT_DEMO_STUDENT !== '0' && process.env.DOM_PEDRO_PERSISTENT_DEMO !== '0';
 const uploadDir = join(dataDir, 'uploads');
 mkdirSync(uploadDir, { recursive: true });
 
@@ -145,10 +146,16 @@ if (!db.prepare('SELECT id FROM users WHERE school_id=1 AND registration=?').get
   db.prepare(`INSERT INTO users(school_id,registration,name,password_hash,role,grade,anonymous_alias)
               VALUES(1,?,?,?,?,?,?)`).run('2026001', 'Aluno Demonstração', passwordHash('Aluno@123'), 'student', '8º ano', 'Estudante Horizonte 27');
 }
-// Conta reservada para teste local; nunca altera alunos existentes.
+// Conta reservada para teste persistente; nunca zera nem sobrescreve dados existentes.
 if (!db.prepare('SELECT id FROM users WHERE school_id=1 AND registration=?').get('TESTEADMIN')) {
-  db.prepare(`INSERT INTO users(school_id,registration,name,password_hash,role,grade,anonymous_alias)
-              VALUES(1,?,?,?,?,?,?)`).run('TESTEADMIN', 'Admin Admin', passwordHash('admin'), 'student', '8º ano', 'Estudante de teste');
+  db.prepare(`INSERT INTO users(school_id,registration,name,password_hash,role,grade,anonymous_alias,first_login,active)
+              VALUES(1,?,?,?,?,?,?,0,1)`).run('TESTEADMIN', 'Aluno Teste', passwordHash('admin'), 'student', '8º ano', 'Estudante de teste');
+} else {
+  db.prepare("UPDATE users SET active=1, first_login=0, name=CASE WHEN name='Admin Admin' THEN 'Aluno Teste' ELSE name END WHERE school_id=1 AND registration='TESTEADMIN'").run();
+}
+const testeAdminUser = db.prepare('SELECT id FROM users WHERE school_id=1 AND registration=?').get('TESTEADMIN');
+if (testeAdminUser) {
+  db.prepare("INSERT OR IGNORE INTO student_profiles(user_id, avatar, nickname, instructor_voice) VALUES(?, 'gatao', 'Aluno Teste', 'naira')").run(testeAdminUser.id);
 }
 for (const reg of ['2026001', 'TESTEADMIN']) {
   const demoUser = db.prepare('SELECT id FROM users WHERE registration=?').get(reg);
@@ -204,8 +211,14 @@ function findTeacherApprovedSample(schoolId, teacherName) {
 }
 
 const app = express();
+app.set('trust proxy', 1);
+app.use((_req, res, next) => {
+  res.setHeader('Permissions-Policy', 'microphone=(self)');
+  next();
+});
 app.use('/api', (req,res,next) => {
   res.setHeader('Cache-Control','no-store');
+  res.setHeader('Access-Control-Expose-Headers', 'X-Voice-Engine');
   const origin = req.headers.origin;
   const allowed = ['https://localhost','capacitor://localhost', ...(process.env.ALLOWED_ORIGINS || '').split(',').filter(Boolean)];
   if (origin && allowed.includes(origin)) {
@@ -262,14 +275,49 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
+function readCookie(req, name) {
+  const raw = String(req.headers.cookie || '');
+  if (!raw) return '';
+  for (const part of raw.split(';')) {
+    const eq = part.indexOf('=');
+    if (eq <= 0) continue;
+    if (part.slice(0, eq).trim() === name) {
+      const val = part.slice(eq + 1).trim();
+      try { return decodeURIComponent(val); } catch { return val; }
+    }
+  }
+  return '';
+}
+
+function getPersistentDemoUser() {
+  return db.prepare(`SELECT u.id,u.school_id,u.registration,u.name,u.role,u.grade,u.active,u.anonymous_alias,u.first_login,u.avatar,s.name AS school_name
+    FROM users u JOIN schools s ON s.id=u.school_id
+    WHERE u.school_id=1 AND u.role='student' AND u.active=1 AND u.registration IN ('TESTEADMIN','2026001')
+    ORDER BY CASE WHEN u.registration='TESTEADMIN' THEN 0 ELSE 1 END LIMIT 1`).get();
+}
+
 function auth(req, res, next) {
-  const token = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
-  if (!token) return res.status(401).json({ error: 'Autenticação necessária.' });
-  const row = db.prepare(`SELECT u.id,u.school_id,u.registration,u.name,u.role,u.grade,u.active,u.anonymous_alias,u.first_login,u.avatar
-    FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=? AND julianday(s.expires_at)>julianday('now')`).get(tokenDigest(token));
-  if (!row || !row.active) return res.status(401).json({ error: 'Sessão inválida ou aluno inativo.' });
+  const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
+  const token = bearer || readCookie(req, 'dpii_demo_token');
+  let row = null;
+  if (token) {
+    row = db.prepare(`SELECT u.id,u.school_id,u.registration,u.name,u.role,u.grade,u.active,u.anonymous_alias,u.first_login,u.avatar
+      FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=? AND julianday(s.expires_at)>julianday('now')`).get(tokenDigest(token));
+  }
+  const rawPath = req.originalUrl.split('?')[0];
+  const path = rawPath.startsWith('/dom-pedro-ii/') ? rawPath.slice('/dom-pedro-ii'.length) : rawPath;
+  if (!row || !row.active) {
+    const isProtectedArea = path.startsWith('/api/team/') || path.startsWith('/api/admin/') || path.startsWith('/api/developer/') || path === '/api/auth/logout';
+    if (persistentDemoStudent && !isProtectedArea) {
+      const demoUser = getPersistentDemoUser();
+      if (demoUser && demoUser.active) {
+        req.user = demoUser;
+        return next();
+      }
+    }
+    return res.status(401).json({ error: token ? 'Sessão inválida ou aluno inativo.' : 'Autenticação necessária.' });
+  }
   req.user = row;
-  const path = req.originalUrl.split('?')[0];
   const common = path === '/api/me' || path === '/api/auth/logout' || path.startsWith('/api/voice/');
   if (row.role === 'developer' && !common && !path.startsWith('/api/developer/')) return res.status(403).json({error:'Perfil técnico sem acesso a informações dos alunos.'});
   const directionTeacherAccess = (path === '/api/teachers' || path.startsWith('/api/teachers/'));
@@ -284,23 +332,42 @@ const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => cb(null, `${req.user.id}-${Date.now()}-${randomBytes(6).toString('hex')}${extname(file.originalname).slice(0,8) || '.webm'}`)
 });
-const upload = multer({ storage, limits: { fileSize: 15*1024*1024, files: 1 }, fileFilter: (_req, file, cb) => cb(null, /^audio\//.test(file.mimetype)) });
+const upload = multer({
+  storage,
+  limits: { fileSize: 15*1024*1024, files: 1 },
+  fileFilter: (_req, file, cb) => {
+    const mimeOk = /^(audio\/|video\/webm|application\/ogg|application\/octet-stream)/i.test(file.mimetype || '');
+    const extOk = /\.(webm|ogg|m4a|mp4|wav|mp3|aac|opus)$/i.test(file.originalname || '');
+    cb(null, mimeOk || extOk);
+  }
+});
 
-app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'Escola Viva local', demoMode, database: 'sqlite', time: new Date().toISOString() }));
-function makeSession(user) {
+app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'Escola Viva local', demoMode, persistentDemo: persistentDemoStudent, database: 'sqlite', time: new Date().toISOString() }));
+function makeSession(user, { ttlDays = 7 } = {}) {
+  const days = (persistentDemoStudent && user?.registration === 'TESTEADMIN') ? Math.max(ttlDays, 365) : ttlDays;
   const token = randomBytes(32).toString('base64url');
-  db.prepare('INSERT INTO sessions(token_hash,user_id,expires_at) VALUES(?,?,?)').run(tokenDigest(token), user.id, new Date(Date.now()+7*86400000).toISOString());
+  db.prepare('INSERT INTO sessions(token_hash,user_id,expires_at) VALUES(?,?,?)').run(tokenDigest(token), user.id, new Date(Date.now()+days*86400000).toISOString());
   return { token, user: { id:user.id, name:user.name, role:user.role, grade:user.grade, school:user.school_name, alias:user.anonymous_alias, first_login:user.first_login ?? 1, avatar:user.avatar || 'gatao' } };
 }
 registerStudentAuth(app, {db, auth, loginIpLimiter, makeSession, tokenDigest, passwordHashAsync, passwordVerifyAsync: passwordMatchesAsync});
 registerNewsSync(app, {db, auth, schoolId: 1});
-app.post('/api/auth/demo', loginIpLimiter, (req, res) => {
+app.post('/api/auth/demo', (req, res) => {
   if (!demoMode) return res.status(404).json({ error: 'Modo demonstração desativado.' });
-  const user = db.prepare(`SELECT u.*,s.name school_name FROM users u JOIN schools s ON s.id=u.school_id
-    WHERE u.school_id=1 AND u.role='student' AND u.active=1 AND u.registration IN ('TESTEADMIN','2026001')
-    ORDER BY CASE WHEN u.registration='TESTEADMIN' THEN 0 ELSE 1 END LIMIT 1`).get();
+  const user = getPersistentDemoUser();
   if (!user) return res.status(404).json({ error: 'Aluno de demonstração indisponível.' });
-  res.json(makeSession(user));
+  const ttlDays = persistentDemoStudent ? 365 : 7;
+  const session = makeSession(user, { ttlDays });
+  const isSecure = Boolean(req.secure || String(req.headers['x-forwarded-proto'] || '').toLowerCase().includes('https'));
+  const cookieParts = [
+    `dpii_demo_token=${encodeURIComponent(session.token)}`,
+    'Path=/',
+    `Max-Age=${ttlDays * 86400}`,
+    'SameSite=Lax',
+    'HttpOnly'
+  ];
+  if (isSecure) cookieParts.push('Secure');
+  res.setHeader('Set-Cookie', cookieParts.join('; '));
+  res.json(session);
 });
 app.post('/api/auth/login', async (req, res, next) => {
   try {
@@ -314,8 +381,11 @@ app.post('/api/auth/login', async (req, res, next) => {
   } catch (error) { next(error); }
 });
 app.post('/api/auth/logout', auth, (req, res) => {
-  const token = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
-  db.prepare('DELETE FROM sessions WHERE token_hash=?').run(tokenDigest(token)); res.status(204).end();
+  const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
+  const token = bearer || readCookie(req, 'dpii_demo_token');
+  if (token) db.prepare('DELETE FROM sessions WHERE token_hash=?').run(tokenDigest(token));
+  res.setHeader('Set-Cookie', 'dpii_demo_token=; Path=/; Max-Age=0; SameSite=Lax; HttpOnly');
+  res.status(204).end();
 });
 app.get('/api/me', auth, (req, res) => res.json({ user:req.user }));
 app.get('/api/me/profile', auth, (req, res) => {
@@ -376,6 +446,7 @@ app.get('/api/teachers/:id/speak', auth, voiceLimiter, async (req, res, next) =>
     const phrase = `Olá! Sou ${art} ${cleanFirstName}, da disciplina de ${prof.disciplines.split('/')[0].trim()}. Seja bem-vindo ao Dom Pedro Segundo Voice, estou aqui para te ajudar nos estudos!`;
     const refWav = findTeacherApprovedSample(req.user.school_id, prof.name);
     const wav = await synthesize(phrase, { voice: prof.voice_preset, rate: prof.voice_rate, refWav });
+    if (wav?.voiceEngine) res.setHeader('X-Voice-Engine', wav.voiceEngine);
     res.type('audio/wav').send(wav);
   } catch(err) { next(err); }
 });
@@ -495,7 +566,7 @@ app.post('/api/doubts/:id/redo', auth, async (req, res, next) => {
     let needsHumanReview = false;
     const questionText = row.text || `Dúvida de ${row.subject}`;
 
-    if (['openrouter', 'google'].includes(process.env.TUTOR_PROVIDER) && row.text) {
+    if (hasTutorConfigured() && row.text) {
       try {
         const priorCount = db.prepare('SELECT COUNT(*) n FROM doubts WHERE user_id=? AND subject=?').get(req.user.id, row.subject).n;
         const previousQuestions = db.prepare('SELECT text FROM doubts WHERE user_id=? AND subject=? AND text IS NOT NULL AND id<>? ORDER BY id DESC LIMIT 3').all(req.user.id, row.subject, id).map(r => r.text);
@@ -670,6 +741,7 @@ app.get('/api/materials/:id/speak', auth, voiceLimiter, async (req, res, next) =
     const defaultVoice = row.doubt_voice || 'prof_naira';
     const preset = resolveVoicePreset(req.query.voice || defaultVoice);
     const wav = await synthesize(fullText, { voice: preset.id });
+    if (wav?.voiceEngine) res.setHeader('X-Voice-Engine', wav.voiceEngine);
     res.type('audio/wav').send(wav);
   } catch (err) { next(err); }
 });
@@ -706,7 +778,7 @@ app.post('/api/doubts', auth, upload.single('audio'), async (req,res,next) => {
     let demoGuide = false;
     let needsHumanReview = false;
     let lesson = null;
-    if (doubtText && ['openrouter', 'google'].includes(process.env.TUTOR_PROVIDER)) {
+    if (doubtText && hasTutorConfigured()) {
       try {
         const priorCount = db.prepare('SELECT COUNT(*) n FROM doubts WHERE user_id=? AND subject=?').get(req.user.id, subject).n;
         const previousQuestions = db.prepare('SELECT text FROM doubts WHERE user_id=? AND subject=? AND text IS NOT NULL AND text <> ? ORDER BY id DESC LIMIT 3').all(req.user.id, subject, '').map(row => row.text);
@@ -808,6 +880,7 @@ app.get('/api/doubts/:id/speak', auth, voiceLimiter, async (req,res,next) => {
         dynamicText: isFull ? lessonToDynamicNarration(lesson, row.answer, row.subject) : ''
       });
       voiceMetrics.replies++;
+      if (wav?.voiceEngine) res.setHeader('X-Voice-Engine', wav.voiceEngine);
       res.type('audio/wav').send(wav);
     } catch {
       voiceMetrics.failures++;
@@ -975,6 +1048,7 @@ app.post('/api/voice/speak', auth, async (req, res, next) => {
     const wav = await synthesize(text, {
       voice: cleanText(req.body.voice, 60) || 'maria'
     });
+    if (wav?.voiceEngine) res.setHeader('X-Voice-Engine', wav.voiceEngine);
     res.type('audio/wav').send(wav);
   } catch (error) { res.status(503).json({error:'A voz está temporariamente indisponível. Tente novamente.'}); }
 });

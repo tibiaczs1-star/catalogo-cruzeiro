@@ -128,7 +128,10 @@ export function registerPedagogy(app, {db,auth,cleanText,metrics,passwordHashAsy
   app.get('/api/developer/metrics',auth,(req,res)=>{
     if(req.user.role!=='developer')return res.sendStatus(403);
     const a=[...metrics.latency].sort((a,b)=>a-b);
-    const tutorConfigured=(process.env.TUTOR_PROVIDER==='openrouter'&&Boolean(process.env.OPENROUTER_API_KEY?.trim()))||(process.env.TUTOR_PROVIDER==='google'&&Boolean(process.env.GOOGLE_API_KEY?.trim()));
+    const prov = String(process.env.TUTOR_PROVIDER || '').trim().toLowerCase();
+    const hasGoogle = Boolean(process.env.GOOGLE_API_KEY?.trim() || process.env.GEMINI_API_KEY?.trim() || process.env.GOOGLE_API_KEY_FALLBACK?.trim());
+    const hasOpenRouter = Boolean(process.env.OPENROUTER_API_KEY?.trim());
+    const tutorConfigured = prov === 'google' ? hasGoogle : prov === 'openrouter' ? hasOpenRouter : (!prov && (hasGoogle || hasOpenRouter));
     res.json({uptimeSeconds:Math.round((Date.now()-metrics.startedAt)/1000),requests:metrics.requests,errors:metrics.errors,p95Ms:Math.round(a[Math.min(a.length-1,Math.floor(a.length*.95))]||0),memoryMB:Math.round(process.memoryUsage().rss/1048576),googleConfigured:process.env.VOICE_PROVIDER==='google' && !!process.env.GOOGLE_API_KEY,tutor:{configured:tutorConfigured,answered:tutorMetrics?.answered||0,forwarded:tutorMetrics?.forwarded||0,unavailable:tutorMetrics?.unavailable||0},voice:{...voiceMetrics},voiceEmotionAnalysis:false});
   });
 }

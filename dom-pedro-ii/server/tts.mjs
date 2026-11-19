@@ -47,7 +47,9 @@ export async function synthesize(text, options = {}) {
   // Para vozes não-clonadas, tentar Google TTS se configurado; fallback para Edge Cinema.
   if (!options.localOnly && process.env.VOICE_PROVIDER === 'google') {
     try {
-      return await googleSynthesize(text, options);
+      const wavBuf = await googleSynthesize(text, options);
+      if (wavBuf && typeof wavBuf === 'object') wavBuf.voiceEngine = 'google';
+      return wavBuf;
     } catch (err) {
       console.warn('[TTS] Google TTS falhou, usando fallback Edge Cinema:', err.message);
     }
@@ -76,7 +78,11 @@ async function synthesizeLocal(text, { voice = 'prof_naira', rate = null, fullLe
 
   const cachedFile = join(CACHE_DIR, `${cacheKey}.wav`);
   if (existsSync(cachedFile)) {
-    try { return readFileSync(cachedFile); } catch {}
+    try {
+      const buf = readFileSync(cachedFile);
+      buf.voiceEngine = shouldClone ? 'omnivoice-clone' : (useCinema ? 'edge-cinema' : 'sapi');
+      return buf;
+    } catch {}
   }
 
   if (inflight.has(cacheKey)) {
@@ -86,6 +92,7 @@ async function synthesizeLocal(text, { voice = 'prof_naira', rate = null, fullLe
   const job = (async () => {
     if (active >= 4) throw new Error('Voz ocupada. Tente novamente em instantes.');
     let wavBuf = null;
+    let usedEngine = shouldClone ? 'omnivoice-clone' : (useCinema ? 'edge-cinema' : 'sapi');
 
     if (shouldClone) {
       active++;
@@ -97,6 +104,7 @@ async function synthesizeLocal(text, { voice = 'prof_naira', rate = null, fullLe
           refText: refText ?? (refWav ? '' : NAIRA_REF_TEXT),
           appendMp3: useStudyConcat ? NAIRA_STUDY_MP3 : null
         });
+        usedEngine = 'omnivoice-clone';
       } catch (err) {
         console.warn('[TTS] Clone OmniVoice indisponível, aplicando fallback neural:', err.message);
         wavBuf = null;
@@ -115,6 +123,7 @@ async function synthesizeLocal(text, { voice = 'prof_naira', rate = null, fullLe
         if (useCinema) {
           try {
             wavBuf = await synthesizeEdgeCinema(input, out, preset.cinema);
+            usedEngine = 'edge-cinema';
           } catch {
             wavBuf = null;
           }
@@ -122,6 +131,7 @@ async function synthesizeLocal(text, { voice = 'prof_naira', rate = null, fullLe
         if (!wavBuf) {
           if (process.platform === 'win32') {
             wavBuf = await synthesizeWindowsSapi(input, out, preset.sapiVoice, effectiveRate);
+            usedEngine = 'sapi';
           } else {
             throw new Error('Configure Edge Cinema ou OmniVoice Clone neste servidor.');
           }
@@ -131,7 +141,12 @@ async function synthesizeLocal(text, { voice = 'prof_naira', rate = null, fullLe
       }
     }
 
-    try { writeFileSync(cachedFile, wavBuf); } catch {}
+    if (wavBuf && typeof wavBuf === 'object') {
+      wavBuf.voiceEngine = usedEngine;
+    }
+    if (!shouldClone || usedEngine === 'omnivoice-clone') {
+      try { writeFileSync(cachedFile, wavBuf); } catch {}
+    }
     return wavBuf;
   })();
 

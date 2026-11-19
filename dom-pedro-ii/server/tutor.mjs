@@ -42,7 +42,7 @@ function userPayload({subject, question, feedbackNote}) {
 }
 
 async function googleAnswer({subject, question, feedbackNote}) {
-  const keys = [process.env.GOOGLE_API_KEY, process.env.GOOGLE_API_KEY_FALLBACK]
+  const keys = [process.env.GOOGLE_API_KEY, process.env.GEMINI_API_KEY, process.env.GOOGLE_API_KEY_FALLBACK]
     .map(k => String(k || '').trim()).filter(Boolean);
   if (!keys.length) return null;
   const configured = process.env.GOOGLE_TUTOR_MODEL || 'gemini-2.5-flash';
@@ -134,9 +134,41 @@ async function openRouterAnswer({subject, question, feedbackNote}) {
   return null;
 }
 
+export function hasTutorConfigured() {
+  const provider = String(process.env.TUTOR_PROVIDER || '').trim().toLowerCase();
+  const hasGoogle = Boolean(
+    process.env.GOOGLE_API_KEY?.trim() ||
+    process.env.GEMINI_API_KEY?.trim() ||
+    process.env.GOOGLE_API_KEY_FALLBACK?.trim()
+  );
+  const hasOpenRouter = Boolean(process.env.OPENROUTER_API_KEY?.trim());
+  if (provider === 'google') return hasGoogle;
+  if (provider === 'openrouter') return hasOpenRouter;
+  if (!provider) return hasGoogle || hasOpenRouter;
+  return false;
+}
+
 export async function tutorAnswer({subject, question, priorCount, previousQuestions = [], feedbackNote = '', detailMode = 'standard'}) {
-  const provider = process.env.TUTOR_PROVIDER;
-  if (!['openrouter', 'google'].includes(provider)) return null;
+  const provider = String(process.env.TUTOR_PROVIDER || '').trim().toLowerCase();
   if (provider === 'google') return googleAnswer({subject, question, feedbackNote});
-  return openRouterAnswer({subject, question, feedbackNote});
+  if (provider === 'openrouter') return openRouterAnswer({subject, question, feedbackNote});
+  if (provider) return null;
+
+  const hasGoogle = Boolean(
+    process.env.GOOGLE_API_KEY?.trim() ||
+    process.env.GEMINI_API_KEY?.trim() ||
+    process.env.GOOGLE_API_KEY_FALLBACK?.trim()
+  );
+  if (hasGoogle) {
+    try {
+      const res = await googleAnswer({subject, question, feedbackNote});
+      if (res) return res;
+    } catch (err) {
+      if (!process.env.OPENROUTER_API_KEY?.trim()) throw err;
+    }
+  }
+  if (process.env.OPENROUTER_API_KEY?.trim()) {
+    return openRouterAnswer({subject, question, feedbackNote});
+  }
+  return null;
 }

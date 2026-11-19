@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const DURATION_MS = 5000;
+  const DURATION_MS = 9400;
   const style = document.createElement('style');
   style.textContent = `
     #school-intro {
@@ -150,6 +150,31 @@
       border-color: rgba(255, 255, 255, 0.35);
       color: rgba(255, 255, 255, 0.8);
     }
+    #school-intro .intro-skip-btn {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: max(16px, env(safe-area-inset-left));
+      z-index: 2;
+      min-height: 38px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(25, 4, 10, 0.38);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.16s ease, background 0.16s ease;
+    }
+    #school-intro .intro-skip-btn:hover {
+      background: rgba(25, 4, 10, 0.65);
+      transform: scale(1.03);
+    }
     @media (prefers-reduced-motion: reduce) {
       #school-intro .cadet {
         animation: none;
@@ -173,13 +198,14 @@
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', 'Abertura do Dom Pedro II Voice');
   overlay.innerHTML = `
+    <button type="button" class="intro-skip-btn" id="introSkipBtn" aria-label="Pular abertura e entrar">Pular ›</button>
     <button type="button" class="intro-sound-btn" id="introSoundToggle" aria-label="Desligar som" title="Desligar som" aria-pressed="false">${ICON_SOUND_ON}</button>
     <div class="intro-head">
       <img class="intro-crest" src="assets/brand/crest-128.png" width="56" height="56" alt="Brasão do Colégio Militar Dom Pedro II">
       <p class="intro-kicker">Colégio Dom Pedro II · Campus CZS Sul</p>
       <h1>Dom Pedro II Voice</h1>
     </div>
-    <div class="scene" role="img" aria-label="Três estudantes de boina vermelha em movimento enquanto o aplicativo carrega por 5 segundos.">
+    <div class="scene" role="img" aria-label="Três estudantes de boina vermelha em movimento enquanto o aplicativo carrega.">
       <span class="cadet cadet-one"></span>
       <span class="cadet cadet-two"></span>
       <span class="cadet cadet-three"></span>
@@ -187,7 +213,7 @@
     <div class="progress-wrap">
       <div class="progress-track" aria-hidden="true"><div class="progress-fill"></div></div>
       <p role="status">Carregando seu espaço de estudos…</p>
-      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.08em;color:#f5c45b;">🎵 Hino Soldados do Fogo · Edição 16-bit</p>
+      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.04em;color:#f5c45b;">🎵 Hino da Independência · Edição 32-bit — "Ou ficar a Pátria livre, ou morrer pelo Brasil!" (2x)</p>
     </div>
   `;
   document.body.prepend(overlay);
@@ -197,10 +223,11 @@
 
   const status = overlay.querySelector('[role="status"]');
   const soundBtn = overlay.querySelector('#introSoundToggle');
+  const skipBtn = overlay.querySelector('#introSkipBtn');
 
-  const music = new Audio('assets/abertura.wav');
+  const music = new Audio('assets/abertura.wav?v=46');
   const effect = new Audio('assets/passo.wav');
-  music.volume = 0.55;
+  music.volume = 0.58;
   effect.volume = 0.33;
   let muted = false;
   let finished = false;
@@ -221,10 +248,10 @@
   tryPlayMusic();
 
   overlay.addEventListener('pointerdown', event => {
-    if (!muted && music.paused && !event.target.closest('#introSoundToggle')) {
+    if (!muted && music.paused && !event.target.closest('#introSoundToggle,#introSkipBtn')) {
       tryPlayMusic();
     }
-  }, { once: true });
+  });
 
   document.addEventListener('click', event => {
     if (!muted && !overlay.isConnected && event.target.closest('nav button,#tutorialNext,#tutorialPrevious')) {
@@ -252,10 +279,11 @@
     if (event.key === 'Escape') finish();
   }
 
-  timers.push(setTimeout(() => { if (status) status.textContent = 'Conectando caderno e vozes…'; }, 1650));
-  timers.push(setTimeout(() => { if (status) status.textContent = 'Tudo pronto! Entrando…'; }, 3400));
+  timers.push(setTimeout(() => { if (status) status.textContent = 'Conectando caderno persistente e vozes…'; }, 2800));
+  timers.push(setTimeout(() => { if (status) status.textContent = 'Tudo pronto! Entrando…'; }, 6200));
   timers.push(setTimeout(finish, DURATION_MS));
 
+  if (skipBtn) skipBtn.onclick = finish;
   soundBtn.onclick = () => {
     muted = !muted;
     music.muted = muted;

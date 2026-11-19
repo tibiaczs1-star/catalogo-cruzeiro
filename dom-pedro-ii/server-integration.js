@@ -18,6 +18,9 @@ function createDomPedroServerIntegration({ dataDir }) {
       if (process.env.DOM_PEDRO_DEMO_MODE !== "0" && !process.env.DEMO_MODE) {
         process.env.DEMO_MODE = "1";
       }
+      if (process.env.DOM_PEDRO_PERSISTENT_DEMO !== "0" && !process.env.PERSISTENT_DEMO_STUDENT) {
+        process.env.PERSISTENT_DEMO_STUDENT = "1";
+      }
       const entryUrl = pathToFileURL(path.join(__dirname, "server", "server.mjs")).href;
       appPromise = import(entryUrl).then(mod => mod.app);
     }
