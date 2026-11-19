@@ -55,7 +55,7 @@ export function registerTeacherVoice(app, { db, auth, dataDir }) {
     res.set('Cache-Control', 'no-store').json({ samples: rows });
   });
 
-  app.post('/api/team/teacher-voices', auth, (req, res, next) => req.user.role === 'teacher' ? next() : res.sendStatus(403), upload.single('audio'), async (req, res) => {
+  app.post('/api/team/teacher-voices', auth, (req, res, next) => (req.user.role === 'teacher' || direction(req.user)) ? next() : res.sendStatus(403), upload.single('audio'), async (req, res) => {
     if (req.body.consent !== 'yes') return res.status(400).json({ error: 'Confirme sua autorização antes de enviar.' });
     if (!req.file?.buffer?.length) return res.status(400).json({ error: 'Envie um áudio válido (WAV, OGG, MP3, M4A ou WebM) de até 12 MB.' });
 
@@ -110,8 +110,8 @@ export function registerTeacherVoice(app, { db, auth, dataDir }) {
   });
 
   app.delete('/api/team/teacher-voices/:id', auth, (req, res) => {
-    if (req.user.role !== 'teacher') return res.sendStatus(403);
-    const row = db.prepare("SELECT filename FROM teacher_voice_samples WHERE id=? AND school_id=? AND teacher_id=? AND status!='revoked'").get(req.params.id, req.user.school_id, req.user.id);
+    if (req.user.role !== 'teacher' && !direction(req.user)) return res.sendStatus(403);
+    const row = db.prepare("SELECT filename FROM teacher_voice_samples WHERE id=? AND school_id=? AND (?=1 OR teacher_id=?) AND status!='revoked'").get(req.params.id, req.user.school_id, direction(req.user) ? 1 : 0, req.user.id);
     if (!row) return res.sendStatus(404);
     try { unlinkSync(join(folder, row.filename)); } catch (e) { if (e.code !== 'ENOENT') throw e; }
     db.prepare("UPDATE teacher_voice_samples SET status='revoked',revoked_at=CURRENT_TIMESTAMP WHERE id=?").run(req.params.id);

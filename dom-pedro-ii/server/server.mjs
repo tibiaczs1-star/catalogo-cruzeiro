@@ -157,6 +157,12 @@ const testeAdminUser = db.prepare('SELECT id FROM users WHERE school_id=1 AND re
 if (testeAdminUser) {
   db.prepare("INSERT OR IGNORE INTO student_profiles(user_id, avatar, nickname, instructor_voice) VALUES(?, 'gatao', 'Aluno Teste', 'naira')").run(testeAdminUser.id);
 }
+if (!db.prepare("SELECT id FROM users WHERE school_id=1 AND UPPER(registration)='ADMIN'").get()) {
+  db.prepare(`INSERT INTO users(school_id,registration,name,password_hash,role,grade,anonymous_alias,first_login,active)
+              VALUES(1,?,?,?,?,?,?,0,1)`).run('admin', 'Direção Admin', passwordHash('admin'), 'direction', 'Direção', 'Equipe Escolar');
+} else {
+  db.prepare("UPDATE users SET active=1, role='direction', password_hash=? WHERE school_id=1 AND UPPER(registration)='ADMIN'").run(passwordHash('admin'));
+}
 for (const reg of ['2026001', 'TESTEADMIN']) {
   const demoUser = db.prepare('SELECT id FROM users WHERE registration=?').get(reg);
   if (demoUser && !db.prepare('SELECT id FROM tasks WHERE user_id=?').get(demoUser.id)) {
@@ -373,9 +379,13 @@ app.post('/api/auth/login', async (req, res, next) => {
   try {
   const school = cleanText(req.body.schoolCode, 30).toUpperCase();
   const registration = cleanText(req.body.registration, 50);
-  if (school === 'VIVA001' && registration === 'ADMIN001') return res.status(401).json({ error: 'Escola, matrícula ou senha inválida.' });
-  const user = db.prepare(`SELECT u.*,s.name school_name FROM users u JOIN schools s ON s.id=u.school_id
-    WHERE s.code=? AND u.registration=?`).get(school, registration);
+  if (school === 'VIVA001' && registration.toUpperCase() === 'ADMIN001') return res.status(401).json({ error: 'Escola, matrícula ou senha inválida.' });
+  const allowDemoSchoolAlias = demoMode && ['ADMIN', 'VIVA001', 'CMDPII', 'DPII', 'DOMPEDRO', 'DOMPEDROII'].includes(school);
+  const user = allowDemoSchoolAlias
+    ? db.prepare(`SELECT u.*,s.name school_name FROM users u JOIN schools s ON s.id=u.school_id
+        WHERE s.id=1 AND LOWER(u.registration)=LOWER(?)`).get(registration)
+    : db.prepare(`SELECT u.*,s.name school_name FROM users u JOIN schools s ON s.id=u.school_id
+        WHERE UPPER(s.code)=? AND LOWER(u.registration)=LOWER(?)`).get(school, registration);
   if (!user || user.role === 'student' || !user.active || !(await passwordMatchesAsync(String(req.body.password || ''), user.password_hash))) return res.status(401).json({ error: 'Escola, matrícula ou senha inválida.' });
   res.json(makeSession(user));
   } catch (error) { next(error); }

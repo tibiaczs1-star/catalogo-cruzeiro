@@ -10,7 +10,7 @@ export function registerPedagogy(app, {db,auth,cleanText,metrics,passwordHashAsy
   CREATE INDEX IF NOT EXISTS assessments_student ON assessments(student_id,subject);`);
   const direction=u=>['admin','direction'].includes(u.role);
   const team=(req,res,next)=>['teacher','pedagogy','direction','admin'].includes(req.user.role)?next():res.status(403).json({error:'Acesso restrito à equipe escolar.'});
-  const canTeach=(u,id)=>u.role==='teacher' && !!db.prepare(`SELECT 1 FROM teaching_assignments a JOIN users s ON s.id=a.student_id WHERE a.teacher_id=? AND a.student_id=? AND s.school_id=? AND s.role='student'`).get(u.id,id,u.school_id);
+  const canTeach=(u,id)=>direction(u) || (u.role==='teacher' && !!db.prepare(`SELECT 1 FROM teaching_assignments a JOIN users s ON s.id=a.student_id WHERE a.teacher_id=? AND a.student_id=? AND s.school_id=? AND s.role='student'`).get(u.id,id,u.school_id));
   const scopedStudents=u=> db.prepare(`SELECT id,name,grade FROM users WHERE school_id=? AND role='student' AND active=1 ${u.role==='teacher'?'AND id IN (SELECT student_id FROM teaching_assignments WHERE teacher_id=?)':''} ORDER BY name`).all(...(u.role==='teacher'?[u.school_id,u.id]:[u.school_id]));
   app.get('/api/team/dashboard',auth,team,(req,res)=>{
     const u=req.user;
@@ -22,10 +22,11 @@ export function registerPedagogy(app, {db,auth,cleanText,metrics,passwordHashAsy
     const subjects=db.prepare(`SELECT subject,COUNT(*) requests,COUNT(DISTINCT user_id) students FROM doubts WHERE user_id IN (${marks}) GROUP BY subject ORDER BY requests DESC`).all(...ids).map(s=>({...s,...db.prepare(`SELECT ROUND(AVG(score),1) average,COUNT(*) assessments FROM assessments WHERE subject=? AND student_id IN (${marks})`).get(s.subject,...ids)}));
     const measured=db.prepare(`SELECT subject,ROUND(AVG(score),1) average,COUNT(*) assessments FROM assessments WHERE student_id IN (${marks}) GROUP BY subject`).all(...ids);
     for(const m of measured) if(!subjects.some(s=>s.subject===m.subject)) subjects.push({...m,requests:0,students:0});
-    const doubts=u.role==='teacher'?db.prepare(`SELECT d.id,d.user_id,d.subject,d.text,d.answer,d.status,d.created_at,d.audio_path IS NOT NULL has_audio,u.name FROM doubts d JOIN users u ON u.id=d.user_id WHERE d.user_id IN (${marks}) ORDER BY d.id DESC LIMIT 100`).all(...ids):[];
+    const canSeePedagogy=(u.role==='teacher'||direction(u));
+    const doubts=canSeePedagogy?db.prepare(`SELECT d.id,d.user_id,d.subject,d.text,d.answer,d.status,d.created_at,d.audio_path IS NOT NULL has_audio,u.name FROM doubts d JOIN users u ON u.id=d.user_id WHERE d.user_id IN (${marks}) ORDER BY d.id DESC LIMIT 100`).all(...ids):[];
     const wellbeing=u.role==='teacher'?db.prepare(`SELECT w.id,w.user_id,w.feeling,w.note,w.created_at,u.name FROM wellbeing w JOIN users u ON u.id=w.user_id WHERE w.user_id IN (${marks}) AND w.recipient='teacher' ORDER BY w.id DESC LIMIT 100`).all(...ids):db.prepare(`SELECT w.id,w.feeling,w.note,w.created_at,u.anonymous_alias alias FROM wellbeing w JOIN users u ON u.id=w.user_id WHERE u.school_id=? AND w.recipient='direction' ORDER BY w.id DESC LIMIT 100`).all(u.school_id);
     const support=direction(u)?db.prepare(`SELECT s.id,s.body,s.risk_flag,s.status,s.created_at,u.anonymous_alias alias FROM support_messages s JOIN users u ON u.id=s.user_id WHERE s.school_id=? AND s.recipient IN ('Direção','direcao') ORDER BY s.risk_flag DESC,s.id DESC LIMIT 100`).all(u.school_id):[];
-    const crosses=u.role==='teacher'?students.map(s=>{
+    const crosses=canSeePedagogy?students.map(s=>{
       const demand=db.prepare('SELECT subject,COUNT(*) requests FROM doubts WHERE user_id=? GROUP BY subject ORDER BY requests DESC').all(s.id);
       const learning=db.prepare('SELECT subject,ROUND(AVG(score),1) average,COUNT(*) assessments FROM assessments WHERE student_id=? GROUP BY subject').all(s.id);
       const overdue=db.prepare("SELECT COUNT(*) n FROM tasks WHERE user_id=? AND completed=0 AND julianday(due_at)<julianday('now')").get(s.id).n;
@@ -37,7 +38,7 @@ export function registerPedagogy(app, {db,auth,cleanText,metrics,passwordHashAsy
       if(report) reasons.push('Relato voluntário: acolher e confirmar contexto');
       return {...s,demand,learning,overdue,report:report||null,reasons};
     }):[];
-    res.json({role:u.role,students:u.role==='teacher'?students:[],studentCount:students.length,subjects,doubts,wellbeing,support,crosses,notice:'Pedidos indicam demanda. Defasagem exige avaliação. Sentimentos são autorrelatos voluntários; nenhuma emoção é inferida da voz.'});
+    res.json({role:u.role,students:canSeePedagogy?students:[],studentCount:students.length,subjects,doubts,wellbeing,support,crosses,notice:'Pedidos indicam demanda. Defasagem exige avaliação. Sentimentos são autorrelatos voluntários; nenhuma emoção é inferida da voz.'});
   });
   app.post('/api/wellbeing',auth,(req,res)=>{
     if(req.user.role!=='student')return res.sendStatus(403);
