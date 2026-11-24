@@ -34,7 +34,8 @@ const EDITION_PLANS = Object.freeze({
     defaultDays: 7,
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
-    summary: "Núcleo fechado com suas próprias chaves (BYOK) e vínculo em 1 máquina.",
+    freeProvidersIncluded: ["openrouter"],
+    summary: "Núcleo BYOK + OpenRouter (:free) guiado no instalador e troca livre em 1 máquina.",
   },
   mid: {
     edition: "mid",
@@ -46,7 +47,8 @@ const EDITION_PLANS = Object.freeze({
     defaultDays: 30,
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
-    summary: "APIs Grátis automáticas + Super Poderes + Swarm de 3 camadas.",
+    freeProvidersIncluded: ["openrouter", "google", "omnirouter"],
+    summary: "OpenRouter (:free) + Google AI Studio Grátis (AIza) + OmniRouter (:20128) com tutoriais + Super Poderes.",
   },
   beta: {
     edition: "beta",
@@ -58,7 +60,8 @@ const EDITION_PLANS = Object.freeze({
     defaultDays: 30,
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
-    summary: "Código limpo, DPAPI local e download privado dedicado.",
+    freeProvidersIncluded: ["openrouter"],
+    summary: "Código limpo, DPAPI local + OpenRouter (:free) e download privado dedicado.",
   },
   superbad: {
     edition: "superbad",
@@ -70,7 +73,8 @@ const EDITION_PLANS = Object.freeze({
     defaultDays: 30,
     defaultMaxHwids: 2,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
-    summary: "Ecossistema SuperBad com download privado e até 2 máquinas vinculadas.",
+    freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-chat-21"],
+    summary: "Studio + 9Router (:20129) + 21 modelos NVIDIA Free Chat/Embeddings + até 2 máquinas vinculadas.",
   },
   founder: {
     edition: "founder",
@@ -82,7 +86,8 @@ const EDITION_PLANS = Object.freeze({
     defaultDays: 30,
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro", "founder-vip"],
-    summary: "Atualização contínua em nuvem, motor 3 camadas + Cidade de Agentes, app blindado sem acesso mestre.",
+    freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-full-38", "nvidia-bio-rest-grpc"],
+    summary: "TUDO LIBERADO: todos os 38 modelos NVIDIA Free (+ REST, gRPC NVCF e Bio/NIM), Google, OpenRouter, OmniRouter, 9Router e atualizações imediatas em nuvem.",
   },
 });
 

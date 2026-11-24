@@ -56,6 +56,13 @@ describe("BadClaude Cloud Licensing, PIX 68 99226-9296 & Dashboard Control Sync"
     assert.equal(apiSrc.includes("99566741204"), false);
     assert.equal(apiSrc.includes("68 99226-9296"), true);
     assert.ok(EDITION_PLANS.founder && EDITION_PLANS.basic && EDITION_PLANS.mid && EDITION_PLANS.superbad);
+    assert.deepEqual(EDITION_PLANS.basic.freeProvidersIncluded, ["openrouter"]);
+    assert.deepEqual(EDITION_PLANS.mid.freeProvidersIncluded, ["openrouter", "google", "omnirouter"]);
+    assert.equal(EDITION_PLANS.superbad.freeProvidersIncluded.includes("nvidia-chat-21"), true);
+    assert.equal(EDITION_PLANS.founder.freeProvidersIncluded.includes("nvidia-full-38"), true);
+    const texteHtml = fs.readFileSync(path.join(__dirname, "..", "badclaude", "superbad-texte", "index.html"), "utf8");
+    assert.equal(texteHtml.includes("38 modelos gratuitos NVIDIA Build"), true);
+    assert.equal(texteHtml.includes("trocar qualquer chave depois"), true);
   });
 
   it("supports multi-plan PIX 68 99226-9296, Ed25519 + HWID lock, Dashboard Control Owner-Proof & revocation", async () => {
