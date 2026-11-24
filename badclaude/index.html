@@ -48,22 +48,22 @@
       border-bottom: 1px solid var(--border);
     }
     .topbar-inner {
-      max-width: 1180px; margin: 0 auto; padding: 11px 20px;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      max-width: 1220px; margin: 0 auto; padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: nowrap;
     }
     .brand {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
       text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.02em;
     }
     .brand-tag {
       font-family: var(--mono); font-size: 10.5px; font-weight: 700;
-      padding: 2px 8px; border-radius: 999px;
+      padding: 2px 7px; border-radius: 999px;
       background: #0f1c2e; border: 1px solid #22446e; color: #7dd3fc;
     }
-    .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: nowrap; }
     .nav-link {
-      text-decoration: none; font-size: 12.5px; font-weight: 600; color: var(--muted);
-      padding: 6px 11px; border-radius: 8px; border: 1px solid transparent; transition: 0.15s;
+      text-decoration: none; font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap;
+      padding: 6px 9px; border-radius: 8px; border: 1px solid transparent; transition: 0.15s;
     }
     .nav-link:hover { color: var(--ink); background: var(--bg-well); border-color: var(--border); }
     .nav-link.cta {
@@ -72,10 +72,13 @@
     .nav-link.cta:hover { background: #0ea5e9; }
 
     .shift-pill {
-      display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
-      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap;
+      padding: 6px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
       background: #171a26; color: #fde68a; border: 1px solid rgba(250, 204, 21, 0.35);
       transition: 0.15s;
+    }
+    @media (max-width: 1080px) {
+      .topbar-inner, .nav-links { flex-wrap: wrap; }
     }
     .shift-pill:hover { background: #1e2334; border-color: var(--gold); }
 
@@ -321,7 +324,7 @@
             <span>Pode trocar qualquer chave depois</span>
           </div>
           <div class="proof-card" data-help-title="Windows e macOS Nativo" data-help-what="Um programa só, otimizado para cada máquina: no Windows roda com os temas oficiais do BadClaude; no Mac assume desenho nativo da Apple." data-help-how="A nuvem envia atualizações assinadas em Ed25519 para as duas plataformas.">
-            <strong>Win +  macOS</strong>
+            <strong>Win + 🍎 macOS</strong>
             <span>Desenho próprio no Mac</span>
           </div>
         </div>
@@ -337,7 +340,7 @@
           <button type="button" class="sim-tab" data-demo="cli">⚡ CLI Multi-IA</button>
           <button type="button" class="sim-tab" data-demo="video">🎬 Vídeo 2D &amp; Voz</button>
           <button type="button" class="sim-tab" data-demo="nvidia">🟢 38 NVIDIA</button>
-          <button type="button" class="sim-tab" data-demo="mac"> Mac &amp; Temas</button>
+          <button type="button" class="sim-tab" data-demo="mac">🍎 Mac &amp; Temas</button>
         </div>
         <div class="sim-screen" id="demoScreen">
           <div>
@@ -389,7 +392,7 @@
 
         <div class="os-card mac" data-help-title="BadClaude no macOS — Desenho Nativo para Mac" data-help-what="No MacBook (Apple Silicon / Intel), o BadClaude não parece programa portado: usa janela hiddenInset com semáforos Apple, barras translúcidas, controles segmentados #0a84ff, fonte SF Pro e atalhos ⌘K / ⌥Z." data-help-how="Cada atualização publicada na nuvem atualiza automaticamente o /Applications/BadClaude.app.">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <strong style="font-size:16px;"> macOS — Desenho Nativo Cupertino</strong>
+            <strong style="font-size:16px;">🍎 macOS — Desenho Nativo Cupertino</strong>
             <span class="mono" style="font-size:11px;color:#60a5fa;">Metal 3 / Apple Silicon</span>
           </div>
           <p style="font-size:13px;color:var(--muted);">Recursos visuais exclusivos do Mac: semáforos Apple integrados na barra, vibrância translúcida, menus nativos no topo da tela e atalhos <code class="mono">⌘</code>.</p>
@@ -553,7 +556,7 @@
             <tr><td>Roteadores OmniRouter (:20128) &amp; 9Router (:20129)</td><td>—</td><td>OmniRouter</td><td>Omni + 9Router</td><td class="col-vip">✓ Cascata Completa</td></tr>
             <tr><td>38 modelos gratuitos NVIDIA Build + 14 Bio/NIM</td><td>—</td><td>—</td><td>21 NVIDIA Chat</td><td class="col-vip">✓ Todos os 38 + 14 Bio</td></tr>
             <tr><td>Pode trocar qualquer chave depois + Upgrade</td><td>✓ Sim</td><td>✓ Sim</td><td>✓ Sim</td><td class="col-vip">✓ Ilimitado</td></tr>
-            <tr><td>Temas Windows + Desenho Nativo  macOS</td><td>1 PC</td><td>1 PC</td><td>Até 2 PCs</td><td class="col-vip">✓ Cascata Nuvem VIP</td></tr>
+            <tr><td>Temas Windows + Desenho Nativo 🍎 macOS</td><td>1 PC</td><td>1 PC</td><td>Até 2 PCs</td><td class="col-vip">✓ Cascata Nuvem VIP</td></tr>
           </tbody>
         </table>
       </div>
@@ -711,7 +714,7 @@
           footer: 'Só o Fundador VIP libera 100% — e você pode trocar qualquer chave depois'
         },
         mac: {
-          title: ' Desenho Nativo macOS & Temas Oficiais no Windows',
+          title: '🍎 Desenho Nativo macOS & Temas Oficiais no Windows',
           bullets: [
             'No MacBook (Apple Silicon / Intel): visual Cupertino próprio, semáforos, vibrância, SF Pro e atalhos Cmd.',
             'No Windows: você escolhe livremente entre Dark Studio Pro (padrão), Claro Limpo, RGB ou Win98.',
@@ -852,7 +855,7 @@
           if (saveIt) {
             try { localStorage.setItem(WEB_KEY_STORE, key); } catch {}
           }
-          box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win +  macOS v6.7.1 incluídas.</span>`;
+          box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + 🍎 macOS v6.7.1 incluídas.</span>`;
           if (actions) actions.style.display = saveIt ? 'flex' : 'none';
         } else {
           if (actions) actions.style.display = 'none';
