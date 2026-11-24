@@ -22095,15 +22095,19 @@ async function handleStatic(req, res, pathname, requestUrl) {
 
       // CZS 2026-11-11 — subpágina BADCLAUDE (showroom das 10 direções)
       if (pathname === "/badclaude/cliente" || pathname === "/badclaude/cliente/") {
-        return sendFile(req, res, path.join(ROOT_DIR, "badclaude", "directions", "cliente.html"), {
-          cacheControl: "no-store"
+        res.writeHead(302, {
+          Location: "/badclaude/#licenca",
+          "Cache-Control": "no-store"
         });
+        return res.end();
       }
 
       if (pathname === "/badclaude/pagamento" || pathname === "/badclaude/pagamento/") {
-        return sendFile(req, res, path.join(ROOT_DIR, "badclaude", "directions", "pagamento.html"), {
-          cacheControl: "no-store"
+        res.writeHead(302, {
+          Location: "/badclaude/#planos",
+          "Cache-Control": "no-store"
         });
+        return res.end();
       }
 
       if (pathname === "/superbad-texte" || pathname === "/superbad-texte/") {

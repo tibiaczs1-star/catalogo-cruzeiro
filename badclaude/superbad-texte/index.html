@@ -2,808 +2,826 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Super Bad Texte — BadClaudio Beta vs SuperBad</title>
-  <meta name="description" content="Compare as edições BadClaudio Beta e SuperBad, pague R$ 350,00 via PIX manual, envie o comprovante no WhatsApp e valide sua licença privada.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BadClaude v6.7.0 — Estúdio Autônomo de IA, Código, Vídeo 2D e Voz R$ 0,00</title>
+  <meta name="description" content="BadClaude Unificado v6.7.0 para Windows e macOS Nativo. Harness Guiado ou CLI Multi-IA, Fábrica de Vídeo 2D, 38 Modelos NVIDIA Build e Economia de Tokens.">
   <style>
     :root {
-      --bg: #05060b;
-      --panel: #0d1018;
-      --panel-2: #131724;
-      --line: #23283a;
-      --ink: #f3f5fa;
-      --dim: #a4acc0;
-      --cyan: #22d3ee;
-      --cyan-dark: #0ea5b7;
-      --violet: #8b5cf6;
-      --red: #c81929;
-      --green: #10b981;
-      --amber: #f5c518;
-      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
-      --mono: "Cascadia Mono", "Consolas", monospace;
+      --desk: #008080;
+      --win: #d4d0c8;
+      --win-dark: #c0c0c0;
+      --paper: #ffffff;
+      --navy: #000080;
+      --ink: #000000;
+      --dim: #404040;
+      --cyan: #30b9d1;
+      --emerald: #0fb981;
+      --orange: #fa913c;
+      --gold: #eab308;
+      --font: Tahoma, 'MS Sans Serif', 'Segoe UI', Arial, sans-serif;
+      --mono: Consolas, 'Courier New', monospace;
     }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
+    * { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0 !important; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--desk);
       color: var(--ink);
       font-family: var(--font);
-      line-height: 1.55;
-      overflow-x: hidden;
+      min-height: 100vh;
+      padding: 14px 14px 56px;
+      line-height: 1.48;
+      font-size: 13px;
     }
+    .container { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(45% 35% at 15% 5%, rgba(34, 211, 238, 0.11), transparent 70%),
-        radial-gradient(40% 35% at 88% 12%, rgba(139, 92, 246, 0.11), transparent 70%),
-        radial-gradient(45% 35% at 50% 95%, rgba(225, 29, 46, 0.09), transparent 70%);
+    /* Moldura clássica Windows 98 Clean (ZERO gradientes!) */
+    .w98-win {
+      background: var(--win);
+      border-top: 2px solid #ffffff;
+      border-left: 2px solid #ffffff;
+      border-right: 2px solid #404040;
+      border-bottom: 2px solid #404040;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
     }
-
-    :focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 2px;
-    }
-
-    a { color: var(--cyan); }
-
-    .skip-link {
-      position: absolute;
-      left: -9999px;
-      top: 8px;
-      z-index: 100;
-      background: var(--cyan);
-      color: #04171c;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .skip-link:focus {
-      left: 12px;
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 20px 16px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .topbar {
+    .w98-bar {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 5px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--mono);
-    }
-
-    .brand strong {
-      letter-spacing: 0.14em;
-      font-size: 14px;
-      color: var(--ink);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-      font-family: var(--mono);
-      font-size: 11.5px;
-      color: var(--dim);
-    }
-
-    .badge-cyan { border-color: rgba(34, 211, 238, 0.45); color: var(--cyan); }
-    .badge-red { border-color: rgba(225, 29, 46, 0.55); color: #ff8a95; }
-    .badge-green { border-color: rgba(16, 185, 129, 0.5); color: var(--green); }
-    .badge-amber { border-color: rgba(245, 197, 24, 0.5); color: var(--amber); }
-
-    .hero {
-      background: linear-gradient(180deg, var(--panel), #090b12);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1.4fr 0.9fr;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .hero h1 {
-      margin: 8px 0 10px;
-      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-price-box {
-      background: var(--panel-2);
-      border: 1px solid rgba(34, 211, 238, 0.35);
-      border-radius: 12px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
       gap: 8px;
-    }
-
-    .price-val {
-      font-family: var(--mono);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--cyan);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .card-superbad {
-      border-color: rgba(225, 29, 46, 0.55);
-    }
-
-    .card h2 {
-      margin: 0;
-      font-size: 1.2rem;
-    }
-
-    .list {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--dim);
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .list strong { color: var(--ink); }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .field label {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--dim);
-    }
-
-    .input, .select {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: #080a10;
-      color: var(--ink);
-      font: inherit;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 16px;
-      border-radius: 9px;
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-      color: var(--ink);
       font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
+      font-size: 12.5px;
+    }
+    .w98-bar-btns { display: flex; gap: 3px; align-items: center; }
+    .w98-sysbtn {
+      width: 18px; height: 17px; background: var(--win); color: #000000;
+      font-family: var(--font); font-size: 11px; font-weight: 900; line-height: 12px;
+      border-top: 2px solid #ffffff; border-left: 2px solid #ffffff;
+      border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+      display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
       text-decoration: none;
-      white-space: nowrap;
-      transition: filter 0.15s ease, border-color 0.15s ease;
+    }
+    .w98-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+    .w98-well {
+      background: var(--paper);
+      border-top: 2px solid #808080;
+      border-left: 2px solid #808080;
+      border-right: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      padding: 12px;
+    }
+    .w98-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      background: var(--win); color: var(--ink); font-family: var(--font);
+      font-weight: 700; font-size: 12.5px; padding: 7px 13px; cursor: pointer;
+      text-decoration: none;
+      border-top: 2px solid #ffffff; border-left: 2px solid #ffffff;
+      border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    }
+    .w98-btn:hover { background: #e4e1da; }
+    .w98-btn:active {
+      border-top: 2px solid #404040; border-left: 2px solid #404040;
+      border-right: 2px solid #ffffff; border-bottom: 2px solid #ffffff;
+    }
+    .w98-btn.primary { background: var(--navy); color: #ffffff; }
+    .w98-btn.primary:hover { background: #0000a8; }
+    .w98-btn.gold { background: #fef08a; color: #000000; }
+    .w98-btn.green { background: #dcfce7; color: #14532d; }
+    .w98-btn.active-tab {
+      background: var(--navy); color: #ffffff;
+      border-top: 2px solid #404040; border-left: 2px solid #404040;
+      border-right: 2px solid #ffffff; border-bottom: 2px solid #ffffff;
     }
 
-    .btn:hover:not(:disabled):not([aria-disabled="true"]) { border-color: var(--cyan); filter: brightness(1.06); }
-    .btn:disabled, .btn[aria-disabled="true"] {
-      opacity: 0.48;
-      cursor: not-allowed;
-      pointer-events: none;
+    .help-q {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; background: #ffffe1; color: #000080;
+      font-weight: 900; font-size: 11px; cursor: help; flex-shrink: 0;
+      border-top: 1px solid #ffffff; border-left: 1px solid #ffffff;
+      border-right: 1px solid #404040; border-bottom: 1px solid #404040;
     }
-    .btn-primary { background: var(--cyan); border-color: var(--cyan); color: #04171c; }
-    .btn-green { background: var(--green); border-color: var(--green); color: #03150e; }
-    .btn-red { background: var(--red); border-color: var(--red); color: #ffffff; }
 
-    .pix-panel {
-      background: #080a10;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 16px;
+    .shift-banner {
+      background: #ffffe1;
+      border: 1px solid #000000;
+      padding: 8px 12px;
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 12px;
     }
 
-    .qr-img {
-      width: 210px;
-      height: 210px;
-      max-width: 100%;
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 8px;
-      align-self: center;
+    .nav-strip {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      padding: 6px 10px; background: var(--win-dark); border-bottom: 1px solid #808080;
     }
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
 
-    .brcode-box {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      word-break: break-all;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 10px;
-      color: #c5cbe0;
-      max-height: 92px;
-      overflow-y: auto;
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; align-items: stretch; }
+    .hero-h1 { font-size: clamp(22px, 3vw, 31px); font-weight: 900; line-height: 1.18; color: #000080; margin-bottom: 8px; }
+    .hero-sub { font-size: 13.5px; color: #1f2937; margin-bottom: 12px; }
+    .stat-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+    .stat-box { background: #f3f2ee; border: 1px solid #808080; padding: 8px; }
+    .stat-box strong { display: block; font-size: 16px; color: #000080; font-family: var(--mono); }
+    .stat-box span { font-size: 11px; color: var(--dim); }
+
+    /* Simulador Interativo do Programa */
+    .demo-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+    .demo-screen {
+      background: #0a0f18; color: #e2e8f0; border: 2px solid #404040; padding: 12px;
+      font-family: var(--mono); font-size: 12px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
     }
+    .demo-screen h3 { color: #fde047; font-size: 13.5px; font-family: var(--font); margin-bottom: 4px; }
+    .demo-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; font-family: var(--font); font-size: 12.5px; }
+    .demo-bullets li::before { content: "▸ "; color: #38bdf8; font-weight: 900; }
 
-    .alert {
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      font-size: 13.5px;
-      background: var(--panel-2);
+    /* Grade dos 4 Planos */
+    .plans-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .plan-card {
+      background: var(--paper);
+      border-top: 2px solid #808080; border-left: 2px solid #808080;
+      border-right: 2px solid #ffffff; border-bottom: 2px solid #ffffff;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
+    .plan-top { padding: 10px; border-bottom: 1px solid #d4d0c8; display: flex; align-items: center; justify-content: space-between; gap: 6px; background: #f4f3ef; }
+    .plan-card.founder { border: 2px solid #000080; background: #fffdf0; }
+    .plan-card.founder .plan-top { background: #000080; color: #ffffff; }
+    .plan-mid { padding: 11px; display: flex; flex-direction: column; gap: 7px; font-size: 12px; }
+    .plan-price { font-size: 22px; font-weight: 900; color: #000080; font-family: var(--mono); }
+    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; }
+    .plan-list li.ok::before { content: "✓ "; color: #15803d; font-weight: 900; }
+    .plan-list li.no { color: #6b7280; }
+    .plan-list li.no::before { content: "— "; color: #9ca3af; font-weight: 900; }
+    .plan-foot { padding: 10px; border-top: 1px solid #d4d0c8; }
 
-    .alert-ok { border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.12); }
-    .alert-err { border-color: rgba(225, 29, 46, 0.6); background: rgba(225, 29, 46, 0.14); }
-    .alert-warn { border-color: rgba(245, 197, 24, 0.55); background: rgba(245, 197, 24, 0.1); }
+    /* Tabela Comparativa */
+    table { width: 100%; border-collapse: collapse; font-size: 12px; background: #ffffff; }
+    th, td { border: 1px solid #808080; padding: 7px 8px; text-align: left; }
+    th { background: #e8e6df; font-weight: 700; }
 
-    .hidden { display: none !important; }
+    /* Checkout & Licença */
+    .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+    .field label { font-weight: 700; font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; }
+    input, select {
+      background: #ffffff; color: #000000; padding: 7px 9px; font-family: var(--font); font-size: 12.5px; width: 100%;
+      border-top: 2px solid #808080; border-left: 2px solid #808080;
+      border-right: 2px solid #ffffff; border-bottom: 2px solid #ffffff;
+    }
+    .pix-box {
+      background: #ffffe1; border: 1px solid #000000; padding: 10px; font-size: 12px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
     .mono { font-family: var(--mono); }
 
-    @media (max-width: 820px) {
-      .hero, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    /* Barra de Tarefas Fixa Win98 no Rodapé */
+    .taskbar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+      background: var(--win);
+      border-top: 2px solid #ffffff;
+      padding: 4px 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 11.5px;
+    }
+    .taskbar-left { display: flex; align-items: center; gap: 6px; overflow-x: auto; }
+    .task-clock {
+      background: var(--win); padding: 3px 9px; font-family: var(--mono); font-size: 11px;
+      border-top: 1px solid #808080; border-left: 1px solid #808080;
+      border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff;
+      white-space: nowrap;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; animation: none !important; }
+    /* Modal de Ajuda Rápida Shift + I */
+    #shiftIModal {
+      display: none; position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0,0,0,0.45); align-items: center; justify-content: center; padding: 16px;
+    }
+    .shift-box {
+      width: min(500px, 95vw); background: #ffffe1; color: #000000;
+      border: 2px solid #000000; box-shadow: 5px 5px 0 rgba(0,0,0,0.45);
+    }
+    .shift-body { padding: 13px; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .plans-grid, .split-2 { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
-
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <strong>SUPER BAD TEXTE</strong>
-        <span class="badge badge-cyan">BadClaudio Desktop</span>
+  <div class="container">
+    <!-- JANELA PRINCIPAL / NAV + HERO -->
+    <section class="w98-win" id="topo">
+      <div class="w98-bar">
+        <span>🖥️ BadClaude.exe — Loja Oficial v6.7.0 (Windows &amp; macOS Nativo)</span>
+        <div class="w98-bar-btns">
+          <a href="/" class="w98-btn" style="padding:2px 8px;font-size:11px;" title="Voltar para o Portal Catálogo CZS">← Portal CZS</a>
+          <button type="button" class="w98-sysbtn" onclick="openHelpModal(null)" title="Ajuda Shift + I">?</button>
+        </div>
       </div>
-      <nav aria-label="Navegação do BadClaude" style="display:flex;gap:12px;flex-wrap:wrap;font-size:13px;">
-        <a href="/badclaude/">Showroom BadClaude</a>
-        <a href="/badclaude/directions/pagamento.html">PIX Geral</a>
-        <a href="/superbad-admin">Painel Admin</a>
-      </nav>
-    </header>
 
-    <main id="conteudo-principal" style="display:flex;flex-direction:column;gap:20px;">
-      <section class="hero" aria-label="Apresentação Super Bad Texte">
-        <div>
-          <span class="badge badge-red">Pacotes oficiais • Liberação privada por licença</span>
-          <h1>Escolha entre BadClaudio Beta e BadClaudio SuperBad</h1>
-          <p style="color:var(--dim);margin:0 0 12px;">
-            Ambiente desktop seguro com Claude Agent SDK, Claude Code CLI fallback, API pessoal com DPAPI, Controle de PC governado e integração OpenCode Infinite via proxy WARP.
-            A liberação do download ocorre após conferência manual do PIX e validação da nova senha gerada pelo administrador.
-          </p>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="#checkout" class="btn btn-primary">Comprar por R$ 350,00 (PIX)</a>
-            <a href="#validar-licenca" class="btn">Já tenho minha senha de licença</a>
-          </div>
+      <div class="nav-strip">
+        <div class="nav-links">
+          <a href="#demonstra" class="w98-btn" style="padding:4px 10px;font-size:11.5px;">⚡ O que Ele Faz</a>
+          <a href="#planos" class="w98-btn" style="padding:4px 10px;font-size:11.5px;">💎 Planos &amp; Preços</a>
+          <a href="#comparativo" class="w98-btn" style="padding:4px 10px;font-size:11.5px;">📊 Comparar Recursos</a>
+          <a href="#checkout" class="w98-btn green" style="padding:4px 10px;font-size:11.5px;">💸 Comprar via PIX</a>
+          <a href="#licenca" class="w98-btn" style="padding:4px 10px;font-size:11.5px;">🔑 Já Tenho Chave</a>
+        </div>
+        <span class="mono" style="font-size:11px;font-weight:700;color:#000080;">Versão Única Unificada: v6.7.0</span>
+      </div>
+
+      <div class="w98-body">
+        <div class="shift-banner">
+          <span>💡 <strong>Não entendeu alguma palavra técnica da loja?</strong> Passe o mouse sobre qualquer bloco, plano ou botão e aperte <strong>Shift + I</strong> (ou clique no <strong>?</strong>) para ver explicação simples em português.</span>
+          <button type="button" class="w98-btn" style="padding:3px 9px;font-size:11px;" onclick="openHelpModal(null)">❓ Testar Shift + I Agora</button>
         </div>
 
-        <div class="hero-price-box">
-          <span class="badge badge-amber">Pagamento único manual</span>
-          <div class="price-val">R$ 350,00</div>
-          <div class="mono" style="font-size:12.5px;color:var(--ink);">
-            Chave PIX: <strong>68 99226-9296</strong><br>
-            Titular: <strong>Raiane Lenoncio</strong>
-          </div>
-          <p style="margin:4px 0 0;font-size:12.5px;color:var(--dim);">
-            Após o pagamento, envie o comprovante no WhatsApp e aguarde a senha exclusiva da edição escolhida.
-          </p>
-        </div>
-      </section>
-
-      <section class="grid-2" aria-label="Comparativo honesto entre edições">
-        <article class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-            <h2>BadClaudio Beta</h2>
-            <span class="badge badge-cyan">Código limpo • Chaves do usuário</span>
-          </div>
-          <ul class="list">
-            <li><strong>Chaves próprias (BYOK):</strong> você cadastra sua chave pessoal no DPAPI local (SecretStore) ou usa seu Claude Code CLI / SDK.</li>
-            <li><strong>Zero segredos do fundador:</strong> nenhuma chave privada, cofre `.enc`, cache ou histórico interno é incluído no pacote Beta.</li>
-            <li><strong>Governança e Controle de PC:</strong> PermissionBroker deny-by-default, proteção SSRF com pinning de DNS e contenção de workspace.</li>
-            <li><strong>Indicado para:</strong> quem quer usar sua própria conta ou API pessoal com segurança desktop.</li>
-          </ul>
-        </article>
-
-        <article class="card card-superbad">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-            <h2>BadClaudio SuperBad</h2>
-            <span class="badge badge-red">Pacote completo • Licença dedicada</span>
-          </div>
-          <ul class="list">
-            <li><strong>Ecossistema completo:</strong> inclui a edição SuperBad completa e cofres criptografados em AES-256-GCM.</li>
-            <li><strong>Nova senha gerada por pedido:</strong> nenhuma senha padrão é embutida; o administrador emite uma senha exclusiva após conferir o PIX.</li>
-            <li><strong>Download privado temporário:</strong> link assinado com expiração curta e limite de downloads auditado no servidor.</li>
-            <li><strong>Indicado para:</strong> clientes autorizados que adquiriram o pacote completo por R$ 350,00.</li>
-          </ul>
-        </article>
-      </section>
-
-      <section class="card" aria-label="Escada de APIs Gratuitas Incorporadas por Plano">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h2 style="font-size:1.15rem;margin-bottom:4px;">Escada de Provedores Gratuitos (R$ 0,00/token) + Popup Guiado na Instalação</h2>
-            <p style="margin:0;color:var(--dim);font-size:13.5px;">
-              Na primeira abertura do BadClaude, um popup guiado pede e ensina passo a passo como gerar suas chaves gratuitas (você também pode pular ou <strong>trocar qualquer chave depois</strong> a qualquer momento):
-            </p>
-          </div>
-          <span class="badge badge-green">Tudo liberado só no Fundador</span>
-        </div>
-        <div class="grid-2" style="margin-top:4px;">
-          <div style="background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:12px;">
-            <strong style="color:var(--ink);">Plano 1 · Básico (R$ 79) &amp; Beta</strong>
-            <ul class="list" style="margin-top:6px;">
-              <li>✅ <strong>OpenRouter (:free)</strong> incorporado (<code>sk-or-v1-...</code>) + BYOK próprio.</li>
-              <li>🔒 Google AI Studio, OmniRouter, 9Router e NVIDIA ficam bloqueados nos planos superiores.</li>
-            </ul>
-          </div>
-          <div style="background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:12px;">
-            <strong style="color:var(--cyan);">Plano 2 · Studio (R$ 179)</strong>
-            <ul class="list" style="margin-top:6px;">
-              <li>✅ Tudo do Básico + <strong>Google AI Studio Grátis (<code>AIza...</code>)</strong> + <strong>OmniRouter (:20128)</strong> com tutorial.</li>
-              <li>🔒 9Router (:20129) e suíte NVIDIA Build Free exigem SuperBad ou Fundador.</li>
-            </ul>
-          </div>
-          <div style="background:var(--panel-2);border:1px solid rgba(225,29,46,0.45);border-radius:10px;padding:12px;">
-            <strong style="color:#ff8a95;">Plano 3 · SuperBad (R$ 350)</strong>
-            <ul class="list" style="margin-top:6px;">
-              <li>✅ Tudo do Studio + <strong>9Router (:20129)</strong> com tutorial + <strong>21 modelos NVIDIA Build</strong> OpenAI-compatíveis (Kimi K3.1 Pro, Nemotron 3 Ultra 550B, Gemma 4 31B, GLM 5.3 Flash, Mistral Large 4, Embeddings 1B/8B).</li>
-              <li>🔒 Endpoints NVIDIA REST especializados (6), gRPC NVCF (5) e Bio/NIM exigem Fundador.</li>
-            </ul>
-          </div>
-          <div style="background:var(--panel-2);border:1px solid rgba(245,197,24,0.55);border-radius:10px;padding:12px;">
-            <strong style="color:var(--amber);">Plano 4 · Fundador (R$ 690) — TUDO LIBERADO</strong>
-            <ul class="list" style="margin-top:6px;">
-              <li>✅ <strong>100% dos 5 provedores gratuitos incorporados:</strong> OpenRouter + Google AI Studio + OmniRouter (:20128) + 9Router (:20129) + <strong>TODOS os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM</strong> (6 REST, 5 gRPC NVCF, Arc evo2, OpenFold 2/3, Boltz-2, DiffDock, RFdiffusion, GenMol, MolMIM, FourCastNet, cuOpt).</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="grid-3" aria-label="Recursos técnicos e dependências">
-        <article class="card">
-          <h2 style="font-size:1.05rem;">Controle de PC Governado</h2>
-          <p style="margin:0;color:var(--dim);font-size:13.5px;">
-            Automação local (janelas, screenshot contido no workspace, teclado/mouse/clipboard) protegida pelo <strong>PermissionBroker</strong> em modo <em>aprovar uma vez / negar / cancelar</em>.
-          </p>
-        </article>
-        <article class="card">
-          <h2 style="font-size:1.05rem;">OpenCode Infinite + WARP</h2>
-          <p style="margin:0;color:var(--dim);font-size:13.5px;">
-            Modo opcional integrado ao <strong>OpenCode Infinite</strong> e ao proxy local <strong>Cloudflare One / WARP (127.0.0.1:40000)</strong>, mantendo isolamento por subprocesso.
-          </p>
-        </article>
-        <article class="card">
-          <h2 style="font-size:1.05rem;">Dependências &amp; Auto-Instalação</h2>
-          <p style="margin:0;color:var(--dim);font-size:13.5px;">
-            O pacote acompanha <code>Instalar-Dependencias.bat</code> e painel interno com mapa completo do que quebra se faltar cada item, além de instalação automática no <code>.venv</code>.
-          </p>
-        </article>
-      </section>
-
-      <section class="card" aria-label="Complemento opcional de efeitos de vídeo">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h2 style="font-size:1.05rem;">Complemento opcional: efeitos de vídeo no Claude</h2>
-            <p style="margin:4px 0 0;color:var(--dim);font-size:13.5px;">
-              Referência informativa externa para quem deseja explorar habilidades extras de efeitos de vídeo (instalação opcional e independente pelo usuário):
-              <a href="https://github.com/Vibha-Ramprakash/claude-video-effects" target="_blank" rel="noopener noreferrer">github.com/Vibha-Ramprakash/claude-video-effects</a>.
-            </p>
-          </div>
-          <span class="badge">Referência opcional</span>
-        </div>
-      </section>
-
-      <section class="grid-2" id="checkout" aria-label="Pedido PIX e Validação de Licença">
-        <div class="card">
-          <h2>1. Gerar pedido PIX — R$ 350,00</h2>
-          <p style="margin:0;color:var(--dim);font-size:13.5px;">
-            O valor é travado no servidor em R$ 350,00. Informe seu nome, contato e edição desejada para gerar o QR Code e o Copia e Cola.
-          </p>
-
-          <form id="orderForm" style="display:flex;flex-direction:column;gap:10px;">
-            <div class="field">
-              <label for="buyerName">Seu nome completo</label>
-              <input id="buyerName" class="input" type="text" required placeholder="Ex.: João da Silva">
-            </div>
-            <div class="field">
-              <label for="buyerContact">WhatsApp ou e-mail para contato</label>
-              <input id="buyerContact" class="input" type="text" required placeholder="Ex.: (68) 99999-9999">
-            </div>
-            <div class="field">
-              <label for="requestedEdition">Plano / Edição solicitada</label>
-              <select id="requestedEdition" class="select">
-                <option value="founder" data-price="R$ 690,00">BadClaude Fundador — R$ 690,00 (30 dias · Blindado + Nuvem)</option>
-                <option value="superbad" data-price="R$ 350,00" selected>BadClaudio SuperBad — R$ 350,00 (30 dias · Portal + 2 Máquinas)</option>
-                <option value="mid" data-price="R$ 179,00">BadClaude Studio — R$ 179,00 (30 dias · APIs Grátis + Super Poderes)</option>
-                <option value="basic" data-price="R$ 79,00">BadClaude Básico — R$ 79,00 (7 dias · BYOK)</option>
-                <option value="beta" data-price="R$ 350,00">BadClaudio Beta — R$ 350,00 (BYOK Dedicado)</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary" id="btnCreateOrder">Gerar PIX de R$ 350,00</button>
-          </form>
-
-          <div id="orderAlert" class="alert hidden" role="status"></div>
-
-          <div id="pixPanel" class="pix-panel hidden">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <span class="mono" style="font-size:12.5px;">Pedido: <strong id="pixOrderId">—</strong></span>
-              <span class="badge badge-amber" id="pixOrderStatus">Aguardando PIX</span>
-            </div>
-
-            <img id="pixQrImg" class="qr-img hidden" alt="QR Code PIX de R$ 350,00 para Raiane Lenoncio">
-
-            <div class="mono" style="font-size:12.5px;">
-              Chave PIX: <strong id="pixKeyText">68 99226-9296</strong> • Titular: <strong id="pixRecipientText">Raiane Lenoncio</strong>
-            </div>
-
-            <div class="brcode-box" id="pixBrCode">—</div>
-
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button type="button" class="btn" id="btnCopyPix">Copiar código PIX</button>
-              <a id="btnWhatsApp" class="btn btn-green" href="https://wa.me/5568992269296" target="_blank" rel="noopener noreferrer">Enviar comprovante no WhatsApp</a>
-            </div>
-
-            <div class="field" style="margin-top:4px;">
-              <label for="receiptNote">Referência / observação do comprovante</label>
-              <input id="receiptNote" class="input" type="text" placeholder="Ex.: Comprovante enviado no WhatsApp às 14:32">
+        <div class="hero-grid">
+          <div class="w98-well" style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+            <div>
+              <div style="font-size:11px;font-weight:900;color:#000080;margin-bottom:5px;text-transform:uppercase;">Estúdio Autônomo de IA + Código + Vídeo 2D + Voz R$ 0,00</div>
+              <h1 class="hero-h1">Transforme seu PC ou Mac em uma fábrica completa de software e conteúdo sem pagar assinatura cara todo mês.</h1>
+              <p class="hero-sub">
+                Na abertura do programa você escolhe em 1 segundo: <strong>Harness</strong> (tudo visual e guiado por botões) ou <strong>CLI</strong> (terminal direto ultrarrápido). Configura tudo <strong>uma única vez</strong> e nas próximas vezes já abre direto no seu padrão!
+              </p>
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button type="button" class="btn btn-primary" id="btnSubmitReceipt">Já enviei o comprovante</button>
-              <button type="button" class="btn" id="btnRefreshOrder">Atualizar status do pedido</button>
+              <a href="#planos" class="w98-btn primary">🚀 Ver Planos e Comprar Agora</a>
+              <a href="#demonstra" class="w98-btn">▶ Ver Como Funciona na Prática</a>
+              <a href="#licenca" class="w98-btn gold">🔑 Validar Minha Chave BC5</a>
             </div>
-          </div>
-        </div>
-
-        <div class="card" id="validar-licenca">
-          <h2>2. Validar senha e baixar edição</h2>
-          <p style="margin:0;color:var(--dim);font-size:13.5px;">
-            Assim que o administrador confirmar seu comprovante e gerar a nova senha da sua licença, informe-a abaixo para liberar o botão de download privado.
-          </p>
-
-          <form id="licenseForm" style="display:flex;flex-direction:column;gap:10px;">
-            <div class="field">
-              <label for="licenseKeyInput">Senha / chave de licença</label>
-              <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <input id="licenseKeyInput" class="input mono" type="password" autocomplete="off" spellcheck="false" required placeholder="Cole aqui sua senha liberada" style="flex:1 1 200px;">
-                <button type="button" class="btn" id="btnToggleLicenseVis">Mostrar</button>
+            <div class="stat-row">
+              <div class="stat-box" data-help-title="38 Modelos NVIDIA Build Grátis" data-help-what="São inteligências artificiais gratuitas de alta capacidade (código, raciocínio e visão) liberadas progressivamente conforme o plano." data-help-how="No plano Fundador VIP todos os 38 modelos gratuitos ficam desbloqueados desde o início.">
+                <strong>38 Modelos</strong>
+                <span>NVIDIA Build R$ 0 (conforme plano)</span>
+              </div>
+              <div class="stat-box" data-help-title="Troca de Plano e Chaves Depois" data-help-what="Você não fica preso: pode começar no plano menor para testar e subir depois, além de poder trocar suas chaves de API quando quiser." data-help-how="Basta pedir upgrade ou editar em Chaves &amp; APIs dentro do app.">
+                <strong>100% Flexível</strong>
+                <span>Pode trocar qualquer chave depois</span>
+              </div>
+              <div class="stat-box" data-help-title="Mesma Versão no Windows e Mac" data-help-what="No Windows tem estilo clássico limpo Win98; no Mac se adapta para parecer um programa nativo da própria Apple." data-help-how="Atualizações chegam automaticamente pela nuvem nos dois sistemas.">
+                <strong>Win + macOS</strong>
+                <span>Nativo Apple &amp; Leve no Windows</span>
               </div>
             </div>
-            <button type="submit" class="btn btn-red" id="btnValidateLicense">Validar licença e gerar link</button>
-          </form>
+          </div>
 
-          <div id="licenseAlert" class="alert hidden" role="status"></div>
-
-          <div id="downloadResultBox" class="pix-panel">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <span class="badge" id="dlStatusBadge">Aguardando validação</span>
-              <span class="mono" style="font-size:12px;">Edição: <strong id="dlEdition">—</strong></span>
+          <!-- JANELA INTERATIVA MOSTRANDO O QUE ELE FAZ -->
+          <div class="w98-well" id="demonstra" style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+              <strong style="font-size:13px;color:#000080;">▶ Veja por Dentro (Clique nas Abas):</strong>
+              <button type="button" class="help-q" data-help-title="Demonstração Interativa do App" data-help-what="Simula as 5 funções principais que você ganha ao instalar o BadClaude no seu computador." data-help-how="Clique em Harness, CLI, Vídeo 2D, 38 NVIDIA ou macOS abaixo para ver o que cada parte faz.">?</button>
             </div>
-            <div class="mono" style="font-size:12.5px;color:var(--dim);">
-              Expira em: <span id="dlExpires">—</span><br>
-              Downloads restantes: <span id="dlRemaining">—</span>
+            <div class="demo-tabs">
+              <button type="button" class="w98-btn active-tab" data-demo="harness" style="padding:4px 8px;font-size:11px;">🧪 Harness</button>
+              <button type="button" class="w98-btn" data-demo="cli" style="padding:4px 8px;font-size:11px;">⚡ CLI Multi-IA</button>
+              <button type="button" class="w98-btn" data-demo="video" style="padding:4px 8px;font-size:11px;">🎬 Vídeo 2D &amp; Voz</button>
+              <button type="button" class="w98-btn" data-demo="nvidia" style="padding:4px 8px;font-size:11px;">🟢 38 NVIDIA Free</button>
+              <button type="button" class="w98-btn" data-demo="mac" style="padding:4px 8px;font-size:11px;">🍎 Mac + Win98</button>
             </div>
-            <a id="btnPrivateDownload" class="btn btn-primary" href="#" aria-disabled="true" tabindex="-1">Valide sua licença para liberar o download</a>
+            <div class="demo-screen" id="demoScreen">
+              <div>
+                <h3 id="demoTitle">🧪 Modo Harness — Estúdio Visual Guiado (Zero Complicação)</h3>
+                <ul class="demo-bullets" id="demoList">
+                  <li>Ideal para quem quer clicar em botões prontos e ver resultados sem decorar comandos.</li>
+                  <li>Escolha Harness logo na 1ª abertura -> passe pela intro de cinema 1x -> salve seu padrão.</li>
+                  <li>Botão "Repetir Setup" permite reconfigurar tudo sem precisar assistir à intro de novo.</li>
+                  <li>Cofre automático de Skills escolhe o especialista certo para sua tarefa.</li>
+                </ul>
+              </div>
+              <div style="border-top:1px solid #1e293b;padding-top:8px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#7dd3fc;">
+                <span id="demoFooter">Disponível a partir do plano BadCode Studio</span>
+                <a href="#checkout" class="w98-btn gold" style="padding:3px 9px;font-size:11px;">Quero Este Poder →</a>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <!-- JANELA DOS 4 PLANOS COM EMBLEMAS OFICIAIS -->
+    <section class="w98-win" id="planos">
+      <div class="w98-bar">
+        <span>💎 Escolha Seu Plano — Cada Nível Libera Mais Poder (Só no Fundador VIP Tudo Fica Liberado!)</span>
+        <button type="button" class="help-q"
+          data-help-title="Como Funciona a Escada de Planos"
+          data-help-what="Organizamos os planos por nível real de uso: ninguém paga caro pelo que não usa, e quem quer tudo no máximo escolhe o Fundador VIP. Além disso, você pode fazer upgrade pagando a diferença e trocar qualquer chave depois."
+          data-help-how="Clique em Escolher Plano em qualquer cartão abaixo para preencher o PIX na hora.">?</button>
+      </div>
+      <div class="w98-body">
+        <div style="background:#ffffe1;border:1px solid #000000;padding:8px 10px;font-size:12px;">
+          <strong>Transparência Total:</strong> Nem tudo fica liberado no plano 1, nem no 2 e nem no 3 — <strong>somente o Fundador VIP libera 100% de tudo</strong>. E se você começar em um plano menor, pode fazer upgrade e <strong>trocar qualquer chave depois</strong> a qualquer momento!
+        </div>
+
+        <div class="plans-grid">
+          <!-- PLANO 1 -->
+          <div class="plan-card" data-help-title="Plano 1: Essencial" data-help-what="Entrada rápida para conversar com IA e programar no modo limpo com OpenRouter Free e suporte opcional à sua chave do Google." data-help-how="Clique em Escolher Essencial para comprar por R$ 147 via PIX.">
+            <div>
+              <div class="plan-top">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 1.5 C12 7.2 7.2 12 1.5 12 C7.2 12 12 16.8 12 22.5 C12 16.8 16.8 12 22.5 12 C16.8 12 12 7.2 12 1.5 Z" fill="#30b9d1"/></svg>
+                  <strong>1. Essencial</strong>
+                </div>
+                <span class="mono" style="font-size:10.5px;">7d · 1 PC</span>
+              </div>
+              <div class="plan-mid">
+                <div class="plan-price">R$ 147</div>
+                <p style="font-size:11.5px;color:var(--dim);">Chat &amp; código limpo sem distrações. Leve até em notebook simples.</p>
+                <ul class="plan-list">
+                  <li class="ok">Terminal CLI + Chat limpo</li>
+                  <li class="ok">OpenRouter (:free) incluso</li>
+                  <li class="ok">Google AI Studio (chave própria)</li>
+                  <li class="ok">Até 8 modelos NVIDIA essenciais</li>
+                  <li class="no">Sem Fábrica de Vídeo 2D &amp; Voz</li>
+                  <li class="no">Sem Equipe IA / OmniRouter</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <button type="button" class="w98-btn" style="width:100%;" onclick="selectPlanOrder('basic')">Escolher Essencial</button>
+            </div>
+          </div>
+
+          <!-- PLANO 2 -->
+          <div class="plan-card" data-help-title="Plano 2: BadCode Studio" data-help-what="Libera o Estúdio criativo com 5 estações locais: Chat, Código, Vídeo 2D R$ 0, Personagem e Voz em português." data-help-how="Clique em Escolher Studio para comprar por R$ 247 via PIX.">
+            <div>
+              <div class="plan-top">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <svg viewBox="0 0 24 24" width="24" height="24"><rect x="10" y="3" width="4" height="4" transform="rotate(45 12 5)" fill="#0fb981"/><rect x="17" y="10" width="4" height="4" transform="rotate(45 19 12)" fill="#0fb981"/><rect x="10" y="17" width="4" height="4" transform="rotate(45 12 19)" fill="#0fb981"/><rect x="3" y="10" width="4" height="4" transform="rotate(45 5 12)" fill="#0fb981"/></svg>
+                  <strong>2. BadCode Studio</strong>
+                </div>
+                <span class="mono" style="font-size:10.5px;">30d · 1 PC</span>
+              </div>
+              <div class="plan-mid">
+                <div class="plan-price">R$ 247</div>
+                <p style="font-size:11.5px;color:var(--dim);">5 estações dedicadas para criar código, vídeos 2D e voz neural grátis.</p>
+                <ul class="plan-list">
+                  <li class="ok">Harness Visual + CLI</li>
+                  <li class="ok">Fábrica Vídeo 2D &amp; Voz PT-BR</li>
+                  <li class="ok">OpenRouter + Google AI Studio</li>
+                  <li class="ok">20 modelos NVIDIA Build Free</li>
+                  <li class="no">Sem 38 NVIDIA completos</li>
+                  <li class="no">Sem Bio/NIM &amp; Prioridade Nuvem</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <button type="button" class="w98-btn" style="width:100%;" onclick="selectPlanOrder('mid')">Escolher BadCode Studio</button>
+            </div>
+          </div>
+
+          <!-- PLANO 3 -->
+          <div class="plan-card" data-help-title="Plano 3: Cockpit Pro" data-help-what="Para quem precisa rodar até 2 computadores, usar roteadores OmniRouter/9Router e coordenar Equipe de Agentes IA." data-help-how="Clique em Escolher Cockpit Pro para comprar por R$ 350 via PIX.">
+            <div>
+              <div class="plan-top">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2L13.5 9.2L19 5L14.8 10.5L22 12L14.8 13.5L19 19L13.5 14.8L12 22L10.5 14.8L5 19L9.2 13.5L2 12L9.2 10.5L5 5L10.5 9.2Z" fill="#fa913c"/></svg>
+                  <strong>3. Cockpit Pro</strong>
+                </div>
+                <span class="mono" style="font-size:10.5px;">30d · 2 PCs</span>
+              </div>
+              <div class="plan-mid">
+                <div class="plan-price">R$ 350</div>
+                <p style="font-size:11.5px;color:var(--dim);">Terminal multi-IA, equipe automatizada, roteadores e 2 máquinas.</p>
+                <ul class="plan-list">
+                  <li class="ok">Tudo do Studio + 2 PCs (Win/Mac)</li>
+                  <li class="ok">Equipe IA &amp; Automação Swarm</li>
+                  <li class="ok">OmniRouter (:20128) + 9Router</li>
+                  <li class="ok">32 modelos NVIDIA Build Free</li>
+                  <li class="no">Sem os 38 modelos completos</li>
+                  <li class="no">Sem 14 Bio/NIM &amp; VIP Cascata</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <button type="button" class="w98-btn primary" style="width:100%;" onclick="selectPlanOrder('superbad')">Escolher Cockpit Pro</button>
+            </div>
+          </div>
+
+          <!-- PLANO 4 -->
+          <div class="plan-card founder" data-help-title="Plano 4: Fundador VIP (Tudo Liberado)" data-help-what="Único plano com 100% dos recursos, todos os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM e atualizações imediatas Windows + macOS." data-help-how="Clique em Escolher Fundador VIP para garantir acesso total por R$ 690.">
+            <div>
+              <div class="plan-top">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 1L14.2 8.8L21.5 4.2L15.6 10.7L23 12L15.6 13.3L21.5 19.8L14.2 15.2L12 23L9.8 15.2L2.5 19.8L8.4 13.3L1 12L8.4 10.7L2.5 4.2L9.8 8.8Z" fill="#facc15"/></svg>
+                  <strong>4. Fundador VIP</strong>
+                </div>
+                <span class="mono" style="font-size:10.5px;background:#fef08a;color:#000;padding:1px 5px;">TUDO ON</span>
+              </div>
+              <div class="plan-mid">
+                <div class="plan-price">R$ 690</div>
+                <p style="font-size:11.5px;color:#111827;"><strong>Acesso absoluto sem travas.</strong> O único com todas as funções liberadas.</p>
+                <ul class="plan-list">
+                  <li class="ok"><strong>Todos os 38 modelos gratuitos NVIDIA Build</strong></li>
+                  <li class="ok"><strong>+ 14 modelos Bio/NIM especiais</strong></li>
+                  <li class="ok">Todos os roteadores (Google, OR, Omni, 9R, Ollama)</li>
+                  <li class="ok">Todas as estações + macOS Nativo VIP</li>
+                  <li class="ok">Atualização imediata em nuvem (Win + Mac)</li>
+                  <li class="ok">Pode trocar chaves e dispositivos com suporte VIP</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <button type="button" class="w98-btn gold" style="width:100%;" onclick="selectPlanOrder('founder')">✳ Escolher Fundador VIP</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARATIVO CLARO -->
+    <section class="w98-win" id="comparativo">
+      <div class="w98-bar">
+        <span>📊 O Que Cada Plano Libera na Prática</span>
+        <button type="button" class="help-q"
+          data-help-title="Tabela Comparativa dos Planos"
+          data-help-what="Mostra exatamente a diferença entre cada nível para você saber por que apenas o Fundador VIP tem tudo liberado."
+          data-help-how="Compare as colunas e escolha o plano ideal acima.">?</button>
+      </div>
+      <div class="w98-body">
+        <div class="w98-well" style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Recurso / Poder</th>
+                <th>✦ Essencial</th>
+                <th>❖ BadCode Studio</th>
+                <th>✴ Cockpit Pro</th>
+                <th>✳ Fundador VIP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Escolha na Abertura: Harness ou CLI</td><td>CLI Limpo</td><td>✓ Sim</td><td>✓ Sim</td><td><strong>✓ Total</strong></td></tr>
+              <tr><td>Fábrica de Vídeos 2D + Voz PT-BR R$ 0</td><td>—</td><td>✓ Incluso</td><td>✓ Incluso</td><td><strong>✓ Prioridade Max</strong></td></tr>
+              <tr><td>OpenRouter (:free) &amp; Google AI Studio</td><td>✓ Sim</td><td>✓ Sim</td><td>✓ Sim</td><td><strong>✓ Tudo</strong></td></tr>
+              <tr><td>Roteadores OmniRouter (:20128) &amp; 9Router</td><td>—</td><td>Parcial</td><td>✓ Completos</td><td><strong>✓ Completos</strong></td></tr>
+              <tr><td>38 modelos gratuitos NVIDIA Build + Bio/NIM</td><td>8 modelos</td><td>20 modelos</td><td>32 modelos</td><td><strong>✓ Todos os 38 + 14 Bio</strong></td></tr>
+              <tr><td>Pode trocar qualquer chave depois + Upgrade</td><td>✓ Sim</td><td>✓ Sim</td><td>✓ Sim</td><td><strong>✓ Ilimitado</strong></td></tr>
+              <tr><td>Windows Win98 Clean + macOS Nativo Apple</td><td>1 PC</td><td>1 PC</td><td>Até 2 PCs</td><td><strong>✓ Cascata VIP</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECKOUT PIX + VALIDAR CHAVE -->
+    <section class="split-2">
+      <div class="w98-win" id="checkout">
+        <div class="w98-bar">
+          <span>💸 Finalizar Pedido via PIX Direto</span>
+          <button type="button" class="help-q"
+            data-help-title="Como Comprar via PIX Instantâneo"
+            data-help-what="Você gera seu pedido aqui, faz o PIX para 68 99226-9296 (Raiane Lenoncio) e informa o comprovante. Nossa equipe aprova no Dashboard Control e sua chave BC5 é liberada."
+            data-help-how="Preencha nome, contato, selecione o plano e clique em Gerar Pedido PIX.">?</button>
+        </div>
+        <div class="w98-body">
+          <div class="pix-box">
+            <strong>Dados Oficiais do PIX:</strong>
+            <div>Chave Telefone: <span class="mono" style="font-weight:900;color:#000080;">68 99226-9296</span> &nbsp;|&nbsp; Titular: <strong>Raiane Lenoncio</strong></div>
+            <button type="button" class="w98-btn" style="align-self:flex-start;padding:4px 10px;font-size:11.5px;" onclick="copyPixKey()">📋 Copiar Chave PIX (68 99226-9296)</button>
+          </div>
+
+          <form id="orderForm">
+            <div class="field">
+              <label for="ordPlan">Plano Escolhido <button type="button" class="help-q" data-help-title="Seleção do Plano" data-help-what="Define o preço oficial no servidor e o que será desbloqueado na sua chave BC5." data-help-how="Escolha entre Essencial, BadCode Studio, Cockpit Pro ou Fundador VIP.">?</button></label>
+              <select id="ordPlan">
+                <option value="founder">✳ Fundador VIP — R$ 690,00 (Tudo Liberado)</option>
+                <option value="superbad" selected>✴ Cockpit Pro — R$ 350,00 (Até 2 PCs)</option>
+                <option value="mid">❖ BadCode Studio — R$ 247,00 (5 Estações)</option>
+                <option value="basic">✦ Essencial — R$ 147,00 (Entrada Leve)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ordName">Seu Nome Completo</label>
+              <input id="ordName" type="text" required placeholder="Ex.: João da Silva">
+            </div>
+            <div class="field">
+              <label for="ordContact">Seu WhatsApp ou E-mail (para entrega da chave)</label>
+              <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999">
+            </div>
+            <button type="submit" class="w98-btn primary" style="width:100%;">💸 Gerar Pedido PIX Agora</button>
+          </form>
+
+          <div id="orderResultBox" class="w98-well" style="display:none;flex-direction:column;gap:8px;font-size:12px;">
+            <strong style="color:#15803d;" id="orderResultHead">Pedido Gerado!</strong>
+            <div class="mono" id="orderResultCode" style="background:#ffffe1;padding:6px;border:1px solid #000;word-break:break-all;">—</div>
+            <div id="orderPixQrWrap" style="text-align:center;"></div>
+            <div class="field" style="margin-bottom:2px;">
+              <label for="ordReceiptNote">Enviar Nota / Código E2E do Comprovante PIX:</label>
+              <input id="ordReceiptNote" type="text" placeholder="Ex.: PIX enviado agora por João - R$ 350">
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button type="button" class="w98-btn green" id="btnSendReceipt">✓ Enviar Comprovante</button>
+              <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="w98-btn">📱 Abrir WhatsApp</a>
+            </div>
+            <div id="orderReceiptStatus" style="font-size:11.5px;font-weight:700;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÁREA DO CLIENTE (LOGIN ONLINE + SALVAR CHAVE) -->
+      <div class="w98-win" id="licenca">
+        <div class="w98-bar">
+          <span>🔑 Já Tem Chave? Logar Online &amp; Salvar Neste PC</span>
+          <button type="button" class="help-q"
+            data-help-title="Login Online + Salvar Chave"
+            data-help-what="Valida sua chave BC5-... diretamente no servidor online da loja. Marque a caixa abaixo para deixar a chave salva e entrar direto sem precisar digitar toda vez."
+            data-help-how="Cole sua chave, deixe 'Salvar chave' marcado e clique em Logar Online Agora.">?</button>
+        </div>
+        <div class="w98-body">
+          <div class="w98-well">
+            <p style="font-size:12px;margin-bottom:8px;">Entre online com sua chave assinada (<strong>BC5-FND-...</strong>, <strong>BC5-MID-...</strong> ou <strong>BC5-BSC-...</strong>) para conferir plano ativo e liberar acesso direto:</p>
+            <form id="verifyForm">
+              <div class="field">
+                <label for="licKeyInput">Sua Chave BadClaude</label>
+                <input id="licKeyInput" type="text" placeholder="BC5-FND-..." required>
+              </div>
+              <label style="display:flex;align-items:center;gap:7px;margin-bottom:9px;padding:6px 8px;background:#dcfce7;border:1px solid #15803d;font-size:11.5px;font-weight:700;cursor:pointer;">
+                <input type="checkbox" id="chkSaveWebKey" checked style="width:auto;">
+                <span>Salvar minha chave neste computador para entrar direto na próxima vez</span>
+              </label>
+              <button type="submit" class="w98-btn primary" style="width:100%;">🔓 Logar Online Agora</button>
+            </form>
+            <div id="licResultBox" style="display:none;margin-top:10px;padding:9px;background:#ffffe1;border:1px solid #000;font-size:12px;"></div>
+            <div id="licSavedActions" style="display:none;margin-top:8px;gap:6px;flex-wrap:wrap;">
+              <button type="button" class="w98-btn" id="btnCopySavedWebKey">📋 Copiar Chave Salva</button>
+              <button type="button" class="w98-btn" id="btnForgetWebKey">🗑️ Trocar / Esquecer Chave</button>
+            </div>
+          </div>
+
+          <div class="w98-well" style="font-size:12px;">
+            <strong style="color:#000080;">Atendimento &amp; Suporte Direto (Troca de PC / Upgrade):</strong>
+            <p style="margin-top:4px;color:var(--dim);">Precisa liberar troca de computador ou fazer upgrade do plano Essencial/Studio para Fundador VIP? Fale direto pelo WhatsApp oficial:</p>
+            <a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="w98-btn green" style="margin-top:8px;">📱 WhatsApp Suporte: (68) 99226-9296</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BARRA DE TAREFAS WINDOWS 98 -->
+  <div class="taskbar">
+    <div class="taskbar-left">
+      <a href="#topo" class="w98-btn" style="padding:3px 9px;font-size:11.5px;">🪟 Iniciar · BadClaude v6.7</a>
+      <a href="#planos" class="w98-btn" style="padding:3px 9px;font-size:11px;">💎 Planos</a>
+      <a href="#checkout" class="w98-btn" style="padding:3px 9px;font-size:11px;">💸 Comprar PIX</a>
+      <span id="hoverBarHint" style="font-size:11px;color:#000080;font-weight:700;white-space:nowrap;">Passe o mouse + Shift + I = Explicação Rápida</span>
+    </div>
+    <div class="task-clock" id="taskClock">v6.7.0</div>
+  </div>
+
+  <!-- JANELA DE AJUDA RÁPIDA SHIFT + I -->
+  <div id="shiftIModal" role="dialog" aria-modal="true" aria-label="Explicação Rápida Shift+I">
+    <div class="shift-box">
+      <div class="w98-bar">
+        <span>❓ Ajuda Rápida da Loja · Shift + I</span>
+        <button type="button" class="w98-sysbtn" id="btnCloseShiftI">✕</button>
+      </div>
+      <div class="shift-body">
+        <h3 id="shiftITitle" style="color:#000080;font-size:14px;">Entenda este item</h3>
+        <div><strong>O que significa:</strong> <span id="shiftIWhat">—</span></div>
+        <div><strong>Como funciona para você:</strong> <span id="shiftIHow">—</span></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:4px;">
+          <button type="button" class="w98-btn primary" id="btnOkShiftI">Entendi [ESC]</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
     (function () {
-      "use strict";
-
-      function $(id) { return document.getElementById(id); }
-
-      function statusPtBr(st) {
-        var map = {
-          pending_pix: "Aguardando PIX",
-          receipt_submitted: "Comprovante em análise",
-          approved: "Aprovado",
-          revoked: "Revogado",
-          expired: "Expirado"
-        };
-        return map[st] || String(st || "Pendente");
-      }
-
-      function setAlert(box, kind, msg) {
-        box.className = "alert " + (kind === "ok" ? "alert-ok" : kind === "err" ? "alert-err" : "alert-warn");
-        box.textContent = String(msg || "");
-        box.classList.remove("hidden");
-      }
-
-      function setDownloadEnabled(url) {
-        var link = $("btnPrivateDownload");
-        if (url) {
-          link.href = url;
-          link.removeAttribute("aria-disabled");
-          link.removeAttribute("tabindex");
-          link.textContent = "Baixar pacote privado agora";
-        } else {
-          link.href = "#";
-          link.setAttribute("aria-disabled", "true");
-          link.setAttribute("tabindex", "-1");
-          link.textContent = "Valide sua licença para liberar o download";
+      const $ = (id) => document.getElementById(id);
+      const DEMOS = {
+        harness: {
+          title: '🧪 Modo Harness — Estúdio Visual Guiado (Zero Complicação)',
+          bullets: [
+            'Ideal para quem quer clicar em botões prontos e ver resultados sem decorar comandos.',
+            'Escolha Harness logo na 1ª abertura -> passe pela intro de cinema 1x -> salve seu padrão.',
+            'Botão "Repetir Setup" permite reconfigurar tudo sem precisar repetir a introdução.',
+            'Cofre automático de Skills escolhe o especialista certo para sua tarefa.'
+          ],
+          footer: 'Disponível a partir do BadCode Studio (e completo no Fundador VIP)'
+        },
+        cli: {
+          title: '⚡ Modo CLI — Terminal Multi-IA Direto de Alta Velocidade',
+          bullets: [
+            'Conecta Pool Gratuito (R$ 0,00), Claude Opus/Sonnet/Fable, Astra e Super Powers num lugar só.',
+            'Na próxima abertura entra direto no seu terminal sem telas de propaganda no meio.',
+            'Barra lateral limpa com monitoramento ao vivo de hardware, VRAM e economia de tokens.',
+            'Pode trocar de chave ou provedor quando quiser.'
+          ],
+          footer: 'Leve até em notebooks básicos a partir do Essencial'
+        },
+        video: {
+          title: '🎬 Fábrica de Vídeos 2D + Voz em Português a R$ 0,00',
+          bullets: [
+            'Gera roteiro, storyboard, personagem 2D e narração em português sem API paga.',
+            'Exporta vídeo pronto para YouTube Shorts, TikTok, Reels e Kwai em 9:16.',
+            'Motor 100% local + pool gratuito para economizar centenas de reais por mês.',
+            'Integrado diretamente no painel de trabalho sem precisar abrir vários apps.'
+          ],
+          footer: 'Liberado a partir do BadCode Studio'
+        },
+        nvidia: {
+          title: '🟢 38 Modelos NVIDIA Build + Economia de Tokens (Escada Justa)',
+          bullets: [
+            'Essencial: OpenRouter Free + Google AI Studio + 8 modelos NVIDIA essenciais.',
+            'BadCode Studio: sobe para 20 modelos gratuitos + estações de vídeo e voz.',
+            'Cockpit Pro: chega a 32 modelos NVIDIA + OmniRouter (:20128) + 9Router (:20129).',
+            'Fundador VIP: TODOS os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM desbloqueados!'
+          ],
+          footer: 'Só o Fundador VIP libera 100% — e você pode trocar qualquer chave depois'
+        },
+        mac: {
+          title: '🍎 Nativo no macOS & 🪟 Win98 Clean no Windows — 1 Única Versão',
+          bullets: [
+            'No MacBook (Apple Silicon / Intel): visual Cupertino, barra translúcida, atalhos Cmd e fontes SF Pro.',
+            'No Windows: visual Win98 limpo sem gradientes pesados e zero processos zumbis duplicados.',
+            'Toda atualização enviada pela nuvem já vai otimizada automaticamente para Windows e Mac.',
+            'Todos os computadores rodam a mesma versão v6.7.0 assinada em Ed25519.'
+          ],
+          footer: 'Sistema único unificado v6.7.0'
         }
-      }
+      };
 
-      var currentOrder = null;
-
-      $("btnPrivateDownload").addEventListener("click", function (ev) {
-        if ($("btnPrivateDownload").getAttribute("aria-disabled") === "true") {
-          ev.preventDefault();
-        }
-      });
-
-      function selectedPlanPrice() {
-        var sel = $("requestedEdition");
-        var opt = sel && sel.options ? sel.options[sel.selectedIndex] : null;
-        return (opt && opt.getAttribute("data-price")) || "R$ 350,00";
-      }
-
-      if ($("requestedEdition")) {
-        $("requestedEdition").addEventListener("change", function () {
-          $("btnCreateOrder").textContent = "Gerar PIX de " + selectedPlanPrice();
+      document.querySelectorAll('[data-demo]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-demo]').forEach((b) => b.classList.remove('active-tab'));
+          btn.classList.add('active-tab');
+          const d = DEMOS[btn.dataset.demo] || DEMOS.harness;
+          $('demoTitle').textContent = d.title;
+          $('demoList').innerHTML = d.bullets.map((x) => `<li>${x}</li>`).join('');
+          $('demoFooter').textContent = d.footer;
         });
-        $("btnCreateOrder").textContent = "Gerar PIX de " + selectedPlanPrice();
+      });
+
+      // Sistema Mouse Hover + Shift + I
+      let lastHoverEl = null;
+      function openHelpModal(rawEl) {
+        let el = rawEl && rawEl.nodeType === 1 ? rawEl : lastHoverEl;
+        if (el && !el.dataset?.helpTitle) el = el.closest?.('[data-help-title]');
+        if (el?.dataset?.helpTitle) {
+          $('shiftITitle').textContent = el.dataset.helpTitle;
+          $('shiftIWhat').textContent = el.dataset.helpWhat || 'Recurso oficial da loja BadClaude.';
+          $('shiftIHow').textContent = el.dataset.helpHow || 'Selecione um plano e conclua via PIX ou valide sua chave.';
+        } else {
+          $('shiftITitle').textContent = 'Ajuda Rápida da Loja BadClaude';
+          $('shiftIWhat').textContent = 'Aqui você escolhe entre Essencial, BadCode Studio, Cockpit Pro ou Fundador VIP (único com tudo liberado).';
+          $('shiftIHow').textContent = 'Aponte o mouse para qualquer número, botão ou cartão e aperte Shift + I (ou clique em ?).';
+        }
+        $('shiftIModal').style.display = 'flex';
+      }
+      window.openHelpModal = openHelpModal;
+      function closeHelpModal() { $('shiftIModal').style.display = 'none'; }
+
+      document.addEventListener('pointerover', (ev) => {
+        const hit = ev.target?.closest?.('[data-help-title]');
+        if (hit) {
+          lastHoverEl = hit;
+          $('hoverBarHint').textContent = 'Shift+I: ' + hit.dataset.helpTitle;
+        }
+      }, { passive: true });
+      window.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape') closeHelpModal();
+        if (ev.shiftKey && !ev.ctrlKey && !ev.altKey && !ev.metaKey && ev.key.toLowerCase() === 'i') {
+          const ae = document.activeElement;
+          if (ae && ['INPUT', 'TEXTAREA', 'SELECT'].includes(ae.tagName)) return;
+          ev.preventDefault();
+          openHelpModal(lastHoverEl);
+        }
+      });
+      document.body.addEventListener('click', (ev) => {
+        const q = ev.target.closest?.('.help-q');
+        if (q) {
+          ev.preventDefault();
+          openHelpModal(q);
+        }
+      });
+      $('btnCloseShiftI').addEventListener('click', closeHelpModal);
+      $('btnOkShiftI').addEventListener('click', closeHelpModal);
+      $('shiftIModal').addEventListener('click', (ev) => { if (ev.target === $('shiftIModal')) closeHelpModal(); });
+
+      window.selectPlanOrder = function (plan) {
+        $('ordPlan').value = plan;
+        document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' });
+      };
+      window.copyPixKey = function () {
+        navigator.clipboard?.writeText('68 99226-9296');
+        alert('Chave PIX 68 99226-9296 (Raiane Lenoncio) copiada!');
+      };
+
+      // Checkout PIX real
+      let activeOrder = null;
+      $('orderForm').addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const res = await fetch('/api/superbad/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            buyer_name: $('ordName').value.trim(),
+            buyer_contact: $('ordContact').value.trim(),
+            requested_edition: $('ordPlan').value,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok || !data.order) {
+          alert(data.error || 'Erro ao gerar pedido PIX. Confira os campos.');
+          return;
+        }
+        activeOrder = data.order;
+        $('orderResultBox').style.display = 'flex';
+        $('orderResultHead').textContent = `Pedido ${activeOrder.order_id} (${activeOrder.amount_display}) pronto!`;
+        $('orderResultCode').textContent = `PIX Copia e Cola: ${activeOrder.pix?.brcode || 'Chave: 68 99226-9296'}`;
+        $('orderPixQrWrap').innerHTML = activeOrder.pix?.qr_data_url
+          ? `<img src="${activeOrder.pix.qr_data_url}" alt="QR Code PIX" style="width:150px;height:150px;border:1px solid #000;background:#fff;padding:4px;">`
+          : '';
+        if (activeOrder.whatsapp_url) $('btnWhatsOrder').href = activeOrder.whatsapp_url;
+      });
+
+      $('btnSendReceipt').addEventListener('click', async () => {
+        if (!activeOrder) return;
+        const note = $('ordReceiptNote').value.trim();
+        if (!note) {
+          $('orderReceiptStatus').textContent = 'Digite uma observação ou código do comprovante.';
+          return;
+        }
+        const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ order_secret: activeOrder.order_secret, receipt_note: note }),
+        });
+        const d = await res.json().catch(() => ({}));
+        $('orderReceiptStatus').style.color = res.ok ? '#15803d' : '#b91c1c';
+        $('orderReceiptStatus').textContent = res.ok
+          ? '✓ Comprovante registrado! Assim que conferido no Dashboard Control sua chave BC5 é liberada.'
+          : (d.error || 'Erro ao enviar comprovante.');
+      });
+
+      // Login online por chave BC5 com salvamento local opcional
+      const WEB_KEY_STORE = 'badclaude_saved_web_key';
+      async function verifyOnlineKey(key, saveIt) {
+        const box = $('licResultBox');
+        const actions = $('licSavedActions');
+        box.style.display = 'block';
+        box.textContent = 'Autenticando online no servidor de licenças...';
+        const res = await fetch('/api/v1/licenses/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, hwid: 'web-' + (navigator.platform || 'browser') }),
+        });
+        const d = await res.json().catch(() => ({}));
+        if (res.ok && d.ok) {
+          if (saveIt) {
+            try { localStorage.setItem(WEB_KEY_STORE, key); } catch {}
+          }
+          box.innerHTML = `<strong style="color:#15803d;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><br>Plano: <b>${d.edition}</b> (${d.tier}) · Atualizações Win+macOS v6.7.0 incluídas.`;
+          if (actions) actions.style.display = saveIt ? 'flex' : 'none';
+        } else {
+          if (actions) actions.style.display = 'none';
+          box.innerHTML = `<strong style="color:#b91c1c;">⚠ ${d.error || 'Chave não reconhecida, expirada ou sem internet.'}</strong>`;
+        }
       }
 
-      $("orderForm").addEventListener("submit", function (ev) {
+      $('verifyForm').addEventListener('submit', async (ev) => {
         ev.preventDefault();
-        var name = $("buyerName").value.trim();
-        var contact = $("buyerContact").value.trim();
-        var edition = $("requestedEdition").value;
-        var alertBox = $("orderAlert");
+        const k = $('licKeyInput').value.trim();
+        const saveIt = Boolean($('chkSaveWebKey')?.checked);
+        await verifyOnlineKey(k, saveIt);
+      });
 
-        if (!name || !contact) {
-          setAlert(alertBox, "warn", "Preencha seu nome e contato para gerar o pedido PIX.");
-          return;
+      $('btnCopySavedWebKey')?.addEventListener('click', () => {
+        try {
+          const saved = localStorage.getItem(WEB_KEY_STORE) || $('licKeyInput').value.trim();
+          if (saved) navigator.clipboard?.writeText(saved);
+          alert('Chave copiada!');
+        } catch {}
+      });
+
+      $('btnForgetWebKey')?.addEventListener('click', () => {
+        try { localStorage.removeItem(WEB_KEY_STORE); } catch {}
+        $('licKeyInput').value = '';
+        $('licResultBox').style.display = 'none';
+        $('licSavedActions').style.display = 'none';
+      });
+
+      try {
+        const savedWebKey = localStorage.getItem(WEB_KEY_STORE);
+        if (savedWebKey && savedWebKey.startsWith('BC5-')) {
+          $('licKeyInput').value = savedWebKey;
+          verifyOnlineKey(savedWebKey, true);
         }
+      } catch {}
 
-        var btn = $("btnCreateOrder");
-        btn.disabled = true;
-        btn.textContent = "Gerando pedido PIX...";
-
-        fetch("/api/superbad/orders", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            buyer_name: name,
-            buyer_contact: contact,
-            requested_edition: edition
-          })
-        })
-          .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, data: d }; }); })
-          .then(function (res) {
-            if (!res.ok || !res.data || !res.data.ok) {
-              throw new Error((res.data && res.data.error) || "Falha ao criar pedido.");
-            }
-            var ord = res.data.order || res.data;
-            currentOrder = {
-              order_id: ord.order_id,
-              order_secret: ord.order_secret
-            };
-            $("pixOrderId").textContent = ord.order_id || "—";
-            $("pixOrderStatus").textContent = statusPtBr(ord.status || "pending_pix");
-            if (ord.pix) {
-              $("pixKeyText").textContent = ord.pix.key || "68 99226-9296";
-              $("pixRecipientText").textContent = ord.pix.recipient || "Raiane Lenoncio";
-              $("pixBrCode").textContent = ord.pix.brcode || "";
-              if (ord.pix.qr_data_url) {
-                $("pixQrImg").src = ord.pix.qr_data_url;
-                $("pixQrImg").classList.remove("hidden");
-              } else {
-                $("pixQrImg").classList.add("hidden");
-              }
-            }
-            if (ord.whatsapp_url) {
-              $("btnWhatsApp").href = ord.whatsapp_url;
-            }
-            $("pixPanel").classList.remove("hidden");
-            setAlert(alertBox, "ok", "Pedido criado com sucesso. Faça o PIX de " + (ord.amount_display || selectedPlanPrice()) + " (chave 68 99226-9296) e envie o comprovante no WhatsApp.");
-          })
-          .catch(function (err) {
-            setAlert(alertBox, "err", err.message || "Erro ao criar pedido.");
-          })
-          .finally(function () {
-            btn.disabled = false;
-            btn.textContent = "Gerar PIX de " + selectedPlanPrice();
-          });
-      });
-
-      $("btnCopyPix").addEventListener("click", function () {
-        var code = $("pixBrCode").textContent;
-        if (!code) return;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(code).then(function () {
-            $("btnCopyPix").textContent = "Código PIX copiado!";
-            setTimeout(function () { $("btnCopyPix").textContent = "Copiar código PIX"; }, 1800);
-          }).catch(function () {});
-        }
-      });
-
-      $("btnSubmitReceipt").addEventListener("click", function () {
-        if (!currentOrder || !currentOrder.order_id) return;
-        var note = $("receiptNote").value.trim() || "Comprovante enviado no WhatsApp";
-        var alertBox = $("orderAlert");
-        var btn = $("btnSubmitReceipt");
-        btn.disabled = true;
-        btn.textContent = "Enviando comprovante...";
-
-        fetch("/api/superbad/orders/" + encodeURIComponent(currentOrder.order_id) + "/receipt", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            order_secret: currentOrder.order_secret,
-            receipt_note: note
-          })
-        })
-          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-          .then(function (res) {
-            if (!res.ok || !res.data || !res.data.ok) {
-              throw new Error((res.data && res.data.error) || "Não foi possível registrar o comprovante.");
-            }
-            var ord = res.data.order || res.data;
-            $("pixOrderStatus").textContent = statusPtBr(ord.status || "receipt_submitted");
-            setAlert(alertBox, "ok", "Comprovante registrado. Aguarde a validação do administrador para receber sua senha.");
-          })
-          .catch(function (err) {
-            setAlert(alertBox, "err", err.message);
-          })
-          .finally(function () {
-            btn.disabled = false;
-            btn.textContent = "Já enviei o comprovante";
-          });
-      });
-
-      $("btnRefreshOrder").addEventListener("click", function () {
-        if (!currentOrder || !currentOrder.order_id) return;
-        var alertBox = $("orderAlert");
-        var btn = $("btnRefreshOrder");
-        btn.disabled = true;
-        btn.textContent = "Consultando...";
-        var url = "/api/superbad/orders/" + encodeURIComponent(currentOrder.order_id) +
-          "?order_secret=" + encodeURIComponent(currentOrder.order_secret || "");
-
-        fetch(url)
-          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-          .then(function (res) {
-            if (!res.ok || !res.data || !res.data.ok) {
-              throw new Error((res.data && res.data.error) || "Não foi possível consultar o pedido.");
-            }
-            var ord = res.data.order || res.data;
-            $("pixOrderStatus").textContent = statusPtBr(ord.status);
-            if (ord.status === "approved") {
-              setAlert(alertBox, "ok", "Pedido aprovado! Use a senha enviada pelo administrador no formulário ao lado para baixar.");
-            } else {
-              setAlert(alertBox, "warn", "Status atual do pedido: " + statusPtBr(ord.status) + ".");
-            }
-          })
-          .catch(function (err) {
-            setAlert(alertBox, "err", err.message);
-          })
-          .finally(function () {
-            btn.disabled = false;
-            btn.textContent = "Atualizar status do pedido";
-          });
-      });
-
-      $("btnToggleLicenseVis").addEventListener("click", function () {
-        var inp = $("licenseKeyInput");
-        var show = inp.type === "password";
-        inp.type = show ? "text" : "password";
-        $("btnToggleLicenseVis").textContent = show ? "Ocultar" : "Mostrar";
-      });
-
-      $("licenseForm").addEventListener("submit", function (ev) {
-        ev.preventDefault();
-        var key = $("licenseKeyInput").value.trim();
-        var alertBox = $("licenseAlert");
-        setDownloadEnabled(null);
-        $("dlStatusBadge").className = "badge";
-        $("dlStatusBadge").textContent = "Validando...";
-
-        if (!key) {
-          $("dlStatusBadge").textContent = "Aguardando validação";
-          setAlert(alertBox, "warn", "Informe a senha da sua licença.");
-          return;
-        }
-
-        var btn = $("btnValidateLicense");
-        btn.disabled = true;
-        btn.textContent = "Validando...";
-
-        fetch("/api/superbad/license/validate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ license_key: key })
-        })
-          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-          .then(function (res) {
-            if (!res.ok || !res.data || !res.data.ok) {
-              throw new Error((res.data && res.data.error) || "Licença inválida, expirada ou revogada.");
-            }
-            $("dlStatusBadge").className = "badge badge-green";
-            $("dlStatusBadge").textContent = "Licença válida";
-            $("dlEdition").textContent = res.data.edition || "—";
-            $("dlExpires").textContent = res.data.expires_at || "—";
-            $("dlRemaining").textContent = String(res.data.downloads_remaining !== undefined ? res.data.downloads_remaining : "—");
-            setDownloadEnabled(res.data.download_url || null);
-            setAlert(alertBox, "ok", "Licença confirmada! Link temporário liberado abaixo.");
-          })
-          .catch(function (err) {
-            $("dlStatusBadge").className = "badge badge-red";
-            $("dlStatusBadge").textContent = "Não validada";
-            setAlert(alertBox, "err", err.message);
-          })
-          .finally(function () {
-            btn.disabled = false;
-            btn.textContent = "Validar licença e gerar link";
-          });
-      });
+      const updateClock = () => {
+        const now = new Date();
+        $('taskClock').textContent = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + ' · v6.7.0';
+      };
+      updateClock();
+      setInterval(updateClock, 30000);
     })();
   </script>
 </body>
