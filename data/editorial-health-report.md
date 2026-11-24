@@ -1,163 +1,163 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-09-12T18:15:07.531Z
-Escopo: 360/504 itens recentes.
+Gerado em: 2026-11-24T20:43:28.728Z
+Escopo: 360/2023 itens recentes.
 
 ## Resumo
-- Gates: P0 93, P1 200, P2 67
-- Aprovacao humana exigida: 0
-- Decisoes humanas registradas: 93
-- Pendencias de fonte: 93
-- Pendencias visuais: 311
+- Gates: P0 112, P1 142, P2 106
+- Aprovacao humana exigida: 112
+- Decisoes humanas registradas: 0
+- Pendencias de fonte: 112
+- Pendencias visuais: 285
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias tecnicas ativas para IDE
-- P0 ide-fix: “Precisamos de mais médicos, de um hospital em cada município, fazer o que for necessário para salvar vidas”, diz Bocalom
+- P0 human-approval: Escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situação e orienta pais
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situação e orienta pais
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situação e orienta pais
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureira
+- P0 human-approval: Polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de vulnerável
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de vulnerável
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de vulnerável
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Polícia Civil prende jovem suspeito de matar homem a golpes de canivete em Sena Madureira
+- P0 human-approval: Jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida protetiva
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida protetiva
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida protetiva
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Diarista fica gravemente ferido após ser atingido por galho de árvore durante derrubada em Porto Acre
+- P0 human-approval: Jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; família cobra justiça
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; família cobra justiça
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; família cobra justiça
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Mãe de aluno relata que invasor correu atrás de estudante com uma faca em escola de Sena
+- P0 human-approval: Lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na defesa dos direitos humanos
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na defesa dos direitos humanos
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na defesa dos direitos humanos
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Siga o dinheiro: veja as principais revelações e os desdobramentos do caso Dark Horse
+- P0 human-approval: Alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Crime: motorista de ambulância é suspeito de matar 6 pacientes injetando ar
+- P0 human-approval: Bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Santidade na veia: Monge é preso após vídeo de sexo e suspeita de fraude milionária
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC alinha atuação da rede de proteção para fiscalização durante evento LGBTQIA+
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC, Aleac e SEE firmam acordo para conscientizar estudantes sobre prevenção e combate à corrupção
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC participa de audiência pública sobre políticas públicas para pessoas com lúpus
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Morre Adriana Oliveira de Queiroz, servidora da Fundhacre; Mailza lamenta
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Povo Yawanawá se posiciona após denúncia de abuso sexual de turista
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Gestora de escola em Sena nega perseguição a alunos durante entrada de homem no prédio
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Jovem é ferido nas costas em ataque com arma branca no Segundo Distrito
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Mãe vai à delegacia por documento perdido e filho foragido do Acre é preso
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acre registra mais de 140 focos de incêndio em 7 dias; Terras Indígenas são atingidas
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Jovem é esfaqueado no Segundo Distrito nesta madrugada
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Jovem leva facada e pede socorro em posto de combustível no Segundo Distrito de Rio Branco
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Carlinhos do Pelado entrega novos espaços e amplia estrutura da Escola Francisco Germano na zona rural
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Trump acredita que Irã está por trás de ataque a oleoduto da Arábia Saudita
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Inmet alerta para chuvas e ventos forte neste sábado em cinco municípios acreanos
-  Motivo: Pendencia visual: sem-imagem.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Como preparar seu cachorro ou gato para viajar com segurança
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acidente com motosserra deixa mulher ferida; vítima é transferida para Rio Branco
+- P0 human-approval: Comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da PF
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da PF
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da PF
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta Friale
-  - Nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta Friale: veja os pontos
-  - Entenda nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta Friale
-  - Folha do Acre informa: Nova friagem chega ao Acre neste domingo com chuvas fortes e mínima de até 14°C, aponta
-- Bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS
-  - Bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS: veja os pontos principa
-  - Entenda bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS
-  - Acre in Foco informa: Bem enrolado: empresa de Flávio Bolsonaro usa endereço de 16 firmas do Careca do INSS
-- Zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul
-  - Zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul: veja os pontos principais
-  - Entenda zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul
-  - Jurua em Tempo informa: Zequinha Lima lota evento para Márcio Bittar em Cruzeiro do Sul
-- Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio
-  - Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio: veja os pontos principais
-  - Entenda pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio
-  - Jurua Online informa: Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio
-- Quase metade dos domicílios do Acre dependem do Bolsa Família, mostra estudo
-  - Quase metade dos domicílios do Acre dependem do Bolsa Família, mostra estudo: veja os pontos principais
-  - Entenda quase metade dos domicílios do Acre dependem do Bolsa Família, mostra estudo
-  - Folha do Acre informa: Quase metade dos domicílios do Acre dependem do Bolsa Família, mostra estudo
-- “Vocês todos estavam juntos”, diz Thor Dantas ao criticar gestões dos últimos oito anos e defender mudança no Acre
-  - “Vocês todos estavam juntos”, diz Thor Dantas ao criticar gestões dos últimos oito anos e defender mudança no 
-  - Entenda “Vocês todos estavam juntos”, diz Thor Dantas ao criticar gestões dos últimos oito anos e defender mud
-  - Folha do Acre informa: “Vocês todos estavam juntos”, diz Thor Dantas ao criticar gestões dos últimos oito anos
-- “Precisamos de mais médicos, de um hospital em cada município, fazer o que for necessário para salvar vidas”, diz Bocalom
-  - “Precisamos de mais médicos, de um hospital em cada município, fazer o que for necessário para salvar vidas”, 
-  - O que se sabe sobre “Precisamos de mais médicos, de um hospital em cada município, fazer o que for necessário 
-  - Folha do Acre informa: “Precisamos de mais médicos, de um hospital em cada município, fazer o que for necessár
-- Em Tarauacá, Ney Amorim e Manoel Moraes são ovacionados durante inauguração de comitê na cidade
-  - Em Tarauacá, Ney Amorim e Manoel Moraes são ovacionados durante inauguração de comitê na cidade: veja os ponto
-  - Entenda em Tarauacá, Ney Amorim e Manoel Moraes são ovacionados durante inauguração de comitê na cidade
-  - Folha do Acre informa: Em Tarauacá, Ney Amorim e Manoel Moraes são ovacionados durante inauguração de comitê n
-- Primeira Corrida da Diversidade reúne participantes em Rio Branco, no Acre
-  - Primeira Corrida da Diversidade reúne participantes em Rio Branco, no Acre: veja os pontos principais
-  - Entenda primeira Corrida da Diversidade reúne participantes em Rio Branco, no Acre
-  - Jurua Online informa: Primeira Corrida da Diversidade reúne participantes em Rio Branco, no Acre
-- “Vamos combater fortemente a corrupção”, diz Alan Rick ao defender mudança na gestão pública
-  - “Vamos combater fortemente a corrupção”, diz Alan Rick ao defender mudança na gestão pública: veja os pontos p
-  - Entenda “Vamos combater fortemente a corrupção”, diz Alan Rick ao defender mudança na gestão pública
-  - Folha do Acre informa: “Vamos combater fortemente a corrupção”, diz Alan Rick ao defender mudança na gestão pú
-- Candidatos ao Governo do Acre divulgam agendas de campanha para este sábado
-  - Candidatos ao Governo do Acre divulgam agendas de campanha para este sábado: veja os pontos principais
-  - Entenda candidatos ao Governo do Acre divulgam agendas de campanha para este sábado
-  - Jurua Online informa: Candidatos ao Governo do Acre divulgam agendas de campanha para este sábado
-- Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureira
-  - Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureira: veja os pontos pr
-  - O que se sabe sobre homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madureir
-  - Folha do Acre informa: Homem é preso após invadir escola armado e tentar atirar contra policiais em Sena Madur
+- Artigo incluído sem alarde na lei do Enamed livra de punições 99 cursos de medicina mal avaliados
+  - Artigo incluído sem alarde na lei do Enamed livra de punições 99 cursos de medicina mal avaliados: veja os pon
+  - Entenda artigo incluído sem alarde na lei do Enamed livra de punições 99 cursos de medicina mal avaliados
+  - Acre in Foco informa: Artigo incluído sem alarde na lei do Enamed livra de punições 99 cursos de medicina mal 
+- Escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situação e orienta pais
+  - Escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situação e orienta pais: ve
+  - O que se sabe sobre escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situaçã
+  - Jurua Online informa: Escola Diocesana São José comunica falta de proteínas na merenda; diretora explica situa
+- Polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de vulnerável
+  - Polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de vulnerável: veja os p
+  - O que se sabe sobre polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de v
+  - Jurua Online informa: Polícia Civil prende em Cruzeiro do Sul homem condenado a mais de 12 anos por estupro de
+- Jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida protetiva
+  - Jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida protetiva: veja os pontos 
+  - O que se sabe sobre jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida protet
+  - Jurua Online informa: Jovem baleada pelo ex no Acre diz que denunciou duas vezes descumprimento de medida prot
+- Jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; família cobra justiça
+  - Jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; família cobra justiça:
+  - O que se sabe sobre jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; fa
+  - Jurua Online informa: Jovem de 28 anos morta em acidente em Rio Branco estava noiva e se casaria em dezembro; 
+- Governo espera arrecadar R$ 4,14 bilhões com imposto sobre dividendos nos últimos dois meses de 2026
+  - Governo espera arrecadar R$ 4,14 bilhões com imposto sobre dividendos nos últimos dois meses de 2026: veja os 
+  - Entenda governo espera arrecadar R$ 4,14 bilhões com imposto sobre dividendos nos últimos dois meses de 2026
+  - Jurua Online informa: Governo espera arrecadar R$ 4,14 bilhões com imposto sobre dividendos nos últimos dois m
+- Lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na defesa dos direitos humanos
+  - Lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na defesa dos direitos hum
+  - O que se sabe sobre lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na def
+  - Jurua Online informa: Lula lamenta morte do jurista Fábio Konder Comparato, aos 90 anos, e destaca legado na d
+- Alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF
+  - Alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF: veja os pontos princ
+  - O que se sabe sobre alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF
+  - Jurua Online informa: Alexandre de Moraes se declara suspeito para julgar ação sobre soberania nacional no STF
+- Bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta
+  - Bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta: veja os pontos princi
+  - O que se sabe sobre bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta
+  - Jurua Online informa: Bolsonaro apresenta melhora discreta, mas segue internado na UTI e sem previsão de alta
+- Governo Lula decide não convidar Javier Milei para cerimônia de posse em janeiro
+  - Governo Lula decide não convidar Javier Milei para cerimônia de posse em janeiro: veja os pontos principais
+  - Entenda governo Lula decide não convidar Javier Milei para cerimônia de posse em janeiro
+  - Jurua Online informa: Governo Lula decide não convidar Javier Milei para cerimônia de posse em janeiro
+- Comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da PF
+  - Comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da PF: veja os pontos pr
+  - O que se sabe sobre comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da P
+  - Jurua Online informa: Comissão da Câmara convoca ministro da Justiça para explicar afastamento de delegados da
+- Homem que utilizava guincho para furtar veículos tem condenação de quatro anos mantida no Acre
+  - Homem que utilizava guincho para furtar veículos tem condenação de quatro anos mantida no Acre: veja os pontos
+  - Entenda homem que utilizava guincho para furtar veículos tem condenação de quatro anos mantida no Acre
+  - Jurua em Tempo informa: Homem que utilizava guincho para furtar veículos tem condenação de quatro anos mantida
 
 ## Formatos especiais seguros
-- guia de servico: Pesquisador do Acre participa de estudo que identifica nova espécie de anfíbio
+- guia de impacto no bolso: Governo espera arrecadar R$ 4,14 bilhões com imposto sobre dividendos nos últimos dois meses de 2026
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Quase metade dos domicílios do Acre dependem do Bolsa Família, mostra estudo
+- agenda visual: CT Náuas conquista vice-campeonato estadual de jiu-jitsu e faz história pelo Vale do Juruá
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Primeira Corrida da Diversidade reúne participantes em Rio Branco, no Acre
+- guia de servico: Presidente da Câmara de Rio Branco descarta anular concurso e confirma nova prova para analista legislativo
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: “Vamos combater fortemente a corrupção”, diz Alan Rick ao defender mudança na gestão pública
+- guia de servico: Vereador pede cancelamento de concurso da Câmara de Rio Branco após falha na prova de analista
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de impacto no bolso: Thor Dantas defende infraestrutura, cooperativas e industrialização para transformar a economia do Acre
+- linha do tempo curta: Prefeitura de Rio Branco implanta QR Code em postes para agilizar serviços de iluminação pública
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Sábado será de calor intenso e possibilidade de temporais em diferentes regiões do Acre
+- agenda visual: Acre lidera gasto proporcional com clima, mas aplicou só 2,6% do orçamento
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Fogo se alastra rapidamente e quase atinge residência em Sena Madureira
+- agenda visual: Crédito do BNDES para o Acre cresce mais de 240% e atinge R$ 622 milhões
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: PF marca depoimento de Vorcaro para dia 15, mas defesa pede adiamento
+- linha do tempo curta: Como a OpenAI quer estabelecer limites para o avanço da IA no setor
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Fachin manda liberar documentos do caso Master e dá 24 horas a Mendonça
+- linha do tempo curta: GTA VI, Spider-Man 2 e mais: seleção de jogos PS5 em promoção na Amazon
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Mailza e Alan parecem dois Neros em uma Roma pegando fogo
+- linha do tempo curta: Vazamento expõe 3,5 bilhões de dados em dois bancos na internet
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Datafolha aponta Tarcísio com 49% e Haddad com 29% em SP
+- linha do tempo curta: Falta de salas e de divulgação limita alcance da animação brasileira
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Bandeiraço provoca congestionamento em frente à Ufac
+- linha do tempo curta: Cidade de SP registrou o dia mais chuvoso do mês nesta segunda-feira
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

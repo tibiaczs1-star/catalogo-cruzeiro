@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-09-28T15:55:50.482Z",
-  "finishedAt": "2026-09-28T15:56:01.755Z",
-  "capturedItems": 376,
-  "capturedToday": 269,
-  "activeWindowItems": 360,
-  "archiveItems": 480,
+  "startedAt": "2026-11-24T20:42:35.827Z",
+  "finishedAt": "2026-11-24T20:42:50.117Z",
+  "capturedItems": 826,
+  "capturedToday": 606,
+  "activeWindowItems": 500,
+  "archiveItems": 2000,
   "reports": [
     {
       "source": "a-gazeta-do-acre",
@@ -43,10 +43,46 @@
       "mode": "wordpress-json"
     },
     {
+      "source": "acrenews",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "agencia-acre",
-      "ok": false,
-      "count": 0,
-      "error": "HTTP 503"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "agencia-brasil-economia",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "agencia-brasil-educacao",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "agencia-brasil-justica",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "agencia-brasil-saude",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "agencia-brasil-ultimas",
@@ -56,7 +92,21 @@
       "mode": "rss"
     },
     {
+      "source": "amazonia-real",
+      "ok": true,
+      "count": 15,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "batelao",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "canaltech",
       "ok": true,
       "count": 10,
       "blocked": 0,
@@ -77,9 +127,30 @@
       "mode": "official-home-headlines"
     },
     {
+      "source": "contilnet-rss",
+      "ok": true,
+      "count": 20,
+      "blocked": 0,
+      "mode": "wordpress-json"
+    },
+    {
+      "source": "correio-braziliense",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "detran-acre",
       "ok": true,
       "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "diario-do-acre",
+      "ok": true,
+      "count": 25,
       "blocked": 0,
       "mode": "rss"
     },
@@ -98,9 +169,78 @@
       "mode": "wordpress-json"
     },
     {
+      "source": "folha-mercado",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "folha-poder",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-acre",
+      "ok": true,
+      "count": 30,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-amazonas",
+      "ok": true,
+      "count": 15,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "g1-brasil",
       "ok": true,
       "count": 18,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-ciencia",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-concursos",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-economia",
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
+    },
+    {
+      "source": "g1-educacao",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-mundo",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-natureza",
+      "ok": true,
+      "count": 10,
       "blocked": 0,
       "mode": "rss"
     },
@@ -115,6 +255,55 @@
       "source": "g1-pop-arte",
       "ok": true,
       "count": 14,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-rondonia",
+      "ok": true,
+      "count": 15,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-saude",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "g1-tecnologia",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "gazeta-do-povo",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "ge-futebol",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "infoamazonia",
+      "ok": true,
+      "count": 15,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "infomoney",
+      "ok": true,
+      "count": 10,
       "blocked": 0,
       "mode": "rss"
     },
@@ -154,6 +343,13 @@
       "mode": "rss"
     },
     {
+      "source": "jurua-informativo-wp",
+      "ok": true,
+      "count": 15,
+      "blocked": 0,
+      "mode": "wordpress-json"
+    },
+    {
       "source": "jurua-online",
       "ok": true,
       "count": 24,
@@ -161,11 +357,25 @@
       "mode": "wordpress-json"
     },
     {
+      "source": "metropoles",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "mpac",
       "ok": true,
-      "count": 4,
+      "count": 5,
       "blocked": 0,
       "mode": "official-home-headlines"
+    },
+    {
+      "source": "noticias-da-hora",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "o-alto-acre",
@@ -175,13 +385,56 @@
       "mode": "rss"
     },
     {
+      "source": "o-eco",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "o-seringal",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "olhar-digital",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "oriobranco",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
       "source": "pcac",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "poder360",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "portal-acre",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "portal-amazonia",
       "ok": true,
       "count": 10,
       "blocked": 0,
@@ -204,30 +457,58 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-marechal-thaumaturgo",
       "ok": true,
-      "count": 0,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-porto-walter",
       "ok": true,
-      "count": 2,
+      "count": 0,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 2,
+      "count": 1,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
+    },
+    {
+      "source": "revista-oeste",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "rondoniagora",
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "senado-noticias",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "tecnoblog",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "terra-diversao",
@@ -235,6 +516,13 @@
       "count": 0,
       "skipped": true,
       "reason": "Canal web ativo, mas RSS monitorado retornou 0 itens; usar como referência manual até trocar integração."
+    },
+    {
+      "source": "terra-noticias",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "the-verge",
@@ -252,6 +540,13 @@
     },
     {
       "source": "tribuna-do-jurua",
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
+    },
+    {
+      "source": "uol-noticias",
       "ok": true,
       "count": 10,
       "blocked": 0,
