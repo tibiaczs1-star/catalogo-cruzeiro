@@ -14521,7 +14521,27 @@ body.v8-merge-ready #heroSide .v8-rail-story {
   }
 
   body.v8-merge-ready .v8-hero-dots {
-    display: none !important;
+    display: flex !important;
+    grid-column: 1 / -1 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding-top: 6px !important;
+  }
+
+  body.v8-merge-ready .v8-hero-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 999px !important;
+    background: rgba(7, 27, 73, 0.25) !important;
+    border: 0 !important;
+    cursor: pointer !important;
+    transition: width .18s ease, background .18s ease !important;
+  }
+
+  body.v8-merge-ready .v8-hero-dot.is-active {
+    width: 24px !important;
+    background: var(--v8-blue-dark, #071b49) !important;
   }
 
   body.v8-merge-ready .v8-hero-media-frame {
