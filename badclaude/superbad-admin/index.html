@@ -270,7 +270,10 @@
             <div class="field">
               <label for="uploadEditionSelect">Edição do pacote (.zip)</label>
               <select id="uploadEditionSelect" class="select">
+                <option value="founder">BadClaude Fundador (BadClaude-Founder-Desktop.zip)</option>
                 <option value="superbad">BadClaudio SuperBad (BadClaudio-Desktop-SuperBad.zip)</option>
+                <option value="mid">BadClaude Studio (BadClaude-Studio-Desktop.zip)</option>
+                <option value="basic">BadClaude Básico (BadClaude-Basic-Desktop.zip)</option>
                 <option value="beta">BadClaudio Beta (BadClaudio-Desktop-Beta.zip)</option>
               </select>
             </div>
@@ -477,13 +480,20 @@
           lEd.setAttribute("for", idEd);
           var selEd = el("select", "select");
           selEd.id = idEd;
-          var optSb = el("option", "", "SuperBad (completo)");
-          optSb.value = "superbad";
-          var optBt = el("option", "", "Beta (limpo)");
-          optBt.value = "beta";
-          selEd.appendChild(optSb);
-          selEd.appendChild(optBt);
-          selEd.value = ord.requested_edition === "beta" ? "beta" : "superbad";
+          [
+            ["founder", "Fundador (Blindado + Nuvem)"],
+            ["superbad", "SuperBad (completo)"],
+            ["mid", "Studio (APIs Grátis)"],
+            ["basic", "Básico (BYOK)"],
+            ["beta", "Beta (limpo)"]
+          ].forEach(function (pair) {
+            var opt = el("option", "", pair[1]);
+            opt.value = pair[0];
+            selEd.appendChild(opt);
+          });
+          selEd.value = ["founder", "superbad", "mid", "basic", "beta"].indexOf(ord.requested_edition) >= 0
+            ? ord.requested_edition
+            : "superbad";
           fEd.appendChild(lEd);
           fEd.appendChild(selEd);
 

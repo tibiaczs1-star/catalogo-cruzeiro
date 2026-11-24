@@ -392,9 +392,9 @@ const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
 const RAYL_WEBSITE_STUDY_FILE = path.join(DATA_DIR, "rayl-website-study.json");
-const PIX_RECEIVER_KEY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_KEY || "99566741204", 120);
-const PIX_RECEIVER_NAME = cleanShortText(process.env.OFFICE_SUPPORT_PIX_RECEIVER_NAME || "ANTONIO CLOVIS", 25);
-const PIX_RECEIVER_CITY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_CITY || "CRUZEIRO SUL", 15);
+const PIX_RECEIVER_KEY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_KEY || "+5568992269296", 120);
+const PIX_RECEIVER_NAME = cleanShortText(process.env.OFFICE_SUPPORT_PIX_RECEIVER_NAME || "RAIANE LENONCIO", 25);
+const PIX_RECEIVER_CITY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_CITY || "CRUZEIRO DO SUL", 15);
 const OFFICE_NEURAL_GROWTH_FILE = path.join(DATA_DIR, "office-neural-growth.json");
 const WHATSAPP_CHAT_LOG_FILE = path.join(DATA_DIR, "whatsapp-chat-log.json");
 const PUBPAID_SPRITE_SCOUT_FILE = path.join(DATA_DIR, "pubpaid-sprite-scout.json");
@@ -17637,7 +17637,14 @@ async function handleApi(req, res, pathname, searchParams) {
     return;
   }
 
-  if (pathname.startsWith("/api/superbad/") && superbadSalesApi) {
+  if (
+    (pathname.startsWith("/api/superbad/") ||
+      pathname.startsWith("/api/v1/licenses/") ||
+      pathname.startsWith("/api/v1/telemetry/") ||
+      pathname === "/api/updates/manifest" ||
+      pathname === "/api/updates/download") &&
+    superbadSalesApi
+  ) {
     return superbadSalesApi.handleApi(req, res, pathname, searchParams);
   }
 

@@ -432,10 +432,13 @@
               <input id="buyerContact" class="input" type="text" required placeholder="Ex.: (68) 99999-9999">
             </div>
             <div class="field">
-              <label for="requestedEdition">Edição solicitada</label>
+              <label for="requestedEdition">Plano / Edição solicitada</label>
               <select id="requestedEdition" class="select">
-                <option value="superbad">BadClaudio SuperBad (R$ 350,00)</option>
-                <option value="beta">BadClaudio Beta (R$ 350,00)</option>
+                <option value="founder" data-price="R$ 690,00">BadClaude Fundador — R$ 690,00 (30 dias · Blindado + Nuvem)</option>
+                <option value="superbad" data-price="R$ 350,00" selected>BadClaudio SuperBad — R$ 350,00 (30 dias · Portal + 2 Máquinas)</option>
+                <option value="mid" data-price="R$ 179,00">BadClaude Studio — R$ 179,00 (30 dias · APIs Grátis + Super Poderes)</option>
+                <option value="basic" data-price="R$ 79,00">BadClaude Básico — R$ 79,00 (7 dias · BYOK)</option>
+                <option value="beta" data-price="R$ 350,00">BadClaudio Beta — R$ 350,00 (BYOK Dedicado)</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" id="btnCreateOrder">Gerar PIX de R$ 350,00</button>
@@ -554,6 +557,19 @@
         }
       });
 
+      function selectedPlanPrice() {
+        var sel = $("requestedEdition");
+        var opt = sel && sel.options ? sel.options[sel.selectedIndex] : null;
+        return (opt && opt.getAttribute("data-price")) || "R$ 350,00";
+      }
+
+      if ($("requestedEdition")) {
+        $("requestedEdition").addEventListener("change", function () {
+          $("btnCreateOrder").textContent = "Gerar PIX de " + selectedPlanPrice();
+        });
+        $("btnCreateOrder").textContent = "Gerar PIX de " + selectedPlanPrice();
+      }
+
       $("orderForm").addEventListener("submit", function (ev) {
         ev.preventDefault();
         var name = $("buyerName").value.trim();
@@ -606,14 +622,14 @@
               $("btnWhatsApp").href = ord.whatsapp_url;
             }
             $("pixPanel").classList.remove("hidden");
-            setAlert(alertBox, "ok", "Pedido criado com sucesso. Faça o PIX de R$ 350,00 e envie o comprovante no WhatsApp.");
+            setAlert(alertBox, "ok", "Pedido criado com sucesso. Faça o PIX de " + (ord.amount_display || selectedPlanPrice()) + " (chave 68 99226-9296) e envie o comprovante no WhatsApp.");
           })
           .catch(function (err) {
             setAlert(alertBox, "err", err.message || "Erro ao criar pedido.");
           })
           .finally(function () {
             btn.disabled = false;
-            btn.textContent = "Gerar PIX de R$ 350,00";
+            btn.textContent = "Gerar PIX de " + selectedPlanPrice();
           });
       });
 

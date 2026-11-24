@@ -5,8 +5,6 @@ const fs = require("node:fs");
 const path = require("node:path");
 const DefaultQRCode = require("qrcode");
 
-const AMOUNT_CENTAVOS = 35_000;
-const AMOUNT_DISPLAY = "R$ 350,00";
 const PIX_DISPLAY_KEY = "68 99226-9296";
 const PIX_RECIPIENT = "Raiane Lenoncio";
 const PIX_CITY = "CRUZEIRO DO SUL";
@@ -18,15 +16,135 @@ const DOWNLOAD_TOKEN_TTL_MS = 15 * 60 * 1000;
 const MAX_JSON_BYTES = 256 * 1024;
 const DEFAULT_MAX_RELEASE_BYTES = 15 * 1024 * 1024;
 const LICENSE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-const VALID_EDITIONS = new Set(["beta", "superbad"]);
+
+const DEFAULT_LICENSE_PUBLIC_KEY_PEM = [
+  "-----BEGIN PUBLIC KEY-----",
+  "MCowBQYDK2VwAyEAIsf0QQNy1C/6kVMCJEz5TzYlrAbHJlBkHvh+OBqwOEo=",
+  "-----END PUBLIC KEY-----",
+].join("\n");
+
+const EDITION_PLANS = Object.freeze({
+  basic: {
+    edition: "basic",
+    tier: "client-basic",
+    tierCode: "BSC",
+    label: "BadClaude Básico",
+    amountCentavos: 7_900,
+    amountDisplay: "R$ 79,00",
+    defaultDays: 7,
+    defaultMaxHwids: 1,
+    unlockedModes: ["essential", "badcode", "cockpit-pro"],
+    summary: "Núcleo fechado com suas próprias chaves (BYOK) e vínculo em 1 máquina.",
+  },
+  mid: {
+    edition: "mid",
+    tier: "client-mid",
+    tierCode: "MID",
+    label: "BadClaude Studio",
+    amountCentavos: 17_900,
+    amountDisplay: "R$ 179,00",
+    defaultDays: 30,
+    defaultMaxHwids: 1,
+    unlockedModes: ["essential", "badcode", "cockpit-pro"],
+    summary: "APIs Grátis automáticas + Super Poderes + Swarm de 3 camadas.",
+  },
+  beta: {
+    edition: "beta",
+    tier: "client-basic",
+    tierCode: "BSC",
+    label: "BadClaudio Beta",
+    amountCentavos: 35_000,
+    amountDisplay: "R$ 350,00",
+    defaultDays: 30,
+    defaultMaxHwids: 1,
+    unlockedModes: ["essential", "badcode", "cockpit-pro"],
+    summary: "Código limpo, DPAPI local e download privado dedicado.",
+  },
+  superbad: {
+    edition: "superbad",
+    tier: "client-mid",
+    tierCode: "MID",
+    label: "BadClaudio SuperBad",
+    amountCentavos: 35_000,
+    amountDisplay: "R$ 350,00",
+    defaultDays: 30,
+    defaultMaxHwids: 2,
+    unlockedModes: ["essential", "badcode", "cockpit-pro"],
+    summary: "Ecossistema SuperBad com download privado e até 2 máquinas vinculadas.",
+  },
+  founder: {
+    edition: "founder",
+    tier: "founder",
+    tierCode: "FND",
+    label: "BadClaude Fundador",
+    amountCentavos: 69_000,
+    amountDisplay: "R$ 690,00",
+    defaultDays: 30,
+    defaultMaxHwids: 1,
+    unlockedModes: ["essential", "badcode", "cockpit-pro", "founder-vip"],
+    summary: "Atualização contínua em nuvem, motor 3 camadas + Cidade de Agentes, app blindado sem acesso mestre.",
+  },
+});
+
+const VALID_EDITIONS = new Set(Object.keys(EDITION_PLANS));
+const ALLOWED_UPDATE_CHANNELS = new Set(["founder", "client-mid", "client-basic"]);
+const ALLOWED_ZIP_CONTENT_TYPES = new Set([
+  "application/octet-stream",
+  "application/zip",
+  "application/x-zip-compressed",
+]);
+const UPDATE_VERSION_RE = /^[A-Za-z0-9._-]{1,32}$/;
+
 const CANONICAL_RELEASE_FILES = {
+  basic: "BadClaude-Basic-Desktop.zip",
+  mid: "BadClaude-Studio-Desktop.zip",
   beta: "BadClaudio-Desktop-Beta.zip",
   superbad: "BadClaudio-Desktop-SuperBad.zip",
+  founder: "BadClaude-Founder-Desktop.zip",
 };
+
 const EDITION_RELEASE_FILES = {
+  basic: ["BadClaude-Basic-Desktop.zip", "BadClaudio-Desktop-Beta.zip"],
+  mid: ["BadClaude-Studio-Desktop.zip", "BadClaudio-Desktop-SuperBad.zip"],
   beta: ["BadClaudio-Desktop-Beta.zip", "Badclaude-Beta.zip", "BadClaudio-Beta.zip"],
   superbad: ["BadClaudio-Desktop-SuperBad.zip", "Badclaude-SuperBad.zip", "BadClaudio-SuperBad.zip"],
+  founder: ["BadClaude-Founder-Desktop.zip", "BadClaude-Founder-v6.4-Portable.zip", "BadClaudio-Desktop-SuperBad.zip"],
 };
+
+const CODE_TO_TIER = Object.freeze({
+  FND: "founder",
+  MID: "client-mid",
+  BSC: "client-basic",
+});
+
+function getUnlockedModesForTier(tier) {
+  const clean = String(tier || "").trim().toLowerCase();
+  if (clean === "founder" || clean === "fundador") {
+    return ["essential", "badcode", "cockpit-pro", "founder-vip"];
+  }
+  if (clean === "client-mid" || clean === "client-basic" || clean === "mid" || clean === "basic") {
+    return ["essential", "badcode", "cockpit-pro"];
+  }
+  return ["essential", "badcode"];
+}
+
+function mapEditionToUpdateChannel(rawEdition) {
+  const clean = String(rawEdition || "").trim().toLowerCase();
+  if (["editor", "admin", "owner", "owner-master", "enterprise", "enterprise-full"].includes(clean)) {
+    return null;
+  }
+  if (clean === "founder" || clean === "fundador" || clean === "fnd") return "founder";
+  if (["superbad", "mid", "client-mid", "studio"].includes(clean)) return "client-mid";
+  if (["basic", "client-basic", "beta", "client"].includes(clean)) return "client-basic";
+  return "client-mid";
+}
+
+function tierCanAccessUpdateChannel(tier, channel) {
+  const rankMap = { "client-basic": 1, basic: 1, beta: 1, "client-mid": 2, mid: 2, superbad: 2, founder: 3, fundador: 3 };
+  const channelMinRank = channel === "founder" ? 3 : channel === "client-mid" ? 2 : 1;
+  const userRank = rankMap[String(tier || "").trim().toLowerCase()] || 0;
+  return userRank >= channelMinRank;
+}
 
 function sendJson(res, statusCode, payload, extraHeaders = {}) {
   if (res.writableEnded) return;
@@ -92,6 +210,58 @@ function isZipBuffer(buf) {
   );
 }
 
+async function writeFileAtomic(targetPath, data) {
+  const tmpPath = `${targetPath}.${process.pid}.${crypto.randomBytes(4).toString("hex")}.tmp`;
+  await fs.promises.writeFile(tmpPath, data);
+  await fs.promises.rename(tmpPath, targetPath);
+}
+
+function streamZipFile(res, filePath, fileName, fileSize, errorMessage) {
+  res.writeHead(200, {
+    "Content-Type": "application/zip",
+    "Content-Disposition": `attachment; filename="${fileName}"`,
+    "Content-Length": fileSize,
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+  });
+  const stream = fs.createReadStream(filePath);
+  stream.on("error", () => {
+    if (!res.headersSent) {
+      sendJson(res, 500, { ok: false, error: errorMessage });
+    } else {
+      res.destroy();
+    }
+  });
+  stream.pipe(res);
+}
+
+function buildAutoEnrolledEd25519License(edCheck, keySha, { email = "", boundHwids = [], nowIso = new Date().toISOString() } = {}) {
+  return {
+    license_id: `LIC-ED-${keySha.slice(0, 10).toUpperCase()}`,
+    order_id: null,
+    edition: edCheck.tier === "founder" ? "founder" : edCheck.tier === "client-basic" ? "basic" : "mid",
+    tier: edCheck.tier,
+    label: edCheck.label || edCheck.tier,
+    email,
+    key_prefix: edCheck.keyPrefix,
+    key_hash: `sha256:${keySha}`,
+    key_sha256: keySha,
+    expires_at: edCheck.expiresAt,
+    max_downloads: 10,
+    downloads_used: 0,
+    max_hwids: 1,
+    bound_hwids: boundHwids,
+    revoked: false,
+    revoked_at: null,
+    issued_origin: "ed25519-auto-enrolled",
+    last_seen_at: nowIso,
+    usage_requests: 0,
+    usage_tokens: 0,
+    created_at: nowIso,
+    last_download_at: null,
+  };
+}
+
 function cleanText(value, maxLen) {
   return String(value ?? "")
     .replace(/[\u0000-\u001f\u007f]+/g, " ")
@@ -109,6 +279,17 @@ function timingSafeEqualText(left, right) {
 
 function hashSecretSha256(value) {
   return crypto.createHash("sha256").update(String(value), "utf8").digest("hex");
+}
+
+function maskIp(ipRaw) {
+  const s = String(ipRaw || "").replace(/^::ffff:/, "").trim();
+  if (!s) return "unknown";
+  if (s === "::1" || s === "127.0.0.1") return s;
+  if (s.includes(".")) {
+    const parts = s.split(".");
+    if (parts.length === 4) return `${parts[0]}.${parts[1]}.${parts[2]}.x`;
+  }
+  return `${s.slice(0, 12)}...`;
 }
 
 function hashScrypt(secret) {
@@ -183,6 +364,64 @@ function isSecureRequest(req, environment, secureCookiesOption) {
   return forwardedProto.includes("https") || Boolean(req?.socket?.encrypted) || isProd;
 }
 
+function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUBLIC_KEY_PEM) {
+  const rawKey = String(rawKeyInput || "").trim();
+  const m = rawKey.match(/^(BC5-(FND|MID|BSC)-([A-Za-z0-9_-]+))\.([A-Za-z0-9_-]+)$/);
+  if (!m) {
+    return { ok: false, isEd25519Format: false, code: "INVALID_FORMAT", error: "Formato fora do padrão BC5." };
+  }
+  const [, signingInput, tierCode, payloadB64Url, sigB64Url] = m;
+  let validSig = false;
+  try {
+    const sigBuf = Buffer.from(sigB64Url, "base64url");
+    if (sigBuf.length === 64) {
+      validSig = crypto.verify(null, Buffer.from(signingInput, "utf8"), publicKeyPem, sigBuf);
+    }
+  } catch {
+    validSig = false;
+  }
+  if (!validSig) {
+    return { ok: false, isEd25519Format: true, code: "INVALID_SIGNATURE", error: "Assinatura Ed25519 inválida." };
+  }
+  let payload;
+  try {
+    payload = JSON.parse(Buffer.from(payloadB64Url, "base64url").toString("utf8"));
+  } catch {
+    return { ok: false, isEd25519Format: true, code: "INVALID_PAYLOAD", error: "Payload inválido." };
+  }
+  if (!payload || payload.issuer !== "juniorplay-local") {
+    return { ok: false, isEd25519Format: true, code: "INVALID_ISSUER", error: "Emissor inválido." };
+  }
+  const expectedTier = CODE_TO_TIER[tierCode];
+  if (!expectedTier || String(payload.tier || "").toLowerCase() !== expectedTier) {
+    return { ok: false, isEd25519Format: true, code: "TIER_MISMATCH", error: "Tier divergente." };
+  }
+  const rawExp = Number(payload.exp);
+  if (!Number.isFinite(rawExp) || rawExp <= 0) {
+    return { ok: false, isEd25519Format: true, code: "INVALID_EXPIRATION", error: "Expiração inválida." };
+  }
+  const expMs = rawExp < 1e11 ? rawExp * 1000 : rawExp;
+  const nowMs = Date.now();
+  const expired = nowMs >= expMs;
+  const daysLeft = expired ? 0 : Math.max(1, Math.ceil((expMs - nowMs) / 86400000));
+  return {
+    ok: !expired,
+    isEd25519Format: true,
+    valid: !expired,
+    expired,
+    code: expired ? "LICENSE_EXPIRED" : "VALID",
+    error: expired ? "Licença Ed25519 expirada." : null,
+    tier: expectedTier,
+    tierCode,
+    label: cleanText(payload.label || expectedTier, 120),
+    daysLeft,
+    expiresAt: new Date(expMs).toISOString(),
+    keyHash: hashSecretSha256(rawKey),
+    keyPrefix: rawKey.slice(0, 10),
+    unlockedModes: getUnlockedModesForTier(expectedTier),
+  };
+}
+
 function buildPixBrCode({ pixKey, recipient, city, amountCentavos, txid, description }) {
   const emvField = (id, val) => `${id}${String(String(val).length).padStart(2, "0")}${val}`;
   const asciiClean = (val, maxLen) =>
@@ -200,10 +439,11 @@ function buildPixBrCode({ pixKey, recipient, city, amountCentavos, txid, descrip
   if (cleanDesc) accountInfo.push(emvField("02", cleanDesc));
 
   const amountStr = (Number(amountCentavos) / 100).toFixed(2);
-  const cleanTxid = String(txid || "")
-    .replace(/[^A-Za-z0-9]/g, "")
-    .toUpperCase()
-    .slice(0, 25) || "SUPERBAD";
+  const cleanTxid =
+    String(txid || "")
+      .replace(/[^A-Za-z0-9]/g, "")
+      .toUpperCase()
+      .slice(0, 25) || "SUPERBAD";
 
   const payload = [
     emvField("00", "01"),
@@ -230,7 +470,8 @@ function buildPixBrCode({ pixKey, recipient, city, amountCentavos, txid, descrip
 }
 
 function generateLicenseKey(edition) {
-  const prefix = edition === "beta" ? "BT" : "SB";
+  const plan = EDITION_PLANS[edition] || EDITION_PLANS.superbad;
+  const prefix = plan.tierCode || (edition === "beta" ? "BT" : "SB");
   const groups = [];
   for (let g = 0; g < 4; g += 1) {
     let part = "";
@@ -242,10 +483,12 @@ function generateLicenseKey(edition) {
   return `${prefix}-${groups.join("-")}`;
 }
 
-function buildWhatsappUrl({ whatsappNumber, orderId, requestedEdition, buyerName }) {
-  const editionLabel = requestedEdition === "beta" ? "Beta" : "SuperBad";
+function buildWhatsappUrl({ whatsappNumber, orderId, requestedEdition, buyerName, amountDisplay }) {
+  const plan = EDITION_PLANS[requestedEdition];
+  const editionLabel = plan ? plan.label : requestedEdition;
+  const valueLabel = amountDisplay || (plan ? plan.amountDisplay : "R$ 350,00");
   const text = [
-    `Olá! Fiz o Pix de ${AMOUNT_DISPLAY} referente ao pedido ${orderId} (BadClaudio ${editionLabel}).`,
+    `Olá! Fiz o Pix de ${valueLabel} referente ao pedido ${orderId} (${editionLabel}).`,
     `Nome: ${buyerName}`,
     "Segue o comprovante para validação e liberação da licença.",
   ].join(" ");
@@ -286,6 +529,19 @@ function createSuperbadSalesApi(options = {}) {
   );
   const qrcodeLib = options.qrcode || DefaultQRCode;
 
+  let licensePublicKeyPem = String(options.publicKeyPem || "").trim();
+  if (!licensePublicKeyPem) {
+    const pubCandidate = path.join(rootDir, "badclaude", "license-public.pem");
+    try {
+      if (fs.existsSync(pubCandidate)) {
+        licensePublicKeyPem = fs.readFileSync(pubCandidate, "utf8").trim();
+      }
+    } catch {}
+  }
+  if (!licensePublicKeyPem) {
+    licensePublicKeyPem = DEFAULT_LICENSE_PUBLIC_KEY_PEM;
+  }
+
   const adminPasswordPlain = String(environment.SUPERBAD_ADMIN_PASSWORD || "");
   const adminPasswordHash = String(environment.SUPERBAD_ADMIN_PASSWORD_HASH || "").trim();
   const sessionSecret =
@@ -307,18 +563,19 @@ function createSuperbadSalesApi(options = {}) {
     windowMs: Number(options.loginWindowMs || 15 * 60 * 1000),
   });
 
-  // Extensible payment provider registry: pix_manual is active today; gateways plug in here.
+  const seenProofNonces = new Map();
+
   const paymentProviders = {
     pix_manual: {
       id: "pix_manual",
-      async createPayment({ orderId, txid, amountCentavos, requestedEdition, buyerName }) {
+      async createPayment({ orderId, txid, amountCentavos, amountDisplay, requestedEdition, buyerName }) {
         const brcode = buildPixBrCode({
           pixKey: pixEmvKey,
           recipient: pixRecipient,
           city: pixCity,
           amountCentavos,
           txid,
-          description: `SUPERBAD ${requestedEdition.toUpperCase()}`,
+          description: `BADCLAUDE ${requestedEdition.toUpperCase()}`,
         });
         const qrDataUrl = await qrcodeLib.toDataURL(brcode, {
           margin: 1,
@@ -338,6 +595,7 @@ function createSuperbadSalesApi(options = {}) {
             orderId,
             requestedEdition,
             buyerName,
+            amountDisplay,
           }),
         };
       },
@@ -356,12 +614,17 @@ function createSuperbadSalesApi(options = {}) {
       const raw = await fs.promises.readFile(storeFile, "utf8");
       const parsed = JSON.parse(raw);
       return {
-        version: 1,
+        version: 2,
         orders: Array.isArray(parsed?.orders) ? parsed.orders : [],
         licenses: Array.isArray(parsed?.licenses) ? parsed.licenses : [],
+        network_nodes: Array.isArray(parsed?.network_nodes) ? parsed.network_nodes : [],
+        update_manifests:
+          parsed?.update_manifests && typeof parsed.update_manifests === "object"
+            ? parsed.update_manifests
+            : {},
       };
     } catch (_err) {
-      return { version: 1, orders: [], licenses: [] };
+      return { version: 2, orders: [], licenses: [], network_nodes: [], update_manifests: {} };
     }
   }
 
@@ -400,23 +663,51 @@ function createSuperbadSalesApi(options = {}) {
     return parsed;
   }
 
-  function requireAdmin(req, res) {
-    if (!isAdminConfigured()) {
-      sendJson(res, 503, {
-        ok: false,
-        error: "Acesso administrativo indisponível: senha não configurada no servidor.",
-      });
+  function verifyOwnerProof(req, method, pathname) {
+    const rawHeader = String(req?.headers?.["x-badclaude-owner-proof"] || "").trim();
+    if (!rawHeader) return null;
+    const parts = rawHeader.split(".");
+    if (parts.length !== 3) return null;
+    const [tsStr, nonce, sigB64Url] = parts;
+    const tsMs = Number(tsStr);
+    if (!Number.isFinite(tsMs) || !nonce || nonce.length < 8 || nonce.length > 64 || !sigB64Url) {
       return null;
     }
+    const now = Date.now();
+    if (Math.abs(now - tsMs) > 5 * 60 * 1000) return null;
+
+    for (const [k, expTs] of seenProofNonces.entries()) {
+      if (expTs <= now) seenProofNonces.delete(k);
+    }
+    if (seenProofNonces.has(nonce)) return null;
+
+    try {
+      const sigBuf = Buffer.from(sigB64Url, "base64url");
+      if (sigBuf.length !== 64) return null;
+      const msg = `owner-proof:${tsStr}:${nonce}:${String(method).toUpperCase()}:${pathname}`;
+      const ok = crypto.verify(null, Buffer.from(msg, "utf8"), licensePublicKeyPem, sigBuf);
+      if (!ok) return null;
+      seenProofNonces.set(nonce, now + 5 * 60 * 1000);
+      return { role: "owner-ed25519", sub: "owner-control-plane" };
+    } catch {
+      return null;
+    }
+  }
+
+  function requireAdminOrOwnerProof(req, res, method, pathname) {
+    const proof = verifyOwnerProof(req, method, pathname);
+    if (proof) return proof;
     const session = getAdminSession(req);
-    if (!session) {
+    if (session) return session;
+    if (!isAdminConfigured()) {
       sendJson(res, 401, {
         ok: false,
-        error: "Autenticação administrativa obrigatória.",
+        error: "Autenticação necessária (assinatura Ed25519 Owner ou sessão admin).",
       });
       return null;
     }
-    return session;
+    sendJson(res, 401, { ok: false, error: "Autenticação administrativa obrigatória." });
+    return null;
   }
 
   function buildSessionCookie(token, req, maxAgeSeconds) {
@@ -453,17 +744,29 @@ function createSuperbadSalesApi(options = {}) {
   }
 
   function redactLicenseForAdmin(license) {
+    const boundHwids = Array.isArray(license.bound_hwids) ? license.bound_hwids : [];
+    const maxHwids = Number(license.max_hwids || 1);
     return {
       license_id: license.license_id,
-      order_id: license.order_id,
+      order_id: license.order_id || null,
       edition: license.edition,
+      tier: license.tier || (EDITION_PLANS[license.edition]?.tier || license.edition),
+      label: license.label || "",
+      email: license.email || "",
       key_prefix: license.key_prefix,
+      key_hash: license.key_hash || null,
       expires_at: license.expires_at,
       max_downloads: license.max_downloads,
       downloads_used: license.downloads_used,
       downloads_remaining: Math.max(0, license.max_downloads - license.downloads_used),
+      max_hwids: maxHwids,
+      bound_hwids: boundHwids,
       revoked: Boolean(license.revoked),
       revoked_at: license.revoked_at || null,
+      issued_origin: license.issued_origin || "web-admin",
+      last_seen_at: license.last_seen_at || null,
+      usage_requests: Number(license.usage_requests || 0),
+      usage_tokens: Number(license.usage_tokens || 0),
       created_at: license.created_at,
       last_download_at: license.last_download_at || null,
     };
@@ -503,24 +806,68 @@ function createSuperbadSalesApi(options = {}) {
         if (stat.isFile()) {
           return { filePath: realTarget, fileName: filename, stat, expectedFiles: candidates };
         }
-      } catch (_err) {
-        // Candidate file does not exist yet; continue checking next candidate.
-      }
+      } catch (_err) {}
     }
     return { filePath: null, expectedFiles: candidates };
   }
 
-  function findLicenseByKey(licenses, normalizedKey) {
-    if (!normalizedKey) return null;
-    const prefix = normalizedKey.slice(0, 7);
+  function findLicenseByKey(licenses, rawKey) {
+    const trimmed = String(rawKey || "").trim();
+    if (!trimmed) return null;
+    const sha = hashSecretSha256(trimmed);
+    const bySha = licenses.find((lic) => lic.key_sha256 && timingSafeEqualText(lic.key_sha256, sha));
+    if (bySha) return bySha;
+
+    const normalizedUpper = trimmed.toUpperCase();
+    const prefix = normalizedUpper.slice(0, 7);
     const matchingPrefix = licenses.filter((lic) => lic.key_prefix === prefix);
     const pool = matchingPrefix.length > 0 ? matchingPrefix : licenses;
     for (const lic of pool) {
-      if (verifyScrypt(normalizedKey, lic.key_hash)) {
-        return lic;
+      if (lic.key_hash && String(lic.key_hash).startsWith("scrypt$")) {
+        if (verifyScrypt(normalizedUpper, lic.key_hash) || verifyScrypt(trimmed, lic.key_hash)) {
+          return lic;
+        }
       }
     }
     return null;
+  }
+
+  function upsertNetworkNode(store, nodeData) {
+    if (!Array.isArray(store.network_nodes)) store.network_nodes = [];
+    const nodeKey = `${nodeData.key_sha256 || nodeData.license_id || "anon"}::${nodeData.hwid || "no-hwid"}`;
+    const nowIso = new Date().toISOString();
+    const idx = store.network_nodes.findIndex((n) => n.node_key === nodeKey);
+    const prev = idx >= 0 ? store.network_nodes[idx] : {};
+    const record = {
+      node_key: nodeKey,
+      license_id: nodeData.license_id || prev.license_id || null,
+      key_sha256: nodeData.key_sha256 || prev.key_sha256 || null,
+      hwid: cleanText(nodeData.hwid || prev.hwid || "unknown", 96),
+      hostname: cleanText(nodeData.hostname || prev.hostname || "PC-Cliente", 80),
+      user_label: cleanText(nodeData.user_label || prev.user_label || "", 120),
+      edition: cleanText(nodeData.edition || prev.edition || "client-mid", 32),
+      tier: cleanText(nodeData.tier || prev.tier || "client-mid", 32),
+      version: cleanText(nodeData.version || prev.version || "6.4.0", 24),
+      active_layer: cleanText(nodeData.active_layer || prev.active_layer || "layer-1", 40),
+      watchdog_ok: nodeData.watchdog_ok !== undefined ? Boolean(nodeData.watchdog_ok) : Boolean(prev.watchdog_ok ?? true),
+      ip_masked: cleanText(nodeData.ip_masked || prev.ip_masked || "unknown", 48),
+      requests_count: Math.max(Number(prev.requests_count || 0), Number(nodeData.requests_count || 0)),
+      tokens_est: Math.max(Number(prev.tokens_est || 0), Number(nodeData.tokens_est || 0)),
+      revoked: Boolean(nodeData.revoked),
+      first_seen_at: prev.first_seen_at || nowIso,
+      last_seen_at: nowIso,
+    };
+    if (idx >= 0) {
+      store.network_nodes[idx] = record;
+    } else {
+      store.network_nodes.unshift(record);
+    }
+    if (store.network_nodes.length > 500) {
+      store.network_nodes = store.network_nodes
+        .sort((a, b) => String(b.last_seen_at).localeCompare(String(a.last_seen_at)))
+        .slice(0, 500);
+    }
+    return record;
   }
 
   async function handleApi(req, res, pathnameArg, searchParamsArg) {
@@ -530,6 +877,16 @@ function createSuperbadSalesApi(options = {}) {
     const method = String(req.method || "GET").toUpperCase();
 
     try {
+      // 0) GET /api/superbad/plans
+      if (method === "GET" && pathname === "/api/superbad/plans") {
+        return sendJson(res, 200, {
+          ok: true,
+          pix: { key: pixDisplayKey, recipient: pixRecipient, city: pixCity },
+          whatsapp: whatsappNumber,
+          plans: Object.values(EDITION_PLANS),
+        });
+      }
+
       // 1) POST /api/superbad/orders
       if (method === "POST" && pathname === "/api/superbad/orders") {
         const body = await readJsonBody(req);
@@ -547,10 +904,11 @@ function createSuperbadSalesApi(options = {}) {
         if (!VALID_EDITIONS.has(requestedEdition)) {
           return sendJson(res, 400, {
             ok: false,
-            error: "Edição solicitada inválida. Escolha 'beta' ou 'superbad'.",
+            error: "Edição solicitada inválida. Escolha basic, mid, beta, superbad ou founder.",
           });
         }
 
+        const plan = EDITION_PLANS[requestedEdition];
         const provider = paymentProviders.pix_manual;
         const orderId = `SB-${crypto.randomBytes(5).toString("hex").toUpperCase()}`;
         const orderSecret = crypto.randomBytes(24).toString("base64url");
@@ -558,7 +916,8 @@ function createSuperbadSalesApi(options = {}) {
         const paymentInfo = await provider.createPayment({
           orderId,
           txid,
-          amountCentavos: AMOUNT_CENTAVOS,
+          amountCentavos: plan.amountCentavos,
+          amountDisplay: plan.amountDisplay,
           requestedEdition,
           buyerName,
         });
@@ -568,8 +927,8 @@ function createSuperbadSalesApi(options = {}) {
           order_id: orderId,
           order_secret_hash: hashSecretSha256(orderSecret),
           status: "pending_pix",
-          amount_centavos: AMOUNT_CENTAVOS,
-          amount_display: AMOUNT_DISPLAY,
+          amount_centavos: plan.amountCentavos,
+          amount_display: plan.amountDisplay,
           requested_edition: requestedEdition,
           edition: null,
           buyer_name: buyerName,
@@ -596,8 +955,8 @@ function createSuperbadSalesApi(options = {}) {
             order_id: orderId,
             order_secret: orderSecret,
             status: "pending_pix",
-            amount_centavos: AMOUNT_CENTAVOS,
-            amount_display: AMOUNT_DISPLAY,
+            amount_centavos: plan.amountCentavos,
+            amount_display: plan.amountDisplay,
             requested_edition: requestedEdition,
             pix: paymentInfo.pix,
             whatsapp_url: paymentInfo.whatsapp_url,
@@ -611,9 +970,7 @@ function createSuperbadSalesApi(options = {}) {
       const orderGetMatch = pathname.match(/^\/api\/superbad\/orders\/([A-Za-z0-9_-]+)$/);
       if (method === "GET" && orderGetMatch) {
         const orderId = orderGetMatch[1];
-        const secret = String(
-          searchParams.get("order_secret") || req.headers["x-order-secret"] || ""
-        ).trim();
+        const secret = String(searchParams.get("order_secret") || req.headers["x-order-secret"] || "").trim();
         const store = await readStore();
         const order = store.orders.find((item) => item.order_id === orderId);
         if (!verifyOrderSecret(order, secret)) {
@@ -629,9 +986,7 @@ function createSuperbadSalesApi(options = {}) {
           created_at: order.created_at,
           updated_at: order.updated_at,
         };
-        if (order.edition) {
-          responseOrder.edition = order.edition;
-        }
+        if (order.edition) responseOrder.edition = order.edition;
         return sendJson(res, 200, { ok: true, order: responseOrder });
       }
 
@@ -643,10 +998,7 @@ function createSuperbadSalesApi(options = {}) {
         const secret = String(body.order_secret || req.headers["x-order-secret"] || "").trim();
         const receiptNote = cleanText(body.receipt_note, 500);
         if (!receiptNote) {
-          return sendJson(res, 400, {
-            ok: false,
-            error: "Informe a referência ou observação do comprovante.",
-          });
+          return sendJson(res, 400, { ok: false, error: "Informe a referência ou observação do comprovante." });
         }
 
         const result = await withStoreLock(async () => {
@@ -688,10 +1040,7 @@ function createSuperbadSalesApi(options = {}) {
 
       if (method === "POST" && pathname === "/api/superbad/admin/login") {
         if (!isAdminConfigured()) {
-          return sendJson(res, 503, {
-            ok: false,
-            error: "Senha administrativa não configurada no servidor.",
-          });
+          return sendJson(res, 503, { ok: false, error: "Senha administrativa não configurada no servidor." });
         }
         const clientIp = String(req.socket?.remoteAddress || "unknown");
         const rate = loginLimiter.consume(clientIp);
@@ -716,12 +1065,7 @@ function createSuperbadSalesApi(options = {}) {
 
         loginLimiter.reset(clientIp);
         const token = signToken(
-          {
-            sub: "superbad-admin",
-            role: "admin",
-            iat: Date.now(),
-            exp: Date.now() + SESSION_TTL_MS,
-          },
+          { sub: "superbad-admin", role: "admin", iat: Date.now(), exp: Date.now() + SESSION_TTL_MS },
           sessionSecret
         );
         const cookie = buildSessionCookie(token, req, Math.floor(SESSION_TTL_MS / 1000));
@@ -733,9 +1077,9 @@ function createSuperbadSalesApi(options = {}) {
         return sendJson(res, 200, { ok: true }, { "Set-Cookie": expiredCookie });
       }
 
-      // 5) Protected admin endpoints
+      // 5) Protected admin & Dashboard Control endpoints
       if (method === "GET" && pathname === "/api/superbad/admin/orders") {
-        if (!requireAdmin(req, res)) return;
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
         const store = await readStore();
         const orders = store.orders
           .slice()
@@ -748,9 +1092,136 @@ function createSuperbadSalesApi(options = {}) {
         return sendJson(res, 200, { ok: true, orders, licenses });
       }
 
+      if (method === "GET" && pathname === "/api/superbad/admin/network") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const store = await readStore();
+        const now = Date.now();
+        const nodes = (store.network_nodes || []).map((n) => {
+          const ageMs = now - Date.parse(n.last_seen_at || 0);
+          const presence = n.revoked
+            ? "revoked"
+            : Number.isFinite(ageMs) && ageMs <= 5 * 60 * 1000
+              ? "online"
+              : Number.isFinite(ageMs) && ageMs <= 60 * 60 * 1000
+                ? "idle"
+                : "offline";
+          return { ...n, presence };
+        });
+        const orders = store.orders
+          .slice()
+          .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
+          .map(redactOrderForAdmin);
+        const licenses = store.licenses
+          .slice()
+          .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
+          .map(redactLicenseForAdmin);
+        return sendJson(res, 200, {
+          ok: true,
+          summary: {
+            onlineNow: nodes.filter((n) => n.presence === "online").length,
+            idleNodes: nodes.filter((n) => n.presence === "idle").length,
+            totalNodes: nodes.length,
+            activeLicenses: licenses.filter((l) => !l.revoked && Date.parse(l.expires_at) > now).length,
+            revokedLicenses: licenses.filter((l) => l.revoked).length,
+            pendingOrders: orders.filter((o) => o.status !== "approved").length,
+            watchdogAlerts: nodes.filter((n) => n.watchdog_ok === false).length,
+          },
+          network_nodes: nodes,
+          orders,
+          licenses,
+          update_manifests: store.update_manifests || {},
+          serverTime: new Date().toISOString(),
+        });
+      }
+
+      if (method === "POST" && pathname === "/api/superbad/admin/licenses/register") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const body = await readJsonBody(req);
+        const keySha256 = cleanText(body.key_hash || body.key_sha256, 128).toLowerCase();
+        if (!/^[a-f0-9]{64}$/.test(keySha256)) {
+          return sendJson(res, 400, { ok: false, error: "key_hash SHA-256 inválido." });
+        }
+        const edition = cleanText(body.edition || "founder", 32).toLowerCase();
+        const plan = EDITION_PLANS[edition] || EDITION_PLANS.founder;
+        const rawDays = Number(body.days || plan.defaultDays || 30);
+        const expiresAt = body.expires_at && Number.isFinite(Date.parse(body.expires_at))
+          ? new Date(Date.parse(body.expires_at)).toISOString()
+          : new Date(Date.now() + Math.max(1, rawDays) * 86400000).toISOString();
+        const maxHwids = Math.max(1, Math.min(20, Number(body.max_hwids || plan.defaultMaxHwids || 1)));
+        const maxDownloads = Math.max(1, Math.min(100, Number(body.max_downloads || 10)));
+        const licenseId = cleanText(body.license_id || `LIC-${crypto.randomBytes(5).toString("hex").toUpperCase()}`, 64);
+        const orderId = cleanText(body.order_id || "", 64) || null;
+        const nowIso = new Date().toISOString();
+
+        const outcome = await withStoreLock(async () => {
+          const store = await readStore();
+          let existing = store.licenses.find((l) => l.key_sha256 === keySha256 || l.license_id === licenseId);
+          if (!existing) {
+            existing = {
+              license_id: licenseId,
+              order_id: orderId,
+              edition,
+              tier: cleanText(body.tier || plan.tier, 32),
+              label: cleanText(body.label || plan.label, 120),
+              email: cleanText(body.email || "", 120),
+              key_prefix: cleanText(body.key_prefix || "BC5-LOC", 16),
+              key_hash: `sha256:${keySha256}`,
+              key_sha256: keySha256,
+              expires_at: expiresAt,
+              max_downloads: maxDownloads,
+              downloads_used: 0,
+              max_hwids: maxHwids,
+              bound_hwids: [],
+              revoked: Boolean(body.revoked),
+              revoked_at: body.revoked ? nowIso : null,
+              issued_origin: "dashboard-control",
+              last_seen_at: null,
+              usage_requests: 0,
+              usage_tokens: 0,
+              created_at: nowIso,
+              last_download_at: null,
+            };
+            store.licenses.push(existing);
+          } else {
+            existing.edition = edition;
+            existing.tier = cleanText(body.tier || plan.tier, 32);
+            existing.label = cleanText(body.label || existing.label, 120);
+            existing.email = cleanText(body.email || existing.email, 120);
+            existing.expires_at = expiresAt;
+            existing.max_hwids = maxHwids;
+            if (body.revoked !== undefined) {
+              existing.revoked = Boolean(body.revoked);
+              existing.revoked_at = existing.revoked ? nowIso : null;
+            }
+          }
+
+          if (orderId) {
+            const ord = store.orders.find((o) => o.order_id === orderId);
+            if (ord) {
+              for (const lic of store.licenses) {
+                if (lic.order_id === orderId && lic.license_id !== existing.license_id && !lic.revoked) {
+                  lic.revoked = true;
+                  lic.revoked_at = nowIso;
+                }
+              }
+              ord.status = "approved";
+              ord.edition = edition;
+              ord.approved_at = nowIso;
+              ord.updated_at = nowIso;
+              ord.license_id = existing.license_id;
+            }
+          }
+
+          await writeStore(store);
+          return redactLicenseForAdmin(existing);
+        });
+
+        return sendJson(res, 200, { ok: true, license: outcome });
+      }
+
       const authorizeMatch = pathname.match(/^\/api\/superbad\/admin\/orders\/([A-Za-z0-9_-]+)\/authorize$/);
       if (method === "POST" && authorizeMatch) {
-        if (!requireAdmin(req, res)) return;
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
         const orderId = authorizeMatch[1];
         const body = await readJsonBody(req);
 
@@ -758,18 +1229,17 @@ function createSuperbadSalesApi(options = {}) {
         if (!VALID_EDITIONS.has(edition)) {
           return sendJson(res, 400, {
             ok: false,
-            error: "Escolha uma edição válida ('beta' ou 'superbad').",
+            error: "Escolha uma edição válida (basic, mid, beta, superbad ou founder).",
           });
         }
 
-        const rawDays = body.expires_in_days === undefined || body.expires_in_days === null || body.expires_in_days === ""
-          ? 30
-          : Number(body.expires_in_days);
+        const plan = EDITION_PLANS[edition];
+        const rawDays =
+          body.expires_in_days === undefined || body.expires_in_days === null || body.expires_in_days === ""
+            ? plan.defaultDays
+            : Number(body.expires_in_days);
         if (!Number.isInteger(rawDays) || rawDays < 1 || rawDays > 365) {
-          return sendJson(res, 400, {
-            ok: false,
-            error: "expires_in_days deve ser um número inteiro entre 1 e 365.",
-          });
+          return sendJson(res, 400, { ok: false, error: "expires_in_days deve ser um inteiro entre 1 e 365." });
         }
 
         const rawMaxDownloads =
@@ -777,14 +1247,12 @@ function createSuperbadSalesApi(options = {}) {
             ? 5
             : Number(body.max_downloads);
         if (!Number.isInteger(rawMaxDownloads) || rawMaxDownloads < 1 || rawMaxDownloads > 100) {
-          return sendJson(res, 400, {
-            ok: false,
-            error: "max_downloads deve ser um número inteiro entre 1 e 100.",
-          });
+          return sendJson(res, 400, { ok: false, error: "max_downloads deve ser um inteiro entre 1 e 100." });
         }
 
         const licenseKey = generateLicenseKey(edition);
         const keyHash = hashScrypt(licenseKey);
+        const keySha256 = hashSecretSha256(licenseKey);
         const licenseId = `LIC-${crypto.randomBytes(5).toString("hex").toUpperCase()}`;
         const now = new Date();
         const expiresAt = new Date(now.getTime() + rawDays * 24 * 60 * 60 * 1000).toISOString();
@@ -797,7 +1265,6 @@ function createSuperbadSalesApi(options = {}) {
             return { status: 404, payload: { ok: false, error: "Pedido não encontrado." } };
           }
 
-          // Revoke prior unrevoked license for this order so only the newly issued license stays active.
           for (const existingLic of store.licenses) {
             if (existingLic.order_id === orderId && !existingLic.revoked) {
               existingLic.revoked = true;
@@ -809,13 +1276,23 @@ function createSuperbadSalesApi(options = {}) {
             license_id: licenseId,
             order_id: orderId,
             edition,
+            tier: plan.tier,
+            label: order.buyer_name || plan.label,
+            email: order.buyer_contact || "",
             key_prefix: licenseKey.slice(0, 7),
             key_hash: keyHash,
+            key_sha256: keySha256,
             expires_at: expiresAt,
             max_downloads: rawMaxDownloads,
             downloads_used: 0,
+            max_hwids: plan.defaultMaxHwids,
+            bound_hwids: [],
             revoked: false,
             revoked_at: null,
+            issued_origin: "web-admin",
+            last_seen_at: null,
+            usage_requests: 0,
+            usage_tokens: 0,
             created_at: nowIso,
             last_download_at: null,
           };
@@ -851,7 +1328,7 @@ function createSuperbadSalesApi(options = {}) {
 
       const revokeMatch = pathname.match(/^\/api\/superbad\/admin\/licenses\/([A-Za-z0-9_-]+)\/revoke$/);
       if (method === "POST" && revokeMatch) {
-        if (!requireAdmin(req, res)) return;
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
         const licenseId = revokeMatch[1];
 
         const result = await withStoreLock(async () => {
@@ -862,19 +1339,92 @@ function createSuperbadSalesApi(options = {}) {
           }
           license.revoked = true;
           license.revoked_at = new Date().toISOString();
+          for (const node of store.network_nodes || []) {
+            if (node.license_id === licenseId || (license.key_sha256 && node.key_sha256 === license.key_sha256)) {
+              node.revoked = true;
+            }
+          }
           await writeStore(store);
-          return {
-            status: 200,
-            payload: { ok: true, license_id: license.license_id, revoked: true },
-          };
+          return { status: 200, payload: { ok: true, license_id: license.license_id, revoked: true } };
         });
 
         return sendJson(res, result.status, result.payload);
       }
 
+      const hwidResetMatch = pathname.match(/^\/api\/superbad\/admin\/licenses\/([A-Za-z0-9_-]+)\/hwid-reset$/);
+      if (method === "POST" && hwidResetMatch) {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const licenseId = hwidResetMatch[1];
+        const body = await readJsonBody(req);
+
+        const result = await withStoreLock(async () => {
+          const store = await readStore();
+          const license = store.licenses.find((item) => item.license_id === licenseId);
+          if (!license) {
+            return { status: 404, payload: { ok: false, error: "Licença não encontrada." } };
+          }
+          license.bound_hwids = [];
+          if (Number.isInteger(Number(body.max_hwids)) && Number(body.max_hwids) >= 1) {
+            license.max_hwids = Math.min(20, Number(body.max_hwids));
+          }
+          if (body.unrevoke === true) {
+            license.revoked = false;
+            license.revoked_at = null;
+          }
+          await writeStore(store);
+          return { status: 200, payload: { ok: true, license: redactLicenseForAdmin(license) } };
+        });
+        return sendJson(res, result.status, result.payload);
+      }
+
+      if (method === "POST" && pathname === "/api/superbad/admin/updates/manifest") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const body = await readJsonBody(req);
+        const channel = cleanText(body.channel || body.edition || "", 32).toLowerCase();
+        if (!ALLOWED_UPDATE_CHANNELS.has(channel)) {
+          return sendJson(res, 400, {
+            ok: false,
+            error: "Canal de update inválido. Use founder, client-mid ou client-basic (owner-master nunca é publicado na nuvem).",
+          });
+        }
+        const version = cleanText(body.version || "", 32);
+        const sha256 = cleanText(body.sha256 || "", 128).toLowerCase();
+        if (!version || !sha256) {
+          return sendJson(res, 400, { ok: false, error: "version e sha256 são obrigatórios." });
+        }
+        const manifest = {
+          version,
+          channel,
+          platform: cleanText(body.platform || "win32-x64", 32),
+          releaseDate: new Date().toISOString(),
+          requiresMinAppVersion: cleanText(body.requiresMinAppVersion || "5.0.0", 24),
+          forceImmediate: Boolean(body.forceImmediate || body.rollout === "immediate"),
+          notes: cleanText(body.notes || "", 500),
+          deltaBundle: body.deltaBundle && typeof body.deltaBundle === "object"
+            ? body.deltaBundle
+            : { url: cleanText(body.url || "", 500), sha256, sizeBytes: Number(body.sizeBytes || 0) },
+          securityInvariants: {
+            watchdogRequired: true,
+            appOnlyClosedRequired: true,
+            forbidPaidFallbackFromClaude: true,
+            forbidKeygenAdminModules: true,
+          },
+          signatureEd25519: cleanText(body.signatureEd25519 || "", 512),
+        };
+        await withStoreLock(async () => {
+          const store = await readStore();
+          if (!store.update_manifests || typeof store.update_manifests !== "object") {
+            store.update_manifests = {};
+          }
+          store.update_manifests[channel] = manifest;
+          await writeStore(store);
+        });
+        return sendJson(res, 200, { ok: true, manifest });
+      }
+
       if (method === "GET" && pathname === "/api/superbad/admin/releases") {
-        if (!requireAdmin(req, res)) return;
-        const releases = ["beta", "superbad"].map((edition) => {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const releases = Array.from(VALID_EDITIONS).map((edition) => {
           const resolved = resolveReleaseFile(edition);
           if (resolved.filePath && resolved.stat) {
             return {
@@ -893,34 +1443,19 @@ function createSuperbadSalesApi(options = {}) {
             updated_at: null,
           };
         });
-        return sendJson(res, 200, {
-          ok: true,
-          releases_dir_configured: Boolean(releasesDir),
-          releases,
-        });
+        return sendJson(res, 200, { ok: true, releases_dir_configured: Boolean(releasesDir), releases });
       }
 
       const uploadReleaseMatch = pathname.match(/^\/api\/superbad\/admin\/releases\/([A-Za-z0-9_-]+)$/);
       if (method === "POST" && uploadReleaseMatch) {
-        if (!requireAdmin(req, res)) return;
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
         const edition = String(uploadReleaseMatch[1] || "").trim().toLowerCase();
         if (!VALID_EDITIONS.has(edition)) {
-          return sendJson(res, 400, {
-            ok: false,
-            error: "Edição inválida. Escolha 'beta' ou 'superbad'.",
-          });
+          return sendJson(res, 400, { ok: false, error: "Edição inválida para upload." });
         }
 
-        const contentType = String(req.headers["content-type"] || "")
-          .split(";")[0]
-          .trim()
-          .toLowerCase();
-        if (
-          contentType &&
-          !["application/octet-stream", "application/zip", "application/x-zip-compressed"].includes(
-            contentType
-          )
-        ) {
+        const contentType = String(req.headers["content-type"] || "").split(";")[0].trim().toLowerCase();
+        if (contentType && !ALLOWED_ZIP_CONTENT_TYPES.has(contentType)) {
           return sendJson(res, 415, {
             ok: false,
             error: "Content-Type inválido. Envie o arquivo .zip como application/octet-stream.",
@@ -928,14 +1463,10 @@ function createSuperbadSalesApi(options = {}) {
         }
 
         const maxReleaseBytes =
-          Number(options.maxReleaseBytes || environment.BADCLAUDE_MAX_RELEASE_BYTES) ||
-          DEFAULT_MAX_RELEASE_BYTES;
+          Number(options.maxReleaseBytes || environment.BADCLAUDE_MAX_RELEASE_BYTES) || DEFAULT_MAX_RELEASE_BYTES;
         const zipBuffer = await readBinaryBody(req, maxReleaseBytes);
         if (!isZipBuffer(zipBuffer)) {
-          return sendJson(res, 400, {
-            ok: false,
-            error: "Arquivo inválido. O upload deve ser um pacote .zip válido (assinatura PK).",
-          });
+          return sendJson(res, 400, { ok: false, error: "Arquivo inválido. O upload deve ser um pacote .zip válido." });
         }
 
         const canonicalFilename = CANONICAL_RELEASE_FILES[edition];
@@ -946,9 +1477,7 @@ function createSuperbadSalesApi(options = {}) {
           return sendJson(res, 403, { ok: false, error: "Destino de release inválido." });
         }
 
-        const tmpPath = `${targetPath}.${process.pid}.${crypto.randomBytes(4).toString("hex")}.tmp`;
-        await fs.promises.writeFile(tmpPath, zipBuffer);
-        await fs.promises.rename(tmpPath, targetPath);
+        await writeFileAtomic(targetPath, zipBuffer);
 
         return sendJson(res, 200, {
           ok: true,
@@ -958,16 +1487,457 @@ function createSuperbadSalesApi(options = {}) {
         });
       }
 
-      // 6) POST /api/superbad/license/validate
-      if (method === "POST" && pathname === "/api/superbad/license/validate") {
+      if (method === "POST" && pathname === "/api/superbad/admin/updates/bundle") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const channel = String(searchParams.get("channel") || "").trim().toLowerCase();
+        const version = String(searchParams.get("version") || "").trim();
+        if (!ALLOWED_UPDATE_CHANNELS.has(channel)) {
+          return sendJson(res, 400, {
+            ok: false,
+            error: "Canal de update inválido. Use founder, client-mid ou client-basic.",
+          });
+        }
+        if (!UPDATE_VERSION_RE.test(version)) {
+          return sendJson(res, 400, { ok: false, error: "Versão inválida para bundle de atualização." });
+        }
+
+        const contentType = String(req.headers["content-type"] || "").split(";")[0].trim().toLowerCase();
+        if (contentType && !ALLOWED_ZIP_CONTENT_TYPES.has(contentType)) {
+          return sendJson(res, 415, {
+            ok: false,
+            error: "Content-Type inválido. Envie o pacote .zip como application/octet-stream ou application/zip.",
+          });
+        }
+
+        const maxReleaseBytes =
+          Number(options.maxReleaseBytes || environment.BADCLAUDE_MAX_RELEASE_BYTES) || DEFAULT_MAX_RELEASE_BYTES;
+        const zipBuffer = await readBinaryBody(req, maxReleaseBytes);
+        if (!isZipBuffer(zipBuffer)) {
+          return sendJson(res, 400, { ok: false, error: "Arquivo inválido. O bundle deve ser um pacote .zip válido." });
+        }
+
+        const deltasRoot = path.join(releasesDir, "deltas");
+        await fs.promises.mkdir(deltasRoot, { recursive: true });
+        const realReleasesRoot = await fs.promises.realpath(releasesDir);
+        const realDeltasRoot = await fs.promises.realpath(deltasRoot);
+        if (!realDeltasRoot.startsWith(`${realReleasesRoot}${path.sep}`)) {
+          return sendJson(res, 403, { ok: false, error: "Diretório de deltas inválido." });
+        }
+
+        const deltaFilename = `delta-${channel}-${version}.zip`;
+        const deltaTargetPath = path.resolve(realDeltasRoot, deltaFilename);
+        if (!deltaTargetPath.startsWith(`${realDeltasRoot}${path.sep}`)) {
+          return sendJson(res, 403, { ok: false, error: "Destino de delta inválido." });
+        }
+        await writeFileAtomic(deltaTargetPath, zipBuffer);
+
+        if (searchParams.get("alsoUpdateRelease") === "1") {
+          const canonicalKey = channel === "founder" ? "founder" : channel === "client-mid" ? "superbad" : "basic";
+          const canonicalFilename = CANONICAL_RELEASE_FILES[canonicalKey];
+          const canonicalTargetPath = path.resolve(realReleasesRoot, canonicalFilename);
+          if (!canonicalTargetPath.startsWith(`${realReleasesRoot}${path.sep}`)) {
+            return sendJson(res, 403, { ok: false, error: "Destino de release canônico inválido." });
+          }
+          await writeFileAtomic(canonicalTargetPath, zipBuffer);
+        }
+
+        const sha256 = crypto.createHash("sha256").update(zipBuffer).digest("hex");
+        return sendJson(res, 200, {
+          ok: true,
+          channel,
+          version,
+          sha256,
+          sizeBytes: zipBuffer.length,
+          downloadUrl: `/api/updates/download?channel=${encodeURIComponent(channel)}&version=${encodeURIComponent(version)}`,
+        });
+      }
+
+      // 6) SaaS Contract: POST /api/v1/licenses/verify (Ed25519 + HWID + Revocation)
+      if (method === "POST" && pathname === "/api/v1/licenses/verify") {
         const body = await readJsonBody(req);
-        const licenseKey = String(body.license_key || "").trim().toUpperCase();
-        if (!licenseKey || licenseKey.length > 80) {
-          return sendJson(res, 400, { ok: false, error: "Informe uma chave de licença válida." });
+        const rawKey = String(body.key || body.license_key || "").trim();
+        const email = cleanText(body.email || "", 120);
+        const hwid = cleanText(body.hwid || "", 96);
+        const hostname = cleanText(body.hostname || "", 80);
+        const version = cleanText(body.version || "6.4.0", 24);
+        if (!rawKey) {
+          return sendJson(res, 400, { ok: false, valid: false, code: "EMPTY_KEY", error: "Chave ausente." });
+        }
+
+        const edCheck = verifyEd25519LicenseKey(rawKey, licensePublicKeyPem);
+        if (edCheck.isEd25519Format && !edCheck.ok) {
+          const st = edCheck.code === "LICENSE_EXPIRED" ? 403 : 401;
+          return sendJson(res, st, {
+            ok: false,
+            valid: false,
+            revoked: false,
+            code: edCheck.code,
+            error: edCheck.error,
+          });
+        }
+
+        const keySha = hashSecretSha256(rawKey);
+        const clientIpMasked = maskIp(req.socket?.remoteAddress || "");
+
+        const outcome = await withStoreLock(async () => {
+          const store = await readStore();
+          let license = findLicenseByKey(store.licenses, rawKey);
+
+          if (!license) {
+            if (!edCheck.ok) {
+              return { status: 401, payload: { ok: false, valid: false, code: "INVALID_SIGNATURE", error: "Chave de licença inválida." } };
+            }
+            license = buildAutoEnrolledEd25519License(edCheck, keySha, { email });
+            store.licenses.push(license);
+          }
+
+          if (license.revoked) {
+            upsertNetworkNode(store, {
+              license_id: license.license_id,
+              key_sha256: keySha,
+              hwid,
+              hostname,
+              user_label: email || license.label,
+              edition: license.edition,
+              tier: license.tier,
+              version,
+              ip_masked: clientIpMasked,
+              revoked: true,
+            });
+            await writeStore(store);
+            return {
+              status: 403,
+              payload: { ok: false, valid: false, revoked: true, code: "LICENSE_REVOKED", error: "Esta licença foi revogada pelo emissor." },
+            };
+          }
+
+          if (Date.parse(license.expires_at) <= Date.now()) {
+            return {
+              status: 403,
+              payload: { ok: false, valid: false, revoked: false, code: "LICENSE_EXPIRED", error: "Licença expirada segundo o relógio do servidor." },
+            };
+          }
+
+          if (!Array.isArray(license.bound_hwids)) license.bound_hwids = [];
+          const maxHwids = Math.max(1, Number(license.max_hwids || 1));
+          if (hwid && !license.bound_hwids.includes(hwid)) {
+            if (license.bound_hwids.length >= maxHwids) {
+              return {
+                status: 403,
+                payload: {
+                  ok: false,
+                  valid: false,
+                  revoked: false,
+                  code: "HWID_MISMATCH",
+                  error: `Limite de dispositivos (${maxHwids}) atingido para esta licença. Peça reset ao administrador.`,
+                },
+              };
+            }
+            license.bound_hwids.push(hwid);
+          }
+
+          const nowIso = new Date().toISOString();
+          license.last_seen_at = nowIso;
+          if (email && !license.email) license.email = email;
+
+          const tier = license.tier || EDITION_PLANS[license.edition]?.tier || "client-mid";
+          const expMs = Date.parse(license.expires_at);
+          const daysLeft = Math.max(1, Math.ceil((expMs - Date.now()) / 86400000));
+
+          upsertNetworkNode(store, {
+            license_id: license.license_id,
+            key_sha256: keySha,
+            hwid,
+            hostname,
+            user_label: email || license.label,
+            edition: license.edition,
+            tier,
+            version,
+            ip_masked: clientIpMasked,
+            revoked: false,
+          });
+          await writeStore(store);
+
+          const sessionToken = signToken(
+            { sub: license.license_id, tier, hwid: hwid || "", exp: Date.now() + 24 * 60 * 60 * 1000 },
+            sessionSecret
+          );
+
+          return {
+            status: 200,
+            payload: {
+              ok: true,
+              valid: true,
+              revoked: false,
+              licenseId: license.license_id,
+              tier,
+              planLabel: license.label || (EDITION_PLANS[license.edition]?.label || tier),
+              email: license.email || email,
+              hwid,
+              boundHwidsCount: license.bound_hwids.length,
+              maxHwids,
+              daysLeft,
+              expiresAt: license.expires_at,
+              unlockedModes: getUnlockedModesForTier(tier),
+              sessionToken,
+              serverTime: nowIso,
+            },
+          };
+        });
+
+        return sendJson(res, outcome.status, outcome.payload);
+      }
+
+      // 7) Live Network Telemetry Heartbeat: POST /api/v1/telemetry/heartbeat
+      if (method === "POST" && pathname === "/api/v1/telemetry/heartbeat") {
+        const body = await readJsonBody(req);
+        const rawKey = String(body.key || req.headers["x-badclaude-license"] || "").trim();
+        const edCheck = rawKey ? verifyEd25519LicenseKey(rawKey, licensePublicKeyPem) : null;
+        const keySha = rawKey ? hashSecretSha256(rawKey) : cleanText(body.key_hash || "", 128).toLowerCase();
+        const hwid = cleanText(body.hwid || "", 96);
+        const edition = cleanText(body.edition || "client-mid", 32).toLowerCase();
+        const tier = cleanText(body.tier || EDITION_PLANS[edition]?.tier || edition, 32).toLowerCase();
+
+        const result = await withStoreLock(async () => {
+          const store = await readStore();
+          let lic = rawKey
+            ? findLicenseByKey(store.licenses, rawKey)
+            : store.licenses.find((l) => l.key_sha256 && keySha && l.key_sha256 === keySha);
+
+          if (!lic && edCheck && edCheck.ok) {
+            lic = buildAutoEnrolledEd25519License(edCheck, keySha, {
+              email: cleanText(body.user_label || body.email || "", 120),
+              boundHwids: hwid ? [hwid] : [],
+            });
+            store.licenses.push(lic);
+          }
+
+          const isRevoked = Boolean(lic && lic.revoked);
+          const isExpired = Boolean(
+            (lic && Date.parse(lic.expires_at) <= Date.now()) ||
+              (!lic && edCheck?.code === "LICENSE_EXPIRED")
+          );
+          if (lic) {
+            lic.last_seen_at = new Date().toISOString();
+            lic.usage_requests = Math.max(Number(lic.usage_requests || 0), Number(body.requests_count || 0));
+            lic.usage_tokens = Math.max(Number(lic.usage_tokens || 0), Number(body.tokens_est || 0));
+          }
+
+          upsertNetworkNode(store, {
+            license_id: lic?.license_id || null,
+            key_sha256: keySha || lic?.key_sha256 || null,
+            hwid,
+            hostname: body.hostname || "",
+            user_label: body.user_label || lic?.email || lic?.label || "",
+            edition: lic?.edition || edition,
+            tier: lic?.tier || tier,
+            version: body.version || "6.4.0",
+            active_layer: body.active_layer || "layer-1",
+            watchdog_ok: body.watchdog_ok !== false,
+            ip_masked: maskIp(req.socket?.remoteAddress || ""),
+            requests_count: Number(body.requests_count || 0),
+            tokens_est: Number(body.tokens_est || 0),
+            revoked: isRevoked,
+          });
+          await writeStore(store);
+
+          const channel = mapEditionToUpdateChannel(lic?.edition || edition);
+          const manifest = channel ? store.update_manifests?.[channel] || null : null;
+          return {
+            status: isRevoked ? 403 : 200,
+            payload: {
+              ok: !isRevoked,
+              active: !isRevoked && !isExpired,
+              revoked: isRevoked,
+              expired: isExpired,
+              code: isRevoked ? "LICENSE_REVOKED" : isExpired ? "LICENSE_EXPIRED" : "OK",
+              update_available: Boolean(manifest && body.version && manifest.version !== body.version),
+              latest_version: manifest?.version || null,
+              force_immediate: Boolean(manifest?.forceImmediate),
+              delta_url: manifest?.deltaBundle?.url || null,
+              serverTime: new Date().toISOString(),
+            },
+          };
+        });
+
+        return sendJson(res, result.status, result.payload);
+      }
+
+      // 8) Cloud Update Manifest: GET /api/updates/manifest
+      if (method === "GET" && pathname === "/api/updates/manifest") {
+        const rawEdition = String(searchParams.get("edition") || "client-mid").trim();
+        const channel = mapEditionToUpdateChannel(rawEdition);
+        if (!channel || !ALLOWED_UPDATE_CHANNELS.has(channel)) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: "CHANNEL_FORBIDDEN",
+            error: "Este canal não é distribuído publicamente pela nuvem.",
+          });
+        }
+        const providedKey = String(req.headers["x-badclaude-license"] || searchParams.get("key") || "").trim();
+        const store = await readStore();
+        if (providedKey) {
+          const lic = findLicenseByKey(store.licenses, providedKey);
+          const edCheck = verifyEd25519LicenseKey(providedKey, licensePublicKeyPem);
+          if ((!lic && !edCheck.ok) || (lic && lic.revoked) || (lic && Date.parse(lic.expires_at) <= Date.now())) {
+            return sendJson(res, 403, {
+              ok: false,
+              code: lic?.revoked ? "LICENSE_REVOKED" : "LICENSE_REQUIRED",
+              error: "Licença inválida, revogada ou expirada para atualização na nuvem.",
+            });
+          }
+        }
+        const manifest = store.update_manifests?.[channel] || null;
+        if (!manifest) {
+          return sendJson(res, 200, {
+            ok: true,
+            channel,
+            updateAvailable: false,
+            version: null,
+            securityInvariants: {
+              watchdogRequired: true,
+              appOnlyClosedRequired: true,
+              forbidPaidFallbackFromClaude: true,
+              forbidKeygenAdminModules: true,
+            },
+          });
+        }
+        return sendJson(res, 200, { ok: true, channel, updateAvailable: true, ...manifest });
+      }
+
+      // 8b) Cloud Update Delta Download: GET /api/updates/download
+      if (method === "GET" && pathname === "/api/updates/download") {
+        const channel = String(searchParams.get("channel") || "").trim().toLowerCase();
+        const version = String(searchParams.get("version") || "").trim();
+        if (!ALLOWED_UPDATE_CHANNELS.has(channel)) {
+          return sendJson(res, 400, {
+            ok: false,
+            code: "INVALID_CHANNEL",
+            error: "Canal de update inválido.",
+          });
+        }
+        if (!UPDATE_VERSION_RE.test(version)) {
+          return sendJson(res, 400, {
+            ok: false,
+            code: "INVALID_VERSION",
+            error: "Versão inválida para download de atualização.",
+          });
+        }
+
+        const rawKey = String(req.headers["x-badclaude-license"] || searchParams.get("key") || "").trim();
+        if (!rawKey) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: "LICENSE_REQUIRED",
+            error: "Chave de licença obrigatória para baixar atualização.",
+          });
+        }
+
+        const edCheck = verifyEd25519LicenseKey(rawKey, licensePublicKeyPem);
+        if (edCheck.isEd25519Format && !edCheck.ok) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: edCheck.code,
+            error: edCheck.error,
+          });
         }
 
         const store = await readStore();
-        const license = findLicenseByKey(store.licenses, licenseKey);
+        const lic = findLicenseByKey(store.licenses, rawKey);
+        if (!lic && !edCheck.ok) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: "INVALID_LICENSE",
+            error: "Chave de licença inválida.",
+          });
+        }
+        if (lic && lic.revoked) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: "LICENSE_REVOKED",
+            error: "Esta licença foi revogada pelo emissor.",
+          });
+        }
+        if (lic && Date.parse(lic.expires_at) <= Date.now()) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: "LICENSE_EXPIRED",
+            error: "Licença expirada.",
+          });
+        }
+
+        const effectiveTier =
+          lic?.tier || (lic?.edition ? EDITION_PLANS[lic.edition]?.tier || lic.edition : null) || edCheck.tier;
+        if (!tierCanAccessUpdateChannel(effectiveTier, channel)) {
+          return sendJson(res, 403, {
+            ok: false,
+            code: "CHANNEL_TIER_FORBIDDEN",
+            error: "Seu plano de licença não permite acesso a este canal de atualização.",
+          });
+        }
+
+        const fileName = `delta-${channel}-${version}.zip`;
+        let targetPath = null;
+        let fileSize = 0;
+        try {
+          const realReleasesRoot = await fs.promises.realpath(releasesDir);
+          const candidate = path.resolve(realReleasesRoot, "deltas", fileName);
+          if (candidate.startsWith(`${realReleasesRoot}${path.sep}`)) {
+            const realTarget = await fs.promises.realpath(candidate);
+            if (realTarget.startsWith(`${realReleasesRoot}${path.sep}`)) {
+              const stat = await fs.promises.stat(realTarget);
+              if (stat.isFile()) {
+                targetPath = realTarget;
+                fileSize = stat.size;
+              }
+            }
+          }
+        } catch (_err) {
+          targetPath = null;
+        }
+
+        if (!targetPath) {
+          return sendJson(res, 404, {
+            ok: false,
+            code: "UPDATE_BUNDLE_NOT_FOUND",
+            error: "Pacote de atualização não encontrado para este canal e versão.",
+          });
+        }
+
+        streamZipFile(res, targetPath, fileName, fileSize, "Falha ao ler pacote de atualização.");
+        return;
+      }
+
+      // 9) POST /api/superbad/license/validate
+      if (method === "POST" && pathname === "/api/superbad/license/validate") {
+        const body = await readJsonBody(req);
+        const rawKey = String(body.license_key || "").trim();
+        if (!rawKey || rawKey.length > 600) {
+          return sendJson(res, 400, { ok: false, error: "Informe uma chave de licença válida." });
+        }
+
+        const edCheck = verifyEd25519LicenseKey(rawKey, licensePublicKeyPem);
+        if (edCheck.isEd25519Format && !edCheck.ok) {
+          return sendJson(res, edCheck.code === "LICENSE_EXPIRED" ? 403 : 401, { ok: false, error: edCheck.error });
+        }
+
+        const store = await readStore();
+        let license = findLicenseByKey(store.licenses, rawKey);
+        if (!license && edCheck.ok) {
+          const edEdition = edCheck.tier === "founder" ? "founder" : edCheck.tier === "client-basic" ? "basic" : "superbad";
+          const token = signToken(
+            { lid: `ED-${edCheck.keyPrefix}`, ed: edEdition, exp: Date.now() + DOWNLOAD_TOKEN_TTL_MS, jti: crypto.randomBytes(8).toString("hex") },
+            downloadSecret
+          );
+          return sendJson(res, 200, {
+            ok: true,
+            edition: edEdition,
+            tier: edCheck.tier,
+            expires_at: edCheck.expiresAt,
+            downloads_remaining: 10,
+            download_url: `/api/superbad/download?token=${encodeURIComponent(token)}`,
+          });
+        }
         if (!license) {
           return sendJson(res, 401, { ok: false, error: "Chave de licença inválida." });
         }
@@ -1000,7 +1970,7 @@ function createSuperbadSalesApi(options = {}) {
         });
       }
 
-      // 7) GET /api/superbad/download?token=...
+      // 10) GET /api/superbad/download?token=...
       if (method === "GET" && pathname === "/api/superbad/download") {
         const token = String(searchParams.get("token") || "").trim();
         const payload = verifyToken(token, downloadSecret);
@@ -1034,8 +2004,7 @@ function createSuperbadSalesApi(options = {}) {
               payload: {
                 ok: false,
                 error: "release_archive_not_ready",
-                message:
-                  "Licença válida, mas o pacote privado desta edição ainda não foi disponibilizado no servidor.",
+                message: "Licença válida, mas o pacote privado desta edição ainda não foi disponibilizado no servidor.",
                 edition: license.edition,
                 expected_files: resolved.expectedFiles,
               },
@@ -1081,16 +2050,14 @@ function createSuperbadSalesApi(options = {}) {
       return sendJson(res, 404, { ok: false, error: "Rota SuperBad não encontrada." });
     } catch (err) {
       const status = Number(err?.statusCode) || 500;
-      const message =
-        status >= 500 ? "Erro interno no serviço SuperBad." : err.message || "Requisição inválida.";
+      const message = status >= 500 ? "Erro interno no serviço SuperBad." : err.message || "Requisição inválida.";
       return sendJson(res, status, { ok: false, error: message });
     }
   }
 
   return {
     handleApi,
-    AMOUNT_CENTAVOS,
-    AMOUNT_DISPLAY,
+    EDITION_PLANS,
     releasesDir,
     storeFile,
   };
@@ -1098,6 +2065,8 @@ function createSuperbadSalesApi(options = {}) {
 
 module.exports = {
   createSuperbadSalesApi,
+  EDITION_PLANS,
+  verifyEd25519LicenseKey,
   buildPixBrCode,
   hashScrypt,
   verifyScrypt,

@@ -22,13 +22,18 @@ const path = require("path");
 const crypto = require("crypto");
 
 const PLANOS = {
-  dez: { id: "dez", nome: "10 Conto", preco: 10, duracao: "8 horas", horas: 8 },
-  dia: { id: "dia", nome: "1 Dia", preco: 20, duracao: "24 horas", horas: 24 },
-  semana: { id: "semana", nome: "7 Dias", preco: 80, duracao: "168 horas", horas: 168 },
-  quinzena: { id: "quinzena", nome: "15 Dias", preco: 100, duracao: "360 horas", horas: 360 },
-  mes: { id: "mes", nome: "30 Dias", preco: 140, duracao: "720 horas", horas: 720 },
-  bilhao: { id: "bilhao", nome: "One Billion", preco: 500, duracao: "7 dias, até 10B tokens", horas: 168 },
-  fundador: { id: "fundador", nome: "Fundador", preco: 1000, duracao: "30 dias, até 25B tokens", horas: 720 },
+  basic: { id: "basic", tier: "client-basic", nome: "Cliente Básico", preco: 79, duracao: "7 dias (BYOK)", horas: 168 },
+  mid: { id: "mid", tier: "client-mid", nome: "Cliente Studio", preco: 179, duracao: "30 dias (APIs Grátis + Super Poderes)", horas: 720 },
+  superbad: { id: "superbad", tier: "client-mid", nome: "BadClaude SuperBad", preco: 350, duracao: "30 dias (Portal + Releases)", horas: 720 },
+  founder: { id: "founder", tier: "founder", nome: "Edição Fundador", preco: 690, duracao: "30 dias (Nuvem + 3 Camadas Blindado)", horas: 720 },
+  // Aliases legados redirecionados para os mesmos planos ativos no PIX oficial
+  dez: { id: "dez", tier: "client-basic", nome: "Passe Rápido", preco: 10, duracao: "8 horas", horas: 8 },
+  dia: { id: "dia", tier: "client-basic", nome: "1 Dia", preco: 20, duracao: "24 horas", horas: 24 },
+  semana: { id: "semana", tier: "client-basic", nome: "Cliente Básico (7d)", preco: 79, duracao: "168 horas", horas: 168 },
+  quinzena: { id: "quinzena", tier: "client-mid", nome: "Studio Quinzena", preco: 100, duracao: "360 horas", horas: 360 },
+  mes: { id: "mes", tier: "client-mid", nome: "Cliente Studio (30d)", preco: 179, duracao: "720 horas", horas: 720 },
+  bilhao: { id: "bilhao", tier: "client-mid", nome: "BadClaude SuperBad", preco: 350, duracao: "30 dias completos", horas: 720 },
+  fundador: { id: "fundador", tier: "founder", nome: "Edição Fundador", preco: 690, duracao: "30 dias blindados", horas: 720 },
 };
 
 const JANELA_MS = 30 * 60 * 1000;
@@ -39,10 +44,11 @@ function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode, isAdmin }) 
   const arquivo = path.join(dir, "pedidos.json");
   const recibos = path.join(dir, "comprovantes");
 
-  const pixChave = String(process.env.BADCLAUDE_PIX_KEY || "99566741204");
-  const pixNome = String(process.env.BADCLAUDE_PIX_NAME || "ANTONIO CLOVIS").toUpperCase().slice(0, 25);
-  const pixCidade = String(process.env.BADCLAUDE_PIX_CITY || "CRUZEIRO SUL").toUpperCase().slice(0, 15);
-  const whatsapp = String(process.env.BADCLAUDE_WHATSAPP || "5568992269296");
+  const pixChave = String(process.env.BADCLAUDE_PIX_KEY || process.env.SUPERBAD_PIX_KEY || "+5568992269296").trim();
+  const pixDisplay = String(process.env.SUPERBAD_PIX_DISPLAY_KEY || "68 99226-9296").trim();
+  const pixNome = String(process.env.BADCLAUDE_PIX_NAME || process.env.SUPERBAD_PIX_RECIPIENT || "Raiane Lenoncio").toUpperCase().slice(0, 25);
+  const pixCidade = String(process.env.BADCLAUDE_PIX_CITY || process.env.SUPERBAD_PIX_CITY || "CRUZEIRO DO SUL").toUpperCase().slice(0, 15);
+  const whatsapp = String(process.env.BADCLAUDE_WHATSAPP || process.env.SUPERBAD_WHATSAPP || "5568992269296").replace(/\D/g, "");
   const emailAviso = String(process.env.BADCLAUDE_EMAIL || "");
 
   let fila = Promise.resolve();
@@ -122,7 +128,7 @@ function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode, isAdmin }) 
   async function tratar(req, res, pathname) {
     /* ---------- públicos ---------- */
     if (req.method === "GET" && pathname === "/api/badclaude/planos") {
-      return sendJson(res, 200, { ok: true, planos: Object.values(PLANOS), whatsapp, pixNome });
+      return sendJson(res, 200, { ok: true, planos: Object.values(PLANOS), whatsapp, pixNome, pixChave: pixDisplay });
     }
 
     if (req.method === "POST" && pathname === "/api/badclaude/pedido") {
