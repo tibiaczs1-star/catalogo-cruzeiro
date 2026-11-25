@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenInfinite v6.1 — IA Contínua por Valor Fixo · Windows, macOS &amp; Ubuntu VPS</title>
-  <meta name="description" content="Pare de levar susto com fatura por token. OpenInfinite v6.1 entrega fluxo contínuo HY4 #1, Hermes Agent oficial no Pro, telemetria SQLite real e ativação automática via PIX para Windows, macOS e Ubuntu Linux VPS.">
+  <meta name="description" content="Pare de levar susto com fatura por token. OpenInfinite v6.1 entrega fluxo contínuo HY4 #1, Hermes Agent oficial no Pro, telemetria SQLite real, Login Google e entrega de chave no seu e-mail.">
   <style>
     :root {
       /* Surface & Obsidian Palette (Tracle-inspired high contrast) */
@@ -93,7 +93,7 @@
 
     :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 
-    #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
+    #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #validador, #licenca, #faq {
       scroll-margin-top: 96px;
     }
 
@@ -173,7 +173,7 @@
       box-shadow: 0 8px 26px rgba(79, 87, 204, 0.28);
     }
     .btn.accent:hover:not(:disabled) { background: var(--accent-solid-hover); }
-    .btn.emerald { background: var(--emerald-bg); border-color: rgba(16, 185, 129, 0.52); color: var(--emerald-ink); }
+    .btn.emerald { background: var(--emerald-bg); border-color: rgba(16, 185, 129, 0.58); color: var(--emerald-ink); }
     .btn.emerald:hover:not(:disabled) { background: #10382c; }
     .btn.ghost { background: transparent; border-color: var(--border); color: var(--muted); }
     .btn.ghost:hover:not(:disabled) { color: var(--ink); background: var(--surface-hover); }
@@ -519,7 +519,7 @@
     .shot-card strong { font-size: 13px; color: var(--ink); }
     .shot-card span { font-size: 12px; color: var(--muted); }
 
-    /* 3-STEP KINETIC FLOW (Semantic Buttons) */
+    /* 3-STEP KINETIC FLOW */
     .steps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
     .step-card {
       padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; text-align: left;
@@ -543,7 +543,7 @@
     .comp-metric strong { font-size: 14px; color: var(--ink); }
     .comp-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
 
-    /* PLANS & PIX CHECKOUT */
+    /* PLANS & 4-STEP CHECKOUT */
     .plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
     .plan-card { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
     .plan-card.pro { border-color: var(--border-accent); background: #0d0f1b; }
@@ -554,11 +554,45 @@
     .plan-list li.dim-item { color: var(--muted); }
     .plan-list li.dim-item::before { content: "— "; color: var(--dim); }
 
-    .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+    .dual-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 18px; margin-top: 18px; align-items: start; }
     .panel { padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+    .checkout-step {
+      background: #070911; border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 15px 16px; display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 180ms var(--ease-snap), box-shadow 180ms var(--ease-snap);
+    }
+    .checkout-step.google-auth-spotlight {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.24);
+    }
+    .checkout-step.is-signed { border-color: rgba(16, 185, 129, 0.42); }
+    .step-badge-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .step-tag {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); padding: 2px 8px; border-radius: var(--radius-pill);
+      background: var(--accent-soft); border: 1px solid rgba(129, 140, 248, 0.3);
+    }
+    .checkout-step h3 { font-size: 15px; font-weight: 700; color: var(--ink); }
+
+    .google-user-pill {
+      display: none; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      padding: 10px 12px; border-radius: 10px; background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .google-user-pill.is-visible { display: flex; }
+    .google-user-meta { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .google-avatar {
+      width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-hi); flex-shrink: 0;
+    }
+    .google-initial {
+      width: 34px; height: 34px; border-radius: 50%; background: var(--accent-solid); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0;
+    }
+
     .pix-card {
-      background: #070911; border: 1px solid var(--border); border-radius: 10px;
-      padding: 13px 15px; display: flex; flex-direction: column; gap: 8px; font-size: 13px;
+      background: #05060b; border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; font-size: 13px;
     }
     .pix-actions-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .inline-feedback {
@@ -566,19 +600,21 @@
       min-height: 18px; display: inline-flex; align-items: center; gap: 6px;
     }
 
-    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
     .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); }
-    input[type="text"], input[type="file"], select {
+    input[type="text"], input[type="email"], input[type="file"], select {
       width: 100%; padding: 10px 12px; background: #05060b; color: var(--ink);
       border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13.5px;
       transition: border-color 150ms, box-shadow 150ms;
     }
     input[type="file"] { padding: 8px 10px; font-size: 12.5px; color: var(--muted); cursor: pointer; }
-    input[type="text"]:focus, input[type="file"]:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22); }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus, select:focus {
+      border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22);
+    }
     input[aria-invalid="true"] { border-color: var(--danger); }
 
     .result-box {
-      background: #070911; border: 1px solid var(--border-hi); border-radius: 10px;
+      background: #05060b; border: 1px solid var(--border-hi); border-radius: 10px;
       padding: 14px; font-size: 13px; display: none; flex-direction: column; gap: 10px;
     }
     .result-box.is-visible { display: flex; }
@@ -586,12 +622,20 @@
     .result-box.is-success { border-color: rgba(16, 185, 129, 0.45); }
     .result-box.is-warn { border-color: rgba(245, 158, 11, 0.45); background: var(--amber-bg); }
 
-    .receipt-subpanel {
-      margin-top: 6px; padding-top: 12px; border-top: 1px solid var(--border);
-      display: flex; flex-direction: column; gap: 10px;
+    .analysis-stage-card {
+      display: none; flex-direction: column; gap: 12px;
+      border-color: rgba(245, 158, 11, 0.45);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(7, 9, 17, 0.96));
     }
+    .analysis-stage-card.is-visible { display: flex; }
+    .sla-wait-box {
+      padding: 12px 14px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
+      font-size: 13px; color: var(--ink-secondary); line-height: 1.55;
+    }
+
     .delivered-key-card {
-      padding: 14px; border-radius: 10px;
+      padding: 15px; border-radius: 10px;
       background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.55);
       display: none; flex-direction: column; gap: 10px;
     }
@@ -679,7 +723,7 @@
       .hover-hud { display: none !important; }
     }
     @media (max-width: 640px) {
-      #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
+      #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #validador, #licenca, #faq {
         scroll-margin-top: 112px;
       }
       .topbar { top: 6px; padding: 0 8px; }
@@ -718,7 +762,7 @@
         <a href="#consumo-ao-vivo" class="nav-link">Consumo Real</a>
         <a href="#ubuntu-hermes" class="nav-link">Linux &amp; Hermes</a>
         <a href="#planos" class="nav-link">Planos</a>
-        <a href="#licenca" class="nav-link">Validar Chave</a>
+        <a href="#validador" class="nav-link">Validar Chave</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="/" class="nav-link">← Portal CZS</a>
       </nav>
@@ -837,7 +881,7 @@
       <span><i aria-hidden="true"></i>macOS Apple Silicon</span>
       <span><i aria-hidden="true"></i>Ubuntu 22.04 / 24.04 VPS</span>
       <span><i aria-hidden="true"></i>Hermes Agent CLI + Harness</span>
-      <span><i aria-hidden="true"></i>Liberação PIX Automática</span>
+      <span><i aria-hidden="true"></i>Login Google + Chave no E-mail</span>
     </div>
 
     <!-- CALCULADORA DE ECONOMIA POR MILHÃO E BILHÃO DE TOKENS -->
@@ -1123,8 +1167,8 @@
     <section id="como-funciona" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Comece em Segundos</span>
-          <h2>Sem burocracia da instalação à ativação.</h2>
+          <span class="sec-kicker">Fluxo Transparente</span>
+          <h2>Do teste gratuito à chave ativa no seu e-mail.</h2>
         </div>
       </div>
       <div class="steps-grid">
@@ -1134,26 +1178,26 @@
           <p>Baixe para Windows (.exe), macOS (.dmg) ou Ubuntu VPS (.tar.gz) e rode 60 minutos grátis para sentir a estabilidade na prática.</p>
         </button>
         <button type="button" class="spotlight-card step-card" aria-pressed="false">
-          <span class="step-num">02 / PIX DIRETO NA TELA</span>
-          <h3>Anexe o comprovante e receba a chave</h3>
-          <p>Pague o PIX, envie o comprovante ou código E2E no próprio navegador e copie sua chave assim que liberada — sem depender de WhatsApp.</p>
+          <span class="step-num">02 / CONTA GOOGLE &amp; PIX</span>
+          <h3>Entre com Google e envie o comprovante</h3>
+          <p>Faça login com seu Gmail, pague o PIX e envie o comprovante. Para urgência, chame no WhatsApp imediato ou aguarde até 1 hora.</p>
         </button>
         <button type="button" class="spotlight-card step-card" aria-pressed="false">
-          <span class="step-num">03 / COTA PREVISÍVEL</span>
-          <h3> Ligue o Motor + Hermes e esqueça</h3>
-          <p>No plano Pro, ative também o comando <code class="mono">infinite-hermes</code> e trabalhe o mês inteiro sabendo exatamente quanto investiu.</p>
+          <span class="step-num">03 / CHAVE NO E-MAIL</span>
+          <h3>Receba por e-mail e valide em 1 clique</h3>
+          <p>Assim que ativada no painel central, sua chave chega no seu e-mail Google com link direto para testar no validador e colar no app.</p>
         </button>
       </div>
     </section>
 
-    <!-- MONTHLY PRICING + INTERACTIVE COMPARATOR + AUTOMATED PIX CHECKOUT + KEY VALIDATOR -->
+    <!-- MONTHLY PRICING + INTERACTIVE COMPARATOR + 4-STEP CHECKOUT + KEY VALIDATOR -->
     <section id="planos" class="reveal">
       <div class="sec-head">
         <div>
           <span class="sec-kicker">Mensalidade Fixa (30 Dias)</span>
-          <h2>Planos transparentes, entrega automática na tela.</h2>
+          <h2>Planos simples, sem cobrança por token extra.</h2>
         </div>
-        <p>Sem fidelidade nem cobrança escondida por token extra. Escolha Windows individual ou Pro Multi-OS com suporte a macOS, Ubuntu VPS e Hermes Agent.</p>
+        <p>Escolha Windows individual ou Pro Multi-OS com suporte a macOS, Ubuntu VPS e Hermes Agent. Sua chave oficial é entregue direto no seu e-mail Google.</p>
       </div>
 
       <!-- INTERACTIVE COMPARATOR -->
@@ -1182,7 +1226,7 @@
       </div>
 
       <div class="plans-grid">
-        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias exclusiva para 1 computador Windows." data-help-how="Clique para selecionar R$ 99,00 no checkout PIX automatizado abaixo.">
+        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias exclusiva para 1 computador Windows." data-help-how="Clique para selecionar R$ 99,00 no checkout em 4 passos abaixo.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
               <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
@@ -1203,7 +1247,7 @@
           <button type="button" class="btn ivory" data-select-plan="infinite">Assinar Windows — R$ 99,00/mês</button>
         </div>
 
-        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês" data-help-what="Licença de 30 dias para macOS Apple Silicon, Windows e Ubuntu Linux VPS (até 2 máquinas) + Nous Research Hermes Agent." data-help-how="Clique para selecionar R$ 159,00 no checkout PIX automatizado abaixo.">
+        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês" data-help-what="Licença de 30 dias para macOS Apple Silicon, Windows e Ubuntu Linux VPS (até 2 máquinas) + Nous Research Hermes Agent." data-help-how="Clique para selecionar R$ 159,00 no checkout em 4 passos abaixo.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
               <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
@@ -1218,7 +1262,7 @@
               <li>Use em até 2 máquinas simultâneas com uma única chave</li>
               <li><strong>Nous Research Hermes Agent</strong> oficial (<code class="mono">infinite-hermes</code> + Harness)</li>
               <li>Acabamento Liquid Glass real e foco inteligente por linguagem</li>
-              <li>Entrega automática da chave na página após confirmação PIX</li>
+              <li>Chave enviada ao seu e-mail Google + WhatsApp imediato disponível</li>
             </ul>
           </div>
           <button type="button" class="btn accent" data-select-plan="infinite_pro">Assinar Pro Multi-OS — R$ 159,00/mês</button>
@@ -1231,117 +1275,197 @@
       </div>
 
       <div class="dual-grid">
-        <!-- AUTOMATED PIX CHECKOUT + RECEIPT UPLOAD + KEY DELIVERY -->
+        <!-- 4-STEP CHECKOUT: 1. GOOGLE -> 2. PIX -> 3. RECEIPT -> 4. IN ANALYSIS (WHATSAPP IMMEDIATE OR 1H + EMAIL) -->
         <div class="spotlight-card panel" id="checkout">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <h2 style="font-size:19px;font-weight:800;">Checkout PIX com Entrega na Tela</h2>
-            <button type="button" class="help-q" aria-label="Ajuda sobre Checkout PIX Automatizado" data-help-title="Checkout PIX Automatizado" data-help-what="Gera o QR Code PIX, recebe seu comprovante ou E2E ID aqui mesmo e exibe sua chave na tela assim que aprovada." data-help-how="1) Gere o PIX; 2) Pague no banco; 3) Anexe o comprovante ou E2E ID abaixo para receber sua chave sem precisar de WhatsApp.">?</button>
-          </div>
-          <div class="pix-card">
-            <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX</div>
-            <div style="color:var(--muted);">Chave: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Lenoncio</strong></div>
-            <div class="pix-actions-row">
-              <button type="button" id="copyPixBtn" class="btn sm">Copiar Chave PIX</button>
-              <span id="pixCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
+            <h2 style="font-size:19px;font-weight:800;">Assinatura PIX em 4 Passos</h2>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Assinatura PIX" data-help-title="Assinatura em 4 Passos" data-help-what="Vincula sua conta Google, gera o PIX oficial, analisa seu comprovante e envia sua chave por e-mail assim que ativada." data-help-how="Entre com Google no Passo 1, pague o PIX no Passo 2, envie o comprovante no Passo 3 e chame no WhatsApp imediato ou aguarde até 1h no Passo 4.">?</button>
           </div>
 
-          <form id="orderForm" novalidate>
-            <div class="field">
-              <label for="ordPlan">Plano Mensal (30 Dias)</label>
-              <select id="ordPlan">
-                <option value="infinite_pro" selected>OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês (Mac + Win + Ubuntu)</option>
-                <option value="infinite">OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
-              </select>
+          <!-- PASSO 1: ENTRAR COM GOOGLE -->
+          <div class="checkout-step" id="step1Google" data-google-auth-card>
+            <div class="step-badge-row">
+              <span class="step-tag">Passo 1 · Conta Google</span>
+              <span class="mono" style="font-size:11px;color:var(--muted);" id="step1StateTag">Identificação do e-mail</span>
             </div>
-            <div class="field">
-              <label for="ordName">Seu Nome Completo</label>
-              <input id="ordName" type="text" required autocomplete="name" placeholder="Ex.: Maria Oliveira" />
+            <h3>Entre com Google para receber sua chave no Gmail</h3>
+            <p style="font-size:12.5px;color:var(--muted);" id="googleAuthLead">
+              Usamos seu login Google apenas para amarrar seu pedido ao e-mail certo e restaurar o andamento da ativação caso você recarregue a página.
+            </p>
+            <div style="display:none;" aria-hidden="true">
+              <span data-google-auth-status></span>
+              <span data-google-auth-email></span>
             </div>
-            <div class="field">
-              <label for="ordContact">Seu E-mail ou Contato (para registro da licença)</label>
-              <input id="ordContact" type="text" required autocomplete="email" placeholder="Ex.: dev@seudominio.com ou (68) 99999-9999" />
-            </div>
-            <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">1. Gerar QR Code PIX</button>
-          </form>
 
-          <div id="orderErrorBox" class="result-box is-error" role="alert" aria-live="assertive">
-            <strong style="color:var(--danger);" id="orderErrorHead">Não foi possível gerar o PIX</strong>
-            <span id="orderErrorMsg" style="color:var(--ink-secondary);">Verifique os dados informados ou sua conexão.</span>
-            <button type="button" id="retryOrderBtn" class="btn sm" style="align-self:flex-start;">↻ Tentar novamente</button>
+            <div data-google-auth-button id="googleAuthBtnHost" style="min-height:42px;"></div>
+
+            <div id="googleConnectedBox" class="google-user-pill" aria-live="polite">
+              <div class="google-user-meta">
+                <img id="googleUserAvatar" class="google-avatar" src="" alt="" referrerpolicy="no-referrer" style="display:none;" />
+                <span id="googleUserInitial" class="google-initial" aria-hidden="true">G</span>
+                <div style="min-width:0;">
+                  <strong id="googleUserName" style="display:block;font-size:13px;color:var(--ink);">Conta conectada</strong>
+                  <span id="googleUserEmail" class="mono" style="font-size:11.5px;color:var(--emerald-ink);word-break:break-all;">—</span>
+                </div>
+              </div>
+              <button type="button" data-google-auth-logout id="googleLogoutBtn" class="btn ghost sm" hidden>Sair</button>
+            </div>
+
+            <div id="googleFallbackNotice" style="display:none;font-size:12.5px;color:var(--amber);background:var(--amber-bg);border:1px solid rgba(245,158,11,0.38);padding:9px 12px;border-radius:9px;">
+              Botão Google indisponível neste ambiente no momento — confirme abaixo seu endereço Gmail/e-mail válido no Passo 2 para receber a chave normalmente.
+            </div>
+            <div id="myOrdersRestoreNote" style="display:none;font-size:12px;color:var(--emerald-ink);"></div>
           </div>
 
-          <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
-              <span class="brand-ver" id="orderLiveStatusBadge">Aguardando comprovante</span>
+          <!-- PASSO 2: ESCOLHA DO PLANO & PAGAMENTO PIX -->
+          <div class="checkout-step" id="step2Pix">
+            <div class="step-badge-row">
+              <span class="step-tag">Passo 2 · Plano &amp; PIX</span>
+              <span class="mono" style="font-size:11px;color:var(--muted);">68 99226-9296 · Raiane Lenoncio</span>
             </div>
-            <div class="mono" id="orderResultCode" style="background:#040509;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
-            <div class="pix-actions-row">
-              <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
-              <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-            <div id="orderPixQrWrap" style="text-align:center;"></div>
+            <h3>Escolha o plano e gere o QR Code PIX</h3>
 
-            <!-- INSTANT DELIVERED KEY CARD (shown automatically when approved/delivered) -->
-            <div id="deliveredKeyBox" class="delivered-key-card" role="region" aria-label="Chave de licença liberada">
-              <strong style="color:var(--emerald-ink);font-size:14px;">🎉 Pagamento confirmado! Sua chave está pronta:</strong>
-              <div class="mono" id="deliveredKeyValue" style="background:#040509;padding:10px;border:1px solid rgba(16,185,129,0.5);border-radius:8px;word-break:break-all;font-size:12.5px;color:#fff;font-weight:700;">—</div>
+            <div class="pix-card">
+              <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX</div>
+              <div style="color:var(--muted);">Chave: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Lenoncio</strong></div>
               <div class="pix-actions-row">
-                <button type="button" id="copyDeliveredKeyBtn" class="btn ivory sm">Copiar Minha Chave</button>
-                <button type="button" id="testDeliveredKeyBtn" class="btn sm">Testar no Validador</button>
-                <span id="deliveredKeyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+                <button type="button" id="copyPixBtn" class="btn sm">Copiar Chave PIX</button>
+                <span id="pixCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
               </div>
             </div>
 
-            <!-- SELF-SERVICE RECEIPT / E2E UPLOAD (NO WHATSAPP REQUIRED) -->
-            <form id="receiptForm" class="receipt-subpanel" novalidate>
-              <strong style="color:var(--ink);font-size:13.5px;">2. Enviar Comprovante ou Código E2E (Liberação Automática)</strong>
-              <span style="font-size:12px;color:var(--muted);">Anexe o comprovante (PNG, JPG, WebP ou PDF até 3 MB) e/ou informe o ID E2E do PIX. Assim que confirmado, sua chave aparece automaticamente acima nesta tela.</span>
-              <div class="field" style="margin-bottom:6px;">
-                <label for="receiptFileInput">Anexar Comprovante (Imagem ou PDF · máx. 3 MB)</label>
-                <input id="receiptFileInput" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" />
+            <form id="orderForm" novalidate>
+              <div class="field">
+                <label for="ordPlan">Plano Mensal (30 Dias)</label>
+                <select id="ordPlan">
+                  <option value="infinite_pro" selected>OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês (Mac + Win + Ubuntu)</option>
+                  <option value="infinite">OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
+                </select>
               </div>
-              <div class="field" style="margin-bottom:6px;">
-                <label for="receiptE2eInput">Código E2E do PIX (opcional — acelera conciliação automática)</label>
-                <input id="receiptE2eInput" type="text" class="mono" placeholder="Ex.: E182361202026..." autocomplete="off" />
+              <div class="field">
+                <label for="ordName">Seu Nome Completo</label>
+                <input id="ordName" type="text" required autocomplete="name" placeholder="Ex.: Maria Oliveira" />
               </div>
-              <div class="field" style="margin-bottom:6px;">
-                <label for="receiptNoteInput">Observação rápida (opcional)</label>
-                <input id="receiptNoteInput" type="text" placeholder="Ex.: Pago via Nubank às 14:20" />
+              <div class="field">
+                <label for="ordContact">E-mail Google de Recebimento da Chave</label>
+                <input id="ordContact" type="email" required autocomplete="email" placeholder="seuemail@gmail.com" />
               </div>
-              <button type="submit" id="receiptSubmitBtn" class="btn accent sm" style="width:100%;">Enviar Comprovante e Aguardar Chave na Tela</button>
+              <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">Gerar QR Code PIX</button>
             </form>
 
-            <div id="receiptFeedbackBox" class="result-box" role="status" aria-live="polite"></div>
+            <div id="orderErrorBox" class="result-box is-error" role="alert" aria-live="assertive">
+              <strong style="color:var(--danger);" id="orderErrorHead">Não foi possível gerar o PIX</strong>
+              <span id="orderErrorMsg" style="color:var(--ink-secondary);">Verifique os dados informados ou sua conexão.</span>
+              <div class="pix-actions-row">
+                <button type="button" id="retryOrderBtn" class="btn sm">↻ Tentar novamente</button>
+              </div>
+            </div>
 
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">
-              <button type="button" id="checkOrderNowBtn" class="btn ghost sm">↻ Consultar liberação agora</button>
-              <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn ghost sm">Suporte humano opcional (WhatsApp)</a>
+            <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
+                <span class="brand-ver" id="orderLiveStatusBadge">Aguardando comprovante</span>
+              </div>
+              <div class="mono" id="orderResultCode" style="background:#040509;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+              <div class="pix-actions-row">
+                <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
+                <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+              </div>
+              <div id="orderPixQrWrap" style="text-align:center;"></div>
+            </div>
+          </div>
+
+          <!-- PASSO 3: ENVIAR COMPROVANTE PARA ANÁLISE -->
+          <div class="checkout-step" id="step3Receipt">
+            <div class="step-badge-row">
+              <span class="step-tag">Passo 3 · Enviar Comprovante</span>
+              <span class="mono" style="font-size:11px;color:var(--muted);">PNG, JPG, WebP ou PDF · até 3 MB</span>
+            </div>
+            <h3>Anexe o comprovante PIX para análise de segurança</h3>
+            <p style="font-size:12.5px;color:var(--muted);">
+              O servidor confere o arquivo, registra o código E2E e avisa a central imediatamente. Por segurança, o envio do recibo <strong>não libera a chave sozinho</strong> antes da conferência.
+            </p>
+            <form id="receiptForm" novalidate>
+              <div class="field" style="margin-bottom:8px;">
+                <label for="receiptFileInput">Arquivo do Comprovante (Imagem ou PDF · máx. 3 MB)</label>
+                <input id="receiptFileInput" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" />
+              </div>
+              <div class="field" style="margin-bottom:8px;">
+                <label for="receiptE2eInput">Código E2E do PIX (opcional)</label>
+                <input id="receiptE2eInput" type="text" class="mono" placeholder="Ex.: E182361202026..." autocomplete="off" />
+              </div>
+              <div class="field" style="margin-bottom:10px;">
+                <label for="receiptNoteInput">Observação rápida (opcional)</label>
+                <input id="receiptNoteInput" type="text" placeholder="Ex.: Pago via Nubank" />
+              </div>
+              <button type="submit" id="receiptSubmitBtn" class="btn accent" style="width:100%;">Enviar Comprovante para Análise</button>
+            </form>
+            <div id="receiptFeedbackBox" class="result-box" role="status" aria-live="polite"></div>
+          </div>
+
+          <!-- PASSO 4: EM ANÁLISE (WHATSAPP IMEDIATO OU ATÉ 1 HORA + E-MAIL COM CHAVE) -->
+          <div class="checkout-step analysis-stage-card" id="step4Analysis" role="region" aria-label="Andamento da análise e ativação">
+            <div class="step-badge-row">
+              <span class="step-tag" style="color:var(--amber);border-color:rgba(245,158,11,0.45);background:var(--amber-bg);">Passo 4 · Em Análise</span>
+              <span class="mono" style="font-size:11px;color:var(--amber);" id="step4SlaBadge">SLA: até 1 hora</span>
+            </div>
+            <h3 id="step4Headline">Comprovante em análise — escolha como prefere ativar</h3>
+
+            <div style="background:#05060b;border:1px solid var(--border);border-radius:9px;padding:11px 13px;font-size:12.5px;display:flex;flex-direction:column;gap:5px;">
+              <div><strong style="color:var(--ink);">Pré-análise do comprovante:</strong> <span id="receiptAnalysisSummary" style="color:var(--ink-secondary);">Comprovante registrado e encaminhado para conferência.</span></div>
+              <div><strong style="color:var(--ink);">E-mail que receberá a chave:</strong> <span id="analysisTargetEmail" class="mono" style="color:var(--emerald-ink);">—</span></div>
+            </div>
+
+            <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald" style="width:100%;font-size:13.5px;">
+              💬 Falar no WhatsApp para Ativação Imediata
+            </a>
+
+            <div class="sla-wait-box" id="slaOneHourNotice">
+              <strong>Ou aguarde até 1 hora</strong> — assim que eu ativar no app central, sua chave chega no seu e-mail e libera aqui para você testar.
+            </div>
+
+            <div class="pix-actions-row" style="justify-content:space-between;">
+              <button type="button" id="checkOrderNowBtn" class="btn ghost sm">↻ Conferir se já foi ativada</button>
+              <span class="mono" style="font-size:11px;color:var(--dim);" id="pollHintTxt">Checagem automática ativa</span>
+            </div>
+          </div>
+
+          <!-- DELIVERED KEY CARD (ONLY SHOWN WHEN status === "approved" || "delivered") -->
+          <div id="deliveredKeyBox" class="delivered-key-card" role="region" aria-label="Chave de licença ativada">
+            <strong style="color:var(--emerald-ink);font-size:14.5px;">🎉 Pedido ativado! Sua chave também foi enviada por e-mail:</strong>
+            <div class="mono" id="deliveredKeyValue" style="background:#040509;padding:10px;border:1px solid rgba(16,185,129,0.5);border-radius:8px;word-break:break-all;font-size:12.5px;color:#fff;font-weight:700;">—</div>
+            <div class="pix-actions-row">
+              <button type="button" id="copyDeliveredKeyBtn" class="btn ivory sm">Copiar Minha Chave</button>
+              <button type="button" id="testDeliveredKeyBtn" class="btn emerald sm">Testar Chave no Validador</button>
+              <span id="deliveredKeyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
             </div>
           </div>
         </div>
 
-        <!-- ONLINE KEY VALIDATOR -->
-        <div class="spotlight-card panel" id="licenca">
+        <!-- ONLINE KEY VALIDATOR (#validador + #licenca alias + ?test_key=...) -->
+        <div class="spotlight-card panel" id="validador">
+          <span id="licenca" aria-hidden="true" style="position:absolute;top:0;"></span>
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <h2 style="font-size:19px;font-weight:800;">Validar Chave de Acesso</h2>
-            <button type="button" class="help-q" aria-label="Ajuda sobre Validar Chave Online" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Cole a chave abaixo e clique em Conferir Chave.">?</button>
+            <h2 style="font-size:19px;font-weight:800;">Validador de Chave Online</h2>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Validar Chave Online" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Abra o link recebido no seu e-mail de ativação ou cole a chave abaixo.">?</button>
           </div>
           <p style="font-size:13.5px;color:var(--muted);">
-            Aceita chaves mensais <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (Pro Multi-OS + Hermes) e chaves BadClaude 3º Nível+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
+            Aceita chaves <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (Pro Multi-OS + Hermes) e BadClaude 3º Nível+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
           </p>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-size:12.5px;color:var(--ink-secondary);">
+            <strong>Importante:</strong> sua chave só passa neste teste depois de ativada pelo dono no painel central e enviada para o seu e-mail Google.
+          </div>
           <form id="verifyForm" novalidate>
             <div class="field">
-              <label for="licKeyInput">Sua Chave</label>
-              <input id="licKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou OI6-INF-..." required autocomplete="off" spellcheck="false" />
+              <label for="verifyKeyInput">Sua Chave Recebida por E-mail</label>
+              <input id="verifyKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou OI6-INF-..." required autocomplete="off" spellcheck="false" />
             </div>
             <button type="submit" id="verifySubmitBtn" class="btn accent" style="width:100%;">Conferir Chave Online</button>
           </form>
           <div id="licResultBox" class="result-box" role="status" aria-live="polite"></div>
           <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
             Trocou de máquina ou reformatou sua VPS e precisa resetar o HWID?
-            <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn ghost sm" style="margin-top:8px;">Solicitar reset de HWID (opcional via WhatsApp)</a>
+            <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn ghost sm" style="margin-top:8px;">Solicitar reset de HWID no WhatsApp</a>
           </div>
         </div>
       </div>
@@ -1358,13 +1482,13 @@
       <div class="faq-list">
         <div class="faq-item open">
           <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
-            <span>Preciso chamar no WhatsApp para receber minha chave após pagar o PIX?</span>
+            <span>Como funciona a ativação após pagar o PIX e enviar o comprovante?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                Não! Depois de gerar o QR Code PIX aqui na página, basta anexar a imagem/PDF do comprovante ou informar o código E2E no próprio formulário. A página verifica automaticamente o pedido a cada poucos segundos e exibe sua chave pronta para copiar na tela assim que aprovada. O WhatsApp fica disponível apenas se você quiser suporte humano opcional.
+                Você entra com sua conta Google, gera o PIX e anexa o comprovante aqui na página. O servidor faz a pré-análise de integridade e alerta o administrador, sem liberar chave no escuro. Em seguida você escolhe: clicar no botão de WhatsApp para <strong>ativação imediata</strong> ou <strong>aguardar até 1 hora</strong>. Assim que ativada no app central, sua chave chega no seu e-mail com link direto para testar no validador.
               </div>
             </div>
           </div>
@@ -1444,6 +1568,7 @@
     </div>
   </div>
 
+  <script src="/site-google-auth.js"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -1458,6 +1583,7 @@
       let activeOrder = null;
       let orderPollTimer = null;
       let refBrlPerMillion = 52.2;
+      let googleAuthState = { enabled: false, signedIn: false, user: null, checked: false };
 
       const brlFmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
       const intFmt = new Intl.NumberFormat('pt-BR');
@@ -2124,7 +2250,11 @@
       function selectPlan(p) {
         $('ordPlan').value = p;
         $('checkout')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
-        $('ordName')?.focus({ preventScroll: true });
+        if (googleAuthState.enabled && !googleAuthState.signedIn) {
+          $('step1Google')?.focus?.({ preventScroll: true });
+        } else {
+          $('ordName')?.focus({ preventScroll: true });
+        }
       }
       document.querySelectorAll('[data-select-plan]').forEach((btn) => {
         btn.addEventListener('click', () => selectPlan(btn.dataset.selectPlan));
@@ -2152,14 +2282,24 @@
         );
       });
 
-      // Automated Order Persistence, Receipt Upload & License Key Delivery Polling
+      // =========================================================================
+      // 4-STEP GOOGLE AUTH + PIX + RECEIPT ANALYSIS + OWNER ACTIVATION / EMAIL
+      // =========================================================================
       const STATUS_LABELS = {
         pending_pix: 'Aguardando pagamento PIX',
-        awaiting_receipt: 'Aguardando comprovante',
-        receipt_submitted: 'Comprovante enviado · validando...',
-        approved: 'Aprovado · Chave liberada!',
-        delivered: 'Chave entregue na tela!',
+        awaiting_receipt: 'Aguardando envio do comprovante',
+        receipt_submitted: 'Em análise · até 1h ou WhatsApp imediato',
+        approved: 'Ativado · Chave enviada por e-mail!',
+        delivered: 'Chave ativa e enviada por e-mail!',
       };
+
+      function buildFallbackWhatsAppUrl(ord) {
+        const id = ord?.order_id || 'NOVO';
+        const email = ord?.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || '';
+        const amt = ord?.amount_display || ($('ordPlan').value === 'infinite' ? 'R$ 99,00' : 'R$ 159,00');
+        const msg = `Olá! Enviei o comprovante PIX do pedido ${id} (${amt}) vinculado ao e-mail ${email}. Pode ativar minha chave OpenInfinite?`;
+        return `https://wa.me/5568992269296?text=${encodeURIComponent(msg)}`;
+      }
 
       function saveActiveOrder(ord) {
         activeOrder = ord;
@@ -2169,18 +2309,185 @@
         } catch (_e) { /* storage disabled */ }
       }
 
-      function renderDeliveredKey(licenseKey) {
-        if (!licenseKey) return;
-        $('deliveredKeyValue').textContent = licenseKey;
-        $('deliveredKeyBox').classList.add('is-visible');
-        $('orderLiveStatusBadge').textContent = 'Chave liberada!';
-        $('orderLiveStatusBadge').style.color = 'var(--emerald-ink)';
-        $('orderLiveStatusBadge').style.borderColor = 'rgba(16,185,129,0.5)';
-        if (orderPollTimer) {
-          clearInterval(orderPollTimer);
-          orderPollTimer = null;
+      function isKeyUnlockedStatus(st, key) {
+        return (st === 'approved' || st === 'delivered') && Boolean(key && String(key).trim());
+      }
+
+      function syncAnalysisAndDeliveryUI(ord) {
+        if (!ord) return;
+        const st = String(ord.status || 'pending_pix');
+        $('orderLiveStatusBadge').textContent = STATUS_LABELS[st] || st;
+
+        const targetEmail = ord.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || 'seu e-mail cadastrado';
+        $('analysisTargetEmail').textContent = targetEmail;
+
+        const analysis = ord.receipt_analysis;
+        if (analysis && analysis.summary_pt) {
+          $('receiptAnalysisSummary').textContent = analysis.summary_pt;
+          $('receiptAnalysisSummary').style.color = analysis.is_duplicate ? 'var(--amber)' : 'var(--ink-secondary)';
+        }
+
+        const whatsUrl = ord.whatsapp_immediate_url || ord.whatsapp_url || buildFallbackWhatsAppUrl(ord);
+        $('btnWhatsOrder').href = whatsUrl;
+
+        if (st === 'receipt_submitted') {
+          $('step4Analysis').classList.add('is-visible');
+          $('deliveredKeyBox').classList.remove('is-visible');
+          $('deliveredKeyValue').textContent = '—';
+        } else if (isKeyUnlockedStatus(st, ord.license_key)) {
+          $('step4Analysis').classList.remove('is-visible');
+          $('deliveredKeyValue').textContent = ord.license_key;
+          $('deliveredKeyBox').classList.add('is-visible');
+          $('orderLiveStatusBadge').style.color = 'var(--emerald-ink)';
+          $('orderLiveStatusBadge').style.borderColor = 'rgba(16,185,129,0.5)';
+          if (orderPollTimer) {
+            clearInterval(orderPollTimer);
+            orderPollTimer = null;
+          }
+        } else {
+          $('step4Analysis').classList.remove('is-visible');
+          $('deliveredKeyBox').classList.remove('is-visible');
+          $('deliveredKeyValue').textContent = '—';
         }
       }
+
+      function hydrateOrderUI(o) {
+        if (!o || !o.order_id) return;
+        lastBrcode = o.brcode || o.pix?.brcode || '68 99226-9296';
+        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display || ''}) gerado!`;
+        $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
+        $('brcodeCopyFeedback').textContent = '';
+
+        const qrWrap = $('orderPixQrWrap');
+        qrWrap.textContent = '';
+        const qrUrl = o.qr_data_url || o.pix?.qr_data_url;
+        if (qrUrl) {
+          const img = document.createElement('img');
+          img.src = qrUrl;
+          img.alt = `QR Code PIX para o pedido ${o.order_id}`;
+          img.style.cssText = 'width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;';
+          qrWrap.appendChild(img);
+        }
+        $('orderResultBox').classList.add('is-visible');
+        syncAnalysisAndDeliveryUI(o);
+
+        if (!isKeyUnlockedStatus(o.status, o.license_key)) {
+          startOrderPolling();
+        }
+      }
+
+      // Restore orders linked to authenticated Google account
+      async function syncMyGoogleOrders() {
+        try {
+          const res = await fetch('/api/superbad/my-orders', {
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' },
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !Array.isArray(data.orders) || data.orders.length === 0) return;
+
+          const latest = data.orders[0];
+          if (!latest || !latest.order_id) return;
+
+          const merged = {
+            ...(activeOrder && activeOrder.order_id === latest.order_id ? activeOrder : {}),
+            ...latest,
+            brcode: latest.pix?.brcode || activeOrder?.brcode || '68 99226-9296',
+            qr_data_url: latest.pix?.qr_data_url || activeOrder?.qr_data_url || '',
+          };
+          saveActiveOrder(merged);
+          hydrateOrderUI(merged);
+
+          const noteEl = $('myOrdersRestoreNote');
+          noteEl.style.display = 'block';
+          noteEl.textContent = `Pedido ${latest.order_id} vinculado à sua conta Google restaurado automaticamente.`;
+        } catch (_err) {
+          /* ignore network hiccup */
+        }
+      }
+
+      function updateGoogleAuthUI(detail) {
+        const enabled = Boolean(detail?.enabled);
+        const user = detail?.user || null;
+        const signedIn = Boolean(user);
+        googleAuthState = { enabled, signedIn, user, checked: true };
+
+        const connectedBox = $('googleConnectedBox');
+        const fallbackNote = $('googleFallbackNotice');
+        const avatarImg = $('googleUserAvatar');
+        const initialBadge = $('googleUserInitial');
+        const logoutBtn = $('googleLogoutBtn');
+
+        if (signedIn && user) {
+          connectedBox.classList.add('is-visible');
+          fallbackNote.style.display = 'none';
+          logoutBtn.hidden = false;
+          $('step1StateTag').textContent = 'Conectado via Google';
+          $('step1StateTag').style.color = 'var(--emerald-ink)';
+          $('googleUserName').textContent = user.name || 'Conta Google Verificada';
+          $('googleUserEmail').textContent = user.email || '';
+
+          if (user.picture) {
+            avatarImg.src = user.picture;
+            avatarImg.style.display = 'block';
+            initialBadge.style.display = 'none';
+          } else {
+            avatarImg.style.display = 'none';
+            initialBadge.style.display = 'inline-flex';
+            initialBadge.textContent = String(user.name || user.email || 'G').trim().charAt(0).toUpperCase();
+          }
+
+          if (user.name && !$('ordName').value.trim()) $('ordName').value = user.name;
+          if (user.email) $('ordContact').value = user.email;
+          void syncMyGoogleOrders();
+        } else {
+          connectedBox.classList.remove('is-visible');
+          logoutBtn.hidden = true;
+          $('myOrdersRestoreNote').style.display = 'none';
+          if (enabled) {
+            $('step1StateTag').textContent = 'Login Google obrigatório';
+            $('step1StateTag').style.color = 'var(--amber)';
+            fallbackNote.style.display = 'none';
+          } else {
+            $('step1StateTag').textContent = 'Confirmação direta de Gmail';
+            $('step1StateTag').style.color = 'var(--muted)';
+            fallbackNote.style.display = 'block';
+          }
+        }
+      }
+
+      window.addEventListener('catalogo:google-auth', (ev) => {
+        updateGoogleAuthUI(ev.detail || {});
+      });
+
+      // Direct session check in case event fired before listener or standalone test
+      (async function initAuthCheck() {
+        if (window.CatalogoGoogleAuth && window.CatalogoGoogleAuth.isReady()) {
+          updateGoogleAuthUI({
+            enabled: window.CatalogoGoogleAuth.isEnabled(),
+            signedIn: window.CatalogoGoogleAuth.isSignedIn(),
+            user: window.CatalogoGoogleAuth.getUser(),
+          });
+          return;
+        }
+        try {
+          const [cfgRes, sesRes] = await Promise.all([
+            fetch('/api/auth/config', { credentials: 'same-origin', headers: { 'Accept': 'application/json' } }),
+            fetch('/api/auth/session', { credentials: 'same-origin', headers: { 'Accept': 'application/json' } }),
+          ]);
+          const cfg = await cfgRes.json().catch(() => ({}));
+          const ses = await sesRes.json().catch(() => ({}));
+          if (!googleAuthState.checked) {
+            updateGoogleAuthUI({
+              enabled: Boolean(cfg.enabled && cfg.clientId),
+              signedIn: Boolean(ses.user),
+              user: ses.user || null,
+            });
+          }
+        } catch (_e) {
+          if (!googleAuthState.checked) updateGoogleAuthUI({ enabled: false, signedIn: false, user: null });
+        }
+      })();
 
       $('copyDeliveredKeyBtn').addEventListener('click', async () => {
         const k = $('deliveredKeyValue').textContent.trim();
@@ -2197,94 +2504,61 @@
       $('testDeliveredKeyBtn').addEventListener('click', () => {
         const k = $('deliveredKeyValue').textContent.trim();
         if (!k || k === '—') return;
-        $('licKeyInput').value = k;
-        $('licenca')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+        $('verifyKeyInput').value = k;
+        $('validador')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
         submitVerify();
       });
 
       async function pollOrderStatus(manualFeedback) {
-        if (!activeOrder || !activeOrder.order_id || !activeOrder.order_secret) return;
+        if (!activeOrder || !activeOrder.order_id) return;
         try {
+          if (!activeOrder.order_secret && googleAuthState.signedIn) {
+            await syncMyGoogleOrders();
+            return;
+          }
+          if (!activeOrder.order_secret) return;
+
           const url = `/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}?order_secret=${encodeURIComponent(activeOrder.order_secret)}`;
           const res = await fetch(url, {
+            credentials: 'same-origin',
             headers: { 'Accept': 'application/json', 'x-order-secret': activeOrder.order_secret }
           });
           const data = await res.json().catch(() => ({}));
           if (!res.ok || !data.ok || !data.order) return;
 
           const ord = data.order;
-          const st = String(ord.status || '');
-          $('orderLiveStatusBadge').textContent = STATUS_LABELS[st] || st;
+          activeOrder = { ...activeOrder, ...ord };
+          saveActiveOrder(activeOrder);
+          syncAnalysisAndDeliveryUI(activeOrder);
 
-          if (ord.license_key && (st === 'approved' || st === 'delivered')) {
-            activeOrder.license_key = ord.license_key;
-            activeOrder.status = st;
-            saveActiveOrder(activeOrder);
-            renderDeliveredKey(ord.license_key);
-          } else if (manualFeedback) {
-            renderBoxMessage(
-              $('receiptFeedbackBox'),
-              'is-warn',
-              'Pedido ainda em confirmação',
-              `Status atual: ${STATUS_LABELS[st] || st}. Continuamos verificando automaticamente a cada 5 segundos.`,
-              null
-            );
+          if (!isKeyUnlockedStatus(ord.status, ord.license_key) && manualFeedback) {
+            $('pollHintTxt').textContent = 'Ainda em análise · aguarde o e-mail ou chame no WhatsApp';
           }
         } catch (_err) {
-          if (manualFeedback) {
-            renderBoxMessage($('receiptFeedbackBox'), 'is-error', 'Sem resposta no momento', 'Tente consultar novamente em alguns segundos.', null);
-          }
+          if (manualFeedback) $('pollHintTxt').textContent = 'Oscilação de rede · tente novamente';
         }
       }
 
       function startOrderPolling() {
         if (orderPollTimer) clearInterval(orderPollTimer);
         orderPollTimer = setInterval(() => {
-          if (document.visibilityState === 'visible' && activeOrder && !activeOrder.license_key) {
+          if (document.visibilityState === 'visible' && activeOrder && !isKeyUnlockedStatus(activeOrder.status, activeOrder.license_key)) {
             pollOrderStatus(false);
           }
-        }, 5000);
+        }, 8000);
       }
 
       $('checkOrderNowBtn').addEventListener('click', () => pollOrderStatus(true));
-
-      function hydrateOrderUI(o) {
-        lastBrcode = o.brcode || o.pix?.brcode || '68 99226-9296';
-        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display}) pronto!`;
-        $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
-        $('brcodeCopyFeedback').textContent = '';
-        $('orderLiveStatusBadge').textContent = STATUS_LABELS[o.status] || 'Aguardando comprovante';
-
-        const qrWrap = $('orderPixQrWrap');
-        qrWrap.textContent = '';
-        const qrUrl = o.qr_data_url || o.pix?.qr_data_url;
-        if (qrUrl) {
-          const img = document.createElement('img');
-          img.src = qrUrl;
-          img.alt = `QR Code PIX para o pedido ${o.order_id}`;
-          img.style.cssText = 'width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;';
-          qrWrap.appendChild(img);
-        }
-        if (o.whatsapp_url) $('btnWhatsOrder').href = o.whatsapp_url;
-        $('orderResultBox').classList.add('is-visible');
-
-        if (o.license_key) {
-          renderDeliveredKey(o.license_key);
-        } else {
-          $('deliveredKeyBox').classList.remove('is-visible');
-          startOrderPolling();
-        }
-      }
 
       // Restore active session order if present
       try {
         const rawSaved = sessionStorage.getItem(ORDER_STORAGE_KEY);
         if (rawSaved) {
           const parsed = JSON.parse(rawSaved);
-          if (parsed && parsed.order_id && parsed.order_secret) {
+          if (parsed && parsed.order_id) {
             activeOrder = parsed;
             hydrateOrderUI(parsed);
-            if (!parsed.license_key) pollOrderStatus(false);
+            if (!isKeyUnlockedStatus(parsed.status, parsed.license_key)) pollOrderStatus(false);
           }
         }
       } catch (_e) { /* ignore */ }
@@ -2317,7 +2591,7 @@
         }
       }
 
-      // Checkout PIX Form (loading/error/offline/retry inline)
+      // Passo 2: Checkout PIX Form (gates on Google Sign-In when enabled)
       async function submitOrder() {
         const nameEl = $('ordName');
         const contactEl = $('ordContact');
@@ -2329,8 +2603,19 @@
         contactEl.setAttribute('aria-invalid', 'false');
         errBox.classList.remove('is-visible');
 
-        const buyerName = nameEl.value.trim();
-        const buyerContact = contactEl.value.trim();
+        if (googleAuthState.enabled && !googleAuthState.signedIn) {
+          $('orderErrorHead').textContent = 'Entre com sua conta Google primeiro (Passo 1)';
+          $('orderErrorMsg').textContent = 'Clique no botão Entrar com Google acima para vincular seu e-mail antes de gerar o QR Code PIX.';
+          errBox.classList.add('is-visible');
+          $('step1Google')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+          $('step1Google')?.classList.add('google-auth-spotlight');
+          setTimeout(() => $('step1Google')?.classList.remove('google-auth-spotlight'), 1800);
+          return;
+        }
+
+        const buyerName = (nameEl.value || googleAuthState.user?.name || '').trim();
+        const buyerEmail = (googleAuthState.user?.email || contactEl.value || '').trim();
+
         if (!buyerName) {
           nameEl.setAttribute('aria-invalid', 'true');
           $('orderErrorHead').textContent = 'Nome obrigatório';
@@ -2339,10 +2624,10 @@
           nameEl.focus();
           return;
         }
-        if (!buyerContact) {
+        if (!buyerEmail || !buyerEmail.includes('@')) {
           contactEl.setAttribute('aria-invalid', 'true');
-          $('orderErrorHead').textContent = 'Contato obrigatório';
-          $('orderErrorMsg').textContent = 'Informe seu e-mail ou WhatsApp para vincular sua licença.';
+          $('orderErrorHead').textContent = 'E-mail válido obrigatório';
+          $('orderErrorMsg').textContent = 'Informe o Gmail ou e-mail que receberá sua chave ativada.';
           errBox.classList.add('is-visible');
           contactEl.focus();
           return;
@@ -2362,19 +2647,24 @@
         try {
           const res = await fetch('/api/superbad/orders', {
             method: 'POST',
+            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               buyer_name: buyerName,
-              buyer_contact: buyerContact,
+              buyer_email: buyerEmail,
+              buyer_contact: buyerEmail,
               requested_edition: $('ordPlan').value
             })
           });
           const data = await res.json().catch(() => ({}));
           if (!res.ok || !data.ok || !data.order) {
             resBox.classList.remove('is-visible');
-            $('orderErrorHead').textContent = 'Não foi possível gerar o pedido PIX';
+            $('orderErrorHead').textContent = res.status === 401 ? 'Conta Google necessária' : 'Não foi possível gerar o pedido PIX';
             $('orderErrorMsg').textContent = data.error || `Erro HTTP ${res.status}. Tente novamente em instantes.`;
             errBox.classList.add('is-visible');
+            if (res.status === 401) {
+              $('step1Google')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+            }
             return;
           }
 
@@ -2385,10 +2675,12 @@
             status: o.status || 'pending_pix',
             amount_display: o.amount_display,
             requested_edition: o.requested_edition,
+            buyer_email: o.buyer_email || buyerEmail,
             brcode: o.pix?.brcode || '68 99226-9296',
             qr_data_url: o.pix?.qr_data_url || '',
             whatsapp_url: o.whatsapp_url || '',
-            license_key: o.license_key || null,
+            whatsapp_immediate_url: o.whatsapp_immediate_url || '',
+            license_key: null,
           };
           $('receiptFeedbackBox').classList.remove('is-visible');
           saveActiveOrder(stored);
@@ -2401,7 +2693,7 @@
         } finally {
           submitBtn.disabled = false;
           submitBtn.removeAttribute('aria-busy');
-          submitBtn.textContent = '1. Gerar QR Code PIX';
+          submitBtn.textContent = 'Gerar QR Code PIX';
         }
       }
 
@@ -2411,7 +2703,7 @@
       });
       $('retryOrderBtn').addEventListener('click', () => submitOrder());
 
-      // Read file as base64 payload
+      // Passo 3: Receipt Upload -> Pre-Analysis (NEVER auto-unlocks key; transitions to Passo 4)
       function readFileAsBase64(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -2429,7 +2721,7 @@
         const fb = $('receiptFeedbackBox');
         const btn = $('receiptSubmitBtn');
         if (!activeOrder || !activeOrder.order_id || !activeOrder.order_secret) {
-          renderBoxMessage(fb, 'is-error', 'Gere primeiro o pedido PIX acima', 'Preencha seu nome e clique em Gerar QR Code PIX.', null);
+          renderBoxMessage(fb, 'is-error', 'Gere primeiro o pedido PIX no Passo 2', 'Escolha o plano acima e clique em Gerar QR Code PIX antes de anexar o comprovante.', null);
           return;
         }
 
@@ -2438,13 +2730,13 @@
         const rawNote = $('receiptNoteInput').value.trim();
 
         if (!file && !e2eId && !rawNote) {
-          renderBoxMessage(fb, 'is-error', 'Envie o comprovante ou código E2E', 'Selecione a imagem/PDF do comprovante ou cole o código E2E da transação PIX.', null);
+          renderBoxMessage(fb, 'is-error', 'Anexe o comprovante ou código E2E', 'Selecione a imagem/PDF do comprovante PIX ou cole o código E2E da transação.', null);
           return;
         }
 
         if (file) {
           if (!ALLOWED_RECEIPT_MIMES.has(file.type)) {
-            renderBoxMessage(fb, 'is-error', 'Formato de arquivo não suportado', 'Envie PNG, JPEG, WebP ou PDF.', null);
+            renderBoxMessage(fb, 'is-error', 'Formato de arquivo não suportado', 'Envie um comprovante real em PNG, JPEG, WebP ou PDF.', null);
             return;
           }
           if (file.size > MAX_RECEIPT_BYTES) {
@@ -2460,7 +2752,7 @@
 
         btn.disabled = true;
         btn.setAttribute('aria-busy', 'true');
-        btn.textContent = 'Enviando comprovante...';
+        btn.textContent = 'Analisando comprovante...';
 
         try {
           const payload = {
@@ -2476,6 +2768,7 @@
 
           const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
             method: 'POST',
+            credentials: 'same-origin',
             headers: {
               'Content-Type': 'application/json',
               'x-order-secret': activeOrder.order_secret,
@@ -2484,34 +2777,36 @@
           });
           const data = await res.json().catch(() => ({}));
           if (!res.ok || !data.ok) {
-            renderBoxMessage(fb, 'is-error', 'Falha ao registrar comprovante', data.error || `Erro HTTP ${res.status}.`, submitReceipt);
+            renderBoxMessage(fb, 'is-error', 'Comprovante recusado na validação', data.error || `Erro HTTP ${res.status}.`, submitReceipt);
             return;
           }
 
-          activeOrder.status = data.status || 'receipt_submitted';
-          if (data.license_key) {
-            activeOrder.license_key = data.license_key;
-            saveActiveOrder(activeOrder);
-            renderDeliveredKey(data.license_key);
-            renderBoxMessage(fb, 'is-success', 'Conciliação automática aprovada!', 'Sua chave já foi liberada acima — basta copiar e colar no OpenInfinite.', null);
-          } else {
-            saveActiveOrder(activeOrder);
-            $('orderLiveStatusBadge').textContent = STATUS_LABELS[activeOrder.status] || 'Comprovante enviado';
-            renderBoxMessage(
-              fb,
-              'is-success',
-              'Comprovante recebido com sucesso!',
-              'Mantenha esta aba aberta: assim que a confirmação finalizar, sua chave aparece automaticamente acima.',
-              null
-            );
-            startOrderPolling();
-          }
+          activeOrder = {
+            ...activeOrder,
+            status: data.status || 'receipt_submitted',
+            buyer_email: data.buyer_email || activeOrder.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim(),
+            receipt_analysis: data.receipt_analysis || activeOrder.receipt_analysis || null,
+            whatsapp_immediate_url: data.whatsapp_immediate_url || activeOrder.whatsapp_immediate_url || '',
+            license_key: null,
+          };
+          saveActiveOrder(activeOrder);
+          syncAnalysisAndDeliveryUI(activeOrder);
+
+          renderBoxMessage(
+            fb,
+            'is-success',
+            'Comprovante recebido e encaminhado para ativação!',
+            data.message_pt || 'Veja no Passo 4 abaixo: chame no WhatsApp para ativação imediata ou aguarde até 1 hora para receber a chave no seu e-mail.',
+            null
+          );
+          $('step4Analysis')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+          startOrderPolling();
         } catch (_err) {
           renderBoxMessage(fb, 'is-error', 'Erro de rede ao enviar comprovante', 'Seus dados continuam preenchidos. Tente novamente.', submitReceipt);
         } finally {
           btn.disabled = false;
           btn.removeAttribute('aria-busy');
-          btn.textContent = 'Enviar Comprovante e Aguardar Chave na Tela';
+          btn.textContent = 'Enviar Comprovante para Análise';
         }
       }
 
@@ -2520,7 +2815,7 @@
         submitReceipt();
       });
 
-      // License Verification Form (loading/offline/retry inline, XSS-safe DOM)
+      // Validador de Chave Online (#validador + #verifyKeyInput + ?test_key=...)
       function renderLicenseMessage(variant, titleText, detailText, withRetry) {
         const box = $('licResultBox');
         box.textContent = '';
@@ -2551,15 +2846,37 @@
         }
       }
 
+      const PLAN_LABELS_BY_EDITION = {
+        infinite: 'OpenInfinite Windows (1 Mês)',
+        infinite_pro: 'OpenInfinite Pro Multi-OS + Hermes (1 Mês)',
+        superbad: 'BadClaudio SuperBad (3º Nível)',
+        founder: 'BadClaude Fundador VIP',
+        mid: 'BadClaude Studio',
+        basic: 'BadClaude Básico',
+        beta: 'BadClaudio Beta',
+      };
+      const PLAN_LABELS_BY_TIER = {
+        'infinite-basic': 'OpenInfinite Windows (1 Mês)',
+        'infinite-pro': 'OpenInfinite Pro Multi-OS + Hermes (1 Mês)',
+        founder: 'BadClaude Fundador VIP',
+        'client-mid': 'BadClaude Studio / SuperBad',
+        'client-basic': 'BadClaude Básico',
+      };
+      function resolveCanonicalPlanName(d) {
+        const ed = String(d?.edition || '').trim().toLowerCase();
+        const tr = String(d?.tier || '').trim().toLowerCase();
+        return PLAN_LABELS_BY_EDITION[ed] || PLAN_LABELS_BY_TIER[tr] || d?.planLabel || d?.tier || 'OpenInfinite';
+      }
+
       async function submitVerify() {
-        const keyInput = $('licKeyInput');
+        const keyInput = $('verifyKeyInput');
         const submitBtn = $('verifySubmitBtn');
         const keyVal = keyInput.value.trim();
 
         keyInput.setAttribute('aria-invalid', 'false');
         if (!keyVal) {
           keyInput.setAttribute('aria-invalid', 'true');
-          renderLicenseMessage('is-error', 'Informe uma chave para validar', 'Cole sua chave OI6-INF, OI6-PRO ou BC5 no campo acima.', false);
+          renderLicenseMessage('is-error', 'Informe uma chave para validar', 'Cole a chave recebida no seu e-mail de ativação (OI6-INF, OI6-PRO ou BC5).', false);
           keyInput.focus();
           return;
         }
@@ -2584,22 +2901,22 @@
           if (res.ok && d.ok && d.includesOpenInfinite !== false) {
             renderLicenseMessage(
               'is-success',
-              'Chave Válida — OpenInfinite Liberado',
-              `Plano: ${d.planLabel || d.tier} · Válida por ${d.daysLeft} dias.`,
+              'Chave Ativa e Validada — OpenInfinite Liberado!',
+              `Plano: ${resolveCanonicalPlanName(d)} · Válida por ${d.daysLeft} dias. Já pode colar no aplicativo.`,
               false
             );
           } else if (res.ok && d.ok && d.includesOpenInfinite === false) {
             renderLicenseMessage(
               'is-warn',
               'Chave BadClaude Nível 1/2',
-              'Esse nível usa apenas a demo de 1h no OpenInfinite. Assine separado acima ou use 3º nível+.',
+              'Esse nível usa apenas a demo de 1h no OpenInfinite. Assine separado ao lado ou use 3º nível+.',
               false
             );
           } else {
             renderLicenseMessage(
               'is-error',
-              d.error || 'Chave não reconhecida ou expirada.',
-              'Confira se não há espaços extras ou tente novamente.',
+              d.error || 'Chave ainda não ativada ou inválida.',
+              'Lembre-se: a chave só passa neste teste após a ativação pelo administrador e envio por e-mail.',
               false
             );
           }
@@ -2621,6 +2938,19 @@
         ev.preventDefault();
         submitVerify();
       });
+
+      // Auto-fill and auto-validate when arriving from activation email (?test_key=...)
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const testKey = (params.get('test_key') || '').trim();
+        if (testKey) {
+          $('verifyKeyInput').value = testKey;
+          setTimeout(() => {
+            $('validador')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+            submitVerify();
+          }, 120);
+        }
+      } catch (_e) { /* ignore malformed URL */ }
     })();
   </script>
 </body>

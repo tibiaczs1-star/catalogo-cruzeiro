@@ -3,6 +3,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const tls = require("node:tls");
 const DefaultQRCode = require("qrcode");
 
 const PIX_DISPLAY_KEY = "68 99226-9296";
@@ -322,6 +323,11 @@ function cleanE2eId(value) {
     .slice(0, 120);
 }
 
+function cleanEmailAddress(value) {
+  const email = String(value ?? "").trim().toLowerCase().slice(0, 160);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : "";
+}
+
 function normalizePublicOrderStatus(rawStatus) {
   const s = String(rawStatus || "").trim().toLowerCase();
   if (s === "delivered") return "delivered";
@@ -329,6 +335,37 @@ function normalizePublicOrderStatus(rawStatus) {
   if (s === "receipt_submitted") return "receipt_submitted";
   if (s === "awaiting_receipt") return "awaiting_receipt";
   return "pending_pix";
+}
+
+function verifyReceiptMagicBytes(buf, mime) {
+  if (!Buffer.isBuffer(buf) || buf.length < 4) return false;
+  if (mime === "image/png") {
+    return (
+      buf.length >= 8 &&
+      buf[0] === 0x89 &&
+      buf[1] === 0x50 &&
+      buf[2] === 0x4e &&
+      buf[3] === 0x47 &&
+      buf[4] === 0x0d &&
+      buf[5] === 0x0a &&
+      buf[6] === 0x1a &&
+      buf[7] === 0x0a
+    );
+  }
+  if (mime === "image/jpeg") {
+    return buf.length >= 3 && buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff;
+  }
+  if (mime === "image/webp") {
+    return (
+      buf.length >= 12 &&
+      buf.subarray(0, 4).toString("ascii") === "RIFF" &&
+      buf.subarray(8, 12).toString("ascii") === "WEBP"
+    );
+  }
+  if (mime === "application/pdf") {
+    return buf.length >= 5 && buf.subarray(0, 5).toString("ascii") === "%PDF-";
+  }
+  return false;
 }
 
 function parseReceiptAttachment(rawB64, rawMime, rawFilename) {
@@ -370,6 +407,11 @@ function parseReceiptAttachment(rawB64, rawMime, rawFilename) {
     err.statusCode = 413;
     throw err;
   }
+  if (!verifyReceiptMagicBytes(buf, detectedMime)) {
+    const err = new Error("Comprovante inválido ou corrompido: assinatura binária não confere com PNG/JPEG/WEBP/PDF.");
+    err.statusCode = 400;
+    throw err;
+  }
 
   const cleanOrigName = path
     .basename(String(rawFilename || `comprovante${ext}`))
@@ -382,6 +424,345 @@ function parseReceiptAttachment(rawB64, rawMime, rawFilename) {
     ext,
     originalName: cleanOrigName || `comprovante${ext}`,
   };
+}
+
+function analyzeReceiptSubmission({ order, attachment, e2eId, receiptNote, existingOrders, nowIso }) {
+  const sha256 = attachment
+    ? crypto.createHash("sha256").update(attachment.buffer).digest("hex")
+    : null;
+  const others = (Array.isArray(existingOrders) ? existingOrders : []).filter(
+    (o) => o && o.order_id !== order.order_id
+  );
+  const duplicateBySha = Boolean(
+    sha256 &&
+      others.some(
+        (o) => o.receipt_file?.sha256 === sha256 || o.receipt_analysis?.sha256 === sha256
+      )
+  );
+  const duplicateByE2e = Boolean(e2eId && others.some((o) => o.e2e_id && o.e2e_id === e2eId));
+  const isDuplicate = duplicateBySha || duplicateByE2e;
+
+  const e2eFormatOk = Boolean(e2eId && /^E[0-9A-Za-z]{31}$/.test(e2eId));
+  const sampleSlice = attachment
+    ? attachment.buffer.subarray(0, Math.min(attachment.buffer.length, 262144)).toString("latin1")
+    : "";
+  const searchable = `${receiptNote || ""} ${sampleSlice}`;
+  const expectedDot = (Number(order.amount_centavos || 0) / 100).toFixed(2);
+  const expectedComma = expectedDot.replace(".", ",");
+  const amountHint =
+    searchable.includes(expectedComma) || searchable.includes(expectedDot)
+      ? order.amount_display
+      : null;
+  const receiverHint = /raiane|lenoncio|99226[- ]?9296/i.test(searchable)
+    ? "Raiane Lenoncio"
+    : null;
+
+  let verdict = "note_pending_owner";
+  if (isDuplicate) {
+    verdict = "duplicate_detected";
+  } else if (attachment && (e2eFormatOk || amountHint || receiverHint)) {
+    verdict = "valid_match_pending_owner";
+  } else if (attachment) {
+    verdict = "valid_file_pending_owner";
+  }
+
+  const fmtLabel = attachment ? attachment.mime.split("/")[1].toUpperCase() : "Referência";
+  const summaryPt = isDuplicate
+    ? "⚠️ Alerta: este comprovante ou código E2E já apareceu em outro pedido e passará por conferência manual."
+    : `Pré-análise concluída (${fmtLabel} íntegro${e2eFormatOk ? " · E2E BACEN válido" : ""}${amountHint ? " · " + amountHint : ""}). Aguardando ativação pelo dono no app central (imediata no WhatsApp ou em até 1 hora com envio ao seu e-mail).`;
+
+  return {
+    analyzed_at: nowIso,
+    mime: attachment ? attachment.mime : null,
+    size_bytes: attachment ? attachment.buffer.length : 0,
+    sha256,
+    magic_valid: attachment ? true : null,
+    is_duplicate: isDuplicate,
+    e2e_format_ok: e2eFormatOk,
+    amount_hint: amountHint,
+    receiver_hint: receiverHint,
+    verdict,
+    summary_pt: summaryPt,
+  };
+}
+
+function sendSmtpsMail({ host, port = 465, user, pass, from, to, subject, text, html, timeoutMs = 12000 }) {
+  return new Promise((resolve, reject) => {
+    const socket = tls.connect({ host, port, servername: host, rejectUnauthorized: true });
+    let buffer = "";
+    let step = 0;
+    let settled = false;
+
+    const finish = (err, val) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      try {
+        socket.destroy();
+      } catch {}
+      if (err) reject(err);
+      else resolve(val);
+    };
+
+    const timer = setTimeout(() => finish(new Error("Timeout na conexão SMTPS.")), timeoutMs);
+    socket.on("error", (err) => finish(err));
+
+    const boundary = `b_${crypto.randomBytes(8).toString("hex")}`;
+    const encodedSubject = `=?UTF-8?B?${Buffer.from(String(subject), "utf8").toString("base64")}?=`;
+    const fromHeader = from && from.includes("<") ? from : `OpenInfinite Oficial <${user}>`;
+    const mimeMsg = [
+      `From: ${fromHeader}`,
+      `To: <${to}>`,
+      `Subject: ${encodedSubject}`,
+      `Date: ${new Date().toUTCString()}`,
+      `MIME-Version: 1.0`,
+      `Content-Type: multipart/alternative; boundary="${boundary}"`,
+      ``,
+      `--${boundary}`,
+      `Content-Type: text/plain; charset=UTF-8`,
+      `Content-Transfer-Encoding: base64`,
+      ``,
+      Buffer.from(String(text || ""), "utf8").toString("base64"),
+      `--${boundary}`,
+      `Content-Type: text/html; charset=UTF-8`,
+      `Content-Transfer-Encoding: base64`,
+      ``,
+      Buffer.from(String(html || text || ""), "utf8").toString("base64"),
+      `--${boundary}--`,
+      ``,
+    ]
+      .join("\r\n")
+      .replace(/^\./gm, "..");
+
+    const sendLine = (line) => socket.write(`${line}\r\n`);
+
+    socket.on("data", (chunk) => {
+      buffer += chunk.toString("utf8");
+      const lines = buffer.split(/\r?\n/);
+      buffer = lines.pop() || "";
+      for (const line of lines) {
+        if (!/^\d{3} /.test(line)) continue;
+        const code = Number(line.slice(0, 3));
+        if (step === 0 && code === 220) {
+          step = 1;
+          sendLine("EHLO openinfinite.local");
+        } else if (step === 1 && code === 250) {
+          step = 2;
+          sendLine("AUTH LOGIN");
+        } else if (step === 2 && code === 334) {
+          step = 3;
+          sendLine(Buffer.from(String(user), "utf8").toString("base64"));
+        } else if (step === 3 && code === 334) {
+          step = 4;
+          sendLine(Buffer.from(String(pass), "utf8").toString("base64"));
+        } else if (step === 4 && code === 235) {
+          step = 5;
+          sendLine(`MAIL FROM:<${user}>`);
+        } else if (step === 5 && code === 250) {
+          step = 6;
+          sendLine(`RCPT TO:<${to}>`);
+        } else if (step === 6 && (code === 250 || code === 251)) {
+          step = 7;
+          sendLine("DATA");
+        } else if (step === 7 && code === 354) {
+          step = 8;
+          socket.write(`${mimeMsg}\r\n.\r\n`);
+        } else if (step === 8 && code === 250) {
+          step = 9;
+          sendLine("QUIT");
+          finish(null, { ok: true, provider: "smtps" });
+        } else {
+          finish(new Error(`Erro SMTP (passo ${step}): ${line}`));
+        }
+      }
+    });
+  });
+}
+
+async function sendActivationEmail({
+  to,
+  buyerName,
+  orderId,
+  editionLabel,
+  licenseKey,
+  publicSiteUrl,
+  environment = {},
+  customSendEmail = null,
+}) {
+  const nowIso = new Date().toISOString();
+  const cleanTo = cleanEmailAddress(to);
+  const siteBase = String(
+    publicSiteUrl || environment.SITE_URL || "https://catalogo-cruzeiro-web.onrender.com"
+  ).replace(/\/+$/, "");
+  const testUrl = `${siteBase}/openinfinite/?test_key=${encodeURIComponent(licenseKey)}#validador`;
+  const subject = `Sua Chave Oficial Ativada — ${editionLabel} (${orderId})`;
+  const greeting = buyerName ? `Olá, ${buyerName}!` : "Olá!";
+
+  const text = [
+    greeting,
+    "",
+    `Seu pagamento PIX do pedido ${orderId} (${editionLabel}) foi conferido e ativado!`,
+    "",
+    "SUA CHAVE OFICIAL (Ed25519):",
+    licenseKey,
+    "",
+    "TESTAR E VALIDAR SUA CHAVE AGORA NO SITE:",
+    testUrl,
+    "",
+    "Como ativar no aplicativo:",
+    "1. Clique no link acima para confirmar que sua chave já consta ATIVA no servidor.",
+    "2. Abra o aplicativo OpenInfinite no seu computador e cole a chave acima.",
+    "",
+    "Suporte direto WhatsApp: +55 68 99226-9296",
+  ].join("\n");
+
+  const html = `<div style="font-family:Segoe UI,Arial,sans-serif;max-width:600px;color:#111;line-height:1.55;">
+    <h2 style="color:#0f172a;margin-bottom:8px;">${greeting}</h2>
+    <p>Seu pagamento PIX referente ao pedido <strong>${orderId}</strong> (<strong>${editionLabel}</strong>) foi conferido e sua licença oficial já está <strong>ATIVA</strong>.</p>
+    <div style="background:#0f172a;color:#f8fafc;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:13px;word-break:break-all;margin:16px 0;">${licenseKey}</div>
+    <p><a href="${testUrl}" style="display:inline-block;background:#10b981;color:#052e16;font-weight:700;text-decoration:none;padding:11px 18px;border-radius:6px;">Testar Minha Chave Agora no Portal</a></p>
+    <p style="font-size:12.5px;color:#475569;">Link direto do validador: <a href="${testUrl}">${testUrl}</a></p>
+  </div>`;
+
+  const gmailComposeUrl = cleanTo
+    ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(cleanTo)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`
+    : null;
+
+  if (!cleanTo) {
+    return {
+      attempted: false,
+      sent: false,
+      provider: "none",
+      to: null,
+      test_url: testUrl,
+      gmail_compose_url: null,
+      at: nowIso,
+      error: "Pedido sem e-mail vinculado.",
+    };
+  }
+
+  try {
+    if (typeof customSendEmail === "function") {
+      const customRes = await customSendEmail({
+        to: cleanTo,
+        subject,
+        text,
+        html,
+        orderId,
+        editionLabel,
+        licenseKey,
+        testUrl,
+      });
+      return {
+        attempted: true,
+        sent: customRes?.sent !== false,
+        provider: String(customRes?.provider || "custom-mailer"),
+        to: cleanTo,
+        test_url: testUrl,
+        gmail_compose_url: gmailComposeUrl,
+        at: nowIso,
+        error: customRes?.error || null,
+      };
+    }
+
+    const resendKey = String(environment.RESEND_API_KEY || "").trim();
+    if (resendKey) {
+      const fromAddr = String(environment.EMAIL_FROM || "OpenInfinite <onboarding@resend.dev>").trim();
+      const r = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ from: fromAddr, to: [cleanTo], subject, text, html }),
+      });
+      if (!r.ok) throw new Error(`Resend HTTP ${r.status}`);
+      return {
+        attempted: true,
+        sent: true,
+        provider: "resend",
+        to: cleanTo,
+        test_url: testUrl,
+        gmail_compose_url: gmailComposeUrl,
+        at: nowIso,
+        error: null,
+      };
+    }
+
+    const brevoKey = String(environment.BREVO_API_KEY || "").trim();
+    if (brevoKey) {
+      const senderEmail = cleanEmailAddress(environment.EMAIL_FROM || environment.GMAIL_USER || "noreply@openinfinite.dev") || "noreply@openinfinite.dev";
+      const r = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: { "api-key": brevoKey, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sender: { name: "OpenInfinite Oficial", email: senderEmail },
+          to: [{ email: cleanTo, name: buyerName || cleanTo }],
+          subject,
+          textContent: text,
+          htmlContent: html,
+        }),
+      });
+      if (!r.ok) throw new Error(`Brevo HTTP ${r.status}`);
+      return {
+        attempted: true,
+        sent: true,
+        provider: "brevo",
+        to: cleanTo,
+        test_url: testUrl,
+        gmail_compose_url: gmailComposeUrl,
+        at: nowIso,
+        error: null,
+      };
+    }
+
+    const smtpUser = cleanEmailAddress(environment.GMAIL_USER || environment.SMTP_USER || "");
+    const smtpPass = String(environment.GMAIL_APP_PASSWORD || environment.SMTP_PASS || "").replace(/\s+/g, "");
+    const smtpHost = String(environment.SMTP_HOST || "smtp.gmail.com").trim();
+    const smtpPort = Number(environment.SMTP_PORT || 465);
+    if (smtpUser && smtpPass) {
+      await sendSmtpsMail({
+        host: smtpHost,
+        port: smtpPort,
+        user: smtpUser,
+        pass: smtpPass,
+        from: environment.EMAIL_FROM || `OpenInfinite Oficial <${smtpUser}>`,
+        to: cleanTo,
+        subject,
+        text,
+        html,
+      });
+      return {
+        attempted: true,
+        sent: true,
+        provider: "gmail-smtps",
+        to: cleanTo,
+        test_url: testUrl,
+        gmail_compose_url: gmailComposeUrl,
+        at: nowIso,
+        error: null,
+      };
+    }
+
+    return {
+      attempted: false,
+      sent: false,
+      provider: "unconfigured",
+      to: cleanTo,
+      test_url: testUrl,
+      gmail_compose_url: gmailComposeUrl,
+      at: nowIso,
+      error: "SMTP/API de e-mail ainda não configurado; use o atalho Gmail Compose ou configure Senha de App no Dashboard Control.",
+    };
+  } catch (err) {
+    return {
+      attempted: true,
+      sent: false,
+      provider: "error",
+      to: cleanTo,
+      test_url: testUrl,
+      gmail_compose_url: gmailComposeUrl,
+      at: nowIso,
+      error: String(err?.message || "Falha no envio de e-mail.").slice(0, 200),
+    };
+  }
 }
 
 async function readBinaryBody(req, maxBytes) {
@@ -771,6 +1152,45 @@ function createSuperbadSalesApi(options = {}) {
       : DEFAULT_PUBLIC_STATS_CACHE_TTL_MS;
   let publicStatsCache = { expiresAt: 0, payload: null };
 
+  const getAuthUserFn = typeof options.getAuthUser === "function" ? options.getAuthUser : () => null;
+  const isGoogleAuthEnabledFn =
+    typeof options.isGoogleAuthEnabled === "function"
+      ? options.isGoogleAuthEnabled
+      : () => Boolean(getGoogleClientId());
+  const notifyOwnerWhatsAppFn =
+    typeof options.notifyOwnerWhatsApp === "function" ? options.notifyOwnerWhatsApp : null;
+  const customSendEmailFn = typeof options.sendEmail === "function" ? options.sendEmail : null;
+
+  let cachedGoogleClientId = String(
+    options.googleClientId || environment.GOOGLE_AUTH_CLIENT_ID || environment.PUBPAID_GOOGLE_CLIENT_ID || ""
+  ).trim();
+  try {
+    if (fs.existsSync(storeFile)) {
+      const bootRaw = JSON.parse(fs.readFileSync(storeFile, "utf8"));
+      const storedCid = String(bootRaw?.auth_config?.google_client_id || "").trim();
+      if (storedCid) cachedGoogleClientId = storedCid;
+    }
+  } catch {}
+
+  function getGoogleClientId() {
+    return String(
+      cachedGoogleClientId ||
+        environment.GOOGLE_AUTH_CLIENT_ID ||
+        environment.PUBPAID_GOOGLE_CLIENT_ID ||
+        ""
+    ).trim();
+  }
+
+  function isCloudMailerConfigured() {
+    return Boolean(
+      customSendEmailFn ||
+        environment.RESEND_API_KEY ||
+        environment.BREVO_API_KEY ||
+        ((environment.GMAIL_USER || environment.SMTP_USER) &&
+          (environment.GMAIL_APP_PASSWORD || environment.SMTP_PASS))
+    );
+  }
+
   const pixEmvKey = String(environment.SUPERBAD_PIX_KEY || DEFAULT_PIX_EMV_KEY).trim();
   const pixDisplayKey = cleanText(environment.SUPERBAD_PIX_DISPLAY_KEY || PIX_DISPLAY_KEY, 40);
   const pixRecipient = cleanText(environment.SUPERBAD_PIX_RECIPIENT || PIX_RECIPIENT, 40);
@@ -847,6 +1267,10 @@ function createSuperbadSalesApi(options = {}) {
             ? parsed.key_pool
             : {},
         pix_webhooks: Array.isArray(parsed?.pix_webhooks) ? parsed.pix_webhooks : [],
+        auth_config:
+          parsed?.auth_config && typeof parsed.auth_config === "object" && !Array.isArray(parsed.auth_config)
+            ? parsed.auth_config
+            : {},
       };
     } catch (_err) {
       return {
@@ -857,6 +1281,7 @@ function createSuperbadSalesApi(options = {}) {
         update_manifests: {},
         key_pool: {},
         pix_webhooks: [],
+        auth_config: {},
       };
     }
   }
@@ -957,6 +1382,71 @@ function createSuperbadSalesApi(options = {}) {
     return timingSafeEqualText(providedHash, order.order_secret_hash);
   }
 
+  function redactEmailDeliveryForStore(ed) {
+    if (!ed || typeof ed !== "object") return null;
+    return {
+      attempted: Boolean(ed.attempted),
+      sent: Boolean(ed.sent),
+      provider: String(ed.provider || "none"),
+      to: ed.to || null,
+      at: ed.at || null,
+      error: ed.error || null,
+    };
+  }
+
+  function buildWhatsappImmediateUrl(order) {
+    const plan = EDITION_PLANS[order.requested_edition];
+    const editionLabel = plan ? plan.label : order.requested_edition;
+    const parts = [
+      `Olá! Enviei o comprovante do pedido ${order.order_id} (${editionLabel} · ${order.amount_display}) no site.`,
+      order.buyer_email ? `Conta Google: ${order.buyer_email}.` : `Nome: ${order.buyer_name}.`,
+      order.e2e_id ? `E2E: ${order.e2e_id}.` : "",
+      "Pode verificar para ativação imediata da minha chave?",
+    ].filter(Boolean);
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(parts.join(" "))}`;
+  }
+
+  function isOrderOwnedByGoogleUser(order, authUser) {
+    if (!order || !authUser) return false;
+    if (authUser.sub && order.google_sub && authUser.sub === order.google_sub) return true;
+    const uEmail = cleanEmailAddress(authUser.email || "");
+    if (!uEmail) return false;
+    return (
+      (order.google_email && cleanEmailAddress(order.google_email) === uEmail) ||
+      (order.buyer_email && cleanEmailAddress(order.buyer_email) === uEmail)
+    );
+  }
+
+  function serializeOrderForBuyer(order) {
+    const publicStatus = normalizePublicOrderStatus(order.status);
+    const canExposeKey = publicStatus === "approved" || publicStatus === "delivered";
+    const unlockedLicenseKey =
+      canExposeKey && order.encrypted_license_key
+        ? decryptLicenseKeyAtRest(order.encrypted_license_key, keyPoolAesKey)
+        : null;
+
+    return {
+      order_id: order.order_id,
+      status: publicStatus,
+      amount_centavos: order.amount_centavos,
+      amount_display: order.amount_display,
+      requested_edition: order.requested_edition,
+      edition: order.edition || null,
+      buyer_email: order.buyer_email || order.google_email || null,
+      google_name: order.google_name || null,
+      sla_minutes: 60,
+      receipt_note: order.receipt_note || "",
+      has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
+      e2e_id: order.e2e_id || null,
+      receipt_analysis: order.receipt_analysis || null,
+      whatsapp_immediate_url: buildWhatsappImmediateUrl(order),
+      email_delivery: order.email_delivery || null,
+      license_key: canExposeKey ? unlockedLicenseKey : null,
+      created_at: order.created_at,
+      updated_at: order.updated_at,
+    };
+  }
+
   function redactOrderForAdmin(order) {
     return {
       order_id: order.order_id,
@@ -967,11 +1457,20 @@ function createSuperbadSalesApi(options = {}) {
       edition: order.edition || null,
       buyer_name: order.buyer_name,
       buyer_contact: order.buyer_contact,
+      buyer_email: order.buyer_email || order.google_email || null,
+      google_name: order.google_name || null,
+      google_picture: order.google_picture || null,
       payment_provider: order.payment_provider,
       receipt_note: order.receipt_note || "",
       e2e_id: order.e2e_id || null,
       has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
+      receipt_mime: order.receipt_file?.mime || null,
+      receipt_analysis: order.receipt_analysis || null,
+      owner_whatsapp_alert: order.owner_whatsapp_alert || null,
+      email_delivery: order.email_delivery || null,
+      whatsapp_immediate_url: buildWhatsappImmediateUrl(order),
       key_delivered: Boolean(order.encrypted_license_key),
+      webhook_verified: Boolean(order.webhook_verified || order.pix_verified),
       receipt_submitted_at: order.receipt_submitted_at || null,
       license_id: order.license_id || null,
       created_at: order.created_at,
@@ -1171,7 +1670,7 @@ function createSuperbadSalesApi(options = {}) {
       order_id: order.order_id,
       edition,
       tier: chosenItem.tier || plan.tier,
-      label: order.buyer_name || plan.label,
+      label: plan?.label || edition,
       email: order.buyer_contact || "",
       key_prefix: chosenItem.key_prefix || plainKey.slice(0, 10),
       key_hash: `sha256:${chosenItem.key_sha256}`,
@@ -1318,11 +1817,60 @@ function createSuperbadSalesApi(options = {}) {
         });
       }
 
+      // 0c) GET /api/superbad/my-orders (Authenticated Google User Order History)
+      if (method === "GET" && pathname === "/api/superbad/my-orders") {
+        const authUser = getAuthUserFn(req);
+        if (!authUser || (!authUser.sub && !authUser.email)) {
+          return sendJson(res, 200, { ok: true, signed_in: false, user: null, orders: [] });
+        }
+        const store = await readStore();
+        const myOrders = store.orders
+          .filter((o) => isOrderOwnedByGoogleUser(o, authUser))
+          .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
+          .slice(0, 25)
+          .map(serializeOrderForBuyer);
+        return sendJson(res, 200, {
+          ok: true,
+          signed_in: true,
+          user: {
+            sub: authUser.sub || null,
+            email: authUser.email || null,
+            name: authUser.name || null,
+            picture: authUser.picture || null,
+          },
+          orders: myOrders,
+        });
+      }
+
       // 1) POST /api/superbad/orders
       if (method === "POST" && pathname === "/api/superbad/orders") {
         const body = await readJsonBody(req);
-        const buyerName = cleanText(body.buyer_name, 120);
-        const buyerContact = cleanText(body.buyer_contact, 160);
+        const authUser = getAuthUserFn(req);
+        const googleEnabled = Boolean(isGoogleAuthEnabledFn(req));
+        if (googleEnabled && (!authUser || !authUser.email)) {
+          return sendJson(res, 401, {
+            ok: false,
+            code: "GOOGLE_AUTH_REQUIRED",
+            error: "Entre com sua conta Google antes de gerar o pagamento PIX.",
+          });
+        }
+
+        const googleSub = cleanText(authUser?.sub || "", 120) || null;
+        const googleEmail = cleanEmailAddress(authUser?.email || "") || null;
+        const googleName = cleanText(authUser?.name || "", 120) || null;
+        const googlePicture = cleanText(authUser?.picture || "", 360) || null;
+        const bodyBuyerEmail = cleanEmailAddress(body.buyer_email || "");
+        const contactAsEmail = cleanEmailAddress(body.buyer_contact || "");
+        const resolvedBuyerEmail = googleEmail || bodyBuyerEmail || contactAsEmail || null;
+
+        const buyerName = cleanText(
+          body.buyer_name || googleName || (resolvedBuyerEmail ? resolvedBuyerEmail.split("@")[0] : ""),
+          120
+        );
+        const buyerContact = cleanText(
+          body.buyer_contact || resolvedBuyerEmail || googleEmail || "",
+          160
+        );
         if (!buyerName || !buyerContact) {
           return sendJson(res, 400, {
             ok: false,
@@ -1364,10 +1912,18 @@ function createSuperbadSalesApi(options = {}) {
           edition: null,
           buyer_name: buyerName,
           buyer_contact: buyerContact,
+          buyer_email: resolvedBuyerEmail,
+          google_sub: googleSub,
+          google_email: googleEmail,
+          google_name: googleName,
+          google_picture: googlePicture,
           payment_provider: paymentInfo.payment_provider,
           txid,
           receipt_note: "",
           receipt_submitted_at: null,
+          receipt_analysis: null,
+          owner_whatsapp_alert: null,
+          email_delivery: null,
           license_id: null,
           created_at: now,
           updated_at: now,
@@ -1389,8 +1945,12 @@ function createSuperbadSalesApi(options = {}) {
             amount_centavos: plan.amountCentavos,
             amount_display: plan.amountDisplay,
             requested_edition: requestedEdition,
+            buyer_email: resolvedBuyerEmail,
+            google_name: googleName,
+            sla_minutes: 60,
             pix: paymentInfo.pix,
             whatsapp_url: paymentInfo.whatsapp_url,
+            whatsapp_immediate_url: buildWhatsappImmediateUrl(storedOrder),
             payment_provider: paymentInfo.payment_provider,
             created_at: now,
           },
@@ -1419,43 +1979,27 @@ function createSuperbadSalesApi(options = {}) {
       if (method === "GET" && orderGetMatch) {
         const orderId = orderGetMatch[1];
         const secret = String(searchParams.get("order_secret") || req.headers["x-order-secret"] || "").trim();
+        const authUser = getAuthUserFn(req);
         const store = await readStore();
         const order = store.orders.find((item) => item.order_id === orderId);
-        if (!verifyOrderSecret(order, secret)) {
+        const authorizedBySecret = verifyOrderSecret(order, secret);
+        const authorizedByGoogle = !secret && isOrderOwnedByGoogleUser(order, authUser);
+        if (!order || (!authorizedBySecret && !authorizedByGoogle)) {
           return sendJson(res, 403, { ok: false, error: "Acesso negado ao pedido." });
         }
-        const publicStatus = normalizePublicOrderStatus(order.status);
-        const canExposeKey = publicStatus === "approved" || publicStatus === "delivered";
-        const unlockedLicenseKey =
-          canExposeKey && order.encrypted_license_key
-            ? decryptLicenseKeyAtRest(order.encrypted_license_key, keyPoolAesKey)
-            : null;
-
-        const responseOrder = {
-          order_id: order.order_id,
-          status: publicStatus,
-          amount_centavos: order.amount_centavos,
-          amount_display: order.amount_display,
-          requested_edition: order.requested_edition,
-          edition: order.edition || null,
-          receipt_note: order.receipt_note || "",
-          has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
-          e2e_id: order.e2e_id || null,
-          license_key: canExposeKey ? unlockedLicenseKey : null,
-          created_at: order.created_at,
-          updated_at: order.updated_at,
-        };
-        return sendJson(res, 200, { ok: true, order: responseOrder });
+        return sendJson(res, 200, { ok: true, order: serializeOrderForBuyer(order) });
       }
 
-      // 3) POST /api/superbad/orders/:orderId/receipt (4 MB JSON limit ONLY on this route)
+      // 3) POST /api/superbad/orders/:orderId/receipt (4 MB JSON limit ONLY on this route; NEVER auto-approves!)
       const orderReceiptMatch = pathname.match(/^\/api\/superbad\/orders\/([A-Za-z0-9_-]+)\/receipt$/);
       if (method === "POST" && orderReceiptMatch) {
         const orderId = orderReceiptMatch[1];
         const body = await readJsonBody(req, MAX_RECEIPT_JSON_BYTES);
         const secret = String(body.order_secret || req.headers["x-order-secret"] || "").trim();
+        const authUser = getAuthUserFn(req);
         const receiptNote = cleanText(body.receipt_note, 500);
         const e2eId = cleanE2eId(body.e2e_id);
+        const overrideEmail = cleanEmailAddress(body.buyer_email || "");
         const attachment = parseReceiptAttachment(
           body.receipt_file_b64,
           body.receipt_file_mime,
@@ -1469,10 +2013,12 @@ function createSuperbadSalesApi(options = {}) {
           });
         }
 
-        const result = await withStoreLock(async () => {
+        const lockOutcome = await withStoreLock(async () => {
           const store = await readStore();
           const order = store.orders.find((item) => item.order_id === orderId);
-          if (!verifyOrderSecret(order, secret)) {
+          const authorizedBySecret = verifyOrderSecret(order, secret);
+          const authorizedByGoogle = !secret && isOrderOwnedByGoogleUser(order, authUser);
+          if (!order || (!authorizedBySecret && !authorizedByGoogle)) {
             return { status: 403, payload: { ok: false, error: "Acesso negado ao pedido." } };
           }
           if (order.status === "approved" || order.status === "delivered") {
@@ -1480,6 +2026,22 @@ function createSuperbadSalesApi(options = {}) {
           }
 
           const now = new Date().toISOString();
+          if (overrideEmail && !order.buyer_email) {
+            order.buyer_email = overrideEmail;
+          }
+          if (authUser?.email && !order.buyer_email) {
+            order.buyer_email = cleanEmailAddress(authUser.email) || null;
+          }
+
+          const analysis = analyzeReceiptSubmission({
+            order,
+            attachment,
+            e2eId,
+            receiptNote,
+            existingOrders: store.orders,
+            nowIso: now,
+          });
+
           if (attachment) {
             await fs.promises.mkdir(receiptsDir, { recursive: true });
             const realReceiptsRoot = await fs.promises.realpath(receiptsDir);
@@ -1494,7 +2056,7 @@ function createSuperbadSalesApi(options = {}) {
               original_name: attachment.originalName,
               mime: attachment.mime,
               size_bytes: attachment.buffer.length,
-              sha256: crypto.createHash("sha256").update(attachment.buffer).digest("hex"),
+              sha256: analysis.sha256,
               saved_at: now,
             };
           }
@@ -1507,63 +2069,100 @@ function createSuperbadSalesApi(options = {}) {
           if (e2eId) {
             order.e2e_id = e2eId;
           }
+          order.receipt_analysis = analysis;
           order.receipt_submitted_at = now;
+          // REGRA DE OURO DO DONO: NUNCA auto-libera chave no envio do comprovante!
           order.status = "receipt_submitted";
           order.updated_at = now;
 
-          let autoApproved = false;
-          let reservedKey = null;
-          if (Array.isArray(store.pix_webhooks)) {
-            const matchingWh = store.pix_webhooks.find((wh) => {
-              if (!wh || wh.matched_order_id) return false;
-              if (wh.amount_centavos !== null && wh.amount_centavos !== undefined) {
-                if (Number(wh.amount_centavos) !== Number(order.amount_centavos)) return false;
-              }
-              return Boolean(
-                (order.e2e_id && wh.e2e_id === order.e2e_id) ||
-                  (wh.order_id && wh.order_id === order.order_id) ||
-                  (wh.txid && order.txid && wh.txid === order.txid) ||
-                  (wh.e2e_id && order.receipt_note && order.receipt_note.includes(wh.e2e_id))
-              );
-            });
-            if (matchingWh) {
-              order.pix_verified = true;
-              order.e2e_id = matchingWh.e2e_id || order.e2e_id || null;
-              const poolRes = reserveKeyFromPoolAndApproveOrder(store, order, {
-                e2eId: matchingWh.e2e_id,
-                nowIso: now,
-              });
-              if (poolRes.approved) {
-                autoApproved = true;
-                reservedKey = poolRes.licenseKey;
-                matchingWh.matched_order_id = order.order_id;
-                matchingWh.matched_at = now;
-              }
-            }
-          }
-
           await writeStore(store);
-          const publicStatus = normalizePublicOrderStatus(order.status);
-          return {
-            status: 200,
-            payload: {
-              ok: true,
-              order_id: order.order_id,
-              status: publicStatus,
-              auto_approved: autoApproved,
-              edition: order.edition || order.requested_edition,
-              ...(autoApproved && reservedKey ? { license_key: reservedKey } : {}),
-              order: {
-                order_id: order.order_id,
-                status: publicStatus,
-                receipt_note: order.receipt_note,
-                e2e_id: order.e2e_id || null,
-                has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
-              },
-            },
-          };
+          return { status: 200, orderSnapshot: { ...order }, analysis };
         });
-        return sendJson(res, result.status, result.payload);
+
+        if (lockOutcome.status !== 200) {
+          return sendJson(res, lockOutcome.status, lockOutcome.payload);
+        }
+
+        const ordSnap = lockOutcome.orderSnapshot;
+        const analysis = lockOutcome.analysis;
+        const nowAlertIso = new Date().toISOString();
+        let ownerAlert = {
+          attempted: false,
+          sent: false,
+          provider: "none",
+          at: nowAlertIso,
+          reason: "not-configured",
+        };
+        const alertMsg = [
+          `🔔 [OpenInfinite PIX] Comprovante enviado!`,
+          `Pedido: ${ordSnap.order_id} (${ordSnap.requested_edition} · ${ordSnap.amount_display})`,
+          `Cliente: ${ordSnap.buyer_name}${ordSnap.buyer_email ? " <" + ordSnap.buyer_email + ">" : ""}`,
+          analysis.is_duplicate ? `⚠️ ALERTA: Comprovante/E2E DUPLICADO!` : `Análise: ${analysis.verdict}`,
+          `Abra o Dashboard Control -> Pedidos PIX para ver o comprovante e clicar em Ativar & Enviar E-mail.`,
+        ].join("\n");
+
+        if (notifyOwnerWhatsAppFn) {
+          try {
+            const whOut = await notifyOwnerWhatsAppFn({
+              to: whatsappNumber,
+              message: alertMsg,
+              order: ordSnap,
+              analysis,
+            });
+            ownerAlert = {
+              attempted: whOut?.attempted !== false,
+              sent: Boolean(whOut?.sent),
+              provider: String(whOut?.provider || "whatsapp-hook"),
+              at: whOut?.at || nowAlertIso,
+              reason: String(whOut?.reason || (whOut?.sent ? "sent" : "skipped")),
+            };
+          } catch (err) {
+            ownerAlert = {
+              attempted: true,
+              sent: false,
+              provider: "whatsapp-hook",
+              at: nowAlertIso,
+              reason: String(err?.message || "error").slice(0, 120),
+            };
+          }
+        }
+
+        await withStoreLock(async () => {
+          const store = await readStore();
+          const ord = store.orders.find((o) => o.order_id === orderId);
+          if (ord) {
+            ord.owner_whatsapp_alert = ownerAlert;
+            await writeStore(store);
+          }
+        });
+
+        const whatsappImmediateUrl = buildWhatsappImmediateUrl(ordSnap);
+        return sendJson(res, 200, {
+          ok: true,
+          order_id: ordSnap.order_id,
+          status: "receipt_submitted",
+          auto_approved: false,
+          awaiting_owner_activation: true,
+          sla_minutes: 60,
+          edition: ordSnap.requested_edition,
+          buyer_email: ordSnap.buyer_email || null,
+          receipt_analysis: analysis,
+          owner_whatsapp_alert: ownerAlert,
+          whatsapp_immediate_url: whatsappImmediateUrl,
+          message_pt:
+            "Comprovante em análise! Fale no WhatsApp para ativação imediata ou aguarde até 1 hora — assim que ativarmos no painel central, sua chave chegará no seu e-mail.",
+          order: {
+            order_id: ordSnap.order_id,
+            status: "receipt_submitted",
+            receipt_note: ordSnap.receipt_note,
+            e2e_id: ordSnap.e2e_id || null,
+            has_receipt_file: Boolean(ordSnap.receipt_file && ordSnap.receipt_file.filename),
+            buyer_email: ordSnap.buyer_email || null,
+            sla_minutes: 60,
+            receipt_analysis: analysis,
+            whatsapp_immediate_url: whatsappImmediateUrl,
+          },
+        });
       }
 
       // 3b) POST /api/superbad/webhooks/pix (authenticated with PIX_WEBHOOK_SECRET + timingSafeEqual)
@@ -1668,13 +2267,12 @@ function createSuperbadSalesApi(options = {}) {
           }
 
           candidate.pix_verified = true;
+          candidate.webhook_verified = true;
+          candidate.webhook_verified_at = nowIso;
           candidate.e2e_id = e2eId;
           candidate.updated_at = nowIso;
-          const poolRes = reserveKeyFromPoolAndApproveOrder(store, candidate, { e2eId, nowIso });
-          if (poolRes.approved) {
-            whRecord.matched_order_id = candidate.order_id;
-            whRecord.matched_at = nowIso;
-          }
+          whRecord.matched_order_id = candidate.order_id;
+          whRecord.matched_at = nowIso;
           await writeStore(store);
 
           return {
@@ -1682,8 +2280,9 @@ function createSuperbadSalesApi(options = {}) {
             payload: {
               ok: true,
               matched: true,
-              auto_approved: poolRes.approved,
-              pool_exhausted: poolRes.poolExhausted,
+              webhook_verified: true,
+              auto_approved: false,
+              awaiting_owner_activation: true,
               order_id: candidate.order_id,
               status: normalizePublicOrderStatus(candidate.status),
               license_id: candidate.license_id || null,
@@ -1793,8 +2392,45 @@ function createSuperbadSalesApi(options = {}) {
           orders,
           licenses,
           key_pool: summarizeKeyPoolCounts(store),
+          auth_config: {
+            google_client_id: getGoogleClientId(),
+            email_configured: isCloudMailerConfigured(),
+          },
           update_manifests: store.update_manifests || {},
           serverTime: new Date().toISOString(),
+        });
+      }
+
+      if (method === "GET" && pathname === "/api/superbad/admin/auth-config") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        return sendJson(res, 200, {
+          ok: true,
+          google_client_id: getGoogleClientId(),
+          google_auth_enabled: Boolean(isGoogleAuthEnabledFn(req)),
+          email_configured: isCloudMailerConfigured(),
+        });
+      }
+
+      if (method === "POST" && pathname === "/api/superbad/admin/auth-config") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const body = await readJsonBody(req);
+        const rawCid = cleanText(body.google_client_id ?? body.googleClientId ?? "", 220);
+        if (rawCid && !/^[A-Za-z0-9._-]{8,220}$/.test(rawCid)) {
+          return sendJson(res, 400, { ok: false, error: "Formato de Google Client ID inválido." });
+        }
+        await withStoreLock(async () => {
+          const store = await readStore();
+          if (!store.auth_config || typeof store.auth_config !== "object") store.auth_config = {};
+          store.auth_config.google_client_id = rawCid;
+          store.auth_config.updated_at = new Date().toISOString();
+          cachedGoogleClientId = rawCid;
+          await writeStore(store);
+        });
+        return sendJson(res, 200, {
+          ok: true,
+          google_client_id: getGoogleClientId(),
+          google_auth_enabled: Boolean(isGoogleAuthEnabledFn(req)),
+          email_configured: isCloudMailerConfigured(),
         });
       }
 
@@ -1883,39 +2519,13 @@ function createSuperbadSalesApi(options = {}) {
             stockedCount += 1;
           }
 
-          // Auto-fulfill any pix_verified orders waiting for stock of this edition
-          let fulfilledWaitingOrders = 0;
-          for (const ord of store.orders) {
-            if (
-              ord &&
-              ord.pix_verified &&
-              ord.status !== "approved" &&
-              ord.status !== "delivered" &&
-              ord.requested_edition === edition &&
-              store.key_pool[edition].length > 0
-            ) {
-              const resPool = reserveKeyFromPoolAndApproveOrder(store, ord, {
-                e2eId: ord.e2e_id || null,
-                nowIso,
-              });
-              if (resPool.approved) {
-                fulfilledWaitingOrders += 1;
-                const wh = (store.pix_webhooks || []).find((w) => w && !w.matched_order_id && w.e2e_id === ord.e2e_id);
-                if (wh) {
-                  wh.matched_order_id = ord.order_id;
-                  wh.matched_at = nowIso;
-                }
-              }
-            }
-          }
-
           await writeStore(store);
           return {
             ok: true,
             edition,
             stocked_count: stockedCount,
             skipped_duplicates: skippedDuplicates,
-            fulfilled_waiting_orders: fulfilledWaitingOrders,
+            fulfilled_waiting_orders: 0,
             pool_available: store.key_pool[edition].length,
           };
         });
@@ -1923,7 +2533,9 @@ function createSuperbadSalesApi(options = {}) {
         return sendJson(res, 200, stockResult);
       }
 
-      const adminReceiptFileMatch = pathname.match(/^\/api\/superbad\/admin\/orders\/([A-Za-z0-9_-]+)\/receipt-file$/);
+      const adminReceiptFileMatch = pathname.match(
+        /^\/api\/superbad\/admin\/orders\/([A-Za-z0-9_-]+)\/receipt(?:-file)?$/
+      );
       if (method === "GET" && adminReceiptFileMatch) {
         if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
         const orderId = adminReceiptFileMatch[1];
@@ -1940,12 +2552,14 @@ function createSuperbadSalesApi(options = {}) {
             return sendJson(res, 403, { ok: false, error: "Acesso negado." });
           }
           const buf = await fs.promises.readFile(candidate);
+          const inlineRequested = searchParams.get("disposition") === "inline";
           res.writeHead(200, {
             "Content-Type": order.receipt_file.mime || "application/octet-stream",
-            "Content-Disposition": `attachment; filename="${safeName}"`,
+            "Content-Disposition": `${inlineRequested ? "inline" : "attachment"}; filename="${safeName}"`,
             "Content-Length": buf.length,
             "Cache-Control": "no-store",
             "X-Content-Type-Options": "nosniff",
+            "Content-Security-Policy": "default-src 'none'; img-src 'self' data: blob:; style-src 'unsafe-inline'; sandbox",
           });
           res.end(buf);
           return;
@@ -1979,6 +2593,8 @@ function createSuperbadSalesApi(options = {}) {
           }
           const edition = cleanText(body.edition || edCheck.edition || ord.requested_edition, 32).toLowerCase();
           const plan = EDITION_PLANS[edition] || EDITION_PLANS[ord.requested_edition] || EDITION_PLANS.superbad;
+          const explicitEmail = cleanEmailAddress(body.buyer_email || "");
+          if (explicitEmail) ord.buyer_email = explicitEmail;
 
           for (const lic of store.licenses) {
             if (lic.order_id === orderId && lic.key_sha256 !== keySha256 && !lic.revoked) {
@@ -1994,8 +2610,8 @@ function createSuperbadSalesApi(options = {}) {
               order_id: orderId,
               edition,
               tier: edCheck.tier,
-              label: ord.buyer_name || plan.label,
-              email: ord.buyer_contact || "",
+              label: plan?.label || edition,
+              email: ord.buyer_email || ord.buyer_contact || "",
               key_prefix: edCheck.keyPrefix,
               key_hash: `sha256:${keySha256}`,
               key_sha256: keySha256,
@@ -2031,16 +2647,53 @@ function createSuperbadSalesApi(options = {}) {
           await writeStore(store);
           return {
             status: 200,
-            payload: {
-              ok: true,
-              order_id: orderId,
-              status: "delivered",
-              license: redactLicenseForAdmin(lic),
+            licAdmin: redactLicenseForAdmin(lic),
+            orderForMail: {
+              order_id: ord.order_id,
+              buyer_name: ord.google_name || ord.buyer_name,
+              buyer_email: ord.buyer_email || ord.google_email || cleanEmailAddress(ord.buyer_contact),
+              editionLabel: plan.label || edition,
             },
           };
         });
 
-        return sendJson(res, deliverOutcome.status, deliverOutcome.payload);
+        if (deliverOutcome.status !== 200) {
+          return sendJson(res, deliverOutcome.status, deliverOutcome.payload);
+        }
+
+        let emailDelivery =
+          body.email_delivery_override && typeof body.email_delivery_override === "object"
+            ? body.email_delivery_override
+            : null;
+        if (!emailDelivery) {
+          emailDelivery = await sendActivationEmail({
+            to: deliverOutcome.orderForMail.buyer_email,
+            buyerName: deliverOutcome.orderForMail.buyer_name,
+            orderId: deliverOutcome.orderForMail.order_id,
+            editionLabel: deliverOutcome.orderForMail.editionLabel,
+            licenseKey: rawProvidedKey,
+            publicSiteUrl: body.public_site_url || environment.SITE_URL,
+            environment,
+            customSendEmail: customSendEmailFn,
+          });
+        }
+
+        await withStoreLock(async () => {
+          const store = await readStore();
+          const ord = store.orders.find((o) => o.order_id === orderId);
+          if (ord) {
+            ord.email_delivery = redactEmailDeliveryForStore(emailDelivery);
+            await writeStore(store);
+          }
+        });
+
+        return sendJson(res, 200, {
+          ok: true,
+          order_id: orderId,
+          status: "delivered",
+          license: deliverOutcome.licAdmin,
+          email_delivery: emailDelivery,
+        });
       }
 
       if (method === "POST" && pathname === "/api/superbad/admin/licenses/register") {
@@ -2119,6 +2772,7 @@ function createSuperbadSalesApi(options = {}) {
             }
           }
 
+          let mailOrderCtx = null;
           if (orderId) {
             const ord = store.orders.find((o) => o.order_id === orderId);
             if (ord) {
@@ -2135,16 +2789,57 @@ function createSuperbadSalesApi(options = {}) {
                 ord.encrypted_license_key = encryptedOrderKey;
                 ord.delivered_at = nowIso;
               }
+              if (body.buyer_email) {
+                const cleaned = cleanEmailAddress(body.buyer_email);
+                if (cleaned) ord.buyer_email = cleaned;
+              }
               ord.updated_at = nowIso;
               ord.license_id = existing.license_id;
+              if (body.deliver_key && rawProvidedKey) {
+                mailOrderCtx = {
+                  order_id: ord.order_id,
+                  buyer_name: ord.google_name || ord.buyer_name,
+                  buyer_email: ord.buyer_email || ord.google_email || cleanEmailAddress(ord.buyer_contact),
+                  editionLabel: plan.label || edition,
+                };
+              }
             }
           }
 
           await writeStore(store);
-          return redactLicenseForAdmin(existing);
+          return { licAdmin: redactLicenseForAdmin(existing), mailOrderCtx };
         });
 
-        return sendJson(res, 200, { ok: true, license: outcome });
+        let emailDelivery = null;
+        if (outcome.mailOrderCtx) {
+          emailDelivery =
+            body.email_delivery_override && typeof body.email_delivery_override === "object"
+              ? body.email_delivery_override
+              : await sendActivationEmail({
+                  to: outcome.mailOrderCtx.buyer_email,
+                  buyerName: outcome.mailOrderCtx.buyer_name,
+                  orderId: outcome.mailOrderCtx.order_id,
+                  editionLabel: outcome.mailOrderCtx.editionLabel,
+                  licenseKey: rawProvidedKey,
+                  publicSiteUrl: body.public_site_url || environment.SITE_URL,
+                  environment,
+                  customSendEmail: customSendEmailFn,
+                });
+          await withStoreLock(async () => {
+            const store = await readStore();
+            const ord = store.orders.find((o) => o.order_id === orderId);
+            if (ord) {
+              ord.email_delivery = redactEmailDeliveryForStore(emailDelivery);
+              await writeStore(store);
+            }
+          });
+        }
+
+        return sendJson(res, 200, {
+          ok: true,
+          license: outcome.licAdmin,
+          ...(emailDelivery ? { email_delivery: emailDelivery } : {}),
+        });
       }
 
       const authorizeMatch = pathname.match(/^\/api\/superbad\/admin\/orders\/([A-Za-z0-9_-]+)\/authorize$/);
@@ -2205,7 +2900,7 @@ function createSuperbadSalesApi(options = {}) {
             order_id: orderId,
             edition,
             tier: plan.tier,
-            label: order.buyer_name || plan.label,
+            label: plan?.label || edition,
             email: order.buyer_contact || "",
             key_prefix: licenseKey.slice(0, 7),
             key_hash: keyHash,
@@ -2609,7 +3304,7 @@ function createSuperbadSalesApi(options = {}) {
               edition: license.edition,
               includesOpenInfinite,
               tier,
-              planLabel: license.label || (EDITION_PLANS[license.edition]?.label || tier),
+              planLabel: EDITION_PLANS[license.edition]?.label || license.label || tier,
               email: license.email || email,
               hwid,
               boundHwidsCount: license.bound_hwids.length,
@@ -3014,6 +3709,7 @@ function createSuperbadSalesApi(options = {}) {
 
   return {
     handleApi,
+    getGoogleClientId,
     EDITION_PLANS,
     releasesDir,
     storeFile,
@@ -3024,6 +3720,8 @@ module.exports = {
   createSuperbadSalesApi,
   EDITION_PLANS,
   verifyEd25519LicenseKey,
+  verifyReceiptMagicBytes,
+  sendActivationEmail,
   buildPixBrCode,
   hashScrypt,
   verifyScrypt,

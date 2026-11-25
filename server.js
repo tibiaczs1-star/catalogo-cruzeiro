@@ -117,6 +117,7 @@ const GOOGLE_AUTH_CLIENT_ID = String(
 const SITE_AUTH_SESSION_SECRET = String(
   process.env.SITE_AUTH_SESSION_SECRET ||
     process.env.PUBPAID_SESSION_SECRET ||
+    process.env.SUPERBAD_SESSION_SECRET ||
     (IS_PRODUCTION ? "" : "catalogo-local-google-auth-session")
 ).trim();
 const SITE_AUTH_COOKIE = "catalogo_google_session";
@@ -3104,8 +3105,18 @@ function safeTimingCompare(left, right) {
   return crypto.timingSafeEqual(leftBuffer, rightBuffer);
 }
 
+function getEffectiveGoogleClientId() {
+  return String(
+    GOOGLE_AUTH_CLIENT_ID ||
+      process.env.GOOGLE_AUTH_CLIENT_ID ||
+      process.env.PUBPAID_GOOGLE_CLIENT_ID ||
+      superbadSalesApi?.getGoogleClientId?.() ||
+      ""
+  ).trim();
+}
+
 function isCatalogoGoogleAuthEnabled() {
-  return Boolean(GOOGLE_AUTH_CLIENT_ID && SITE_AUTH_SESSION_SECRET);
+  return Boolean(getEffectiveGoogleClientId() && SITE_AUTH_SESSION_SECRET);
 }
 
 function parseCookies(req) {
@@ -3284,7 +3295,8 @@ async function verifyGoogleIdToken(idToken) {
   }
 
   const nowSeconds = Math.floor(Date.now() / 1000);
-  if (String(claims.aud || "") !== GOOGLE_AUTH_CLIENT_ID) {
+  const effectiveGoogleClientId = getEffectiveGoogleClientId();
+  if (!effectiveGoogleClientId || String(claims.aud || "") !== effectiveGoogleClientId) {
     throw new Error("Credencial Google emitida para outro aplicativo.");
   }
   if (!["accounts.google.com", "https://accounts.google.com"].includes(String(claims.iss || ""))) {
@@ -17621,6 +17633,34 @@ try {
     dataDir: DATA_DIR,
     environment: process.env,
     qrcode: QRCode,
+    getAuthUser: readCatalogoAuthSession,
+    isGoogleAuthEnabled: isCatalogoGoogleAuthEnabled,
+    async notifyOwnerWhatsApp({ to, message }) {
+      const target = String(
+        to || process.env.SUPERBAD_OWNER_WHATSAPP || process.env.SUPERBAD_WHATSAPP || "5568992269296"
+      ).replace(/\D/g, "");
+      try {
+        const res = await sendWhatsappTextMessage(target, message);
+        if (res && res.ok) {
+          return { attempted: true, sent: true, provider: "whatsapp-cloud-api", at: new Date().toISOString(), reason: "sent" };
+        }
+        return {
+          attempted: true,
+          sent: false,
+          provider: "whatsapp-cloud-api",
+          at: new Date().toISOString(),
+          reason: String(res?.reason || "not-configured"),
+        };
+      } catch (err) {
+        return {
+          attempted: true,
+          sent: false,
+          provider: "whatsapp-cloud-api",
+          at: new Date().toISOString(),
+          reason: String(err?.message || "send-error").slice(0, 160),
+        };
+      }
+    },
   });
 } catch (err) {
   console.warn("[superbad-sales] indisponível:", err.message);
@@ -17872,12 +17912,14 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/auth/config") {
+    const effectiveClientId = getEffectiveGoogleClientId();
+    const enabled = Boolean(effectiveClientId && SITE_AUTH_SESSION_SECRET);
     return sendJson(res, 200, {
       ok: true,
-      enabled: isCatalogoGoogleAuthEnabled(),
+      enabled,
       provider: "google",
-      clientId: isCatalogoGoogleAuthEnabled() ? GOOGLE_AUTH_CLIENT_ID : "",
-      requiredFor: ["newsletter", "fundadores", "pubpaid", "pagamentos"]
+      clientId: enabled ? effectiveClientId : "",
+      requiredFor: ["newsletter", "fundadores", "pubpaid", "pagamentos", "openinfinite"]
     });
   }
 

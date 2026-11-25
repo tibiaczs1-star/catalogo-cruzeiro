@@ -61,7 +61,7 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(apiJs, /R\$ 159,00/);
 });
 
-test("OpenInfinite UI enforces WCAG AA, token M/B calculator, live anonymous stats, self-service PIX receipt/key delivery and zero alert()", () => {
+test("OpenInfinite UI enforces 4-step Google Auth + PIX + Receipt Analysis (WhatsApp immediate or 1h + email) + ?test_key validator, M/B calculator and zero alert()", () => {
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
 
   // Zero raw alert() calls and zero Private Use Area Apple glyph (\uF8FF)
@@ -69,6 +69,39 @@ test("OpenInfinite UI enforces WCAG AA, token M/B calculator, live anonymous sta
   assert.doesNotMatch(oiHtml, /\uF8FF/);
   assert.match(oiHtml, /scroll-margin-top:/);
   assert.match(oiHtml, /outline-offset:\s*-3px/);
+
+  // Google Auth integration (/site-google-auth.js + Step 1 card + my-orders restore)
+  assert.match(oiHtml, /<script src="\/site-google-auth\.js"><\/script>/);
+  assert.match(oiHtml, /id="step1Google"/);
+  assert.match(oiHtml, /data-google-auth-card/);
+  assert.match(oiHtml, /data-google-auth-button/);
+  assert.match(oiHtml, /data-google-auth-logout/);
+  assert.match(oiHtml, /\/api\/superbad\/my-orders/);
+  assert.match(oiHtml, /\/api\/auth\/config/);
+  assert.match(oiHtml, /\/api\/auth\/session/);
+
+  // 4-Step Checkout: Step 2 PIX -> Step 3 Receipt -> Step 4 In Analysis (WhatsApp Immediate or up to 1h + email)
+  assert.match(oiHtml, /id="step2Pix"/);
+  assert.match(oiHtml, /id="step3Receipt"/);
+  assert.match(oiHtml, /id="step4Analysis"/);
+  assert.match(oiHtml, /id="receiptForm"/);
+  assert.match(oiHtml, /id="receiptFileInput"/);
+  assert.match(oiHtml, /id="receiptE2eInput"/);
+  assert.match(oiHtml, /receipt_file_b64/);
+  assert.match(oiHtml, /receipt_file_mime/);
+  assert.match(oiHtml, /receipt_analysis/);
+  assert.match(oiHtml, /whatsapp_immediate_url/);
+  assert.match(oiHtml, /Falar no WhatsApp para Ativação Imediata/);
+  assert.match(oiHtml, /Ou aguarde até 1 hora/i);
+  assert.match(oiHtml, /id="deliveredKeyBox"/);
+  assert.match(oiHtml, /isKeyUnlockedStatus/);
+
+  // Validator (#validador + #verifyKeyInput + ?test_key= URL auto-runner + canonical plan name without PII leak)
+  assert.match(oiHtml, /id="validador"/);
+  assert.match(oiHtml, /id="verifyKeyInput"/);
+  assert.match(oiHtml, /params\.get\(['"]test_key['"]\)/);
+  assert.match(oiHtml, /Testar Chave no Validador/);
+  assert.match(oiHtml, /resolveCanonicalPlanName/);
 
   // Skip link, keyboard focus ring, and WAI-ARIA tabs + keyboard handlers
   assert.match(oiHtml, /class="skip-link"/);
@@ -88,16 +121,6 @@ test("OpenInfinite UI enforces WCAG AA, token M/B calculator, live anonymous sta
   assert.match(oiHtml, /id="consumo-ao-vivo"/);
   assert.match(oiHtml, /\/api\/openinfinite\/public-stats/);
   assert.match(oiHtml, /id="liveProfilesGrid"/);
-
-  // Automated Self-Service PIX Receipt Upload & Polling Key Delivery (#receiptForm, #deliveredKeyBox)
-  assert.match(oiHtml, /id="receiptForm"/);
-  assert.match(oiHtml, /id="receiptFileInput"/);
-  assert.match(oiHtml, /id="receiptE2eInput"/);
-  assert.match(oiHtml, /receipt_file_b64/);
-  assert.match(oiHtml, /receipt_file_mime/);
-  assert.match(oiHtml, /id="deliveredKeyBox"/);
-  assert.match(oiHtml, /id="deliveredKeyValue"/);
-  assert.match(oiHtml, /id="copyDeliveredKeyBtn"/);
 
   // Interactive language/stack focus pills, comparator & CSS Grid 0fr -> 1fr FAQ
   assert.match(oiHtml, /data-lang="python"/);
@@ -122,10 +145,12 @@ test("OpenInfinite UI enforces WCAG AA, token M/B calculator, live anonymous sta
   assert.match(oiHtml, /retryVerifyBtn/);
   assert.match(oiHtml, /navigator\.onLine === false/);
 
-  // Parse inline <script> block with Node VM to guarantee zero JS syntax errors
-  const scriptMatch = oiHtml.match(/<script>([\s\S]*?)<\/script>/);
-  assert.ok(scriptMatch, "Expected inline <script> in openinfinite/index.html");
-  assert.doesNotThrow(() => new vm.Script(scriptMatch[1], { filename: "openinfinite/index.html" }));
+  // Parse inline <script> blocks with Node VM to guarantee zero JS syntax errors
+  const scriptBlocks = [...oiHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+  assert.ok(scriptBlocks.length >= 1, "Expected inline <script> in openinfinite/index.html");
+  for (const [, code] of scriptBlocks) {
+    assert.doesNotThrow(() => new vm.Script(code, { filename: "openinfinite/index.html" }));
+  }
 });
 
 test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license verification contracts work end-to-end", async (t) => {
@@ -176,7 +201,8 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       buyer_name: "Maria Oliveira",
-      buyer_contact: "68999990000",
+      buyer_email: "maria@gmail.com",
+      buyer_contact: "maria@gmail.com",
       requested_edition: "infinite",
     }),
   });
@@ -194,7 +220,8 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       buyer_name: "João Silva",
-      buyer_contact: "joao@example.com",
+      buyer_email: "joao@gmail.com",
+      buyer_contact: "joao@gmail.com",
       requested_edition: "infinite_pro",
     }),
   });
@@ -204,7 +231,27 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
   assert.equal(bodyMac.order.amount_centavos, 15900);
   assert.equal(bodyMac.order.amount_display, "R$ 159,00");
 
-  // 3) Invalid key check
+  // 3) Receipt upload transitions order to receipt_submitted without auto-unlocking license_key
+  const tinyPngB64 =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+  const resReceipt = await fetch(`${baseUrl}/api/superbad/orders/${bodyMac.order.order_id}/receipt`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      order_secret: bodyMac.order.order_secret,
+      receipt_note: "Comprovante enviado no Passo 3",
+      receipt_file_b64: tinyPngB64,
+      receipt_file_mime: "image/png",
+      receipt_file_name: "pix.png",
+    }),
+  });
+  assert.equal(resReceipt.status, 200);
+  const bodyReceipt = await resReceipt.json();
+  assert.equal(bodyReceipt.ok, true);
+  assert.equal(bodyReceipt.status, "receipt_submitted");
+  assert.equal(Boolean(bodyReceipt.license_key), false);
+
+  // 4) Invalid key check
   const resBad = await fetch(`${baseUrl}/api/v1/licenses/verify`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -214,7 +261,7 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
   const bodyBad = await resBad.json();
   assert.equal(bodyBad.ok, false);
 
-  // 4) Valid OpenInfinite keys (OI6-INF, OI6-PRO) and BadClaude L3+ (BC5-FND) -> includesOpenInfinite: true
+  // 5) Valid OpenInfinite keys (OI6-INF, OI6-PRO) and BadClaude L3+ (BC5-FND) -> includesOpenInfinite: true
   for (const k of [infKey, proKey, founderKey]) {
     const resValid = await fetch(`${baseUrl}/api/v1/licenses/verify`, {
       method: "POST",
@@ -227,7 +274,7 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
     assert.equal(bodyValid.includesOpenInfinite, true);
   }
 
-  // 5) BadClaude L1/L2 key -> includesOpenInfinite: false
+  // 6) BadClaude L1/L2 key -> includesOpenInfinite: false
   const resL1 = await fetch(`${baseUrl}/api/v1/licenses/verify`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
