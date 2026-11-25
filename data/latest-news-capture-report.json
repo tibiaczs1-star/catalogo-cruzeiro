@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-11-24T20:42:35.827Z",
-  "finishedAt": "2026-11-24T20:42:50.117Z",
-  "capturedItems": 826,
-  "capturedToday": 606,
+  "startedAt": "2026-11-25T17:13:21.638Z",
+  "finishedAt": "2026-11-25T17:13:36.001Z",
+  "capturedItems": 831,
+  "capturedToday": 553,
   "activeWindowItems": 500,
   "archiveItems": 2000,
   "reports": [
@@ -219,9 +219,10 @@
     },
     {
       "source": "g1-economia",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 12,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "g1-educacao",
@@ -337,10 +338,9 @@
     },
     {
       "source": "jurua-informativo",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "jurua-informativo-wp",
@@ -393,10 +393,9 @@
     },
     {
       "source": "o-seringal",
-      "ok": true,
-      "count": 10,
-      "blocked": 0,
-      "mode": "rss"
+      "ok": false,
+      "count": 0,
+      "error": "This operation was aborted"
     },
     {
       "source": "olhar-digital",
@@ -457,7 +456,7 @@
     {
       "source": "prefeitura-mancio-lima",
       "ok": true,
-      "count": 1,
+      "count": 3,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
@@ -478,7 +477,7 @@
     {
       "source": "prefeitura-rodrigues-alves",
       "ok": true,
-      "count": 1,
+      "count": 2,
       "blocked": 0,
       "mode": "prefeitura-wix-home"
     },
