@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BadClaude v6.7.1 — Sua Fábrica Autônoma de Código, IA, Vídeo 2D e Voz R$ 0,00</title>
+  <title>BadClaude v6.8.0 — Sua Fábrica Autônoma de Código, IA, Vídeo 2D e Voz R$ 0,00</title>
   <meta name="description" content="Pare de gastar com mensalidades caras de IA. Escolha Harness Visual ou CLI Multi-IA, use até 38 modelos gratuitos NVIDIA Build + Vídeo 2D e Voz PT-BR no Windows e macOS Nativo.">
   <style>
     :root {
@@ -285,7 +285,7 @@
       <a href="#topo" class="brand">
         <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 1L14.2 8.8L21.5 4.2L15.6 10.7L23 12L15.6 13.3L21.5 19.8L14.2 15.2L12 23L9.8 15.2L2.5 19.8L8.4 13.3L1 12L8.4 10.7L2.5 4.2L9.8 8.8Z" fill="#facc15"/></svg>
         <span>BadClaude</span>
-        <span class="brand-tag">v6.7.1 Unificado</span>
+        <span class="brand-tag">v6.8.0 Unificado</span>
       </a>
       <nav class="nav-links" aria-label="Navegação da loja">
         <a href="#demonstra" class="nav-link">O que Ele Faz</a>
@@ -370,20 +370,20 @@
         <button type="button" class="help-q" data-help-title="Diferenciação Windows vs macOS" data-help-what="O painel de vendas usa identidade própria Dark Tech. Dentro do programa BadClaude, você escolhe o tema no Windows; já no Mac ele ativa design Apple nativo automaticamente." data-help-how="Não há mistura: cada sistema recebe o acabamento visual correto e mesma versão v6.7.1.">?</button>
       </div>
       <div class="os-grid">
-        <div class="os-card" data-help-title="BadClaude no Windows — Temas Próprios" data-help-what="Permite alternar instantaneamente entre Dark Studio Pro (padrão), Claro Limpo, Clássico RGB Avançado ou Retrô Win98 opcional." data-help-how="Escolha seu tema favorito na configuração única ou na barra superior do app.">
+        <div class="os-card" data-help-title="BadClaude no Windows — Temas Próprios (Padrão Claro)" data-help-what="No Windows, tanto o BadClaude quanto o Harness abrem por padrão no tema Claro Limpo e permitem alternar para Escuro Pro, Clássico RGB, macOS ou Retrô Win98." data-help-how="Escolha seu tema favorito na configuração única ou no seletor superior.">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <strong style="font-size:16px;">🪟 Windows &amp; PC — Temas do BadClaude</strong>
-            <span class="mono" style="font-size:11px;color:var(--cyan);">v6.7.1 Desktop</span>
+            <strong style="font-size:16px;">🪟 Windows &amp; PC — Temas do BadClaude &amp; Harness</strong>
+            <span class="mono" style="font-size:11px;color:var(--cyan);">v6.8.0 Portátil</span>
           </div>
-          <p style="font-size:13px;color:var(--muted);">Interface de estúdio rápida com barra lateral flexível, terminal TrueColor, troca de tema em 1 clique e zero processos duplicados.</p>
+          <p style="font-size:13px;color:var(--muted);">Acomoda-se em qualquer pasta do Windows com padrão <strong>Claro Limpo</strong>, 5 temas sincronizados no BadClaude e no Harness, e zero processos duplicados.</p>
           <div class="os-preview">
             <div style="display:flex;justify-content:space-between;align-items:center;color:#7dd3fc;">
-              <span>BADCLAUDE v6.7.1 · ESTÚDIO MULTI-IA</span>
-              <span>Dark Pro · R$ 0 Smart Pool</span>
+              <span>BADCLAUDE v6.8.0 · HARNESS &amp; CLI</span>
+              <span>Padrão Claro · R$ 0 Smart Pool</span>
             </div>
             <div class="theme-chips">
-              <span class="theme-chip">🌙 Escuro Pro (Padrão)</span>
-              <span class="theme-chip">☀️ Claro Limpo</span>
+              <span class="theme-chip" style="background:#f1f5f9;color:#0f172a;border-color:#94a3b8;">☀️ Claro Limpo (Padrão)</span>
+              <span class="theme-chip">🌙 Escuro Pro</span>
               <span class="theme-chip">🌈 Clássico RGB</span>
               <span class="theme-chip">🪟 Retrô Win98</span>
             </div>
@@ -413,6 +413,12 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="callout-box" style="margin-top:16px;margin-bottom:0;border-left-color:var(--cyan);"
+        data-help-title="Dependências Atualizadas (Obrigatório para Atualizações)"
+        data-help-what="Manter Node.js, Python, Git, FFmpeg e o runtime do sistema atualizados garante compatibilidade com os novos motores de IA, vídeo 2D, voz e com o atualizador automático assinado em nuvem."
+        data-help-how="Sempre aceite as atualizações de dependências e mantenha o sistema em dia para receber todas as versões novas sem falhas.">
+        <strong>⚠️ Requisito Obrigatório para Bom Uso e Atualizações:</strong> Para o bom uso do BadClaude e para continuar <strong>recebendo todas as atualizações automáticas</strong> (Windows e macOS), é <strong>obrigatório manter todas as dependências atualizadas</strong> no computador (Node.js, Python, Git, FFmpeg e runtime/drivers do sistema).
       </div>
     </section>
 
@@ -877,7 +883,7 @@
           if (saveIt) {
             try { localStorage.setItem(WEB_KEY_STORE, key); } catch {}
           }
-          box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + 🍎 macOS v6.7.1 incluídas.</span>`;
+          box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + 🍎 macOS v6.8.0 incluídas (mantenha todas as dependências atualizadas para receber updates).</span>`;
           if (actions) actions.style.display = saveIt ? 'flex' : 'none';
         } else {
           if (actions) actions.style.display = 'none';
