@@ -179,9 +179,10 @@
       </a>
       <nav class="nav-links" aria-label="Navegação OpenInfinite">
         <a href="#galeria" class="nav-link">Galeria 3 Temas</a>
-        <a href="#planos" class="nav-link">Inclusão Grátis (Nível 3+)</a>
-        <a href="#licenca" class="nav-link">🔑 Conferir Chave</a>
-        <a href="/badclaude/#planos" class="nav-link cta">✳ Ver BadClaude Nível 3+</a>
+        <a href="#planos" class="nav-link">Planos &amp; BadClaude 3+</a>
+        <a href="#licenca" class="nav-link">🔑 Validar Chave</a>
+        <a href="#checkout" class="nav-link cta">💳 Comprar via PIX</a>
+        <a href="/badclaude/" class="nav-link" style="color:#fde047;">✳ Ver BadClaude</a>
         <a href="/" class="nav-link">← Portal CZS</a>
       </nav>
       <button type="button" class="shift-pill" onclick="openHelpModal(null)">ⓘ Dúvida? Mouse + Shift + I</button>
@@ -211,7 +212,7 @@
           </a>
         </div>
         <div class="demo-note">
-          ⏱ <strong>Regra da Demonstração (1h):</strong> você testa todos os recursos grátis por <strong>1 hora completa</strong>. Depois de 60 minutos, o programa pede ativação — o <strong>OpenInfinite NÃO é vendido separado</strong>: ele faz parte <strong>100% grátis</strong> dos planos <strong>BadClaude a partir do 3º nível (Cockpit Pro ou Fundador VIP)</strong>!
+          ⏱ <strong>Regra da Demonstração (1h):</strong> você testa todos os recursos grátis por <strong>1 hora completa</strong>. Depois de 60 minutos, ative comprando o <strong>OpenInfinite avulso via PIX</strong> (<code class="mono">OI6-...</code>) nesta página — <strong>ou receba 100% grátis</strong> assinando o <strong>BadClaude a partir do 3º nível (<code class="mono">Cockpit Pro</code> ou <code class="mono">Fundador VIP</code>)</strong>!
         </div>
         <div class="proof-row">
           <div class="proof-card" data-help-title="Motor Infinite (:4114)" data-help-what="Cria um endereço local próprio que distribui suas mensagens pelos modelos gratuitos mantendo HY4 como primeira opção." data-help-how="Aperte Iniciar no painel para configurar o OpenBot e terminais automaticamente.">
@@ -269,79 +270,106 @@
 
     <section id="planos">
       <div class="sec-head">
-        <h2>Incluso Grátis no BadClaude a Partir do 3º Nível</h2>
-        <p>O OpenInfinite v6.1 não tem cobrança avulsa: basta assinar o BadClaude a partir do 3º nível (Cockpit Pro ou Fundador VIP) para receber o desbloqueio Win + Mac incluso gratuitamente.</p>
+        <h2>Compre o OpenInfinite Separado ou Leve Grátis no BadClaude 3+</h2>
+        <p>Você pode adquirir sua licença anual avulsa do OpenInfinite aqui mesmo via PIX — ou recebê-lo 100% grátis incluído nos planos do BadClaude a partir do 3º nível (Cockpit Pro e Fundador VIP).</p>
       </div>
       <div class="plans-grid">
-        <div class="plan-card" data-help-title="BadClaude Nível 3: Cockpit Pro (R$ 350)" data-help-what="Libera o BadClaude em até 2 PCs + 21 modelos NVIDIA Free + Swarm de Agentes E DESBLOQUEIA O OPENINFINITE GRÁTIS (Windows + macOS)." data-help-how="Clique abaixo para ir direto aos planos do BadClaude.">
+        <div class="plan-card" data-help-title="OpenInfinite Essencial — R$ 49,90/ano" data-help-what="Licença oficial anual avulsa para 1 computador Windows ou macOS com Gateway :4114 (HY4 #1) e 3 temas." data-help-how="Clique abaixo para gerar seu pedido PIX de R$ 49,90.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="font-size:18px;color:#fb923c;">✴ BadClaude Nível 3 — Cockpit Pro</strong>
-              <span class="brand-tag" style="background:rgba(16,185,129,0.18);border-color:rgba(16,185,129,0.45);color:#6ee7b7;">OpenInfinite Grátis</span>
+              <strong style="font-size:18px;">∞ OpenInfinite Essencial</strong>
+              <span class="brand-tag">1 PC · 365 dias</span>
             </div>
-            <div class="plan-price">Incluso Grátis <small>(Plano R$ 350 · 2 PCs)</small></div>
+            <div class="plan-price">R$ 49,90 <small>/ ano (chave OI6-INF)</small></div>
             <ul class="plan-list">
-              <li>OpenInfinite v6.1 completo liberado sem custo extra (Win + Mac)</li>
-              <li>Motor Infinite AI (:4114) com prioridade HY4 #1 + troca invisível</li>
-              <li>Auto-configuração em 1 clique do OpenBot, CLIs e BadClaude</li>
-              <li>BadClaude Desktop completo com Swarm + 21 modelos NVIDIA Free</li>
-              <li>Mesma chave <code class="mono">BC5-MID-...</code> destrava BadClaude e OpenInfinite</li>
+              <li>Motor Infinite AI (:4114) com prioridade máxima HY4 #1</li>
+              <li>Troca invisível entre modelos gratuitos quando houver limite</li>
+              <li>Auto-configuração em 1 clique do OpenBot, CLIs e terminais</li>
+              <li>Gráficos reais de tokens, velocidade e linguagens usadas</li>
+              <li>3 temas completos: Escuro, Claro e Liquid Glass (Win + Mac)</li>
             </ul>
           </div>
-          <a href="/badclaude/#planos" class="btn primary">✴ Liberar no BadClaude Nível 3 →</a>
+          <button type="button" class="btn primary" onclick="selectPlan('infinite')">Escolher Essencial (R$ 49,90)</button>
         </div>
 
-        <div class="plan-card pro" data-help-title="BadClaude Nível 4: Fundador VIP (R$ 690)" data-help-what="Plano máximo sem limites: todos os 38 modelos NVIDIA + 14 Bio/NIM + Modo Turbo Auto completo no OpenInfinite Win e macOS." data-help-how="Clique abaixo para escolher o Fundador VIP no portal BadClaude.">
+        <div class="plan-card pro" data-help-title="OpenInfinite Pro Win+Mac — R$ 97,00/ano" data-help-what="Licença oficial anual avulsa para até 2 computadores simultâneos (Windows + Apple Silicon Mac) com Modo Turbo Auto completo." data-help-how="Clique abaixo para gerar seu pedido PIX de R$ 97,00.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="font-size:18px;color:#fde047;">✳ BadClaude Nível 4 — Fundador VIP</strong>
-              <span class="brand-tag" style="background:rgba(250,204,21,0.18);border-color:rgba(250,204,21,0.45);color:#fde047;">VIP Total · Grátis</span>
+              <strong style="font-size:18px;color:#7dd3fc;">∞ OpenInfinite Pro (Win + Mac)</strong>
+              <span class="brand-tag" style="background:rgba(16,185,129,0.18);border-color:rgba(16,185,129,0.45);color:#6ee7b7;">2 PCs · Recomendado</span>
             </div>
-            <div class="plan-price">Incluso Grátis <small>(Plano R$ 690 · Tudo Liberado)</small></div>
+            <div class="plan-price">R$ 97,00 <small>/ ano (chave OI6-PRO)</small></div>
             <ul class="plan-list">
-              <li>OpenInfinite v6.1 Pro + Modo Turbo Auto 100% liberado (Win + Mac)</li>
-              <li>Todos os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM no BadClaude</li>
-              <li>3 temas completos: Escuro, Claro e Liquid Glass nativo macOS</li>
-              <li>Atualizações imediatas na nuvem + suporte VIP prioritário</li>
-              <li>Obs.: Níveis 1 (Essencial) e 2 (Studio) ficam só com a demo de 1h</li>
+              <li>Tudo do OpenInfinite Essencial desbloqueado sem limites</li>
+              <li>Até 2 computadores juntos (Windows + Apple Silicon macOS)</li>
+              <li>Modo Turbo Auto com Guardião IA e otimização de RAM oculta</li>
+              <li>Suporte prioritário para troca de computador via WhatsApp</li>
+              <li>Ou ganhe grátis assinando BadClaude Cockpit Pro / Fundador VIP</li>
             </ul>
           </div>
-          <a href="/badclaude/#planos" class="btn gold">✳ Liberar no Fundador VIP →</a>
+          <button type="button" class="btn gold" onclick="selectPlan('infinite_pro')">Escolher Pro Win+Mac (R$ 97,00)</button>
         </div>
+      </div>
+
+      <div class="pix-card" style="margin-top:16px;border-color:rgba(250,204,21,0.55);background:linear-gradient(135deg,#0c1427,#17162c);display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div>
+          <div style="font-weight:900;color:#fde047;font-size:15px;">✳ Também Incluso 100% Grátis no BadClaude a Partir do 3º Nível!</div>
+          <div style="color:#e2e8f0;font-size:13px;">Quem assina o <strong>BadClaude Cockpit Pro (Nível 3 · R$ 350)</strong> ou <strong>Fundador VIP (Nível 4 · R$ 690)</strong> já desbloqueia o OpenInfinite v6.1 completo grátis com a mesma chave <code class="mono">BC5-...</code>. (Os níveis 1 Essencial e 2 Studio ficam apenas com a demo de 1h.)</div>
+        </div>
+        <a href="/badclaude/#planos" class="btn gold sm" style="white-space:nowrap;">✳ Ver BadClaude Nível 3+ →</a>
       </div>
     </section>
 
-    <!-- RESUMO BADCLAUDE + VALIDAÇÃO DE CHAVE -->
+    <!-- CHECKOUT PIX AVULSO + VALIDAÇÃO DE CHAVE -->
     <section class="dual-grid">
-      <div class="panel" id="como-funciona">
+      <div class="panel" id="checkout">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <h2 style="font-size:20px;font-weight:900;">⚡ Como Funciona a Liberação</h2>
-          <button type="button" class="help-q" data-help-title="Integração Direta com BadClaude" data-help-what="Sua chave do BadClaude Nível 3 (Cockpit Pro) ou Nível 4 (Fundador VIP) também ativa o OpenInfinite automaticamente no cofre do aplicativo." data-help-how="Use a demo de 1 hora grátis agora ou clique no botão ao lado para ativar pelo BadClaude.">?</button>
+          <h2 style="font-size:20px;font-weight:900;">💸 Comprar Chave Avulsa via PIX</h2>
+          <button type="button" class="help-q" data-help-title="Checkout PIX Oficial OpenInfinite" data-help-what="Gera seu pedido com QR Code PIX para 68 99226-9296 (Raiane Lenoncio). Após aprovação, cole sua chave OI6-... no programa para destravar imediatamente." data-help-how="Escolha entre Essencial (R$ 49,90) ou Pro Win+Mac (R$ 97,00), preencha seu nome e WhatsApp e gere o QR Code.">?</button>
         </div>
         <div class="pix-card">
-          <div style="font-weight:800;color:#7dd3fc;">Por que o OpenInfinite não é vendido avulso?</div>
-          <div style="color:#e2e8f0;font-size:13px;">Ele nasceu como o motor irmão de continuidade anti-limite para quem assina o ecossistema completo <strong>BadClaude a partir do 3º Nível</strong>.</div>
+          <div style="font-weight:800;color:#7dd3fc;">Recebedor Oficial PIX:</div>
+          <div>Chave Telefone: <strong class="mono">68 99226-9296</strong> · Titular: <strong>Raiane Lenoncio</strong></div>
+          <button type="button" class="btn sm" style="align-self:flex-start;" onclick="copyPix()">📋 Copiar Chave PIX</button>
         </div>
-        <ul class="plan-list">
-          <li><strong>1. Teste Grátis (1h):</strong> baixe no topo e experimente por 60 minutos completos sem chave.</li>
-          <li><strong>2. Assine Nível 3+:</strong> escolha Cockpit Pro (3º nível) ou Fundador VIP (4º nível) em <code class="mono">/badclaude/</code>.</li>
-          <li><strong>3. Cole Sua Chave BC5:</strong> a mesma chave libera ambos — no Windows e no macOS.</li>
-        </ul>
-        <a href="/badclaude/#checkout" class="btn gold" style="width:100%;">✳ Ir para Planos &amp; PIX do BadClaude →</a>
+        <form id="orderForm">
+          <div class="field">
+            <label for="ordPlan">Plano OpenInfinite</label>
+            <select id="ordPlan">
+              <option value="infinite_pro" selected>∞ OpenInfinite Pro Win+Mac — R$ 97,00 (2 PCs · 1 ano)</option>
+              <option value="infinite">∞ OpenInfinite Essencial — R$ 49,90 (1 PC · 1 ano)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ordName">Seu Nome Completo</label>
+            <input id="ordName" type="text" required placeholder="Ex.: Maria Oliveira" />
+          </div>
+          <div class="field">
+            <label for="ordContact">Seu WhatsApp ou E-mail</label>
+            <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999" />
+          </div>
+          <button type="submit" class="btn gold" style="width:100%;">💸 Gerar Pedido PIX Agora</button>
+        </form>
+        <div id="orderResultBox" class="result-box">
+          <strong style="color:#10b981;" id="orderResultHead">Pedido Pronto!</strong>
+          <div class="mono" id="orderResultCode" style="background:#04060b;padding:8px;border:1px solid #1e293b;border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+          <div id="orderPixQrWrap" style="text-align:center;"></div>
+          <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm">📱 Enviar Comprovante no WhatsApp</a>
+        </div>
       </div>
 
       <div class="panel" id="licenca">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <h2 style="font-size:20px;font-weight:900;">🔑 Conferir Chave BadClaude Nível 3+</h2>
-          <button type="button" class="help-q" data-help-title="Validar Chave BC5 (Nível 3+) ou Bônus OI6" data-help-what="Confirma se sua chave do BadClaude pertence ao 3º nível (Cockpit Pro), 4º nível (Fundador VIP) ou cortesia OI6." data-help-how="Cole a chave abaixo e clique em Validar Agora.">?</button>
+          <h2 style="font-size:20px;font-weight:900;">🔑 Validar Chave OI6 ou BC5</h2>
+          <button type="button" class="help-q" data-help-title="Validar Chave OI6 Avulsa ou BC5 (Nível 3+)" data-help-what="Confirma se sua chave OpenInfinite avulsa (OI6-...) ou BadClaude a partir do 3º nível (BC5-MID Cockpit Pro / BC5-FND Fundador VIP) está ativa." data-help-how="Cole a chave abaixo e clique em Validar Agora.">?</button>
         </div>
         <p style="font-size:13px;color:var(--muted);">
-          Aceita chaves do <strong>BadClaude Nível 3+ (<code class="mono">BC5-MID-...</code> Cockpit Pro ou <code class="mono">BC5-FND-...</code> Fundador VIP)</strong> — além de chaves cortesia <code class="mono">OI6-...</code>!
+          Aceita chaves avulsas <strong><code class="mono">OI6-PRO-...</code> / <code class="mono">OI6-INF-...</code></strong> e chaves do <strong>BadClaude a partir do 3º Nível (<code class="mono">BC5-MID-...</code> Cockpit Pro ou <code class="mono">BC5-FND-...</code> Fundador VIP)</strong>!
         </p>
         <form id="verifyForm">
           <div class="field">
             <label for="licKeyInput">Sua Chave de Acesso</label>
-            <input id="licKeyInput" type="text" class="mono" placeholder="BC5-FND-... ou BC5-MID-..." required />
+            <input id="licKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou BC5-FND-..." required />
           </div>
           <button type="submit" class="btn primary" style="width:100%;">🔓 Conferir Chave Online</button>
         </form>
@@ -359,9 +387,9 @@
         <div style="display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.05em;color:#fde047;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.38);padding:4px 10px;border-radius:999px;margin-bottom:8px;">
           ✳ ECOSSISTEMA COMPLETO · OPENINFINITE GRÁTIS A PARTIR DO 3º NÍVEL!
         </div>
-        <h3 style="font-size:21px;font-weight:900;color:#ffffff;margin-bottom:6px;">Conheça o BadClaude v6.7.1 SuperBad &amp; Fundador VIP</h3>
+        <h3 style="font-size:21px;font-weight:900;color:#ffffff;margin-bottom:6px;">Quer levar ainda mais poder com o BadClaude v6.7.1?</h3>
         <p style="font-size:13.5px;color:#cbd5e1;max-width:68ch;">
-          O <strong>BadClaude</strong> é a fábrica autônoma completa de <strong>Código Multi-IA, Vídeos 2D, Voz em Português R$ 0,00 e até 38 modelos gratuitos NVIDIA Build</strong> — e assinando a partir do <strong>3º Nível (Cockpit Pro ou Fundador VIP)</strong> você leva o <strong>OpenInfinite v6.1 completo 100% grátis</strong> na mesma chave <code class="mono">BC5</code>!
+          O <strong>BadClaude</strong> é a fábrica autônoma completa de <strong>Código Multi-IA, Vídeos 2D, Voz em Português R$ 0,00 e até 38 modelos gratuitos NVIDIA Build</strong>. Assinando a partir do <strong>3º Nível (Cockpit Pro ou Fundador VIP)</strong> você já recebe o <strong>OpenInfinite v6.1 incluso grátis</strong> sem pagar separado!
         </p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -439,6 +467,41 @@
       document.body.addEventListener('click', (ev) => {
         const q = ev.target.closest?.('.help-q');
         if (q) { ev.preventDefault(); openHelpModal(q); }
+      });
+
+      window.selectPlan = function (p) {
+        $('ordPlan').value = p;
+        $('checkout')?.scrollIntoView({ behavior: 'smooth' });
+      };
+      window.copyPix = function () {
+        navigator.clipboard?.writeText('68 99226-9296');
+        alert('Chave PIX 68 99226-9296 (Raiane Lenoncio) copiada!');
+      };
+
+      $('orderForm').addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const res = await fetch('/api/superbad/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            buyer_name: $('ordName').value.trim(),
+            buyer_contact: $('ordContact').value.trim(),
+            requested_edition: $('ordPlan').value
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok || !data.order) {
+          alert(data.error || 'Erro ao gerar pedido PIX.');
+          return;
+        }
+        const o = data.order;
+        $('orderResultBox').style.display = 'flex';
+        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display}) pronto!`;
+        $('orderResultCode').textContent = `PIX Copia e Cola: ${o.pix?.brcode || '68 99226-9296'}`;
+        $('orderPixQrWrap').innerHTML = o.pix?.qr_data_url
+          ? `<img src="${o.pix.qr_data_url}" alt="QR Code PIX" style="width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;">`
+          : '';
+        if (o.whatsapp_url) $('btnWhatsOrder').href = o.whatsapp_url;
       });
 
       $('verifyForm').addEventListener('submit', async (ev) => {

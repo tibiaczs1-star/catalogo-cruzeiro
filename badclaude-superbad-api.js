@@ -89,6 +89,32 @@ const EDITION_PLANS = Object.freeze({
     freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-full-38", "nvidia-bio-rest-grpc"],
     summary: "TUDO LIBERADO: todos os 38 modelos NVIDIA Free (+ REST, gRPC NVCF e Bio/NIM), Google, OpenRouter, OmniRouter, 9Router, OpenInfinite v6.1 Win/Mac grátis e atualizações imediatas em nuvem.",
   },
+  infinite: {
+    edition: "infinite",
+    tier: "infinite-basic",
+    tierCode: "INF",
+    label: "OpenInfinite Essencial (Win/Mac)",
+    amountCentavos: 4_990,
+    amountDisplay: "R$ 49,90",
+    defaultDays: 365,
+    defaultMaxHwids: 1,
+    unlockedModes: ["essential"],
+    freeProvidersIncluded: ["infinite-gateway"],
+    summary: "Painel Apple Glass completo, Motor Infinite :4114 (HY4 #1), renovação anti-limite automática, 3 temas e licença anual avulsa para 1 computador.",
+  },
+  infinite_pro: {
+    edition: "infinite_pro",
+    tier: "infinite-pro",
+    tierCode: "PRO",
+    label: "OpenInfinite Pro (Win + Mac)",
+    amountCentavos: 9_700,
+    amountDisplay: "R$ 97,00",
+    defaultDays: 365,
+    defaultMaxHwids: 2,
+    unlockedModes: ["essential", "cockpit-pro"],
+    freeProvidersIncluded: ["infinite-gateway", "turbo-auto"],
+    summary: "Tudo do Essencial + Modo Turbo Auto com Guardião IA, auto-configuração completa de CLIs/OpenBot e 2 computadores simultâneos (Windows + macOS).",
+  },
 });
 
 const VALID_EDITIONS = new Set(Object.keys(EDITION_PLANS));
@@ -106,6 +132,8 @@ const CANONICAL_RELEASE_FILES = {
   beta: "BadClaudio-Desktop-Beta.zip",
   superbad: "BadClaudio-Desktop-SuperBad.zip",
   founder: "BadClaude-Founder-Desktop.zip",
+  infinite: "OpenInfinite-Client-v6.1-Portable.zip",
+  infinite_pro: "OpenInfinite-Client-v6.1-Portable.zip",
 };
 
 const EDITION_RELEASE_FILES = {
@@ -114,6 +142,8 @@ const EDITION_RELEASE_FILES = {
   beta: ["BadClaudio-Desktop-Beta.zip", "Badclaude-Beta.zip", "BadClaudio-Beta.zip"],
   superbad: ["BadClaudio-Desktop-SuperBad.zip", "Badclaude-SuperBad.zip", "BadClaudio-SuperBad.zip"],
   founder: ["BadClaude-Founder-Desktop.zip", "BadClaude-Founder-v6.4-Portable.zip", "BadClaudio-Desktop-SuperBad.zip"],
+  infinite: ["OpenInfinite-Client-v6.1-Portable.zip"],
+  infinite_pro: ["OpenInfinite-Client-v6.1-Portable.zip"],
 };
 
 const CODE_TO_TIER = Object.freeze({
@@ -594,7 +624,7 @@ function createSuperbadSalesApi(options = {}) {
           city: pixCity,
           amountCentavos,
           txid,
-          description: `BADCLAUDE ${requestedEdition.toUpperCase()}`,
+          description: `${requestedEdition.startsWith("infinite") ? "OPENINFINITE" : "BADCLAUDE"} ${requestedEdition.toUpperCase()}`,
         });
         const qrDataUrl = await qrcodeLib.toDataURL(brcode, {
           margin: 1,
