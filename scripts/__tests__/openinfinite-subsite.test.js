@@ -14,7 +14,7 @@ const { createSuperbadSalesApi } = require("../../badclaude-superbad-api");
 
 const root = path.resolve(__dirname, "..", "..");
 
-test("OpenInfinite route, monthly R$99/R$159 checkout, living hero, clean photos and BadClaude L3+ inclusion are configured", () => {
+test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, living hero, clean photos and BadClaude L3+ inclusion are configured", () => {
   const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
   const bcHtml = fs.readFileSync(path.join(root, "badclaude", "index.html"), "utf8");
@@ -29,6 +29,12 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, living hero, clean photos
 
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-macOS\.dmg/);
+  assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Ubuntu-VPS\.tar\.gz/);
+  assert.match(oiHtml, /install-ubuntu-vps\.sh/);
+  assert.match(oiHtml, /infinite-hermes/);
+  assert.match(oiHtml, /~\/\.hermes\/openinfinite-endpoint\.json/);
+  assert.match(oiHtml, /Nous Research/);
+
   assert.match(oiHtml, /R\$ 99,00/);
   assert.match(oiHtml, /R\$ 159,00/);
   assert.match(oiHtml, /id="livingStage"/);
@@ -55,10 +61,10 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, living hero, clean photos
   assert.match(apiJs, /R\$ 159,00/);
 });
 
-test("OpenInfinite UI enforces WCAG AA patterns, inline PIX/license states without alert(), WAI-ARIA tabs, comparator and CSS Grid FAQ", () => {
+test("OpenInfinite UI enforces WCAG AA, token M/B calculator, live anonymous stats, self-service PIX receipt/key delivery and zero alert()", () => {
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
 
-  // Zero raw alert() calls and zero Private Use Area Apple glyph (\uF8FF) that renders as tofu on Windows
+  // Zero raw alert() calls and zero Private Use Area Apple glyph (\uF8FF)
   assert.doesNotMatch(oiHtml, /\balert\s*\(/);
   assert.doesNotMatch(oiHtml, /\uF8FF/);
   assert.match(oiHtml, /scroll-margin-top:/);
@@ -72,19 +78,36 @@ test("OpenInfinite UI enforces WCAG AA patterns, inline PIX/license states witho
   assert.match(oiHtml, /ArrowRight/);
   assert.match(oiHtml, /ArrowLeft/);
 
-  // Interactive language/stack focus pills in cockpit simulator
+  // Token Million & Billion Calculator (#economia-tokens: 1M, 10M, 100M, 500M, 1B, 3B)
+  assert.match(oiHtml, /id="economia-tokens"/);
+  for (const preset of ["1000000", "10000000", "100000000", "500000000", "1000000000", "3000000000"]) {
+    assert.match(oiHtml, new RegExp(`data-tokens="${preset}"`));
+  }
+
+  // Live Anonymous Telemetry & Savings Panel (#consumo-ao-vivo -> /api/openinfinite/public-stats)
+  assert.match(oiHtml, /id="consumo-ao-vivo"/);
+  assert.match(oiHtml, /\/api\/openinfinite\/public-stats/);
+  assert.match(oiHtml, /id="liveProfilesGrid"/);
+
+  // Automated Self-Service PIX Receipt Upload & Polling Key Delivery (#receiptForm, #deliveredKeyBox)
+  assert.match(oiHtml, /id="receiptForm"/);
+  assert.match(oiHtml, /id="receiptFileInput"/);
+  assert.match(oiHtml, /id="receiptE2eInput"/);
+  assert.match(oiHtml, /receipt_file_b64/);
+  assert.match(oiHtml, /receipt_file_mime/);
+  assert.match(oiHtml, /id="deliveredKeyBox"/);
+  assert.match(oiHtml, /id="deliveredKeyValue"/);
+  assert.match(oiHtml, /id="copyDeliveredKeyBtn"/);
+
+  // Interactive language/stack focus pills, comparator & CSS Grid 0fr -> 1fr FAQ
   assert.match(oiHtml, /data-lang="python"/);
   assert.match(oiHtml, /data-lang="ts"/);
   assert.match(oiHtml, /data-lang="go"/);
   assert.match(oiHtml, /data-lang="rust"/);
-
-  // Interactive comparator (Demo 1h vs Windows R$ 99 vs macOS R$ 159)
   assert.match(oiHtml, /id="comparador"/);
   assert.match(oiHtml, /data-comp="demo"/);
   assert.match(oiHtml, /data-comp="infinite"/);
   assert.match(oiHtml, /data-comp="infinite_pro"/);
-
-  // Expandable FAQ using compositor-friendly CSS Grid 0fr -> 1fr
   assert.match(oiHtml, /id="faq"/);
   assert.match(oiHtml, /grid-template-rows:\s*0fr/);
   assert.match(oiHtml, /grid-template-rows:\s*1fr/);

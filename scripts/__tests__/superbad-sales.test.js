@@ -465,9 +465,8 @@ test("admin release upload and listing require session, validate PK ZIP signatur
   });
   assert.equal(listEmpty.status, 200);
   assert.equal(listEmpty.data.releases_dir_configured, true);
-  assert.equal(listEmpty.data.releases.length, 2);
-  assert.equal(listEmpty.data.releases[0].exists, false);
-  assert.equal(listEmpty.data.releases[1].exists, false);
+  assert.equal(listEmpty.data.releases.length, 7);
+  assert.ok(listEmpty.data.releases.every((r) => r.exists === false));
 
   // Reject invalid edition, bad content-type, non-ZIP body, and oversized upload.
   const badEdition = await fetch(`${baseUrl}/api/superbad/admin/releases/pro`, {

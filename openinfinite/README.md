@@ -2,91 +2,84 @@
 
 ## Overview
 
-Subsistema web oficial do aplicativo desktop **OpenInfinite v6.1** (Windows 10/11 x64 e macOS Apple Silicon), servido na rota pública `/openinfinite/` pelo servidor principal [`../server.js`](../server.js) e integrado ao motor comercial e criptográfico de pedidos PIX e licenças Ed25519 em [`../badclaude-superbad-api.js`](../badclaude-superbad-api.js).
+Subsistema web oficial do **OpenInfinite v6.1** (Windows 10/11 x64, macOS Apple Silicon e Ubuntu Linux VPS x64), servido em `/openinfinite/` por [`../server.js`](../server.js) e integrado ao motor comercial, de automação PIX e de licenciamento criptográfico Ed25519 em [`../badclaude-superbad-api.js`](../badclaude-superbad-api.js).
 
-O pacote combina vitrine interativa de baixa latência (estética Obsidian de alto contraste WCAG AA, símbolo vivo 3D `#livingCore`, simuladores de cascata `HY4 #1` / telemetria SQLite / temas / comparador de planos e FAQ em CSS Grid `0fr -> 1fr`) com distribuição da demonstração gratuita de 1 hora (`.exe` e `.dmg`), checkout PIX mensal (`R$ 99,00` Windows e `R$ 159,00` macOS & Multi) e validação online de chaves `OI6-INF`, `OI6-PRO` e `BC5` (BadClaude 3º nível+).
+O pacote reúne vitrine interativa Obsidian WCAG AA, calculadora de economia por milhão/bilhão de tokens (`#economia-tokens`), painel público de telemetria agregada 100% anônima (`#consumo-ao-vivo`), distribuição dos 3 instaladores oficiais com demo gratuita de 1 hora (`.exe`, `.dmg`, `.tar.gz`), integração oficial com **Nous Research Hermes Agent** (`#ubuntu-hermes`), checkout PIX automatizado com upload de comprovante/E2E e entrega automática de chave na tela (`#checkout`) e validador online (`#licenca`).
 
 ## Interface
 
 ### Rotas HTTP e Distribuição Estática (`../server.js`)
 
 - `[../server.js:pathname === "/openinfinite"]` — Redireciona via HTTP `302` (`Cache-Control: no-store`) para `Location: "/openinfinite/"`.
-- `[../server.js:pathname.startsWith("/openinfinite/")]` — Serve arquivos estáticos contidos em `openinfinite/` com proteção contra *path traversal* (`oiRoot`), resolução automática de diretório para [`./index.html`](./index.html) (`Cache-Control: no-store` para `.html`) e *allowlist* estrita de extensões (`"", ".html", ".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".json"`).
-- `[../server.js:PUBLIC_STATIC_EXTENSIONS]` — Habilita entrega direta dos instaladores oficiais de demonstração gratuita (1h) referenciados em [`./index.html`](./index.html):
-  - `/downloads/OpenInfinite-Client-Setup.exe` (Windows 10/11 x64)
-  - `/downloads/OpenInfinite-Client-macOS.dmg` (macOS Apple Silicon)
+- `[../server.js:pathname.startsWith("/openinfinite/")]` — Serve arquivos estáticos em `openinfinite/` com proteção contra *path traversal* (`oiRoot`), resolução de diretório para [`./index.html`](./index.html) (`Cache-Control: no-store` em `.html`) e *allowlist* estrita de extensões.
+- `[../server.js:pathname.startsWith("/api/openinfinite/")]` — Encaminha rotas públicas de telemetria agregada para `superbadSalesApi.handleApi`.
+- `[../server.js:PUBLIC_STATIC_EXTENSIONS]` — Habilita entrega direta em `/downloads/` para `.exe`, `.dmg` e `.gz`/`.tgz` (`Content-Type: application/gzip`, pacotes `> 2 MB` servidos via stream fora do `staticFileResponseCache`):
+  - `/downloads/OpenInfinite-Client-Setup.exe` (`37,02 MB` — Windows 10/11 x64)
+  - `/downloads/OpenInfinite-Client-macOS.dmg` (`1,90 MB` — macOS Apple Silicon)
+  - `/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz` (`30,79 MB` — Ubuntu 22.04/24.04 `linux-x64`)
 
 ### Símbolos de UI, DOM e Controladores (`./index.html`)
 
-- **Acessibilidade, Navegação e Modais**:
-  - `[./index.html:.skip-link]` (`href="#conteudo"`), `[./index.html:#topbar]`, `[./index.html:#topo]`, `[./index.html:#conteudo]`
-  - Ajuda contextual `Shift + I`: `[./index.html:#topHelpBtn]`, `[./index.html:#hoverHudBtn]`, `[./index.html:#hoverBarHint]`, `[./index.html:.help-q]`, modal `[./index.html:#shiftIModal]` (`#shiftITitle`, `#shiftIWhat`, `#shiftIHow`, `#shiftICloseTop`, `#shiftICloseBtn`), funções `openHelpModal(rawEl)` e `closeHelpModal()`
-  - Ampliação de capturas: `[./index.html:#stageZoomBtn]`, `[./index.html:#captionZoomBtn]`, modal `[./index.html:#zoomModal]` (`#zoomImg`, `#zoomCloseBtn`), funções `openZoomModal(src)` e `closeZoomModal()`
-- **Hero 3D & Simulador do Painel (`#painel-live`)**:
-  - Símbolo vivo 3D reativo ao ponteiro: `[./index.html:#livingStage]`, `[./index.html:#particleCanvas]`, `[./index.html:#cursorAura]`, `[./index.html:#livingCore]`, `[./index.html:#badge1]`, `[./index.html:#badge2]`, `[./index.html:#badge3]` (`tickSpring` + `drawParticles`)
-  - WAI-ARIA Tabs + View Transitions (`oi-hero-shot`): `[./index.html:#cockpitTabs]` (`role="tablist"`, `#tab-shot-0`..`#tab-shot-3` com navegação `ArrowRight`, `ArrowLeft`, `Home`, `End`), `[./index.html:#cockpitPanel]` (`role="tabpanel"`, `#featImg`, `#featTitle`, `#featDesc`), funções `activateShot(idx, focusTab)` e `runTransition(fn)`
-  - Controle do motor e foco por linguagem: `[./index.html:#simEngineBtn]`, `.lang-chip[data-lang="python"|"ts"|"go"|"rust"]`, `[./index.html:#langStatus]` (`LANG_PROFILES`)
-- **Simuladores Bento (`#recursos`), Fluxo (`#como-funciona`), Comparador (`#comparador`) e FAQ (`#faq`)**:
-  - Cascata `HY4 #1`: `[./index.html:#cascadeSimBtn]`, `[./index.html:#cascadeStatusTxt]`, `[./index.html:#cascadeList]`
-  - Scrubber SQLite: `[./index.html:#scrubBars]`, `[./index.html:#scrubVal]`, `[./index.html:#scrubMeta]`, `selectScrubCol(col)`
-  - Seletor dos 3 temas nativos: `[data-theme-opt="dark"|"liquid"|"light"]`, `[./index.html:#miniThemePreview]`, `[./index.html:#miniThemeTitle]`, `[./index.html:#miniThemeDesc]` (`THEME_COPY`)
-  - Limpeza de RAM: `[./index.html:#ramOptimizeBtn]`, `[./index.html:#ramDemoVal]`
-  - Comparador de modalidades (`COMP_DATA`): `[./index.html:#comparador]`, abas `#comp-tab-demo` (`data-comp="demo"`), `#comp-tab-win` (`data-comp="infinite"`) e `#comp-tab-mac` (`data-comp="infinite_pro"`), painel `[./index.html:#compPanel]` (`#compPrice`, `#compDevices`, `#compEngine`, `#compKey`, `#compSummary`, `#compActionBtn`), função `activateComp(key, focusTab)`
-  - Acordeão FAQ (`grid-template-rows: 0fr -> 1fr`): `[./index.html:#faq]`, botões `.faq-trigger` (`#faq-btn-1`..`#faq-btn-4`, `aria-expanded`) e regiões `#faq-panel-1`..`#faq-panel-4`
-- **Checkout PIX Mensal (`#planos` / `#checkout`)**:
-  - Seleção de plano: `[data-select-plan="infinite"|"infinite_pro"]`, função `selectPlan(p)`
-  - Cópia inline sem popup nativo: `[./index.html:#copyPixBtn]`, `[./index.html:#pixCopyFeedback]`, `[./index.html:#copyBrcodeBtn]`, `[./index.html:#brcodeCopyFeedback]`, funções `copyTextSafely(text)` e `showInlineCopyState(...)`
-  - Formulário e estados: `[./index.html:#orderForm]`, `[./index.html:#ordPlan]`, `[./index.html:#ordName]`, `[./index.html:#ordContact]`, `[./index.html:#orderSubmitBtn]`, erro/offline inline `[./index.html:#orderErrorBox]` (`#orderErrorHead`, `#orderErrorMsg`, `#retryOrderBtn`), sucesso `[./index.html:#orderResultBox]` (`#orderResultHead`, `#orderResultCode`, `#orderPixQrWrap`, `#btnWhatsOrder`), função `submitOrder()`
-  - Nota discreta de inclusão BadClaude: `[./index.html:.bc-footnote]` com link para `/badclaude/`
-- **Validador Online de Licença (`#licenca`)**:
-  - Formulário e estados: `[./index.html:#verifyForm]`, `[./index.html:#licKeyInput]`, `[./index.html:#verifySubmitBtn]`, container `[./index.html:#licResultBox]` (botão dinâmico `#retryVerifyBtn` em falhas de rede/offline), funções `submitVerify()` e `renderLicenseMessage(variant, titleText, detailText, withRetry)`
+- **Acessibilidade, Navegação e Modais**: `.skip-link` (`#conteudo`), `#topbar`, `#topHelpBtn`, `#topo`, `#hoverHudBtn`, `#hoverBarHint`, `.help-q`, `#shiftIModal` (`#shiftITitle`, `#shiftIWhat`, `#shiftIHow`, `#shiftICloseTop`, `#shiftICloseBtn`), `#zoomModal` (`#zoomImg`, `#zoomCloseBtn`).
+- **Hero 3D & Simulador (`#painel-live`)**: `#livingStage`, `#particleCanvas`, `#cursorAura`, `#livingCore`, `#badge1`..`#badge3`, WAI-ARIA tabs `#cockpitTabs` (`#tab-shot-0`..`#tab-shot-3` + `#cockpitPanel`, `#stageZoomBtn`, `#featImg`, `#featTitle`, `#featDesc`, `#captionZoomBtn`), `#simEngineBtn`, `.lang-chip[data-lang="python"|"ts"|"go"|"rust"]`, `#langStatus`.
+- **Economia por Escala (`#economia-tokens`) & Consumo Anônimo ao Vivo (`#consumo-ao-vivo`)**:
+  - Calculadora 1M a 3B tokens (`R$ 52,20 / 1M` blended vs planos fixos): `#tokenPresets`, `#calcRefRateLabel`, `#calcVolTitle`, `#calcMeteredBrl`, `#calcWinSaveBadge`, `#calcProSaveBadge`, `renderTokenCalc(tokens, label, focusBtn)`.
+  - Telemetria pública: `#liveStatsUpdated`, `#refreshStatsBtn`, `#liveTotalTokens`, `#liveCacheTokens`, `#liveSavedBrl`, `#liveClientsReq`, `#liveProfilesGrid`, `fetchPublicStats()`.
+- **Ubuntu Linux VPS & Hermes Agent (`#ubuntu-hermes`)**: `#ubuntuInstallCmd` (`tar -xzf OpenInfinite-Client-Ubuntu-VPS.tar.gz && ./install-ubuntu-vps.sh`), `#copyUbuntuCmdBtn`, `#ubuntuCmdFeedback`.
+- **Bento (`#recursos`), Fluxo (`#como-funciona`), Comparador (`#comparador`) e FAQ (`#faq`)**: `#cascadeSimBtn`, `#cascadeList`, `#cascadeStatusTxt`, `#scrubBars`, `#scrubVal`, `#scrubMeta`, `#miniThemePreview`, `#ramOptimizeBtn`, `#ramDemoVal`, abas `#comp-tab-demo` / `#comp-tab-win` / `#comp-tab-mac` (`#compPanel`), acordeão CSS Grid `0fr -> 1fr` (`.faq-trigger`, `#faq-btn-1`..`#faq-btn-4`, `#faq-panel-1`..`#faq-panel-4`).
+- **Checkout PIX Automatizado (`#checkout`) & Validador (`#licenca`)**:
+  - Pedido inicial: `#copyPixBtn`, `#pixCopyFeedback`, `#orderForm` (`#ordPlan`, `#ordName`, `#ordContact`, `#orderSubmitBtn`), `#orderErrorBox` (`#retryOrderBtn`), `#orderResultBox` (`#orderLiveStatusBadge`, `#orderResultCode`, `#copyBrcodeBtn`, `#brcodeCopyFeedback`, `#orderPixQrWrap`), `submitOrder()`.
+  - Envio de comprovante/E2E e entrega automática na tela (WhatsApp apenas opcional em `#btnWhatsOrder`): `#receiptForm` (`#receiptFileInput`, `#receiptE2eInput`, `#receiptNoteInput`, `#receiptSubmitBtn`), `#receiptFeedbackBox`, `#checkOrderNowBtn`, `#deliveredKeyBox` (`#deliveredKeyValue`, `#copyDeliveredKeyBtn`, `#testDeliveredKeyBtn`, `#deliveredKeyFeedback`), funções `readFileAsBase64(file)`, `submitReceipt()`, `pollOrderStatus()`, `startOrderPolling()` e `renderDeliveredKey(licenseKey)`.
+  - Validação online: `#verifyForm` (`#licKeyInput`, `#verifySubmitBtn`), `#licResultBox` (`#retryVerifyBtn`), `submitVerify()`.
 
 ### Fronteiras de API (`../badclaude-superbad-api.js`)
 
-| Método & Rota | Consumidor Local | Contrato de Entrada | Contrato de Saída / Comportamento |
+| Método & Rota | Autenticação / Limite | Contrato de Entrada | Contrato de Saída / Comportamento |
 | :--- | :--- | :--- | :--- |
-| `POST /api/superbad/orders` | `[./index.html:submitOrder]` | `{ buyer_name: string, buyer_contact: string, requested_edition: "infinite" \| "infinite_pro" }` | Valida `VALID_EDITIONS` / `EDITION_PLANS` em `[../badclaude-superbad-api.js:createSuperbadSalesApi]`, gera BR Code EMV (`buildPixBrCode`) + QR Code Data URL e retorna HTTP `201` `{ ok: true, order: { order_id, order_secret, status: "pending_pix", amount_centavos, amount_display, requested_edition, pix: { key, recipient, brcode, qr_data_url }, whatsapp_url, payment_provider: "pix_manual", created_at } }`. |
-| `POST /api/v1/licenses/verify` | `[./index.html:submitVerify]` | `{ key: string, hwid: string, email?: string, hostname?: string, version?: string }` | Verifica assinatura Ed25519 (`[../badclaude-superbad-api.js:verifyEd25519LicenseKey]`, prefixos `OI6-INF`, `OI6-PRO`, `BC5-FND`, `BC5-MID`, `BC5-BSC`) ou chave persistida (`findLicenseByKey`), checa revogação, expiração e limite `max_hwids`, calcula `includesOpenInfinite` e retorna HTTP `200` `{ ok: true, valid: true, revoked: false, licenseId, edition, includesOpenInfinite, tier, planLabel, hwid, boundHwidsCount, maxHwids, daysLeft, expiresAt, unlockedModes, sessionToken, serverTime }` (ou `400`/`401`/`403` com `{ ok: false, code, error }`). |
+| `POST /api/superbad/orders` | Público (`256 KB`) | `{ buyer_name, buyer_contact, requested_edition: "infinite" \| "infinite_pro" }` | Cria pedido `pending_pix`, gera BR Code EMV + QR Code PNG Data URL e retorna `201` `{ ok: true, order: { order_id, order_secret, status, amount_centavos, amount_display, requested_edition, pix, whatsapp_url, created_at } }`. |
+| `POST /api/superbad/orders/:orderId/receipt` | `order_secret` / `x-order-secret` (`MAX_RECEIPT_JSON_BYTES = 4 MB` exclusivo nesta rota) | `{ order_secret, receipt_note?, e2e_id?, receipt_file_b64?, receipt_file_mime?, receipt_file_name? }` (`image/png`, `image/jpeg`, `image/webp`, `application/pdf` até `3 MB`) | Valida segredo e MIME (`parseReceiptAttachment`), salva anexo privado em `data/superbad-receipts/`, faz *auto-match* com `store.pix_webhooks` (`reserveKeyFromPoolAndApproveOrder`) e retorna `200` `{ ok: true, order_id, status, auto_approved, edition, license_key?, order }`. |
+| `GET /api/superbad/orders/:orderId` | `?order_secret=...` ou `x-order-secret` | Query/Header `order_secret` | Preserva `"pending_pix"` antes do recibo (`normalizePublicOrderStatus`) e retorna `{ ok: true, order: { ..., status, has_receipt_file, e2e_id, license_key } }`; descriptografa `license_key` **somente** quando `status` é `"approved"` ou `"delivered"`. |
+| `POST /api/superbad/webhooks/pix` | `PIX_WEBHOOK_SECRET` via `crypto.timingSafeEqual` (`x-pix-webhook-secret` ou `Bearer`) | `{ e2e_id, amount_centavos?, amount_brl?, txid?, order_id? }` | Idempotente por `e2e_id`; concilia valor em centavos com pedido pendente/`receipt_submitted` (ou retém em `store.pix_webhooks` para conciliação reversa) e reserva chave Ed25519 do `key_pool`. |
+| `GET /api/superbad/admin/key-pool` e `POST /api/superbad/admin/key-pool/stock` | `requireAdminOrOwnerProof` | `POST`: `{ edition, keys: string[] }` (1..500 chaves Ed25519 pré-assinadas) | Valida assinatura/tier (`verifyEd25519LicenseKey`), deduplica por SHA-256, cifra em repouso com `AES-256-GCM` (`encryptLicenseKeyAtRest`) e auto-atende pedidos `pix_verified` em espera. |
+| `POST /api/superbad/admin/orders/:orderId/deliver-key` (e `/admin/licenses/register`) | `requireAdminOrOwnerProof` | `{ license_key \| raw_license_key, edition?, max_hwids? }` | Cifra a chave Ed25519 assinada offline pelo `DashboardControl` e anexa `encrypted_license_key` ao pedido (`status: "delivered"`), liberando-a na tela do cliente. |
+| `POST /api/v1/licenses/verify` | Público (`256 KB`) | `{ key, hwid, email?, hostname?, version? }` | Valida Ed25519 (`OI6-INF`, `OI6-PRO`, `BC5-*`) ou chave persistida, revogação, expiração, `max_hwids` e `includesOpenInfinite`. |
+| `POST /api/v1/telemetry/heartbeat` | Público (`256 KB`) | `{ key?, hwid?, tokens_total?, cache_tokens?, requests?, profile? }` (`clampSafeInt` + `normalizeTelemetryProfile`) | Atualiza contadores sanitizados em `store.network_nodes` por perfil (`demo`, `infinito`, `pro`, `superbad`, `founder`, `editor`) e invalida o cache de estatísticas. |
+| `GET /api/openinfinite/public-stats` | Público (CORS `*`, cache `10s`) | Nenhum | Retorna agregados **100% anônimos** (`totals`, `pricing_reference` `R$ 52,20/1M`, `profiles[]` com média de tokens e economia em R$) sem jamais expor chaves, prefixos, e-mails, HWIDs, hostnames ou IPs. |
+
+### Clientes Nativos, Ubuntu Linux VPS e Hermes Agent
+
+- **Cliente Ubuntu Linux VPS (`OpenInfiniteLinux/`, `.NET 9` `linux-x64`)**:
+  - Distribuído em `/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz` (`30,79 MB`, binário single-file comprimido com `Microsoft.Data.Sqlite 9.0.0` + `install-ubuntu-vps.sh` para Ubuntu 22.04/24.04 sem exigir `root` + unit `systemd --user` opcional desativada por padrão).
+  - Cofre Ed25519 + `ui.bin` `AES-256-CBC`, HWID derivado de `/etc/machine-id` (`OI-LNX-...`), Painel Web Local `127.0.0.1:4115` e Motor Infinite `127.0.0.1:4114/v1`, rejeitando chaves `OI6-INF` (exclusivas para Windows).
+- **Integração Oficial Nous Research Hermes Agent (CLI + Harness)**:
+  - Governada por `HasProOrHigher()` nos clientes Windows, macOS e Linux: liberada apenas em **Pro Multi-OS** (`OI6-PRO`, `R$ 159,00`), **SuperBad / Cockpit Pro Nível 3** (`BC5-MID`), **Fundador VIP** (`BC5-FND`) e `editor`; **bloqueada** na Demo 1h e no plano `OI6-INF` (`R$ 99,00` Windows-only).
+  - Quando elegível, gera o wrapper CLI `infinite-hermes` / `infinite-hermes.cmd` apontando para `http://127.0.0.1:4114/v1` e grava `~/.hermes/openinfinite-endpoint.json` (`supportedHarnesses: ["opencode", "hermes"]`, `autoStartDaemon: false`), **sem jamais iniciar processos ou daemons do Hermes automaticamente**.
 
 ### Ativos Estáticos Locais (`assets/`)
 
-Diretório de mídia estática (sem código-fonte executável):
-- [`./assets/openinfinite_silver.png`](./assets/openinfinite_silver.png) — Símbolo metálico da marca (`#topbar` e `#livingCore`).
-- [`./assets/openinfinite_tema_escuro.png`](./assets/openinfinite_tema_escuro.png) — Captura oficial do Painel Principal Escuro (`SHOTS[0]`).
-- [`./assets/openinfinite_liquid_glass.png`](./assets/openinfinite_liquid_glass.png) — Captura oficial do tema Liquid Glass (`SHOTS[1]`).
-- [`./assets/openinfinite_estatisticas.png`](./assets/openinfinite_estatisticas.png) — Captura oficial das Estatísticas Reais SQLite (`SHOTS[2]`).
-- [`./assets/openinfinite_tema_claro.png`](./assets/openinfinite_tema_claro.png) — Captura oficial do Tema Claro Apple Daylight (`SHOTS[3]`).
+- [`./assets/openinfinite_silver.png`](./assets/openinfinite_silver.png), [`./assets/openinfinite_tema_escuro.png`](./assets/openinfinite_tema_escuro.png), [`./assets/openinfinite_liquid_glass.png`](./assets/openinfinite_liquid_glass.png), [`./assets/openinfinite_estatisticas.png`](./assets/openinfinite_estatisticas.png), [`./assets/openinfinite_tema_claro.png`](./assets/openinfinite_tema_claro.png).
 
 ## Invariants
 
-- **Planos Comerciais e Limites de Dispositivos (`[../badclaude-superbad-api.js:EDITION_PLANS]`)**:
-  - `infinite` (*OpenInfinite Windows*): `amountCentavos: 9900` (`R$ 99,00`), `tier: "infinite-basic"`, `tierCode: "INF"` (chave `OI6-INF-...`), `defaultDays: 30`, `defaultMaxHwids: 1` (1 PC Windows).
-  - `infinite_pro` (*OpenInfinite macOS & Multi*): `amountCentavos: 15900` (`R$ 159,00`), `tier: "infinite-pro"`, `tierCode: "PRO"` (chave `OI6-PRO-...`), `defaultDays: 30`, `defaultMaxHwids: 2` (macOS Apple Silicon + Windows em até 2 máquinas simultâneas).
-  - **Demonstração Gratuita de 1 Hora**: Ambos os instaladores (`/downloads/OpenInfinite-Client-Setup.exe` e `/downloads/OpenInfinite-Client-macOS.dmg`) devem permanecer acessíveis no Hero e no comparador para 60 minutos de uso sem chave prévia.
-- **Elegibilidade Cruzada BadClaude (`BC5` Nível 3+)**:
-  - Em `[../badclaude-superbad-api.js:includesOpenInfinite]`, `includesOpenInfinite` é `true` exclusivamente quando `edition === "founder" || edition === "superbad" || tier === "founder" || String(tier).startsWith("infinite")`.
-  - Chaves `BC5-...` a partir do 3º nível (**Cockpit Pro** / `superbad` e **Fundador VIP** / `founder`) liberam o OpenInfinite v6.1 Windows + macOS sem custo extra (referenciado de forma discreta em `.bc-footnote` com `href="/badclaude/"`).
-  - Chaves BadClaude de 1º/2º nível (`basic`, `mid`, `beta`, ex.: `BC5-BSC`) retornam `includesOpenInfinite: false`, exibindo aviso inline `is-warn` em `#licResultBox` (restritas à demo de 1h no OpenInfinite salvo assinatura própria).
-- **Recebedor PIX Oficial (`[../badclaude-superbad-api.js:PIX_DISPLAY_KEY]`)**:
-  - Chave exibida `68 99226-9296` (`DEFAULT_PIX_EMV_KEY = "+5568992269296"`), titular `Raiane Lenoncio`, cidade `CRUZEIRO DO SUL`, WhatsApp `5568992269296`.
-- **Acessibilidade WCAG AA, UX Inline e Higiene de Conteúdo (`[../scripts/__tests__/openinfinite-subsite.test.js]`)**:
-  - **Zero `alert()`**: É proibido usar `alert()` em [`./index.html`](./index.html). Cópia de PIX, validação de campos (`aria-invalid`), detecção offline (`navigator.onLine === false`) e botões de nova tentativa (`#retryOrderBtn`, `#retryVerifyBtn`) devem ocorrer inline, construindo nós DOM com `textContent` / `createElement` (prevenção de XSS).
-  - **Símbolo Vivo 3D Sempre Responsivo**: `#livingStage` e `#livingCore` devem manter o rastreamento 3D ao ponteiro (`rotateX` / `rotateY`) mesmo quando `prefers-reduced-motion: reduce` estiver ativo (que pausa apenas animações CSS decorativas `.css-anim`/`.reveal` e deriva autônoma de partículas).
-  - **Termos e Arquivos Proibidos**: [`./index.html`](./index.html) nunca deve conter `4114`, `demo_lock`, `shift_i.png`, `"NÃO é vendido separado"` ou `"não é vendido avulso"`, e os arquivos legados `assets/openinfinite_demo_lock.png` e `assets/openinfinite_shift_i.png` não podem existir em `./assets/`.
+- **Planos Comerciais, Plataformas e Limites (`[../badclaude-superbad-api.js:EDITION_PLANS]`)**:
+  - `infinite` (*OpenInfinite Windows*): `R$ 99,00` (`9900` centavos), `OI6-INF`, `30 dias`, `max_hwids: 1`, exclusivo Windows (rejeitado no Linux/macOS e sem Hermes Agent).
+  - `infinite_pro` (*OpenInfinite Pro Multi-OS*): `R$ 159,00` (`15900` centavos), `OI6-PRO`, `30 dias`, `max_hwids: 2`, habilitado em Windows + macOS Apple Silicon + Ubuntu Linux VPS com Hermes Agent CLI + Harness liberado.
+  - **Demo 1h Gratuita & Inclusão `BC5` Nível 3+**: Demo de 60 minutos liberada nos 3 instaladores (Hermes bloqueado na demo); chaves `BC5-...` 3º nível+ (`superbad` / **Cockpit Pro** e `founder` / **Fundador VIP**) retornam `includesOpenInfinite: true` e habilitam Multi-OS + Hermes (`BC5` Nível 1/2 retorna `includesOpenInfinite: false`).
+- **Isolamento Criptográfico & Privacidade (`[../badclaude-superbad-api.js]`)**:
+  - `master-license-private.pem` permanece **100% offline** no `DashboardControl` local; o servidor web recebe apenas chaves Ed25519 já assinadas e as armazena cifradas com `AES-256-GCM` (`deriveKeyPoolAesKey` via HKDF-SHA256 sobre `KEY_POOL_SECRET || downloadSecret`).
+  - `data/superbad-receipts/` nunca é servido publicamente; `GET /api/superbad/orders/:orderId` jamais expõe `license_key` sem `order_secret` válido e status `approved`/`delivered`.
+  - `GET /api/openinfinite/public-stats` é estritamente livre de PII (zero chaves, prefixos `OI6-`/`BC5-`, e-mails, HWIDs, hostnames ou IPs).
+- **Higiene de UI & Acessibilidade WCAG AA (`[../scripts/__tests__/openinfinite-subsite.test.js]`)**:
+  - Zero `alert()`, zero glifo privado Apple `\uF8FF` (`▯`), `#livingCore` 3D responsivo ao cursor mesmo com `prefers-reduced-motion`, zero menção a `4114`, `demo_lock` ou `shift_i.png` no HTML público, e zero auto-start de daemons externos nos clientes.
 
 ## Side Effects
 
-- **Cliente Navegador (`./index.html`)**:
-  - Dispara requisições HTTP `POST /api/superbad/orders` (criação de pedido PIX) e `POST /api/v1/licenses/verify` (enviando `hwid: "web-" + (navigator.platform || "browser")`).
-  - Grava a chave PIX ou código EMV na área de transferência do sistema via `navigator.clipboard.writeText` (com *fallback* temporário `document.execCommand('copy')` em `copyTextSafely`).
-  - Inicia download direto de binários `/downloads/OpenInfinite-Client-Setup.exe` e `/downloads/OpenInfinite-Client-macOS.dmg` e abre link externo de comprovante/suporte em `https://wa.me/5568992269296`.
-- **Persistência e Telemetria no Servidor (`../badclaude-superbad-api.js`)**:
-  - `POST /api/superbad/orders` adquire lock serializado em memória (`withStoreLock`) e grava atomicamente (`writeStore` via arquivo `.tmp` + `rename`) o novo pedido `pending_pix` (com `order_secret_hash` SHA-256) em `data/superbad-orders.json`.
-  - `POST /api/v1/licenses/verify` auto-registra licenças Ed25519 inéditas válidas (`buildAutoEnrolledEd25519License`, `issued_origin: "ed25519-auto-enrolled"`), vincula novos `hwid` em `license.bound_hwids` até `max_hwids`, atualiza `last_seen_at`, registra/atualiza o nó em `store.network_nodes` (`upsertNetworkNode`, limitado aos 500 registros mais recentes com IP mascarado por `maskIp`), persiste em `data/superbad-orders.json` e emite `sessionToken` HMAC-SHA256 com validade de 24h (`signToken`).
+- **Cliente Navegador (`./index.html`)**: `fetch` em `GET /api/openinfinite/public-stats`, `POST /api/superbad/orders`, `POST /api/superbad/orders/:orderId/receipt` (base64 até 3 MB), polling `GET /api/superbad/orders/:orderId?order_secret=...` e `POST /api/v1/licenses/verify`; persistência leve do pedido ativo no navegador (`saveActiveOrder`); escrita no clipboard (`copyTextSafely`) e download dos instaladores `.exe`, `.dmg` e `.tar.gz`.
+- **Servidor (`../badclaude-superbad-api.js`)**: escrita atômica serializada (`withStoreLock` + `writeStore`) em `data/superbad-orders.json` (`orders`, `licenses`, `key_pool` cifrado `AES-256-GCM`, `pix_webhooks`, `network_nodes`) e gravação privada de comprovantes em `data/superbad-receipts/`.
 
 ## Verification
 
 - Run (a partir de `C:\Users\junio\catalogo-cruzeiro`):
   ```bash
-  node --test scripts/__tests__/openinfinite-subsite.test.js
+  node --test scripts/__tests__/openinfinite-subsite.test.js scripts/__tests__/openinfinite-automation.test.js scripts/__tests__/superbad-sales.test.js
   ```

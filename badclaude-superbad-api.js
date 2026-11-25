@@ -14,8 +14,39 @@ const SESSION_COOKIE_NAME = "superbad_admin_session";
 const SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 const DOWNLOAD_TOKEN_TTL_MS = 15 * 60 * 1000;
 const MAX_JSON_BYTES = 256 * 1024;
+const MAX_RECEIPT_JSON_BYTES = 4 * 1024 * 1024;
+const MAX_RECEIPT_FILE_BYTES = 3 * 1024 * 1024;
 const DEFAULT_MAX_RELEASE_BYTES = 15 * 1024 * 1024;
+const MAX_HEARTBEAT_TOKENS = 50_000_000_000;
+const MAX_HEARTBEAT_REQUESTS = 100_000_000;
+const DEFAULT_PUBLIC_STATS_CACHE_TTL_MS = 10 * 1000;
 const LICENSE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+const ALLOWED_RECEIPT_MIMES = Object.freeze({
+  "image/png": ".png",
+  "image/jpeg": ".jpg",
+  "image/webp": ".webp",
+  "application/pdf": ".pdf",
+});
+
+// Tabela de referência medida para cálculo transparente de economia dos clientes:
+// Preço blended comercial (input + output) de APIs frontier medidas: US$ 9,00 / 1M tokens
+// Câmbio de referência: R$ 5,80 -> R$ 52,20 por 1 milhão de tokens processados.
+const PRICING_REFERENCE = Object.freeze({
+  metered_blended_usd_per_1m_tokens: 9.0,
+  usd_brl: 5.8,
+  metered_blended_brl_per_1m_tokens: 52.2,
+});
+
+const TELEMETRY_PROFILES = Object.freeze({
+  demo: { profile: "demo", label: "Demo 1h Grátis", planCostBrl: 0 },
+  infinito: { profile: "infinito", label: "OpenInfinite Windows (R$ 99)", planCostBrl: 99 },
+  pro: { profile: "pro", label: "OpenInfinite Pro Multi-OS + Hermes (R$ 159)", planCostBrl: 159 },
+  superbad: { profile: "superbad", label: "Cockpit Pro SuperBad (R$ 350)", planCostBrl: 350 },
+  founder: { profile: "founder", label: "Fundador VIP (R$ 690)", planCostBrl: 690 },
+  editor: { profile: "editor", label: "Editor Master", planCostBrl: 0 },
+});
+const TELEMETRY_PROFILE_ORDER = Object.freeze(["demo", "infinito", "pro", "superbad", "founder", "editor"]);
 
 const DEFAULT_LICENSE_PUBLIC_KEY_PEM = [
   "-----BEGIN PUBLIC KEY-----",
@@ -198,12 +229,12 @@ function sendJson(res, statusCode, payload, extraHeaders = {}) {
   res.end(body);
 }
 
-async function readJsonBody(req) {
+async function readJsonBody(req, maxBytes = MAX_JSON_BYTES) {
   let total = 0;
   const chunks = [];
   for await (const chunk of req) {
     total += chunk.length;
-    if (total > MAX_JSON_BYTES) {
+    if (total > maxBytes) {
       const err = new Error("Corpo da requisição excede o limite permitido.");
       err.statusCode = 413;
       throw err;
@@ -221,6 +252,136 @@ async function readJsonBody(req) {
     err.statusCode = 400;
     throw err;
   }
+}
+
+function deriveKeyPoolAesKey(secret) {
+  return Buffer.from(
+    crypto.hkdfSync(
+      "sha256",
+      Buffer.from(String(secret || ""), "utf8"),
+      Buffer.from("superbad-key-pool-salt-v1", "utf8"),
+      Buffer.from("aes-256-gcm-at-rest", "utf8"),
+      32
+    )
+  );
+}
+
+function encryptLicenseKeyAtRest(plainKey, aesKey32) {
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", aesKey32, iv);
+  const ct = Buffer.concat([cipher.update(String(plainKey), "utf8"), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return `aes256gcm$${iv.toString("base64url")}$${tag.toString("base64url")}$${ct.toString("base64url")}`;
+}
+
+function decryptLicenseKeyAtRest(encoded, aesKey32) {
+  if (typeof encoded !== "string" || !encoded.startsWith("aes256gcm$")) return null;
+  const parts = encoded.split("$");
+  if (parts.length !== 4) return null;
+  try {
+    const iv = Buffer.from(parts[1], "base64url");
+    const tag = Buffer.from(parts[2], "base64url");
+    const ct = Buffer.from(parts[3], "base64url");
+    if (iv.length !== 12 || tag.length !== 16 || ct.length === 0) return null;
+    const decipher = crypto.createDecipheriv("aes-256-gcm", aesKey32, iv);
+    decipher.setAuthTag(tag);
+    const out = Buffer.concat([decipher.update(ct), decipher.final()]).toString("utf8");
+    return out || null;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeTelemetryProfile(rawProfile, fallbackEdition = "", fallbackTier = "") {
+  const candidates = [rawProfile, fallbackEdition, fallbackTier]
+    .map((v) => String(v || "").trim().toLowerCase())
+    .filter(Boolean);
+  for (const c of candidates) {
+    if (c === "demo" || c === "trial" || c === "free") return "demo";
+    if (["infinito", "infinite", "infinite-basic", "infinite_basic", "oi6-inf", "inf", "basic", "client-basic", "beta"].includes(c)) {
+      return "infinito";
+    }
+    if (["pro", "infinite-pro", "infinite_pro", "oi6-pro"].includes(c)) return "pro";
+    if (["superbad", "client-mid", "mid", "studio"].includes(c)) return "superbad";
+    if (["founder", "fundador", "fnd"].includes(c)) return "founder";
+    if (["editor", "owner", "owner-master", "admin"].includes(c)) return "editor";
+  }
+  return "superbad";
+}
+
+function clampSafeInt(value, maxVal) {
+  const n = Number(value);
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  return Math.min(maxVal, Math.floor(n));
+}
+
+function cleanE2eId(value) {
+  return String(value ?? "")
+    .trim()
+    .replace(/[^A-Za-z0-9._:-]/g, "")
+    .slice(0, 120);
+}
+
+function normalizePublicOrderStatus(rawStatus) {
+  const s = String(rawStatus || "").trim().toLowerCase();
+  if (s === "delivered") return "delivered";
+  if (s === "approved") return "approved";
+  if (s === "receipt_submitted") return "receipt_submitted";
+  if (s === "awaiting_receipt") return "awaiting_receipt";
+  return "pending_pix";
+}
+
+function parseReceiptAttachment(rawB64, rawMime, rawFilename) {
+  const str = String(rawB64 || "").trim();
+  if (!str) return null;
+
+  let detectedMime = String(rawMime || "").trim().toLowerCase();
+  let payloadB64 = str;
+  const dataUrlMatch = str.match(/^data:([a-z0-9/+.-]+);base64,([\s\S]+)$/i);
+  if (dataUrlMatch) {
+    if (!detectedMime) detectedMime = dataUrlMatch[1].toLowerCase();
+    payloadB64 = dataUrlMatch[2];
+  }
+  if (detectedMime === "image/jpg") detectedMime = "image/jpeg";
+
+  const ext = ALLOWED_RECEIPT_MIMES[detectedMime];
+  if (!ext) {
+    const err = new Error("Tipo de comprovante inválido. Envie PNG, JPEG, WEBP ou PDF.");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const compactB64 = payloadB64.replace(/\s+/g, "");
+  if (!compactB64 || !/^[A-Za-z0-9+/=_-]+$/.test(compactB64)) {
+    const err = new Error("Conteúdo base64 do comprovante inválido.");
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const normalizedB64 = compactB64.replace(/-/g, "+").replace(/_/g, "/");
+  const buf = Buffer.from(normalizedB64, "base64");
+  if (!buf.length) {
+    const err = new Error("Arquivo de comprovante vazio.");
+    err.statusCode = 400;
+    throw err;
+  }
+  if (buf.length > MAX_RECEIPT_FILE_BYTES) {
+    const err = new Error("Comprovante excede o limite máximo de 3 MB.");
+    err.statusCode = 413;
+    throw err;
+  }
+
+  const cleanOrigName = path
+    .basename(String(rawFilename || `comprovante${ext}`))
+    .replace(/[^A-Za-z0-9._-]/g, "_")
+    .slice(0, 80);
+
+  return {
+    buffer: buf,
+    mime: detectedMime,
+    ext,
+    originalName: cleanOrigName || `comprovante${ext}`,
+  };
 }
 
 async function readBinaryBody(req, maxBytes) {
@@ -520,7 +681,7 @@ function buildPixBrCode({ pixKey, recipient, city, amountCentavos, txid, descrip
 
 function generateLicenseKey(edition) {
   const plan = EDITION_PLANS[edition] || EDITION_PLANS.superbad;
-  const prefix = plan.tierCode || (edition === "beta" ? "BT" : "SB");
+  const prefix = edition === "beta" ? "BT" : edition === "superbad" ? "SB" : (plan.tierCode || "SB");
   const groups = [];
   for (let g = 0; g < 4; g += 1) {
     let part = "";
@@ -599,6 +760,16 @@ function createSuperbadSalesApi(options = {}) {
   const downloadSecret =
     String(options.downloadSecret || environment.SUPERBAD_DOWNLOAD_SECRET || "").trim() ||
     crypto.randomBytes(32).toString("hex");
+  const keyPoolSecret =
+    String(options.keyPoolSecret || environment.KEY_POOL_SECRET || downloadSecret).trim() || downloadSecret;
+  const keyPoolAesKey = deriveKeyPoolAesKey(keyPoolSecret);
+  const pixWebhookSecret = String(options.pixWebhookSecret || environment.PIX_WEBHOOK_SECRET || "").trim();
+  const receiptsDir = path.join(dataDir, "superbad-receipts");
+  const publicStatsCacheTtlMs =
+    options.publicStatsCacheTtlMs !== undefined
+      ? Math.max(0, Number(options.publicStatsCacheTtlMs))
+      : DEFAULT_PUBLIC_STATS_CACHE_TTL_MS;
+  let publicStatsCache = { expiresAt: 0, payload: null };
 
   const pixEmvKey = String(environment.SUPERBAD_PIX_KEY || DEFAULT_PIX_EMV_KEY).trim();
   const pixDisplayKey = cleanText(environment.SUPERBAD_PIX_DISPLAY_KEY || PIX_DISPLAY_KEY, 40);
@@ -671,9 +842,22 @@ function createSuperbadSalesApi(options = {}) {
           parsed?.update_manifests && typeof parsed.update_manifests === "object"
             ? parsed.update_manifests
             : {},
+        key_pool:
+          parsed?.key_pool && typeof parsed.key_pool === "object" && !Array.isArray(parsed.key_pool)
+            ? parsed.key_pool
+            : {},
+        pix_webhooks: Array.isArray(parsed?.pix_webhooks) ? parsed.pix_webhooks : [],
       };
     } catch (_err) {
-      return { version: 2, orders: [], licenses: [], network_nodes: [], update_manifests: {} };
+      return {
+        version: 2,
+        orders: [],
+        licenses: [],
+        network_nodes: [],
+        update_manifests: {},
+        key_pool: {},
+        pix_webhooks: [],
+      };
     }
   }
 
@@ -749,7 +933,8 @@ function createSuperbadSalesApi(options = {}) {
     const session = getAdminSession(req);
     if (session) return session;
     if (!isAdminConfigured()) {
-      sendJson(res, 401, {
+      const hasOwnerHeader = Boolean(String(req?.headers?.["x-badclaude-owner-proof"] || "").trim());
+      sendJson(res, hasOwnerHeader ? 401 : 503, {
         ok: false,
         error: "Autenticação necessária (assinatura Ed25519 Owner ou sessão admin).",
       });
@@ -784,6 +969,9 @@ function createSuperbadSalesApi(options = {}) {
       buyer_contact: order.buyer_contact,
       payment_provider: order.payment_provider,
       receipt_note: order.receipt_note || "",
+      e2e_id: order.e2e_id || null,
+      has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
+      key_delivered: Boolean(order.encrypted_license_key),
       receipt_submitted_at: order.receipt_submitted_at || null,
       license_id: order.license_id || null,
       created_at: order.created_at,
@@ -803,7 +991,6 @@ function createSuperbadSalesApi(options = {}) {
       label: license.label || "",
       email: license.email || "",
       key_prefix: license.key_prefix,
-      key_hash: license.key_hash || null,
       expires_at: license.expires_at,
       max_downloads: license.max_downloads,
       downloads_used: license.downloads_used,
@@ -900,8 +1087,18 @@ function createSuperbadSalesApi(options = {}) {
       active_layer: cleanText(nodeData.active_layer || prev.active_layer || "layer-1", 40),
       watchdog_ok: nodeData.watchdog_ok !== undefined ? Boolean(nodeData.watchdog_ok) : Boolean(prev.watchdog_ok ?? true),
       ip_masked: cleanText(nodeData.ip_masked || prev.ip_masked || "unknown", 48),
+      profile: normalizeTelemetryProfile(
+        nodeData.profile || prev.profile || "",
+        nodeData.edition || prev.edition || "",
+        nodeData.tier || prev.tier || ""
+      ),
       requests_count: Math.max(Number(prev.requests_count || 0), Number(nodeData.requests_count || 0)),
       tokens_est: Math.max(Number(prev.tokens_est || 0), Number(nodeData.tokens_est || 0)),
+      tokens_total: Math.max(
+        Number(prev.tokens_total ?? prev.tokens_est ?? 0),
+        Number(nodeData.tokens_total ?? nodeData.tokens_est ?? 0)
+      ),
+      cache_tokens: Math.max(Number(prev.cache_tokens || 0), Number(nodeData.cache_tokens || 0)),
       revoked: Boolean(nodeData.revoked),
       first_seen_at: prev.first_seen_at || nowIso,
       last_seen_at: nowIso,
@@ -917,6 +1114,191 @@ function createSuperbadSalesApi(options = {}) {
         .slice(0, 500);
     }
     return record;
+  }
+
+  function summarizeKeyPoolCounts(store) {
+    const counts = {};
+    let totalAvailable = 0;
+    const nowMs = Date.now();
+    for (const edition of VALID_EDITIONS) {
+      const list = Array.isArray(store.key_pool?.[edition]) ? store.key_pool[edition] : [];
+      const validCount = list.filter((item) => item && item.encrypted_key && Date.parse(item.expires_at) > nowMs).length;
+      counts[edition] = validCount;
+      totalAvailable += validCount;
+    }
+    return { counts, total_available: totalAvailable };
+  }
+
+  function reserveKeyFromPoolAndApproveOrder(store, order, { e2eId = null, nowIso = new Date().toISOString() } = {}) {
+    const edition = String(order.requested_edition || "superbad").toLowerCase();
+    const plan = EDITION_PLANS[edition] || EDITION_PLANS.superbad;
+    if (!store.key_pool || typeof store.key_pool !== "object") store.key_pool = {};
+    const poolList = Array.isArray(store.key_pool[edition]) ? store.key_pool[edition] : [];
+    const nowMs = Date.now();
+
+    let chosenItem = null;
+    let plainKey = null;
+    const remaining = [];
+    for (const item of poolList) {
+      if (!item || !item.encrypted_key) continue;
+      if (Date.parse(item.expires_at) <= nowMs) continue;
+      if (!chosenItem) {
+        const dec = decryptLicenseKeyAtRest(item.encrypted_key, keyPoolAesKey);
+        if (dec) {
+          chosenItem = item;
+          plainKey = dec;
+          continue;
+        }
+      }
+      remaining.push(item);
+    }
+    store.key_pool[edition] = remaining;
+
+    if (!chosenItem || !plainKey) {
+      return { approved: false, poolExhausted: true, licenseKey: null, license: null };
+    }
+
+    for (const existingLic of store.licenses) {
+      if (existingLic.order_id === order.order_id && !existingLic.revoked) {
+        existingLic.revoked = true;
+        existingLic.revoked_at = nowIso;
+      }
+    }
+
+    const licenseId = `LIC-POOL-${crypto.randomBytes(5).toString("hex").toUpperCase()}`;
+    const license = {
+      license_id: licenseId,
+      order_id: order.order_id,
+      edition,
+      tier: chosenItem.tier || plan.tier,
+      label: order.buyer_name || plan.label,
+      email: order.buyer_contact || "",
+      key_prefix: chosenItem.key_prefix || plainKey.slice(0, 10),
+      key_hash: `sha256:${chosenItem.key_sha256}`,
+      key_sha256: chosenItem.key_sha256,
+      expires_at: chosenItem.expires_at,
+      max_downloads: 10,
+      downloads_used: 0,
+      max_hwids: plan.defaultMaxHwids,
+      bound_hwids: [],
+      revoked: false,
+      revoked_at: null,
+      issued_origin: "key-pool-auto",
+      last_seen_at: null,
+      usage_requests: 0,
+      usage_tokens: 0,
+      created_at: nowIso,
+      last_download_at: null,
+    };
+    store.licenses.push(license);
+
+    order.status = "approved";
+    order.edition = edition;
+    order.license_id = licenseId;
+    order.encrypted_license_key = chosenItem.encrypted_key;
+    if (e2eId) order.e2e_id = e2eId;
+    order.pix_verified = true;
+    order.approved_at = nowIso;
+    order.updated_at = nowIso;
+
+    return { approved: true, poolExhausted: false, licenseKey: plainKey, license };
+  }
+
+  function buildAnonymousPublicStats(store) {
+    const nowMs = Date.now();
+    const activeNodes = (Array.isArray(store.network_nodes) ? store.network_nodes : []).filter((n) => !n?.revoked);
+
+    const buckets = new Map();
+    for (const profKey of TELEMETRY_PROFILE_ORDER) {
+      buckets.set(profKey, {
+        spec: TELEMETRY_PROFILES[profKey],
+        clientsCount: 0,
+        activeNow: 0,
+        distinctAccounts: new Set(),
+        totalTokens: 0,
+        cacheTokens: 0,
+        requests: 0,
+      });
+    }
+
+    let totalTokensProcessed = 0;
+    let totalCacheTokens = 0;
+    let totalRequests = 0;
+    let activeClientsNow = 0;
+
+    for (let idx = 0; idx < activeNodes.length; idx += 1) {
+      const n = activeNodes[idx];
+      const profKey = normalizeTelemetryProfile(n.profile, n.edition, n.tier);
+      const bucket = buckets.get(profKey) || buckets.get("superbad");
+      const nodeTokens = clampSafeInt(n.tokens_total ?? n.tokens_est ?? 0, MAX_HEARTBEAT_TOKENS);
+      const nodeCache = clampSafeInt(n.cache_tokens ?? 0, MAX_HEARTBEAT_TOKENS);
+      const nodeReqs = clampSafeInt(n.requests_count ?? 0, MAX_HEARTBEAT_REQUESTS);
+      const ageMs = nowMs - Date.parse(n.last_seen_at || 0);
+      const isOnline = Number.isFinite(ageMs) && ageMs >= 0 && ageMs <= 5 * 60 * 1000;
+
+      bucket.clientsCount += 1;
+      if (isOnline) {
+        bucket.activeNow += 1;
+        activeClientsNow += 1;
+      }
+      // Agrupamento interno apenas em memória (nunca serializado) para não cobrar 2x o mesmo plano em multi-PC
+      bucket.distinctAccounts.add(n.license_id || n.key_sha256 || `anon-${idx}`);
+      bucket.totalTokens += nodeTokens;
+      bucket.cacheTokens += nodeCache;
+      bucket.requests += nodeReqs;
+
+      totalTokensProcessed += nodeTokens;
+      totalCacheTokens += nodeCache;
+      totalRequests += nodeReqs;
+    }
+
+    const round2 = (v) => Math.round(v * 100) / 100;
+    let savedBrlTotal = 0;
+
+    const profiles = TELEMETRY_PROFILE_ORDER.map((profKey) => {
+      const b = buckets.get(profKey);
+      const meteredEquivalentBrl = round2(
+        (b.totalTokens / 1_000_000) * PRICING_REFERENCE.metered_blended_brl_per_1m_tokens
+      );
+      const totalPlanCostBrl = b.distinctAccounts.size * b.spec.planCostBrl;
+      const savedBrl = Math.max(0, round2(meteredEquivalentBrl - totalPlanCostBrl));
+      savedBrlTotal = round2(savedBrlTotal + savedBrl);
+
+      return {
+        profile: b.spec.profile,
+        label: b.spec.label,
+        clients_count: b.clientsCount,
+        active_now: b.activeNow,
+        total_tokens: b.totalTokens,
+        cache_tokens: b.cacheTokens,
+        requests: b.requests,
+        avg_tokens_per_client: b.clientsCount > 0 ? Math.round(b.totalTokens / b.clientsCount) : 0,
+        metered_equivalent_brl: meteredEquivalentBrl,
+        plan_cost_brl: b.spec.planCostBrl,
+        saved_brl: savedBrl,
+        avg_saved_brl_per_client: b.clientsCount > 0 ? round2(savedBrl / b.clientsCount) : 0,
+      };
+    });
+
+    return {
+      ok: true,
+      updated_at: new Date(nowMs).toISOString(),
+      pricing_reference: { ...PRICING_REFERENCE },
+      totals: {
+        total_tokens_processed: totalTokensProcessed,
+        cache_tokens: totalCacheTokens,
+        requests: totalRequests,
+        active_clients_now: activeClientsNow,
+        registered_client_nodes: activeNodes.length,
+        saved_brl_total: savedBrlTotal,
+      },
+      total_tokens_processed: totalTokensProcessed,
+      cache_tokens: totalCacheTokens,
+      requests: totalRequests,
+      active_clients_now: activeClientsNow,
+      saved_brl_total: savedBrlTotal,
+      profiles,
+    };
   }
 
   async function handleApi(req, res, pathnameArg, searchParamsArg) {
@@ -1015,6 +1397,23 @@ function createSuperbadSalesApi(options = {}) {
         });
       }
 
+      // 0b) Public Anonymous Telemetry Stats: GET /api/openinfinite/public-stats
+      if (method === "GET" && pathname === "/api/openinfinite/public-stats") {
+        const nowMs = Date.now();
+        if (!publicStatsCache.payload || nowMs >= publicStatsCache.expiresAt) {
+          const store = await readStore();
+          publicStatsCache = {
+            expiresAt: nowMs + publicStatsCacheTtlMs,
+            payload: buildAnonymousPublicStats(store),
+          };
+        }
+        return sendJson(res, 200, publicStatsCache.payload, {
+          "Cache-Control": "public, max-age=10",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, OPTIONS",
+        });
+      }
+
       // 2) GET /api/superbad/orders/:orderId
       const orderGetMatch = pathname.match(/^\/api\/superbad\/orders\/([A-Za-z0-9_-]+)$/);
       if (method === "GET" && orderGetMatch) {
@@ -1025,29 +1424,49 @@ function createSuperbadSalesApi(options = {}) {
         if (!verifyOrderSecret(order, secret)) {
           return sendJson(res, 403, { ok: false, error: "Acesso negado ao pedido." });
         }
+        const publicStatus = normalizePublicOrderStatus(order.status);
+        const canExposeKey = publicStatus === "approved" || publicStatus === "delivered";
+        const unlockedLicenseKey =
+          canExposeKey && order.encrypted_license_key
+            ? decryptLicenseKeyAtRest(order.encrypted_license_key, keyPoolAesKey)
+            : null;
+
         const responseOrder = {
           order_id: order.order_id,
-          status: order.status,
+          status: publicStatus,
           amount_centavos: order.amount_centavos,
           amount_display: order.amount_display,
           requested_edition: order.requested_edition,
+          edition: order.edition || null,
           receipt_note: order.receipt_note || "",
+          has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
+          e2e_id: order.e2e_id || null,
+          license_key: canExposeKey ? unlockedLicenseKey : null,
           created_at: order.created_at,
           updated_at: order.updated_at,
         };
-        if (order.edition) responseOrder.edition = order.edition;
         return sendJson(res, 200, { ok: true, order: responseOrder });
       }
 
-      // 3) POST /api/superbad/orders/:orderId/receipt
+      // 3) POST /api/superbad/orders/:orderId/receipt (4 MB JSON limit ONLY on this route)
       const orderReceiptMatch = pathname.match(/^\/api\/superbad\/orders\/([A-Za-z0-9_-]+)\/receipt$/);
       if (method === "POST" && orderReceiptMatch) {
         const orderId = orderReceiptMatch[1];
-        const body = await readJsonBody(req);
+        const body = await readJsonBody(req, MAX_RECEIPT_JSON_BYTES);
         const secret = String(body.order_secret || req.headers["x-order-secret"] || "").trim();
         const receiptNote = cleanText(body.receipt_note, 500);
-        if (!receiptNote) {
-          return sendJson(res, 400, { ok: false, error: "Informe a referência ou observação do comprovante." });
+        const e2eId = cleanE2eId(body.e2e_id);
+        const attachment = parseReceiptAttachment(
+          body.receipt_file_b64,
+          body.receipt_file_mime,
+          body.receipt_file_name
+        );
+
+        if (!receiptNote && !e2eId && !attachment) {
+          return sendJson(res, 400, {
+            ok: false,
+            error: "Informe a observação, o código E2E PIX ou anexe a imagem/PDF do comprovante.",
+          });
         }
 
         const result = await withStoreLock(async () => {
@@ -1056,28 +1475,223 @@ function createSuperbadSalesApi(options = {}) {
           if (!verifyOrderSecret(order, secret)) {
             return { status: 403, payload: { ok: false, error: "Acesso negado ao pedido." } };
           }
-          if (order.status === "approved") {
+          if (order.status === "approved" || order.status === "delivered") {
             return { status: 409, payload: { ok: false, error: "Pedido já aprovado." } };
           }
+
           const now = new Date().toISOString();
-          order.receipt_note = receiptNote;
+          if (attachment) {
+            await fs.promises.mkdir(receiptsDir, { recursive: true });
+            const realReceiptsRoot = await fs.promises.realpath(receiptsDir);
+            const storedFilename = `${order.order_id}-${Date.now()}-${crypto.randomBytes(4).toString("hex")}${attachment.ext}`;
+            const targetPath = path.resolve(realReceiptsRoot, storedFilename);
+            if (!targetPath.startsWith(`${realReceiptsRoot}${path.sep}`)) {
+              return { status: 400, payload: { ok: false, error: "Caminho de comprovante inválido." } };
+            }
+            await writeFileAtomic(targetPath, attachment.buffer);
+            order.receipt_file = {
+              filename: storedFilename,
+              original_name: attachment.originalName,
+              mime: attachment.mime,
+              size_bytes: attachment.buffer.length,
+              sha256: crypto.createHash("sha256").update(attachment.buffer).digest("hex"),
+              saved_at: now,
+            };
+          }
+
+          if (receiptNote) {
+            order.receipt_note = receiptNote;
+          } else if (!order.receipt_note) {
+            order.receipt_note = e2eId ? `PIX E2E: ${e2eId}` : `Arquivo anexado (${attachment.originalName})`;
+          }
+          if (e2eId) {
+            order.e2e_id = e2eId;
+          }
           order.receipt_submitted_at = now;
           order.status = "receipt_submitted";
           order.updated_at = now;
+
+          let autoApproved = false;
+          let reservedKey = null;
+          if (Array.isArray(store.pix_webhooks)) {
+            const matchingWh = store.pix_webhooks.find((wh) => {
+              if (!wh || wh.matched_order_id) return false;
+              if (wh.amount_centavos !== null && wh.amount_centavos !== undefined) {
+                if (Number(wh.amount_centavos) !== Number(order.amount_centavos)) return false;
+              }
+              return Boolean(
+                (order.e2e_id && wh.e2e_id === order.e2e_id) ||
+                  (wh.order_id && wh.order_id === order.order_id) ||
+                  (wh.txid && order.txid && wh.txid === order.txid) ||
+                  (wh.e2e_id && order.receipt_note && order.receipt_note.includes(wh.e2e_id))
+              );
+            });
+            if (matchingWh) {
+              order.pix_verified = true;
+              order.e2e_id = matchingWh.e2e_id || order.e2e_id || null;
+              const poolRes = reserveKeyFromPoolAndApproveOrder(store, order, {
+                e2eId: matchingWh.e2e_id,
+                nowIso: now,
+              });
+              if (poolRes.approved) {
+                autoApproved = true;
+                reservedKey = poolRes.licenseKey;
+                matchingWh.matched_order_id = order.order_id;
+                matchingWh.matched_at = now;
+              }
+            }
+          }
+
           await writeStore(store);
+          const publicStatus = normalizePublicOrderStatus(order.status);
           return {
             status: 200,
             payload: {
               ok: true,
+              order_id: order.order_id,
+              status: publicStatus,
+              auto_approved: autoApproved,
+              edition: order.edition || order.requested_edition,
+              ...(autoApproved && reservedKey ? { license_key: reservedKey } : {}),
               order: {
                 order_id: order.order_id,
-                status: order.status,
+                status: publicStatus,
                 receipt_note: order.receipt_note,
+                e2e_id: order.e2e_id || null,
+                has_receipt_file: Boolean(order.receipt_file && order.receipt_file.filename),
               },
             },
           };
         });
         return sendJson(res, result.status, result.payload);
+      }
+
+      // 3b) POST /api/superbad/webhooks/pix (authenticated with PIX_WEBHOOK_SECRET + timingSafeEqual)
+      if (method === "POST" && pathname === "/api/superbad/webhooks/pix") {
+        if (!pixWebhookSecret) {
+          return sendJson(res, 503, { ok: false, error: "PIX_WEBHOOK_SECRET não configurado no servidor." });
+        }
+        const authHeader = String(req.headers.authorization || "").trim();
+        const bearerToken = authHeader.toLowerCase().startsWith("bearer ")
+          ? authHeader.slice(7).trim()
+          : "";
+        const providedSecret = String(req.headers["x-pix-webhook-secret"] || bearerToken || "").trim();
+        if (!providedSecret || !timingSafeEqualText(providedSecret, pixWebhookSecret)) {
+          return sendJson(res, 401, { ok: false, error: "Credencial do webhook PIX inválida." });
+        }
+
+        const body = await readJsonBody(req);
+        const firstPix = Array.isArray(body.pix) && body.pix[0] && typeof body.pix[0] === "object" ? body.pix[0] : null;
+        const e2eId = cleanE2eId(body.e2e_id || body.endToEndId || firstPix?.endToEndId || "");
+        if (!e2eId) {
+          return sendJson(res, 400, { ok: false, error: "e2e_id é obrigatório no webhook PIX." });
+        }
+
+        const txid = cleanText(body.txid || firstPix?.txid || "", 64) || null;
+        const orderIdHint = cleanText(body.order_id || "", 64) || null;
+        let amountCentavos = null;
+        if (body.amount_centavos !== undefined && body.amount_centavos !== null && body.amount_centavos !== "") {
+          amountCentavos = Math.round(Number(body.amount_centavos));
+        } else {
+          const rawBrl = body.amount_brl ?? body.valor ?? firstPix?.valor;
+          if (rawBrl !== undefined && rawBrl !== null && rawBrl !== "") {
+            amountCentavos = Math.round(Number(String(rawBrl).replace(",", ".")) * 100);
+          }
+        }
+        if (amountCentavos !== null && (!Number.isFinite(amountCentavos) || amountCentavos <= 0)) {
+          return sendJson(res, 400, { ok: false, error: "Valor do pagamento PIX inválido." });
+        }
+
+        const outcome = await withStoreLock(async () => {
+          const store = await readStore();
+          if (!Array.isArray(store.pix_webhooks)) store.pix_webhooks = [];
+
+          const existingWh = store.pix_webhooks.find((w) => w && w.e2e_id === e2eId);
+          if (existingWh && existingWh.matched_order_id) {
+            const prevOrd = store.orders.find((o) => o.order_id === existingWh.matched_order_id);
+            return {
+              status: 200,
+              payload: {
+                ok: true,
+                matched: true,
+                idempotent: true,
+                order_id: existingWh.matched_order_id,
+                status: prevOrd ? normalizePublicOrderStatus(prevOrd.status) : "approved",
+              },
+            };
+          }
+
+          const nowIso = new Date().toISOString();
+          let whRecord = existingWh;
+          if (!whRecord) {
+            whRecord = {
+              e2e_id: e2eId,
+              amount_centavos: amountCentavos,
+              txid,
+              order_id: orderIdHint,
+              received_at: nowIso,
+              matched_order_id: null,
+              matched_at: null,
+            };
+            store.pix_webhooks.unshift(whRecord);
+            if (store.pix_webhooks.length > 1000) {
+              store.pix_webhooks = store.pix_webhooks.slice(0, 1000);
+            }
+          } else {
+            if (amountCentavos !== null) whRecord.amount_centavos = amountCentavos;
+            if (txid) whRecord.txid = txid;
+            if (orderIdHint) whRecord.order_id = orderIdHint;
+          }
+
+          const candidate = store.orders.find((o) => {
+            if (!o || o.status === "approved" || o.status === "delivered") return false;
+            if (amountCentavos !== null && Number(o.amount_centavos) !== amountCentavos) return false;
+            return Boolean(
+              (orderIdHint && o.order_id === orderIdHint) ||
+                (txid && o.txid && o.txid === txid) ||
+                (o.e2e_id && o.e2e_id === e2eId) ||
+                (o.receipt_note && o.receipt_note.includes(e2eId))
+            );
+          });
+
+          if (!candidate) {
+            await writeStore(store);
+            return {
+              status: 200,
+              payload: {
+                ok: true,
+                matched: false,
+                queued_for_match: true,
+                e2e_id: e2eId,
+              },
+            };
+          }
+
+          candidate.pix_verified = true;
+          candidate.e2e_id = e2eId;
+          candidate.updated_at = nowIso;
+          const poolRes = reserveKeyFromPoolAndApproveOrder(store, candidate, { e2eId, nowIso });
+          if (poolRes.approved) {
+            whRecord.matched_order_id = candidate.order_id;
+            whRecord.matched_at = nowIso;
+          }
+          await writeStore(store);
+
+          return {
+            status: 200,
+            payload: {
+              ok: true,
+              matched: true,
+              auto_approved: poolRes.approved,
+              pool_exhausted: poolRes.poolExhausted,
+              order_id: candidate.order_id,
+              status: normalizePublicOrderStatus(candidate.status),
+              license_id: candidate.license_id || null,
+            },
+          };
+        });
+
+        return sendJson(res, outcome.status, outcome.payload);
       }
 
       // 4) Admin auth endpoints
@@ -1178,17 +1792,278 @@ function createSuperbadSalesApi(options = {}) {
           network_nodes: nodes,
           orders,
           licenses,
+          key_pool: summarizeKeyPoolCounts(store),
           update_manifests: store.update_manifests || {},
           serverTime: new Date().toISOString(),
         });
       }
 
+      if (method === "GET" && pathname === "/api/superbad/admin/key-pool") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const store = await readStore();
+        return sendJson(res, 200, { ok: true, ...summarizeKeyPoolCounts(store) });
+      }
+
+      if (method === "POST" && pathname === "/api/superbad/admin/key-pool/stock") {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const body = await readJsonBody(req);
+        const edition = String(body.edition || "").trim().toLowerCase();
+        if (!VALID_EDITIONS.has(edition)) {
+          return sendJson(res, 400, { ok: false, error: "Edição inválida para estoque de chaves." });
+        }
+        const rawKeys = Array.isArray(body.keys) ? body.keys : [];
+        if (rawKeys.length === 0 || rawKeys.length > 500) {
+          return sendJson(res, 400, { ok: false, error: "Envie entre 1 e 500 chaves assinadas no lote." });
+        }
+
+        const expectedPlan = EDITION_PLANS[edition];
+        const validatedBatch = [];
+        for (const candidateRaw of rawKeys) {
+          const cleanKey = String(candidateRaw || "").trim();
+          const edCheck = verifyEd25519LicenseKey(cleanKey, licensePublicKeyPem);
+          if (!edCheck.ok) {
+            return sendJson(res, 400, {
+              ok: false,
+              error: `Chave Ed25519 inválida ou expirada no lote (${edCheck.code}): ${edCheck.error}`,
+            });
+          }
+          if (edCheck.tier !== expectedPlan.tier) {
+            return sendJson(res, 400, {
+              ok: false,
+              error: `Tier da chave (${edCheck.tier}) incompatível com a edição "${edition}" (${expectedPlan.tier}).`,
+            });
+          }
+          if (edCheck.edition && edCheck.edition !== edition) {
+            return sendJson(res, 400, {
+              ok: false,
+              error: `Edição da chave (${edCheck.edition}) incompatível com "${edition}".`,
+            });
+          }
+          validatedBatch.push({
+            cleanKey,
+            edCheck,
+          });
+        }
+
+        const stockResult = await withStoreLock(async () => {
+          const store = await readStore();
+          if (!store.key_pool || typeof store.key_pool !== "object") store.key_pool = {};
+          if (!Array.isArray(store.key_pool[edition])) store.key_pool[edition] = [];
+
+          const existingShas = new Set();
+          for (const lic of store.licenses) {
+            if (lic?.key_sha256) existingShas.add(lic.key_sha256);
+          }
+          for (const edKey of Object.keys(store.key_pool)) {
+            for (const item of store.key_pool[edKey] || []) {
+              if (item?.key_sha256) existingShas.add(item.key_sha256);
+            }
+          }
+
+          const nowIso = new Date().toISOString();
+          let stockedCount = 0;
+          let skippedDuplicates = 0;
+
+          for (const { cleanKey, edCheck } of validatedBatch) {
+            if (existingShas.has(edCheck.keyHash)) {
+              skippedDuplicates += 1;
+              continue;
+            }
+            existingShas.add(edCheck.keyHash);
+            store.key_pool[edition].push({
+              pool_id: `POOL-${crypto.randomBytes(5).toString("hex").toUpperCase()}`,
+              edition,
+              tier: edCheck.tier,
+              key_prefix: edCheck.keyPrefix,
+              key_sha256: edCheck.keyHash,
+              expires_at: edCheck.expiresAt,
+              encrypted_key: encryptLicenseKeyAtRest(cleanKey, keyPoolAesKey),
+              stocked_at: nowIso,
+            });
+            stockedCount += 1;
+          }
+
+          // Auto-fulfill any pix_verified orders waiting for stock of this edition
+          let fulfilledWaitingOrders = 0;
+          for (const ord of store.orders) {
+            if (
+              ord &&
+              ord.pix_verified &&
+              ord.status !== "approved" &&
+              ord.status !== "delivered" &&
+              ord.requested_edition === edition &&
+              store.key_pool[edition].length > 0
+            ) {
+              const resPool = reserveKeyFromPoolAndApproveOrder(store, ord, {
+                e2eId: ord.e2e_id || null,
+                nowIso,
+              });
+              if (resPool.approved) {
+                fulfilledWaitingOrders += 1;
+                const wh = (store.pix_webhooks || []).find((w) => w && !w.matched_order_id && w.e2e_id === ord.e2e_id);
+                if (wh) {
+                  wh.matched_order_id = ord.order_id;
+                  wh.matched_at = nowIso;
+                }
+              }
+            }
+          }
+
+          await writeStore(store);
+          return {
+            ok: true,
+            edition,
+            stocked_count: stockedCount,
+            skipped_duplicates: skippedDuplicates,
+            fulfilled_waiting_orders: fulfilledWaitingOrders,
+            pool_available: store.key_pool[edition].length,
+          };
+        });
+
+        return sendJson(res, 200, stockResult);
+      }
+
+      const adminReceiptFileMatch = pathname.match(/^\/api\/superbad\/admin\/orders\/([A-Za-z0-9_-]+)\/receipt-file$/);
+      if (method === "GET" && adminReceiptFileMatch) {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const orderId = adminReceiptFileMatch[1];
+        const store = await readStore();
+        const order = store.orders.find((o) => o.order_id === orderId);
+        if (!order || !order.receipt_file || !order.receipt_file.filename) {
+          return sendJson(res, 404, { ok: false, error: "Comprovante não anexado neste pedido." });
+        }
+        try {
+          const realReceiptsRoot = await fs.promises.realpath(receiptsDir);
+          const safeName = path.basename(order.receipt_file.filename);
+          const candidate = path.resolve(realReceiptsRoot, safeName);
+          if (!candidate.startsWith(`${realReceiptsRoot}${path.sep}`)) {
+            return sendJson(res, 403, { ok: false, error: "Acesso negado." });
+          }
+          const buf = await fs.promises.readFile(candidate);
+          res.writeHead(200, {
+            "Content-Type": order.receipt_file.mime || "application/octet-stream",
+            "Content-Disposition": `attachment; filename="${safeName}"`,
+            "Content-Length": buf.length,
+            "Cache-Control": "no-store",
+            "X-Content-Type-Options": "nosniff",
+          });
+          res.end(buf);
+          return;
+        } catch {
+          return sendJson(res, 404, { ok: false, error: "Arquivo do comprovante não encontrado em disco." });
+        }
+      }
+
+      const deliverKeyMatch = pathname.match(/^\/api\/superbad\/admin\/orders\/([A-Za-z0-9_-]+)\/deliver-key$/);
+      if (method === "POST" && deliverKeyMatch) {
+        if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
+        const orderId = deliverKeyMatch[1];
+        const body = await readJsonBody(req);
+        const rawProvidedKey = String(body.license_key || body.raw_license_key || "").trim();
+        if (!rawProvidedKey) {
+          return sendJson(res, 400, { ok: false, error: "Informe license_key assinada para entregar ao pedido." });
+        }
+        const edCheck = verifyEd25519LicenseKey(rawProvidedKey, licensePublicKeyPem);
+        if (!edCheck.ok) {
+          return sendJson(res, 400, { ok: false, error: edCheck.error || "Chave Ed25519 inválida." });
+        }
+        const keySha256 = edCheck.keyHash;
+        const encryptedKey = encryptLicenseKeyAtRest(rawProvidedKey, keyPoolAesKey);
+        const nowIso = new Date().toISOString();
+
+        const deliverOutcome = await withStoreLock(async () => {
+          const store = await readStore();
+          const ord = store.orders.find((o) => o.order_id === orderId);
+          if (!ord) {
+            return { status: 404, payload: { ok: false, error: "Pedido não encontrado." } };
+          }
+          const edition = cleanText(body.edition || edCheck.edition || ord.requested_edition, 32).toLowerCase();
+          const plan = EDITION_PLANS[edition] || EDITION_PLANS[ord.requested_edition] || EDITION_PLANS.superbad;
+
+          for (const lic of store.licenses) {
+            if (lic.order_id === orderId && lic.key_sha256 !== keySha256 && !lic.revoked) {
+              lic.revoked = true;
+              lic.revoked_at = nowIso;
+            }
+          }
+
+          let lic = store.licenses.find((l) => l.key_sha256 === keySha256);
+          if (!lic) {
+            lic = {
+              license_id: `LIC-${crypto.randomBytes(5).toString("hex").toUpperCase()}`,
+              order_id: orderId,
+              edition,
+              tier: edCheck.tier,
+              label: ord.buyer_name || plan.label,
+              email: ord.buyer_contact || "",
+              key_prefix: edCheck.keyPrefix,
+              key_hash: `sha256:${keySha256}`,
+              key_sha256: keySha256,
+              expires_at: edCheck.expiresAt,
+              max_downloads: 10,
+              downloads_used: 0,
+              max_hwids: Math.max(1, Math.min(20, Number(body.max_hwids || plan.defaultMaxHwids || 1))),
+              bound_hwids: [],
+              revoked: false,
+              revoked_at: null,
+              issued_origin: "dashboard-deliver-key",
+              last_seen_at: null,
+              usage_requests: 0,
+              usage_tokens: 0,
+              created_at: nowIso,
+              last_download_at: null,
+            };
+            store.licenses.push(lic);
+          } else {
+            lic.order_id = orderId;
+            lic.revoked = false;
+            lic.revoked_at = null;
+          }
+
+          ord.status = "delivered";
+          ord.edition = edition;
+          ord.license_id = lic.license_id;
+          ord.encrypted_license_key = encryptedKey;
+          ord.approved_at = ord.approved_at || nowIso;
+          ord.delivered_at = nowIso;
+          ord.updated_at = nowIso;
+
+          await writeStore(store);
+          return {
+            status: 200,
+            payload: {
+              ok: true,
+              order_id: orderId,
+              status: "delivered",
+              license: redactLicenseForAdmin(lic),
+            },
+          };
+        });
+
+        return sendJson(res, deliverOutcome.status, deliverOutcome.payload);
+      }
+
       if (method === "POST" && pathname === "/api/superbad/admin/licenses/register") {
         if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
         const body = await readJsonBody(req);
-        const keySha256 = cleanText(body.key_hash || body.key_sha256, 128).toLowerCase();
+        const rawProvidedKey = String(body.raw_license_key || body.license_key || "").trim();
+        let keySha256 = cleanText(body.key_hash || body.key_sha256, 128).toLowerCase();
+        if (!keySha256 && rawProvidedKey) {
+          keySha256 = hashSecretSha256(rawProvidedKey);
+        }
         if (!/^[a-f0-9]{64}$/.test(keySha256)) {
           return sendJson(res, 400, { ok: false, error: "key_hash SHA-256 inválido." });
+        }
+        let encryptedOrderKey = null;
+        if (rawProvidedKey) {
+          if (hashSecretSha256(rawProvidedKey) !== keySha256) {
+            return sendJson(res, 400, { ok: false, error: "raw_license_key não confere com key_hash." });
+          }
+          const edCheck = verifyEd25519LicenseKey(rawProvidedKey, licensePublicKeyPem);
+          if (edCheck.isEd25519Format && !edCheck.ok) {
+            return sendJson(res, 400, { ok: false, error: edCheck.error || "Assinatura Ed25519 inválida." });
+          }
+          encryptedOrderKey = encryptLicenseKeyAtRest(rawProvidedKey, keyPoolAesKey);
         }
         const edition = cleanText(body.edition || "founder", 32).toLowerCase();
         const plan = EDITION_PLANS[edition] || EDITION_PLANS.founder;
@@ -1253,9 +2128,13 @@ function createSuperbadSalesApi(options = {}) {
                   lic.revoked_at = nowIso;
                 }
               }
-              ord.status = "approved";
+              ord.status = body.deliver_key ? "delivered" : "approved";
               ord.edition = edition;
-              ord.approved_at = nowIso;
+              ord.approved_at = ord.approved_at || nowIso;
+              if (encryptedOrderKey) {
+                ord.encrypted_license_key = encryptedOrderKey;
+                ord.delivered_at = nowIso;
+              }
               ord.updated_at = nowIso;
               ord.license_id = existing.license_id;
             }
@@ -1352,6 +2231,7 @@ function createSuperbadSalesApi(options = {}) {
           order.approved_at = nowIso;
           order.updated_at = nowIso;
           order.license_id = licenseId;
+          order.encrypted_license_key = encryptLicenseKeyAtRest(licenseKey, keyPoolAesKey);
 
           await writeStore(store);
 
@@ -1756,6 +2636,17 @@ function createSuperbadSalesApi(options = {}) {
         const edition = cleanText(body.edition || "client-mid", 32).toLowerCase();
         const tier = cleanText(body.tier || EDITION_PLANS[edition]?.tier || edition, 32).toLowerCase();
 
+        const sanitizedTokensTotal = clampSafeInt(
+          body.tokens_total !== undefined ? body.tokens_total : body.tokens_est,
+          MAX_HEARTBEAT_TOKENS
+        );
+        const sanitizedCacheTokens = clampSafeInt(body.cache_tokens, MAX_HEARTBEAT_TOKENS);
+        const sanitizedRequests = clampSafeInt(
+          body.requests !== undefined ? body.requests : body.requests_count,
+          MAX_HEARTBEAT_REQUESTS
+        );
+        const rawProfileInput = cleanText(body.profile || "", 32).toLowerCase();
+
         const result = await withStoreLock(async () => {
           const store = await readStore();
           let lic = rawKey
@@ -1777,9 +2668,13 @@ function createSuperbadSalesApi(options = {}) {
           );
           if (lic) {
             lic.last_seen_at = new Date().toISOString();
-            lic.usage_requests = Math.max(Number(lic.usage_requests || 0), Number(body.requests_count || 0));
-            lic.usage_tokens = Math.max(Number(lic.usage_tokens || 0), Number(body.tokens_est || 0));
+            lic.usage_requests = Math.max(Number(lic.usage_requests || 0), sanitizedRequests);
+            lic.usage_tokens = Math.max(Number(lic.usage_tokens || 0), sanitizedTokensTotal);
           }
+
+          const effectiveEdition = lic?.edition || edition;
+          const effectiveTier = lic?.tier || tier;
+          const normalizedProfile = normalizeTelemetryProfile(rawProfileInput, effectiveEdition, effectiveTier);
 
           upsertNetworkNode(store, {
             license_id: lic?.license_id || null,
@@ -1787,17 +2682,21 @@ function createSuperbadSalesApi(options = {}) {
             hwid,
             hostname: body.hostname || "",
             user_label: body.user_label || lic?.email || lic?.label || "",
-            edition: lic?.edition || edition,
-            tier: lic?.tier || tier,
+            edition: effectiveEdition,
+            tier: effectiveTier,
+            profile: normalizedProfile,
             version: body.version || "6.4.0",
             active_layer: body.active_layer || "layer-1",
             watchdog_ok: body.watchdog_ok !== false,
             ip_masked: maskIp(req.socket?.remoteAddress || ""),
-            requests_count: Number(body.requests_count || 0),
-            tokens_est: Number(body.tokens_est || 0),
+            requests_count: sanitizedRequests,
+            tokens_est: sanitizedTokensTotal,
+            tokens_total: sanitizedTokensTotal,
+            cache_tokens: sanitizedCacheTokens,
             revoked: isRevoked,
           });
           await writeStore(store);
+          publicStatsCache.expiresAt = 0;
 
           const channel = mapEditionToUpdateChannel(lic?.edition || edition);
           const manifest = channel ? store.update_manifests?.[channel] || null : null;

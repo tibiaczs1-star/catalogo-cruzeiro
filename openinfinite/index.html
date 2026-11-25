@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenInfinite v6.1 — Motor de IA Contínuo · Windows &amp; macOS</title>
-  <meta name="description" content="OpenInfinite v6.1: fluxo de IA contínuo com prioridade HY4 #1, Modo Turbo Auto oculto, estatísticas reais SQLite e 3 temas nativos. Demonstração grátis de 1 hora no Windows e macOS.">
+  <title>OpenInfinite v6.1 — IA Contínua por Valor Fixo · Windows, macOS &amp; Ubuntu VPS</title>
+  <meta name="description" content="Pare de levar susto com fatura por token. OpenInfinite v6.1 entrega fluxo contínuo HY4 #1, Hermes Agent oficial no Pro, telemetria SQLite real e ativação automática via PIX para Windows, macOS e Ubuntu Linux VPS.">
   <style>
     :root {
       /* Surface & Obsidian Palette (Tracle-inspired high contrast) */
@@ -93,7 +93,7 @@
 
     :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 
-    #topo, #conteudo, #painel-live, #recursos, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
+    #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
       scroll-margin-top: 96px;
     }
 
@@ -122,13 +122,13 @@
     }
     .topbar-inner {
       pointer-events: auto;
-      max-width: 1140px; margin: 0 auto; padding: 8px 12px 8px 16px;
-      background: rgba(11, 12, 20, 0.85);
+      max-width: 1160px; margin: 0 auto; padding: 8px 12px 8px 16px;
+      background: rgba(11, 12, 20, 0.86);
       backdrop-filter: blur(18px) saturate(160%);
       -webkit-backdrop-filter: blur(18px) saturate(160%);
       border: 1px solid var(--border);
       border-radius: var(--radius-pill);
-      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
       box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
       transition: border-color 180ms var(--ease-snap), background-color 180ms var(--ease-snap);
     }
@@ -136,7 +136,7 @@
       background: rgba(8, 9, 15, 0.96);
       border-color: rgba(255, 255, 255, 0.16);
     }
-    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
+    .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
     .brand img { width: 28px; height: 28px; border-radius: var(--radius-sm); }
     .brand-ver {
       font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--muted);
@@ -144,8 +144,8 @@
     }
     .nav-links { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
     .nav-link {
-      text-decoration: none; font-size: 12.5px; font-weight: 600; color: var(--muted);
-      padding: 7px 11px; border-radius: var(--radius-pill);
+      text-decoration: none; font-size: 12px; font-weight: 600; color: var(--muted);
+      padding: 6px 10px; border-radius: var(--radius-pill);
       transition: color 160ms var(--ease-snap), background-color 160ms var(--ease-snap);
     }
     .nav-link:hover { color: var(--ink); background: var(--surface-hover); }
@@ -193,7 +193,7 @@
     .wrap {
       position: relative; z-index: 1;
       max-width: 1160px; margin: 0 auto; padding: 48px 20px 104px;
-      display: flex; flex-direction: column; gap: 80px;
+      display: flex; flex-direction: column; gap: 76px;
     }
 
     /* SPOTLIGHT SURFACE */
@@ -226,17 +226,17 @@
     .kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
 
     .hero h1 {
-      font-size: clamp(32px, 4.7vw, 56px);
-      font-weight: 800; line-height: 1.07; letter-spacing: -0.035em;
-      color: var(--ink); max-width: 24ch;
+      font-size: clamp(31px, 4.6vw, 54px);
+      font-weight: 800; line-height: 1.08; letter-spacing: -0.035em;
+      color: var(--ink); max-width: 25ch;
     }
     .hero h1 span { color: var(--muted); font-weight: 700; }
     .hero-sub {
-      font-size: 16px; color: var(--muted); max-width: 60ch; line-height: 1.6;
+      font-size: 15.5px; color: var(--muted); max-width: 64ch; line-height: 1.62;
     }
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .hero-meta-strip {
-      display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
       font-size: 12.5px; color: var(--muted);
     }
     .hero-meta-strip strong { color: var(--ink); font-weight: 700; }
@@ -383,7 +383,83 @@
       color: var(--accent); margin-bottom: 8px; display: block;
     }
     .sec-head h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
-    .sec-head p { color: var(--muted); font-size: 14px; max-width: 56ch; }
+    .sec-head p { color: var(--muted); font-size: 14px; max-width: 58ch; }
+
+    /* TOKEN MILLION & BILLION SAVINGS CALCULATOR (#economia-tokens) */
+    .calc-shell { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .calc-presets { display: flex; gap: 8px; flex-wrap: wrap; }
+    .calc-preset-btn {
+      padding: 8px 14px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 12.5px; font-weight: 700;
+      background: var(--surface-soft); border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+      transition: background-color 150ms, color 150ms, border-color 150ms, transform 150ms var(--ease-spring);
+    }
+    .calc-preset-btn:hover { color: var(--ink); border-color: var(--border-hi); }
+    .calc-preset-btn.active, .calc-preset-btn[aria-selected="true"] {
+      background: var(--ink); color: var(--bg); border-color: #ffffff;
+    }
+    .calc-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .calc-box {
+      padding: 18px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 8px; min-width: 0;
+    }
+    .calc-box.win-highlight { border-color: rgba(16, 185, 129, 0.38); }
+    .calc-box.pro-highlight { border-color: var(--border-accent); background: #0b0d19; }
+    .calc-lbl { font-family: var(--mono); font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-big { font-family: var(--mono); font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+    .calc-big.danger { color: var(--danger); }
+    .calc-save-pill {
+      display: inline-flex; align-items: center; align-self: flex-start; gap: 6px;
+      padding: 4px 10px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 11.5px; font-weight: 700;
+      background: rgba(16, 185, 129, 0.14); color: var(--emerald-ink); border: 1px solid rgba(16, 185, 129, 0.36);
+    }
+    .calc-bar-track { height: 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.07); overflow: hidden; margin-top: 4px; }
+    .calc-bar-fill {
+      height: 100%; width: 100%; border-radius: var(--radius-pill); transform-origin: left center;
+      transition: transform 320ms var(--ease-spring);
+    }
+
+    /* LIVE ANONYMOUS TELEMETRY (#consumo-ao-vivo) */
+    .live-shell { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+    .privacy-pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--radius-pill);
+      background: rgba(16, 185, 129, 0.11); border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald-ink); font-size: 12px; font-weight: 600;
+    }
+    .live-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .live-kpi {
+      padding: 15px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 4px; min-width: 0;
+    }
+    .live-kpi span { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .live-kpi strong { font-family: var(--mono); font-size: clamp(19px, 2.2vw, 25px); font-weight: 800; color: var(--ink); }
+    .live-profiles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .profile-stat-card {
+      padding: 14px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; min-width: 0;
+    }
+    .profile-stat-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); }
+    .profile-stat-row { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); }
+    .profile-stat-row b { color: var(--ink-secondary); font-family: var(--mono); font-weight: 600; }
+
+    /* UBUNTU VPS + HERMES AGENT (#ubuntu-hermes) */
+    .os-hermes-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; }
+    .code-snippet-box {
+      background: #040509; border: 1px solid var(--border-hi); border-radius: 10px;
+      padding: 12px 14px; font-family: var(--mono); font-size: 12px; color: #e2e8f0;
+      word-break: break-word; line-height: 1.5;
+    }
+    .tier-matrix { display: flex; flex-direction: column; gap: 8px; }
+    .tier-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      padding: 9px 12px; border-radius: var(--radius-sm); background: #070810; border: 1px solid var(--border);
+      font-size: 12.5px;
+    }
+    .tier-row.unlocked { border-color: rgba(16, 185, 129, 0.42); background: rgba(16, 185, 129, 0.06); }
+    .tier-badge {
+      font-family: var(--mono); font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: var(--radius-pill);
+    }
+    .tier-badge.locked { background: rgba(255, 255, 255, 0.06); color: var(--muted); border: 1px solid var(--border); }
+    .tier-badge.open { background: rgba(16, 185, 129, 0.16); color: var(--emerald-ink); border: 1px solid rgba(16, 185, 129, 0.42); }
 
     /* ASYMMETRIC BENTO GRID */
     .bento-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
@@ -464,7 +540,7 @@
     }
     .comp-metric { display: flex; flex-direction: column; gap: 4px; }
     .comp-metric span { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
-    .comp-metric strong { font-size: 14.5px; color: var(--ink); }
+    .comp-metric strong { font-size: 14px; color: var(--ink); }
     .comp-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
 
     /* PLANS & PIX CHECKOUT */
@@ -475,6 +551,8 @@
     .plan-price small { font-size: 12.5px; color: var(--muted); font-family: var(--font); font-weight: 500; }
     .plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-secondary); }
     .plan-list li::before { content: "✓ "; color: var(--emerald); font-weight: 800; }
+    .plan-list li.dim-item { color: var(--muted); }
+    .plan-list li.dim-item::before { content: "— "; color: var(--dim); }
 
     .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
     .panel { padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -490,12 +568,13 @@
 
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
     .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); }
-    input[type="text"], select {
+    input[type="text"], input[type="file"], select {
       width: 100%; padding: 10px 12px; background: #05060b; color: var(--ink);
       border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13.5px;
       transition: border-color 150ms, box-shadow 150ms;
     }
-    input[type="text"]:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22); }
+    input[type="file"] { padding: 8px 10px; font-size: 12.5px; color: var(--muted); cursor: pointer; }
+    input[type="text"]:focus, input[type="file"]:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22); }
     input[aria-invalid="true"] { border-color: var(--danger); }
 
     .result-box {
@@ -506,6 +585,17 @@
     .result-box.is-error { border-color: var(--danger-border); background: var(--danger-bg); }
     .result-box.is-success { border-color: rgba(16, 185, 129, 0.45); }
     .result-box.is-warn { border-color: rgba(245, 158, 11, 0.45); background: var(--amber-bg); }
+
+    .receipt-subpanel {
+      margin-top: 6px; padding-top: 12px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .delivered-key-card {
+      padding: 14px; border-radius: 10px;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.55);
+      display: none; flex-direction: column; gap: 10px;
+    }
+    .delivered-key-card.is-visible { display: flex; }
 
     /* Subtle single-line BadClaude footnote */
     .bc-footnote {
@@ -580,14 +670,16 @@
     .zoom-wrap img { max-width: 94vw; max-height: 84vh; border-radius: 12px; border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 32px 96px #000; }
 
     @media (max-width: 960px) {
-      .hero-stage, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid, .comp-grid { grid-template-columns: 1fr; }
+      .hero-stage, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid, .comp-grid, .calc-cards, .live-kpis, .live-profiles-grid, .os-hermes-grid {
+        grid-template-columns: 1fr;
+      }
       .living-stage { min-height: 310px; }
     }
     @media (max-width: 640px), (hover: none) {
       .hover-hud { display: none !important; }
     }
     @media (max-width: 640px) {
-      #topo, #conteudo, #painel-live, #recursos, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
+      #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
         scroll-margin-top: 112px;
       }
       .topbar { top: 6px; padding: 0 8px; }
@@ -622,8 +714,9 @@
       </a>
       <nav class="nav-links" aria-label="Navegação OpenInfinite">
         <a href="#painel-live" class="nav-link">Painel Live</a>
-        <a href="#recursos" class="nav-link">Recursos</a>
-        <a href="#como-funciona" class="nav-link">Como Funciona</a>
+        <a href="#economia-tokens" class="nav-link">Economia por Token</a>
+        <a href="#consumo-ao-vivo" class="nav-link">Consumo Real</a>
+        <a href="#ubuntu-hermes" class="nav-link">Linux &amp; Hermes</a>
         <a href="#planos" class="nav-link">Planos</a>
         <a href="#licenca" class="nav-link">Validar Chave</a>
         <a href="#faq" class="nav-link">FAQ</a>
@@ -641,39 +734,47 @@
     <section class="hero" id="conteudo">
       <div class="hero-kicker">
         <span class="kicker-dot" aria-hidden="true"></span>
-        <span>OpenInfinite v6.1 · Windows &amp; macOS Apple Silicon</span>
+        <span>OpenInfinite v6.1 · Windows, macOS Apple Silicon &amp; Ubuntu VPS</span>
       </div>
 
       <h1>
-        Fluxo de IA Contínuo.<br /><span>Sem Pausas, Sem Limites.</span>
+        Codifique horas a fio sem olhar o relógio.<br /><span>Nem levar susto com fatura por token.</span>
       </h1>
 
       <p class="hero-sub">
-        Escolha o perfil <strong>Infinite Auto Turbo</strong> (com prioridade máxima <strong>HY4 #1</strong>) e sua linguagem favorita. O aplicativo configura suas ferramentas em 1 clique, renova rotas silenciosamente e monitora tudo em tempo real.
+        Quem programa de verdade conhece a dor: você entra em estado de fluxo numa refatoração grande e, de repente, bate num bloqueio de cota ou vê a conta da API disparar em dólares. Com o <strong>OpenInfinite v6.1</strong>, seu custo mensal é fixo, a rota <strong>HY4 #1</strong> renova sozinha nos bastidores e você trabalha em paz.
       </p>
 
       <div class="hero-ctas">
         <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn ivory pill"
            data-help-title="Download Windows (Demo 1h Grátis)"
-           data-help-what="Instalador oficial Windows 10/11 (64 bits) com 60 minutos grátis para testar todas as funções."
-           data-help-how="Baixe, instale e aperte Iniciar no painel. Depois da demo, assine Windows (R$ 99,00/mês).">
-          🪟 Baixar Grátis (1h) — Windows .exe
+           data-help-what="Instalador oficial Windows 10/11 (64 bits) com 60 minutos grátis para testar todas as funções no seu código."
+           data-help-how="Baixe, instale e aperte Iniciar no painel. Depois da demo, assine Windows (R$ 99,00/mês) ou Pro Multi-OS (R$ 159,00/mês).">
+          <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M3 5.3l7.5-1v7.2H3V5.3zm8.5-1.1L21 3v8.5h-9.5V4.2zM3 12.5h7.5v7.2l-7.5-1v-6.2zm8.5 0H21V21l-9.5-1.2v-7.3z"/></svg>
+          <span>Baixar Grátis (1h) — Windows .exe</span>
         </a>
         <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn pill"
            data-help-title="Download macOS Apple Silicon (Demo 1h Grátis)"
-           data-help-what="Aplicativo nativo Apple Silicon com transparência Liquid Glass e zero janelas extras."
-           data-help-how="Baixe o .dmg, arraste para Aplicativos e teste 1 hora grátis. Plano macOS &amp; Multi: R$ 159,00/mês.">
+           data-help-what="Aplicativo nativo Apple Silicon com transparência Liquid Glass e zero janelas secundárias."
+           data-help-how="Baixe o .dmg, arraste para Aplicativos e teste 1 hora grátis. Plano Pro Multi-OS + Hermes: R$ 159,00/mês.">
           <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
           <span>Baixar Grátis (1h) — macOS .dmg</span>
+        </a>
+        <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn pill"
+           data-help-title="Download Ubuntu Linux VPS (.tar.gz)"
+           data-help-what="Pacote self-contained .NET 9 linux-x64 com instalador rápido install-ubuntu-vps.sh para Ubuntu 22.04 e 24.04."
+           data-help-how="Extraia na sua VPS ou estação Linux e rode ./install-ubuntu-vps.sh. Requer chave Pro Multi-OS (R$ 159,00/mês) ou superior.">
+          <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          <span>Ubuntu Linux VPS — .tar.gz</span>
         </a>
       </div>
 
       <div class="hero-meta-strip">
-        <span><strong>Demo 1h</strong> completa grátis</span>
+        <span><strong>1h grátis</strong> sem cartão</span>
         <span aria-hidden="true">·</span>
-        <span>Windows por <strong>R$ 99,00/mês</strong></span>
+        <span>Windows fixo em <strong>R$ 99,00/mês</strong></span>
         <span aria-hidden="true">·</span>
-        <span>macOS + Multi (2 PCs) por <strong>R$ 159,00/mês</strong></span>
+        <span>Pro Multi-OS (Mac + Win + Ubuntu + Hermes) por <strong>R$ 159,00/mês</strong></span>
       </div>
 
       <!-- INTERACTIVE COCKPIT STAGE + LIVING 3D SYMBOL -->
@@ -734,19 +835,185 @@
     <div class="trust-strip reveal">
       <span><i aria-hidden="true"></i>Windows 10 / 11 x64</span>
       <span><i aria-hidden="true"></i>macOS Apple Silicon</span>
-      <span><i aria-hidden="true"></i>Prioridade HY4 #1</span>
-      <span><i aria-hidden="true"></i>Telemetria SQLite Real</span>
-      <span><i aria-hidden="true"></i>Ocultação Silenciosa de Popups</span>
+      <span><i aria-hidden="true"></i>Ubuntu 22.04 / 24.04 VPS</span>
+      <span><i aria-hidden="true"></i>Hermes Agent CLI + Harness</span>
+      <span><i aria-hidden="true"></i>Liberação PIX Automática</span>
     </div>
+
+    <!-- CALCULADORA DE ECONOMIA POR MILHÃO E BILHÃO DE TOKENS -->
+    <section id="economia-tokens" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Fatura Aberta vs Paz de Espírito</span>
+          <h2>Quanto custaria seu ritmo em uma API tarifada?</h2>
+        </div>
+        <p>Em projetos reais com contexto amplo e agentes rodando testes, 100 milhões de tokens evaporam rápido. Simule abaixo a diferença entre pagar por cada milhão consumido e ter mensalidade travada.</p>
+      </div>
+
+      <div class="spotlight-card calc-shell">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div>
+            <strong style="font-size:15px;">Escolha o volume mensal de tokens processados:</strong>
+            <div style="font-size:12.5px;color:var(--muted);">Referência média de mercado em APIs medidas: <span class="mono" id="calcRefRateLabel">R$ 52,20 / 1M tokens</span> (US$ 9,00 blended × R$ 5,80).</div>
+          </div>
+          <div class="calc-presets" id="tokenPresets" role="tablist" aria-label="Volume mensal de tokens">
+            <button type="button" role="tab" class="calc-preset-btn" aria-selected="false" tabindex="-1" data-tokens="1000000" data-label="1 Milhão">1M</button>
+            <button type="button" role="tab" class="calc-preset-btn" aria-selected="false" tabindex="-1" data-tokens="10000000" data-label="10 Milhões">10M</button>
+            <button type="button" role="tab" class="calc-preset-btn active" aria-selected="true" tabindex="0" data-tokens="100000000" data-label="100 Milhões">100M</button>
+            <button type="button" role="tab" class="calc-preset-btn" aria-selected="false" tabindex="-1" data-tokens="500000000" data-label="500 Milhões">500M</button>
+            <button type="button" role="tab" class="calc-preset-btn" aria-selected="false" tabindex="-1" data-tokens="1000000000" data-label="1 Bilhão">1 Bilhão</button>
+            <button type="button" role="tab" class="calc-preset-btn" aria-selected="false" tabindex="-1" data-tokens="3000000000" data-label="3 Bilhões">3 Bilhões</button>
+          </div>
+        </div>
+
+        <div class="calc-cards" aria-live="polite">
+          <div class="calc-box">
+            <span class="calc-lbl" id="calcVolTitle">API Tarifada · 100 Milhões</span>
+            <div class="calc-big danger" id="calcMeteredBrl">R$ 5.220,00</div>
+            <span style="font-size:12.5px;color:var(--muted);">Cobrança variável no cartão a cada prompt, contexto longo ou retry de agente.</span>
+            <div class="calc-bar-track" aria-hidden="true">
+              <div class="calc-bar-fill" id="calcBarMetered" style="background:var(--danger);transform:scaleX(1);"></div>
+            </div>
+          </div>
+
+          <div class="calc-box win-highlight">
+            <span class="calc-lbl">OpenInfinite Windows (1 PC)</span>
+            <div class="calc-big">R$ 99,00 <small style="font-size:12px;color:var(--muted);font-weight:500;">/mês fixo</small></div>
+            <div class="calc-save-pill" id="calcWinSaveBadge">Economia: R$ 5.121,00 (98,1%)</div>
+            <span style="font-size:12px;color:var(--muted);">Fluxo HY4 #1 contínuo no Windows sem surpresa no fim do mês.</span>
+            <div class="calc-bar-track" aria-hidden="true">
+              <div class="calc-bar-fill" id="calcBarWin" style="background:var(--emerald);transform:scaleX(0.04);"></div>
+            </div>
+          </div>
+
+          <div class="calc-box pro-highlight">
+            <span class="calc-lbl">Pro Multi-OS + Hermes Agent</span>
+            <div class="calc-big">R$ 159,00 <small style="font-size:12px;color:var(--muted);font-weight:500;">/mês fixo</small></div>
+            <div class="calc-save-pill" id="calcProSaveBadge">Economia: R$ 5.061,00 (97,0%)</div>
+            <span style="font-size:12px;color:var(--muted);">Mac + Windows + Ubuntu VPS (2 máquinas) com Hermes CLI &amp; Harness liberado.</span>
+            <div class="calc-bar-track" aria-hidden="true">
+              <div class="calc-bar-fill" id="calcBarPro" style="background:var(--accent);transform:scaleX(0.06);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAINEL AO VIVO DE CONSUMO ANÔNIMO E ECONOMIA (#consumo-ao-vivo) -->
+    <section id="consumo-ao-vivo" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Transparência em Tempo Real</span>
+          <h2>Consumo agregado e economia real da comunidade.</h2>
+        </div>
+        <p>Números somados diretamente dos heartbeats voluntários das estações conectadas — zero estimativas fictícias e privacidade total.</p>
+      </div>
+
+      <div class="spotlight-card live-shell">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div class="privacy-pill">
+            <span aria-hidden="true">🛡️</span>
+            <span>100% Anônimo: zero chaves, prefixos, e-mails, HWIDs, nomes de máquina ou IPs expostos.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span class="mono" style="font-size:11.5px;color:var(--dim);" id="liveStatsUpdated" aria-live="polite">Sincronizando telemetria...</span>
+            <button type="button" class="btn sm ghost" id="refreshStatsBtn">↻ Atualizar agora</button>
+          </div>
+        </div>
+
+        <div class="live-kpis">
+          <div class="live-kpi">
+            <span>Tokens Processados</span>
+            <strong id="liveTotalTokens">—</strong>
+          </div>
+          <div class="live-kpi">
+            <span>Cache Reaproveitado</span>
+            <strong id="liveCacheTokens">—</strong>
+          </div>
+          <div class="live-kpi">
+            <span>Economia Acumulada</span>
+            <strong id="liveSavedBrl" style="color:var(--emerald-ink);">—</strong>
+          </div>
+          <div class="live-kpi">
+            <span>Estações Ativas / Req.</span>
+            <strong id="liveClientsReq">—</strong>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--ink-secondary);margin-bottom:10px;">Média anônima por perfil de licença:</div>
+          <div id="liveProfilesGrid" class="live-profiles-grid" aria-live="polite">
+            <div class="profile-stat-card">
+              <span style="color:var(--muted);">Consultando agregados públicos em <code class="mono">/api/openinfinite/public-stats</code>...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UBUNTU LINUX VPS + NOUS RESEARCH HERMES AGENT (#ubuntu-hermes) -->
+    <section id="ubuntu-hermes" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Servidores Linux &amp; Agentes Autônomos</span>
+          <h2>Agora em Ubuntu VPS e integrado ao Hermes Agent oficial.</h2>
+        </div>
+        <p>Rode seus pipelines 24/7 numa VPS Linux enxuta e conecte o agente oficial da Nous Research diretamente ao Motor Infinite nos planos a partir do Pro.</p>
+      </div>
+
+      <div class="os-hermes-grid">
+        <div class="spotlight-card bento-card">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <h3>Ubuntu Linux VPS (22.04 / 24.04 LTS)</h3>
+              <span class="brand-ver">.NET 9 Self-Contained</span>
+            </div>
+            <p>Binário nativo <code class="mono">linux-x64</code> com SQLite embarcado, cofre Ed25519 atrelado ao <code class="mono">/etc/machine-id</code> e script <code class="mono">install-ubuntu-vps.sh</code> sem exigir root obrigatório.</p>
+            <div class="code-snippet-box" id="ubuntuInstallCmd">tar -xzf OpenInfinite-Client-Ubuntu-VPS.tar.gz &amp;&amp; ./install-ubuntu-vps.sh</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <div class="pix-actions-row">
+              <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn sm ivory">Baixar .tar.gz</a>
+              <button type="button" class="btn sm" id="copyUbuntuCmdBtn">Copiar comando</button>
+            </div>
+            <span id="ubuntuCmdFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <div class="spotlight-card bento-card">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <h3>Nous Research Hermes Agent (CLI + Harness)</h3>
+              <span class="brand-ver" style="color:#c7d2fe;border-color:var(--border-accent);">Pro R$ 159+</span>
+            </div>
+            <p>Gera automaticamente o atalho <code class="mono">infinite-hermes</code> e registra o Harness oficial em <code class="mono">~/.hermes/openinfinite-endpoint.json</code>. Zero processos ocultos iniciados sem seu comando.</p>
+            <div class="tier-matrix" aria-label="Disponibilidade do Hermes Agent por plano">
+              <div class="tier-row">
+                <span>Demo Grátis (1h) &amp; Windows Básico (<strong>R$ 99,00</strong>)</span>
+                <span class="tier-badge locked">Hermes Bloqueado</span>
+              </div>
+              <div class="tier-row unlocked">
+                <span><strong>OpenInfinite Pro Multi-OS</strong> (<strong>R$ 159,00/mês</strong> · Win/Mac/Ubuntu)</span>
+                <span class="tier-badge open">✓ Hermes CLI + Harness</span>
+              </div>
+              <div class="tier-row unlocked">
+                <span>BadClaude <strong>SuperBad 3º Nível</strong> (R$ 350) &amp; <strong>Fundador VIP</strong> (R$ 690)</span>
+                <span class="tier-badge open">✓ Incluso Completo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ASYMMETRIC BENTO FEATURE GRID -->
     <section id="recursos" class="reveal">
       <div class="sec-head">
         <div>
           <span class="sec-kicker">Arquitetura do Painel</span>
-          <h2>Recursos dinâmicos feitos para não parar.</h2>
+          <h2>Feito para aguentar rotina pesada de engenharia.</h2>
         </div>
-        <p>Interaja com os simuladores abaixo para ver como o OpenInfinite gerencia rotas, tokens reais, memória livre e temas nativos.</p>
+        <p>Teste os controles interativos abaixo e veja como o painel alterna rotas saturadas, lê seu histórico SQLite real e cuida da memória.</p>
       </div>
 
       <div class="bento-grid">
@@ -754,7 +1021,7 @@
         <div class="spotlight-card bento-card">
           <div>
             <h3>Cascata Inteligente com HY4 em 1º Lugar</h3>
-            <p>Quando uma rota atinge o limite de uso, o Motor Infinite assume na mesma sessão e renova o caminho em segundo plano.</p>
+            <p>Bateu limite de requisição numa rota? O Motor Infinite troca na mesma fração de segundo sem derrubar o diff que seu editor estava escrevendo.</p>
           </div>
           <div class="bento-widget">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
@@ -770,11 +1037,11 @@
           </div>
         </div>
 
-        <!-- Bento 2: Real SQLite Scrubber (Keyboard & Pointer accessible) -->
+        <!-- Bento 2: Real SQLite Scrubber -->
         <div class="spotlight-card bento-card">
           <div>
-            <h3>Leitura Real dos Seus Tokens e Sessões</h3>
-            <p>Zero números inventados: lê diretamente o banco local SQLite por janela de 1h, 6h, 24h e 7d. Navegue ou passe o mouse nas barras.</p>
+            <h3>Leitura Real do Seu SQLite Local</h3>
+            <p>Sem contadores enfeitados: o painel consulta direto o banco SQLite das suas sessões por janela de 1h, 6h, 24h e 7 dias.</p>
           </div>
           <div class="bento-widget">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px;" aria-live="polite">
@@ -796,7 +1063,7 @@
         <div class="spotlight-card bento-card">
           <div>
             <h3>3 Temas Nativos Instantâneos</h3>
-            <p>Troque entre Escuro OLED, Liquid Glass translúcido ou Claro Apple Daylight diretamente na barra superior do aplicativo.</p>
+            <p>Alterne entre Escuro OLED para madrugada, Liquid Glass translúcido ou Claro Daylight para escritórios iluminados.</p>
           </div>
           <div class="bento-widget">
             <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;" role="group" aria-label="Prévia dos 3 temas nativos">
@@ -814,8 +1081,8 @@
         <!-- Bento 4: RAM Cleanup -->
         <div class="spotlight-card bento-card">
           <div>
-            <h3>Modo Turbo Auto + Limpeza de RAM</h3>
-            <p>Mantém suas ferramentas sincronizadas, libera memória ociosa em 1 clique e elimina popups de conexão no Mac e no Windows.</p>
+            <h3>Modo Turbo Auto + Alívio de RAM</h3>
+            <p>Sincroniza seus terminais, enxuga processos órfãos em 1 clique e impede janelas intrusivas de roubarem o foco da IDE.</p>
           </div>
           <div class="bento-widget" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <div>
@@ -827,7 +1094,7 @@
         </div>
       </div>
 
-      <!-- 4 CLEAN REAL SCREENSHOT THUMBNAILS (Keyboard accessible buttons) -->
+      <!-- 4 CLEAN REAL SCREENSHOT THUMBNAILS -->
       <div class="shot-grid" style="margin-top:16px;" role="group" aria-label="Galeria rápida de telas do painel">
         <button type="button" class="spotlight-card shot-card active" data-shot="0" aria-pressed="true">
           <img src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Painel Principal Escuro" />
@@ -856,129 +1123,134 @@
     <section id="como-funciona" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Comece Agora</span>
-          <h2>Do download ao fluxo contínuo em 3 passos.</h2>
+          <span class="sec-kicker">Comece em Segundos</span>
+          <h2>Sem burocracia da instalação à ativação.</h2>
         </div>
       </div>
       <div class="steps-grid">
         <button type="button" class="spotlight-card step-card active" aria-pressed="true">
-          <span class="step-num">01 / TESTE GRÁTIS</span>
-          <h3>Baixe e abra em segundos</h3>
-          <p>Use todos os recursos liberados durante 1 hora completa no Windows (.exe) ou macOS Apple Silicon (.dmg).</p>
+          <span class="step-num">01 / 1 HORA LIVRE</span>
+          <h3>Teste antes no seu repositório</h3>
+          <p>Baixe para Windows (.exe), macOS (.dmg) ou Ubuntu VPS (.tar.gz) e rode 60 minutos grátis para sentir a estabilidade na prática.</p>
         </button>
         <button type="button" class="spotlight-card step-card" aria-pressed="false">
-          <span class="step-num">02 / 1 CLIQUE</span>
-          <h3>Escolha o perfil HY4 &amp; linguagem</h3>
-          <p>Aperte Iniciar no painel para alinhar OpenBot, Editor e Terminais CLI sem precisar copiar endpoints à mão.</p>
+          <span class="step-num">02 / PIX DIRETO NA TELA</span>
+          <h3>Anexe o comprovante e receba a chave</h3>
+          <p>Pague o PIX, envie o comprovante ou código E2E no próprio navegador e copie sua chave assim que liberada — sem depender de WhatsApp.</p>
         </button>
         <button type="button" class="spotlight-card step-card" aria-pressed="false">
-          <span class="step-num">03 / SEM INTERRUPÇÕES</span>
-          <h3>Pause ou renove quando quiser</h3>
-          <p>O botão muda para Pausar quando ativo, o Guardião Turbo Auto protege contra quedas e seus gráficos mostram só dados reais.</p>
+          <span class="step-num">03 / COTA PREVISÍVEL</span>
+          <h3> Ligue o Motor + Hermes e esqueça</h3>
+          <p>No plano Pro, ative também o comando <code class="mono">infinite-hermes</code> e trabalhe o mês inteiro sabendo exatamente quanto investiu.</p>
         </button>
       </div>
     </section>
 
-    <!-- MONTHLY PRICING + INTERACTIVE COMPARATOR + PIX CHECKOUT + KEY VALIDATOR -->
+    <!-- MONTHLY PRICING + INTERACTIVE COMPARATOR + AUTOMATED PIX CHECKOUT + KEY VALIDATOR -->
     <section id="planos" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Licença Mensal (1 Mês)</span>
-          <h2>Planos simples por plataforma.</h2>
+          <span class="sec-kicker">Mensalidade Fixa (30 Dias)</span>
+          <h2>Planos transparentes, entrega automática na tela.</h2>
         </div>
-        <p>Após 1 hora de demonstração gratuita, escolha o plano de 30 dias para o seu sistema e libere na hora via PIX.</p>
+        <p>Sem fidelidade nem cobrança escondida por token extra. Escolha Windows individual ou Pro Multi-OS com suporte a macOS, Ubuntu VPS e Hermes Agent.</p>
       </div>
 
-      <!-- INTERACTIVE COMPARATOR: Demo 1h vs Windows R$ 99 vs macOS R$ 159 -->
+      <!-- INTERACTIVE COMPARATOR -->
       <div class="spotlight-card comparator-card" id="comparador">
         <div class="comparator-head">
           <div>
-            <span class="sec-kicker" style="margin-bottom:2px;">Comparador Interativo</span>
-            <strong style="font-size:16px;">Compare Demo 1h, Windows e macOS &amp; Multi</strong>
+            <span class="sec-kicker" style="margin-bottom:2px;">Comparador Rápido</span>
+            <strong style="font-size:16px;">Compare Demo 1h, Windows R$ 99,00 e Pro R$ 159,00</strong>
           </div>
           <div class="comp-tabs" role="tablist" aria-label="Comparar modalidades do OpenInfinite">
             <button type="button" role="tab" class="sim-pill" id="comp-tab-demo" aria-selected="false" tabindex="-1" data-comp="demo">Demo Grátis (1h)</button>
             <button type="button" role="tab" class="sim-pill" id="comp-tab-win" aria-selected="false" tabindex="-1" data-comp="infinite">Windows · R$ 99,00</button>
-            <button type="button" role="tab" class="sim-pill active" id="comp-tab-mac" aria-selected="true" tabindex="0" data-comp="infinite_pro">macOS &amp; Multi · R$ 159,00</button>
+            <button type="button" role="tab" class="sim-pill active" id="comp-tab-mac" aria-selected="true" tabindex="0" data-comp="infinite_pro">Pro Multi-OS · R$ 159,00</button>
           </div>
         </div>
         <div class="comp-grid" id="compPanel" role="tabpanel" aria-labelledby="comp-tab-mac" aria-live="polite">
           <div class="comp-metric"><span>Investimento</span><strong id="compPrice" class="mono">R$ 159,00 / mês</strong></div>
-          <div class="comp-metric"><span>Dispositivos</span><strong id="compDevices">macOS + Windows (até 2 PCs)</strong></div>
-          <div class="comp-metric"><span>Motor &amp; Acabamento</span><strong id="compEngine">HY4 #1 + Liquid Glass + Turbo Auto</strong></div>
+          <div class="comp-metric"><span>Sistemas &amp; Máquinas</span><strong id="compDevices">Win + Mac + Ubuntu VPS (2 máq.)</strong></div>
+          <div class="comp-metric"><span>Hermes Agent Oficial</span><strong id="compEngine">Liberado (CLI + Harness)</strong></div>
           <div class="comp-metric"><span>Chave / Liberação</span><strong id="compKey" class="mono">OI6-PRO (30 dias)</strong></div>
         </div>
         <div class="comp-actions">
-          <span id="compSummary" style="font-size:13px;color:var(--muted);">Ideal para quem alterna entre Mac Apple Silicon e PC Windows com uma única licença.</span>
-          <button type="button" class="btn sm ivory" id="compActionBtn">Selecionar macOS &amp; Multi no PIX</button>
+          <span id="compSummary" style="font-size:13px;color:var(--muted);">Nosso plano mais completo: roda em Mac Apple Silicon, Windows e Ubuntu Linux VPS com Hermes Agent oficial.</span>
+          <button type="button" class="btn sm ivory" id="compActionBtn">Selecionar Pro Multi-OS (R$ 159,00) no PIX</button>
         </div>
       </div>
 
       <div class="plans-grid">
-        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias para 1 PC Windows com todos os recursos." data-help-how="Clique para gerar seu PIX de R$ 99,00.">
+        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias exclusiva para 1 computador Windows." data-help-how="Clique para selecionar R$ 99,00 no checkout PIX automatizado abaixo.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <strong style="font-size:17px;">🪟 OpenInfinite Windows</strong>
+              <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
+                <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M3 5.3l7.5-1v7.2H3V5.3zm8.5-1.1L21 3v8.5h-9.5V4.2zM3 12.5h7.5v7.2l-7.5-1v-6.2zm8.5 0H21V21l-9.5-1.2v-7.3z"/></svg>
+                <span>OpenInfinite Windows</span>
+              </strong>
               <span class="brand-ver">30 dias · 1 PC Windows</span>
             </div>
             <div class="plan-price">R$ 99,00 <small>/ mês · chave OI6-INF</small></div>
             <ul class="plan-list">
-              <li>1 computador Windows liberado por 30 dias completos</li>
+              <li>1 computador Windows 10/11 liberado por 30 dias</li>
               <li>Cascata Infinite AI com prioridade máxima HY4 #1</li>
               <li>Modo Turbo Auto silencioso + otimização de memória RAM</li>
-              <li>Botão Iniciar/Pausar e telemetria real SQLite + 3 temas</li>
-              <li>Auto-configuração em 1 clique do OpenBot e CLIs locais</li>
+              <li>Auto-configuração em 1 clique do OpenBot e editores locais</li>
+              <li class="dim-item">Não inclui macOS, Ubuntu VPS nem Hermes Agent</li>
             </ul>
           </div>
           <button type="button" class="btn ivory" data-select-plan="infinite">Assinar Windows — R$ 99,00/mês</button>
         </div>
 
-        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite macOS &amp; Multi — R$ 159,00 / mês" data-help-what="Licença oficial de 30 dias para Apple Silicon macOS + Windows (até 2 PCs)." data-help-how="Clique para gerar seu PIX de R$ 159,00.">
+        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês" data-help-what="Licença de 30 dias para macOS Apple Silicon, Windows e Ubuntu Linux VPS (até 2 máquinas) + Nous Research Hermes Agent." data-help-how="Clique para selecionar R$ 159,00 no checkout PIX automatizado abaixo.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
               <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
                 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
-                <span>OpenInfinite macOS &amp; Multi</span>
+                <span>OpenInfinite macOS, Linux &amp; Multi</span>
               </strong>
-              <span class="brand-ver" style="color:#c7d2fe;border-color:var(--border-accent);">30 dias · Mac + 2 PCs</span>
+              <span class="brand-ver" style="color:#c7d2fe;border-color:var(--border-accent);">30 dias · 2 Máquinas + Hermes</span>
             </div>
             <div class="plan-price">R$ 159,00 <small>/ mês · chave OI6-PRO</small></div>
             <ul class="plan-list">
-              <li>Aplicativo nativo macOS Apple Silicon + suporte Windows</li>
-              <li>Use em até 2 máquinas ao mesmo tempo com uma única chave</li>
-              <li>Acabamento Liquid Glass real com zero popups na frente</li>
-              <li>Tudo do Motor Infinite AI Turbo Auto + foco por linguagem</li>
-              <li>Suporte prioritário para migração de máquina via WhatsApp</li>
+              <li>Nativo macOS Apple Silicon + Windows + Ubuntu Linux VPS</li>
+              <li>Use em até 2 máquinas simultâneas com uma única chave</li>
+              <li><strong>Nous Research Hermes Agent</strong> oficial (<code class="mono">infinite-hermes</code> + Harness)</li>
+              <li>Acabamento Liquid Glass real e foco inteligente por linguagem</li>
+              <li>Entrega automática da chave na página após confirmação PIX</li>
             </ul>
           </div>
-          <button type="button" class="btn accent" data-select-plan="infinite_pro">Assinar macOS &amp; Multi — R$ 159,00/mês</button>
+          <button type="button" class="btn accent" data-select-plan="infinite_pro">Assinar Pro Multi-OS — R$ 159,00/mês</button>
         </div>
       </div>
 
       <div class="bc-footnote">
-        <span>Já usa <strong>BadClaude</strong> a partir do 3º nível (<strong>Cockpit Pro</strong> ou <strong>Fundador VIP</strong>)? Sua chave <code class="mono">BC5-...</code> também destrava o OpenInfinite v6.1 Win + Mac gratuitamente.</span>
+        <span>Já assina <strong>BadClaude</strong> a partir do 3º nível — <strong>SuperBad / Cockpit Pro</strong> (R$ 350) ou <strong>Fundador VIP</strong> (R$ 690)? Sua chave <code class="mono">BC5-...</code> já libera o OpenInfinite Multi-OS + Hermes Agent sem pagar nada a mais.</span>
         <a href="/badclaude/" style="color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap;">Ver BadClaude →</a>
       </div>
 
       <div class="dual-grid">
+        <!-- AUTOMATED PIX CHECKOUT + RECEIPT UPLOAD + KEY DELIVERY -->
         <div class="spotlight-card panel" id="checkout">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <h2 style="font-size:19px;font-weight:800;">Gerar PIX da Assinatura</h2>
-            <button type="button" class="help-q" aria-label="Ajuda sobre Checkout PIX Oficial" data-help-title="Checkout PIX Oficial" data-help-what="Gera QR Code oficial e Copia e Cola para 68 99226-9296 (Raiane Lenoncio)." data-help-how="Escolha Windows (R$ 99,00) ou macOS &amp; Multi (R$ 159,00) e preencha seu nome e contato.">?</button>
+            <h2 style="font-size:19px;font-weight:800;">Checkout PIX com Entrega na Tela</h2>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Checkout PIX Automatizado" data-help-title="Checkout PIX Automatizado" data-help-what="Gera o QR Code PIX, recebe seu comprovante ou E2E ID aqui mesmo e exibe sua chave na tela assim que aprovada." data-help-how="1) Gere o PIX; 2) Pague no banco; 3) Anexe o comprovante ou E2E ID abaixo para receber sua chave sem precisar de WhatsApp.">?</button>
           </div>
           <div class="pix-card">
             <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX</div>
-            <div style="color:var(--muted);">Telefone: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Lenoncio</strong></div>
+            <div style="color:var(--muted);">Chave: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Lenoncio</strong></div>
             <div class="pix-actions-row">
               <button type="button" id="copyPixBtn" class="btn sm">Copiar Chave PIX</button>
               <span id="pixCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
             </div>
           </div>
+
           <form id="orderForm" novalidate>
             <div class="field">
-              <label for="ordPlan">Plano Mensal (1 Mês)</label>
+              <label for="ordPlan">Plano Mensal (30 Dias)</label>
               <select id="ordPlan">
-                <option value="infinite_pro" selected>OpenInfinite macOS &amp; Multi — R$ 159,00 / mês (Mac + 2 PCs)</option>
+                <option value="infinite_pro" selected>OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês (Mac + Win + Ubuntu)</option>
                 <option value="infinite">OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
               </select>
             </div>
@@ -987,10 +1259,10 @@
               <input id="ordName" type="text" required autocomplete="name" placeholder="Ex.: Maria Oliveira" />
             </div>
             <div class="field">
-              <label for="ordContact">Seu WhatsApp ou E-mail</label>
-              <input id="ordContact" type="text" required autocomplete="tel" placeholder="Ex.: (68) 99999-9999" />
+              <label for="ordContact">Seu E-mail ou Contato (para registro da licença)</label>
+              <input id="ordContact" type="text" required autocomplete="email" placeholder="Ex.: dev@seudominio.com ou (68) 99999-9999" />
             </div>
-            <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">Gerar QR Code PIX</button>
+            <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">1. Gerar QR Code PIX</button>
           </form>
 
           <div id="orderErrorBox" class="result-box is-error" role="alert" aria-live="assertive">
@@ -1000,24 +1272,64 @@
           </div>
 
           <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
-            <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
+              <span class="brand-ver" id="orderLiveStatusBadge">Aguardando comprovante</span>
+            </div>
             <div class="mono" id="orderResultCode" style="background:#040509;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
             <div class="pix-actions-row">
               <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
               <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
             </div>
             <div id="orderPixQrWrap" style="text-align:center;"></div>
-            <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm">Enviar Comprovante no WhatsApp</a>
+
+            <!-- INSTANT DELIVERED KEY CARD (shown automatically when approved/delivered) -->
+            <div id="deliveredKeyBox" class="delivered-key-card" role="region" aria-label="Chave de licença liberada">
+              <strong style="color:var(--emerald-ink);font-size:14px;">🎉 Pagamento confirmado! Sua chave está pronta:</strong>
+              <div class="mono" id="deliveredKeyValue" style="background:#040509;padding:10px;border:1px solid rgba(16,185,129,0.5);border-radius:8px;word-break:break-all;font-size:12.5px;color:#fff;font-weight:700;">—</div>
+              <div class="pix-actions-row">
+                <button type="button" id="copyDeliveredKeyBtn" class="btn ivory sm">Copiar Minha Chave</button>
+                <button type="button" id="testDeliveredKeyBtn" class="btn sm">Testar no Validador</button>
+                <span id="deliveredKeyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <!-- SELF-SERVICE RECEIPT / E2E UPLOAD (NO WHATSAPP REQUIRED) -->
+            <form id="receiptForm" class="receipt-subpanel" novalidate>
+              <strong style="color:var(--ink);font-size:13.5px;">2. Enviar Comprovante ou Código E2E (Liberação Automática)</strong>
+              <span style="font-size:12px;color:var(--muted);">Anexe o comprovante (PNG, JPG, WebP ou PDF até 3 MB) e/ou informe o ID E2E do PIX. Assim que confirmado, sua chave aparece automaticamente acima nesta tela.</span>
+              <div class="field" style="margin-bottom:6px;">
+                <label for="receiptFileInput">Anexar Comprovante (Imagem ou PDF · máx. 3 MB)</label>
+                <input id="receiptFileInput" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" />
+              </div>
+              <div class="field" style="margin-bottom:6px;">
+                <label for="receiptE2eInput">Código E2E do PIX (opcional — acelera conciliação automática)</label>
+                <input id="receiptE2eInput" type="text" class="mono" placeholder="Ex.: E182361202026..." autocomplete="off" />
+              </div>
+              <div class="field" style="margin-bottom:6px;">
+                <label for="receiptNoteInput">Observação rápida (opcional)</label>
+                <input id="receiptNoteInput" type="text" placeholder="Ex.: Pago via Nubank às 14:20" />
+              </div>
+              <button type="submit" id="receiptSubmitBtn" class="btn accent sm" style="width:100%;">Enviar Comprovante e Aguardar Chave na Tela</button>
+            </form>
+
+            <div id="receiptFeedbackBox" class="result-box" role="status" aria-live="polite"></div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">
+              <button type="button" id="checkOrderNowBtn" class="btn ghost sm">↻ Consultar liberação agora</button>
+              <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn ghost sm">Suporte humano opcional (WhatsApp)</a>
+            </div>
           </div>
         </div>
 
+        <!-- ONLINE KEY VALIDATOR -->
         <div class="spotlight-card panel" id="licenca">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:19px;font-weight:800;">Validar Chave de Acesso</h2>
             <button type="button" class="help-q" aria-label="Ajuda sobre Validar Chave Online" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Cole a chave abaixo e clique em Conferir Chave.">?</button>
           </div>
           <p style="font-size:13.5px;color:var(--muted);">
-            Aceita chaves mensais <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (macOS &amp; Multi) e chaves BadClaude 3º Nível+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
+            Aceita chaves mensais <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (Pro Multi-OS + Hermes) e chaves BadClaude 3º Nível+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
           </p>
           <form id="verifyForm" novalidate>
             <div class="field">
@@ -1028,8 +1340,8 @@
           </form>
           <div id="licResultBox" class="result-box" role="status" aria-live="polite"></div>
           <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
-            Formatou o computador e precisa liberar o HWID antigo?
-            <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm" style="margin-top:8px;">Suporte WhatsApp: (68) 99226-9296</a>
+            Trocou de máquina ou reformatou sua VPS e precisa resetar o HWID?
+            <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn ghost sm" style="margin-top:8px;">Solicitar reset de HWID (opcional via WhatsApp)</a>
           </div>
         </div>
       </div>
@@ -1039,20 +1351,20 @@
     <section id="faq" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Dúvidas Frequentes</span>
-          <h2>Respostas diretas antes de assinar.</h2>
+          <span class="sec-kicker">Dúvidas Diretas</span>
+          <h2>O que você precisa saber antes de assinar.</h2>
         </div>
       </div>
       <div class="faq-list">
         <div class="faq-item open">
           <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
-            <span>O que acontece após a demonstração gratuita de 1 hora?</span>
+            <span>Preciso chamar no WhatsApp para receber minha chave após pagar o PIX?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                Durante 60 minutos você testa todos os recursos do OpenInfinite v6.1 sem cartão de crédito. Ao concluir a demo, basta gerar seu PIX nesta página (R$ 99,00 no Windows ou R$ 159,00 no macOS &amp; Multi) e colar a chave recebida no painel.
+                Não! Depois de gerar o QR Code PIX aqui na página, basta anexar a imagem/PDF do comprovante ou informar o código E2E no próprio formulário. A página verifica automaticamente o pedido a cada poucos segundos e exibe sua chave pronta para copiar na tela assim que aprovada. O WhatsApp fica disponível apenas se você quiser suporte humano opcional.
               </div>
             </div>
           </div>
@@ -1060,13 +1372,13 @@
 
         <div class="faq-item">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
-            <span>Qual a diferença entre Windows (R$ 99,00) e macOS &amp; Multi (R$ 159,00)?</span>
+            <span>Em quais planos o Ubuntu Linux VPS e o Nous Research Hermes Agent funcionam?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                O plano Windows (R$ 99,00/mês) libera 1 computador Windows com chave <code class="mono">OI6-INF</code>. O plano macOS &amp; Multi (R$ 159,00/mês) libera o app nativo Apple Silicon com acabamento Liquid Glass e permite uso simultâneo em até 2 máquinas (Mac + Windows) com chave <code class="mono">OI6-PRO</code>.
+                Tanto o cliente Ubuntu Linux VPS (<code class="mono">install-ubuntu-vps.sh</code>) quanto a integração oficial com o Hermes Agent (<code class="mono">infinite-hermes</code> CLI + Harness <code class="mono">~/.hermes/openinfinite-endpoint.json</code>) são liberados a partir do plano <strong>OpenInfinite Pro Multi-OS (R$ 159,00/mês · chave OI6-PRO)</strong>, além do BadClaude 3º nível (SuperBad / Cockpit Pro R$ 350 e Fundador VIP R$ 690). Na Demo de 1h e no plano Windows de R$ 99,00 (<code class="mono">OI6-INF</code>), o Hermes Agent permanece bloqueado.
               </div>
             </div>
           </div>
@@ -1074,13 +1386,13 @@
 
         <div class="faq-item">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
-            <span>Tenho BadClaude (Cockpit Pro / Fundador VIP, 3º nível+) — preciso pagar separado?</span>
+            <span>Meus dados ou chaves aparecem no painel público de consumo em tempo real?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                Não. Chaves BadClaude válidas a partir do 3º nível (<code class="mono">BC5-...</code> SuperBad / Cockpit Pro ou Fundador VIP) já incluem acesso ao OpenInfinite v6.1 Windows e macOS sem custo adicional.
+                Jamais. O endpoint <code class="mono">/api/openinfinite/public-stats</code> soma apenas contadores numéricos anônimos de tokens, cache e economia média por categoria de plano. Nenhuma chave, prefixo, e-mail, HWID, hostname ou endereço IP é retornado.
               </div>
             </div>
           </div>
@@ -1088,13 +1400,13 @@
 
         <div class="faq-item">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
-            <span>Como o validador de chave e o checkout funcionam se eu estiver offline?</span>
+            <span>Tenho BadClaude (Cockpit Pro / Fundador VIP, 3º nível+) — preciso pagar separado?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                Ambos os formulários exibem o status em tempo real inline, sem janelas de alerta do navegador. Caso sua rede oscile, você vê o aviso de erro na hora com botão de tentar novamente sem perder os dados digitados.
+                Não. Chaves BadClaude válidas a partir do 3º nível (<code class="mono">BC5-...</code> SuperBad / Cockpit Pro ou Fundador VIP) já destravam o OpenInfinite v6.1 completo em Windows, macOS e Ubuntu VPS, incluindo o Hermes Agent oficial.
               </div>
             </div>
           </div>
@@ -1136,9 +1448,28 @@
     (function () {
       const $ = (id) => document.getElementById(id);
       const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const ORDER_STORAGE_KEY = 'openinfinite_active_order_v1';
+      const ALLOWED_RECEIPT_MIMES = new Set(['image/png', 'image/jpeg', 'image/webp', 'application/pdf']);
+      const MAX_RECEIPT_BYTES = 3 * 1024 * 1024;
+
       let lastHoverEl = null;
       let lastFocusBeforeModal = null;
       let lastBrcode = '';
+      let activeOrder = null;
+      let orderPollTimer = null;
+      let refBrlPerMillion = 52.2;
+
+      const brlFmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+      const intFmt = new Intl.NumberFormat('pt-BR');
+
+      function formatCompactTokens(n) {
+        const val = Number(n || 0);
+        if (!Number.isFinite(val) || val <= 0) return '0';
+        if (val >= 1e9) return (val / 1e9).toLocaleString('pt-BR', { maximumFractionDigits: 2 }) + ' B';
+        if (val >= 1e6) return (val / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 2 }) + ' M';
+        if (val >= 1e3) return (val / 1e3).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' K';
+        return intFmt.format(Math.round(val));
+      }
 
       function runTransition(fn) {
         if (document.startViewTransition && !reducedMotion) {
@@ -1380,6 +1711,182 @@
         }
       });
 
+      // Token Million & Billion Calculator (#economia-tokens)
+      const presetBtns = Array.from(document.querySelectorAll('#tokenPresets [role="tab"]'));
+      let currentCalcTokens = 100_000_000;
+      let currentCalcLabel = '100 Milhões';
+
+      function renderTokenCalc(tokens, label, focusBtn) {
+        currentCalcTokens = tokens;
+        currentCalcLabel = label;
+        const millions = tokens / 1_000_000;
+        const meteredBrl = millions * refBrlPerMillion;
+        const winCost = 99;
+        const proCost = 159;
+
+        $('calcVolTitle').textContent = `API Tarifada · ${label}`;
+        $('calcMeteredBrl').textContent = brlFmt.format(meteredBrl);
+
+        const formatSavings = (cost) => {
+          const diff = meteredBrl - cost;
+          if (diff <= 0) {
+            return 'Teto fixo protegido (zero fatura extra)';
+          }
+          const pct = Math.min(99.9, (diff / meteredBrl) * 100);
+          return `Economia: ${brlFmt.format(diff)} (${pct.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)`;
+        };
+
+        $('calcWinSaveBadge').textContent = formatSavings(winCost);
+        $('calcProSaveBadge').textContent = formatSavings(proCost);
+
+        const winRatio = Math.max(0.03, Math.min(1, winCost / Math.max(meteredBrl, proCost)));
+        const proRatio = Math.max(0.05, Math.min(1, proCost / Math.max(meteredBrl, proCost)));
+        const metRatio = Math.max(0.08, Math.min(1, meteredBrl / Math.max(meteredBrl, proCost)));
+        $('calcBarMetered').style.transform = `scaleX(${metRatio.toFixed(3)})`;
+        $('calcBarWin').style.transform = `scaleX(${winRatio.toFixed(3)})`;
+        $('calcBarPro').style.transform = `scaleX(${proRatio.toFixed(3)})`;
+
+        presetBtns.forEach((b) => {
+          const on = Number(b.dataset.tokens) === tokens;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-selected', String(on));
+          b.setAttribute('tabindex', on ? '0' : '-1');
+          if (on && focusBtn) b.focus();
+        });
+      }
+
+      presetBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', () => renderTokenCalc(Number(btn.dataset.tokens), btn.dataset.label, false));
+        btn.addEventListener('keydown', (ev) => {
+          let next = null;
+          if (ev.key === 'ArrowRight') next = (idx + 1) % presetBtns.length;
+          else if (ev.key === 'ArrowLeft') next = (idx - 1 + presetBtns.length) % presetBtns.length;
+          else if (ev.key === 'Home') next = 0;
+          else if (ev.key === 'End') next = presetBtns.length - 1;
+          if (next !== null) {
+            ev.preventDefault();
+            const target = presetBtns[next];
+            renderTokenCalc(Number(target.dataset.tokens), target.dataset.label, true);
+          }
+        });
+      });
+      renderTokenCalc(100_000_000, '100 Milhões', false);
+
+      // Live Anonymous Public Stats (#consumo-ao-vivo)
+      async function fetchPublicStats() {
+        const statusEl = $('liveStatsUpdated');
+        const gridEl = $('liveProfilesGrid');
+        try {
+          const res = await fetch('/api/openinfinite/public-stats', { headers: { 'Accept': 'application/json' } });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !data.totals) {
+            statusEl.textContent = 'Telemetria ao vivo em sincronização';
+            $('liveTotalTokens').textContent = '0';
+            $('liveCacheTokens').textContent = '0';
+            $('liveSavedBrl').textContent = brlFmt.format(0);
+            $('liveClientsReq').textContent = '0 ativas';
+            gridEl.textContent = '';
+            const card = document.createElement('div');
+            card.className = 'profile-stat-card';
+            card.textContent = 'Servidor aguardando os primeiros heartbeats agregados.';
+            gridEl.appendChild(card);
+            return;
+          }
+
+          if (data.pricing_reference && Number(data.pricing_reference.metered_blended_brl_per_1m_tokens) > 0) {
+            refBrlPerMillion = Number(data.pricing_reference.metered_blended_brl_per_1m_tokens);
+            $('calcRefRateLabel').textContent = `${brlFmt.format(refBrlPerMillion)} / 1M tokens`;
+            renderTokenCalc(currentCalcTokens, currentCalcLabel, false);
+          }
+
+          const t = data.totals;
+          $('liveTotalTokens').textContent = formatCompactTokens(t.total_tokens_processed);
+          $('liveCacheTokens').textContent = formatCompactTokens(t.cache_tokens);
+          $('liveSavedBrl').textContent = brlFmt.format(Math.max(0, Number(t.saved_brl_total || 0)));
+          const activeNow = intFmt.format(Number(t.active_clients_now || 0));
+          const reqCount = formatCompactTokens(t.requests);
+          $('liveClientsReq').textContent = `${activeNow} / ${reqCount} req`;
+
+          const updatedDate = data.updated_at ? new Date(data.updated_at) : null;
+          statusEl.textContent = updatedDate && !Number.isNaN(updatedDate.getTime())
+            ? `Atualizado às ${updatedDate.toLocaleTimeString('pt-BR')}`
+            : 'Atualizado agora';
+
+          gridEl.textContent = '';
+          const profiles = Array.isArray(data.profiles) ? data.profiles : [];
+          if (profiles.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'profile-stat-card';
+            empty.textContent = 'Nenhum perfil com consumo registrado ainda neste ciclo — zero números inventados.';
+            gridEl.appendChild(empty);
+            return;
+          }
+
+          profiles.forEach((p) => {
+            const card = document.createElement('div');
+            card.className = 'profile-stat-card';
+
+            const head = document.createElement('div');
+            head.className = 'profile-stat-head';
+            const title = document.createElement('span');
+            title.textContent = String(p.label || p.profile || 'Perfil');
+            const badge = document.createElement('span');
+            badge.className = 'brand-ver';
+            badge.textContent = `${intFmt.format(Number(p.clients_count || 0))} est.`;
+            head.appendChild(title);
+            head.appendChild(badge);
+
+            const r1 = document.createElement('div');
+            r1.className = 'profile-stat-row';
+            r1.innerHTML = '<span>Média / cliente:</span>';
+            const b1El = document.createElement('b');
+            b1El.textContent = `${formatCompactTokens(p.avg_tokens_per_client)} tokens`;
+            r1.appendChild(b1El);
+
+            const r2 = document.createElement('div');
+            r2.className = 'profile-stat-row';
+            r2.innerHTML = '<span>Equiv. tarifado:</span>';
+            const b2El = document.createElement('b');
+            b2El.textContent = brlFmt.format(Number(p.metered_equivalent_brl || 0));
+            r2.appendChild(b2El);
+
+            const r3 = document.createElement('div');
+            r3.className = 'profile-stat-row';
+            r3.innerHTML = '<span>Economia líquida:</span>';
+            const b3El = document.createElement('b');
+            b3El.style.color = 'var(--emerald-ink)';
+            b3El.textContent = brlFmt.format(Math.max(0, Number(p.saved_brl || 0)));
+            r3.appendChild(b3El);
+
+            card.appendChild(head);
+            card.appendChild(r1);
+            card.appendChild(r2);
+            card.appendChild(r3);
+            gridEl.appendChild(card);
+          });
+        } catch (_err) {
+          statusEl.textContent = 'Modo offline — clique para atualizar';
+        }
+      }
+
+      $('refreshStatsBtn').addEventListener('click', () => fetchPublicStats());
+      fetchPublicStats();
+      setInterval(() => {
+        if (document.visibilityState === 'visible') fetchPublicStats();
+      }, 15000);
+
+      // Copy Ubuntu install command
+      $('copyUbuntuCmdBtn').addEventListener('click', async () => {
+        const cmd = 'tar -xzf OpenInfinite-Client-Ubuntu-VPS.tar.gz && ./install-ubuntu-vps.sh';
+        const ok = await copyTextSafely(cmd);
+        showInlineCopyState(
+          $('copyUbuntuCmdBtn'),
+          $('ubuntuCmdFeedback'),
+          'Copiar comando',
+          ok ? 'Comando install-ubuntu-vps.sh copiado!' : 'Copie manualmente o comando acima.'
+        );
+      });
+
       // Interactive Bento 1: Cascade rotation simulator
       let casIdx = 0;
       const casLabels = [
@@ -1462,8 +1969,8 @@
       const COMP_DATA = {
         demo: {
           price: 'Grátis por 1 hora',
-          devices: 'Windows ou macOS (1 sessão)',
-          engine: 'HY4 #1 + Todos os recursos liberados',
+          devices: 'Win, Mac ou Ubuntu (teste)',
+          engine: 'Bloqueado na Demo',
           key: 'Sem chave · Teste imediato',
           summary: 'Baixe o instalador oficial e valide o painel no seu projeto real durante 60 minutos.',
           cta: 'Baixar Demo Windows (.exe)',
@@ -1471,20 +1978,20 @@
         },
         infinite: {
           price: 'R$ 99,00 / mês',
-          devices: '1 PC Windows (30 dias)',
-          engine: 'HY4 #1 + Turbo Auto + 3 Temas',
+          devices: '1 PC Windows exclusivo',
+          engine: 'Bloqueado (só Windows)',
           key: 'OI6-INF (30 dias)',
-          summary: 'Plano dedicado para estações Windows com renovação silenciosa e limpeza de RAM.',
+          summary: 'Plano econômico dedicado para 1 estação Windows com HY4 #1 e renovação silenciosa.',
           cta: 'Selecionar Windows (R$ 99,00) no PIX',
           action: () => selectPlan('infinite'),
         },
         infinite_pro: {
           price: 'R$ 159,00 / mês',
-          devices: 'macOS + Windows (até 2 PCs)',
-          engine: 'HY4 #1 + Liquid Glass + Turbo Auto',
+          devices: 'Win + Mac + Ubuntu VPS (2 máq.)',
+          engine: 'Liberado (CLI + Harness)',
           key: 'OI6-PRO (30 dias)',
-          summary: 'Ideal para quem alterna entre Mac Apple Silicon e PC Windows com uma única licença.',
-          cta: 'Selecionar macOS & Multi (R$ 159,00) no PIX',
+          summary: 'Nosso plano mais completo: roda em Mac Apple Silicon, Windows e Ubuntu Linux VPS com Hermes Agent oficial.',
+          cta: 'Selecionar Pro Multi-OS (R$ 159,00) no PIX',
           action: () => selectPlan('infinite_pro'),
         },
       };
@@ -1645,6 +2152,171 @@
         );
       });
 
+      // Automated Order Persistence, Receipt Upload & License Key Delivery Polling
+      const STATUS_LABELS = {
+        pending_pix: 'Aguardando pagamento PIX',
+        awaiting_receipt: 'Aguardando comprovante',
+        receipt_submitted: 'Comprovante enviado · validando...',
+        approved: 'Aprovado · Chave liberada!',
+        delivered: 'Chave entregue na tela!',
+      };
+
+      function saveActiveOrder(ord) {
+        activeOrder = ord;
+        try {
+          if (ord) sessionStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(ord));
+          else sessionStorage.removeItem(ORDER_STORAGE_KEY);
+        } catch (_e) { /* storage disabled */ }
+      }
+
+      function renderDeliveredKey(licenseKey) {
+        if (!licenseKey) return;
+        $('deliveredKeyValue').textContent = licenseKey;
+        $('deliveredKeyBox').classList.add('is-visible');
+        $('orderLiveStatusBadge').textContent = 'Chave liberada!';
+        $('orderLiveStatusBadge').style.color = 'var(--emerald-ink)';
+        $('orderLiveStatusBadge').style.borderColor = 'rgba(16,185,129,0.5)';
+        if (orderPollTimer) {
+          clearInterval(orderPollTimer);
+          orderPollTimer = null;
+        }
+      }
+
+      $('copyDeliveredKeyBtn').addEventListener('click', async () => {
+        const k = $('deliveredKeyValue').textContent.trim();
+        if (!k || k === '—') return;
+        const ok = await copyTextSafely(k);
+        showInlineCopyState(
+          $('copyDeliveredKeyBtn'),
+          $('deliveredKeyFeedback'),
+          'Copiar Minha Chave',
+          ok ? 'Chave copiada! Cole no aplicativo OpenInfinite.' : 'Selecione a chave acima para copiar.'
+        );
+      });
+
+      $('testDeliveredKeyBtn').addEventListener('click', () => {
+        const k = $('deliveredKeyValue').textContent.trim();
+        if (!k || k === '—') return;
+        $('licKeyInput').value = k;
+        $('licenca')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+        submitVerify();
+      });
+
+      async function pollOrderStatus(manualFeedback) {
+        if (!activeOrder || !activeOrder.order_id || !activeOrder.order_secret) return;
+        try {
+          const url = `/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}?order_secret=${encodeURIComponent(activeOrder.order_secret)}`;
+          const res = await fetch(url, {
+            headers: { 'Accept': 'application/json', 'x-order-secret': activeOrder.order_secret }
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !data.order) return;
+
+          const ord = data.order;
+          const st = String(ord.status || '');
+          $('orderLiveStatusBadge').textContent = STATUS_LABELS[st] || st;
+
+          if (ord.license_key && (st === 'approved' || st === 'delivered')) {
+            activeOrder.license_key = ord.license_key;
+            activeOrder.status = st;
+            saveActiveOrder(activeOrder);
+            renderDeliveredKey(ord.license_key);
+          } else if (manualFeedback) {
+            renderBoxMessage(
+              $('receiptFeedbackBox'),
+              'is-warn',
+              'Pedido ainda em confirmação',
+              `Status atual: ${STATUS_LABELS[st] || st}. Continuamos verificando automaticamente a cada 5 segundos.`,
+              null
+            );
+          }
+        } catch (_err) {
+          if (manualFeedback) {
+            renderBoxMessage($('receiptFeedbackBox'), 'is-error', 'Sem resposta no momento', 'Tente consultar novamente em alguns segundos.', null);
+          }
+        }
+      }
+
+      function startOrderPolling() {
+        if (orderPollTimer) clearInterval(orderPollTimer);
+        orderPollTimer = setInterval(() => {
+          if (document.visibilityState === 'visible' && activeOrder && !activeOrder.license_key) {
+            pollOrderStatus(false);
+          }
+        }, 5000);
+      }
+
+      $('checkOrderNowBtn').addEventListener('click', () => pollOrderStatus(true));
+
+      function hydrateOrderUI(o) {
+        lastBrcode = o.brcode || o.pix?.brcode || '68 99226-9296';
+        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display}) pronto!`;
+        $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
+        $('brcodeCopyFeedback').textContent = '';
+        $('orderLiveStatusBadge').textContent = STATUS_LABELS[o.status] || 'Aguardando comprovante';
+
+        const qrWrap = $('orderPixQrWrap');
+        qrWrap.textContent = '';
+        const qrUrl = o.qr_data_url || o.pix?.qr_data_url;
+        if (qrUrl) {
+          const img = document.createElement('img');
+          img.src = qrUrl;
+          img.alt = `QR Code PIX para o pedido ${o.order_id}`;
+          img.style.cssText = 'width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;';
+          qrWrap.appendChild(img);
+        }
+        if (o.whatsapp_url) $('btnWhatsOrder').href = o.whatsapp_url;
+        $('orderResultBox').classList.add('is-visible');
+
+        if (o.license_key) {
+          renderDeliveredKey(o.license_key);
+        } else {
+          $('deliveredKeyBox').classList.remove('is-visible');
+          startOrderPolling();
+        }
+      }
+
+      // Restore active session order if present
+      try {
+        const rawSaved = sessionStorage.getItem(ORDER_STORAGE_KEY);
+        if (rawSaved) {
+          const parsed = JSON.parse(rawSaved);
+          if (parsed && parsed.order_id && parsed.order_secret) {
+            activeOrder = parsed;
+            hydrateOrderUI(parsed);
+            if (!parsed.license_key) pollOrderStatus(false);
+          }
+        }
+      } catch (_e) { /* ignore */ }
+
+      function renderBoxMessage(box, variant, titleText, detailText, retryFn) {
+        box.textContent = '';
+        box.className = `result-box is-visible ${variant || ''}`.trim();
+        const strong = document.createElement('strong');
+        strong.textContent = titleText;
+        if (variant === 'is-success') strong.style.color = 'var(--emerald-ink)';
+        else if (variant === 'is-warn') strong.style.color = 'var(--amber)';
+        else if (variant === 'is-error') strong.style.color = 'var(--danger)';
+        else strong.style.color = 'var(--ink)';
+        box.appendChild(strong);
+
+        if (detailText) {
+          const span = document.createElement('span');
+          span.style.color = 'var(--ink-secondary)';
+          span.textContent = detailText;
+          box.appendChild(span);
+        }
+        if (typeof retryFn === 'function') {
+          const retryBtn = document.createElement('button');
+          retryBtn.type = 'button';
+          retryBtn.className = 'btn sm';
+          retryBtn.style.alignSelf = 'flex-start';
+          retryBtn.textContent = '↻ Tentar novamente';
+          retryBtn.addEventListener('click', retryFn);
+          box.appendChild(retryBtn);
+        }
+      }
+
       // Checkout PIX Form (loading/error/offline/retry inline)
       async function submitOrder() {
         const nameEl = $('ordName');
@@ -1670,7 +2342,7 @@
         if (!buyerContact) {
           contactEl.setAttribute('aria-invalid', 'true');
           $('orderErrorHead').textContent = 'Contato obrigatório';
-          $('orderErrorMsg').textContent = 'Informe seu WhatsApp ou e-mail para receber sua chave.';
+          $('orderErrorMsg').textContent = 'Informe seu e-mail ou WhatsApp para vincular sua licença.';
           errBox.classList.add('is-visible');
           contactEl.focus();
           return;
@@ -1707,22 +2379,20 @@
           }
 
           const o = data.order;
-          lastBrcode = o.pix?.brcode || '68 99226-9296';
-          $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display}) pronto!`;
-          $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
-          $('brcodeCopyFeedback').textContent = '';
-
-          const qrWrap = $('orderPixQrWrap');
-          qrWrap.textContent = '';
-          if (o.pix?.qr_data_url) {
-            const img = document.createElement('img');
-            img.src = o.pix.qr_data_url;
-            img.alt = `QR Code PIX para o pedido ${o.order_id}`;
-            img.style.cssText = 'width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;';
-            qrWrap.appendChild(img);
-          }
-          if (o.whatsapp_url) $('btnWhatsOrder').href = o.whatsapp_url;
-          resBox.classList.add('is-visible');
+          const stored = {
+            order_id: o.order_id,
+            order_secret: o.order_secret,
+            status: o.status || 'pending_pix',
+            amount_display: o.amount_display,
+            requested_edition: o.requested_edition,
+            brcode: o.pix?.brcode || '68 99226-9296',
+            qr_data_url: o.pix?.qr_data_url || '',
+            whatsapp_url: o.whatsapp_url || '',
+            license_key: o.license_key || null,
+          };
+          $('receiptFeedbackBox').classList.remove('is-visible');
+          saveActiveOrder(stored);
+          hydrateOrderUI(stored);
         } catch (_err) {
           resBox.classList.remove('is-visible');
           $('orderErrorHead').textContent = 'Falha de conexão com o servidor';
@@ -1731,7 +2401,7 @@
         } finally {
           submitBtn.disabled = false;
           submitBtn.removeAttribute('aria-busy');
-          submitBtn.textContent = 'Gerar QR Code PIX';
+          submitBtn.textContent = '1. Gerar QR Code PIX';
         }
       }
 
@@ -1740,6 +2410,115 @@
         submitOrder();
       });
       $('retryOrderBtn').addEventListener('click', () => submitOrder());
+
+      // Read file as base64 payload
+      function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const str = String(reader.result || '');
+            const commaIdx = str.indexOf(',');
+            resolve(commaIdx >= 0 ? str.slice(commaIdx + 1) : str);
+          };
+          reader.onerror = () => reject(new Error('Falha ao ler arquivo local.'));
+          reader.readAsDataURL(file);
+        });
+      }
+
+      async function submitReceipt() {
+        const fb = $('receiptFeedbackBox');
+        const btn = $('receiptSubmitBtn');
+        if (!activeOrder || !activeOrder.order_id || !activeOrder.order_secret) {
+          renderBoxMessage(fb, 'is-error', 'Gere primeiro o pedido PIX acima', 'Preencha seu nome e clique em Gerar QR Code PIX.', null);
+          return;
+        }
+
+        const file = $('receiptFileInput').files && $('receiptFileInput').files[0];
+        const e2eId = $('receiptE2eInput').value.trim();
+        const rawNote = $('receiptNoteInput').value.trim();
+
+        if (!file && !e2eId && !rawNote) {
+          renderBoxMessage(fb, 'is-error', 'Envie o comprovante ou código E2E', 'Selecione a imagem/PDF do comprovante ou cole o código E2E da transação PIX.', null);
+          return;
+        }
+
+        if (file) {
+          if (!ALLOWED_RECEIPT_MIMES.has(file.type)) {
+            renderBoxMessage(fb, 'is-error', 'Formato de arquivo não suportado', 'Envie PNG, JPEG, WebP ou PDF.', null);
+            return;
+          }
+          if (file.size > MAX_RECEIPT_BYTES) {
+            renderBoxMessage(fb, 'is-error', 'Arquivo maior que 3 MB', 'Envie uma captura ou PDF com até 3 MB.', null);
+            return;
+          }
+        }
+
+        if (navigator.onLine === false) {
+          renderBoxMessage(fb, 'is-error', 'Sem conexão no momento', 'Reconecte à internet para enviar seu comprovante.', submitReceipt);
+          return;
+        }
+
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
+        btn.textContent = 'Enviando comprovante...';
+
+        try {
+          const payload = {
+            order_secret: activeOrder.order_secret,
+            receipt_note: rawNote || (e2eId ? `E2E: ${e2eId}` : `Arquivo: ${file.name}`),
+          };
+          if (e2eId) payload.e2e_id = e2eId;
+          if (file) {
+            payload.receipt_file_b64 = await readFileAsBase64(file);
+            payload.receipt_file_mime = file.type;
+            payload.receipt_file_name = file.name.slice(0, 120);
+          }
+
+          const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-order-secret': activeOrder.order_secret,
+            },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            renderBoxMessage(fb, 'is-error', 'Falha ao registrar comprovante', data.error || `Erro HTTP ${res.status}.`, submitReceipt);
+            return;
+          }
+
+          activeOrder.status = data.status || 'receipt_submitted';
+          if (data.license_key) {
+            activeOrder.license_key = data.license_key;
+            saveActiveOrder(activeOrder);
+            renderDeliveredKey(data.license_key);
+            renderBoxMessage(fb, 'is-success', 'Conciliação automática aprovada!', 'Sua chave já foi liberada acima — basta copiar e colar no OpenInfinite.', null);
+          } else {
+            saveActiveOrder(activeOrder);
+            $('orderLiveStatusBadge').textContent = STATUS_LABELS[activeOrder.status] || 'Comprovante enviado';
+            renderBoxMessage(
+              fb,
+              'is-success',
+              'Comprovante recebido com sucesso!',
+              'Mantenha esta aba aberta: assim que a confirmação finalizar, sua chave aparece automaticamente acima.',
+              null
+            );
+            startOrderPolling();
+          }
+        } catch (_err) {
+          renderBoxMessage(fb, 'is-error', 'Erro de rede ao enviar comprovante', 'Seus dados continuam preenchidos. Tente novamente.', submitReceipt);
+        } finally {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
+          btn.textContent = 'Enviar Comprovante e Aguardar Chave na Tela';
+        }
+      }
+
+      $('receiptForm').addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        submitReceipt();
+      });
 
       // License Verification Form (loading/offline/retry inline, XSS-safe DOM)
       function renderLicenseMessage(variant, titleText, detailText, withRetry) {

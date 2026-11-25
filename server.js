@@ -277,6 +277,8 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".wav",
   ".mp4",
   ".pdf", ".zip",
+  ".gz",
+  ".tgz",
   ".apk",
   ".exe",
   ".dmg",
@@ -7116,6 +7118,9 @@ function mimeFor(filePath) {
       return "audio/wav";
     case ".pdf":
       return "application/pdf"; case ".zip": return "application/zip";
+    case ".gz":
+    case ".tgz":
+      return "application/gzip";
     case ".apk":
       return "application/vnd.android.package-archive";
     case ".ico":
@@ -7219,6 +7224,9 @@ function getStableJsonCacheKey(value) {
 }
 
 function rememberStaticFileResponse(key, value) {
+  if (value?.buffer && value.buffer.length > 2 * 1024 * 1024) {
+    return;
+  }
   if (staticFileResponseCache.size > 80) {
     staticFileResponseCache.clear();
   }
@@ -17642,6 +17650,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (
     (pathname.startsWith("/api/superbad/") ||
+      pathname.startsWith("/api/openinfinite/") ||
       pathname.startsWith("/api/v1/licenses/") ||
       pathname.startsWith("/api/v1/telemetry/") ||
       pathname === "/api/updates/manifest" ||
