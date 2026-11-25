@@ -7,24 +7,58 @@
   <meta name="description" content="OpenInfinite v6.1: fluxo de IA contínuo com prioridade HY4 #1, Modo Turbo Auto oculto, estatísticas reais SQLite e 3 temas nativos. Demonstração grátis de 1 hora no Windows e macOS.">
   <style>
     :root {
+      /* Surface & Obsidian Palette (Tracle-inspired high contrast) */
       --bg: #05050a;
       --surface: #0b0c14;
-      --surface-elevated: #10121e;
-      --surface-soft: rgba(255, 255, 255, 0.03);
-      --border: rgba(255, 255, 255, 0.085);
-      --border-hi: rgba(255, 255, 255, 0.22);
-      --border-accent: rgba(129, 140, 248, 0.48);
+      --surface-elevated: #121422;
+      --surface-soft: rgba(255, 255, 255, 0.035);
+      --surface-hover: rgba(255, 255, 255, 0.065);
+
+      /* Borders */
+      --border: rgba(255, 255, 255, 0.09);
+      --border-hi: rgba(255, 255, 255, 0.24);
+      --border-accent: rgba(129, 140, 248, 0.52);
+
+      /* Typography & WCAG AA Ink Tokens */
       --ink: #f5f7fb;
-      --muted: #8f96ab;
-      --dim: #5d6478;
+      --ink-secondary: #d4d9e8;
+      --muted: #a1a8bd;
+      --dim: #8b93a9;
+
+      /* Semantic Accents */
       --accent: #818cf8;
+      --accent-solid: #4f57cc;
+      --accent-solid-hover: #5c64db;
       --accent-soft: rgba(129, 140, 248, 0.14);
       --emerald: #10b981;
-      --amber: #f59e0b;
+      --emerald-ink: #6ee7b7;
+      --emerald-bg: #0b2920;
+      --amber: #fbbf24;
+      --amber-bg: rgba(245, 158, 11, 0.14);
+      --danger: #fb7185;
+      --danger-bg: rgba(244, 63, 94, 0.12);
+      --danger-border: rgba(251, 113, 133, 0.45);
+
+      /* Spacing & Radius Scale */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 14px;
+      --radius-xl: 18px;
+      --radius-pill: 999px;
+
+      /* Type & Motion */
       --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable", "Segoe UI", sans-serif;
       --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
       --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-snap: cubic-bezier(0.4, 0, 0.2, 1);
+      --focus-ring: 2px solid #a5b4fc;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,14 +75,29 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .css-anim { animation: none !important; transition-duration: 0.01ms !important; }
+      .css-anim, .reveal { animation: none !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
     }
+
+    /* Skip Link (WCAG 2.1 AA) */
+    .skip-link {
+      position: fixed; top: -100px; left: 16px; z-index: 1200;
+      padding: 10px 16px; border-radius: var(--radius-sm);
+      background: var(--ink); color: var(--bg); font-weight: 700; text-decoration: none;
+      transition: top 160ms var(--ease-snap);
+    }
+    .skip-link:focus { top: 14px; outline: var(--focus-ring); outline-offset: 2px; }
 
     .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
     a { color: inherit; }
 
-    /* Single refined top-vault glow (Tracle obsidian architecture — zero multicolored gradient slop) */
+    :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+    #topo, #conteudo, #painel-live, #recursos, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
+      scroll-margin-top: 96px;
+    }
+
+    /* Single refined top-vault glow (Tracle obsidian architecture) */
     .vault-light {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
@@ -67,109 +116,112 @@
       -webkit-mask-image: radial-gradient(ellipse 75% 48% at 50% 18%, #000 10%, transparent 78%);
     }
 
-    /* FLOATING PILL NAVBAR (Tracle Minimalist Centerpiece) */
+    /* FLOATING PILL NAVBAR */
     .topbar {
-      position: sticky; top: 14px; z-index: 900; padding: 0 20px; pointer-events: none;
+      position: sticky; top: 14px; z-index: 900; padding: 0 16px; pointer-events: none;
     }
     .topbar-inner {
       pointer-events: auto;
-      max-width: 1120px; margin: 0 auto; padding: 9px 14px 9px 18px;
-      background: rgba(11, 12, 20, 0.82);
+      max-width: 1140px; margin: 0 auto; padding: 8px 12px 8px 16px;
+      background: rgba(11, 12, 20, 0.85);
       backdrop-filter: blur(18px) saturate(160%);
       -webkit-backdrop-filter: blur(18px) saturate(160%);
       border: 1px solid var(--border);
-      border-radius: 999px;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      border-radius: var(--radius-pill);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
       box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
       transition: border-color 180ms var(--ease-snap), background-color 180ms var(--ease-snap);
     }
     .topbar.scrolled .topbar-inner {
-      background: rgba(8, 9, 15, 0.94);
-      border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(8, 9, 15, 0.96);
+      border-color: rgba(255, 255, 255, 0.16);
     }
     .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
-    .brand img { width: 28px; height: 28px; border-radius: 8px; }
+    .brand img { width: 28px; height: 28px; border-radius: var(--radius-sm); }
     .brand-ver {
-      font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--muted);
-      padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-soft);
+      font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--muted);
+      padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--border); background: var(--surface-soft);
     }
-    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .nav-links { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
     .nav-link {
       text-decoration: none; font-size: 12.5px; font-weight: 600; color: var(--muted);
-      padding: 6px 12px; border-radius: 999px;
+      padding: 7px 11px; border-radius: var(--radius-pill);
       transition: color 160ms var(--ease-snap), background-color 160ms var(--ease-snap);
     }
-    .nav-link:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }
+    .nav-link:hover { color: var(--ink); background: var(--surface-hover); }
     .nav-actions { display: flex; align-items: center; gap: 8px; }
 
-    /* CRISP BUTTONS (Zero tacky gradients) */
+    /* CRISP BUTTONS */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       font-family: var(--font); font-weight: 700; font-size: 13px; padding: 10px 18px;
-      border-radius: 10px; cursor: pointer; text-decoration: none;
+      border-radius: var(--radius-md); cursor: pointer; text-decoration: none;
       border: 1px solid var(--border-hi);
       background: var(--surface-elevated); color: var(--ink);
-      transition: transform 180ms var(--ease-spring), background-color 160ms, border-color 160ms;
+      transition: transform 180ms var(--ease-spring), background-color 160ms var(--ease-snap), border-color 160ms var(--ease-snap), opacity 160ms var(--ease-snap);
     }
-    .btn:hover { background: #16192b; border-color: rgba(255, 255, 255, 0.34); transform: translateY(-1px); }
-    .btn:active { transform: scale(0.98); }
-    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .btn:hover:not(:disabled) { background: #181c30; border-color: rgba(255, 255, 255, 0.36); transform: translateY(-1px); }
+    .btn:active:not(:disabled) { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .btn.ivory {
-      background: #f5f7fb; color: #05050a; border-color: #ffffff;
-      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
+      background: var(--ink); color: var(--bg); border-color: #ffffff;
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.10);
     }
-    .btn.ivory:hover { background: #ffffff; }
+    .btn.ivory:hover:not(:disabled) { background: #ffffff; }
     .btn.accent {
-      background: #5b63d6; color: #ffffff; border-color: rgba(165, 180, 252, 0.45);
-      box-shadow: 0 8px 26px rgba(91, 99, 214, 0.26);
+      background: var(--accent-solid); color: #ffffff; border-color: rgba(165, 180, 252, 0.45);
+      box-shadow: 0 8px 26px rgba(79, 87, 204, 0.28);
     }
-    .btn.accent:hover { background: #6770e5; }
-    .btn.emerald { background: #0c2b22; border-color: rgba(16, 185, 129, 0.52); color: #6ee7b7; }
-    .btn.emerald:hover { background: #10382c; }
-    .btn.pill { border-radius: 999px; }
-    .btn.sm { padding: 7px 13px; font-size: 12px; border-radius: 8px; }
+    .btn.accent:hover:not(:disabled) { background: var(--accent-solid-hover); }
+    .btn.emerald { background: var(--emerald-bg); border-color: rgba(16, 185, 129, 0.52); color: var(--emerald-ink); }
+    .btn.emerald:hover:not(:disabled) { background: #10382c; }
+    .btn.ghost { background: transparent; border-color: var(--border); color: var(--muted); }
+    .btn.ghost:hover:not(:disabled) { color: var(--ink); background: var(--surface-hover); }
+    .btn.pill { border-radius: var(--radius-pill); }
+    .btn.sm { padding: 7px 13px; font-size: 12px; border-radius: var(--radius-sm); }
 
     .help-q {
       display: inline-flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px; border-radius: 50%; cursor: help; flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%; cursor: help; flex-shrink: 0;
       background: var(--surface-elevated); color: var(--muted); border: 1px solid var(--border-hi);
-      font-weight: 800; font-size: 11px;
+      font-weight: 800; font-size: 11.5px;
+      transition: color 160ms, border-color 160ms, transform 160ms var(--ease-spring);
     }
-    .help-q:hover { color: var(--ink); border-color: var(--accent); }
+    .help-q:hover { color: var(--ink); border-color: var(--accent); transform: scale(1.06); }
 
     /* MAIN WRAP */
     .wrap {
       position: relative; z-index: 1;
-      max-width: 1160px; margin: 0 auto; padding: 54px 20px 96px;
-      display: flex; flex-direction: column; gap: 84px;
+      max-width: 1160px; margin: 0 auto; padding: 48px 20px 104px;
+      display: flex; flex-direction: column; gap: 80px;
     }
 
-    /* SPOTLIGHT SURFACE (ReactBits) */
+    /* SPOTLIGHT SURFACE */
     .spotlight-card {
       position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      transition: border-color 200ms var(--ease-snap), transform 220ms var(--ease-spring);
+      transition: border-color 200ms var(--ease-snap), transform 220ms var(--ease-spring), background-color 200ms var(--ease-snap);
     }
     .spotlight-card::before {
       content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(360px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.065), transparent 72%);
+      background: radial-gradient(360px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.06), transparent 72%);
     }
     .spotlight-card:hover { border-color: var(--border-hi); }
 
-    /* EDITORIAL CENTERED HERO + LIVE STAGE (Inspired by Tracle Pin) */
+    /* HERO */
     .hero {
-      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;
     }
     .hero-kicker {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 5px 14px; border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: var(--radius-pill);
+      background: var(--surface-soft); border: 1px solid var(--border);
       font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #cbd5e1;
+      color: var(--ink-secondary);
     }
     .kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
 
@@ -184,28 +236,28 @@
     }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .hero-meta-strip {
-      display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap;
-      font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+      font-size: 12.5px; color: var(--muted);
     }
     .hero-meta-strip strong { color: var(--ink); font-weight: 700; }
 
     /* HERO COCKPIT SHOWCASE WINDOW + LIVING 3D SYMBOL */
     .hero-stage {
-      width: 100%; margin-top: 12px;
+      width: 100%; margin-top: 8px;
       background: #080910;
       border: 1px solid rgba(255, 255, 255, 0.11);
-      border-radius: 18px;
+      border-radius: var(--radius-xl);
       padding: 18px;
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.09);
-      display: grid; grid-template-columns: 370px 1fr; gap: 18px; align-items: stretch;
+      display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: stretch;
       text-align: left;
     }
 
     /* Living Symbol Orbital Pod */
     .living-stage {
-      position: relative; min-height: 390px; border-radius: 14px;
-      background: radial-gradient(circle at 50% 48%, rgba(129, 140, 248, 0.10), #06070d 72%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative; min-height: 390px; border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 50% 48%, rgba(129, 140, 248, 0.11), #06070d 72%);
+      border: 1px solid var(--border);
       overflow: hidden; display: flex; align-items: center; justify-content: center;
       user-select: none;
     }
@@ -238,20 +290,21 @@
       transform: translateZ(24px);
     }
     .float-badge {
-      position: absolute; padding: 5px 11px; border-radius: 999px;
-      font-family: var(--mono); font-size: 10.5px; font-weight: 700;
-      background: rgba(8, 9, 16, 0.90); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.13); color: #e2e8f0;
+      position: absolute; padding: 5px 11px; border-radius: var(--radius-pill);
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      background: rgba(8, 9, 16, 0.92); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.14); color: var(--ink);
       will-change: transform; pointer-events: none;
     }
-    .float-badge.b1 { top: 16px; left: 16px; }
-    .float-badge.b2 { top: 16px; right: 16px; color: #6ee7b7; border-color: rgba(16, 185, 129, 0.35); }
+    .float-badge.b1 { top: 14px; left: 14px; }
+    .float-badge.b2 { top: 14px; right: 14px; color: var(--emerald-ink); border-color: rgba(16, 185, 129, 0.38); }
     .float-badge.b3 { bottom: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--muted); font-family: var(--font); }
 
-    /* Interactive Preview Cockpit beside Living Core */
+    /* Interactive Preview Cockpit */
     .stage-cockpit {
       display: flex; flex-direction: column; gap: 12px;
-      background: #0b0c14; border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px;
+      min-width: 0;
     }
     .cockpit-bar {
       display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
@@ -259,103 +312,160 @@
     }
     .cockpit-pills { display: flex; gap: 6px; flex-wrap: wrap; }
     .sim-pill {
-      padding: 5px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
-      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); color: var(--muted);
-      cursor: pointer; transition: all 150ms var(--ease-snap);
+      padding: 6px 12px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 600;
+      font-family: var(--font);
+      background: var(--surface-soft); border: 1px solid var(--border); color: var(--muted);
+      cursor: pointer; transition: color 150ms var(--ease-snap), background-color 150ms var(--ease-snap), border-color 150ms var(--ease-snap), transform 150ms var(--ease-spring);
     }
     .sim-pill:hover { color: var(--ink); border-color: var(--border-hi); }
-    .sim-pill.active { background: #f5f7fb; color: #05050a; border-color: #ffffff; }
+    .sim-pill:active { transform: scale(0.97); }
+    .sim-pill.active, .sim-pill[aria-selected="true"], .sim-pill[aria-pressed="true"] {
+      background: var(--ink); color: var(--bg); border-color: #ffffff;
+    }
     .sim-toggle {
-      padding: 6px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 700; cursor: pointer;
-      border: 1px solid rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.14); color: #fbbf24;
-      transition: all 160ms;
+      padding: 6px 13px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; cursor: pointer;
+      font-family: var(--font);
+      border: 1px solid rgba(245, 158, 11, 0.48); background: var(--amber-bg); color: var(--amber);
+      transition: background-color 160ms, border-color 160ms, color 160ms, transform 150ms var(--ease-spring);
     }
-    .sim-toggle.stopped { border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.16); color: #6ee7b7; }
-    .stage-screen-wrap {
-      position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
-      view-transition-name: oi-hero-shot; background: #05060b; cursor: zoom-in;
+    .sim-toggle:active { transform: scale(0.97); }
+    .sim-toggle.stopped { border-color: rgba(16, 185, 129, 0.48); background: rgba(16, 185, 129, 0.16); color: var(--emerald-ink); }
+
+    /* Language / Stack Focus Bar inside Simulator */
+    .lang-strip {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      padding: 8px 10px; border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.025); border: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .stage-screen-wrap img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+    .lang-pills { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+    .lang-chip {
+      padding: 4px 10px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 11px; font-weight: 700;
+      background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+      transition: color 150ms, border-color 150ms, background-color 150ms;
+    }
+    .lang-chip:hover { color: var(--ink); border-color: var(--border-hi); }
+    .lang-chip.active { background: var(--accent-soft); color: #c7d2fe; border-color: var(--border-accent); }
+    .lang-status { font-family: var(--mono); font-size: 11px; color: var(--emerald-ink); }
+
+    .stage-screen-btn {
+      display: block; width: 100%; padding: 0; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border); background: #05060b; cursor: zoom-in;
+      view-transition-name: oi-hero-shot;
+      transition: border-color 180ms var(--ease-snap), transform 200ms var(--ease-spring);
+    }
+    .stage-screen-btn:hover { border-color: var(--border-hi); }
+    .stage-screen-btn img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+
+    ::view-transition-old(oi-hero-shot),
+    ::view-transition-new(oi-hero-shot) {
+      animation-duration: 280ms;
+      animation-timing-function: var(--ease-spring);
+    }
+
     .cockpit-caption {
       display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-      font-size: 12px; color: var(--muted);
+      font-size: 12.5px; color: var(--muted);
     }
 
     /* PLATFORM STRIP */
     .trust-strip {
-      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
       padding: 16px 22px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      color: var(--dim); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--dim); font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
     }
     .trust-strip span { display: inline-flex; align-items: center; gap: 8px; }
-    .trust-strip i { width: 5px; height: 5px; border-radius: 50%; background: var(--dim); font-style: normal; }
+    .trust-strip i { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); font-style: normal; }
 
     /* SECTION HEADERS */
     .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
     .sec-kicker {
-      font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 8px; display: block;
     }
     .sec-head h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
     .sec-head p { color: var(--muted); font-size: 14px; max-width: 56ch; }
 
-    /* ASYMMETRIC BENTO GRID (Modelled on Tracle Features Grid) */
-    .bento-grid {
-      display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px;
-    }
-    .bento-card { padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    /* ASYMMETRIC BENTO GRID */
+    .bento-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
+    .bento-card { padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; min-width: 0; }
     .bento-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-    .bento-card p { font-size: 13px; color: var(--muted); }
+    .bento-card p { font-size: 13.5px; color: var(--muted); }
     .bento-widget {
-      background: #07080f; border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 10px; padding: 14px;
+      background: #07080f; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px;
     }
 
-    /* Interactive Cascade Demo inside Bento 1 */
+    /* Interactive Cascade Demo */
     .cascade-list { display: flex; flex-direction: column; gap: 8px; }
     .cascade-row {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding: 8px 11px; border-radius: 8px; background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.06); font-size: 12px;
-      transition: border-color 180ms, background-color 180ms;
+      padding: 8px 11px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06); font-size: 12.5px;
+      transition: border-color 180ms, background-color 180ms, opacity 180ms;
     }
-    .cascade-row.active { border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08); }
-    .cascade-row.cooldown { border-color: rgba(245, 158, 11, 0.35); opacity: 0.65; }
-    .c-tag { font-family: var(--mono); font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--muted); }
-    .cascade-row.active .c-tag { color: #6ee7b7; background: rgba(16, 185, 129, 0.16); }
+    .cascade-row.active { border-color: rgba(16, 185, 129, 0.48); background: rgba(16, 185, 129, 0.09); }
+    .cascade-row.cooldown { border-color: rgba(245, 158, 11, 0.35); opacity: 0.72; }
+    .c-tag { font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.07); color: var(--muted); }
+    .cascade-row.active .c-tag { color: var(--emerald-ink); background: rgba(16, 185, 129, 0.18); }
 
-    /* Interactive SQLite Scrub Chart inside Bento 2 */
-    .scrub-bars { display: flex; align-items: flex-end; gap: 8px; height: 96px; padding-top: 8px; }
-    .scrub-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+    /* Interactive SQLite Scrub Chart */
+    .scrub-bars { display: flex; align-items: flex-end; gap: 8px; height: 104px; padding-top: 8px; }
+    .scrub-col {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;
+      background: transparent; border: none; padding: 0; font-family: inherit;
+    }
     .scrub-fill {
-      width: 100%; border-radius: 5px 5px 2px 2px; background: rgba(255, 255, 255, 0.14);
+      width: 100%; border-radius: 5px 5px 2px 2px; background: rgba(255, 255, 255, 0.16);
       transition: background-color 140ms, transform 160ms var(--ease-spring);
+      transform-origin: bottom;
     }
-    .scrub-col:hover .scrub-fill, .scrub-col.active .scrub-fill { background: #818cf8; transform: scaleY(1.06); }
-    .scrub-lbl { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+    .scrub-col:hover .scrub-fill, .scrub-col:focus-visible .scrub-fill, .scrub-col.active .scrub-fill {
+      background: var(--accent); transform: scaleY(1.06);
+    }
+    .scrub-lbl { font-family: var(--mono); font-size: 11px; color: var(--dim); }
+    .scrub-col.active .scrub-lbl { color: var(--ink); font-weight: 700; }
 
-    /* Interactive Swatch inside Bento 3 */
+    /* Interactive Theme Preview */
     .theme-preview-box {
       border-radius: 9px; padding: 12px; border: 1px solid var(--border);
       transition: background-color 200ms, color 200ms, border-color 200ms;
     }
-    .theme-preview-box[data-t="light"] { background: #eef3fa; color: #0f172a; border-color: rgba(15, 23, 42, 0.14); }
-    .theme-preview-box[data-t="liquid"] { background: rgba(255, 255, 255, 0.09); backdrop-filter: blur(22px); border-color: rgba(255, 255, 255, 0.25); }
+    .theme-preview-box[data-t="light"] { background: #eef3fa; color: #0f172a; border-color: rgba(15, 23, 42, 0.16); }
+    .theme-preview-box[data-t="liquid"] { background: rgba(255, 255, 255, 0.09); backdrop-filter: blur(22px); border-color: rgba(255, 255, 255, 0.28); }
 
-    /* INTERACTIVE GALLERY */
+    /* INTERACTIVE GALLERY (Semantic Buttons) */
     .shot-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-    .shot-card { padding: 10px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+    .shot-card {
+      padding: 10px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; text-align: left;
+      font-family: inherit; color: inherit;
+    }
     .shot-card.active { border-color: var(--border-accent); background: #101322; }
-    .shot-card img { width: 100%; border-radius: 8px; display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+    .shot-card img { width: 100%; border-radius: var(--radius-sm); display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
     .shot-card strong { font-size: 13px; color: var(--ink); }
-    .shot-card span { font-size: 11.5px; color: var(--muted); }
+    .shot-card span { font-size: 12px; color: var(--muted); }
 
-    /* 3-STEP KINETIC FLOW (Tracle Getting Started section) */
+    /* 3-STEP KINETIC FLOW (Semantic Buttons) */
     .steps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .step-card { padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
-    .step-card.active { border-color: var(--border-accent); background: #10121f; transform: translateY(-4px); }
+    .step-card {
+      padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; text-align: left;
+      font-family: inherit; color: inherit;
+    }
+    .step-card.active { border-color: var(--border-accent); background: #10121f; transform: translateY(-3px); }
     .step-num { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 700; }
     .step-card h3 { font-size: 15.5px; font-weight: 700; }
-    .step-card p { font-size: 12.8px; color: var(--muted); }
+    .step-card p { font-size: 13px; color: var(--muted); }
+
+    /* INTERACTIVE COMPARATOR */
+    .comparator-card { padding: 20px; margin-bottom: 18px; }
+    .comparator-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .comp-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .comp-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+      padding: 14px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+    }
+    .comp-metric { display: flex; flex-direction: column; gap: 4px; }
+    .comp-metric span { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .comp-metric strong { font-size: 14.5px; color: var(--ink); }
+    .comp-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
 
     /* PLANS & PIX CHECKOUT */
     .plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
@@ -363,66 +473,143 @@
     .plan-card.pro { border-color: var(--border-accent); background: #0d0f1b; }
     .plan-price { font-size: 38px; font-weight: 800; font-family: var(--mono); color: var(--ink); margin: 6px 0; letter-spacing: -0.03em; }
     .plan-price small { font-size: 12.5px; color: var(--muted); font-family: var(--font); font-weight: 500; }
-    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #d4d9e8; }
+    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-secondary); }
     .plan-list li::before { content: "✓ "; color: var(--emerald); font-weight: 800; }
 
     .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
-    .panel { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+    .panel { padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
     .pix-card {
       background: #070911; border: 1px solid var(--border); border-radius: 10px;
-      padding: 13px 15px; display: flex; flex-direction: column; gap: 7px; font-size: 13px;
+      padding: 13px 15px; display: flex; flex-direction: column; gap: 8px; font-size: 13px;
     }
-    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
-    .field label { font-size: 12px; font-weight: 600; color: #cbd5e1; }
+    .pix-actions-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .inline-feedback {
+      font-size: 12px; font-weight: 600; color: var(--emerald-ink);
+      min-height: 18px; display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); }
     input[type="text"], select {
       width: 100%; padding: 10px 12px; background: #05060b; color: var(--ink);
-      border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13px; outline: none;
+      border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13.5px;
+      transition: border-color 150ms, box-shadow 150ms;
     }
-    input[type="text"]:focus, select:focus { border-color: var(--accent); }
+    input[type="text"]:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22); }
+    input[aria-invalid="true"] { border-color: var(--danger); }
+
     .result-box {
       background: #070911; border: 1px solid var(--border-hi); border-radius: 10px;
-      padding: 14px; font-size: 12.5px; display: none; flex-direction: column; gap: 8px;
+      padding: 14px; font-size: 13px; display: none; flex-direction: column; gap: 10px;
     }
+    .result-box.is-visible { display: flex; }
+    .result-box.is-error { border-color: var(--danger-border); background: var(--danger-bg); }
+    .result-box.is-success { border-color: rgba(16, 185, 129, 0.45); }
+    .result-box.is-warn { border-color: rgba(245, 158, 11, 0.45); background: var(--amber-bg); }
 
-    /* Subtle single-line BadClaude footnote (never dominates OpenInfinite!) */
+    /* Subtle single-line BadClaude footnote */
     .bc-footnote {
       margin-top: 14px; padding: 12px 16px; border-radius: 10px;
-      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.025);
       display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      font-size: 12.5px; color: var(--muted);
+      font-size: 13px; color: var(--muted);
     }
 
-    /* REVEAL ON SCROLL (compositor only) */
+    /* CSS GRID 0fr -> 1fr FAQ ACCORDION */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+      overflow: hidden; transition: border-color 180ms var(--ease-snap);
+    }
+    .faq-item.open { border-color: var(--border-accent); }
+    .faq-trigger {
+      width: 100%; padding: 16px 18px; background: transparent; border: none; color: var(--ink);
+      font-family: var(--font); font-size: 14.5px; font-weight: 700; text-align: left;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; cursor: pointer;
+    }
+    .faq-trigger:hover { background: var(--surface-soft); }
+    .faq-trigger:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: -3px;
+      border-radius: calc(var(--radius-md) - 2px);
+    }
+    .faq-chevron {
+      font-family: var(--mono); font-size: 14px; color: var(--muted); flex-shrink: 0;
+      transition: transform 240ms var(--ease-spring);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(45deg); color: var(--accent); }
+    .faq-panel {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 280ms var(--ease-spring);
+    }
+    .faq-item.open .faq-panel { grid-template-rows: 1fr; }
+    .faq-panel-inner { overflow: hidden; }
+    .faq-panel-body {
+      padding: 0 18px 16px; font-size: 13.5px; color: var(--muted); line-height: 1.6;
+      opacity: 0; transform: translateY(-4px);
+      transition: opacity 220ms var(--ease-snap), transform 220ms var(--ease-spring);
+    }
+    .faq-item.open .faq-panel-body { opacity: 1; transform: translateY(0); }
+
+    /* REVEAL ON SCROLL */
     .reveal { opacity: 0; transform: translate3d(0, 16px, 0); transition: opacity 520ms var(--ease-spring), transform 520ms var(--ease-spring); }
     .reveal.in { opacity: 1; transform: translate3d(0, 0, 0); }
 
     .hover-hud {
-      position: fixed; right: 16px; bottom: 16px; z-index: 880;
-      background: rgba(11, 12, 20, 0.92); backdrop-filter: blur(12px);
-      border: 1px solid var(--border-hi); border-radius: 999px; padding: 7px 14px;
+      position: fixed; right: 16px; bottom: 16px; z-index: 880; max-width: calc(100vw - 32px);
+      background: rgba(11, 12, 20, 0.94); backdrop-filter: blur(12px);
+      border: 1px solid var(--border-hi); border-radius: var(--radius-pill); padding: 8px 14px;
       font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; cursor: pointer;
     }
     .hover-hud strong { color: var(--ink); }
 
     #shiftIModal, #zoomModal {
       display: none; position: fixed; inset: 0; z-index: 99999;
-      background: rgba(4, 5, 10, 0.86); backdrop-filter: blur(10px);
+      background: rgba(4, 5, 10, 0.88); backdrop-filter: blur(10px);
       align-items: center; justify-content: center; padding: 18px;
     }
+    #shiftIModal.open, #zoomModal.open { display: flex; }
     .shift-box {
       width: min(520px, 95vw); background: #0c0d16; color: var(--ink);
-      border: 1px solid var(--border-hi); border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 32px 96px rgba(0, 0, 0, 0.85);
     }
     .shift-head { padding: 13px 18px; background: #07080f; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
-    .shift-body { padding: 18px; display: flex; flex-direction: column; gap: 11px; font-size: 13.5px; }
+    .shift-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; }
+    .zoom-wrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 94vw; }
+    .zoom-wrap img { max-width: 94vw; max-height: 84vh; border-radius: 12px; border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 32px 96px #000; }
 
     @media (max-width: 960px) {
-      .hero-stage, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid { grid-template-columns: 1fr; }
+      .hero-stage, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid, .comp-grid { grid-template-columns: 1fr; }
       .living-stage { min-height: 310px; }
+    }
+    @media (max-width: 640px), (hover: none) {
+      .hover-hud { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      #topo, #conteudo, #painel-live, #recursos, #como-funciona, #planos, #comparador, #checkout, #licenca, #faq {
+        scroll-margin-top: 112px;
+      }
+      .topbar { top: 6px; padding: 0 8px; }
+      .topbar-inner { border-radius: 14px; padding: 8px 10px; gap: 6px; }
+      .brand { font-size: 14px; gap: 7px; }
+      .brand img { width: 24px; height: 24px; }
+      .nav-actions { gap: 6px; }
+      .nav-actions .btn.sm { padding: 5px 10px; font-size: 11.5px; }
+      .nav-links {
+        order: 3; width: 100%; justify-content: flex-start; gap: 4px;
+        flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-link { padding: 4px 9px; font-size: 11.5px; white-space: nowrap; flex-shrink: 0; }
+      .wrap { padding: 28px 14px 64px; gap: 52px; }
+      .hero-stage { padding: 12px; gap: 12px; }
+      .float-badge.b1, .float-badge.b2 { font-size: 10px; padding: 4px 8px; }
     }
   </style>
 </head>
 <body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
   <div class="vault-light" aria-hidden="true"></div>
   <div class="grid-backdrop" aria-hidden="true"></div>
 
@@ -439,10 +626,11 @@
         <a href="#como-funciona" class="nav-link">Como Funciona</a>
         <a href="#planos" class="nav-link">Planos</a>
         <a href="#licenca" class="nav-link">Validar Chave</a>
+        <a href="#faq" class="nav-link">FAQ</a>
         <a href="/" class="nav-link">← Portal CZS</a>
       </nav>
       <div class="nav-actions">
-        <button type="button" class="nav-link" style="border:none;background:transparent;cursor:pointer;" onclick="openHelpModal(null)">Shift + I</button>
+        <button type="button" id="topHelpBtn" class="btn ghost sm pill">Shift + I</button>
         <a href="#checkout" class="btn ivory pill sm">Assinar agora</a>
       </div>
     </div>
@@ -450,7 +638,7 @@
 
   <main class="wrap" id="topo">
     <!-- EDITORIAL HERO + INTERACTIVE LIVE STAGE -->
-    <section class="hero">
+    <section class="hero" id="conteudo">
       <div class="hero-kicker">
         <span class="kicker-dot" aria-hidden="true"></span>
         <span>OpenInfinite v6.1 · Windows &amp; macOS Apple Silicon</span>
@@ -468,26 +656,27 @@
         <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn ivory pill"
            data-help-title="Download Windows (Demo 1h Grátis)"
            data-help-what="Instalador oficial Windows 10/11 (64 bits) com 60 minutos grátis para testar todas as funções."
-           data-help-how="Baixe, instale e aperte Iniciar no painel. Depois da demo, assine Windows (R$ 99/mês).">
+           data-help-how="Baixe, instale e aperte Iniciar no painel. Depois da demo, assine Windows (R$ 99,00/mês).">
           🪟 Baixar Grátis (1h) — Windows .exe
         </a>
         <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn pill"
            data-help-title="Download macOS Apple Silicon (Demo 1h Grátis)"
            data-help-what="Aplicativo nativo Apple Silicon com transparência Liquid Glass e zero janelas extras."
-           data-help-how="Baixe o .dmg, arraste para Aplicativos e teste 1 hora grátis. Plano macOS + Multi: R$ 159/mês.">
-           Baixar Grátis (1h) — macOS .dmg
+           data-help-how="Baixe o .dmg, arraste para Aplicativos e teste 1 hora grátis. Plano macOS &amp; Multi: R$ 159,00/mês.">
+          <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
+          <span>Baixar Grátis (1h) — macOS .dmg</span>
         </a>
       </div>
 
       <div class="hero-meta-strip">
         <span><strong>Demo 1h</strong> completa grátis</span>
-        <span>·</span>
+        <span aria-hidden="true">·</span>
         <span>Windows por <strong>R$ 99,00/mês</strong></span>
-        <span>·</span>
+        <span aria-hidden="true">·</span>
         <span>macOS + Multi (2 PCs) por <strong>R$ 159,00/mês</strong></span>
       </div>
 
-      <!-- TRACLE-STYLE INTERACTIVE COCKPIT STAGE + LIVING SYMBOL -->
+      <!-- INTERACTIVE COCKPIT STAGE + LIVING 3D SYMBOL -->
       <div class="hero-stage" id="painel-live">
         <div id="livingStage" class="living-stage" aria-label="Símbolo vivo 3D do OpenInfinite que reage ao cursor">
           <canvas id="particleCanvas" aria-hidden="true"></canvas>
@@ -498,23 +687,36 @@
             <img src="/openinfinite/assets/openinfinite_silver.png" alt="Símbolo Vivo OpenInfinite" />
           </div>
           <div id="badge1" class="float-badge b1">HY4 #1 · Prioridade</div>
-          <div id="badge2" class="float-badge b2">● Motor Pronto</div>
+          <div id="badge2" class="float-badge b2" aria-live="polite">● Motor Pronto</div>
           <div id="badge3" class="float-badge b3">Símbolo Vivo · Mova o mouse</div>
         </div>
 
         <div class="stage-cockpit">
           <div class="cockpit-bar">
-            <div class="cockpit-pills" role="tablist" aria-label="Visualizar telas do OpenInfinite">
-              <button type="button" role="tab" aria-selected="true" class="sim-pill active" data-shot="0">Painel Real</button>
-              <button type="button" role="tab" aria-selected="false" class="sim-pill" data-shot="1">Liquid Glass</button>
-              <button type="button" role="tab" aria-selected="false" class="sim-pill" data-shot="2">Estatísticas</button>
-              <button type="button" role="tab" aria-selected="false" class="sim-pill" data-shot="3">Tema Claro</button>
+            <div class="cockpit-pills" id="cockpitTabs" role="tablist" aria-label="Visualizar telas do OpenInfinite">
+              <button type="button" role="tab" id="tab-shot-0" aria-selected="true" aria-controls="cockpitPanel" tabindex="0" class="sim-pill active" data-shot="0">Painel Real</button>
+              <button type="button" role="tab" id="tab-shot-1" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="1">Liquid Glass</button>
+              <button type="button" role="tab" id="tab-shot-2" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="2">Estatísticas</button>
+              <button type="button" role="tab" id="tab-shot-3" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="3">Tema Claro</button>
             </div>
-            <button type="button" id="simEngineBtn" class="sim-toggle" onclick="toggleSimEngine()">⏸ Motor Ativo · Pausar</button>
+            <button type="button" id="simEngineBtn" class="sim-toggle" aria-pressed="true">⏸ Motor Ativo · Pausar</button>
           </div>
 
-          <div class="stage-screen-wrap" onclick="zoomImage(document.getElementById('featImg').src)">
-            <img id="featImg" src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Interface real do aplicativo OpenInfinite v6.1" />
+          <!-- Language / Stack Focus Switcher -->
+          <div class="lang-strip" aria-label="Simulador de foco por linguagem e idioma">
+            <div class="lang-pills" role="group" aria-label="Selecionar linguagem do projeto">
+              <button type="button" class="lang-chip active" data-lang="python" aria-pressed="true">Python</button>
+              <button type="button" class="lang-chip" data-lang="ts" aria-pressed="false">TypeScript</button>
+              <button type="button" class="lang-chip" data-lang="go" aria-pressed="false">Go</button>
+              <button type="button" class="lang-chip" data-lang="rust" aria-pressed="false">Rust</button>
+            </div>
+            <span id="langStatus" class="lang-status" aria-live="polite">Perfil: Python 3.12 · HY4 #1 (54 ms)</span>
+          </div>
+
+          <div id="cockpitPanel" role="tabpanel" aria-labelledby="tab-shot-0">
+            <button type="button" class="stage-screen-btn" id="stageZoomBtn" aria-label="Ampliar captura de tela atual do OpenInfinite">
+              <img id="featImg" src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Interface real do aplicativo OpenInfinite v6.1" />
+            </button>
           </div>
 
           <div class="cockpit-caption">
@@ -522,7 +724,7 @@
               <strong id="featTitle" style="color:var(--ink);">Painel Principal com Botão Iniciar / Pausar &amp; Dados Reais</strong>
               <span id="featDesc" style="display:block;">Telemetria direta do banco local, status ao vivo das ferramentas e troca de motor sem popups.</span>
             </div>
-            <button type="button" class="btn sm" onclick="zoomImage(document.getElementById('featImg').src)">Ampliar Tela</button>
+            <button type="button" class="btn sm" id="captionZoomBtn">Ampliar Tela</button>
           </div>
         </div>
       </div>
@@ -530,21 +732,21 @@
 
     <!-- CLEAN MONOCHROME PLATFORM STRIP -->
     <div class="trust-strip reveal">
-      <span><i></i>Windows 10 / 11 x64</span>
-      <span><i></i>macOS Apple Silicon</span>
-      <span><i></i>Prioridade HY4 #1</span>
-      <span><i></i>Telemetria SQLite Real</span>
-      <span><i></i>Ocultação Silenciosa de Popups</span>
+      <span><i aria-hidden="true"></i>Windows 10 / 11 x64</span>
+      <span><i aria-hidden="true"></i>macOS Apple Silicon</span>
+      <span><i aria-hidden="true"></i>Prioridade HY4 #1</span>
+      <span><i aria-hidden="true"></i>Telemetria SQLite Real</span>
+      <span><i aria-hidden="true"></i>Ocultação Silenciosa de Popups</span>
     </div>
 
-    <!-- ASYMMETRIC BENTO FEATURE GRID (Interactive) -->
+    <!-- ASYMMETRIC BENTO FEATURE GRID -->
     <section id="recursos" class="reveal">
       <div class="sec-head">
         <div>
           <span class="sec-kicker">Arquitetura do Painel</span>
           <h2>Recursos dinâmicos feitos para não parar.</h2>
         </div>
-        <p>Clique nos simuladores abaixo para ver como o OpenInfinite gerencia rotas, tokens reais, memória livre e temas nativos.</p>
+        <p>Interaja com os simuladores abaixo para ver como o OpenInfinite gerencia rotas, tokens reais, memória livre e temas nativos.</p>
       </div>
 
       <div class="bento-grid">
@@ -555,9 +757,9 @@
             <p>Quando uma rota atinge o limite de uso, o Motor Infinite assume na mesma sessão e renova o caminho em segundo plano.</p>
           </div>
           <div class="bento-widget">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-              <span class="mono" style="font-size:11px;color:var(--muted);" id="cascadeStatusTxt">Rota ativa: infinite/auto-turbo (HY4 #1)</span>
-              <button type="button" class="btn sm" onclick="stepCascadeSim()">⚡ Simular Limite</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+              <span class="mono" style="font-size:11.5px;color:var(--muted);" id="cascadeStatusTxt" aria-live="polite">Rota ativa: infinite/auto-turbo (HY4 #1)</span>
+              <button type="button" class="btn sm" id="cascadeSimBtn">⚡ Simular Limite</button>
             </div>
             <div class="cascade-list" id="cascadeList">
               <div class="cascade-row active" data-step="0"><span>1. hy4-flash-free (Principal)</span><span class="c-tag">Ativo · 54 ms</span></div>
@@ -568,24 +770,24 @@
           </div>
         </div>
 
-        <!-- Bento 2: Real SQLite Scrubber -->
+        <!-- Bento 2: Real SQLite Scrubber (Keyboard & Pointer accessible) -->
         <div class="spotlight-card bento-card">
           <div>
             <h3>Leitura Real dos Seus Tokens e Sessões</h3>
-            <p>Zero números inventados: lê diretamente o banco local SQLite por janela de 1h, 6h, 24h e 7d. Passe o mouse nas barras.</p>
+            <p>Zero números inventados: lê diretamente o banco local SQLite por janela de 1h, 6h, 24h e 7d. Navegue ou passe o mouse nas barras.</p>
           </div>
           <div class="bento-widget">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px;" aria-live="polite">
               <strong id="scrubVal" class="mono" style="font-size:18px;">291,7 K tokens</strong>
-              <span id="scrubMeta" class="mono" style="font-size:11px;color:var(--muted);">Janela 24h · Passe o mouse</span>
+              <span id="scrubMeta" class="mono" style="font-size:11.5px;color:var(--muted);">Janela 24h · Selecione uma barra</span>
             </div>
-            <div class="scrub-bars" id="scrubBars">
-              <div class="scrub-col" data-v="42,1 K tokens" data-m="00h — Entrada + Saída"><div class="scrub-fill" style="height:34px;"></div><span class="scrub-lbl">00h</span></div>
-              <div class="scrub-col" data-v="78,4 K tokens" data-m="04h — Pico em Python"><div class="scrub-fill" style="height:54px;"></div><span class="scrub-lbl">04h</span></div>
-              <div class="scrub-col" data-v="118,9 K tokens" data-m="08h — Prioridade HY4 #1"><div class="scrub-fill" style="height:74px;"></div><span class="scrub-lbl">08h</span></div>
-              <div class="scrub-col" data-v="94,2 K tokens" data-m="12h — OpenBot Modo Leve"><div class="scrub-fill" style="height:60px;"></div><span class="scrub-lbl">12h</span></div>
-              <div class="scrub-col" data-v="164,8 K tokens" data-m="16h — Projeto ativo"><div class="scrub-fill" style="height:88px;"></div><span class="scrub-lbl">16h</span></div>
-              <div class="scrub-col active" data-v="291,7 K tokens" data-m="Agora — Tempo real"><div class="scrub-fill" style="height:92px;"></div><span class="scrub-lbl">Hoje</span></div>
+            <div class="scrub-bars" id="scrubBars" role="group" aria-label="Consumo de tokens por janela de horário">
+              <button type="button" class="scrub-col" data-v="42,1 K tokens" data-m="00h — Entrada + Saída" aria-label="00h: 42,1 K tokens"><span class="scrub-fill" style="height:34px;"></span><span class="scrub-lbl">00h</span></button>
+              <button type="button" class="scrub-col" data-v="78,4 K tokens" data-m="04h — Pico em Python" aria-label="04h: 78,4 K tokens"><span class="scrub-fill" style="height:54px;"></span><span class="scrub-lbl">04h</span></button>
+              <button type="button" class="scrub-col" data-v="118,9 K tokens" data-m="08h — Prioridade HY4 #1" aria-label="08h: 118,9 K tokens"><span class="scrub-fill" style="height:74px;"></span><span class="scrub-lbl">08h</span></button>
+              <button type="button" class="scrub-col" data-v="94,2 K tokens" data-m="12h — OpenBot Modo Leve" aria-label="12h: 94,2 K tokens"><span class="scrub-fill" style="height:60px;"></span><span class="scrub-lbl">12h</span></button>
+              <button type="button" class="scrub-col" data-v="164,8 K tokens" data-m="16h — Projeto ativo" aria-label="16h: 164,8 K tokens"><span class="scrub-fill" style="height:88px;"></span><span class="scrub-lbl">16h</span></button>
+              <button type="button" class="scrub-col active" data-v="291,7 K tokens" data-m="Agora — Tempo real" aria-label="Hoje: 291,7 K tokens"><span class="scrub-fill" style="height:92px;"></span><span class="scrub-lbl">Hoje</span></button>
             </div>
           </div>
         </div>
@@ -597,56 +799,56 @@
             <p>Troque entre Escuro OLED, Liquid Glass translúcido ou Claro Apple Daylight diretamente na barra superior do aplicativo.</p>
           </div>
           <div class="bento-widget">
-            <div style="display:flex;gap:6px;margin-bottom:10px;">
-              <button type="button" class="sim-pill active" onclick="setMiniTheme('dark', this)">Escuro</button>
-              <button type="button" class="sim-pill" onclick="setMiniTheme('liquid', this)">Liquid Glass</button>
-              <button type="button" class="sim-pill" onclick="setMiniTheme('light', this)">Claro</button>
+            <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;" role="group" aria-label="Prévia dos 3 temas nativos">
+              <button type="button" class="sim-pill active" data-theme-opt="dark" aria-pressed="true">Escuro</button>
+              <button type="button" class="sim-pill" data-theme-opt="liquid" aria-pressed="false">Liquid Glass</button>
+              <button type="button" class="sim-pill" data-theme-opt="light" aria-pressed="false">Claro</button>
             </div>
-            <div id="miniThemePreview" class="theme-preview-box" data-t="dark">
-              <div style="font-weight:700;font-size:13px;">Painel OpenInfinite</div>
-              <div style="font-size:11.5px;opacity:0.75;margin-top:2px;">Contrastes nativos adaptados ao sistema.</div>
+            <div id="miniThemePreview" class="theme-preview-box" data-t="dark" aria-live="polite">
+              <div style="font-weight:700;font-size:13px;" id="miniThemeTitle">Painel OpenInfinite · Escuro OLED</div>
+              <div style="font-size:12px;opacity:0.82;margin-top:2px;" id="miniThemeDesc">Contrastes nativos adaptados ao sistema.</div>
             </div>
           </div>
         </div>
 
-        <!-- Bento 4: Clean Gallery Thumbnails -->
+        <!-- Bento 4: RAM Cleanup -->
         <div class="spotlight-card bento-card">
           <div>
             <h3>Modo Turbo Auto + Limpeza de RAM</h3>
             <p>Mantém suas ferramentas sincronizadas, libera memória ociosa em 1 clique e elimina popups de conexão no Mac e no Windows.</p>
           </div>
-          <div class="bento-widget" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <div class="bento-widget" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <div>
               <div class="mono" style="font-size:11px;color:var(--muted);">MEMÓRIA LIVRE MONITORADA</div>
-              <div id="ramDemoVal" class="mono" style="font-size:20px;font-weight:800;margin-top:2px;">18,4 GB</div>
+              <div id="ramDemoVal" class="mono" style="font-size:20px;font-weight:800;margin-top:2px;" aria-live="polite">18,4 GB</div>
             </div>
-            <button type="button" class="btn sm ivory" onclick="optimizeRamDemo()">⚡ Otimizar</button>
+            <button type="button" class="btn sm ivory" id="ramOptimizeBtn">⚡ Otimizar</button>
           </div>
         </div>
       </div>
 
-      <!-- 4 CLEAN REAL SCREENSHOT THUMBNAILS -->
-      <div class="shot-grid" style="margin-top:16px;">
-        <div class="spotlight-card shot-card active" data-shot="0">
+      <!-- 4 CLEAN REAL SCREENSHOT THUMBNAILS (Keyboard accessible buttons) -->
+      <div class="shot-grid" style="margin-top:16px;" role="group" aria-label="Galeria rápida de telas do painel">
+        <button type="button" class="spotlight-card shot-card active" data-shot="0" aria-pressed="true">
           <img src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Painel Principal Escuro" />
           <strong>Painel Principal</strong>
           <span>Botão Iniciar/Pausar e dados reais</span>
-        </div>
-        <div class="spotlight-card shot-card" data-shot="1">
+        </button>
+        <button type="button" class="spotlight-card shot-card" data-shot="1" aria-pressed="false">
           <img src="/openinfinite/assets/openinfinite_liquid_glass.png" alt="Visual Liquid Glass" />
           <strong>Liquid Glass</strong>
           <span>Transparência especular nativa</span>
-        </div>
-        <div class="spotlight-card shot-card" data-shot="2">
+        </button>
+        <button type="button" class="spotlight-card shot-card" data-shot="2" aria-pressed="false">
           <img src="/openinfinite/assets/openinfinite_estatisticas.png" alt="Estatísticas Reais" />
           <strong>Estatísticas SQLite</strong>
           <span>Tokens, cache e linguagens</span>
-        </div>
-        <div class="spotlight-card shot-card" data-shot="3">
+        </button>
+        <button type="button" class="spotlight-card shot-card" data-shot="3" aria-pressed="false">
           <img src="/openinfinite/assets/openinfinite_tema_claro.png" alt="Tema Claro Apple Daylight" />
           <strong>Tema Claro Daylight</strong>
           <span>Alto contraste para o dia</span>
-        </div>
+        </button>
       </div>
     </section>
 
@@ -659,25 +861,25 @@
         </div>
       </div>
       <div class="steps-grid">
-        <div class="spotlight-card step-card active" onclick="highlightStep(this)">
+        <button type="button" class="spotlight-card step-card active" aria-pressed="true">
           <span class="step-num">01 / TESTE GRÁTIS</span>
           <h3>Baixe e abra em segundos</h3>
           <p>Use todos os recursos liberados durante 1 hora completa no Windows (.exe) ou macOS Apple Silicon (.dmg).</p>
-        </div>
-        <div class="spotlight-card step-card" onclick="highlightStep(this)">
+        </button>
+        <button type="button" class="spotlight-card step-card" aria-pressed="false">
           <span class="step-num">02 / 1 CLIQUE</span>
           <h3>Escolha o perfil HY4 &amp; linguagem</h3>
           <p>Aperte Iniciar no painel para alinhar OpenBot, Editor e Terminais CLI sem precisar copiar endpoints à mão.</p>
-        </div>
-        <div class="spotlight-card step-card" onclick="highlightStep(this)">
+        </button>
+        <button type="button" class="spotlight-card step-card" aria-pressed="false">
           <span class="step-num">03 / SEM INTERRUPÇÕES</span>
           <h3>Pause ou renove quando quiser</h3>
           <p>O botão muda para Pausar quando ativo, o Guardião Turbo Auto protege contra quedas e seus gráficos mostram só dados reais.</p>
-        </div>
+        </button>
       </div>
     </section>
 
-    <!-- MONTHLY PRICING (R$ 99 WIN / R$ 159 MAC) + PIX CHECKOUT + KEY VALIDATOR -->
+    <!-- MONTHLY PRICING + INTERACTIVE COMPARATOR + PIX CHECKOUT + KEY VALIDATOR -->
     <section id="planos" class="reveal">
       <div class="sec-head">
         <div>
@@ -687,10 +889,35 @@
         <p>Após 1 hora de demonstração gratuita, escolha o plano de 30 dias para o seu sistema e libere na hora via PIX.</p>
       </div>
 
+      <!-- INTERACTIVE COMPARATOR: Demo 1h vs Windows R$ 99 vs macOS R$ 159 -->
+      <div class="spotlight-card comparator-card" id="comparador">
+        <div class="comparator-head">
+          <div>
+            <span class="sec-kicker" style="margin-bottom:2px;">Comparador Interativo</span>
+            <strong style="font-size:16px;">Compare Demo 1h, Windows e macOS &amp; Multi</strong>
+          </div>
+          <div class="comp-tabs" role="tablist" aria-label="Comparar modalidades do OpenInfinite">
+            <button type="button" role="tab" class="sim-pill" id="comp-tab-demo" aria-selected="false" tabindex="-1" data-comp="demo">Demo Grátis (1h)</button>
+            <button type="button" role="tab" class="sim-pill" id="comp-tab-win" aria-selected="false" tabindex="-1" data-comp="infinite">Windows · R$ 99,00</button>
+            <button type="button" role="tab" class="sim-pill active" id="comp-tab-mac" aria-selected="true" tabindex="0" data-comp="infinite_pro">macOS &amp; Multi · R$ 159,00</button>
+          </div>
+        </div>
+        <div class="comp-grid" id="compPanel" role="tabpanel" aria-labelledby="comp-tab-mac" aria-live="polite">
+          <div class="comp-metric"><span>Investimento</span><strong id="compPrice" class="mono">R$ 159,00 / mês</strong></div>
+          <div class="comp-metric"><span>Dispositivos</span><strong id="compDevices">macOS + Windows (até 2 PCs)</strong></div>
+          <div class="comp-metric"><span>Motor &amp; Acabamento</span><strong id="compEngine">HY4 #1 + Liquid Glass + Turbo Auto</strong></div>
+          <div class="comp-metric"><span>Chave / Liberação</span><strong id="compKey" class="mono">OI6-PRO (30 dias)</strong></div>
+        </div>
+        <div class="comp-actions">
+          <span id="compSummary" style="font-size:13px;color:var(--muted);">Ideal para quem alterna entre Mac Apple Silicon e PC Windows com uma única licença.</span>
+          <button type="button" class="btn sm ivory" id="compActionBtn">Selecionar macOS &amp; Multi no PIX</button>
+        </div>
+      </div>
+
       <div class="plans-grid">
         <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias para 1 PC Windows com todos os recursos." data-help-how="Clique para gerar seu PIX de R$ 99,00.">
           <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
               <strong style="font-size:17px;">🪟 OpenInfinite Windows</strong>
               <span class="brand-ver">30 dias · 1 PC Windows</span>
             </div>
@@ -703,14 +930,17 @@
               <li>Auto-configuração em 1 clique do OpenBot e CLIs locais</li>
             </ul>
           </div>
-          <button type="button" class="btn ivory" onclick="selectPlan('infinite')">Assinar Windows — R$ 99,00/mês</button>
+          <button type="button" class="btn ivory" data-select-plan="infinite">Assinar Windows — R$ 99,00/mês</button>
         </div>
 
         <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite macOS &amp; Multi — R$ 159,00 / mês" data-help-what="Licença oficial de 30 dias para Apple Silicon macOS + Windows (até 2 PCs)." data-help-how="Clique para gerar seu PIX de R$ 159,00.">
           <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="font-size:17px;"> OpenInfinite macOS &amp; Multi</strong>
-              <span class="brand-ver" style="color:#a5b4fc;border-color:var(--border-accent);">30 dias · Mac + 2 PCs</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
+                <span>OpenInfinite macOS &amp; Multi</span>
+              </strong>
+              <span class="brand-ver" style="color:#c7d2fe;border-color:var(--border-accent);">30 dias · Mac + 2 PCs</span>
             </div>
             <div class="plan-price">R$ 159,00 <small>/ mês · chave OI6-PRO</small></div>
             <ul class="plan-list">
@@ -721,7 +951,7 @@
               <li>Suporte prioritário para migração de máquina via WhatsApp</li>
             </ul>
           </div>
-          <button type="button" class="btn accent" onclick="selectPlan('infinite_pro')">Assinar macOS &amp; Multi — R$ 159,00/mês</button>
+          <button type="button" class="btn accent" data-select-plan="infinite_pro">Assinar macOS &amp; Multi — R$ 159,00/mês</button>
         </div>
       </div>
 
@@ -734,34 +964,48 @@
         <div class="spotlight-card panel" id="checkout">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:19px;font-weight:800;">Gerar PIX da Assinatura</h2>
-            <button type="button" class="help-q" data-help-title="Checkout PIX Oficial" data-help-what="Gera QR Code oficial e Copia e Cola para 68 99226-9296 (Raiane Lenoncio)." data-help-how="Escolha Windows (R$ 99) ou macOS &amp; Multi (R$ 159) e preencha seu nome e contato.">?</button>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Checkout PIX Oficial" data-help-title="Checkout PIX Oficial" data-help-what="Gera QR Code oficial e Copia e Cola para 68 99226-9296 (Raiane Lenoncio)." data-help-how="Escolha Windows (R$ 99,00) ou macOS &amp; Multi (R$ 159,00) e preencha seu nome e contato.">?</button>
           </div>
           <div class="pix-card">
             <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX</div>
             <div style="color:var(--muted);">Telefone: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Lenoncio</strong></div>
-            <button type="button" class="btn sm" style="align-self:flex-start;" onclick="copyPix()">Copiar Chave PIX</button>
+            <div class="pix-actions-row">
+              <button type="button" id="copyPixBtn" class="btn sm">Copiar Chave PIX</button>
+              <span id="pixCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
           </div>
-          <form id="orderForm">
+          <form id="orderForm" novalidate>
             <div class="field">
               <label for="ordPlan">Plano Mensal (1 Mês)</label>
               <select id="ordPlan">
-                <option value="infinite_pro" selected> OpenInfinite macOS &amp; Multi — R$ 159,00 / mês (Mac + 2 PCs)</option>
-                <option value="infinite">🪟 OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
+                <option value="infinite_pro" selected>OpenInfinite macOS &amp; Multi — R$ 159,00 / mês (Mac + 2 PCs)</option>
+                <option value="infinite">OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
               </select>
             </div>
             <div class="field">
               <label for="ordName">Seu Nome Completo</label>
-              <input id="ordName" type="text" required placeholder="Ex.: Maria Oliveira" />
+              <input id="ordName" type="text" required autocomplete="name" placeholder="Ex.: Maria Oliveira" />
             </div>
             <div class="field">
               <label for="ordContact">Seu WhatsApp ou E-mail</label>
-              <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999" />
+              <input id="ordContact" type="text" required autocomplete="tel" placeholder="Ex.: (68) 99999-9999" />
             </div>
-            <button type="submit" class="btn ivory" style="width:100%;">Gerar QR Code PIX</button>
+            <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">Gerar QR Code PIX</button>
           </form>
-          <div id="orderResultBox" class="result-box">
-            <strong style="color:var(--emerald);" id="orderResultHead">Pedido Pronto!</strong>
-            <div class="mono" id="orderResultCode" style="background:#040509;padding:8px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+
+          <div id="orderErrorBox" class="result-box is-error" role="alert" aria-live="assertive">
+            <strong style="color:var(--danger);" id="orderErrorHead">Não foi possível gerar o PIX</strong>
+            <span id="orderErrorMsg" style="color:var(--ink-secondary);">Verifique os dados informados ou sua conexão.</span>
+            <button type="button" id="retryOrderBtn" class="btn sm" style="align-self:flex-start;">↻ Tentar novamente</button>
+          </div>
+
+          <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
+            <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
+            <div class="mono" id="orderResultCode" style="background:#040509;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+            <div class="pix-actions-row">
+              <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
+              <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
             <div id="orderPixQrWrap" style="text-align:center;"></div>
             <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm">Enviar Comprovante no WhatsApp</a>
           </div>
@@ -770,19 +1014,19 @@
         <div class="spotlight-card panel" id="licenca">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:19px;font-weight:800;">Validar Chave de Acesso</h2>
-            <button type="button" class="help-q" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Cole a chave abaixo e clique em Conferir Chave.">?</button>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Validar Chave Online" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Cole a chave abaixo e clique em Conferir Chave.">?</button>
           </div>
-          <p style="font-size:13px;color:var(--muted);">
-            Aceita chaves mensais <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (macOS &amp; Multi) e chaves BadClaude Nível 3+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
+          <p style="font-size:13.5px;color:var(--muted);">
+            Aceita chaves mensais <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (macOS &amp; Multi) e chaves BadClaude 3º Nível+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
           </p>
-          <form id="verifyForm">
+          <form id="verifyForm" novalidate>
             <div class="field">
               <label for="licKeyInput">Sua Chave</label>
-              <input id="licKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou OI6-INF-..." required />
+              <input id="licKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou OI6-INF-..." required autocomplete="off" spellcheck="false" />
             </div>
-            <button type="submit" class="btn accent" style="width:100%;">Conferir Chave Online</button>
+            <button type="submit" id="verifySubmitBtn" class="btn accent" style="width:100%;">Conferir Chave Online</button>
           </form>
-          <div id="licResultBox" class="result-box"></div>
+          <div id="licResultBox" class="result-box" role="status" aria-live="polite"></div>
           <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
             Formatou o computador e precisa liberar o HWID antigo?
             <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm" style="margin-top:8px;">Suporte WhatsApp: (68) 99226-9296</a>
@@ -790,30 +1034,102 @@
         </div>
       </div>
     </section>
+
+    <!-- FAQ EXPANSÍVEL (CSS Grid 0fr -> 1fr) -->
+    <section id="faq" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Dúvidas Frequentes</span>
+          <h2>Respostas diretas antes de assinar.</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
+            <span>O que acontece após a demonstração gratuita de 1 hora?</span>
+            <span class="faq-chevron" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+            <div class="faq-panel-inner">
+              <div class="faq-panel-body">
+                Durante 60 minutos você testa todos os recursos do OpenInfinite v6.1 sem cartão de crédito. Ao concluir a demo, basta gerar seu PIX nesta página (R$ 99,00 no Windows ou R$ 159,00 no macOS &amp; Multi) e colar a chave recebida no painel.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+            <span>Qual a diferença entre Windows (R$ 99,00) e macOS &amp; Multi (R$ 159,00)?</span>
+            <span class="faq-chevron" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
+            <div class="faq-panel-inner">
+              <div class="faq-panel-body">
+                O plano Windows (R$ 99,00/mês) libera 1 computador Windows com chave <code class="mono">OI6-INF</code>. O plano macOS &amp; Multi (R$ 159,00/mês) libera o app nativo Apple Silicon com acabamento Liquid Glass e permite uso simultâneo em até 2 máquinas (Mac + Windows) com chave <code class="mono">OI6-PRO</code>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+            <span>Tenho BadClaude (Cockpit Pro / Fundador VIP, 3º nível+) — preciso pagar separado?</span>
+            <span class="faq-chevron" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
+            <div class="faq-panel-inner">
+              <div class="faq-panel-body">
+                Não. Chaves BadClaude válidas a partir do 3º nível (<code class="mono">BC5-...</code> SuperBad / Cockpit Pro ou Fundador VIP) já incluem acesso ao OpenInfinite v6.1 Windows e macOS sem custo adicional.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+            <span>Como o validador de chave e o checkout funcionam se eu estiver offline?</span>
+            <span class="faq-chevron" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
+            <div class="faq-panel-inner">
+              <div class="faq-panel-body">
+                Ambos os formulários exibem o status em tempo real inline, sem janelas de alerta do navegador. Caso sua rede oscile, você vê o aviso de erro na hora com botão de tentar novamente sem perder os dados digitados.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <button type="button" class="hover-hud" onclick="openHelpModal(null)">
-    <span>ⓘ</span>
+  <button type="button" class="hover-hud" id="hoverHudBtn" aria-label="Abrir ajuda rápida Shift + I">
+    <span aria-hidden="true">ⓘ</span>
     <span id="hoverBarHint">Passe o mouse + <strong>Shift + I</strong> para explicar</span>
   </button>
 
-  <div id="shiftIModal" role="dialog" aria-modal="true" aria-label="Explicação Rápida Shift+I">
+  <div id="shiftIModal" role="dialog" aria-modal="true" aria-labelledby="shiftITitle">
     <div class="shift-box">
       <div class="shift-head">
         <span>Ajuda OpenInfinite · Shift + I</span>
-        <button type="button" class="btn sm" onclick="closeHelpModal()" style="padding:3px 9px;">✕</button>
+        <button type="button" id="shiftICloseTop" class="btn sm" aria-label="Fechar janela de ajuda" style="padding:4px 10px;">✕</button>
       </div>
       <div class="shift-body">
-        <h3 id="shiftITitle" style="color:#fff;font-size:16px;font-weight:800;">Entenda este item</h3>
-        <div><strong style="color:var(--accent);">O que é:</strong> <span id="shiftIWhat" style="color:#d4d9e8;">—</span></div>
-        <div><strong style="color:var(--emerald);">Como usar:</strong> <span id="shiftIHow" style="color:#d4d9e8;">—</span></div>
-        <div style="display:flex;justify-content:flex-end;"><button type="button" class="btn ivory sm" onclick="closeHelpModal()">Entendi [ESC]</button></div>
+        <h3 id="shiftITitle" style="color:var(--ink);font-size:16px;font-weight:800;">Entenda este item</h3>
+        <div><strong style="color:var(--accent);">O que é:</strong> <span id="shiftIWhat" style="color:var(--ink-secondary);">—</span></div>
+        <div><strong style="color:var(--emerald-ink);">Como usar:</strong> <span id="shiftIHow" style="color:var(--ink-secondary);">—</span></div>
+        <div style="display:flex;justify-content:flex-end;">
+          <button type="button" id="shiftICloseBtn" class="btn ivory sm">Entendi [ESC]</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div id="zoomModal" onclick="this.style.display='none'">
-    <img id="zoomImg" src="" alt="Visualização ampliada" style="max-width:94vw;max-height:92vh;border-radius:12px;border:1px solid rgba(255,255,255,0.22);box-shadow:0 32px 96px #000;" />
+  <div id="zoomModal" role="dialog" aria-modal="true" aria-label="Visualização ampliada da interface">
+    <div class="zoom-wrap">
+      <img id="zoomImg" src="" alt="Visualização ampliada" />
+      <button type="button" id="zoomCloseBtn" class="btn ivory sm pill">Fechar visualização [ESC]</button>
+    </div>
   </div>
 
   <script>
@@ -821,6 +1137,52 @@
       const $ = (id) => document.getElementById(id);
       const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let lastHoverEl = null;
+      let lastFocusBeforeModal = null;
+      let lastBrcode = '';
+
+      function runTransition(fn) {
+        if (document.startViewTransition && !reducedMotion) {
+          document.startViewTransition(fn);
+        } else {
+          fn();
+        }
+      }
+
+      async function copyTextSafely(text) {
+        if (navigator.clipboard && window.isSecureContext !== false) {
+          try {
+            await navigator.clipboard.writeText(text);
+            return true;
+          } catch (_err) {
+            /* fallback below */
+          }
+        }
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch (_err2) {
+          return false;
+        }
+      }
+
+      function showInlineCopyState(btn, feedbackEl, defaultLabel, copiedMsg) {
+        if (feedbackEl) feedbackEl.textContent = copiedMsg;
+        if (btn) {
+          btn.textContent = '✓ Copiado!';
+          clearTimeout(btn._copyTimer);
+          btn._copyTimer = setTimeout(() => {
+            btn.textContent = defaultLabel;
+          }, 2200);
+        }
+      }
 
       // Sticky topbar density change on scroll
       const topbar = $('topbar');
@@ -830,7 +1192,7 @@
 
       // IntersectionObserver reveal animations
       const revEls = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
+      if ('IntersectionObserver' in window && !reducedMotion) {
         const io = new IntersectionObserver((entries) => {
           entries.forEach((en) => {
             if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
@@ -850,7 +1212,7 @@
         }, { passive: true });
       });
 
-      // Living 3D Symbol tracking mouse across Hero + LivingStage (never blocked by OS reduced-motion setting!)
+      // Living 3D Symbol tracking mouse across Hero + LivingStage (never blocked by reduced-motion!)
       const stage = $('livingStage');
       const hero = document.querySelector('.hero');
       const core = $('livingCore');
@@ -934,7 +1296,7 @@
         }
       }
 
-      // Interactive Cockpit & Gallery Sync (View Transitions API)
+      // Interactive Cockpit & Gallery Sync (WAI-ARIA Tabs + View Transitions)
       const SHOTS = [
         { img: '/openinfinite/assets/openinfinite_tema_escuro.png', title: 'Painel Principal com Botão Iniciar / Pausar & Dados Reais', desc: 'Telemetria direta do banco local, status ao vivo das ferramentas e troca de motor sem popups.' },
         { img: '/openinfinite/assets/openinfinite_liquid_glass.png', title: 'Visual Liquid Glass (macOS & Windows)', desc: 'Vidro translúcido com bordas especulares sem banners ou janelas secundárias interrompendo o foco.' },
@@ -942,40 +1304,81 @@
         { img: '/openinfinite/assets/openinfinite_tema_claro.png', title: 'Tema Claro Apple Daylight', desc: 'Contraste alto e limpo para ambientes bem iluminados com leitura nítida dos gráficos.' },
       ];
 
-      function activateShot(idx) {
-        const s = SHOTS[idx] || SHOTS[0];
-        const apply = () => {
+      const cockpitTabs = Array.from(document.querySelectorAll('#cockpitTabs [role="tab"]'));
+      function activateShot(idx, focusTab) {
+        const safeIdx = Math.max(0, Math.min(SHOTS.length - 1, idx));
+        const s = SHOTS[safeIdx];
+        runTransition(() => {
           $('featImg').src = s.img;
           $('featImg').alt = s.title;
           $('featTitle').textContent = s.title;
           $('featDesc').textContent = s.desc;
+          const panel = $('cockpitPanel');
+          if (panel) panel.setAttribute('aria-labelledby', `tab-shot-${safeIdx}`);
           document.querySelectorAll('.sim-pill[data-shot], .shot-card[data-shot]').forEach((el) => {
-            const on = Number(el.dataset.shot) === idx;
+            const on = Number(el.dataset.shot) === safeIdx;
             el.classList.toggle('active', on);
-            if (el.getAttribute('role') === 'tab') el.setAttribute('aria-selected', String(on));
+            if (el.getAttribute('role') === 'tab') {
+              el.setAttribute('aria-selected', String(on));
+              el.setAttribute('tabindex', on ? '0' : '-1');
+            } else {
+              el.setAttribute('aria-pressed', String(on));
+            }
           });
-        };
-        if (document.startViewTransition && !reducedMotion) document.startViewTransition(apply);
-        else apply();
+        });
+        if (focusTab && cockpitTabs[safeIdx]) cockpitTabs[safeIdx].focus();
       }
+
       document.querySelectorAll('[data-shot]').forEach((el) => {
-        el.addEventListener('click', () => activateShot(Number(el.dataset.shot)));
+        el.addEventListener('click', () => activateShot(Number(el.dataset.shot), false));
       });
 
+      cockpitTabs.forEach((tab, idx) => {
+        tab.addEventListener('keydown', (ev) => {
+          let next = null;
+          if (ev.key === 'ArrowRight') next = (idx + 1) % cockpitTabs.length;
+          else if (ev.key === 'ArrowLeft') next = (idx - 1 + cockpitTabs.length) % cockpitTabs.length;
+          else if (ev.key === 'Home') next = 0;
+          else if (ev.key === 'End') next = cockpitTabs.length - 1;
+          if (next !== null) {
+            ev.preventDefault();
+            activateShot(next, true);
+          }
+        });
+      });
+
+      // Language / Stack focus pills inside simulator
+      const LANG_PROFILES = {
+        python: 'Perfil: Python 3.12 · HY4 #1 (54 ms)',
+        ts: 'Perfil: TypeScript 5 · HY4 #1 (48 ms)',
+        go: 'Perfil: Go 1.24 · HY4 #1 (42 ms)',
+        rust: 'Perfil: Rust Cargo · HY4 #1 (51 ms)',
+      };
+      document.querySelectorAll('.lang-chip[data-lang]').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const lang = chip.dataset.lang;
+          document.querySelectorAll('.lang-chip[data-lang]').forEach((c) => {
+            const on = c === chip;
+            c.classList.toggle('active', on);
+            c.setAttribute('aria-pressed', String(on));
+          });
+          $('langStatus').textContent = LANG_PROFILES[lang] || LANG_PROFILES.python;
+        });
+      });
+
+      // Engine toggle
       let simOn = true;
-      window.toggleSimEngine = function () {
+      $('simEngineBtn').addEventListener('click', () => {
         simOn = !simOn;
         const btn = $('simEngineBtn');
-        const b2 = $('badge2');
-        if (btn) {
-          btn.classList.toggle('stopped', !simOn);
-          btn.textContent = simOn ? '⏸ Motor Ativo · Pausar' : '▶ Motor Pausado · Iniciar';
-        }
+        btn.classList.toggle('stopped', !simOn);
+        btn.setAttribute('aria-pressed', String(simOn));
+        btn.textContent = simOn ? '⏸ Motor Ativo · Pausar' : '▶ Motor Pausado · Iniciar';
         if (b2) {
           b2.textContent = simOn ? '● Motor Pronto' : '○ Motor Pausado';
-          b2.style.color = simOn ? '#6ee7b7' : '#fbbf24';
+          b2.style.color = simOn ? 'var(--emerald-ink)' : 'var(--amber)';
         }
-      };
+      });
 
       // Interactive Bento 1: Cascade rotation simulator
       let casIdx = 0;
@@ -985,7 +1388,7 @@
         'Rota #2 saturada → Assumiu MiMo v2.6 Flash sem fechar o editor',
         'Conexão renovada! HY4 #1 restaurado como principal'
       ];
-      window.stepCascadeSim = function () {
+      $('cascadeSimBtn').addEventListener('click', () => {
         casIdx = (casIdx + 1) % 4;
         $('cascadeStatusTxt').textContent = casLabels[casIdx];
         document.querySelectorAll('#cascadeList .cascade-row').forEach((row, i) => {
@@ -998,44 +1401,163 @@
             else tag.textContent = i === 3 ? 'Turbo Auto' : 'Pronto';
           }
         });
-      };
+      });
 
-      // Interactive Bento 2: Scrubber hover
+      // Interactive Bento 2: Scrubber hover + focus + click
+      function selectScrubCol(col) {
+        document.querySelectorAll('#scrubBars .scrub-col').forEach((c) => c.classList.remove('active'));
+        col.classList.add('active');
+        $('scrubVal').textContent = col.dataset.v || '—';
+        $('scrubMeta').textContent = col.dataset.m || '';
+      }
       document.querySelectorAll('#scrubBars .scrub-col').forEach((col) => {
-        col.addEventListener('pointerenter', () => {
-          document.querySelectorAll('#scrubBars .scrub-col').forEach((c) => c.classList.remove('active'));
-          col.classList.add('active');
-          $('scrubVal').textContent = col.dataset.v || '—';
-          $('scrubMeta').textContent = col.dataset.m || '';
-        });
+        col.addEventListener('pointerenter', () => selectScrubCol(col));
+        col.addEventListener('focus', () => selectScrubCol(col));
+        col.addEventListener('click', () => selectScrubCol(col));
       });
 
       // Interactive Bento 3: Theme swatch preview
-      window.setMiniTheme = function (t, btn) {
-        const box = $('miniThemePreview');
-        if (box) box.setAttribute('data-t', t);
-        btn.parentElement.querySelectorAll('.sim-pill').forEach((b) => b.classList.toggle('active', b === btn));
+      const THEME_COPY = {
+        dark: { title: 'Painel OpenInfinite · Escuro OLED', desc: 'Contrastes nativos adaptados ao sistema.' },
+        liquid: { title: 'Painel OpenInfinite · Liquid Glass', desc: 'Vidro translúcido especular para macOS e Windows.' },
+        light: { title: 'Painel OpenInfinite · Claro Daylight', desc: 'Leitura nítida em ambientes muito iluminados.' },
       };
+      document.querySelectorAll('[data-theme-opt]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.themeOpt;
+          const box = $('miniThemePreview');
+          if (box) box.setAttribute('data-t', t);
+          const info = THEME_COPY[t] || THEME_COPY.dark;
+          $('miniThemeTitle').textContent = info.title;
+          $('miniThemeDesc').textContent = info.desc;
+          document.querySelectorAll('[data-theme-opt]').forEach((b) => {
+            const on = b === btn;
+            b.classList.toggle('active', on);
+            b.setAttribute('aria-pressed', String(on));
+          });
+        });
+      });
 
       // Interactive Bento 4: RAM preview action
-      window.optimizeRamDemo = function () {
+      $('ramOptimizeBtn').addEventListener('click', () => {
         const el = $('ramDemoVal');
         if (!el) return;
-        el.textContent = '19,8 GB';
-        setTimeout(() => { el.textContent = '19,6 GB'; }, 1200);
-      };
+        el.textContent = '19,8 GB (Otimizado)';
+        clearTimeout(el._ramTimer);
+        el._ramTimer = setTimeout(() => { el.textContent = '19,6 GB'; }, 1400);
+      });
 
-      window.highlightStep = function (el) {
-        document.querySelectorAll('.step-card').forEach((c) => c.classList.remove('active'));
-        el.classList.add('active');
-      };
+      // 3-Step kinetic buttons
+      document.querySelectorAll('.step-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.step-card').forEach((c) => {
+            const on = c === card;
+            c.classList.toggle('active', on);
+            c.setAttribute('aria-pressed', String(on));
+          });
+        });
+      });
 
-      window.zoomImage = function (src) {
+      // Interactive Comparator Tabs
+      const COMP_DATA = {
+        demo: {
+          price: 'Grátis por 1 hora',
+          devices: 'Windows ou macOS (1 sessão)',
+          engine: 'HY4 #1 + Todos os recursos liberados',
+          key: 'Sem chave · Teste imediato',
+          summary: 'Baixe o instalador oficial e valide o painel no seu projeto real durante 60 minutos.',
+          cta: 'Baixar Demo Windows (.exe)',
+          action: () => { window.location.href = '/downloads/OpenInfinite-Client-Setup.exe'; },
+        },
+        infinite: {
+          price: 'R$ 99,00 / mês',
+          devices: '1 PC Windows (30 dias)',
+          engine: 'HY4 #1 + Turbo Auto + 3 Temas',
+          key: 'OI6-INF (30 dias)',
+          summary: 'Plano dedicado para estações Windows com renovação silenciosa e limpeza de RAM.',
+          cta: 'Selecionar Windows (R$ 99,00) no PIX',
+          action: () => selectPlan('infinite'),
+        },
+        infinite_pro: {
+          price: 'R$ 159,00 / mês',
+          devices: 'macOS + Windows (até 2 PCs)',
+          engine: 'HY4 #1 + Liquid Glass + Turbo Auto',
+          key: 'OI6-PRO (30 dias)',
+          summary: 'Ideal para quem alterna entre Mac Apple Silicon e PC Windows com uma única licença.',
+          cta: 'Selecionar macOS & Multi (R$ 159,00) no PIX',
+          action: () => selectPlan('infinite_pro'),
+        },
+      };
+      let currentCompAction = COMP_DATA.infinite_pro.action;
+      const compTabs = Array.from(document.querySelectorAll('#comparador [role="tab"]'));
+      function activateComp(key, focusTab) {
+        const d = COMP_DATA[key] || COMP_DATA.infinite_pro;
+        const apply = () => {
+          $('compPrice').textContent = d.price;
+          $('compDevices').textContent = d.devices;
+          $('compEngine').textContent = d.engine;
+          $('compKey').textContent = d.key;
+          $('compSummary').textContent = d.summary;
+          $('compActionBtn').textContent = d.cta;
+          currentCompAction = d.action;
+          compTabs.forEach((tab) => {
+            const on = tab.dataset.comp === key;
+            tab.classList.toggle('active', on);
+            tab.setAttribute('aria-selected', String(on));
+            tab.setAttribute('tabindex', on ? '0' : '-1');
+            if (on) $('compPanel').setAttribute('aria-labelledby', tab.id);
+          });
+        };
+        runTransition(apply);
+        if (focusTab) {
+          const t = compTabs.find((x) => x.dataset.comp === key);
+          if (t) t.focus();
+        }
+      }
+      compTabs.forEach((tab, idx) => {
+        tab.addEventListener('click', () => activateComp(tab.dataset.comp, false));
+        tab.addEventListener('keydown', (ev) => {
+          let next = null;
+          if (ev.key === 'ArrowRight') next = (idx + 1) % compTabs.length;
+          else if (ev.key === 'ArrowLeft') next = (idx - 1 + compTabs.length) % compTabs.length;
+          else if (ev.key === 'Home') next = 0;
+          else if (ev.key === 'End') next = compTabs.length - 1;
+          if (next !== null) {
+            ev.preventDefault();
+            activateComp(compTabs[next].dataset.comp, true);
+          }
+        });
+      });
+      $('compActionBtn').addEventListener('click', () => currentCompAction());
+
+      // FAQ Accordion (CSS Grid 0fr -> 1fr)
+      document.querySelectorAll('.faq-trigger').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const willOpen = !item.classList.contains('open');
+          item.classList.toggle('open', willOpen);
+          btn.setAttribute('aria-expanded', String(willOpen));
+        });
+      });
+
+      // Modals with focus management
+      function openZoomModal(src) {
+        lastFocusBeforeModal = document.activeElement;
         $('zoomImg').src = src;
-        $('zoomModal').style.display = 'flex';
-      };
+        $('zoomModal').classList.add('open');
+        $('zoomCloseBtn').focus();
+      }
+      function closeZoomModal() {
+        $('zoomModal').classList.remove('open');
+        if (lastFocusBeforeModal && typeof lastFocusBeforeModal.focus === 'function') lastFocusBeforeModal.focus();
+      }
+      $('stageZoomBtn').addEventListener('click', () => openZoomModal($('featImg').src));
+      $('captionZoomBtn').addEventListener('click', () => openZoomModal($('featImg').src));
+      $('zoomCloseBtn').addEventListener('click', closeZoomModal);
+      $('zoomModal').addEventListener('click', (ev) => { if (ev.target === $('zoomModal')) closeZoomModal(); });
 
       function openHelpModal(rawEl) {
+        lastFocusBeforeModal = document.activeElement;
         let el = rawEl && rawEl.nodeType === 1 ? rawEl : lastHoverEl;
         if (el && !el.dataset?.helpTitle) el = el.closest?.('[data-help-title]');
         if (el?.dataset?.helpTitle) {
@@ -1047,18 +1569,37 @@
           $('shiftIWhat').textContent = 'Explica qualquer bloco, botão de download ou plano mensal em linguagem simples.';
           $('shiftIHow').textContent = 'Passe o mouse sobre qualquer área e aperte Shift + I.';
         }
-        $('shiftIModal').style.display = 'flex';
+        $('shiftIModal').classList.add('open');
+        $('shiftICloseBtn').focus();
       }
-      window.openHelpModal = openHelpModal;
-      window.closeHelpModal = function () { $('shiftIModal').style.display = 'none'; };
+      function closeHelpModal() {
+        $('shiftIModal').classList.remove('open');
+        if (lastFocusBeforeModal && typeof lastFocusBeforeModal.focus === 'function') lastFocusBeforeModal.focus();
+      }
+      $('topHelpBtn').addEventListener('click', () => openHelpModal(null));
+      $('hoverHudBtn').addEventListener('click', () => openHelpModal(null));
+      $('shiftICloseTop').addEventListener('click', closeHelpModal);
+      $('shiftICloseBtn').addEventListener('click', closeHelpModal);
+      $('shiftIModal').addEventListener('click', (ev) => { if (ev.target === $('shiftIModal')) closeHelpModal(); });
 
       document.addEventListener('pointerover', (ev) => {
         const hit = ev.target?.closest?.('[data-help-title]');
-        if (hit) { lastHoverEl = hit; $('hoverBarHint').innerHTML = '<strong>Shift + I:</strong> ' + hit.dataset.helpTitle; }
+        if (hit) {
+          lastHoverEl = hit;
+          const hint = $('hoverBarHint');
+          hint.textContent = '';
+          const b = document.createElement('strong');
+          b.textContent = 'Shift + I:';
+          hint.appendChild(b);
+          hint.appendChild(document.createTextNode(' ' + hit.dataset.helpTitle));
+        }
       }, { passive: true });
 
       window.addEventListener('keydown', (ev) => {
-        if (ev.key === 'Escape') { closeHelpModal(); $('zoomModal').style.display = 'none'; }
+        if (ev.key === 'Escape') {
+          if ($('shiftIModal').classList.contains('open')) closeHelpModal();
+          if ($('zoomModal').classList.contains('open')) closeZoomModal();
+        }
         if (ev.shiftKey && !ev.ctrlKey && !ev.altKey && !ev.metaKey && ev.key.toLowerCase() === 'i') {
           const ae = document.activeElement;
           if (ae && ['INPUT', 'SELECT', 'TEXTAREA'].includes(ae.tagName)) return;
@@ -1072,59 +1613,234 @@
         if (q) { ev.preventDefault(); openHelpModal(q); }
       });
 
-      window.selectPlan = function (p) {
+      // Plan selection -> Checkout
+      function selectPlan(p) {
         $('ordPlan').value = p;
-        $('checkout')?.scrollIntoView({ behavior: 'smooth' });
-      };
-      window.copyPix = function () {
-        navigator.clipboard?.writeText('68 99226-9296');
-        alert('Chave PIX 68 99226-9296 (Raiane Lenoncio) copiada!');
-      };
-
-      $('orderForm').addEventListener('submit', async (ev) => {
-        ev.preventDefault();
-        const res = await fetch('/api/superbad/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            buyer_name: $('ordName').value.trim(),
-            buyer_contact: $('ordContact').value.trim(),
-            requested_edition: $('ordPlan').value
-          })
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.ok || !data.order) {
-          alert(data.error || 'Erro ao gerar pedido PIX.');
-          return;
-        }
-        const o = data.order;
-        $('orderResultBox').style.display = 'flex';
-        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display}) pronto!`;
-        $('orderResultCode').textContent = `PIX Copia e Cola: ${o.pix?.brcode || '68 99226-9296'}`;
-        $('orderPixQrWrap').innerHTML = o.pix?.qr_data_url
-          ? `<img src="${o.pix.qr_data_url}" alt="QR Code PIX" style="width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;">`
-          : '';
-        if (o.whatsapp_url) $('btnWhatsOrder').href = o.whatsapp_url;
+        $('checkout')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+        $('ordName')?.focus({ preventScroll: true });
+      }
+      document.querySelectorAll('[data-select-plan]').forEach((btn) => {
+        btn.addEventListener('click', () => selectPlan(btn.dataset.selectPlan));
       });
 
-      $('verifyForm').addEventListener('submit', async (ev) => {
-        ev.preventDefault();
-        const box = $('licResultBox');
-        box.style.display = 'flex';
-        box.textContent = 'Validando assinatura online...';
-        const res = await fetch('/api/v1/licenses/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key: $('licKeyInput').value.trim(), hwid: 'web-' + (navigator.platform || 'browser') })
-        });
-        const d = await res.json().catch(() => ({}));
-        if (res.ok && d.ok && d.includesOpenInfinite !== false) {
-          box.innerHTML = `<strong style="color:#10b981;">Chave Válida — OpenInfinite Liberado</strong><span>Plano: <b>${d.planLabel || d.tier}</b> · Válida por ${d.daysLeft} dias.</span>`;
-        } else if (res.ok && d.ok && d.includesOpenInfinite === false) {
-          box.innerHTML = `<strong style="color:#f59e0b;">Chave BadClaude Nível 1/2</strong><span>Esse nível usa apenas a demo de 1h no OpenInfinite. Assine separado acima ou use Nível 3+.</span>`;
-        } else {
-          box.innerHTML = `<strong style="color:#f43f5e;">${d.error || 'Chave não reconhecida ou expirada.'}</strong>`;
+      // Inline PIX Copy (sem bloqueio por popup nativo)
+      $('copyPixBtn').addEventListener('click', async () => {
+        const ok = await copyTextSafely('68 99226-9296');
+        showInlineCopyState(
+          $('copyPixBtn'),
+          $('pixCopyFeedback'),
+          'Copiar Chave PIX',
+          ok ? 'Chave PIX 68 99226-9296 (Raiane Lenoncio) copiada!' : 'Chave: 68 99226-9296 (copie manualmente)'
+        );
+      });
+
+      $('copyBrcodeBtn').addEventListener('click', async () => {
+        const code = lastBrcode || '68 99226-9296';
+        const ok = await copyTextSafely(code);
+        showInlineCopyState(
+          $('copyBrcodeBtn'),
+          $('brcodeCopyFeedback'),
+          'Copiar PIX Copia e Cola',
+          ok ? 'Código PIX Copia e Cola copiado!' : 'Selecione o código acima para copiar.'
+        );
+      });
+
+      // Checkout PIX Form (loading/error/offline/retry inline)
+      async function submitOrder() {
+        const nameEl = $('ordName');
+        const contactEl = $('ordContact');
+        const errBox = $('orderErrorBox');
+        const resBox = $('orderResultBox');
+        const submitBtn = $('orderSubmitBtn');
+
+        nameEl.setAttribute('aria-invalid', 'false');
+        contactEl.setAttribute('aria-invalid', 'false');
+        errBox.classList.remove('is-visible');
+
+        const buyerName = nameEl.value.trim();
+        const buyerContact = contactEl.value.trim();
+        if (!buyerName) {
+          nameEl.setAttribute('aria-invalid', 'true');
+          $('orderErrorHead').textContent = 'Nome obrigatório';
+          $('orderErrorMsg').textContent = 'Informe seu nome completo para gerar o PIX.';
+          errBox.classList.add('is-visible');
+          nameEl.focus();
+          return;
         }
+        if (!buyerContact) {
+          contactEl.setAttribute('aria-invalid', 'true');
+          $('orderErrorHead').textContent = 'Contato obrigatório';
+          $('orderErrorMsg').textContent = 'Informe seu WhatsApp ou e-mail para receber sua chave.';
+          errBox.classList.add('is-visible');
+          contactEl.focus();
+          return;
+        }
+
+        if (navigator.onLine === false) {
+          $('orderErrorHead').textContent = 'Você parece estar offline';
+          $('orderErrorMsg').textContent = 'Reconecte à internet e clique em tentar novamente.';
+          errBox.classList.add('is-visible');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Gerando PIX oficial...';
+
+        try {
+          const res = await fetch('/api/superbad/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              buyer_name: buyerName,
+              buyer_contact: buyerContact,
+              requested_edition: $('ordPlan').value
+            })
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !data.order) {
+            resBox.classList.remove('is-visible');
+            $('orderErrorHead').textContent = 'Não foi possível gerar o pedido PIX';
+            $('orderErrorMsg').textContent = data.error || `Erro HTTP ${res.status}. Tente novamente em instantes.`;
+            errBox.classList.add('is-visible');
+            return;
+          }
+
+          const o = data.order;
+          lastBrcode = o.pix?.brcode || '68 99226-9296';
+          $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display}) pronto!`;
+          $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
+          $('brcodeCopyFeedback').textContent = '';
+
+          const qrWrap = $('orderPixQrWrap');
+          qrWrap.textContent = '';
+          if (o.pix?.qr_data_url) {
+            const img = document.createElement('img');
+            img.src = o.pix.qr_data_url;
+            img.alt = `QR Code PIX para o pedido ${o.order_id}`;
+            img.style.cssText = 'width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;';
+            qrWrap.appendChild(img);
+          }
+          if (o.whatsapp_url) $('btnWhatsOrder').href = o.whatsapp_url;
+          resBox.classList.add('is-visible');
+        } catch (_err) {
+          resBox.classList.remove('is-visible');
+          $('orderErrorHead').textContent = 'Falha de conexão com o servidor';
+          $('orderErrorMsg').textContent = 'Não foi possível alcançar o checkout agora. Seus dados foram preservados.';
+          errBox.classList.add('is-visible');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+          submitBtn.textContent = 'Gerar QR Code PIX';
+        }
+      }
+
+      $('orderForm').addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        submitOrder();
+      });
+      $('retryOrderBtn').addEventListener('click', () => submitOrder());
+
+      // License Verification Form (loading/offline/retry inline, XSS-safe DOM)
+      function renderLicenseMessage(variant, titleText, detailText, withRetry) {
+        const box = $('licResultBox');
+        box.textContent = '';
+        box.className = `result-box is-visible ${variant}`;
+        const strong = document.createElement('strong');
+        strong.textContent = titleText;
+        if (variant === 'is-success') strong.style.color = 'var(--emerald-ink)';
+        else if (variant === 'is-warn') strong.style.color = 'var(--amber)';
+        else if (variant === 'is-error') strong.style.color = 'var(--danger)';
+        else strong.style.color = 'var(--ink)';
+        box.appendChild(strong);
+
+        if (detailText) {
+          const span = document.createElement('span');
+          span.style.color = 'var(--ink-secondary)';
+          span.textContent = detailText;
+          box.appendChild(span);
+        }
+        if (withRetry) {
+          const retryBtn = document.createElement('button');
+          retryBtn.type = 'button';
+          retryBtn.id = 'retryVerifyBtn';
+          retryBtn.className = 'btn sm';
+          retryBtn.style.alignSelf = 'flex-start';
+          retryBtn.textContent = '↻ Tentar novamente';
+          retryBtn.addEventListener('click', () => submitVerify());
+          box.appendChild(retryBtn);
+        }
+      }
+
+      async function submitVerify() {
+        const keyInput = $('licKeyInput');
+        const submitBtn = $('verifySubmitBtn');
+        const keyVal = keyInput.value.trim();
+
+        keyInput.setAttribute('aria-invalid', 'false');
+        if (!keyVal) {
+          keyInput.setAttribute('aria-invalid', 'true');
+          renderLicenseMessage('is-error', 'Informe uma chave para validar', 'Cole sua chave OI6-INF, OI6-PRO ou BC5 no campo acima.', false);
+          keyInput.focus();
+          return;
+        }
+
+        if (navigator.onLine === false) {
+          renderLicenseMessage('is-error', 'Sem conexão com a internet', 'Reconecte e clique em tentar novamente para validar no servidor.', true);
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Conferindo chave...';
+        renderLicenseMessage('', 'Validando assinatura online...', 'Consultando servidor de licenças OpenInfinite.', false);
+
+        try {
+          const res = await fetch('/api/v1/licenses/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: keyVal, hwid: 'web-' + (navigator.platform || 'browser') })
+          });
+          const d = await res.json().catch(() => ({}));
+          if (res.ok && d.ok && d.includesOpenInfinite !== false) {
+            renderLicenseMessage(
+              'is-success',
+              'Chave Válida — OpenInfinite Liberado',
+              `Plano: ${d.planLabel || d.tier} · Válida por ${d.daysLeft} dias.`,
+              false
+            );
+          } else if (res.ok && d.ok && d.includesOpenInfinite === false) {
+            renderLicenseMessage(
+              'is-warn',
+              'Chave BadClaude Nível 1/2',
+              'Esse nível usa apenas a demo de 1h no OpenInfinite. Assine separado acima ou use 3º nível+.',
+              false
+            );
+          } else {
+            renderLicenseMessage(
+              'is-error',
+              d.error || 'Chave não reconhecida ou expirada.',
+              'Confira se não há espaços extras ou tente novamente.',
+              false
+            );
+          }
+        } catch (_err) {
+          renderLicenseMessage(
+            'is-error',
+            'Falha de rede ao validar chave',
+            'Não foi possível conectar ao servidor de licenças.',
+            true
+          );
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+          submitBtn.textContent = 'Conferir Chave Online';
+        }
+      }
+
+      $('verifyForm').addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        submitVerify();
       });
     })();
   </script>
