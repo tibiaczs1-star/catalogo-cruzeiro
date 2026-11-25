@@ -74,7 +74,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 2,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
     freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-chat-21"],
-    summary: "Studio + 9Router (:20129) + 21 modelos NVIDIA Free Chat/Embeddings + até 2 máquinas vinculadas.",
+    summary: "Studio + 9Router (:20129) + 21 modelos NVIDIA Free Chat/Embeddings + OpenInfinite v6.1 Win/Mac grátis + até 2 máquinas vinculadas.",
   },
   founder: {
     edition: "founder",
@@ -87,7 +87,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro", "founder-vip"],
     freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-full-38", "nvidia-bio-rest-grpc"],
-    summary: "TUDO LIBERADO: todos os 38 modelos NVIDIA Free (+ REST, gRPC NVCF e Bio/NIM), Google, OpenRouter, OmniRouter, 9Router e atualizações imediatas em nuvem.",
+    summary: "TUDO LIBERADO: todos os 38 modelos NVIDIA Free (+ REST, gRPC NVCF e Bio/NIM), Google, OpenRouter, OmniRouter, 9Router, OpenInfinite v6.1 Win/Mac grátis e atualizações imediatas em nuvem.",
   },
 });
 
@@ -120,6 +120,8 @@ const CODE_TO_TIER = Object.freeze({
   FND: "founder",
   MID: "client-mid",
   BSC: "client-basic",
+  PRO: "infinite-pro",
+  INF: "infinite-basic",
 });
 
 function getUnlockedModesForTier(tier) {
@@ -241,10 +243,18 @@ function streamZipFile(res, filePath, fileName, fileSize, errorMessage) {
 }
 
 function buildAutoEnrolledEd25519License(edCheck, keySha, { email = "", boundHwids = [], nowIso = new Date().toISOString() } = {}) {
+  const lblLower = String(edCheck.label || "").toLowerCase();
+  const payloadEd = String(edCheck.edition || "").trim().toLowerCase();
+  const resolvedEdition = payloadEd
+    || (edCheck.tier === "founder" ? "founder"
+      : edCheck.tier === "client-basic" ? "basic"
+      : edCheck.tier === "infinite-pro" ? "infinite_pro"
+      : edCheck.tier === "infinite-basic" ? "infinite"
+      : (lblLower.includes("superbad") || lblLower.includes("cockpit")) ? "superbad" : "mid");
   return {
     license_id: `LIC-ED-${keySha.slice(0, 10).toUpperCase()}`,
     order_id: null,
-    edition: edCheck.tier === "founder" ? "founder" : edCheck.tier === "client-basic" ? "basic" : "mid",
+    edition: resolvedEdition,
     tier: edCheck.tier,
     label: edCheck.label || edCheck.tier,
     email,
@@ -254,7 +264,7 @@ function buildAutoEnrolledEd25519License(edCheck, keySha, { email = "", boundHwi
     expires_at: edCheck.expiresAt,
     max_downloads: 10,
     downloads_used: 0,
-    max_hwids: 1,
+    max_hwids: (resolvedEdition === "superbad" || resolvedEdition === "infinite_pro") ? 2 : 1,
     bound_hwids: boundHwids,
     revoked: false,
     revoked_at: null,
@@ -371,11 +381,14 @@ function isSecureRequest(req, environment, secureCookiesOption) {
 
 function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUBLIC_KEY_PEM) {
   const rawKey = String(rawKeyInput || "").trim();
-  const m = rawKey.match(/^(BC5-(FND|MID|BSC)-([A-Za-z0-9_-]+))\.([A-Za-z0-9_-]+)$/);
+  const m = rawKey.match(/^((?:BC5-(FND|MID|BSC)|OI6-(INF|PRO))-([A-Za-z0-9_-]+))\.([A-Za-z0-9_-]+)$/);
   if (!m) {
-    return { ok: false, isEd25519Format: false, code: "INVALID_FORMAT", error: "Formato fora do padrão BC5." };
+    return { ok: false, isEd25519Format: false, code: "INVALID_FORMAT", error: "Formato fora do padrão BC5/OI6." };
   }
-  const [, signingInput, tierCode, payloadB64Url, sigB64Url] = m;
+  const signingInput = m[1];
+  const tierCode = m[2] || m[3];
+  const payloadB64Url = m[4];
+  const sigB64Url = m[5];
   let validSig = false;
   try {
     const sigBuf = Buffer.from(sigB64Url, "base64url");
@@ -418,6 +431,7 @@ function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUB
     error: expired ? "Licença Ed25519 expirada." : null,
     tier: expectedTier,
     tierCode,
+    edition: cleanText(payload.edition || "", 32).toLowerCase(),
     label: cleanText(payload.label || expectedTier, 120),
     daysLeft,
     expiresAt: new Date(expMs).toISOString(),
@@ -1668,6 +1682,13 @@ function createSuperbadSalesApi(options = {}) {
             sessionSecret
           );
 
+          const includesOpenInfinite = Boolean(
+            license.edition === "founder"
+            || license.edition === "superbad"
+            || tier === "founder"
+            || String(tier).startsWith("infinite")
+          );
+
           return {
             status: 200,
             payload: {
@@ -1675,6 +1696,8 @@ function createSuperbadSalesApi(options = {}) {
               valid: true,
               revoked: false,
               licenseId: license.license_id,
+              edition: license.edition,
+              includesOpenInfinite,
               tier,
               planLabel: license.label || (EDITION_PLANS[license.edition]?.label || tier),
               email: license.email || email,

@@ -278,6 +278,9 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".mp4",
   ".pdf", ".zip",
   ".apk",
+  ".exe",
+  ".dmg",
+  ".pkg",
   ".ico",
   ".webmanifest"
 ]);
@@ -22128,6 +22131,32 @@ async function handleStatic(req, res, pathname, requestUrl) {
           "Cache-Control": "no-store"
         });
         return res.end();
+      }
+
+      if (pathname === "/openinfinite") {
+        res.writeHead(302, {
+          Location: "/openinfinite/",
+          "Cache-Control": "no-store"
+        });
+        return res.end();
+      }
+
+      if (pathname.startsWith("/openinfinite/")) {
+        let filePath = path.join(ROOT_DIR, "openinfinite", pathname.slice("/openinfinite/".length));
+        const oiRoot = path.join(ROOT_DIR, "openinfinite");
+        if (filePath !== oiRoot && !filePath.startsWith(`${oiRoot}${path.sep}`)) {
+          return sendText(res, 403, "Acesso negado.");
+        }
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+          filePath = path.join(filePath, "index.html");
+        }
+        const oiExt = path.extname(filePath).toLowerCase();
+        if (!["", ".html", ".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".json"].includes(oiExt)) {
+          return sendText(res, 403, "Acesso negado.");
+        }
+        return sendFile(req, res, filePath, {
+          cacheControl: oiExt === ".html" ? "no-store" : VERSIONED_STATIC_CACHE_CONTROL
+        });
       }
 
       if (pathname.startsWith("/bookray/")) {
