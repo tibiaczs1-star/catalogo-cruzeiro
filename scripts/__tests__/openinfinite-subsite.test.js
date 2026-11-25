@@ -7,7 +7,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..", "..");
 
-test("OpenInfinite route, standalone PIX checkout, BadClaude L3+ inclusion and cross-links are configured", () => {
+test("OpenInfinite route, monthly R$99/R$159 checkout, living hero, clean photos and BadClaude L3+ inclusion are configured", () => {
   const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
   const bcHtml = fs.readFileSync(path.join(root, "badclaude", "index.html"), "utf8");
@@ -22,15 +22,21 @@ test("OpenInfinite route, standalone PIX checkout, BadClaude L3+ inclusion and c
 
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-macOS\.dmg/);
-  assert.match(oiHtml, /R\$ 49,90/);
-  assert.match(oiHtml, /R\$ 97,00/);
+  assert.match(oiHtml, /R\$ 99,00/);
+  assert.match(oiHtml, /R\$ 159,00/);
+  assert.match(oiHtml, /id="livingStage"/);
+  assert.match(oiHtml, /id="livingCore"/);
   assert.match(oiHtml, /id="checkout"/);
   assert.match(oiHtml, /id="orderForm"/);
   assert.match(oiHtml, /3º nível|3º Nível/i);
   assert.match(oiHtml, /Cockpit Pro/);
   assert.match(oiHtml, /Fundador VIP/);
   assert.match(oiHtml, /href="\/badclaude\//);
-  assert.doesNotMatch(oiHtml, /NÃO é vendido separado|não é vendido avulso|não tem cobrança avulsa/i);
+  assert.doesNotMatch(oiHtml, /4114|demo_lock|shift_i\.png|NÃO é vendido separado|não é vendido avulso/i);
+
+  assert.ok(!fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_demo_lock.png")));
+  assert.ok(!fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_shift_i.png")));
+  assert.ok(fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_estatisticas.png")));
 
   assert.match(bcHtml, /OpenInfinite/);
   assert.match(sbHtml, /OpenInfinite/);
@@ -38,6 +44,6 @@ test("OpenInfinite route, standalone PIX checkout, BadClaude L3+ inclusion and c
   assert.match(sbHtml, /\/openinfinite\//);
 
   assert.match(apiJs, /includesOpenInfinite/);
-  assert.match(apiJs, /\binfinite\s*:\s*\{/);
-  assert.match(apiJs, /\binfinite_pro\s*:\s*\{/);
+  assert.match(apiJs, /R\$ 99,00/);
+  assert.match(apiJs, /R\$ 159,00/);
 });

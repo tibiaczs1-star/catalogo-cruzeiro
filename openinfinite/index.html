@@ -3,429 +3,1032 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenInfinite v6.1 — Motor Infinite AI Anti-Limite &amp; Painel Apple Liquid Glass</title>
-  <meta name="description" content="Baixe grátis para testar por 1 hora no Windows ou Mac. Roteador invisível com prioridade HY4, auto-configuração de ferramentas, Modo Turbo Auto e 3 temas.">
+  <title>OpenInfinite v6.1 — Motor de IA Contínuo · Windows &amp; macOS</title>
+  <meta name="description" content="OpenInfinite v6.1: fluxo de IA contínuo com prioridade HY4 #1, Modo Turbo Auto oculto, estatísticas reais SQLite e 3 temas nativos. Demonstração grátis de 1 hora no Windows e macOS.">
   <style>
     :root {
-      --bg: #050811;
-      --bg-card: #0c1222;
-      --bg-well: #11192e;
-      --border: rgba(255,255,255,0.10);
-      --border-hi: rgba(56,189,248,0.45);
-      --ink: #f8fafc;
-      --muted: #94a3b8;
-      --cyan: #38bdf8;
-      --purple: #a855f7;
+      --bg: #05050a;
+      --surface: #0b0c14;
+      --surface-elevated: #10121e;
+      --surface-soft: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.085);
+      --border-hi: rgba(255, 255, 255, 0.22);
+      --border-accent: rgba(129, 140, 248, 0.48);
+      --ink: #f5f7fb;
+      --muted: #8f96ab;
+      --dim: #5d6478;
+      --accent: #818cf8;
+      --accent-soft: rgba(129, 140, 248, 0.14);
       --emerald: #10b981;
-      --gold: #facc15;
-      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-      --mono: 'JetBrains Mono', Consolas, monospace;
+      --amber: #f59e0b;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable", "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-snap: cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background:
-        radial-gradient(ellipse 75% 42% at 50% -10%, rgba(56,189,248,0.16), transparent 70%),
-        radial-gradient(ellipse 50% 40% at 85% 30%, rgba(168,85,247,0.10), transparent 70%),
-        var(--bg);
-      color: var(--ink); font-family: var(--font); line-height: 1.55; font-size: 14px; min-height: 100vh;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    .mono { font-family: var(--mono); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .css-anim { animation: none !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
     a { color: inherit; }
 
+    /* Single refined top-vault glow (Tracle obsidian architecture — zero multicolored gradient slop) */
+    .vault-light {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(62% 38% at 50% -4%, rgba(129, 140, 248, 0.15), rgba(5, 5, 10, 0) 70%),
+        radial-gradient(40% 24% at 50% 42%, rgba(255, 255, 255, 0.025), transparent 72%);
+    }
+
+    /* Hairline grid texture fading cleanly to obsidian edges */
+    .grid-backdrop {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.26;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 75% 48% at 50% 18%, #000 10%, transparent 78%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 48% at 50% 18%, #000 10%, transparent 78%);
+    }
+
+    /* FLOATING PILL NAVBAR (Tracle Minimalist Centerpiece) */
     .topbar {
-      position: sticky; top: 0; z-index: 900;
-      background: rgba(5, 8, 17, 0.86); backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      position: sticky; top: 14px; z-index: 900; padding: 0 20px; pointer-events: none;
     }
     .topbar-inner {
-      max-width: 1180px; margin: 0 auto; padding: 11px 20px;
+      pointer-events: auto;
+      max-width: 1120px; margin: 0 auto; padding: 9px 14px 9px 18px;
+      background: rgba(11, 12, 20, 0.82);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid var(--border);
+      border-radius: 999px;
       display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: border-color 180ms var(--ease-snap), background-color 180ms var(--ease-snap);
     }
-    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 16px; }
-    .brand img { width: 32px; height: 32px; border-radius: 8px; }
-    .brand-tag {
-      font-family: var(--mono); font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
-      background: rgba(56,189,248,0.14); border: 1px solid rgba(56,189,248,0.35); color: #7dd3fc;
+    .topbar.scrolled .topbar-inner {
+      background: rgba(8, 9, 15, 0.94);
+      border-color: rgba(255, 255, 255, 0.14);
     }
-    .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
+    .brand img { width: 28px; height: 28px; border-radius: 8px; }
+    .brand-ver {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--muted);
+      padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-soft);
+    }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
     .nav-link {
       text-decoration: none; font-size: 12.5px; font-weight: 600; color: var(--muted);
-      padding: 6px 11px; border-radius: 8px; transition: .15s;
+      padding: 6px 12px; border-radius: 999px;
+      transition: color 160ms var(--ease-snap), background-color 160ms var(--ease-snap);
     }
-    .nav-link:hover { color: var(--ink); background: var(--bg-well); }
-    .nav-link.cta { background: #0284c7; color: #fff; }
-    .nav-link.cta:hover { background: #0ea5e9; }
+    .nav-link:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
 
-    .shift-pill {
-      display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
-      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
-      background: #141c31; color: #bae6fd; border: 1px solid rgba(56,189,248,0.38);
-    }
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 30px 20px 80px; display: flex; flex-direction: column; gap: 46px; }
-
+    /* CRISP BUTTONS (Zero tacky gradients) */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      font-family: var(--font); font-weight: 700; font-size: 13.5px; padding: 11px 18px;
-      border-radius: 11px; cursor: pointer; text-decoration: none;
-      border: 1px solid var(--border); background: var(--bg-well); color: var(--ink); transition: .15s;
+      font-family: var(--font); font-weight: 700; font-size: 13px; padding: 10px 18px;
+      border-radius: 10px; cursor: pointer; text-decoration: none;
+      border: 1px solid var(--border-hi);
+      background: var(--surface-elevated); color: var(--ink);
+      transition: transform 180ms var(--ease-spring), background-color 160ms, border-color 160ms;
     }
-    .btn:hover { border-color: var(--border-hi); transform: translateY(-1px); }
-    .btn.primary { background: linear-gradient(135deg,#0284c7,#6366f1); border-color: rgba(125,211,252,0.5); color: #fff; }
-    .btn.silver { background: linear-gradient(135deg,#f8fafc,#cbd5e1); border-color: #fff; color: #0f172a; }
-    .btn.emerald { background: #065f46; border-color: #10b981; color: #ecfdf5; }
-    .btn.gold { background: var(--gold); border-color: #fef08a; color: #0f172a; }
-    .btn.sm { padding: 7px 12px; font-size: 12px; border-radius: 8px; }
+    .btn:hover { background: #16192b; border-color: rgba(255, 255, 255, 0.34); transform: translateY(-1px); }
+    .btn:active { transform: scale(0.98); }
+    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .btn.ivory {
+      background: #f5f7fb; color: #05050a; border-color: #ffffff;
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
+    }
+    .btn.ivory:hover { background: #ffffff; }
+    .btn.accent {
+      background: #5b63d6; color: #ffffff; border-color: rgba(165, 180, 252, 0.45);
+      box-shadow: 0 8px 26px rgba(91, 99, 214, 0.26);
+    }
+    .btn.accent:hover { background: #6770e5; }
+    .btn.emerald { background: #0c2b22; border-color: rgba(16, 185, 129, 0.52); color: #6ee7b7; }
+    .btn.emerald:hover { background: #10382c; }
+    .btn.pill { border-radius: 999px; }
+    .btn.sm { padding: 7px 13px; font-size: 12px; border-radius: 8px; }
 
     .help-q {
       display: inline-flex; align-items: center; justify-content: center;
       width: 22px; height: 22px; border-radius: 50%; cursor: help; flex-shrink: 0;
-      background: #172034; color: #7dd3fc; border: 1px solid rgba(56,189,248,0.45);
-      font-weight: 800; font-size: 11.5px;
+      background: var(--surface-elevated); color: var(--muted); border: 1px solid var(--border-hi);
+      font-weight: 800; font-size: 11px;
+    }
+    .help-q:hover { color: var(--ink); border-color: var(--accent); }
+
+    /* MAIN WRAP */
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 1160px; margin: 0 auto; padding: 54px 20px 96px;
+      display: flex; flex-direction: column; gap: 84px;
     }
 
-    .hero { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 26px; align-items: center; }
-    .eyebrow {
+    /* SPOTLIGHT SURFACE (ReactBits) */
+    .spotlight-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: border-color 200ms var(--ease-snap), transform 220ms var(--ease-spring);
+    }
+    .spotlight-card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(360px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.065), transparent 72%);
+    }
+    .spotlight-card:hover { border-color: var(--border-hi); }
+
+    /* EDITORIAL CENTERED HERO + LIVE STAGE (Inspired by Tracle Pin) */
+    .hero {
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px;
+    }
+    .hero-kicker {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 5px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
-      background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.35); color: #7dd3fc; margin-bottom: 14px;
+      padding: 5px 14px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
+      font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #cbd5e1;
     }
-    .hero h1 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 900; line-height: 1.12; margin-bottom: 14px; }
-    .hero-sub { font-size: 15px; color: #cbd5e1; margin-bottom: 20px; max-width: 60ch; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-    .demo-note {
-      font-size: 12.5px; color: #fde68a; background: rgba(250,204,21,0.08); border: 1px solid rgba(250,204,21,0.28);
-      border-radius: 10px; padding: 9px 12px; margin-bottom: 18px; max-width: 62ch;
+    .kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+
+    .hero h1 {
+      font-size: clamp(32px, 4.7vw, 56px);
+      font-weight: 800; line-height: 1.07; letter-spacing: -0.035em;
+      color: var(--ink); max-width: 24ch;
     }
-    .proof-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-    .proof-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 13px; }
-    .proof-card strong { display: block; font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
-    .proof-card span { font-size: 12px; color: var(--muted); }
-
-    .hero-preview {
-      background: var(--bg-card); border: 1px solid var(--border-hi); border-radius: 18px; padding: 12px;
-      box-shadow: 0 24px 64px rgba(2,132,199,0.20);
+    .hero h1 span { color: var(--muted); font-weight: 700; }
+    .hero-sub {
+      font-size: 16px; color: var(--muted); max-width: 60ch; line-height: 1.6;
     }
-    .hero-preview img { width: 100%; border-radius: 12px; display: block; cursor: zoom-in; }
-    .preview-caption { font-size: 12px; color: var(--muted); margin-top: 8px; display: flex; justify-content: space-between; align-items: center; }
-
-    .sec-head h2 { font-size: clamp(22px, 2.5vw, 30px); font-weight: 900; margin-bottom: 4px; }
-    .sec-head p { color: var(--muted); font-size: 14px; max-width: 68ch; }
-
-    .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
-    .shot-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 14px;
-      display: flex; flex-direction: column; gap: 10px; transition: border-color .15s;
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .hero-meta-strip {
+      display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap;
+      font-size: 12px; color: var(--muted);
     }
-    .shot-card:hover { border-color: var(--border-hi); }
-    .shot-card img { width: 100%; border-radius: 10px; display: block; cursor: zoom-in; }
-    .shot-card strong { font-size: 14.5px; color: #fff; }
-    .shot-card span { font-size: 12.5px; color: var(--muted); }
+    .hero-meta-strip strong { color: var(--ink); font-weight: 700; }
 
-    .plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
-    .plan-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 24px;
-      display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+    /* HERO COCKPIT SHOWCASE WINDOW + LIVING 3D SYMBOL */
+    .hero-stage {
+      width: 100%; margin-top: 12px;
+      background: #080910;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+      display: grid; grid-template-columns: 370px 1fr; gap: 18px; align-items: stretch;
+      text-align: left;
     }
-    .plan-card.pro { border: 1.5px solid rgba(56,189,248,0.7); box-shadow: 0 20px 60px rgba(56,189,248,0.12); }
-    .plan-price { font-size: 34px; font-weight: 900; font-family: var(--mono); color: #fff; margin: 8px 0; }
-    .plan-price small { font-size: 12.5px; color: var(--muted); font-family: var(--font); }
-    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 7px; font-size: 13px; color: #e2e8f0; }
-    .plan-list li::before { content: "✓ "; color: var(--emerald); font-weight: 900; }
 
-    .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
-    .pix-card { background: #081523; border: 1px solid #1d4ed8; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
-    .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
-    .field label { font-size: 12px; font-weight: 700; color: #cbd5e1; }
+    /* Living Symbol Orbital Pod */
+    .living-stage {
+      position: relative; min-height: 390px; border-radius: 14px;
+      background: radial-gradient(circle at 50% 48%, rgba(129, 140, 248, 0.10), #06070d 72%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+      user-select: none;
+    }
+    #particleCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .cursor-aura {
+      position: absolute; width: 220px; height: 220px; border-radius: 50%; pointer-events: none;
+      left: 50%; top: 50%; transform: translate3d(-50%, -50%, 0);
+      background: radial-gradient(circle, rgba(165, 180, 252, 0.24) 0%, transparent 72%);
+      filter: blur(18px); will-change: transform;
+    }
+    .orbit-ring {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+    .orbit-ring.r1 { width: 230px; height: 230px; border-style: dashed; animation: spinSlow 22s linear infinite; }
+    .orbit-ring.r2 { width: 300px; height: 300px; border-color: rgba(129, 140, 248, 0.18); animation: spinSlow 34s linear infinite reverse; }
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .living-core {
+      position: relative; width: 158px; height: 158px; border-radius: 34px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 14px rgba(255, 255, 255, 0.18);
+      will-change: transform; transform-style: preserve-3d;
+    }
+    .living-core img {
+      width: 124px; height: 124px; border-radius: 24px; pointer-events: none;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+      transform: translateZ(24px);
+    }
+    .float-badge {
+      position: absolute; padding: 5px 11px; border-radius: 999px;
+      font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+      background: rgba(8, 9, 16, 0.90); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.13); color: #e2e8f0;
+      will-change: transform; pointer-events: none;
+    }
+    .float-badge.b1 { top: 16px; left: 16px; }
+    .float-badge.b2 { top: 16px; right: 16px; color: #6ee7b7; border-color: rgba(16, 185, 129, 0.35); }
+    .float-badge.b3 { bottom: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--muted); font-family: var(--font); }
+
+    /* Interactive Preview Cockpit beside Living Core */
+    .stage-cockpit {
+      display: flex; flex-direction: column; gap: 12px;
+      background: #0b0c14; border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+    }
+    .cockpit-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+    .cockpit-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sim-pill {
+      padding: 5px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
+      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); color: var(--muted);
+      cursor: pointer; transition: all 150ms var(--ease-snap);
+    }
+    .sim-pill:hover { color: var(--ink); border-color: var(--border-hi); }
+    .sim-pill.active { background: #f5f7fb; color: #05050a; border-color: #ffffff; }
+    .sim-toggle {
+      padding: 6px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 700; cursor: pointer;
+      border: 1px solid rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.14); color: #fbbf24;
+      transition: all 160ms;
+    }
+    .sim-toggle.stopped { border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.16); color: #6ee7b7; }
+    .stage-screen-wrap {
+      position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+      view-transition-name: oi-hero-shot; background: #05060b; cursor: zoom-in;
+    }
+    .stage-screen-wrap img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+    .cockpit-caption {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      font-size: 12px; color: var(--muted);
+    }
+
+    /* PLATFORM STRIP */
+    .trust-strip {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+      padding: 16px 22px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      color: var(--dim); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .trust-strip span { display: inline-flex; align-items: center; gap: 8px; }
+    .trust-strip i { width: 5px; height: 5px; border-radius: 50%; background: var(--dim); font-style: normal; }
+
+    /* SECTION HEADERS */
+    .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .sec-kicker {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px; display: block;
+    }
+    .sec-head h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
+    .sec-head p { color: var(--muted); font-size: 14px; max-width: 56ch; }
+
+    /* ASYMMETRIC BENTO GRID (Modelled on Tracle Features Grid) */
+    .bento-grid {
+      display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px;
+    }
+    .bento-card { padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .bento-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .bento-card p { font-size: 13px; color: var(--muted); }
+    .bento-widget {
+      background: #07080f; border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 10px; padding: 14px;
+    }
+
+    /* Interactive Cascade Demo inside Bento 1 */
+    .cascade-list { display: flex; flex-direction: column; gap: 8px; }
+    .cascade-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 8px 11px; border-radius: 8px; background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06); font-size: 12px;
+      transition: border-color 180ms, background-color 180ms;
+    }
+    .cascade-row.active { border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08); }
+    .cascade-row.cooldown { border-color: rgba(245, 158, 11, 0.35); opacity: 0.65; }
+    .c-tag { font-family: var(--mono); font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--muted); }
+    .cascade-row.active .c-tag { color: #6ee7b7; background: rgba(16, 185, 129, 0.16); }
+
+    /* Interactive SQLite Scrub Chart inside Bento 2 */
+    .scrub-bars { display: flex; align-items: flex-end; gap: 8px; height: 96px; padding-top: 8px; }
+    .scrub-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+    .scrub-fill {
+      width: 100%; border-radius: 5px 5px 2px 2px; background: rgba(255, 255, 255, 0.14);
+      transition: background-color 140ms, transform 160ms var(--ease-spring);
+    }
+    .scrub-col:hover .scrub-fill, .scrub-col.active .scrub-fill { background: #818cf8; transform: scaleY(1.06); }
+    .scrub-lbl { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+
+    /* Interactive Swatch inside Bento 3 */
+    .theme-preview-box {
+      border-radius: 9px; padding: 12px; border: 1px solid var(--border);
+      transition: background-color 200ms, color 200ms, border-color 200ms;
+    }
+    .theme-preview-box[data-t="light"] { background: #eef3fa; color: #0f172a; border-color: rgba(15, 23, 42, 0.14); }
+    .theme-preview-box[data-t="liquid"] { background: rgba(255, 255, 255, 0.09); backdrop-filter: blur(22px); border-color: rgba(255, 255, 255, 0.25); }
+
+    /* INTERACTIVE GALLERY */
+    .shot-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .shot-card { padding: 10px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+    .shot-card.active { border-color: var(--border-accent); background: #101322; }
+    .shot-card img { width: 100%; border-radius: 8px; display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+    .shot-card strong { font-size: 13px; color: var(--ink); }
+    .shot-card span { font-size: 11.5px; color: var(--muted); }
+
+    /* 3-STEP KINETIC FLOW (Tracle Getting Started section) */
+    .steps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .step-card { padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
+    .step-card.active { border-color: var(--border-accent); background: #10121f; transform: translateY(-4px); }
+    .step-num { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 700; }
+    .step-card h3 { font-size: 15.5px; font-weight: 700; }
+    .step-card p { font-size: 12.8px; color: var(--muted); }
+
+    /* PLANS & PIX CHECKOUT */
+    .plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .plan-card { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+    .plan-card.pro { border-color: var(--border-accent); background: #0d0f1b; }
+    .plan-price { font-size: 38px; font-weight: 800; font-family: var(--mono); color: var(--ink); margin: 6px 0; letter-spacing: -0.03em; }
+    .plan-price small { font-size: 12.5px; color: var(--muted); font-family: var(--font); font-weight: 500; }
+    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #d4d9e8; }
+    .plan-list li::before { content: "✓ "; color: var(--emerald); font-weight: 800; }
+
+    .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+    .panel { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+    .pix-card {
+      background: #070911; border: 1px solid var(--border); border-radius: 10px;
+      padding: 13px 15px; display: flex; flex-direction: column; gap: 7px; font-size: 13px;
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+    .field label { font-size: 12px; font-weight: 600; color: #cbd5e1; }
     input[type="text"], select {
-      width: 100%; padding: 10px 12px; background: #050810; color: #f8fafc;
-      border: 1px solid #283652; border-radius: 9px; font-family: var(--font); font-size: 13px; outline: none;
+      width: 100%; padding: 10px 12px; background: #05060b; color: var(--ink);
+      border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13px; outline: none;
     }
-    .result-box { background: #080d18; border: 1px solid #283652; border-radius: 12px; padding: 14px; font-size: 12.5px; display: none; flex-direction: column; gap: 8px; }
+    input[type="text"]:focus, select:focus { border-color: var(--accent); }
+    .result-box {
+      background: #070911; border: 1px solid var(--border-hi); border-radius: 10px;
+      padding: 14px; font-size: 12.5px; display: none; flex-direction: column; gap: 8px;
+    }
+
+    /* Subtle single-line BadClaude footnote (never dominates OpenInfinite!) */
+    .bc-footnote {
+      margin-top: 14px; padding: 12px 16px; border-radius: 10px;
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.02);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      font-size: 12.5px; color: var(--muted);
+    }
+
+    /* REVEAL ON SCROLL (compositor only) */
+    .reveal { opacity: 0; transform: translate3d(0, 16px, 0); transition: opacity 520ms var(--ease-spring), transform 520ms var(--ease-spring); }
+    .reveal.in { opacity: 1; transform: translate3d(0, 0, 0); }
 
     .hover-hud {
       position: fixed; right: 16px; bottom: 16px; z-index: 880;
-      background: rgba(11, 16, 27, 0.92); backdrop-filter: blur(12px);
-      border: 1px solid #2a3a57; border-radius: 999px; padding: 7px 14px;
-      font-size: 12px; color: #cbd5e1; display: flex; align-items: center; gap: 8px; cursor: pointer;
+      background: rgba(11, 12, 20, 0.92); backdrop-filter: blur(12px);
+      border: 1px solid var(--border-hi); border-radius: 999px; padding: 7px 14px;
+      font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; cursor: pointer;
     }
-    .hover-hud strong { color: var(--cyan); }
+    .hover-hud strong { color: var(--ink); }
 
     #shiftIModal, #zoomModal {
       display: none; position: fixed; inset: 0; z-index: 99999;
-      background: rgba(3, 5, 10, 0.84); backdrop-filter: blur(8px);
+      background: rgba(4, 5, 10, 0.86); backdrop-filter: blur(10px);
       align-items: center; justify-content: center; padding: 18px;
     }
     .shift-box {
-      width: min(520px, 95vw); background: #0c1220; color: #f8fafc;
-      border: 1px solid rgba(56,189,248,0.45); border-radius: 16px; overflow: hidden;
+      width: min(520px, 95vw); background: #0c0d16; color: var(--ink);
+      border: 1px solid var(--border-hi); border-radius: 14px; overflow: hidden;
     }
-    .shift-head { padding: 13px 18px; background: #080c16; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: var(--cyan); }
+    .shift-head { padding: 13px 18px; background: #07080f; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
     .shift-body { padding: 18px; display: flex; flex-direction: column; gap: 11px; font-size: 13.5px; }
 
     @media (max-width: 960px) {
-      .hero, .shot-grid, .plans-grid, .dual-grid, .proof-row { grid-template-columns: 1fr; }
+      .hero-stage, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid { grid-template-columns: 1fr; }
+      .living-stage { min-height: 310px; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
+  <div class="vault-light" aria-hidden="true"></div>
+  <div class="grid-backdrop" aria-hidden="true"></div>
+
+  <header class="topbar" id="topbar">
     <div class="topbar-inner">
       <a href="#topo" class="brand">
-        <img src="/openinfinite/assets/openinfinite_silver.png" alt="OpenInfinite Silver" />
+        <img src="/openinfinite/assets/openinfinite_silver.png" alt="OpenInfinite" />
         <span>OpenInfinite</span>
-        <span class="brand-tag">v6.1 Win + Mac</span>
+        <span class="brand-ver">v6.1</span>
       </a>
       <nav class="nav-links" aria-label="Navegação OpenInfinite">
-        <a href="#galeria" class="nav-link">Galeria 3 Temas</a>
-        <a href="#planos" class="nav-link">Planos &amp; BadClaude 3+</a>
-        <a href="#licenca" class="nav-link">🔑 Validar Chave</a>
-        <a href="#checkout" class="nav-link cta">💳 Comprar via PIX</a>
-        <a href="/badclaude/" class="nav-link" style="color:#fde047;">✳ Ver BadClaude</a>
+        <a href="#painel-live" class="nav-link">Painel Live</a>
+        <a href="#recursos" class="nav-link">Recursos</a>
+        <a href="#como-funciona" class="nav-link">Como Funciona</a>
+        <a href="#planos" class="nav-link">Planos</a>
+        <a href="#licenca" class="nav-link">Validar Chave</a>
         <a href="/" class="nav-link">← Portal CZS</a>
       </nav>
-      <button type="button" class="shift-pill" onclick="openHelpModal(null)">ⓘ Dúvida? Mouse + Shift + I</button>
+      <div class="nav-actions">
+        <button type="button" class="nav-link" style="border:none;background:transparent;cursor:pointer;" onclick="openHelpModal(null)">Shift + I</button>
+        <a href="#checkout" class="btn ivory pill sm">Assinar agora</a>
+      </div>
     </div>
   </header>
 
   <main class="wrap" id="topo">
+    <!-- EDITORIAL HERO + INTERACTIVE LIVE STAGE -->
     <section class="hero">
-      <div>
-        <div class="eyebrow">∞ SISTEMA FECHADO · DEMONSTRAÇÃO GRATUITA DE 1 HORA</div>
-        <h1>Seu Roteador de IA Anti-Limite no Windows e Mac</h1>
-        <p class="hero-sub">
-          Aperte Iniciar, escolha a inteligência <strong>Infinite Auto Turbo</strong> (com preferência máxima <strong>HY4 #1</strong>) e sua linguagem favorita. O painel configura suas ferramentas em 1 clique, alterna modelos sozinho em segundo plano e nunca abre janelas extras.
-        </p>
-        <div class="hero-actions">
-          <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn primary"
-             data-help-title="Baixar OpenInfinite para Windows (Teste 1h)"
-             data-help-what="Instalador oficial Windows 64 bits já autônomo (não precisa instalar pacotes extras). Funciona 1 hora liberado para demonstração."
-             data-help-how="Baixe, execute o instalador e teste por 60 minutos antes de ativar sua chave.">
-            🪟 Baixar Grátis (1h) — Windows .exe
-          </a>
-          <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn silver"
-             data-help-title="Baixar OpenInfinite Nativo macOS (Teste 1h)"
-             data-help-what="Aplicativo nativo Apple Silicon com efeito Liquid Glass verdadeiro no macOS. Funciona 1 hora grátis para teste."
-             data-help-how="Abra o arquivo .dmg, arraste para Aplicativos e teste grátis por 60 minutos.">
-             Baixar Grátis (1h) — macOS .dmg
-          </a>
-        </div>
-        <div class="demo-note">
-          ⏱ <strong>Regra da Demonstração (1h):</strong> você testa todos os recursos grátis por <strong>1 hora completa</strong>. Depois de 60 minutos, ative comprando o <strong>OpenInfinite avulso via PIX</strong> (<code class="mono">OI6-...</code>) nesta página — <strong>ou receba 100% grátis</strong> assinando o <strong>BadClaude a partir do 3º nível (<code class="mono">Cockpit Pro</code> ou <code class="mono">Fundador VIP</code>)</strong>!
-        </div>
-        <div class="proof-row">
-          <div class="proof-card" data-help-title="Motor Infinite (:4114)" data-help-what="Cria um endereço local próprio que distribui suas mensagens pelos modelos gratuitos mantendo HY4 como primeira opção." data-help-how="Aperte Iniciar no painel para configurar o OpenBot e terminais automaticamente.">
-            <strong>Motor Infinite AI</strong>
-            <span>Prioridade HY4 + troca invisível</span>
-          </div>
-          <div class="proof-card" data-help-title="Modo Turbo Auto" data-help-what="Liga ou desliga o guardião em segundo plano que checa a corrente, limpa memória e oculta janelas auxiliares." data-help-how="Um único botão no topo controla tudo.">
-            <strong>Modo Turbo Auto</strong>
-            <span>100% oculto e sem janelas</span>
-          </div>
-          <div class="proof-card" data-help-title="Temas Reais Win + Mac" data-help-what="Alterne na hora entre Escuro, Claro (Apple Daylight) e Liquid Glass translúcido." data-help-how="Escolha direto no topo do painel.">
-            <strong>3 Temas Visuais</strong>
-            <span>Escuro, Claro e Liquid Glass</span>
-          </div>
-        </div>
+      <div class="hero-kicker">
+        <span class="kicker-dot" aria-hidden="true"></span>
+        <span>OpenInfinite v6.1 · Windows &amp; macOS Apple Silicon</span>
       </div>
 
-      <div class="hero-preview" data-help-title="Visual Oficial do OpenInfinite v6.1" data-help-what="Captura real do aplicativo funcionando em tela cheia com gráficos reais de tokens, linguagens e velocidade." data-help-how="Clique na imagem para ampliar.">
-        <img src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Painel OpenInfinite v6.1 Escuro" onclick="zoomImage(this.src)" />
-        <div class="preview-caption">
-          <span>Visual Real v6.1 · Corrente Íntegra + Telemetria ao Vivo</span>
-          <span class="mono" style="color:var(--cyan);">Apple Silver Icon</span>
+      <h1>
+        Fluxo de IA Contínuo.<br /><span>Sem Pausas, Sem Limites.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Escolha o perfil <strong>Infinite Auto Turbo</strong> (com prioridade máxima <strong>HY4 #1</strong>) e sua linguagem favorita. O aplicativo configura suas ferramentas em 1 clique, renova rotas silenciosamente e monitora tudo em tempo real.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn ivory pill"
+           data-help-title="Download Windows (Demo 1h Grátis)"
+           data-help-what="Instalador oficial Windows 10/11 (64 bits) com 60 minutos grátis para testar todas as funções."
+           data-help-how="Baixe, instale e aperte Iniciar no painel. Depois da demo, assine Windows (R$ 99/mês).">
+          🪟 Baixar Grátis (1h) — Windows .exe
+        </a>
+        <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn pill"
+           data-help-title="Download macOS Apple Silicon (Demo 1h Grátis)"
+           data-help-what="Aplicativo nativo Apple Silicon com transparência Liquid Glass e zero janelas extras."
+           data-help-how="Baixe o .dmg, arraste para Aplicativos e teste 1 hora grátis. Plano macOS + Multi: R$ 159/mês.">
+           Baixar Grátis (1h) — macOS .dmg
+        </a>
+      </div>
+
+      <div class="hero-meta-strip">
+        <span><strong>Demo 1h</strong> completa grátis</span>
+        <span>·</span>
+        <span>Windows por <strong>R$ 99,00/mês</strong></span>
+        <span>·</span>
+        <span>macOS + Multi (2 PCs) por <strong>R$ 159,00/mês</strong></span>
+      </div>
+
+      <!-- TRACLE-STYLE INTERACTIVE COCKPIT STAGE + LIVING SYMBOL -->
+      <div class="hero-stage" id="painel-live">
+        <div id="livingStage" class="living-stage" aria-label="Símbolo vivo 3D do OpenInfinite que reage ao cursor">
+          <canvas id="particleCanvas" aria-hidden="true"></canvas>
+          <div id="cursorAura" class="cursor-aura" aria-hidden="true"></div>
+          <div class="orbit-ring r1 css-anim" aria-hidden="true"></div>
+          <div class="orbit-ring r2 css-anim" aria-hidden="true"></div>
+          <div id="livingCore" class="living-core">
+            <img src="/openinfinite/assets/openinfinite_silver.png" alt="Símbolo Vivo OpenInfinite" />
+          </div>
+          <div id="badge1" class="float-badge b1">HY4 #1 · Prioridade</div>
+          <div id="badge2" class="float-badge b2">● Motor Pronto</div>
+          <div id="badge3" class="float-badge b3">Símbolo Vivo · Mova o mouse</div>
+        </div>
+
+        <div class="stage-cockpit">
+          <div class="cockpit-bar">
+            <div class="cockpit-pills" role="tablist" aria-label="Visualizar telas do OpenInfinite">
+              <button type="button" role="tab" aria-selected="true" class="sim-pill active" data-shot="0">Painel Real</button>
+              <button type="button" role="tab" aria-selected="false" class="sim-pill" data-shot="1">Liquid Glass</button>
+              <button type="button" role="tab" aria-selected="false" class="sim-pill" data-shot="2">Estatísticas</button>
+              <button type="button" role="tab" aria-selected="false" class="sim-pill" data-shot="3">Tema Claro</button>
+            </div>
+            <button type="button" id="simEngineBtn" class="sim-toggle" onclick="toggleSimEngine()">⏸ Motor Ativo · Pausar</button>
+          </div>
+
+          <div class="stage-screen-wrap" onclick="zoomImage(document.getElementById('featImg').src)">
+            <img id="featImg" src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Interface real do aplicativo OpenInfinite v6.1" />
+          </div>
+
+          <div class="cockpit-caption">
+            <div>
+              <strong id="featTitle" style="color:var(--ink);">Painel Principal com Botão Iniciar / Pausar &amp; Dados Reais</strong>
+              <span id="featDesc" style="display:block;">Telemetria direta do banco local, status ao vivo das ferramentas e troca de motor sem popups.</span>
+            </div>
+            <button type="button" class="btn sm" onclick="zoomImage(document.getElementById('featImg').src)">Ampliar Tela</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="galeria">
+    <!-- CLEAN MONOCHROME PLATFORM STRIP -->
+    <div class="trust-strip reveal">
+      <span><i></i>Windows 10 / 11 x64</span>
+      <span><i></i>macOS Apple Silicon</span>
+      <span><i></i>Prioridade HY4 #1</span>
+      <span><i></i>Telemetria SQLite Real</span>
+      <span><i></i>Ocultação Silenciosa de Popups</span>
+    </div>
+
+    <!-- ASYMMETRIC BENTO FEATURE GRID (Interactive) -->
+    <section id="recursos" class="reveal">
       <div class="sec-head">
-        <h2>Veja os 3 Temas e a Ajuda Interativa em Ação</h2>
-        <p>Clique em qualquer tela abaixo para ampliar. O mesmo aplicativo adapta os gráficos automaticamente para Claro, Escuro ou Liquid Glass.</p>
-      </div>
-      <div class="shot-grid">
-        <div class="shot-card">
-          <img src="/openinfinite/assets/openinfinite_liquid_glass.png" alt="Tema Liquid Glass macOS e Windows" onclick="zoomImage(this.src)" />
-          <strong>Tema Liquid Glass (Vidro Translúcido)</strong>
-          <span>Visual translúcido com bordas especulares — padrão no macOS e disponível também no Windows.</span>
-        </div>
-        <div class="shot-card">
-          <img src="/openinfinite/assets/openinfinite_tema_claro.png" alt="Tema Claro Apple Daylight" onclick="zoomImage(this.src)" />
-          <strong>Tema Claro (Apple Daylight)</strong>
-          <span>Ideal para ambientes muito iluminados, mantendo contraste nítido em cartões e gráficos.</span>
-        </div>
-        <div class="shot-card">
-          <img src="/openinfinite/assets/openinfinite_shift_i.png" alt="Ajuda Rápida Shift+I" onclick="zoomImage(this.src)" />
-          <strong>Ajuda Instantânea (Mouse + Shift + I)</strong>
-          <span>Qualquer botão ou indicador explica o que faz e quando usar em português simples.</span>
-        </div>
-        <div class="shot-card">
-          <img src="/openinfinite/assets/openinfinite_demo_lock.png" alt="Cofre de Ativação após 1 hora" onclick="zoomImage(this.src)" />
-          <strong>Cofre Seguro após 1 Hora</strong>
-          <span>Após 60 minutos de teste, aceita chaves oficiais OI6 ou chaves BC5 do BadClaude com validação criptográfica.</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="planos">
-      <div class="sec-head">
-        <h2>Compre o OpenInfinite Separado ou Leve Grátis no BadClaude 3+</h2>
-        <p>Você pode adquirir sua licença anual avulsa do OpenInfinite aqui mesmo via PIX — ou recebê-lo 100% grátis incluído nos planos do BadClaude a partir do 3º nível (Cockpit Pro e Fundador VIP).</p>
-      </div>
-      <div class="plans-grid">
-        <div class="plan-card" data-help-title="OpenInfinite Essencial — R$ 49,90/ano" data-help-what="Licença oficial anual avulsa para 1 computador Windows ou macOS com Gateway :4114 (HY4 #1) e 3 temas." data-help-how="Clique abaixo para gerar seu pedido PIX de R$ 49,90.">
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="font-size:18px;">∞ OpenInfinite Essencial</strong>
-              <span class="brand-tag">1 PC · 365 dias</span>
-            </div>
-            <div class="plan-price">R$ 49,90 <small>/ ano (chave OI6-INF)</small></div>
-            <ul class="plan-list">
-              <li>Motor Infinite AI (:4114) com prioridade máxima HY4 #1</li>
-              <li>Troca invisível entre modelos gratuitos quando houver limite</li>
-              <li>Auto-configuração em 1 clique do OpenBot, CLIs e terminais</li>
-              <li>Gráficos reais de tokens, velocidade e linguagens usadas</li>
-              <li>3 temas completos: Escuro, Claro e Liquid Glass (Win + Mac)</li>
-            </ul>
-          </div>
-          <button type="button" class="btn primary" onclick="selectPlan('infinite')">Escolher Essencial (R$ 49,90)</button>
-        </div>
-
-        <div class="plan-card pro" data-help-title="OpenInfinite Pro Win+Mac — R$ 97,00/ano" data-help-what="Licença oficial anual avulsa para até 2 computadores simultâneos (Windows + Apple Silicon Mac) com Modo Turbo Auto completo." data-help-how="Clique abaixo para gerar seu pedido PIX de R$ 97,00.">
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="font-size:18px;color:#7dd3fc;">∞ OpenInfinite Pro (Win + Mac)</strong>
-              <span class="brand-tag" style="background:rgba(16,185,129,0.18);border-color:rgba(16,185,129,0.45);color:#6ee7b7;">2 PCs · Recomendado</span>
-            </div>
-            <div class="plan-price">R$ 97,00 <small>/ ano (chave OI6-PRO)</small></div>
-            <ul class="plan-list">
-              <li>Tudo do OpenInfinite Essencial desbloqueado sem limites</li>
-              <li>Até 2 computadores juntos (Windows + Apple Silicon macOS)</li>
-              <li>Modo Turbo Auto com Guardião IA e otimização de RAM oculta</li>
-              <li>Suporte prioritário para troca de computador via WhatsApp</li>
-              <li>Ou ganhe grátis assinando BadClaude Cockpit Pro / Fundador VIP</li>
-            </ul>
-          </div>
-          <button type="button" class="btn gold" onclick="selectPlan('infinite_pro')">Escolher Pro Win+Mac (R$ 97,00)</button>
-        </div>
-      </div>
-
-      <div class="pix-card" style="margin-top:16px;border-color:rgba(250,204,21,0.55);background:linear-gradient(135deg,#0c1427,#17162c);display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;">
         <div>
-          <div style="font-weight:900;color:#fde047;font-size:15px;">✳ Também Incluso 100% Grátis no BadClaude a Partir do 3º Nível!</div>
-          <div style="color:#e2e8f0;font-size:13px;">Quem assina o <strong>BadClaude Cockpit Pro (Nível 3 · R$ 350)</strong> ou <strong>Fundador VIP (Nível 4 · R$ 690)</strong> já desbloqueia o OpenInfinite v6.1 completo grátis com a mesma chave <code class="mono">BC5-...</code>. (Os níveis 1 Essencial e 2 Studio ficam apenas com a demo de 1h.)</div>
+          <span class="sec-kicker">Arquitetura do Painel</span>
+          <h2>Recursos dinâmicos feitos para não parar.</h2>
         </div>
-        <a href="/badclaude/#planos" class="btn gold sm" style="white-space:nowrap;">✳ Ver BadClaude Nível 3+ →</a>
+        <p>Clique nos simuladores abaixo para ver como o OpenInfinite gerencia rotas, tokens reais, memória livre e temas nativos.</p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Bento 1: Interactive HY4 Cascade -->
+        <div class="spotlight-card bento-card">
+          <div>
+            <h3>Cascata Inteligente com HY4 em 1º Lugar</h3>
+            <p>Quando uma rota atinge o limite de uso, o Motor Infinite assume na mesma sessão e renova o caminho em segundo plano.</p>
+          </div>
+          <div class="bento-widget">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <span class="mono" style="font-size:11px;color:var(--muted);" id="cascadeStatusTxt">Rota ativa: infinite/auto-turbo (HY4 #1)</span>
+              <button type="button" class="btn sm" onclick="stepCascadeSim()">⚡ Simular Limite</button>
+            </div>
+            <div class="cascade-list" id="cascadeList">
+              <div class="cascade-row active" data-step="0"><span>1. hy4-flash-free (Principal)</span><span class="c-tag">Ativo · 54 ms</span></div>
+              <div class="cascade-row" data-step="1"><span>2. deepseek-v4.1-flash (Reserva #1)</span><span class="c-tag">Pronto</span></div>
+              <div class="cascade-row" data-step="2"><span>3. mimo-v2.6-flash (Reserva #2)</span><span class="c-tag">Pronto</span></div>
+              <div class="cascade-row" data-step="3"><span>4. Renovação de IP Silenciosa</span><span class="c-tag">Turbo Auto</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 2: Real SQLite Scrubber -->
+        <div class="spotlight-card bento-card">
+          <div>
+            <h3>Leitura Real dos Seus Tokens e Sessões</h3>
+            <p>Zero números inventados: lê diretamente o banco local SQLite por janela de 1h, 6h, 24h e 7d. Passe o mouse nas barras.</p>
+          </div>
+          <div class="bento-widget">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+              <strong id="scrubVal" class="mono" style="font-size:18px;">291,7 K tokens</strong>
+              <span id="scrubMeta" class="mono" style="font-size:11px;color:var(--muted);">Janela 24h · Passe o mouse</span>
+            </div>
+            <div class="scrub-bars" id="scrubBars">
+              <div class="scrub-col" data-v="42,1 K tokens" data-m="00h — Entrada + Saída"><div class="scrub-fill" style="height:34px;"></div><span class="scrub-lbl">00h</span></div>
+              <div class="scrub-col" data-v="78,4 K tokens" data-m="04h — Pico em Python"><div class="scrub-fill" style="height:54px;"></div><span class="scrub-lbl">04h</span></div>
+              <div class="scrub-col" data-v="118,9 K tokens" data-m="08h — Prioridade HY4 #1"><div class="scrub-fill" style="height:74px;"></div><span class="scrub-lbl">08h</span></div>
+              <div class="scrub-col" data-v="94,2 K tokens" data-m="12h — OpenBot Modo Leve"><div class="scrub-fill" style="height:60px;"></div><span class="scrub-lbl">12h</span></div>
+              <div class="scrub-col" data-v="164,8 K tokens" data-m="16h — Projeto ativo"><div class="scrub-fill" style="height:88px;"></div><span class="scrub-lbl">16h</span></div>
+              <div class="scrub-col active" data-v="291,7 K tokens" data-m="Agora — Tempo real"><div class="scrub-fill" style="height:92px;"></div><span class="scrub-lbl">Hoje</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 3: 3 Theme Live Switcher -->
+        <div class="spotlight-card bento-card">
+          <div>
+            <h3>3 Temas Nativos Instantâneos</h3>
+            <p>Troque entre Escuro OLED, Liquid Glass translúcido ou Claro Apple Daylight diretamente na barra superior do aplicativo.</p>
+          </div>
+          <div class="bento-widget">
+            <div style="display:flex;gap:6px;margin-bottom:10px;">
+              <button type="button" class="sim-pill active" onclick="setMiniTheme('dark', this)">Escuro</button>
+              <button type="button" class="sim-pill" onclick="setMiniTheme('liquid', this)">Liquid Glass</button>
+              <button type="button" class="sim-pill" onclick="setMiniTheme('light', this)">Claro</button>
+            </div>
+            <div id="miniThemePreview" class="theme-preview-box" data-t="dark">
+              <div style="font-weight:700;font-size:13px;">Painel OpenInfinite</div>
+              <div style="font-size:11.5px;opacity:0.75;margin-top:2px;">Contrastes nativos adaptados ao sistema.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento 4: Clean Gallery Thumbnails -->
+        <div class="spotlight-card bento-card">
+          <div>
+            <h3>Modo Turbo Auto + Limpeza de RAM</h3>
+            <p>Mantém suas ferramentas sincronizadas, libera memória ociosa em 1 clique e elimina popups de conexão no Mac e no Windows.</p>
+          </div>
+          <div class="bento-widget" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <div>
+              <div class="mono" style="font-size:11px;color:var(--muted);">MEMÓRIA LIVRE MONITORADA</div>
+              <div id="ramDemoVal" class="mono" style="font-size:20px;font-weight:800;margin-top:2px;">18,4 GB</div>
+            </div>
+            <button type="button" class="btn sm ivory" onclick="optimizeRamDemo()">⚡ Otimizar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 CLEAN REAL SCREENSHOT THUMBNAILS -->
+      <div class="shot-grid" style="margin-top:16px;">
+        <div class="spotlight-card shot-card active" data-shot="0">
+          <img src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Painel Principal Escuro" />
+          <strong>Painel Principal</strong>
+          <span>Botão Iniciar/Pausar e dados reais</span>
+        </div>
+        <div class="spotlight-card shot-card" data-shot="1">
+          <img src="/openinfinite/assets/openinfinite_liquid_glass.png" alt="Visual Liquid Glass" />
+          <strong>Liquid Glass</strong>
+          <span>Transparência especular nativa</span>
+        </div>
+        <div class="spotlight-card shot-card" data-shot="2">
+          <img src="/openinfinite/assets/openinfinite_estatisticas.png" alt="Estatísticas Reais" />
+          <strong>Estatísticas SQLite</strong>
+          <span>Tokens, cache e linguagens</span>
+        </div>
+        <div class="spotlight-card shot-card" data-shot="3">
+          <img src="/openinfinite/assets/openinfinite_tema_claro.png" alt="Tema Claro Apple Daylight" />
+          <strong>Tema Claro Daylight</strong>
+          <span>Alto contraste para o dia</span>
+        </div>
       </div>
     </section>
 
-    <!-- CHECKOUT PIX AVULSO + VALIDAÇÃO DE CHAVE -->
-    <section class="dual-grid">
-      <div class="panel" id="checkout">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <h2 style="font-size:20px;font-weight:900;">💸 Comprar Chave Avulsa via PIX</h2>
-          <button type="button" class="help-q" data-help-title="Checkout PIX Oficial OpenInfinite" data-help-what="Gera seu pedido com QR Code PIX para 68 99226-9296 (Raiane Lenoncio). Após aprovação, cole sua chave OI6-... no programa para destravar imediatamente." data-help-how="Escolha entre Essencial (R$ 49,90) ou Pro Win+Mac (R$ 97,00), preencha seu nome e WhatsApp e gere o QR Code.">?</button>
-        </div>
-        <div class="pix-card">
-          <div style="font-weight:800;color:#7dd3fc;">Recebedor Oficial PIX:</div>
-          <div>Chave Telefone: <strong class="mono">68 99226-9296</strong> · Titular: <strong>Raiane Lenoncio</strong></div>
-          <button type="button" class="btn sm" style="align-self:flex-start;" onclick="copyPix()">📋 Copiar Chave PIX</button>
-        </div>
-        <form id="orderForm">
-          <div class="field">
-            <label for="ordPlan">Plano OpenInfinite</label>
-            <select id="ordPlan">
-              <option value="infinite_pro" selected>∞ OpenInfinite Pro Win+Mac — R$ 97,00 (2 PCs · 1 ano)</option>
-              <option value="infinite">∞ OpenInfinite Essencial — R$ 49,90 (1 PC · 1 ano)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="ordName">Seu Nome Completo</label>
-            <input id="ordName" type="text" required placeholder="Ex.: Maria Oliveira" />
-          </div>
-          <div class="field">
-            <label for="ordContact">Seu WhatsApp ou E-mail</label>
-            <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999" />
-          </div>
-          <button type="submit" class="btn gold" style="width:100%;">💸 Gerar Pedido PIX Agora</button>
-        </form>
-        <div id="orderResultBox" class="result-box">
-          <strong style="color:#10b981;" id="orderResultHead">Pedido Pronto!</strong>
-          <div class="mono" id="orderResultCode" style="background:#04060b;padding:8px;border:1px solid #1e293b;border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
-          <div id="orderPixQrWrap" style="text-align:center;"></div>
-          <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm">📱 Enviar Comprovante no WhatsApp</a>
+    <!-- 3-STEP KINETIC FLOW -->
+    <section id="como-funciona" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Comece Agora</span>
+          <h2>Do download ao fluxo contínuo em 3 passos.</h2>
         </div>
       </div>
-
-      <div class="panel" id="licenca">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <h2 style="font-size:20px;font-weight:900;">🔑 Validar Chave OI6 ou BC5</h2>
-          <button type="button" class="help-q" data-help-title="Validar Chave OI6 Avulsa ou BC5 (Nível 3+)" data-help-what="Confirma se sua chave OpenInfinite avulsa (OI6-...) ou BadClaude a partir do 3º nível (BC5-MID Cockpit Pro / BC5-FND Fundador VIP) está ativa." data-help-how="Cole a chave abaixo e clique em Validar Agora.">?</button>
+      <div class="steps-grid">
+        <div class="spotlight-card step-card active" onclick="highlightStep(this)">
+          <span class="step-num">01 / TESTE GRÁTIS</span>
+          <h3>Baixe e abra em segundos</h3>
+          <p>Use todos os recursos liberados durante 1 hora completa no Windows (.exe) ou macOS Apple Silicon (.dmg).</p>
         </div>
-        <p style="font-size:13px;color:var(--muted);">
-          Aceita chaves avulsas <strong><code class="mono">OI6-PRO-...</code> / <code class="mono">OI6-INF-...</code></strong> e chaves do <strong>BadClaude a partir do 3º Nível (<code class="mono">BC5-MID-...</code> Cockpit Pro ou <code class="mono">BC5-FND-...</code> Fundador VIP)</strong>!
-        </p>
-        <form id="verifyForm">
-          <div class="field">
-            <label for="licKeyInput">Sua Chave de Acesso</label>
-            <input id="licKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou BC5-FND-..." required />
-          </div>
-          <button type="submit" class="btn primary" style="width:100%;">🔓 Conferir Chave Online</button>
-        </form>
-        <div id="licResultBox" class="result-box"></div>
-        <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
-          Precisa liberar troca de computador após formatar?
-          <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm" style="margin-top:8px;">📱 Suporte WhatsApp: (68) 99226-9296</a>
+        <div class="spotlight-card step-card" onclick="highlightStep(this)">
+          <span class="step-num">02 / 1 CLIQUE</span>
+          <h3>Escolha o perfil HY4 &amp; linguagem</h3>
+          <p>Aperte Iniciar no painel para alinhar OpenBot, Editor e Terminais CLI sem precisar copiar endpoints à mão.</p>
+        </div>
+        <div class="spotlight-card step-card" onclick="highlightStep(this)">
+          <span class="step-num">03 / SEM INTERRUPÇÕES</span>
+          <h3>Pause ou renove quando quiser</h3>
+          <p>O botão muda para Pausar quando ativo, o Guardião Turbo Auto protege contra quedas e seus gráficos mostram só dados reais.</p>
         </div>
       </div>
     </section>
 
-    <!-- PROPAGANDA RECÍPROCA BADCLAUDE v6.7.1 -->
-    <section aria-label="Conheça também o BadClaude" style="background:linear-gradient(135deg,#0d1221 0%,#151b32 60%,#1c162b 100%);border:1px solid rgba(250,204,21,0.55);border-radius:18px;padding:26px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;box-shadow:0 18px 50px rgba(250,204,21,0.10);">
-      <div style="flex:1;min-width:260px;">
-        <div style="display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.05em;color:#fde047;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.38);padding:4px 10px;border-radius:999px;margin-bottom:8px;">
-          ✳ ECOSSISTEMA COMPLETO · OPENINFINITE GRÁTIS A PARTIR DO 3º NÍVEL!
+    <!-- MONTHLY PRICING (R$ 99 WIN / R$ 159 MAC) + PIX CHECKOUT + KEY VALIDATOR -->
+    <section id="planos" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Licença Mensal (1 Mês)</span>
+          <h2>Planos simples por plataforma.</h2>
         </div>
-        <h3 style="font-size:21px;font-weight:900;color:#ffffff;margin-bottom:6px;">Quer levar ainda mais poder com o BadClaude v6.7.1?</h3>
-        <p style="font-size:13.5px;color:#cbd5e1;max-width:68ch;">
-          O <strong>BadClaude</strong> é a fábrica autônoma completa de <strong>Código Multi-IA, Vídeos 2D, Voz em Português R$ 0,00 e até 38 modelos gratuitos NVIDIA Build</strong>. Assinando a partir do <strong>3º Nível (Cockpit Pro ou Fundador VIP)</strong> você já recebe o <strong>OpenInfinite v6.1 incluso grátis</strong> sem pagar separado!
-        </p>
+        <p>Após 1 hora de demonstração gratuita, escolha o plano de 30 dias para o seu sistema e libere na hora via PIX.</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="/badclaude/" class="btn gold" style="white-space:nowrap;">✳ Conhecer o BadClaude v6.7.1 →</a>
+
+      <div class="plans-grid">
+        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias para 1 PC Windows com todos os recursos." data-help-how="Clique para gerar seu PIX de R$ 99,00.">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="font-size:17px;">🪟 OpenInfinite Windows</strong>
+              <span class="brand-ver">30 dias · 1 PC Windows</span>
+            </div>
+            <div class="plan-price">R$ 99,00 <small>/ mês · chave OI6-INF</small></div>
+            <ul class="plan-list">
+              <li>1 computador Windows liberado por 30 dias completos</li>
+              <li>Cascata Infinite AI com prioridade máxima HY4 #1</li>
+              <li>Modo Turbo Auto silencioso + otimização de memória RAM</li>
+              <li>Botão Iniciar/Pausar e telemetria real SQLite + 3 temas</li>
+              <li>Auto-configuração em 1 clique do OpenBot e CLIs locais</li>
+            </ul>
+          </div>
+          <button type="button" class="btn ivory" onclick="selectPlan('infinite')">Assinar Windows — R$ 99,00/mês</button>
+        </div>
+
+        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite macOS &amp; Multi — R$ 159,00 / mês" data-help-what="Licença oficial de 30 dias para Apple Silicon macOS + Windows (até 2 PCs)." data-help-how="Clique para gerar seu PIX de R$ 159,00.">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="font-size:17px;"> OpenInfinite macOS &amp; Multi</strong>
+              <span class="brand-ver" style="color:#a5b4fc;border-color:var(--border-accent);">30 dias · Mac + 2 PCs</span>
+            </div>
+            <div class="plan-price">R$ 159,00 <small>/ mês · chave OI6-PRO</small></div>
+            <ul class="plan-list">
+              <li>Aplicativo nativo macOS Apple Silicon + suporte Windows</li>
+              <li>Use em até 2 máquinas ao mesmo tempo com uma única chave</li>
+              <li>Acabamento Liquid Glass real com zero popups na frente</li>
+              <li>Tudo do Motor Infinite AI Turbo Auto + foco por linguagem</li>
+              <li>Suporte prioritário para migração de máquina via WhatsApp</li>
+            </ul>
+          </div>
+          <button type="button" class="btn accent" onclick="selectPlan('infinite_pro')">Assinar macOS &amp; Multi — R$ 159,00/mês</button>
+        </div>
+      </div>
+
+      <div class="bc-footnote">
+        <span>Já usa <strong>BadClaude</strong> a partir do 3º nível (<strong>Cockpit Pro</strong> ou <strong>Fundador VIP</strong>)? Sua chave <code class="mono">BC5-...</code> também destrava o OpenInfinite v6.1 Win + Mac gratuitamente.</span>
+        <a href="/badclaude/" style="color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap;">Ver BadClaude →</a>
+      </div>
+
+      <div class="dual-grid">
+        <div class="spotlight-card panel" id="checkout">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-size:19px;font-weight:800;">Gerar PIX da Assinatura</h2>
+            <button type="button" class="help-q" data-help-title="Checkout PIX Oficial" data-help-what="Gera QR Code oficial e Copia e Cola para 68 99226-9296 (Raiane Lenoncio)." data-help-how="Escolha Windows (R$ 99) ou macOS &amp; Multi (R$ 159) e preencha seu nome e contato.">?</button>
+          </div>
+          <div class="pix-card">
+            <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX</div>
+            <div style="color:var(--muted);">Telefone: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Lenoncio</strong></div>
+            <button type="button" class="btn sm" style="align-self:flex-start;" onclick="copyPix()">Copiar Chave PIX</button>
+          </div>
+          <form id="orderForm">
+            <div class="field">
+              <label for="ordPlan">Plano Mensal (1 Mês)</label>
+              <select id="ordPlan">
+                <option value="infinite_pro" selected> OpenInfinite macOS &amp; Multi — R$ 159,00 / mês (Mac + 2 PCs)</option>
+                <option value="infinite">🪟 OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ordName">Seu Nome Completo</label>
+              <input id="ordName" type="text" required placeholder="Ex.: Maria Oliveira" />
+            </div>
+            <div class="field">
+              <label for="ordContact">Seu WhatsApp ou E-mail</label>
+              <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999" />
+            </div>
+            <button type="submit" class="btn ivory" style="width:100%;">Gerar QR Code PIX</button>
+          </form>
+          <div id="orderResultBox" class="result-box">
+            <strong style="color:var(--emerald);" id="orderResultHead">Pedido Pronto!</strong>
+            <div class="mono" id="orderResultCode" style="background:#040509;padding:8px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+            <div id="orderPixQrWrap" style="text-align:center;"></div>
+            <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm">Enviar Comprovante no WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="spotlight-card panel" id="licenca">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-size:19px;font-weight:800;">Validar Chave de Acesso</h2>
+            <button type="button" class="help-q" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Cole a chave abaixo e clique em Conferir Chave.">?</button>
+          </div>
+          <p style="font-size:13px;color:var(--muted);">
+            Aceita chaves mensais <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (macOS &amp; Multi) e chaves BadClaude Nível 3+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
+          </p>
+          <form id="verifyForm">
+            <div class="field">
+              <label for="licKeyInput">Sua Chave</label>
+              <input id="licKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou OI6-INF-..." required />
+            </div>
+            <button type="submit" class="btn accent" style="width:100%;">Conferir Chave Online</button>
+          </form>
+          <div id="licResultBox" class="result-box"></div>
+          <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
+            Formatou o computador e precisa liberar o HWID antigo?
+            <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm" style="margin-top:8px;">Suporte WhatsApp: (68) 99226-9296</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <button type="button" class="hover-hud" onclick="openHelpModal(null)">
-    <span>💡</span>
-    <span id="hoverBarHint">Passe o mouse + <strong>Shift + I</strong> para explicar qualquer recurso</span>
+    <span>ⓘ</span>
+    <span id="hoverBarHint">Passe o mouse + <strong>Shift + I</strong> para explicar</span>
   </button>
 
   <div id="shiftIModal" role="dialog" aria-modal="true" aria-label="Explicação Rápida Shift+I">
     <div class="shift-box">
       <div class="shift-head">
-        <span>ⓘ Ajuda Rápida OpenInfinite · Shift + I</span>
+        <span>Ajuda OpenInfinite · Shift + I</span>
         <button type="button" class="btn sm" onclick="closeHelpModal()" style="padding:3px 9px;">✕</button>
       </div>
       <div class="shift-body">
         <h3 id="shiftITitle" style="color:#fff;font-size:16px;font-weight:800;">Entenda este item</h3>
-        <div><strong style="color:var(--cyan);">O que significa:</strong> <span id="shiftIWhat" style="color:#e2e8f0;">—</span></div>
-        <div><strong style="color:var(--emerald);">Como funciona para você:</strong> <span id="shiftIHow" style="color:#e2e8f0;">—</span></div>
-        <div style="display:flex;justify-content:flex-end;"><button type="button" class="btn primary sm" onclick="closeHelpModal()">Entendi [ESC]</button></div>
+        <div><strong style="color:var(--accent);">O que é:</strong> <span id="shiftIWhat" style="color:#d4d9e8;">—</span></div>
+        <div><strong style="color:var(--emerald);">Como usar:</strong> <span id="shiftIHow" style="color:#d4d9e8;">—</span></div>
+        <div style="display:flex;justify-content:flex-end;"><button type="button" class="btn ivory sm" onclick="closeHelpModal()">Entendi [ESC]</button></div>
       </div>
     </div>
   </div>
 
   <div id="zoomModal" onclick="this.style.display='none'">
-    <img id="zoomImg" src="" alt="Visualização ampliada" style="max-width:94vw;max-height:92vh;border-radius:14px;border:1px solid rgba(56,189,248,0.5);box-shadow:0 28px 90px #000;" />
+    <img id="zoomImg" src="" alt="Visualização ampliada" style="max-width:94vw;max-height:92vh;border-radius:12px;border:1px solid rgba(255,255,255,0.22);box-shadow:0 32px 96px #000;" />
   </div>
 
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let lastHoverEl = null;
+
+      // Sticky topbar density change on scroll
+      const topbar = $('topbar');
+      window.addEventListener('scroll', () => {
+        if (topbar) topbar.classList.toggle('scrolled', window.scrollY > 24);
+      }, { passive: true });
+
+      // IntersectionObserver reveal animations
+      const revEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.08 });
+        revEls.forEach((el) => io.observe(el));
+      } else {
+        revEls.forEach((el) => el.classList.add('in'));
+      }
+
+      // SpotlightCard pointer glow
+      document.querySelectorAll('.spotlight-card').forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+        }, { passive: true });
+      });
+
+      // Living 3D Symbol tracking mouse across Hero + LivingStage (never blocked by OS reduced-motion setting!)
+      const stage = $('livingStage');
+      const hero = document.querySelector('.hero');
+      const core = $('livingCore');
+      const aura = $('cursorAura');
+      const b1 = $('badge1');
+      const b2 = $('badge2');
+      const canvas = $('particleCanvas');
+
+      if (stage && core) {
+        let tx = 0, ty = 0, cx = 0, cy = 0;
+        let ax = 0, ay = 0, cax = 0, cay = 0;
+        const onPointer = (ev) => {
+          const r = stage.getBoundingClientRect();
+          const cx0 = r.left + r.width / 2;
+          const cy0 = r.top + r.height / 2;
+          const nx = (ev.clientX - cx0) / Math.max(180, r.width * 0.6);
+          const ny = (ev.clientY - cy0) / Math.max(180, r.height * 0.6);
+          tx = Math.max(-1, Math.min(1, nx));
+          ty = Math.max(-1, Math.min(1, ny));
+          ax = Math.max(-r.width * 0.45, Math.min(r.width * 0.45, ev.clientX - cx0));
+          ay = Math.max(-r.height * 0.45, Math.min(r.height * 0.45, ev.clientY - cy0));
+        };
+        window.addEventListener('pointermove', onPointer, { passive: true });
+        if (hero) hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; ax = 0; ay = 0; });
+
+        const tickSpring = () => {
+          cx += (tx - cx) * 0.14;
+          cy += (ty - cy) * 0.14;
+          cax += (ax - cax) * 0.16;
+          cay += (ay - cay) * 0.16;
+          const rotY = (cx * 18).toFixed(2);
+          const rotX = (-cy * 18).toFixed(2);
+          const mvX = (cx * 20).toFixed(2);
+          const mvY = (cy * 16).toFixed(2);
+          core.style.transform = `perspective(1000px) translate3d(${mvX}px, ${mvY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+          if (aura) aura.style.transform = `translate3d(calc(-50% + ${cax.toFixed(1)}px), calc(-50% + ${cay.toFixed(1)}px), 0)`;
+          if (b1) b1.style.transform = `translate3d(${(-cx * 9).toFixed(1)}px, ${(-cy * 7).toFixed(1)}px, 0)`;
+          if (b2) b2.style.transform = `translate3d(${(cx * 10).toFixed(1)}px, ${(-cy * 8).toFixed(1)}px, 0)`;
+          requestAnimationFrame(tickSpring);
+        };
+        requestAnimationFrame(tickSpring);
+
+        if (canvas && canvas.getContext) {
+          const ctx = canvas.getContext('2d');
+          const pts = Array.from({ length: 24 }, (_, i) => ({
+            x: (i * 53) % 360, y: (i * 79) % 380,
+            vx: ((i % 2 === 0 ? 1 : -1) * (0.24 + (i % 4) * 0.07)),
+            vy: ((i % 3 === 0 ? 1 : -1) * (0.20 + (i % 5) * 0.06)),
+          }));
+          const drawParticles = () => {
+            const w = stage.clientWidth || 360;
+            const h = stage.clientHeight || 390;
+            if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+            ctx.clearRect(0, 0, w, h);
+            const mx = w / 2 + cax, my = h / 2 + cay;
+            for (let i = 0; i < pts.length; i++) {
+              const p = pts[i];
+              if (!reducedMotion) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
+              }
+              const dm = Math.hypot(mx - p.x, my - p.y);
+              if (dm < 110) { p.x += (mx - p.x) * 0.01; p.y += (my - p.y) * 0.01; }
+              ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+              ctx.fillStyle = dm < 100 ? 'rgba(165,180,252,0.85)' : 'rgba(255,255,255,0.28)';
+              ctx.fill();
+              for (let j = i + 1; j < pts.length; j++) {
+                const q = pts[j];
+                const d = Math.hypot(p.x - q.x, p.y - q.y);
+                if (d < 84) {
+                  ctx.strokeStyle = `rgba(165,180,252,${(0.18 * (1 - d / 84)).toFixed(3)})`;
+                  ctx.lineWidth = 0.7;
+                  ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+                }
+              }
+            }
+            requestAnimationFrame(drawParticles);
+          };
+          requestAnimationFrame(drawParticles);
+        }
+      }
+
+      // Interactive Cockpit & Gallery Sync (View Transitions API)
+      const SHOTS = [
+        { img: '/openinfinite/assets/openinfinite_tema_escuro.png', title: 'Painel Principal com Botão Iniciar / Pausar & Dados Reais', desc: 'Telemetria direta do banco local, status ao vivo das ferramentas e troca de motor sem popups.' },
+        { img: '/openinfinite/assets/openinfinite_liquid_glass.png', title: 'Visual Liquid Glass (macOS & Windows)', desc: 'Vidro translúcido com bordas especulares sem banners ou janelas secundárias interrompendo o foco.' },
+        { img: '/openinfinite/assets/openinfinite_estatisticas.png', title: 'Estatísticas Reais SQLite', desc: 'Acompanhe tokens de entrada, saída, cache reaproveitado e linguagens reais medidas nos seus projetos.' },
+        { img: '/openinfinite/assets/openinfinite_tema_claro.png', title: 'Tema Claro Apple Daylight', desc: 'Contraste alto e limpo para ambientes bem iluminados com leitura nítida dos gráficos.' },
+      ];
+
+      function activateShot(idx) {
+        const s = SHOTS[idx] || SHOTS[0];
+        const apply = () => {
+          $('featImg').src = s.img;
+          $('featImg').alt = s.title;
+          $('featTitle').textContent = s.title;
+          $('featDesc').textContent = s.desc;
+          document.querySelectorAll('.sim-pill[data-shot], .shot-card[data-shot]').forEach((el) => {
+            const on = Number(el.dataset.shot) === idx;
+            el.classList.toggle('active', on);
+            if (el.getAttribute('role') === 'tab') el.setAttribute('aria-selected', String(on));
+          });
+        };
+        if (document.startViewTransition && !reducedMotion) document.startViewTransition(apply);
+        else apply();
+      }
+      document.querySelectorAll('[data-shot]').forEach((el) => {
+        el.addEventListener('click', () => activateShot(Number(el.dataset.shot)));
+      });
+
+      let simOn = true;
+      window.toggleSimEngine = function () {
+        simOn = !simOn;
+        const btn = $('simEngineBtn');
+        const b2 = $('badge2');
+        if (btn) {
+          btn.classList.toggle('stopped', !simOn);
+          btn.textContent = simOn ? '⏸ Motor Ativo · Pausar' : '▶ Motor Pausado · Iniciar';
+        }
+        if (b2) {
+          b2.textContent = simOn ? '● Motor Pronto' : '○ Motor Pausado';
+          b2.style.color = simOn ? '#6ee7b7' : '#fbbf24';
+        }
+      };
+
+      // Interactive Bento 1: Cascade rotation simulator
+      let casIdx = 0;
+      const casLabels = [
+        'Rota ativa: infinite/auto-turbo (HY4 #1)',
+        'HY4 saturado → Alternou silenciosamente para DeepSeek v4.1',
+        'Rota #2 saturada → Assumiu MiMo v2.6 Flash sem fechar o editor',
+        'Conexão renovada! HY4 #1 restaurado como principal'
+      ];
+      window.stepCascadeSim = function () {
+        casIdx = (casIdx + 1) % 4;
+        $('cascadeStatusTxt').textContent = casLabels[casIdx];
+        document.querySelectorAll('#cascadeList .cascade-row').forEach((row, i) => {
+          row.classList.toggle('active', i === casIdx);
+          row.classList.toggle('cooldown', i < casIdx && casIdx < 3);
+          const tag = row.querySelector('.c-tag');
+          if (tag) {
+            if (i === casIdx) tag.textContent = i === 3 ? 'Renovando' : 'Ativo agora';
+            else if (i < casIdx && casIdx < 3) tag.textContent = 'Cooldown';
+            else tag.textContent = i === 3 ? 'Turbo Auto' : 'Pronto';
+          }
+        });
+      };
+
+      // Interactive Bento 2: Scrubber hover
+      document.querySelectorAll('#scrubBars .scrub-col').forEach((col) => {
+        col.addEventListener('pointerenter', () => {
+          document.querySelectorAll('#scrubBars .scrub-col').forEach((c) => c.classList.remove('active'));
+          col.classList.add('active');
+          $('scrubVal').textContent = col.dataset.v || '—';
+          $('scrubMeta').textContent = col.dataset.m || '';
+        });
+      });
+
+      // Interactive Bento 3: Theme swatch preview
+      window.setMiniTheme = function (t, btn) {
+        const box = $('miniThemePreview');
+        if (box) box.setAttribute('data-t', t);
+        btn.parentElement.querySelectorAll('.sim-pill').forEach((b) => b.classList.toggle('active', b === btn));
+      };
+
+      // Interactive Bento 4: RAM preview action
+      window.optimizeRamDemo = function () {
+        const el = $('ramDemoVal');
+        if (!el) return;
+        el.textContent = '19,8 GB';
+        setTimeout(() => { el.textContent = '19,6 GB'; }, 1200);
+      };
+
+      window.highlightStep = function (el) {
+        document.querySelectorAll('.step-card').forEach((c) => c.classList.remove('active'));
+        el.classList.add('active');
+      };
 
       window.zoomImage = function (src) {
         $('zoomImg').src = src;
@@ -438,11 +1041,11 @@
         if (el?.dataset?.helpTitle) {
           $('shiftITitle').textContent = el.dataset.helpTitle;
           $('shiftIWhat').textContent = el.dataset.helpWhat || 'Recurso oficial OpenInfinite v6.1.';
-          $('shiftIHow').textContent = el.dataset.helpHow || 'Baixe o teste de 1h ou ative sua chave OI6 / BC5.';
+          $('shiftIHow').textContent = el.dataset.helpHow || 'Teste por 1h ou assine um dos planos mensais.';
         } else {
           $('shiftITitle').textContent = 'Ajuda Rápida Shift + I';
-          $('shiftIWhat').textContent = 'Qualquer botão ou plano da página pode ser explicado em português simples.';
-          $('shiftIHow').textContent = 'Passe o mouse sobre qualquer bloco e aperte Shift + I.';
+          $('shiftIWhat').textContent = 'Explica qualquer bloco, botão de download ou plano mensal em linguagem simples.';
+          $('shiftIHow').textContent = 'Passe o mouse sobre qualquer área e aperte Shift + I.';
         }
         $('shiftIModal').style.display = 'flex';
       }
@@ -458,7 +1061,7 @@
         if (ev.key === 'Escape') { closeHelpModal(); $('zoomModal').style.display = 'none'; }
         if (ev.shiftKey && !ev.ctrlKey && !ev.altKey && !ev.metaKey && ev.key.toLowerCase() === 'i') {
           const ae = document.activeElement;
-          if (ae && ['INPUT', 'SELECT'].includes(ae.tagName)) return;
+          if (ae && ['INPUT', 'SELECT', 'TEXTAREA'].includes(ae.tagName)) return;
           ev.preventDefault();
           openHelpModal(lastHoverEl);
         }
@@ -516,11 +1119,11 @@
         });
         const d = await res.json().catch(() => ({}));
         if (res.ok && d.ok && d.includesOpenInfinite !== false) {
-          box.innerHTML = `<strong style="color:#10b981;">🟢 Chave Válida com OpenInfinite Liberado!</strong><span>Plano: <b>${d.planLabel || d.tier}</b> · Válida por ${d.daysLeft} dias. Cole no cofre do aplicativo OpenInfinite para destravar!</span>`;
+          box.innerHTML = `<strong style="color:#10b981;">Chave Válida — OpenInfinite Liberado</strong><span>Plano: <b>${d.planLabel || d.tier}</b> · Válida por ${d.daysLeft} dias.</span>`;
         } else if (res.ok && d.ok && d.includesOpenInfinite === false) {
-          box.innerHTML = `<strong style="color:#f59e0b;">⚠ Plano Nível 1/2 sem OpenInfinite</strong><span>Sua chave <b>${d.planLabel || d.tier}</b> não inclui o OpenInfinite após a demo de 1h. Faça upgrade para o 3º nível (Cockpit Pro) ou Fundador VIP em <a href="/badclaude/#planos" style="color:#7dd3fc;">/badclaude/</a>.</span>`;
+          box.innerHTML = `<strong style="color:#f59e0b;">Chave BadClaude Nível 1/2</strong><span>Esse nível usa apenas a demo de 1h no OpenInfinite. Assine separado acima ou use Nível 3+.</span>`;
         } else {
-          box.innerHTML = `<strong style="color:#f43f5e;">⚠ ${d.error || 'Chave não reconhecida ou expirada.'}</strong>`;
+          box.innerHTML = `<strong style="color:#f43f5e;">${d.error || 'Chave não reconhecida ou expirada.'}</strong>`;
         }
       });
     })();
