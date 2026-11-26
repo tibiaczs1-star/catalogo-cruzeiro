@@ -642,10 +642,10 @@ function sendSmtpsMail({ host, port = 465, user, pass, from, to, subject, text, 
           sendLine(Buffer.from(String(pass), "utf8").toString("base64"));
         } else if (step === 4 && code === 235) {
           step = 5;
-          sendLine(`MAIL FROM:<${user}>`);
+          sendLine(`MAIL FROM:<${safeHdr(user)}>`);
         } else if (step === 5 && code === 250) {
           step = 6;
-          sendLine(`RCPT TO:<${to}>`);
+          sendLine(`RCPT TO:<${safeTo}>`);
         } else if (step === 6 && (code === 250 || code === 251)) {
           step = 7;
           sendLine("DATA");
@@ -2741,6 +2741,12 @@ function createSuperbadSalesApi(options = {}) {
             return { status: 404, payload: { ok: false, error: "Pedido não encontrado." } };
           }
           const edition = cleanText(body.edition || edCheck.edition || ord.requested_edition, 32).toLowerCase();
+          if (!VALID_EDITIONS.has(edition)) {
+            return {
+              status: 400,
+              payload: { ok: false, error: `Edição inválida para entrega (${edition}).` },
+            };
+          }
           const plan = EDITION_PLANS[edition] || EDITION_PLANS[ord.requested_edition] || EDITION_PLANS.superbad;
           if (EDITION_PLANS[edition] && edCheck.tier && EDITION_PLANS[edition].tier !== edCheck.tier) {
             return {
@@ -3387,19 +3393,21 @@ function createSuperbadSalesApi(options = {}) {
           }
 
           if (license.revoked) {
-            upsertNetworkNode(store, {
-              license_id: license.license_id,
-              key_sha256: keySha,
-              hwid,
-              hostname,
-              user_label: email || license.label,
-              edition: license.edition,
-              tier: license.tier,
-              version,
-              ip_masked: clientIpMasked,
-              revoked: true,
-            });
-            await writeStore(store);
+            if (!isProbeOnly) {
+              upsertNetworkNode(store, {
+                license_id: license.license_id,
+                key_sha256: keySha,
+                hwid,
+                hostname,
+                user_label: email || license.label,
+                edition: license.edition,
+                tier: license.tier,
+                version,
+                ip_masked: clientIpMasked,
+                revoked: true,
+              });
+              await writeStore(store);
+            }
             return {
               status: 403,
               payload: { ok: false, valid: false, revoked: true, code: "LICENSE_REVOKED", error: "Esta licença foi revogada pelo emissor." },
