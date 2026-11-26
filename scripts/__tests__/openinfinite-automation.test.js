@@ -178,10 +178,14 @@ test("Google session checkout, receipt magic-byte & duplicate analysis, WhatsApp
   const createRes = await reqJson("/api/superbad/orders", {
     method: "POST",
     headers: googleHeaders,
-    body: JSON.stringify({ requested_edition: "infinite_pro" }),
+    body: JSON.stringify({
+      requested_edition: "infinite_pro",
+      buyer_whatsapp: "(68) 99988-7766",
+    }),
   });
   assert.equal(createRes.status, 201);
   assert.equal(createRes.data.order.buyer_email, "alice.dev@gmail.com");
+  assert.equal(createRes.data.order.buyer_whatsapp, "(68) 99988-7766");
   assert.equal(createRes.data.order.google_name, "Alice Ferreira");
   assert.equal(createRes.data.order.sla_minutes, 60);
   const { order_id: orderId, order_secret: orderSecret } = createRes.data.order;
@@ -201,7 +205,7 @@ test("Google session checkout, receipt magic-byte & duplicate analysis, WhatsApp
   // Submit valid >256KB PNG receipt with BACEN E2E ID -> MUST analyze, alert WhatsApp, and NEVER auto-approve!
   const realPng512KB = Buffer.concat([
     Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-    Buffer.from("Comprovante PIX R$ 159,00 Raiane Lenoncio "),
+    Buffer.from("Comprovante PIX R$ 159,00 Raiane Leoncio "),
     Buffer.alloc(512 * 1024, 0x42),
   ]);
   const validE2e = "E18236120202611251430ABCDEF12345"; // 32 chars (E + 31)
@@ -221,16 +225,28 @@ test("Google session checkout, receipt magic-byte & duplicate analysis, WhatsApp
   assert.equal(recRes.data.auto_approved, false);
   assert.equal(recRes.data.awaiting_owner_activation, true);
   assert.equal(recRes.data.sla_minutes, 60);
+  assert.equal(recRes.data.buyer_whatsapp, "(68) 99988-7766");
   assert.equal(recRes.data.license_key, undefined);
   assert.equal(recRes.data.receipt_analysis.magic_valid, true);
   assert.equal(recRes.data.receipt_analysis.is_duplicate, false);
   assert.equal(recRes.data.receipt_analysis.e2e_format_ok, true);
   assert.equal(recRes.data.receipt_analysis.amount_hint, "R$ 159,00");
-  assert.equal(recRes.data.receipt_analysis.receiver_hint, "Raiane Lenoncio");
+  assert.equal(recRes.data.receipt_analysis.receiver_hint, "Raiane Leoncio");
   assert.equal(recRes.data.owner_whatsapp_alert.attempted, true);
   assert.equal(recRes.data.owner_whatsapp_alert.sent, true);
   assert.match(recRes.data.whatsapp_immediate_url, /^https:\/\/wa\.me\/5568992269296\?text=/);
+  assert.ok(decodeURIComponent(recRes.data.whatsapp_immediate_url).includes("(68) 99988-7766"));
   assert.equal(whatsappAlerts.length, 1);
+
+  // Admin order serialization must include buyer_whatsapp + has_receipt_file so Dashboard Control can message client
+  const adminOrdersPath = "/api/superbad/admin/orders";
+  const adminOrdRes = await reqJson(adminOrdersPath, {
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("GET", adminOrdersPath) },
+  });
+  assert.equal(adminOrdRes.status, 200);
+  const aliceAdminOrd = adminOrdRes.data.orders.find((o) => o.order_id === orderId);
+  assert.equal(aliceAdminOrd.buyer_whatsapp, "(68) 99988-7766");
+  assert.equal(aliceAdminOrd.has_receipt_file, true);
 
   // Even if PIX bank webhook arrives, order stays awaiting owner activation (license_key STILL null!)
   const whRes = await reqJson("/api/superbad/webhooks/pix", {
@@ -307,7 +323,7 @@ test("Google session checkout, receipt magic-byte & duplicate analysis, WhatsApp
   assert.match(sentEmails[0].text, /Alice Ferreira/);
   assert.ok(sentEmails[0].text.includes(proKey));
   assert.ok(
-    sentEmails[0].testUrl.includes(`/openinfinite/?test_key=${encodeURIComponent(proKey)}#validador`)
+    sentEmails[0].testUrl.includes(`/openinfinite/checkout/?test_key=${encodeURIComponent(proKey)}#validador`)
   );
 
   // Now GET order & my-orders return the decrypted license_key, and /api/v1/licenses/verify passes!
@@ -468,7 +484,7 @@ test("IC6-PRO (infinite_claude) supports PIX order, key-pool stocking, owner del
   assert.equal(deliverRes.status, 200);
   assert.equal(deliverRes.data.status, "delivered");
   assert.equal(sentEmails.length, 1);
-  assert.ok(sentEmails[0].testUrl.includes(`/openinfinite/?test_key=${encodeURIComponent(icKeyDeliver)}#validador`));
+  assert.ok(sentEmails[0].testUrl.includes(`/openinfinite/checkout/?test_key=${encodeURIComponent(icKeyDeliver)}#validador`));
 
   const orderAfter = await reqJson(`/api/superbad/orders/${orderId}?order_secret=${encodeURIComponent(orderSecret)}`);
   assert.equal(orderAfter.status, 200);
@@ -543,7 +559,7 @@ test("IC6-MAX (infinite_max) supports PIX order (R$ 249), key-pool stocking, own
   assert.equal(deliverRes.status, 200);
   assert.equal(deliverRes.data.status, "delivered");
   assert.equal(sentEmails.length, 1);
-  assert.ok(sentEmails[0].testUrl.includes(`/openinfinite/?test_key=${encodeURIComponent(maxKeyDeliver)}#validador`));
+  assert.ok(sentEmails[0].testUrl.includes(`/openinfinite/checkout/?test_key=${encodeURIComponent(maxKeyDeliver)}#validador`));
 
   const orderAfter = await reqJson(`/api/superbad/orders/${orderId}?order_secret=${encodeURIComponent(orderSecret)}`);
   assert.equal(orderAfter.status, 200);
@@ -621,13 +637,18 @@ test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/publ
     ["/install-infiniteclaude.sh", "/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz"],
     ["/install-mac.sh?app=openinfinite", 'TARGET_APP="${INFINITE_APP:-openinfinite}"'],
     ["/install-win.ps1?app=infiniteclaude", "$TargetApp = if ($env:INFINITE_APP) { $env:INFINITE_APP.ToLower() } else { 'infiniteclaude' }"],
-    ["/openinfinite/", "IC6-MAX"],
+    ["/openinfinite/", "INFINITE ZONE"],
+    ["/openinfinite/checkout/", "Raiane Leoncio"],
+    ["/openinfinite/checkout/", "IC6-MAX"],
   ]) {
     const res = await fetch(`http://127.0.0.1:${port}${p}`);
     const body = await res.text();
     assert.equal(res.status, 200, `Expected 200 for ${p}, got ${res.status}`);
     assert.ok(body.includes(expected), `Expected ${expected} in ${p}`);
   }
+  const checkinRedir = await fetch(`http://127.0.0.1:${port}/openinfinite/checkin?plan=infinite_pro`, { redirect: "manual" });
+  assert.equal(checkinRedir.status, 302);
+  assert.equal(checkinRedir.headers.get("location"), "/openinfinite/checkout/?plan=infinite_pro");
   for (const dl of [
     "/downloads/SHA256SUMS.txt",
     "/downloads/OpenInfinite-Client-Setup.exe",

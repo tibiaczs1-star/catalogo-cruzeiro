@@ -46,7 +46,7 @@ function criarVendaBadclaude({ dataDir, sendJson, parseBody, qrcode, isAdmin }) 
 
   const pixChave = String(process.env.BADCLAUDE_PIX_KEY || process.env.SUPERBAD_PIX_KEY || "+5568992269296").trim();
   const pixDisplay = String(process.env.SUPERBAD_PIX_DISPLAY_KEY || "68 99226-9296").trim();
-  const pixNome = String(process.env.BADCLAUDE_PIX_NAME || process.env.SUPERBAD_PIX_RECIPIENT || "Raiane Lenoncio").toUpperCase().slice(0, 25);
+  const pixNome = String(process.env.BADCLAUDE_PIX_NAME || process.env.SUPERBAD_PIX_RECIPIENT || "Raiane Leoncio").toUpperCase().slice(0, 25);
   const pixCidade = String(process.env.BADCLAUDE_PIX_CITY || process.env.SUPERBAD_PIX_CITY || "CRUZEIRO DO SUL").toUpperCase().slice(0, 15);
   const whatsapp = String(process.env.BADCLAUDE_WHATSAPP || process.env.SUPERBAD_WHATSAPP || "5568992269296").replace(/\D/g, "");
   const emailAviso = String(process.env.BADCLAUDE_EMAIL || "");

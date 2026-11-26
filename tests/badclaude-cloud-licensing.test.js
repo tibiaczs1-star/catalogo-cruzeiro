@@ -91,7 +91,7 @@ describe("BadClaude Cloud Licensing, PIX 68 99226-9296 & Dashboard Control Sync"
       const ordJson = await ordRes.json();
       assert.equal(ordJson.order.amount_centavos, 69000);
       assert.equal(ordJson.order.pix.key, "68 99226-9296");
-      assert.equal(ordJson.order.pix.recipient, "Raiane Lenoncio");
+      assert.equal(ordJson.order.pix.recipient, "Raiane Leoncio");
 
       // 2. Dashboard Control registers local-signed Ed25519 Founder key using Owner-Proof (no private key sent!)
       const founderKey = signLicense({ tier: "founder", tierCode: "FND", days: 30, label: "Fundador 1" }, privateKey);

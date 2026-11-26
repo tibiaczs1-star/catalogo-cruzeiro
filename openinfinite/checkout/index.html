@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Zone · Check-in, Pagamento PIX e Validação de Chave</title>
+  <meta name="description" content="Check-in oficial Infinite Zone (OpenInfinite & InfiniteClaude). Pagamento PIX 68 99226-9296 (Raiane Leoncio), anexo de comprovante ao pedido, confirmação via WhatsApp e validador de chave.">
+  <style>
+    :root {
+      --bg: #070709;
+      --surface: #0d0e13;
+      --surface-elevated: #14161e;
+      --surface-soft: rgba(255, 255, 255, 0.04);
+      --surface-hover: rgba(255, 255, 255, 0.08);
+      --prismatic-gradient: linear-gradient(90deg, #00B4FF 0%, #5B2EFF 25%, #FF00B8 50%, #FF7A00 75%, #19FF00 100%);
+      --border: rgba(255, 255, 255, 0.11);
+      --border-hi: rgba(255, 255, 255, 0.28);
+      --ink: #ffffff;
+      --ink-secondary: #e2e6f0;
+      --silver: #d4d9e3;
+      --muted: #a6aebe;
+      --emerald: #10b981;
+      --emerald-ink: #6ee7b7;
+      --emerald-bg: #09261d;
+      --amber: #fbbf24;
+      --amber-bg: rgba(245, 158, 11, 0.14);
+      --danger: #fb7185;
+      --danger-bg: rgba(244, 63, 94, 0.13);
+      --danger-border: rgba(251, 113, 133, 0.48);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable", "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+      --focus-ring: 2px solid #00B4FF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .skip-link {
+      position: fixed; top: -100px; left: 16px; z-index: 1200;
+      padding: 10px 16px; border-radius: var(--radius-sm);
+      background: #ffffff; color: #070709; font-weight: 800; text-decoration: none;
+    }
+    .skip-link:focus { top: 14px; outline: var(--focus-ring); outline-offset: 2px; }
+    :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+    a { color: inherit; }
+    #checkout, #validador, #licenca { scroll-margin-top: 86px; }
+
+    /* DOCKED SINGLE-ROW HEADER */
+    .topbar {
+      position: sticky; top: 0; z-index: 900; width: 100%;
+      background: rgba(7, 7, 9, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .topbar::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
+      background: var(--prismatic-gradient); opacity: 0.78; pointer-events: none;
+    }
+    .topbar-inner {
+      max-width: 1180px; margin: 0 auto; padding: 10px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: nowrap;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .brand-mark { width: 32px; height: 32px; display: block; flex-shrink: 0; }
+    .brand-lockup { display: flex; flex-direction: column; line-height: 1.05; white-space: nowrap; }
+    .brand-wordmark { font-weight: 900; font-size: 13.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #ffffff; }
+    .brand-lab { font-size: 8.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+    .nav-link {
+      text-decoration: none; font-size: 13px; font-weight: 600; color: var(--muted);
+      padding: 6px 11px; border-radius: var(--radius-sm); white-space: nowrap; flex-shrink: 0;
+    }
+    .nav-link:hover { color: var(--ink); background: var(--surface-hover); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; white-space: nowrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font); font-weight: 700; font-size: 13px; padding: 10px 18px;
+      border-radius: var(--radius-md); cursor: pointer; text-decoration: none;
+      border: 1px solid var(--border-hi);
+      background: var(--surface-elevated); color: var(--ink);
+    }
+    .btn:hover:not(:disabled) { background: #1e212d; border-color: rgba(255, 255, 255, 0.45); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn.ivory { background: #ffffff; color: #070709; border-color: #ffffff; }
+    .btn.ivory:hover:not(:disabled) { background: #eef2f7; }
+    .btn.silver { background: linear-gradient(180deg, #f4f6fa 0%, #d5dae5 100%); color: #070709; border-color: #ffffff; }
+    .btn.emerald { background: var(--emerald-bg); border-color: rgba(16, 185, 129, 0.62); color: var(--emerald-ink); }
+    .btn.emerald:hover:not(:disabled) { background: #0e382b; }
+    .btn.ghost { background: transparent; border-color: var(--border); color: var(--silver); }
+    .btn.ghost:hover:not(:disabled) { color: #ffffff; background: var(--surface-hover); }
+    .btn.pill { border-radius: var(--radius-pill); }
+    .btn.sm { padding: 7px 13px; font-size: 12px; border-radius: var(--radius-sm); }
+
+    .wrap {
+      max-width: 1180px; margin: 0 auto; padding: 36px 20px 80px;
+      display: flex; flex-direction: column; gap: 28px;
+    }
+    .page-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+      padding: 20px 24px; border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--border);
+    }
+    .page-head h1 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
+    .page-head p { color: var(--ink-secondary); font-size: 13.5px; max-width: 64ch; }
+    .rule-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .rule-chip {
+      font-family: var(--mono); font-size: 11px; font-weight: 700; padding: 4px 10px;
+      border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--silver);
+    }
+
+    .dual-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 20px; align-items: start; }
+    .panel {
+      position: relative; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 15px; min-width: 0;
+      overflow: hidden;
+    }
+    .panel::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: var(--prismatic-gradient); opacity: 0.85; pointer-events: none;
+    }
+
+    .checkout-step {
+      background: #070709; border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 16px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .checkout-step.google-auth-spotlight { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.28); }
+    .step-badge-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .step-tag {
+      font-family: var(--mono); font-size: 10.5px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase;
+      color: #ffffff; padding: 2px 9px; border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .checkout-step h2 { font-size: 15.5px; font-weight: 700; color: var(--ink); }
+
+    .google-user-pill {
+      display: none; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+      padding: 10px 12px; border-radius: 10px; background: rgba(16, 185, 129, 0.09); border: 1px solid rgba(16, 185, 129, 0.38);
+    }
+    .google-user-pill.is-visible { display: flex; }
+    .google-user-meta { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .google-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-hi); flex-shrink: 0; }
+    .google-initial {
+      width: 34px; height: 34px; border-radius: 50%; background: #ffffff; color: #070709;
+      display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0;
+    }
+
+    .pix-card {
+      background: #0a0b10; border: 1px solid var(--border-hi); border-radius: 10px;
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; font-size: 13px;
+    }
+    .pix-actions-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .inline-feedback { font-size: 12px; font-weight: 600; color: var(--emerald-ink); min-height: 18px; }
+    .plan-hint-box {
+      padding: 9px 12px; border-radius: 9px; font-size: 12.5px; line-height: 1.45;
+      background: rgba(255, 255, 255, 0.035); border: 1px solid var(--border); color: var(--ink-secondary);
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+    .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="file"], select {
+      width: 100%; padding: 10px 12px; background: #050507; color: var(--ink);
+      border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13.5px;
+    }
+    input[type="file"] { padding: 8px 10px; font-size: 12.5px; color: var(--silver); cursor: pointer; }
+    input:focus, select:focus { border-color: #00B4FF; outline: none; box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.22); }
+    input[aria-invalid="true"] { border-color: var(--danger); }
+
+    .result-box {
+      background: #050507; border: 1px solid var(--border-hi); border-radius: 10px;
+      padding: 14px; font-size: 13px; display: none; flex-direction: column; gap: 10px;
+    }
+    .result-box.is-visible { display: flex; }
+    .result-box.is-error { border-color: var(--danger-border); background: var(--danger-bg); }
+    .result-box.is-success { border-color: rgba(16, 185, 129, 0.48); }
+    .result-box.is-warn { border-color: rgba(245, 158, 11, 0.48); background: var(--amber-bg); }
+
+    .analysis-stage-card {
+      display: none; flex-direction: column; gap: 12px;
+      border-color: rgba(245, 158, 11, 0.48);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(7, 7, 9, 0.96));
+    }
+    .analysis-stage-card.is-visible { display: flex; }
+    .sla-wait-box {
+      padding: 12px 14px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.035); border: 1px solid var(--border);
+      font-size: 13px; color: var(--ink-secondary);
+    }
+    .delivered-key-card {
+      padding: 15px; border-radius: 10px;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.58);
+      display: none; flex-direction: column; gap: 10px;
+    }
+    .delivered-key-card.is-visible { display: flex; }
+    .brand-ver {
+      font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink-secondary);
+      padding: 2px 9px; border-radius: var(--radius-pill); border: 1px solid var(--border-hi); background: var(--surface-soft);
+    }
+
+    @media (max-width: 960px) {
+      .dual-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .topbar-inner { flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
+      .brand-lab { display: none; }
+      .nav-links { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .wrap { padding: 24px 14px 64px; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="izPrismaticGrad" x1="16%" y1="50%" x2="84%" y2="50%">
+        <stop offset="0%" stop-color="#00B4FF" />
+        <stop offset="25%" stop-color="#5B2EFF" />
+        <stop offset="50%" stop-color="#FF00B8" />
+        <stop offset="75%" stop-color="#FF7A00" />
+        <stop offset="100%" stop-color="#19FF00" />
+      </linearGradient>
+      <symbol id="izHoodMark" viewBox="0 0 120 120">
+        <path fill="#FFFFFF" d="M60 11 C67 11 86 24 106 66 C94 52 78 36 60 36 C42 36 26 52 14 66 C34 24 53 11 60 11 Z" />
+        <path fill="#FFFFFF" d="M24 75 C36 78 48 84 60 93 C72 84 84 78 96 75 C90 85 77 96 60 107 C48 99 39 92 35 88 L41 88 L28 80 Z" />
+        <path fill="#FFFFFF" d="M89 87 L97 82 L75 104 L68 107 Z" opacity="0.92" />
+        <path fill="none" stroke="url(#izPrismaticGrad)" stroke-width="6.8" stroke-linecap="round" stroke-linejoin="round"
+              d="M60 60 C52 50 35 50 35 60 C35 70 52 70 60 60 C68 50 85 50 85 60 C85 70 68 70 60 60 Z" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <a href="#checkout" class="skip-link">Pular para o Check-in PIX</a>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a href="/openinfinite/" class="brand" aria-label="Voltar para Infinite Zone">
+        <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
+        <span class="brand-lockup">
+          <span class="brand-wordmark">INFINITE ZONE</span>
+          <span class="brand-lab">CHECK-IN &amp; ATIVAÇÃO</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Navegação Check-in">
+        <a href="/openinfinite/" class="nav-link">← Voltar ao site</a>
+        <a href="#checkout" class="nav-link">Check-in PIX</a>
+        <a href="#validador" class="nav-link">Validar Chave</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm pill">WhatsApp (68) 99226-9296</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="page-head">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <svg width="48" height="48" style="flex-shrink:0;" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
+        <div style="flex:1;min-width:240px;">
+          <h1>Check-in PIX e Ativação de Chave — Infinite Zone</h1>
+          <p>Gere seu pedido PIX para <strong>68 99226-9296 · Raiane Leoncio</strong>, anexe seu comprovante diretamente ao pedido e confirme via WhatsApp para liberação da chave.</p>
+          <div class="rule-chips">
+            <span class="rule-chip">Windows &amp; Mac normal: 1h grátis antes da chave</span>
+            <span class="rule-chip">Linux Ubuntu VPS: pedido pago obrigatório</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dual-grid">
+      <!-- CHECKOUT PIX + ANEXO DE COMPROVANTE + WHATSAPP -->
+      <div class="panel" id="checkout">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+          <h2 style="font-size:19px;font-weight:800;">Assinatura PIX em 4 Passos</h2>
+          <span class="brand-ver">68 99226-9296 · Raiane Leoncio</span>
+        </div>
+
+        <!-- PASSO 1: ENTRAR COM GOOGLE -->
+        <div class="checkout-step" id="step1Google" data-google-auth-card>
+          <div class="step-badge-row">
+            <span class="step-tag">Passo 1 · Conta Google</span>
+            <span class="mono" style="font-size:11px;color:var(--silver);" id="step1StateTag">Identificação do e-mail</span>
+          </div>
+          <h2>Entre com Google para vincular seu pedido</h2>
+          <p style="font-size:12.5px;color:var(--muted);">
+            Seu login Google garante que a chave fique vinculada ao e-mail certo e permite restaurar o pedido automaticamente se você recarregar a página.
+          </p>
+          <div style="display:none;" aria-hidden="true">
+            <span data-google-auth-status></span>
+            <span data-google-auth-email></span>
+          </div>
+          <div data-google-auth-button id="googleAuthBtnHost" style="min-height:42px;"></div>
+
+          <div id="googleConnectedBox" class="google-user-pill" aria-live="polite">
+            <div class="google-user-meta">
+              <img id="googleUserAvatar" class="google-avatar" src="" alt="" referrerpolicy="no-referrer" style="display:none;" />
+              <span id="googleUserInitial" class="google-initial" aria-hidden="true">G</span>
+              <div style="min-width:0;">
+                <strong id="googleUserName" style="display:block;font-size:13px;">Conta conectada</strong>
+                <span id="googleUserEmail" class="mono" style="font-size:11.5px;color:var(--emerald-ink);word-break:break-all;">—</span>
+              </div>
+            </div>
+            <button type="button" data-google-auth-logout id="googleLogoutBtn" class="btn ghost sm" hidden>Sair</button>
+          </div>
+
+          <div id="googleFallbackNotice" style="display:none;font-size:12.5px;color:var(--amber);background:var(--amber-bg);border:1px solid rgba(245,158,11,0.38);padding:9px 12px;border-radius:9px;">
+            Preencha seu e-mail Gmail válido abaixo no Passo 2 para vincular o recebimento da chave.
+          </div>
+          <div id="myOrdersRestoreNote" style="display:none;font-size:12px;color:var(--emerald-ink);"></div>
+        </div>
+
+        <!-- PASSO 2: ESCOLHA DO PLANO, WHATSAPP DO CLIENTE E PIX OFICIAL -->
+        <div class="checkout-step" id="step2Pix">
+          <div class="step-badge-row">
+            <span class="step-tag">Passo 2 · Dados &amp; PIX Oficial</span>
+            <span class="mono" style="font-size:11px;color:var(--silver);">68 99226-9296 · Raiane Leoncio</span>
+          </div>
+          <h2>Escolha o plano, informe seu WhatsApp e gere o PIX</h2>
+
+          <div class="pix-card">
+            <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX Infinite Zone</div>
+            <div style="color:var(--muted);">Chave Telefone: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Leoncio</strong></div>
+            <div class="pix-actions-row">
+              <button type="button" id="copyPixBtn" class="btn sm">Copiar Chave PIX (68 99226-9296)</button>
+              <span id="pixCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <form id="orderForm" novalidate>
+            <div class="field">
+              <label for="ordPlan">Plano Mensal (30 Dias)</label>
+              <select id="ordPlan">
+                <option value="infinite_max">InfiniteClaude Max — 5 Máq. (Win + Mac normal + Linux VPS) — R$ 249,00 / mês</option>
+                <option value="infinite_claude" selected>InfiniteClaude Pro — 3 Máq. (Win + Mac normal + Linux VPS) — R$ 199,00 / mês</option>
+                <option value="infinite_pro">OpenInfinite Pro — 2 Máq. (Win + Mac normal + Linux VPS) — R$ 159,00 / mês</option>
+                <option value="infinite">OpenInfinite Windows — 1 PC Windows (somente Windows) — R$ 99,00 / mês</option>
+              </select>
+            </div>
+            <div id="planPlatformHint" class="plan-hint-box" style="margin-bottom:10px;">
+              Inclui Windows, Mac (computador normal) e servidor Linux Ubuntu VPS.
+            </div>
+            <div class="field">
+              <label for="ordName">Seu Nome Completo</label>
+              <input id="ordName" type="text" required autocomplete="name" placeholder="Ex.: Maria Oliveira" />
+            </div>
+            <div class="field">
+              <label for="ordWhatsapp">Seu WhatsApp com DDD (para envio e confirmação)</label>
+              <input id="ordWhatsapp" type="tel" required autocomplete="tel" placeholder="Ex.: (68) 99999-9999" />
+            </div>
+            <div class="field">
+              <label for="ordContact">Seu E-mail Google para receber a chave</label>
+              <input id="ordContact" type="email" required autocomplete="email" placeholder="seuemail@gmail.com" />
+            </div>
+            <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">Gerar Pedido e QR Code PIX</button>
+          </form>
+
+          <div id="orderErrorBox" class="result-box is-error" role="alert" aria-live="assertive">
+            <strong style="color:var(--danger);" id="orderErrorHead">Não foi possível gerar o PIX</strong>
+            <span id="orderErrorMsg" style="color:var(--ink-secondary);">Verifique os dados informados.</span>
+            <div class="pix-actions-row">
+              <button type="button" id="retryOrderBtn" class="btn sm">↻ Tentar novamente</button>
+            </div>
+          </div>
+
+          <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
+              <span class="brand-ver" id="orderLiveStatusBadge">Aguardando comprovante</span>
+            </div>
+            <div class="mono" id="orderResultCode" style="background:#050507;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+            <div class="pix-actions-row">
+              <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
+              <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
+            <div id="orderPixQrWrap" style="text-align:center;"></div>
+          </div>
+        </div>
+
+        <!-- PASSO 3: ANEXAR COMPROVANTE AO PEDIDO -->
+        <div class="checkout-step" id="step3Receipt">
+          <div class="step-badge-row">
+            <span class="step-tag">Passo 3 · Anexar Comprovante</span>
+            <span class="mono" style="font-size:11px;color:var(--silver);" id="receiptOrderTargetTag">Gere o pedido acima primeiro</span>
+          </div>
+          <h2>Anexe a imagem ou PDF do comprovante no pedido</h2>
+          <p style="font-size:12.5px;color:var(--muted);">
+            O comprovante fica salvo e vinculado ao seu pedido para conferência segura. Após anexar, clique no botão do WhatsApp para confirmação e ativação da chave.
+          </p>
+          <form id="receiptForm" novalidate>
+            <div class="field" style="margin-bottom:8px;">
+              <label for="receiptFileInput">Comprovante PIX (PNG, JPG, WebP ou PDF · até 3 MB)</label>
+              <input id="receiptFileInput" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" />
+              <span id="receiptFilePreviewName" class="mono" style="font-size:11.5px;color:var(--silver);">Nenhum arquivo selecionado</span>
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label for="receiptE2eInput">Código E2E do PIX (opcional)</label>
+              <input id="receiptE2eInput" type="text" class="mono" placeholder="Ex.: E182361202026..." autocomplete="off" />
+            </div>
+            <div class="field" style="margin-bottom:10px;">
+              <label for="receiptNoteInput">Observação (opcional)</label>
+              <input id="receiptNoteInput" type="text" placeholder="Ex.: Pago via Nubank" />
+            </div>
+            <button type="submit" id="receiptSubmitBtn" class="btn silver" style="width:100%;">Anexar Comprovante ao Meu Pedido</button>
+          </form>
+          <div id="receiptFeedbackBox" class="result-box" role="status" aria-live="polite"></div>
+        </div>
+
+        <!-- PASSO 4: COMPROVANTE ANEXADO + CONFIRMAÇÃO WHATSAPP -->
+        <div class="checkout-step analysis-stage-card" id="step4Analysis" role="region" aria-label="Confirmação e andamento do pedido">
+          <div class="step-badge-row">
+            <span class="step-tag" style="color:var(--amber);border-color:rgba(245,158,11,0.45);background:var(--amber-bg);">Passo 4 · Comprovante Anexado</span>
+            <span class="mono" style="font-size:11px;color:var(--amber);" id="step4SlaBadge">Conferência via WhatsApp ou até 1h</span>
+          </div>
+          <h3>Agora envie sua confirmação no WhatsApp (68 99226-9296)</h3>
+
+          <div style="background:#050507;border:1px solid var(--border);border-radius:9px;padding:11px 13px;font-size:12.5px;display:flex;flex-direction:column;gap:5px;">
+            <div><strong>Resumo do anexo:</strong> <span id="receiptAnalysisSummary" style="color:var(--ink-secondary);">Comprovante salvo no pedido.</span></div>
+            <div><strong>E-mail da chave:</strong> <span id="analysisTargetEmail" class="mono" style="color:var(--emerald-ink);">—</span></div>
+            <div><strong>Seu WhatsApp:</strong> <span id="analysisTargetWhatsapp" class="mono" style="color:var(--ink);">—</span></div>
+          </div>
+
+          <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald" style="width:100%;font-size:13.5px;">
+            📲 Falar no WhatsApp para Ativação Imediata (68 99226-9296)
+          </a>
+
+          <div class="sla-wait-box">
+            <strong>Ou aguarde até 1 hora:</strong> assim que confirmarmos o recebimento na chave PIX de Raiane Leoncio, sua chave será liberada aqui e enviada no seu e-mail.
+          </div>
+
+          <div class="pix-actions-row" style="justify-content:space-between;">
+            <button type="button" id="checkOrderNowBtn" class="btn ghost sm">↻ Conferir se já foi ativada</button>
+            <span class="mono" style="font-size:11px;color:var(--silver);" id="pollHintTxt">Atualização automática ativa</span>
+          </div>
+        </div>
+
+        <!-- CHAVE LIBERADA -->
+        <div id="deliveredKeyBox" class="delivered-key-card" role="region" aria-label="Chave de licença ativada">
+          <strong style="color:var(--emerald-ink);font-size:14.5px;">🎉 Pedido ativado! Sua chave oficial Infinite Zone está pronta:</strong>
+          <div class="mono" id="deliveredKeyValue" style="background:#050507;padding:10px;border:1px solid rgba(16,185,129,0.5);border-radius:8px;word-break:break-all;font-size:12.5px;color:#fff;font-weight:700;">—</div>
+          <div class="pix-actions-row">
+            <button type="button" id="copyDeliveredKeyBtn" class="btn ivory sm">Copiar Minha Chave</button>
+            <button type="button" id="testDeliveredKeyBtn" class="btn emerald sm">Testar Chave no Validador</button>
+            <span id="deliveredKeyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VALIDADOR DE CHAVE (#validador + #licenca + ?test_key=...) -->
+      <div class="panel" id="validador">
+        <span id="licenca" aria-hidden="true" style="position:absolute;top:0;"></span>
+        <h2 style="font-size:19px;font-weight:800;">Validador de Chave Online</h2>
+        <p style="font-size:13.5px;color:var(--ink-secondary);">
+          Cole sua chave do <strong>OpenInfinite</strong> (<code class="mono">OI6-...</code>) ou do <strong>InfiniteClaude</strong> (<code class="mono">IC6-...</code>) para conferir se está ativa antes de colar no programa.
+        </p>
+        <div class="plan-hint-box">
+          <strong>Lembrete:</strong> no Windows e Mac normal você usa 1h grátis antes de inserir a chave. No Linux Ubuntu VPS, cole sua chave paga imediatamente ao abrir o terminal ou rodar <code class="mono">--activate SUA-CHAVE</code>.
+        </div>
+        <form id="verifyForm" novalidate>
+          <div class="field">
+            <label for="verifyKeyInput">Sua Chave Recebida</label>
+            <input id="verifyKeyInput" type="text" class="mono" placeholder="IC6-PRO-... · IC6-MAX-... · OI6-PRO-... · OI6-INF-..." required autocomplete="off" spellcheck="false" />
+          </div>
+          <button type="submit" id="verifySubmitBtn" class="btn ivory" style="width:100%;">Conferir Chave Online</button>
+        </form>
+        <div id="licResultBox" class="result-box" role="status" aria-live="polite"></div>
+
+        <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
+          Trocou de PC, Mac ou servidor VPS e precisa liberar a trava para o novo aparelho?
+          <br><a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn ghost sm" style="margin-top:8px;">Falar no WhatsApp (68) 99226-9296</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/site-google-auth.js"></script>
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const ORDER_STORAGE_KEY = 'openinfinite_active_order_v1';
+      const ALLOWED_RECEIPT_MIMES = new Set(['image/png', 'image/jpeg', 'image/webp', 'application/pdf']);
+      const MAX_RECEIPT_BYTES = 3 * 1024 * 1024;
+
+      let lastBrcode = '';
+      let activeOrder = null;
+      let orderPollTimer = null;
+      let googleAuthState = { enabled: false, signedIn: false, user: null, checked: false };
+
+      const PLAN_HINTS = {
+        infinite: 'Válido somente para 1 PC Windows (não inclui macOS nem Linux Ubuntu VPS).',
+        infinite_pro: 'OpenInfinite Pro: libera Windows, Mac (computador normal) e servidor Linux Ubuntu VPS (até 2 máquinas).',
+        infinite_claude: 'InfiniteClaude Pro: libera Windows, Mac (computador normal), Linux Ubuntu VPS e Claude Code (até 3 máquinas).',
+        infinite_max: 'InfiniteClaude Max: libera Windows, Mac (computador normal), Linux Ubuntu VPS e Multi-CLI total (até 5 máquinas).',
+      };
+
+      function updatePlanHint() {
+        const val = $('ordPlan').value;
+        $('planPlatformHint').textContent = PLAN_HINTS[val] || PLAN_HINTS.infinite_claude;
+      }
+      $('ordPlan').addEventListener('change', updatePlanHint);
+
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const requestedPlan = (params.get('plan') || '').trim().toLowerCase();
+        if (PLAN_HINTS[requestedPlan]) $('ordPlan').value = requestedPlan;
+      } catch (_e) {}
+      updatePlanHint();
+
+      async function copyTextSafely(text) {
+        if (navigator.clipboard && window.isSecureContext !== false) {
+          try { await navigator.clipboard.writeText(text); return true; } catch (_e) {}
+        }
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch (_e2) {
+          return false;
+        }
+      }
+
+      function showInlineCopyState(btn, feedbackEl, defaultLabel, copiedMsg) {
+        if (feedbackEl) feedbackEl.textContent = copiedMsg;
+        if (btn) {
+          btn.textContent = '✓ Copiado!';
+          clearTimeout(btn._copyTimer);
+          btn._copyTimer = setTimeout(() => { btn.textContent = defaultLabel; }, 2200);
+        }
+      }
+
+      $('copyPixBtn').addEventListener('click', async () => {
+        const ok = await copyTextSafely('68 99226-9296');
+        showInlineCopyState(
+          $('copyPixBtn'),
+          $('pixCopyFeedback'),
+          'Copiar Chave PIX (68 99226-9296)',
+          ok ? 'Chave PIX 68 99226-9296 (Raiane Leoncio) copiada!' : 'Chave: 68 99226-9296 (copie manualmente)'
+        );
+      });
+
+      $('copyBrcodeBtn').addEventListener('click', async () => {
+        const code = lastBrcode || '68 99226-9296';
+        const ok = await copyTextSafely(code);
+        showInlineCopyState(
+          $('copyBrcodeBtn'),
+          $('brcodeCopyFeedback'),
+          'Copiar PIX Copia e Cola',
+          ok ? 'Código PIX Copia e Cola copiado!' : 'Selecione o código acima para copiar.'
+        );
+      });
+
+      $('receiptFileInput').addEventListener('change', () => {
+        const f = $('receiptFileInput').files && $('receiptFileInput').files[0];
+        $('receiptFilePreviewName').textContent = f
+          ? `Arquivo selecionado: ${f.name} (${(f.size / 1024).toFixed(1)} KB)`
+          : 'Nenhum arquivo selecionado';
+      });
+
+      const STATUS_LABELS = {
+        pending_pix: 'Aguardando pagamento PIX',
+        awaiting_receipt: 'Aguardando envio do comprovante',
+        receipt_submitted: 'Comprovante anexado · chame no WhatsApp ou aguarde até 1h',
+        approved: 'Ativado · Chave enviada por e-mail!',
+        delivered: 'Chave ativa e enviada por e-mail!',
+      };
+
+      function buildFallbackWhatsAppUrl(ord) {
+        const id = ord?.order_id || 'NOVO';
+        const email = ord?.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || '';
+        const wa = ord?.buyer_whatsapp || $('ordWhatsapp').value.trim() || '';
+        const planVal = $('ordPlan').value;
+        const fallbackAmt = planVal === 'infinite' ? 'R$ 99,00' : planVal === 'infinite_pro' ? 'R$ 159,00' : planVal === 'infinite_max' ? 'R$ 249,00' : 'R$ 199,00';
+        const amt = ord?.amount_display || fallbackAmt;
+        const msg = `Olá! Anexei o comprovante PIX do pedido ${id} (${amt}) no site Infinite Zone.${email ? ' E-mail: ' + email + '.' : ''}${wa ? ' WhatsApp: ' + wa + '.' : ''} Pode confirmar para liberar minha chave?`;
+        return `https://wa.me/5568992269296?text=${encodeURIComponent(msg)}`;
+      }
+
+      function saveActiveOrder(ord) {
+        activeOrder = ord;
+        try {
+          if (ord) sessionStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(ord));
+          else sessionStorage.removeItem(ORDER_STORAGE_KEY);
+        } catch (_e) {}
+      }
+
+      function isKeyUnlockedStatus(st, key) {
+        return (st === 'approved' || st === 'delivered') && Boolean(key && String(key).trim());
+      }
+
+      function syncAnalysisAndDeliveryUI(ord) {
+        if (!ord) return;
+        const st = String(ord.status || 'pending_pix');
+        $('orderLiveStatusBadge').textContent = STATUS_LABELS[st] || st;
+        $('receiptOrderTargetTag').textContent = `Pedido vinculado: ${ord.order_id}`;
+
+        const targetEmail = ord.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || 'seu e-mail cadastrado';
+        const targetWa = ord.buyer_whatsapp || $('ordWhatsapp').value.trim() || 'informado no WhatsApp';
+        $('analysisTargetEmail').textContent = targetEmail;
+        $('analysisTargetWhatsapp').textContent = targetWa;
+
+        const analysis = ord.receipt_analysis;
+        if (analysis && analysis.summary_pt) {
+          $('receiptAnalysisSummary').textContent = analysis.summary_pt;
+          $('receiptAnalysisSummary').style.color = analysis.is_duplicate ? 'var(--amber)' : 'var(--ink-secondary)';
+        }
+
+        $('btnWhatsOrder').href = ord.whatsapp_immediate_url || ord.whatsapp_url || buildFallbackWhatsAppUrl(ord);
+
+        if (st === 'receipt_submitted') {
+          $('step4Analysis').classList.add('is-visible');
+          $('deliveredKeyBox').classList.remove('is-visible');
+          $('deliveredKeyValue').textContent = '—';
+        } else if (isKeyUnlockedStatus(st, ord.license_key)) {
+          $('step4Analysis').classList.remove('is-visible');
+          $('deliveredKeyValue').textContent = ord.license_key;
+          $('deliveredKeyBox').classList.add('is-visible');
+          $('orderLiveStatusBadge').style.color = 'var(--emerald-ink)';
+          $('orderLiveStatusBadge').style.borderColor = 'rgba(16,185,129,0.5)';
+          if (orderPollTimer) { clearInterval(orderPollTimer); orderPollTimer = null; }
+        } else {
+          $('step4Analysis').classList.remove('is-visible');
+          $('deliveredKeyBox').classList.remove('is-visible');
+          $('deliveredKeyValue').textContent = '—';
+        }
+      }
+
+      function hydrateOrderUI(o) {
+        if (!o || !o.order_id) return;
+        lastBrcode = o.brcode || o.pix?.brcode || '68 99226-9296';
+        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display || ''}) gerado!`;
+        $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
+        $('brcodeCopyFeedback').textContent = '';
+
+        if (o.buyer_whatsapp && !$('ordWhatsapp').value.trim()) $('ordWhatsapp').value = o.buyer_whatsapp;
+
+        const qrWrap = $('orderPixQrWrap');
+        qrWrap.textContent = '';
+        const qrUrl = o.qr_data_url || o.pix?.qr_data_url;
+        if (qrUrl) {
+          const img = document.createElement('img');
+          img.src = qrUrl;
+          img.alt = `QR Code PIX para o pedido ${o.order_id}`;
+          img.style.cssText = 'width:168px;height:168px;border-radius:10px;background:#fff;padding:6px;';
+          qrWrap.appendChild(img);
+        }
+        $('orderResultBox').classList.add('is-visible');
+        syncAnalysisAndDeliveryUI(o);
+
+        if (!isKeyUnlockedStatus(o.status, o.license_key)) {
+          startOrderPolling();
+        }
+      }
+
+      async function syncMyGoogleOrders() {
+        try {
+          const res = await fetch('/api/superbad/my-orders', {
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' },
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !Array.isArray(data.orders) || data.orders.length === 0) return;
+
+          const latest = data.orders[0];
+          if (!latest || !latest.order_id) return;
+
+          const merged = {
+            ...(activeOrder && activeOrder.order_id === latest.order_id ? activeOrder : {}),
+            ...latest,
+            brcode: latest.pix?.brcode || activeOrder?.brcode || '68 99226-9296',
+            qr_data_url: latest.pix?.qr_data_url || activeOrder?.qr_data_url || '',
+          };
+          saveActiveOrder(merged);
+          hydrateOrderUI(merged);
+
+          const noteEl = $('myOrdersRestoreNote');
+          noteEl.style.display = 'block';
+          noteEl.textContent = `Pedido ${latest.order_id} vinculado à sua conta Google restaurado automaticamente.`;
+        } catch (_err) {}
+      }
+
+      function updateGoogleAuthUI(detail) {
+        const enabled = Boolean(detail?.enabled);
+        const user = detail?.user || null;
+        const signedIn = Boolean(user);
+        googleAuthState = { enabled, signedIn, user, checked: true };
+
+        const connectedBox = $('googleConnectedBox');
+        const fallbackNote = $('googleFallbackNotice');
+        const avatarImg = $('googleUserAvatar');
+        const initialBadge = $('googleUserInitial');
+        const logoutBtn = $('googleLogoutBtn');
+
+        if (signedIn && user) {
+          connectedBox.classList.add('is-visible');
+          fallbackNote.style.display = 'none';
+          logoutBtn.hidden = false;
+          $('step1StateTag').textContent = 'Conectado via Google';
+          $('step1StateTag').style.color = 'var(--emerald-ink)';
+          $('googleUserName').textContent = user.name || 'Conta Google Verificada';
+          $('googleUserEmail').textContent = user.email || '';
+
+          if (user.picture) {
+            avatarImg.src = user.picture;
+            avatarImg.style.display = 'block';
+            initialBadge.style.display = 'none';
+          } else {
+            avatarImg.style.display = 'none';
+            initialBadge.style.display = 'inline-flex';
+            initialBadge.textContent = String(user.name || user.email || 'G').trim().charAt(0).toUpperCase();
+          }
+
+          if (user.name && !$('ordName').value.trim()) $('ordName').value = user.name;
+          if (user.email) $('ordContact').value = user.email;
+          void syncMyGoogleOrders();
+        } else {
+          connectedBox.classList.remove('is-visible');
+          logoutBtn.hidden = true;
+          $('myOrdersRestoreNote').style.display = 'none';
+          if (enabled) {
+            $('step1StateTag').textContent = 'Login Google obrigatório';
+            $('step1StateTag').style.color = 'var(--amber)';
+            fallbackNote.style.display = 'none';
+          } else {
+            $('step1StateTag').textContent = 'Confirmação direta de Gmail';
+            $('step1StateTag').style.color = 'var(--silver)';
+            fallbackNote.style.display = 'block';
+          }
+        }
+      }
+
+      window.addEventListener('catalogo:google-auth', (ev) => updateGoogleAuthUI(ev.detail || {}));
+
+      (async function initAuthCheck() {
+        if (window.CatalogoGoogleAuth && window.CatalogoGoogleAuth.isReady()) {
+          updateGoogleAuthUI({
+            enabled: window.CatalogoGoogleAuth.isEnabled(),
+            signedIn: window.CatalogoGoogleAuth.isSignedIn(),
+            user: window.CatalogoGoogleAuth.getUser(),
+          });
+          return;
+        }
+        try {
+          const [cfgRes, sesRes] = await Promise.all([
+            fetch('/api/auth/config', { credentials: 'same-origin', headers: { 'Accept': 'application/json' } }),
+            fetch('/api/auth/session', { credentials: 'same-origin', headers: { 'Accept': 'application/json' } }),
+          ]);
+          const cfg = await cfgRes.json().catch(() => ({}));
+          const ses = await sesRes.json().catch(() => ({}));
+          if (!googleAuthState.checked) {
+            updateGoogleAuthUI({
+              enabled: Boolean(cfg.enabled && cfg.clientId),
+              signedIn: Boolean(ses.user),
+              user: ses.user || null,
+            });
+          }
+        } catch (_e) {
+          if (!googleAuthState.checked) updateGoogleAuthUI({ enabled: false, signedIn: false, user: null });
+        }
+      })();
+
+      $('copyDeliveredKeyBtn').addEventListener('click', async () => {
+        const k = $('deliveredKeyValue').textContent.trim();
+        if (!k || k === '—') return;
+        const ok = await copyTextSafely(k);
+        showInlineCopyState($('copyDeliveredKeyBtn'), $('deliveredKeyFeedback'), 'Copiar Minha Chave', ok ? 'Chave copiada!' : 'Copie a chave acima.');
+      });
+
+      $('testDeliveredKeyBtn').addEventListener('click', () => {
+        const k = $('deliveredKeyValue').textContent.trim();
+        if (!k || k === '—') return;
+        $('verifyKeyInput').value = k;
+        $('validador')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+        submitVerify();
+      });
+
+      async function pollOrderStatus(manualFeedback) {
+        if (!activeOrder || !activeOrder.order_id) return;
+        try {
+          if (!activeOrder.order_secret && googleAuthState.signedIn) { await syncMyGoogleOrders(); return; }
+          if (!activeOrder.order_secret) return;
+          const url = `/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}?order_secret=${encodeURIComponent(activeOrder.order_secret)}`;
+          const res = await fetch(url, { credentials: 'same-origin', headers: { 'Accept': 'application/json', 'x-order-secret': activeOrder.order_secret } });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !data.order) return;
+          activeOrder = { ...activeOrder, ...data.order };
+          saveActiveOrder(activeOrder);
+          syncAnalysisAndDeliveryUI(activeOrder);
+          if (!isKeyUnlockedStatus(data.order.status, data.order.license_key) && manualFeedback) {
+            $('pollHintTxt').textContent = 'Ainda aguardando ativação · chame no WhatsApp';
+          }
+        } catch (_err) {
+          if (manualFeedback) $('pollHintTxt').textContent = 'Oscilação de rede · tente novamente';
+        }
+      }
+
+      function startOrderPolling() {
+        if (orderPollTimer) clearInterval(orderPollTimer);
+        orderPollTimer = setInterval(() => {
+          if (document.visibilityState === 'visible' && activeOrder && !isKeyUnlockedStatus(activeOrder.status, activeOrder.license_key)) {
+            pollOrderStatus(false);
+          }
+        }, 8000);
+      }
+
+      $('checkOrderNowBtn').addEventListener('click', () => pollOrderStatus(true));
+
+      try {
+        const rawSaved = sessionStorage.getItem(ORDER_STORAGE_KEY);
+        if (rawSaved) {
+          const parsed = JSON.parse(rawSaved);
+          if (parsed && parsed.order_id) {
+            activeOrder = parsed;
+            hydrateOrderUI(parsed);
+            if (!isKeyUnlockedStatus(parsed.status, parsed.license_key)) pollOrderStatus(false);
+          }
+        }
+      } catch (_e) {}
+
+      function renderBoxMessage(box, variant, titleText, detailText, retryFn) {
+        box.textContent = '';
+        box.className = `result-box is-visible ${variant || ''}`.trim();
+        const strong = document.createElement('strong');
+        strong.textContent = titleText;
+        strong.style.color = variant === 'is-success' ? 'var(--emerald-ink)' : variant === 'is-warn' ? 'var(--amber)' : variant === 'is-error' ? 'var(--danger)' : 'var(--ink)';
+        box.appendChild(strong);
+        if (detailText) {
+          const span = document.createElement('span');
+          span.style.color = 'var(--ink-secondary)';
+          span.textContent = detailText;
+          box.appendChild(span);
+        }
+        if (typeof retryFn === 'function') {
+          const retryBtn = document.createElement('button');
+          retryBtn.type = 'button';
+          retryBtn.className = 'btn sm';
+          retryBtn.style.alignSelf = 'flex-start';
+          retryBtn.textContent = '↻ Tentar novamente';
+          retryBtn.addEventListener('click', retryFn);
+          box.appendChild(retryBtn);
+        }
+      }
+
+      async function submitOrder() {
+        const nameEl = $('ordName');
+        const waEl = $('ordWhatsapp');
+        const contactEl = $('ordContact');
+        const errBox = $('orderErrorBox');
+        const resBox = $('orderResultBox');
+        const submitBtn = $('orderSubmitBtn');
+
+        nameEl.setAttribute('aria-invalid', 'false');
+        waEl.setAttribute('aria-invalid', 'false');
+        contactEl.setAttribute('aria-invalid', 'false');
+        errBox.classList.remove('is-visible');
+
+        if (googleAuthState.enabled && !googleAuthState.signedIn) {
+          $('orderErrorHead').textContent = 'Entre com sua conta Google primeiro (Passo 1)';
+          $('orderErrorMsg').textContent = 'Conecte sua conta Google acima antes de gerar o QR Code PIX.';
+          errBox.classList.add('is-visible');
+          $('step1Google')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+          $('step1Google')?.classList.add('google-auth-spotlight');
+          setTimeout(() => $('step1Google')?.classList.remove('google-auth-spotlight'), 1800);
+          return;
+        }
+
+        const buyerName = (nameEl.value || googleAuthState.user?.name || '').trim();
+        const buyerWhatsapp = (waEl.value || '').trim();
+        const buyerWaDigits = buyerWhatsapp.replace(/\D/g, '');
+        const buyerEmail = (googleAuthState.user?.email || contactEl.value || '').trim();
+
+        if (!buyerName) {
+          nameEl.setAttribute('aria-invalid', 'true');
+          $('orderErrorHead').textContent = 'Nome obrigatório';
+          $('orderErrorMsg').textContent = 'Informe seu nome completo para gerar o PIX.';
+          errBox.classList.add('is-visible');
+          nameEl.focus();
+          return;
+        }
+        if (buyerWaDigits.length < 10) {
+          waEl.setAttribute('aria-invalid', 'true');
+          $('orderErrorHead').textContent = 'WhatsApp com DDD obrigatório';
+          $('orderErrorMsg').textContent = 'Informe seu WhatsApp (DDD + número) para vincular ao pedido e agilizar o atendimento.';
+          errBox.classList.add('is-visible');
+          waEl.focus();
+          return;
+        }
+        if (!buyerEmail || !buyerEmail.includes('@')) {
+          contactEl.setAttribute('aria-invalid', 'true');
+          $('orderErrorHead').textContent = 'E-mail válido obrigatório';
+          $('orderErrorMsg').textContent = 'Informe o Gmail ou e-mail que receberá sua chave.';
+          errBox.classList.add('is-visible');
+          contactEl.focus();
+          return;
+        }
+
+        if (navigator.onLine === false) {
+          $('orderErrorHead').textContent = 'Sem conexão com a internet';
+          $('orderErrorMsg').textContent = 'Reconecte e clique em tentar novamente.';
+          errBox.classList.add('is-visible');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Gerando PIX oficial...';
+
+        try {
+          const res = await fetch('/api/superbad/orders', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              buyer_name: buyerName,
+              buyer_email: buyerEmail,
+              buyer_whatsapp: buyerWhatsapp,
+              buyer_contact: buyerWhatsapp,
+              requested_edition: $('ordPlan').value
+            })
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !data.order) {
+            resBox.classList.remove('is-visible');
+            $('orderErrorHead').textContent = res.status === 401 ? 'Conta Google necessária' : 'Não foi possível gerar o pedido PIX';
+            $('orderErrorMsg').textContent = data.error || `Erro HTTP ${res.status}.`;
+            errBox.classList.add('is-visible');
+            return;
+          }
+
+          const o = data.order;
+          const stored = {
+            order_id: o.order_id,
+            order_secret: o.order_secret,
+            status: o.status || 'pending_pix',
+            amount_display: o.amount_display,
+            requested_edition: o.requested_edition,
+            buyer_email: o.buyer_email || buyerEmail,
+            buyer_whatsapp: o.buyer_whatsapp || buyerWhatsapp,
+            brcode: o.pix?.brcode || '68 99226-9296',
+            qr_data_url: o.pix?.qr_data_url || '',
+            whatsapp_url: o.whatsapp_url || '',
+            whatsapp_immediate_url: o.whatsapp_immediate_url || '',
+            license_key: null,
+          };
+          $('receiptFeedbackBox').classList.remove('is-visible');
+          saveActiveOrder(stored);
+          hydrateOrderUI(stored);
+          $('step3Receipt')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+        } catch (_err) {
+          resBox.classList.remove('is-visible');
+          $('orderErrorHead').textContent = 'Falha de conexão com o servidor';
+          $('orderErrorMsg').textContent = 'Seus dados foram mantidos. Tente novamente.';
+          errBox.classList.add('is-visible');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+          submitBtn.textContent = 'Gerar Pedido e QR Code PIX';
+        }
+      }
+
+      $('orderForm').addEventListener('submit', (ev) => { ev.preventDefault(); submitOrder(); });
+      $('retryOrderBtn').addEventListener('click', () => submitOrder());
+
+      function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const str = String(reader.result || '');
+            const idx = str.indexOf(',');
+            resolve(idx >= 0 ? str.slice(idx + 1) : str);
+          };
+          reader.onerror = () => reject(new Error('Falha ao ler arquivo local.'));
+          reader.readAsDataURL(file);
+        });
+      }
+
+      async function submitReceipt() {
+        const fb = $('receiptFeedbackBox');
+        const btn = $('receiptSubmitBtn');
+        if (!activeOrder || !activeOrder.order_id || !activeOrder.order_secret) {
+          renderBoxMessage(fb, 'is-error', 'Gere primeiro o pedido PIX no Passo 2', 'Preencha seus dados acima e gere o pedido antes de anexar o comprovante.', null);
+          return;
+        }
+
+        const file = $('receiptFileInput').files && $('receiptFileInput').files[0];
+        const e2eId = $('receiptE2eInput').value.trim();
+        const rawNote = $('receiptNoteInput').value.trim();
+        const waNow = $('ordWhatsapp').value.trim();
+
+        if (!file && !e2eId && !rawNote) {
+          renderBoxMessage(fb, 'is-error', 'Anexe o comprovante ou código E2E', 'Selecione a imagem/PDF do comprovante PIX ou cole o código E2E.', null);
+          return;
+        }
+        if (file) {
+          if (!ALLOWED_RECEIPT_MIMES.has(file.type)) {
+            renderBoxMessage(fb, 'is-error', 'Formato inválido', 'Envie PNG, JPEG, WebP ou PDF.', null);
+            return;
+          }
+          if (file.size > MAX_RECEIPT_BYTES) {
+            renderBoxMessage(fb, 'is-error', 'Arquivo maior que 3 MB', 'Envie um comprovante com até 3 MB.', null);
+            return;
+          }
+        }
+        if (navigator.onLine === false) {
+          renderBoxMessage(fb, 'is-error', 'Sem conexão', 'Reconecte e tente novamente.', submitReceipt);
+          return;
+        }
+
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
+        btn.textContent = 'Anexando comprovante ao pedido...';
+
+        try {
+          const payload = {
+            order_secret: activeOrder.order_secret,
+            receipt_note: rawNote || (e2eId ? `E2E: ${e2eId}` : `Arquivo: ${file.name}`),
+          };
+          if (waNow) payload.buyer_whatsapp = waNow;
+          if (e2eId) payload.e2e_id = e2eId;
+          if (file) {
+            payload.receipt_file_b64 = await readFileAsBase64(file);
+            payload.receipt_file_mime = file.type;
+            payload.receipt_file_name = file.name.slice(0, 120);
+          }
+
+          const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json', 'x-order-secret': activeOrder.order_secret },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            renderBoxMessage(fb, 'is-error', 'Comprovante não aceito', data.error || `Erro HTTP ${res.status}.`, submitReceipt);
+            return;
+          }
+
+          activeOrder = {
+            ...activeOrder,
+            status: data.status || 'receipt_submitted',
+            buyer_email: data.buyer_email || activeOrder.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim(),
+            buyer_whatsapp: data.buyer_whatsapp || activeOrder.buyer_whatsapp || waNow,
+            receipt_analysis: data.receipt_analysis || activeOrder.receipt_analysis || null,
+            whatsapp_immediate_url: data.whatsapp_immediate_url || activeOrder.whatsapp_immediate_url || '',
+            license_key: null,
+          };
+          saveActiveOrder(activeOrder);
+          syncAnalysisAndDeliveryUI(activeOrder);
+
+          renderBoxMessage(
+            fb,
+            'is-success',
+            `Comprovante anexado ao pedido ${activeOrder.order_id}!`,
+            data.message_pt || 'Agora clique no botão do WhatsApp abaixo para confirmar o pagamento e receber sua chave.',
+            null
+          );
+          $('step4Analysis')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+          startOrderPolling();
+        } catch (_err) {
+          renderBoxMessage(fb, 'is-error', 'Erro de rede ao enviar comprovante', 'Tente novamente.', submitReceipt);
+        } finally {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
+          btn.textContent = 'Anexar Comprovante ao Meu Pedido';
+        }
+      }
+
+      $('receiptForm').addEventListener('submit', (ev) => { ev.preventDefault(); submitReceipt(); });
+
+      const PLAN_LABELS_BY_EDITION = {
+        infinite_max: 'InfiniteClaude Max (5 Máq.)',
+        infinite_claude: 'InfiniteClaude Pro (3 Máq.)',
+        infinite: 'OpenInfinite Windows (1 PC)',
+        infinite_pro: 'OpenInfinite Pro (2 Máq. · Win/Mac/VPS)',
+        superbad: 'BadClaudio SuperBad',
+        founder: 'BadClaude Fundador',
+        mid: 'BadClaude Studio',
+        basic: 'BadClaude Básico',
+        beta: 'BadClaudio Beta',
+      };
+      const PLAN_LABELS_BY_TIER = {
+        'infinite-max': 'InfiniteClaude Max (5 Máq.)',
+        'infinite-claude-max': 'InfiniteClaude Max (5 Máq.)',
+        'infinite-claude': 'InfiniteClaude Pro (3 Máq.)',
+        'infinite-basic': 'OpenInfinite Windows (1 PC)',
+        'infinite-pro': 'OpenInfinite Pro (2 Máq.)',
+        founder: 'BadClaude Fundador',
+        'client-mid': 'BadClaude Studio / SuperBad',
+        'client-basic': 'BadClaude Básico',
+      };
+      function resolveCanonicalPlanName(d) {
+        const ed = String(d?.edition || '').trim().toLowerCase();
+        const tr = String(d?.tier || '').trim().toLowerCase();
+        return PLAN_LABELS_BY_EDITION[ed] || PLAN_LABELS_BY_TIER[tr] || d?.planLabel || d?.tier || 'Infinite Zone';
+      }
+
+      function renderLicenseMessage(variant, titleText, detailText, withRetry) {
+        const box = $('licResultBox');
+        box.textContent = '';
+        box.className = `result-box is-visible ${variant}`;
+        const strong = document.createElement('strong');
+        strong.textContent = titleText;
+        strong.style.color = variant === 'is-success' ? 'var(--emerald-ink)' : variant === 'is-warn' ? 'var(--amber)' : variant === 'is-error' ? 'var(--danger)' : 'var(--ink)';
+        box.appendChild(strong);
+        if (detailText) {
+          const span = document.createElement('span');
+          span.style.color = 'var(--ink-secondary)';
+          span.textContent = detailText;
+          box.appendChild(span);
+        }
+        if (withRetry) {
+          const retryBtn = document.createElement('button');
+          retryBtn.type = 'button';
+          retryBtn.id = 'retryVerifyBtn';
+          retryBtn.className = 'btn sm';
+          retryBtn.style.alignSelf = 'flex-start';
+          retryBtn.textContent = '↻ Tentar novamente';
+          retryBtn.addEventListener('click', () => submitVerify());
+          box.appendChild(retryBtn);
+        }
+      }
+
+      async function submitVerify() {
+        const keyInput = $('verifyKeyInput');
+        const submitBtn = $('verifySubmitBtn');
+        const keyVal = keyInput.value.trim();
+
+        keyInput.setAttribute('aria-invalid', 'false');
+        if (!keyVal) {
+          keyInput.setAttribute('aria-invalid', 'true');
+          renderLicenseMessage('is-error', 'Informe uma chave para validar', 'Cole sua chave do OpenInfinite ou InfiniteClaude.', false);
+          keyInput.focus();
+          return;
+        }
+        if (navigator.onLine === false) {
+          renderLicenseMessage('is-error', 'Sem conexão com a internet', 'Reconecte e tente novamente.', true);
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Conferindo chave...';
+        renderLicenseMessage('', 'Validando chave no servidor Infinite Zone...', '', false);
+
+        try {
+          const res = await fetch('/api/v1/licenses/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: keyVal, hwid: 'web-' + (navigator.platform || 'browser') })
+          });
+          const d = await res.json().catch(() => ({}));
+          if (res.ok && d.ok && d.includesOpenInfinite !== false) {
+            const msgTitle = d.includesInfiniteClaude
+              ? 'Chave Ativa — InfiniteClaude & OpenInfinite Liberados!'
+              : 'Chave Ativa — OpenInfinite Liberado!';
+            renderLicenseMessage(
+              'is-success',
+              msgTitle,
+              `Plano: ${resolveCanonicalPlanName(d)} · Válida por ${d.daysLeft} dias. Cole no aplicativo para ativar.`,
+              false
+            );
+          } else if (res.ok && d.ok && d.includesOpenInfinite === false) {
+            renderLicenseMessage(
+              'is-warn',
+              'Plano sem acesso ao OpenInfinite',
+              'Assine um plano OpenInfinite ou InfiniteClaude ao lado para ativar sua máquina.',
+              false
+            );
+          } else {
+            renderLicenseMessage(
+              'is-error',
+              d.error || 'Chave inválida ou ainda não ativada.',
+              'Confirme se seu comprovante já foi conferido via WhatsApp.',
+              false
+            );
+          }
+        } catch (_err) {
+          renderLicenseMessage('is-error', 'Falha de rede ao validar chave', 'Não foi possível conectar ao servidor.', true);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+          submitBtn.textContent = 'Conferir Chave Online';
+        }
+      }
+
+      $('verifyForm').addEventListener('submit', (ev) => { ev.preventDefault(); submitVerify(); });
+
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const testKey = (params.get('test_key') || '').trim();
+        if (testKey) {
+          $('verifyKeyInput').value = testKey;
+          setTimeout(() => {
+            $('validador')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+            submitVerify();
+          }, 120);
+        }
+      } catch (_e) {}
+    })();
+  </script>
+</body>
+</html>

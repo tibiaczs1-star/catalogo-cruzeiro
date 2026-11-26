@@ -7,7 +7,7 @@ const tls = require("node:tls");
 const DefaultQRCode = require("qrcode");
 
 const PIX_DISPLAY_KEY = "68 99226-9296";
-const PIX_RECIPIENT = "Raiane Lenoncio";
+const PIX_RECIPIENT = "Raiane Leoncio";
 const PIX_CITY = "CRUZEIRO DO SUL";
 const DEFAULT_PIX_EMV_KEY = "+5568992269296";
 const DEFAULT_WHATSAPP = "5568992269296";
@@ -148,7 +148,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 2,
     unlockedModes: ["essential", "cockpit-pro"],
     freeProvidersIncluded: ["infinite-gateway", "turbo-auto"],
-    summary: "OpenInfinite nativo macOS (Apple Silicon Liquid Glass) + Windows (até 2 computadores · 30 dias), Modo Turbo Auto completo e troca de linguagem.",
+    summary: "OpenInfinite para macOS (MacBook/iMac/Mac mini), Windows e Ubuntu Linux VPS (até 2 máquinas · 30 dias), com Hermes Agent.",
   },
   infinite_claude: {
     edition: "infinite_claude",
@@ -510,8 +510,8 @@ function analyzeReceiptSubmission({ order, attachment, e2eId, receiptNote, exist
     searchable.includes(expectedComma) || searchable.includes(expectedDot)
       ? order.amount_display
       : null;
-  const receiverHint = /raiane|lenoncio|99226[- ]?9296/i.test(searchable)
-    ? "Raiane Lenoncio"
+  const receiverHint = /raiane|le(?:n)?oncio|99226[- ]?9296/i.test(searchable)
+    ? "Raiane Leoncio"
     : null;
 
   let verdict = "note_pending_owner";
@@ -651,7 +651,7 @@ async function sendActivationEmail({
   const siteBase = String(
     publicSiteUrl || environment.SITE_URL || "https://catalogo-cruzeiro-web.onrender.com"
   ).replace(/\/+$/, "");
-  const testUrl = `${siteBase}/openinfinite/?test_key=${encodeURIComponent(licenseKey)}#validador`;
+  const testUrl = `${siteBase}/openinfinite/checkout/?test_key=${encodeURIComponent(licenseKey)}#validador`;
   const subject = `Sua Chave Oficial Ativada — ${editionLabel} (${orderId})`;
   const greeting = buyerName ? `Olá, ${buyerName}!` : "Olá!";
 
@@ -1125,7 +1125,7 @@ function buildPixBrCode({ pixKey, recipient, city, amountCentavos, txid, descrip
     emvField("53", "986"),
     emvField("54", amountStr),
     emvField("58", "BR"),
-    emvField("59", asciiClean(recipient, 25) || "RAIANE LENONCIO"),
+    emvField("59", asciiClean(recipient, 25) || "RAIANE LEONCIO"),
     emvField("60", asciiClean(city, 15) || "CRUZEIRO DO SUL"),
     emvField("62", emvField("05", cleanTxid)),
     "6304",
@@ -1483,8 +1483,9 @@ function createSuperbadSalesApi(options = {}) {
     const plan = EDITION_PLANS[order.requested_edition];
     const editionLabel = plan ? plan.label : order.requested_edition;
     const parts = [
-      `Olá! Enviei o comprovante do pedido ${order.order_id} (${editionLabel} · ${order.amount_display}) no site.`,
+      `Olá! Enviei o comprovante do pedido ${order.order_id} (${editionLabel} · ${order.amount_display}) no site Infinite Zone.`,
       order.buyer_email ? `Conta Google: ${order.buyer_email}.` : `Nome: ${order.buyer_name}.`,
+      order.buyer_whatsapp ? `Meu WhatsApp: ${order.buyer_whatsapp}.` : "",
       order.e2e_id ? `E2E: ${order.e2e_id}.` : "",
       "Pode verificar para ativação imediata da minha chave?",
     ].filter(Boolean);
@@ -1518,6 +1519,7 @@ function createSuperbadSalesApi(options = {}) {
       requested_edition: order.requested_edition,
       edition: order.edition || null,
       buyer_email: order.buyer_email || order.google_email || null,
+      buyer_whatsapp: order.buyer_whatsapp || null,
       google_name: order.google_name || null,
       sla_minutes: 60,
       receipt_note: order.receipt_note || "",
@@ -1542,7 +1544,9 @@ function createSuperbadSalesApi(options = {}) {
       edition: order.edition || null,
       buyer_name: order.buyer_name,
       buyer_contact: order.buyer_contact,
+      buyer_whatsapp: order.buyer_whatsapp || null,
       buyer_email: order.buyer_email || order.google_email || null,
+      buyer_whatsapp: order.buyer_whatsapp || null,
       google_name: order.google_name || null,
       google_picture: order.google_picture || null,
       payment_provider: order.payment_provider,
@@ -1945,7 +1949,12 @@ function createSuperbadSalesApi(options = {}) {
         const googleName = cleanText(authUser?.name || "", 120) || null;
         const googlePicture = cleanText(authUser?.picture || "", 360) || null;
         const bodyBuyerEmail = cleanEmailAddress(body.buyer_email || "");
+        const rawBuyerWhatsapp = cleanText(body.buyer_whatsapp || "", 40);
         const contactAsEmail = cleanEmailAddress(body.buyer_contact || "");
+        const contactDigits = String(body.buyer_contact || "").replace(/\D/g, "");
+        const fallbackWhatsapp =
+          !contactAsEmail && contactDigits.length >= 10 ? cleanText(body.buyer_contact || "", 40) : "";
+        const resolvedWhatsapp = rawBuyerWhatsapp || fallbackWhatsapp || null;
         const resolvedBuyerEmail = googleEmail || bodyBuyerEmail || contactAsEmail || null;
 
         const buyerName = cleanText(
@@ -1953,7 +1962,7 @@ function createSuperbadSalesApi(options = {}) {
           120
         );
         const buyerContact = cleanText(
-          body.buyer_contact || resolvedBuyerEmail || googleEmail || "",
+          body.buyer_contact || resolvedWhatsapp || resolvedBuyerEmail || googleEmail || "",
           160
         );
         if (!buyerName || !buyerContact) {
@@ -1997,6 +2006,7 @@ function createSuperbadSalesApi(options = {}) {
           edition: null,
           buyer_name: buyerName,
           buyer_contact: buyerContact,
+          buyer_whatsapp: resolvedWhatsapp,
           buyer_email: resolvedBuyerEmail,
           google_sub: googleSub,
           google_email: googleEmail,
@@ -2031,6 +2041,7 @@ function createSuperbadSalesApi(options = {}) {
             amount_display: plan.amountDisplay,
             requested_edition: requestedEdition,
             buyer_email: resolvedBuyerEmail,
+            buyer_whatsapp: resolvedWhatsapp,
             google_name: googleName,
             sla_minutes: 60,
             pix: paymentInfo.pix,
@@ -2085,6 +2096,7 @@ function createSuperbadSalesApi(options = {}) {
         const receiptNote = cleanText(body.receipt_note, 500);
         const e2eId = cleanE2eId(body.e2e_id);
         const overrideEmail = cleanEmailAddress(body.buyer_email || "");
+        const overrideWhatsapp = cleanText(body.buyer_whatsapp || "", 40);
         const attachment = parseReceiptAttachment(
           body.receipt_file_b64,
           body.receipt_file_mime,
@@ -2113,6 +2125,12 @@ function createSuperbadSalesApi(options = {}) {
           const now = new Date().toISOString();
           if (overrideEmail && !order.buyer_email) {
             order.buyer_email = overrideEmail;
+          }
+          if (overrideWhatsapp) {
+            order.buyer_whatsapp = overrideWhatsapp;
+            if (!order.buyer_contact || cleanEmailAddress(order.buyer_contact)) {
+              order.buyer_contact = overrideWhatsapp;
+            }
           }
           if (authUser?.email && !order.buyer_email) {
             order.buyer_email = cleanEmailAddress(authUser.email) || null;
@@ -2179,9 +2197,9 @@ function createSuperbadSalesApi(options = {}) {
           reason: "not-configured",
         };
         const alertMsg = [
-          `🔔 [OpenInfinite PIX] Comprovante enviado!`,
+          `🔔 [Infinite Zone PIX] Comprovante enviado!`,
           `Pedido: ${ordSnap.order_id} (${ordSnap.requested_edition} · ${ordSnap.amount_display})`,
-          `Cliente: ${ordSnap.buyer_name}${ordSnap.buyer_email ? " <" + ordSnap.buyer_email + ">" : ""}`,
+          `Cliente: ${ordSnap.buyer_name}${ordSnap.buyer_email ? " <" + ordSnap.buyer_email + ">" : ""}${ordSnap.buyer_whatsapp ? " | WhatsApp: " + ordSnap.buyer_whatsapp : ""}`,
           analysis.is_duplicate ? `⚠️ ALERTA: Comprovante/E2E DUPLICADO!` : `Análise: ${analysis.verdict}`,
           `Abra o Dashboard Control -> Pedidos PIX para ver o comprovante e clicar em Ativar & Enviar E-mail.`,
         ].join("\n");
@@ -2231,6 +2249,7 @@ function createSuperbadSalesApi(options = {}) {
           sla_minutes: 60,
           edition: ordSnap.requested_edition,
           buyer_email: ordSnap.buyer_email || null,
+          buyer_whatsapp: ordSnap.buyer_whatsapp || null,
           receipt_analysis: analysis,
           owner_whatsapp_alert: ownerAlert,
           whatsapp_immediate_url: whatsappImmediateUrl,
@@ -2243,6 +2262,7 @@ function createSuperbadSalesApi(options = {}) {
             e2e_id: ordSnap.e2e_id || null,
             has_receipt_file: Boolean(ordSnap.receipt_file && ordSnap.receipt_file.filename),
             buyer_email: ordSnap.buyer_email || null,
+            buyer_whatsapp: ordSnap.buyer_whatsapp || null,
             sla_minutes: 60,
             receipt_analysis: analysis,
             whatsapp_immediate_url: whatsappImmediateUrl,

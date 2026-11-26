@@ -120,7 +120,7 @@ test("manual Pix order locks price at R$ 350,00 and protects order lookup with o
   assert.equal(order.requested_edition, "superbad");
   assert.equal(order.payment_provider, "pix_manual");
   assert.equal(order.pix.key, "68 99226-9296");
-  assert.equal(order.pix.recipient, "Raiane Lenoncio");
+  assert.equal(order.pix.recipient, "Raiane Leoncio");
   assert.match(order.pix.brcode, /5406350\.00/);
   assert.match(order.pix.qr_data_url, /^data:image\/png;base64,/);
   assert.match(order.whatsapp_url, /^https:\/\/wa\.me\/5568992269296\?text=/);

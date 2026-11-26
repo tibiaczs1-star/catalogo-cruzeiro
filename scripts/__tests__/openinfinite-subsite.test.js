@@ -14,16 +14,20 @@ const { createSuperbadSalesApi } = require("../../badclaude-superbad-api");
 
 const root = path.resolve(__dirname, "..", "..");
 
-test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, living hero, clean photos and BadClaude L3+ inclusion are configured", () => {
+test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, logo variations and BadClaude L3+ inclusion are configured", () => {
   const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
+  const checkoutHtml = fs.readFileSync(path.join(root, "openinfinite", "checkout", "index.html"), "utf8");
   const oiReadme = fs.readFileSync(path.join(root, "openinfinite", "README.md"), "utf8");
   const bcHtml = fs.readFileSync(path.join(root, "badclaude", "index.html"), "utf8");
   const sbHtml = fs.readFileSync(path.join(root, "badclaude", "superbad-texte", "index.html"), "utf8");
   const apiJs = fs.readFileSync(path.join(root, "badclaude-superbad-api.js"), "utf8");
 
   assert.match(server, /pathname === "\/openinfinite"/);
-  assert.match(server, /Location: "\/openinfinite\/"/);
+  assert.match(server, /Location: `\/openinfinite\/\$\{oiQuerySuffix\}`/);
+  assert.match(server, /pathname === "\/openinfinite\/checkout"/);
+  assert.match(server, /pathname === "\/openinfinite\/checkin"/);
+  assert.match(server, /Location: `\/openinfinite\/checkout\/\$\{oiQuerySuffix\}`/);
   assert.match(server, /pathname\.startsWith\("\/openinfinite\/"\)/);
   assert.match(server, /"\.exe"/);
   assert.match(server, /"\.dmg"/);
@@ -38,51 +42,35 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-infiniteclaude\.sh \| bash/);
   assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-mac\.sh \| bash/);
   assert.match(oiHtml, /irm https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-win\.ps1 \| iex/);
-  assert.match(oiHtml, /install-ubuntu-vps\.sh/);
-  assert.match(oiHtml, /infinite-hermes/);
-  assert.match(oiHtml, /~\/\.hermes\/openinfinite-endpoint\.json/);
-  assert.match(oiHtml, /~\/\.claude\/settings\.json/);
-  assert.match(oiHtml, /Nous Research/);
 
-  // Infinite Zone Visual Language & Two Native Softwares (OpenInfinite v6.2 + InfiniteClaude v6.2)
+  // Lean Customer Landing Page: company + product names only, logo variations per OS/product, no internal dev jargon
   assert.match(oiHtml, /--bg:\s*#070709/i);
-  assert.match(oiHtml, /#00B4FF/i);
-  assert.match(oiHtml, /#5B2EFF/i);
-  assert.match(oiHtml, /#FF00B8/i);
-  assert.match(oiHtml, /#FF7A00/i);
-  assert.match(oiHtml, /#19FF00/i);
   assert.match(oiHtml, /id="izHoodMark"/);
+  assert.match(oiHtml, /id="izOpenInfiniteMark"/);
   assert.match(oiHtml, /id="izClaudeMark"/);
-  assert.match(oiHtml, /INFINITE ZONE · LABORATÓRIOS DE TECNOLOGIA/);
-  assert.match(oiHtml, /OpenInfinite v6\.2/);
-  assert.match(oiHtml, /InfiniteClaude v6\.2/);
-  assert.match(oiHtml, /WinForms GDI\+/);
-  assert.match(oiHtml, /SwiftUI Liquid Glass/);
-  assert.match(oiHtml, /IC6-PRO/);
-  assert.match(oiHtml, /IC6-MAX/);
-  assert.match(oiHtml, /Headless OpenCode Swap/);
-  assert.match(oiHtml, /infinite\/coder/);
-  assert.match(oiHtml, /infinite\/reasoning/);
-  assert.match(oiHtml, /infinite\/fast/);
-  assert.match(oiHtml, /~\/\.hermes\/config\.yaml/);
-
+  assert.match(oiHtml, /id="izWinMark"/);
+  assert.match(oiHtml, /id="izMacMark"/);
+  assert.match(oiHtml, /id="izLinuxMark"/);
+  assert.match(oiHtml, /id="izMaxMark"/);
+  assert.match(oiHtml, /INFINITE ZONE/);
+  assert.match(oiHtml, /OpenInfinite/);
+  assert.match(oiHtml, /InfiniteClaude/);
+  assert.match(oiHtml, /Mac Normal/i);
+  assert.match(oiHtml, /não é VPS/i);
+  assert.match(oiHtml, /Requer Pedido Pago/i);
+  assert.match(oiHtml, /href="\/openinfinite\/checkout\/"/);
   assert.match(oiHtml, /R\$ 99,00/);
   assert.match(oiHtml, /R\$ 159,00/);
   assert.match(oiHtml, /R\$ 199,00/);
   assert.match(oiHtml, /R\$ 249,00/);
-  assert.match(oiHtml, /id="livingStage"/);
-  assert.match(oiHtml, /id="livingCore"/);
-  assert.match(oiHtml, /id="checkout"/);
-  assert.match(oiHtml, /id="orderForm"/);
-  assert.match(oiHtml, /3º nível|3º Nível/i);
-  assert.match(oiHtml, /Cockpit Pro/);
-  assert.match(oiHtml, /Fundador VIP/);
-  assert.match(oiHtml, /href="\/badclaude\//);
+
+  // Ensure removed clutter, internal jargon, and inline checkout are NOT on landing page
+  assert.doesNotMatch(oiHtml, /2 softwares nativos|White-Label|Símbolo Vivo|HTTP 200 Real Verificado|WinForms GDI\+|SwiftUI NSVisualEffectView/i);
+  assert.doesNotMatch(oiHtml, /id="particleCanvas"|id="cursorAura"|orbit-ring|float-badge/);
+  assert.doesNotMatch(oiHtml, /id="orderForm"|id="receiptForm"|id="verifyForm"/);
   assert.doesNotMatch(oiHtml, /4114|demo_lock|shift_i\.png|NÃO é vendido separado|não é vendido avulso/i);
   assert.doesNotMatch(oiHtml, /claude-sonnet|claude-opus|claude-haiku/i);
-  assert.doesNotMatch(oiHtml, /gerenciador de APIs \/v1 pr[oó]prias|endpoint \/v1 pr[oó]prio|Cascata APIs \/v1 Pr[oó]prias|Gateway \/v1 Pr[oó]prio/i);
   assert.doesNotMatch(oiReadme, /claude-sonnet|claude-opus|claude-haiku/i);
-  assert.doesNotMatch(oiReadme, /gerenciador de APIs \/v1 pr[oó]prias|endpoint \/v1 pr[oó]prio/i);
 
   assert.ok(!fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_demo_lock.png")));
   assert.ok(!fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_shift_i.png")));
@@ -93,6 +81,13 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(bcHtml, /\/openinfinite\//);
   assert.match(sbHtml, /\/openinfinite\//);
 
+  assert.match(checkoutHtml, /id="checkout"/);
+  assert.match(checkoutHtml, /id="validador"/);
+  assert.match(checkoutHtml, /Raiane Leoncio/);
+  assert.match(checkoutHtml, /68 99226-9296/);
+  assert.doesNotMatch(checkoutHtml, /Lenoncio/i);
+  assert.doesNotMatch(oiHtml, /Lenoncio/i);
+
   assert.match(apiJs, /includesOpenInfinite/);
   assert.match(apiJs, /includesInfiniteClaude/);
   assert.match(apiJs, /infinite_claude/);
@@ -101,97 +96,68 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(apiJs, /R\$ 199,00/);
 });
 
-test("OpenInfinite UI enforces 4-step Google Auth + PIX + Receipt Analysis (WhatsApp immediate or 1h + email) + ?test_key validator, M/B calculator and zero alert()", () => {
+test("OpenInfinite separate checkout (/openinfinite/checkout/) enforces Google Auth, Buyer WhatsApp, PIX Raiane Leoncio, Receipt attachment & Key Validator with zero alert()", () => {
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
+  const checkoutHtml = fs.readFileSync(path.join(root, "openinfinite", "checkout", "index.html"), "utf8");
 
-  // Zero raw alert() calls and zero Private Use Area Apple glyph (\uF8FF)
-  assert.doesNotMatch(oiHtml, /\balert\s*\(/);
-  assert.doesNotMatch(oiHtml, /\uF8FF/);
-  assert.match(oiHtml, /scroll-margin-top:/);
-  assert.match(oiHtml, /outline-offset:\s*-3px/);
-
-  // Google Auth integration (/site-google-auth.js + Step 1 card + my-orders restore)
-  assert.match(oiHtml, /<script src="\/site-google-auth\.js"><\/script>/);
-  assert.match(oiHtml, /id="step1Google"/);
-  assert.match(oiHtml, /data-google-auth-card/);
-  assert.match(oiHtml, /data-google-auth-button/);
-  assert.match(oiHtml, /data-google-auth-logout/);
-  assert.match(oiHtml, /\/api\/superbad\/my-orders/);
-  assert.match(oiHtml, /\/api\/auth\/config/);
-  assert.match(oiHtml, /\/api\/auth\/session/);
-
-  // 4-Step Checkout: Step 2 PIX -> Step 3 Receipt -> Step 4 In Analysis (WhatsApp Immediate or up to 1h + email)
-  assert.match(oiHtml, /id="step2Pix"/);
-  assert.match(oiHtml, /id="step3Receipt"/);
-  assert.match(oiHtml, /id="step4Analysis"/);
-  assert.match(oiHtml, /id="receiptForm"/);
-  assert.match(oiHtml, /id="receiptFileInput"/);
-  assert.match(oiHtml, /id="receiptE2eInput"/);
-  assert.match(oiHtml, /receipt_file_b64/);
-  assert.match(oiHtml, /receipt_file_mime/);
-  assert.match(oiHtml, /receipt_analysis/);
-  assert.match(oiHtml, /whatsapp_immediate_url/);
-  assert.match(oiHtml, /Falar no WhatsApp para Ativação Imediata/);
-  assert.match(oiHtml, /Ou aguarde até 1 hora/i);
-  assert.match(oiHtml, /id="deliveredKeyBox"/);
-  assert.match(oiHtml, /isKeyUnlockedStatus/);
-
-  // Validator (#validador + #verifyKeyInput + ?test_key= URL auto-runner + canonical plan name without PII leak)
-  assert.match(oiHtml, /id="validador"/);
-  assert.match(oiHtml, /id="verifyKeyInput"/);
-  assert.match(oiHtml, /params\.get\(['"]test_key['"]\)/);
-  assert.match(oiHtml, /Testar Chave no Validador/);
-  assert.match(oiHtml, /resolveCanonicalPlanName/);
-
-  // Skip link, keyboard focus ring, and WAI-ARIA tabs + keyboard handlers
-  assert.match(oiHtml, /class="skip-link"/);
-  assert.match(oiHtml, /:focus-visible/);
-  assert.match(oiHtml, /role="tablist"/);
-  assert.match(oiHtml, /role="tabpanel"/);
-  assert.match(oiHtml, /ArrowRight/);
-  assert.match(oiHtml, /ArrowLeft/);
-
-  // Token Million & Billion Calculator (#economia-tokens: 1M, 10M, 100M, 500M, 1B, 3B)
-  assert.match(oiHtml, /id="economia-tokens"/);
-  for (const preset of ["1000000", "10000000", "100000000", "500000000", "1000000000", "3000000000"]) {
-    assert.match(oiHtml, new RegExp(`data-tokens="${preset}"`));
+  for (const doc of [oiHtml, checkoutHtml]) {
+    assert.doesNotMatch(doc, /\balert\s*\(/);
+    assert.doesNotMatch(doc, /\uF8FF/);
+    assert.match(doc, /class="skip-link"/);
+    assert.match(doc, /:focus-visible/);
+    assert.match(doc, /navigator\.clipboard/);
   }
 
-  // Live Anonymous Telemetry & Savings Panel (#consumo-ao-vivo -> /api/openinfinite/public-stats)
-  assert.match(oiHtml, /id="consumo-ao-vivo"/);
-  assert.match(oiHtml, /\/api\/openinfinite\/public-stats/);
-  assert.match(oiHtml, /id="liveProfilesGrid"/);
+  // Google Auth integration + Buyer WhatsApp field + Orders auto-restore on /openinfinite/checkout/
+  assert.match(checkoutHtml, /<script src="\/site-google-auth\.js"><\/script>/);
+  assert.match(checkoutHtml, /id="step1Google"/);
+  assert.match(checkoutHtml, /id="ordWhatsapp"/);
+  assert.match(checkoutHtml, /buyer_whatsapp/);
+  assert.match(checkoutHtml, /data-google-auth-card/);
+  assert.match(checkoutHtml, /data-google-auth-button/);
+  assert.match(checkoutHtml, /data-google-auth-logout/);
+  assert.match(checkoutHtml, /\/api\/superbad\/my-orders/);
+  assert.match(checkoutHtml, /\/api\/auth\/config/);
+  assert.match(checkoutHtml, /\/api\/auth\/session/);
 
-  // Interactive language/stack focus pills, comparator & CSS Grid 0fr -> 1fr FAQ
-  assert.match(oiHtml, /data-lang="python"/);
-  assert.match(oiHtml, /data-lang="ts"/);
-  assert.match(oiHtml, /data-lang="go"/);
-  assert.match(oiHtml, /data-lang="rust"/);
-  assert.match(oiHtml, /id="comparador"/);
-  assert.match(oiHtml, /data-comp="demo"/);
-  assert.match(oiHtml, /data-comp="infinite"/);
-  assert.match(oiHtml, /data-comp="infinite_pro"/);
-  assert.match(oiHtml, /data-comp="infinite_claude"/);
-  assert.match(oiHtml, /data-comp="infinite_max"/);
-  assert.match(oiHtml, /id="faq"/);
-  assert.match(oiHtml, /grid-template-rows:\s*0fr/);
-  assert.match(oiHtml, /grid-template-rows:\s*1fr/);
-  assert.match(oiHtml, /class="faq-trigger"[^>]*aria-expanded=/);
+  // 4-Step Checkout: Step 2 PIX -> Step 3 Receipt attachment -> Step 4 WhatsApp immediate + Key release
+  assert.match(checkoutHtml, /id="step2Pix"/);
+  assert.match(checkoutHtml, /id="step3Receipt"/);
+  assert.match(checkoutHtml, /id="step4Analysis"/);
+  assert.match(checkoutHtml, /id="receiptForm"/);
+  assert.match(checkoutHtml, /id="receiptFileInput"/);
+  assert.match(checkoutHtml, /id="receiptE2eInput"/);
+  assert.match(checkoutHtml, /receipt_file_b64/);
+  assert.match(checkoutHtml, /receipt_file_mime/);
+  assert.match(checkoutHtml, /receipt_analysis/);
+  assert.match(checkoutHtml, /whatsapp_immediate_url/);
+  assert.match(checkoutHtml, /Falar no WhatsApp para Ativação Imediata/);
+  assert.match(checkoutHtml, /id="deliveredKeyBox"/);
+  assert.match(checkoutHtml, /isKeyUnlockedStatus/);
+
+  // Validator (#validador + #verifyKeyInput + ?test_key= URL auto-runner + canonical plan name without PII leak)
+  assert.match(checkoutHtml, /id="validador"/);
+  assert.match(checkoutHtml, /id="verifyKeyInput"/);
+  assert.match(checkoutHtml, /params\.get\(['"]test_key['"]\)/);
+  assert.match(checkoutHtml, /Testar Chave no Validador/);
+  assert.match(checkoutHtml, /resolveCanonicalPlanName/);
 
   // Inline PIX copy + inline error/offline/retry UX
-  assert.match(oiHtml, /id="copyPixBtn"/);
-  assert.match(oiHtml, /id="pixCopyFeedback"/);
-  assert.match(oiHtml, /id="copyBrcodeBtn"/);
-  assert.match(oiHtml, /id="orderErrorBox"/);
-  assert.match(oiHtml, /id="retryOrderBtn"/);
-  assert.match(oiHtml, /retryVerifyBtn/);
-  assert.match(oiHtml, /navigator\.onLine === false/);
+  assert.match(checkoutHtml, /id="copyPixBtn"/);
+  assert.match(checkoutHtml, /id="pixCopyFeedback"/);
+  assert.match(checkoutHtml, /id="copyBrcodeBtn"/);
+  assert.match(checkoutHtml, /id="orderErrorBox"/);
+  assert.match(checkoutHtml, /id="retryOrderBtn"/);
+  assert.match(checkoutHtml, /retryVerifyBtn/);
+  assert.match(checkoutHtml, /navigator\.onLine === false/);
 
-  // Parse inline <script> blocks with Node VM to guarantee zero JS syntax errors
-  const scriptBlocks = [...oiHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)];
-  assert.ok(scriptBlocks.length >= 1, "Expected inline <script> in openinfinite/index.html");
-  for (const [, code] of scriptBlocks) {
-    assert.doesNotThrow(() => new vm.Script(code, { filename: "openinfinite/index.html" }));
+  // Parse inline <script> blocks in BOTH pages with Node VM to guarantee zero JS syntax errors
+  for (const [name, doc] of [["openinfinite/index.html", oiHtml], ["openinfinite/checkout/index.html", checkoutHtml]]) {
+    const scriptBlocks = [...doc.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+    assert.ok(scriptBlocks.length >= 1, `Expected inline <script> in ${name}`);
+    for (const [, code] of scriptBlocks) {
+      assert.doesNotThrow(() => new vm.Script(code, { filename: name }));
+    }
   }
 });
 

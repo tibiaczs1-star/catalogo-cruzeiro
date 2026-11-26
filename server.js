@@ -399,7 +399,7 @@ const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
 const RAYL_WEBSITE_STUDY_FILE = path.join(DATA_DIR, "rayl-website-study.json");
 const PIX_RECEIVER_KEY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_KEY || "+5568992269296", 120);
-const PIX_RECEIVER_NAME = cleanShortText(process.env.OFFICE_SUPPORT_PIX_RECEIVER_NAME || "RAIANE LENONCIO", 25);
+const PIX_RECEIVER_NAME = cleanShortText(process.env.OFFICE_SUPPORT_PIX_RECEIVER_NAME || "RAIANE LEONCIO", 25);
 const PIX_RECEIVER_CITY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_CITY || "CRUZEIRO DO SUL", 15);
 const OFFICE_NEURAL_GROWTH_FILE = path.join(DATA_DIR, "office-neural-growth.json");
 const WHATSAPP_CHAT_LOG_FILE = path.join(DATA_DIR, "whatsapp-chat-log.json");
@@ -22276,6 +22276,8 @@ async function handleStatic(req, res, pathname, requestUrl) {
             '  if [ -n "$BIN_FILE" ]; then chmod +x "$BIN_FILE" && ln -sf "$BIN_FILE" "$BIN_DIR/openinfinite"; fi',
             'fi',
             'echo "==> [Infinite Zone] OpenInfinite v6.2 instalado com sucesso!"',
+            'echo "==> Atencao VPS: o modo Linux VPS exige pedido pago e chave ativa (sem hora gratis)."',
+            'echo "==> Checkout PIX (68 99226-9296 - Raiane Leoncio): $ORIGIN/openinfinite/checkout/"',
             "",
           ].join("\n");
         } else if (pathname === "/install-infiniteclaude.sh") {
@@ -22313,6 +22315,8 @@ async function handleStatic(req, res, pathname, requestUrl) {
             '  if [ -n "$BIN_FILE" ]; then chmod +x "$BIN_FILE" && ln -sf "$BIN_FILE" "$BIN_DIR/infiniteclaude"; fi',
             'fi',
             'echo "==> [Infinite Zone] InfiniteClaude v6.2 instalado com sucesso!"',
+            'echo "==> Atencao VPS: o modo Linux VPS exige pedido pago e chave ativa (sem hora gratis)."',
+            'echo "==> Checkout PIX (68 99226-9296 - Raiane Leoncio): $ORIGIN/openinfinite/checkout/"',
             "",
           ].join("\n");
         } else if (pathname === "/install-mac.sh") {
@@ -22416,9 +22420,22 @@ async function handleStatic(req, res, pathname, requestUrl) {
         return res.end(scriptBody);
       }
 
+      const oiQueryIdx = String(req.url || "").indexOf("?");
+      const oiQuerySuffix = oiQueryIdx >= 0 ? String(req.url).slice(oiQueryIdx) : "";
       if (pathname === "/openinfinite") {
         res.writeHead(302, {
-          Location: "/openinfinite/",
+          Location: `/openinfinite/${oiQuerySuffix}`,
+          "Cache-Control": "no-store"
+        });
+        return res.end();
+      }
+      if (
+        pathname === "/openinfinite/checkout" ||
+        pathname === "/openinfinite/checkin" ||
+        pathname === "/openinfinite/checkin/"
+      ) {
+        res.writeHead(302, {
+          Location: `/openinfinite/checkout/${oiQuerySuffix}`,
           "Cache-Control": "no-store"
         });
         return res.end();
