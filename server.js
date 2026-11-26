@@ -7356,7 +7356,42 @@ function sendFile(req, res, filePath, options = {}) {
     return;
   }
 
-  const responseCacheKey = [
+  if (!usesTemplateVars && !injectsAgenteVivo && !isCompressibleMime(mimeType)) {
+    fs.stat(filePath, (err, stat) => {
+      if (err || !stat.isFile()) {
+        return sendText(res, 404, "Arquivo não encontrado.");
+      }
+      if (req.method === "HEAD" || stat.size > 2 * 1024 * 1024) {
+        const headers = {
+          "Content-Type": mimeType,
+          "Cache-Control": cacheControl,
+          "Accept-Ranges": "bytes",
+          "Content-Length": stat.size,
+          ...(options.headers || {}),
+        };
+        if (/no-store/i.test(cacheControl)) {
+          headers.Pragma = "no-cache";
+          headers.Expires = "0";
+          headers["Surrogate-Control"] = "no-store";
+        }
+        res.writeHead(200, headers);
+        if (req.method === "HEAD") return res.end();
+        const stream = fs.createReadStream(filePath);
+        stream.on("error", () => {
+          if (!res.headersSent) sendText(res, 500, "Erro ao ler arquivo.");
+          else res.destroy();
+        });
+        return stream.pipe(res);
+      }
+      serveFromCacheOrRead();
+    });
+    return;
+  }
+
+  return serveFromCacheOrRead();
+
+  function serveFromCacheOrRead() {
+    const responseCacheKey = [
     getFileCacheSignature(filePath),
     mimeType,
     cacheControl,
@@ -7368,7 +7403,7 @@ function sendFile(req, res, filePath, options = {}) {
 
   if (cachedResponse) {
     res.writeHead(200, { ...cachedResponse.headers });
-    return res.end(cachedResponse.buffer);
+    return res.end(req.method === "HEAD" ? undefined : cachedResponse.buffer);
   }
 
   fs.readFile(filePath, (err, buffer) => {
@@ -7429,8 +7464,10 @@ function sendFile(req, res, filePath, options = {}) {
     res.writeHead(200, {
       ...headers
     });
+    if (req.method === "HEAD") return res.end();
     res.end(finalBuffer);
   });
+  }
 }
 
 function pubpaidNoStoreHeaders() {

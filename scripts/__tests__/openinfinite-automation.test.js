@@ -628,6 +628,17 @@ test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/publ
     assert.equal(res.status, 200, `Expected 200 for ${p}, got ${res.status}`);
     assert.ok(body.includes(expected), `Expected ${expected} in ${p}`);
   }
-  const headSums = await fetch(`http://127.0.0.1:${port}/downloads/SHA256SUMS.txt`, { method: "HEAD" });
-  assert.equal(headSums.status, 200);
+  for (const dl of [
+    "/downloads/SHA256SUMS.txt",
+    "/downloads/OpenInfinite-Client-Setup.exe",
+    "/downloads/InfiniteClaude-Client-Setup.exe",
+    "/downloads/OpenInfinite-Client-macOS.dmg",
+    "/downloads/InfiniteClaude-Client-macOS.dmg",
+    "/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz",
+    "/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz",
+  ]) {
+    const headRes = await fetch(`http://127.0.0.1:${port}${dl}`, { method: "HEAD" });
+    assert.equal(headRes.status, 200, `Expected 200 HEAD for ${dl}`);
+    assert.ok(Number(headRes.headers.get("content-length")) > 100);
+  }
 });
