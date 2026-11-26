@@ -590,4 +590,44 @@ test("server.js configures Google Auth dynamic Client ID fallback, 1-prompt inst
   assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-macOS\.dmg/);
   assert.match(serverSource, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
   assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-Setup\.exe/);
+  assert.doesNotMatch(serverSource, /const appParam = String\(searchParams\./);
+});
+
+test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/public-stats, and /downloads/* live with HTTP 200", async (t) => {
+  const { spawn } = require("node:child_process");
+  const tmpData = await fsp.mkdtemp(path.join(os.tmpdir(), "oi-server-live-"));
+  const port = 15497;
+  const child = spawn(process.execPath, [path.join(repoRoot, "server.js")], {
+    cwd: repoRoot,
+    env: { ...process.env, PORT: String(port), HOST: "127.0.0.1", BADCLAUDE_DATA_DIR: tmpData, NODE_ENV: "production" },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  t.after(async () => {
+    try { child.kill(); } catch {}
+    await new Promise((r) => setTimeout(r, 200));
+    await fsp.rm(tmpData, { recursive: true, force: true }).catch(() => {});
+  });
+
+  for (let i = 0; i < 40; i++) {
+    try {
+      const r = await fetch(`http://127.0.0.1:${port}/api/openinfinite/public-stats`);
+      if (r.ok) break;
+    } catch {}
+    await new Promise((r) => setTimeout(r, 150));
+  }
+
+  for (const [p, expected] of [
+    ["/install-openinfinite.sh", "/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz"],
+    ["/install-infiniteclaude.sh", "/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz"],
+    ["/install-mac.sh?app=openinfinite", 'TARGET_APP="${INFINITE_APP:-openinfinite}"'],
+    ["/install-win.ps1?app=infiniteclaude", "$TargetApp = if ($env:INFINITE_APP) { $env:INFINITE_APP.ToLower() } else { 'infiniteclaude' }"],
+    ["/openinfinite/", "IC6-MAX"],
+  ]) {
+    const res = await fetch(`http://127.0.0.1:${port}${p}`);
+    const body = await res.text();
+    assert.equal(res.status, 200, `Expected 200 for ${p}, got ${res.status}`);
+    assert.ok(body.includes(expected), `Expected ${expected} in ${p}`);
+  }
+  const headSums = await fetch(`http://127.0.0.1:${port}/downloads/SHA256SUMS.txt`, { method: "HEAD" });
+  assert.equal(headSums.status, 200);
 });

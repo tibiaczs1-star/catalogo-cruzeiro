@@ -21979,6 +21979,10 @@ async function handleStatic(req, res, pathname, requestUrl) {
     return sendFile(req, res, ANDROID_APP_METADATA_FILE, { cacheControl: "no-store" });
   }
 
+  if ((req.method === "GET" || req.method === "HEAD") && pathname === "/downloads/SHA256SUMS.txt") {
+    return sendFile(req, res, path.join(ROOT_DIR, "downloads", "SHA256SUMS.txt"), { cacheControl: "no-store" });
+  }
+
   if (pathname === "/robots.txt") {
     return sendText(res, 200, buildRobotsTxt(req), "public, max-age=3600");
   }
@@ -22197,7 +22201,7 @@ async function handleStatic(req, res, pathname, requestUrl) {
         const isLocalHost = /^(127\.0\.0\.1|localhost|\[::1\])(?::\d+)?$/i.test(safeHost);
         const proto = fwdProto === "https" || (!isLocalHost && safeHost.endsWith(".onrender.com")) ? "https" : (fwdProto === "http" || isLocalHost ? "http" : "https");
         const baseOrigin = safeHost ? `${proto}://${safeHost}` : SITE_URL;
-        const appParam = String(searchParams.get("app") || "").trim().toLowerCase();
+        const appParam = String(requestUrl?.searchParams?.get("app") || "").trim().toLowerCase();
 
         let scriptBody = "";
         if (pathname === "/install-openinfinite.sh") {
