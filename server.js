@@ -22184,6 +22184,197 @@ async function handleStatic(req, res, pathname, requestUrl) {
         return res.end();
       }
 
+      if (
+        (req.method === "GET" || req.method === "HEAD") &&
+        (pathname === "/install-openinfinite.sh" ||
+          pathname === "/install-infiniteclaude.sh" ||
+          pathname === "/install-mac.sh" ||
+          pathname === "/install-win.ps1")
+      ) {
+        const rawHost = String(req.headers.host || "").trim();
+        const safeHost = /^[A-Za-z0-9.:-]+$/.test(rawHost) ? rawHost : "";
+        const fwdProto = String(req.headers["x-forwarded-proto"] || "").split(",")[0].trim().toLowerCase();
+        const isLocalHost = /^(127\.0\.0\.1|localhost|\[::1\])(?::\d+)?$/i.test(safeHost);
+        const proto = fwdProto === "https" || (!isLocalHost && safeHost.endsWith(".onrender.com")) ? "https" : (fwdProto === "http" || isLocalHost ? "http" : "https");
+        const baseOrigin = safeHost ? `${proto}://${safeHost}` : SITE_URL;
+        const appParam = String(searchParams.get("app") || "").trim().toLowerCase();
+
+        let scriptBody = "";
+        if (pathname === "/install-openinfinite.sh") {
+          scriptBody = [
+            "#!/usr/bin/env bash",
+            "# Infinite Zone · Laboratorios de Tecnologia — OpenInfinite v6.2 (Ubuntu Linux VPS)",
+            "set -euo pipefail",
+            `ORIGIN="\${INFINITE_ORIGIN:-${baseOrigin}}"`,
+            'ARCHIVE_URL="$ORIGIN/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz"',
+            'TMP_DIR="$(mktemp -d)"',
+            'trap \'rm -rf "$TMP_DIR"\' EXIT',
+            'if ! command -v opencode >/dev/null 2>&1 && [ ! -x "$HOME/.opencode/bin/opencode" ] && [ ! -x "$HOME/.opencode-infinite/runtime/opencode" ] && [ ! -x "$HOME/.local/bin/opencode" ]; then',
+            '  echo "==> [Infinite Zone] Preparando runtime headless OpenCode em segundo plano..."',
+            '  curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path >/dev/null 2>&1 || true',
+            'fi',
+            'echo "==> [Infinite Zone] Baixando OpenInfinite v6.2 nativo Linux x64..."',
+            'if command -v curl >/dev/null 2>&1; then',
+            '  curl -fsSL "$ARCHIVE_URL" -o "$TMP_DIR/OpenInfinite-Client-Ubuntu-VPS.tar.gz"',
+            'elif command -v wget >/dev/null 2>&1; then',
+            '  wget -qO "$TMP_DIR/OpenInfinite-Client-Ubuntu-VPS.tar.gz" "$ARCHIVE_URL"',
+            'else',
+            '  echo "Erro: curl ou wget necessario para baixar o pacote." >&2; exit 1',
+            'fi',
+            'tar -xzf "$TMP_DIR/OpenInfinite-Client-Ubuntu-VPS.tar.gz" -C "$TMP_DIR"',
+            'INSTALL_SH="$(find "$TMP_DIR" -maxdepth 3 -name "install-ubuntu-vps.sh" | head -n 1 || true)"',
+            'if [ -n "$INSTALL_SH" ]; then',
+            '  chmod +x "$INSTALL_SH"',
+            '  (cd "$(dirname "$INSTALL_SH")" && bash "./$(basename "$INSTALL_SH")")',
+            'else',
+            '  DEST_DIR="$HOME/.local/share/openinfinite"',
+            '  BIN_DIR="$HOME/.local/bin"',
+            '  mkdir -p "$DEST_DIR" "$BIN_DIR"',
+            '  cp -R "$TMP_DIR"/* "$DEST_DIR"/ 2>/dev/null || true',
+            '  BIN_FILE="$(find "$DEST_DIR" -maxdepth 2 -type f \\( -name "OpenInfiniteLinux" -o -name "openinfinite" \\) | head -n 1 || true)"',
+            '  if [ -n "$BIN_FILE" ]; then chmod +x "$BIN_FILE" && ln -sf "$BIN_FILE" "$BIN_DIR/openinfinite"; fi',
+            'fi',
+            'echo "==> [Infinite Zone] OpenInfinite v6.2 instalado com sucesso!"',
+            "",
+          ].join("\n");
+        } else if (pathname === "/install-infiniteclaude.sh") {
+          scriptBody = [
+            "#!/usr/bin/env bash",
+            "# Infinite Zone · Laboratorios de Tecnologia — InfiniteClaude v6.2 (Ubuntu Linux VPS + Claude Code)",
+            "set -euo pipefail",
+            `ORIGIN="\${INFINITE_ORIGIN:-${baseOrigin}}"`,
+            'ARCHIVE_URL="$ORIGIN/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz"',
+            'TMP_DIR="$(mktemp -d)"',
+            'trap \'rm -rf "$TMP_DIR"\' EXIT',
+            'if ! command -v opencode >/dev/null 2>&1 && [ ! -x "$HOME/.opencode/bin/opencode" ] && [ ! -x "$HOME/.opencode-infinite/runtime/opencode" ] && [ ! -x "$HOME/.local/bin/opencode" ]; then',
+            '  echo "==> [Infinite Zone] Preparando runtime headless OpenCode em segundo plano..."',
+            '  curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path >/dev/null 2>&1 || true',
+            'fi',
+            'echo "==> [Infinite Zone] Baixando InfiniteClaude v6.2 nativo Linux x64 (Claude Code + Multi-CLI)..."',
+            'if command -v curl >/dev/null 2>&1; then',
+            '  curl -fsSL "$ARCHIVE_URL" -o "$TMP_DIR/InfiniteClaude-Client-Ubuntu-VPS.tar.gz"',
+            'elif command -v wget >/dev/null 2>&1; then',
+            '  wget -qO "$TMP_DIR/InfiniteClaude-Client-Ubuntu-VPS.tar.gz" "$ARCHIVE_URL"',
+            'else',
+            '  echo "Erro: curl ou wget necessario para baixar o pacote." >&2; exit 1',
+            'fi',
+            'tar -xzf "$TMP_DIR/InfiniteClaude-Client-Ubuntu-VPS.tar.gz" -C "$TMP_DIR"',
+            'INSTALL_SH="$(find "$TMP_DIR" -maxdepth 3 \\( -name "install-infiniteclaude.sh" -o -name "install-ubuntu-vps.sh" \\) | head -n 1 || true)"',
+            'if [ -n "$INSTALL_SH" ]; then',
+            '  chmod +x "$INSTALL_SH"',
+            '  (cd "$(dirname "$INSTALL_SH")" && bash "./$(basename "$INSTALL_SH")")',
+            'else',
+            '  DEST_DIR="$HOME/.local/share/infiniteclaude"',
+            '  BIN_DIR="$HOME/.local/bin"',
+            '  mkdir -p "$DEST_DIR" "$BIN_DIR"',
+            '  cp -R "$TMP_DIR"/* "$DEST_DIR"/ 2>/dev/null || true',
+            '  BIN_FILE="$(find "$DEST_DIR" -maxdepth 2 -type f \\( -name "InfiniteClaudeLinux" -o -name "infiniteclaude" -o -name "OpenInfiniteLinux" \\) | head -n 1 || true)"',
+            '  if [ -n "$BIN_FILE" ]; then chmod +x "$BIN_FILE" && ln -sf "$BIN_FILE" "$BIN_DIR/infiniteclaude"; fi',
+            'fi',
+            'echo "==> [Infinite Zone] InfiniteClaude v6.2 instalado com sucesso!"',
+            "",
+          ].join("\n");
+        } else if (pathname === "/install-mac.sh") {
+          const defaultMacTarget = ["openinfinite", "infiniteclaude", "both"].includes(appParam) ? appParam : "both";
+          scriptBody = [
+            "#!/usr/bin/env bash",
+            "# Infinite Zone · Laboratorios de Tecnologia — Instalador Nativo macOS Liquid Glass (Zero Homebrew)",
+            "set -euo pipefail",
+            `ORIGIN="\${INFINITE_ORIGIN:-${baseOrigin}}"`,
+            `TARGET_APP="\${INFINITE_APP:-${defaultMacTarget}}"`,
+            'TMP_DIR="$(mktemp -d)"',
+            'trap \'rm -rf "$TMP_DIR"\' EXIT',
+            'if ! command -v opencode >/dev/null 2>&1 && [ ! -x "$HOME/.opencode/bin/opencode" ] && [ ! -x "$HOME/.opencode-infinite/runtime/opencode" ] && [ ! -x "$HOME/.local/bin/opencode" ] && [ ! -x "/opt/homebrew/bin/opencode" ] && [ ! -x "/usr/local/bin/opencode" ]; then',
+            '  echo "==> [Infinite Zone] Preparando runtime headless OpenCode em segundo plano..."',
+            '  curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path >/dev/null 2>&1 || true',
+            'fi',
+            'DEST_APPS="/Applications"',
+            '[ -w "$DEST_APPS" ] || { DEST_APPS="$HOME/Applications"; mkdir -p "$DEST_APPS"; }',
+            "install_dmg() {",
+            '  local dmg_rel="$1"',
+            '  local dmg_name="$(basename "$dmg_rel")"',
+            '  local dmg_url="$ORIGIN$dmg_rel"',
+            '  local dmg_path="$TMP_DIR/$dmg_name"',
+            '  local mnt_dir="$TMP_DIR/mnt_${dmg_name%.dmg}"',
+            '  echo "==> [Infinite Zone] Baixando $dmg_name..."',
+            '  curl -fsSL "$dmg_url" -o "$dmg_path"',
+            '  mkdir -p "$mnt_dir"',
+            '  hdiutil attach "$dmg_path" -nobrowse -readonly -quiet -mountpoint "$mnt_dir"',
+            '  for app_bundle in "$mnt_dir"/*.app; do',
+            '    [ -d "$app_bundle" ] || continue',
+            '    local app_base="$(basename "$app_bundle")"',
+            '    rm -rf "$DEST_APPS/$app_base"',
+            '    cp -R "$app_bundle" "$DEST_APPS/$app_base"',
+            '    xattr -cr "$DEST_APPS/$app_base" 2>/dev/null || true',
+            '    echo "    Instalado em $DEST_APPS/$app_base"',
+            '  done',
+            '  hdiutil detach "$mnt_dir" -quiet || true',
+            "}",
+            'if [ "$TARGET_APP" = "openinfinite" ] || [ "$TARGET_APP" = "both" ]; then',
+            '  install_dmg "/downloads/OpenInfinite-Client-macOS.dmg"',
+            "fi",
+            'if [ "$TARGET_APP" = "infiniteclaude" ] || [ "$TARGET_APP" = "both" ]; then',
+            '  install_dmg "/downloads/InfiniteClaude-Client-macOS.dmg"',
+            "fi",
+            'echo "==> [Infinite Zone] Instalacao macOS Liquid Glass concluida!"',
+            "",
+          ].join("\n");
+        } else {
+          const defaultWinTarget = ["openinfinite", "infiniteclaude", "both"].includes(appParam) ? appParam : "both";
+          scriptBody = [
+            "# Infinite Zone · Laboratorios de Tecnologia — Instalador 1-Comando Windows (WinForms GDI+ Nativo)",
+            "$ErrorActionPreference = 'Stop'",
+            "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12",
+            `$Origin = if ($env:INFINITE_ORIGIN) { $env:INFINITE_ORIGIN } else { '${baseOrigin}' }`,
+            `$TargetApp = if ($env:INFINITE_APP) { $env:INFINITE_APP.ToLower() } else { '${defaultWinTarget}' }`,
+            "$OpenCodeCandidates = @(",
+            "  (Join-Path $env:USERPROFILE '.opencode\\bin\\opencode.exe'),",
+            "  (Join-Path $env:LOCALAPPDATA 'Programs\\ai.opencode.desktop\\resources\\opencode-cli.exe'),",
+            "  (Join-Path $env:LOCALAPPDATA 'opencode-infinite\\runtime\\opencode-cli.exe')",
+            ")",
+            "$HasOpenCode = [bool](Get-Command opencode -ErrorAction SilentlyContinue)",
+            "if (-not $HasOpenCode) { foreach ($c in $OpenCodeCandidates) { if (Test-Path $c) { $HasOpenCode = $true; break } } }",
+            "if (-not $HasOpenCode) {",
+            "  Write-Host '==> [Infinite Zone] Preparando runtime headless OpenCode em segundo plano...' -ForegroundColor DarkCyan",
+            "  try { $env:OPENCODE_NO_MODIFY_PATH = '1'; irm https://opencode.ai/install.ps1 | iex | Out-Null } catch { }",
+            "}",
+            "$WorkDir = Join-Path $env:TEMP ('InfiniteZone-' + [guid]::NewGuid().ToString('N').Substring(0, 8))",
+            "New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null",
+            "try {",
+            "  function Install-InfiniteSetup([string]$RelPath) {",
+            "    $FileName = Split-Path $RelPath -Leaf",
+            "    $Url = \"$Origin$RelPath\"",
+            "    $Out = Join-Path $WorkDir $FileName",
+            "    Write-Host \"==> [Infinite Zone] Baixando $FileName...\" -ForegroundColor Cyan",
+            "    Invoke-WebRequest -Uri $Url -OutFile $Out -UseBasicParsing",
+            "    Write-Host \"==> [Infinite Zone] Instalando $FileName...\" -ForegroundColor White",
+            "    Start-Process -FilePath $Out -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -Wait",
+            "  }",
+            "  if ($TargetApp -eq 'openinfinite' -or $TargetApp -eq 'both') {",
+            "    Install-InfiniteSetup '/downloads/OpenInfinite-Client-Setup.exe'",
+            "  }",
+            "  if ($TargetApp -eq 'infiniteclaude' -or $TargetApp -eq 'both') {",
+            "    Install-InfiniteSetup '/downloads/InfiniteClaude-Client-Setup.exe'",
+            "  }",
+            "  Write-Host '==> [Infinite Zone] Instalacao Windows concluida com sucesso!' -ForegroundColor Green",
+            "} finally {",
+            "  Remove-Item -Recurse -Force -Path $WorkDir -ErrorAction SilentlyContinue",
+            "}",
+            "",
+          ].join("\n");
+        }
+
+        const byteLen = Buffer.byteLength(scriptBody, "utf8");
+        res.writeHead(200, {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-store",
+          "Content-Length": byteLen,
+          "X-Content-Type-Options": "nosniff",
+        });
+        if (req.method === "HEAD") return res.end();
+        return res.end(scriptBody);
+      }
+
       if (pathname === "/openinfinite") {
         res.writeHead(302, {
           Location: "/openinfinite/",

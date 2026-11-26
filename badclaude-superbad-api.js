@@ -43,11 +43,13 @@ const TELEMETRY_PROFILES = Object.freeze({
   demo: { profile: "demo", label: "Demo 1h Grátis", planCostBrl: 0 },
   infinito: { profile: "infinito", label: "OpenInfinite Windows (R$ 99)", planCostBrl: 99 },
   pro: { profile: "pro", label: "OpenInfinite Pro Multi-OS + Hermes (R$ 159)", planCostBrl: 159 },
+  infinite_claude: { profile: "infinite_claude", label: "InfiniteClaude v6.2 Multi-OS + Claude Code (R$ 199)", planCostBrl: 199 },
+  infinite_max: { profile: "infinite_max", label: "InfiniteClaude v6.2 Max Multi-CLI (R$ 249)", planCostBrl: 249 },
   superbad: { profile: "superbad", label: "Cockpit Pro SuperBad (R$ 350)", planCostBrl: 350 },
   founder: { profile: "founder", label: "Fundador VIP (R$ 690)", planCostBrl: 690 },
   editor: { profile: "editor", label: "Editor Master", planCostBrl: 0 },
 });
-const TELEMETRY_PROFILE_ORDER = Object.freeze(["demo", "infinito", "pro", "superbad", "founder", "editor"]);
+const TELEMETRY_PROFILE_ORDER = Object.freeze(["demo", "infinito", "pro", "infinite_claude", "infinite_max", "superbad", "founder", "editor"]);
 
 const DEFAULT_LICENSE_PUBLIC_KEY_PEM = [
   "-----BEGIN PUBLIC KEY-----",
@@ -138,6 +140,7 @@ const EDITION_PLANS = Object.freeze({
     edition: "infinite_pro",
     tier: "infinite-pro",
     tierCode: "PRO",
+    prefixFamily: "OI6",
     label: "OpenInfinite macOS & Multi (1 Mês)",
     amountCentavos: 15_900,
     amountDisplay: "R$ 159,00",
@@ -147,9 +150,46 @@ const EDITION_PLANS = Object.freeze({
     freeProvidersIncluded: ["infinite-gateway", "turbo-auto"],
     summary: "OpenInfinite nativo macOS (Apple Silicon Liquid Glass) + Windows (até 2 computadores · 30 dias), Modo Turbo Auto completo e troca de linguagem.",
   },
+  infinite_claude: {
+    edition: "infinite_claude",
+    tier: "infinite-claude",
+    tierCode: "PRO",
+    prefixFamily: "IC6",
+    label: "InfiniteClaude v6.2 Multi-OS + Claude Code (1 Mês)",
+    amountCentavos: 19_900,
+    amountDisplay: "R$ 199,00",
+    defaultDays: 30,
+    defaultMaxHwids: 3,
+    unlockedModes: ["essential", "cockpit-pro", "claude-code-v1", "hermes-pro"],
+    freeProvidersIncluded: ["infinite-gateway", "turbo-auto", "claude-code-bridge"],
+    summary: "InfiniteClaude v6.2 nativo Windows, macOS Liquid Glass & Ubuntu VPS (até 3 máquinas · 30 dias), Motor Headless OpenCode Swap nos 4 perfis white-label, injeção direta no Claude Code (~/.claude/settings.json com infinite/coder, infinite/reasoning e infinite/fast) + OpenCode + Hermes Pro+.",
+  },
+  infinite_max: {
+    edition: "infinite_max",
+    tier: "infinite-max",
+    tierCode: "MAX",
+    prefixFamily: "IC6",
+    label: "InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)",
+    amountCentavos: 24_900,
+    amountDisplay: "R$ 249,00",
+    defaultDays: 30,
+    defaultMaxHwids: 5,
+    unlockedModes: ["essential", "cockpit-pro", "claude-code-v1", "hermes-pro", "multi-cli-max"],
+    freeProvidersIncluded: ["infinite-gateway", "turbo-auto", "claude-code-bridge", "multi-cli-total"],
+    summary: "InfiniteClaude v6.2 Max Multi-OS (até 5 máquinas · 30 dias): Escada Multi-CLI total com auto-detecção e injeção em 1 clique no OpenCode, Claude Code, Hermes Agent (~/.hermes/config.yaml sem iniciar daemon), Local Harness e Codex CLI sobre Motor Headless OpenCode Swap.",
+  },
 });
 
 const VALID_EDITIONS = new Set(Object.keys(EDITION_PLANS));
+const PRIVATE_RELEASE_LIST_EDITIONS = Object.freeze([
+  "basic",
+  "mid",
+  "beta",
+  "superbad",
+  "founder",
+  "infinite",
+  "infinite_pro",
+]);
 const ALLOWED_UPDATE_CHANNELS = new Set(["founder", "client-mid", "client-basic"]);
 const ALLOWED_ZIP_CONTENT_TYPES = new Set([
   "application/octet-stream",
@@ -166,6 +206,8 @@ const CANONICAL_RELEASE_FILES = {
   founder: "BadClaude-Founder-Desktop.zip",
   infinite: "OpenInfinite-Client-v6.1-Portable.zip",
   infinite_pro: "OpenInfinite-Client-v6.1-Portable.zip",
+  infinite_claude: "InfiniteClaude-Client-v6.2-Portable.zip",
+  infinite_max: "InfiniteClaude-Client-v6.2-Portable.zip",
 };
 
 const EDITION_RELEASE_FILES = {
@@ -176,6 +218,8 @@ const EDITION_RELEASE_FILES = {
   founder: ["BadClaude-Founder-Desktop.zip", "BadClaude-Founder-v6.4-Portable.zip", "BadClaudio-Desktop-SuperBad.zip"],
   infinite: ["OpenInfinite-Client-v6.1-Portable.zip"],
   infinite_pro: ["OpenInfinite-Client-v6.1-Portable.zip"],
+  infinite_claude: ["InfiniteClaude-Client-v6.2-Portable.zip", "OpenInfinite-Client-v6.1-Portable.zip"],
+  infinite_max: ["InfiniteClaude-Client-v6.2-Portable.zip", "OpenInfinite-Client-v6.1-Portable.zip"],
 };
 
 const CODE_TO_TIER = Object.freeze({
@@ -184,12 +228,19 @@ const CODE_TO_TIER = Object.freeze({
   BSC: "client-basic",
   PRO: "infinite-pro",
   INF: "infinite-basic",
+  MAX: "infinite-max",
 });
 
 function getUnlockedModesForTier(tier) {
   const clean = String(tier || "").trim().toLowerCase();
   if (clean === "founder" || clean === "fundador") {
     return ["essential", "badcode", "cockpit-pro", "founder-vip"];
+  }
+  if (clean === "infinite-max" || clean === "infinite-claude-max" || clean === "infinite_max") {
+    return ["essential", "cockpit-pro", "claude-code-v1", "hermes-pro", "multi-cli-max"];
+  }
+  if (clean === "infinite-claude" || clean === "infinite_claude") {
+    return ["essential", "cockpit-pro", "claude-code-v1", "hermes-pro"];
   }
   if (clean === "client-mid" || clean === "client-basic" || clean === "mid" || clean === "basic") {
     return ["essential", "badcode", "cockpit-pro"];
@@ -301,6 +352,12 @@ function normalizeTelemetryProfile(rawProfile, fallbackEdition = "", fallbackTie
     if (c === "demo" || c === "trial" || c === "free") return "demo";
     if (["infinito", "infinite", "infinite-basic", "infinite_basic", "oi6-inf", "inf", "basic", "client-basic", "beta"].includes(c)) {
       return "infinito";
+    }
+    if (["infinite_max", "infinite-max", "infinite-claude-max", "infinite_claude_max", "ic6-max", "infinitemax"].includes(c)) {
+      return "infinite_max";
+    }
+    if (["infinite_claude", "infinite-claude", "ic6-pro", "ic6", "infiniteclaude"].includes(c)) {
+      return "infinite_claude";
     }
     if (["pro", "infinite-pro", "infinite_pro", "oi6-pro"].includes(c)) return "pro";
     if (["superbad", "client-mid", "mid", "studio"].includes(c)) return "superbad";
@@ -820,15 +877,22 @@ function buildAutoEnrolledEd25519License(edCheck, keySha, { email = "", boundHwi
   const resolvedEdition = payloadEd
     || (edCheck.tier === "founder" ? "founder"
       : edCheck.tier === "client-basic" ? "basic"
+      : (edCheck.tier === "infinite-max" || edCheck.tier === "infinite-claude-max") ? "infinite_max"
+      : edCheck.tier === "infinite-claude" ? "infinite_claude"
       : edCheck.tier === "infinite-pro" ? "infinite_pro"
       : edCheck.tier === "infinite-basic" ? "infinite"
       : (lblLower.includes("superbad") || lblLower.includes("cockpit")) ? "superbad" : "mid");
+  const defaultMaxHwids = resolvedEdition === "infinite_max"
+    ? 5
+    : resolvedEdition === "infinite_claude"
+      ? 3
+      : (resolvedEdition === "superbad" || resolvedEdition === "infinite_pro") ? 2 : 1;
   return {
     license_id: `LIC-ED-${keySha.slice(0, 10).toUpperCase()}`,
     order_id: null,
     edition: resolvedEdition,
     tier: edCheck.tier,
-    label: edCheck.label || edCheck.tier,
+    label: EDITION_PLANS[resolvedEdition]?.label || edCheck.label || edCheck.tier,
     email,
     key_prefix: edCheck.keyPrefix,
     key_hash: `sha256:${keySha}`,
@@ -836,7 +900,7 @@ function buildAutoEnrolledEd25519License(edCheck, keySha, { email = "", boundHwi
     expires_at: edCheck.expiresAt,
     max_downloads: 10,
     downloads_used: 0,
-    max_hwids: (resolvedEdition === "superbad" || resolvedEdition === "infinite_pro") ? 2 : 1,
+    max_hwids: defaultMaxHwids,
     bound_hwids: boundHwids,
     revoked: false,
     revoked_at: null,
@@ -953,14 +1017,15 @@ function isSecureRequest(req, environment, secureCookiesOption) {
 
 function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUBLIC_KEY_PEM) {
   const rawKey = String(rawKeyInput || "").trim();
-  const m = rawKey.match(/^((?:BC5-(FND|MID|BSC)|OI6-(INF|PRO))-([A-Za-z0-9_-]+))\.([A-Za-z0-9_-]+)$/);
+  const m = rawKey.match(/^((?:(BC5)-(FND|MID|BSC)|(OI6)-(INF|PRO)|(IC6)-(PRO|MAX))-([A-Za-z0-9_-]+))\.([A-Za-z0-9_-]+)$/);
   if (!m) {
-    return { ok: false, isEd25519Format: false, code: "INVALID_FORMAT", error: "Formato fora do padrão BC5/OI6." };
+    return { ok: false, isEd25519Format: false, code: "INVALID_FORMAT", error: "Formato fora do padrão BC5/OI6/IC6." };
   }
   const signingInput = m[1];
-  const tierCode = m[2] || m[3];
-  const payloadB64Url = m[4];
-  const sigB64Url = m[5];
+  const prefixFamily = m[2] || m[4] || m[6];
+  const tierCode = m[3] || m[5] || m[7];
+  const payloadB64Url = m[8];
+  const sigB64Url = m[9];
   let validSig = false;
   try {
     const sigBuf = Buffer.from(sigB64Url, "base64url");
@@ -982,8 +1047,19 @@ function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUB
   if (!payload || payload.issuer !== "juniorplay-local") {
     return { ok: false, isEd25519Format: true, code: "INVALID_ISSUER", error: "Emissor inválido." };
   }
-  const expectedTier = CODE_TO_TIER[tierCode];
-  if (!expectedTier || String(payload.tier || "").toLowerCase() !== expectedTier) {
+  const payloadTier = String(payload.tier || "").trim().toLowerCase();
+  let expectedTier = CODE_TO_TIER[tierCode];
+  if (prefixFamily === "IC6" && tierCode === "MAX") {
+    expectedTier = "infinite-max";
+    if (!["infinite-claude-max", "infinite-max", "infinite_max"].includes(payloadTier)) {
+      return { ok: false, isEd25519Format: true, code: "TIER_MISMATCH", error: "Tier divergente para IC6-MAX." };
+    }
+  } else if (prefixFamily === "IC6") {
+    expectedTier = "infinite-claude";
+    if (!["infinite-claude", "infinite_claude", "infinite-pro"].includes(payloadTier)) {
+      return { ok: false, isEd25519Format: true, code: "TIER_MISMATCH", error: "Tier divergente para IC6-PRO." };
+    }
+  } else if (!expectedTier || payloadTier !== expectedTier) {
     return { ok: false, isEd25519Format: true, code: "TIER_MISMATCH", error: "Tier divergente." };
   }
   const rawExp = Number(payload.exp);
@@ -994,6 +1070,10 @@ function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUB
   const nowMs = Date.now();
   const expired = nowMs >= expMs;
   const daysLeft = expired ? 0 : Math.max(1, Math.ceil((expMs - nowMs) / 86400000));
+  const resolvedEdition = cleanText(
+    payload.edition || (prefixFamily === "IC6" ? (tierCode === "MAX" ? "infinite_max" : "infinite_claude") : ""),
+    32
+  ).toLowerCase();
   return {
     ok: !expired,
     isEd25519Format: true,
@@ -1003,7 +1083,8 @@ function verifyEd25519LicenseKey(rawKeyInput, publicKeyPem = DEFAULT_LICENSE_PUB
     error: expired ? "Licença Ed25519 expirada." : null,
     tier: expectedTier,
     tierCode,
-    edition: cleanText(payload.edition || "", 32).toLowerCase(),
+    prefixFamily,
+    edition: resolvedEdition,
     label: cleanText(payload.label || expectedTier, 120),
     daysLeft,
     expiresAt: new Date(expMs).toISOString(),
@@ -1062,7 +1143,7 @@ function buildPixBrCode({ pixKey, recipient, city, amountCentavos, txid, descrip
 
 function generateLicenseKey(edition) {
   const plan = EDITION_PLANS[edition] || EDITION_PLANS.superbad;
-  const prefix = edition === "beta" ? "BT" : edition === "superbad" ? "SB" : (plan.tierCode || "SB");
+  const prefix = edition === "beta" ? "BT" : edition === "superbad" ? "SB" : (edition === "infinite_claude" || edition === "infinite_max") ? "IC" : (plan.tierCode || "SB");
   const groups = [];
   for (let g = 0; g < 4; g += 1) {
     let part = "";
@@ -1215,7 +1296,11 @@ function createSuperbadSalesApi(options = {}) {
           city: pixCity,
           amountCentavos,
           txid,
-          description: `${requestedEdition.startsWith("infinite") ? "OPENINFINITE" : "BADCLAUDE"} ${requestedEdition.toUpperCase()}`,
+          description: requestedEdition === "infinite_max"
+            ? "INFINITECLAUDE MAX"
+            : requestedEdition === "infinite_claude"
+              ? "INFINITECLAUDE PRO"
+              : `${requestedEdition.startsWith("infinite") ? "OPENINFINITE" : "BADCLAUDE"} ${requestedEdition.toUpperCase()}`,
         });
         const qrDataUrl = await qrcodeLib.toDataURL(brcode, {
           margin: 1,
@@ -3048,8 +3133,20 @@ function createSuperbadSalesApi(options = {}) {
 
       if (method === "GET" && pathname === "/api/superbad/admin/releases") {
         if (!requireAdminOrOwnerProof(req, res, method, pathname)) return;
-        const releases = Array.from(VALID_EDITIONS).map((edition) => {
-          const resolved = resolveReleaseFile(edition);
+        const icResolved = resolveReleaseFile("infinite_claude");
+        const icMaxResolved = resolveReleaseFile("infinite_max");
+        const extraEditions = [];
+        if (icResolved.filePath) extraEditions.push("infinite_claude");
+        if (icMaxResolved.filePath) extraEditions.push("infinite_max");
+        const listedEditions = extraEditions.length > 0
+          ? [...PRIVATE_RELEASE_LIST_EDITIONS, ...extraEditions]
+          : PRIVATE_RELEASE_LIST_EDITIONS;
+        const releases = listedEditions.map((edition) => {
+          const resolved = edition === "infinite_claude"
+            ? icResolved
+            : edition === "infinite_max"
+              ? icMaxResolved
+              : resolveReleaseFile(edition);
           if (resolved.filePath && resolved.stat) {
             return {
               edition,
@@ -3290,8 +3387,20 @@ function createSuperbadSalesApi(options = {}) {
           const includesOpenInfinite = Boolean(
             license.edition === "founder"
             || license.edition === "superbad"
+            || license.edition === "infinite_claude"
+            || license.edition === "infinite_max"
             || tier === "founder"
             || String(tier).startsWith("infinite")
+          );
+          const includesInfiniteClaude = Boolean(
+            license.edition === "infinite_claude"
+            || license.edition === "infinite_max"
+            || license.edition === "founder"
+            || license.edition === "superbad"
+            || tier === "infinite-claude"
+            || tier === "infinite-max"
+            || tier === "infinite-claude-max"
+            || tier === "founder"
           );
 
           return {
@@ -3303,6 +3412,7 @@ function createSuperbadSalesApi(options = {}) {
               licenseId: license.license_id,
               edition: license.edition,
               includesOpenInfinite,
+              includesInfiniteClaude,
               tier,
               planLabel: EDITION_PLANS[license.edition]?.label || license.label || tier,
               email: license.email || email,

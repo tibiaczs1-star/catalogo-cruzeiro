@@ -1,60 +1,50 @@
-# OpenInfinite Subsite (`/openinfinite/`)
+# Infinite Zone — OpenInfinite v6.2 & InfiniteClaude v6.2 (`/openinfinite/`)
 
 ## Overview
 
-Subsistema web oficial do **OpenInfinite v6.1** (Windows 10/11 x64, macOS Apple Silicon e Ubuntu Linux VPS x64), servido em `/openinfinite/` por [`../server.js`](../server.js) e integrado ao motor de autenticação Google, checkout PIX supervisionado pelo proprietário, disparo de e-mail de ativação e licenciamento criptográfico Ed25519 em [`../badclaude-superbad-api.js`](../badclaude-superbad-api.js).
+Subsistema web oficial da **Infinite Zone · Laboratórios de Tecnologia** para os dois softwares 100% nativos (zero HTML / zero WebView — **WinForms GDI+** no Windows, **SwiftUI Liquid Glass** no macOS Apple Silicon e **TUI ANSI + Daemon** `.NET 9 self-contained` no Ubuntu Linux VPS):
+- **OpenInfinite v6.2** (`OI6-INF` `R$ 99,00` Windows / `OI6-PRO` `R$ 159,00` Pro Multi-OS): **Motor Headless OpenCode Swap** em segundo plano ("Só Clicar e Usar", sem abrir GUI do OpenCode e sem expor IPs, túneis ou upstreams), auto-teste contínuo nos 4 perfis white-label `infinite/*` (`infinite/auto`, `infinite/coder`, `infinite/fast`, `infinite/reasoning`, `owned_by: "infinite-zone"`), zero falso positivo (status Verde somente após resposta HTTP 200 real com latência medida) e integração oficial **Nous Research Hermes Agent** no Pro.
+- **InfiniteClaude v6.2** (`IC6-PRO` `R$ 199,00` Multi-OS até 3 máquinas / `IC6-MAX` `R$ 249,00` Multi-CLI Total até 5 máquinas): mesmo Motor Headless OpenCode Swap somado a tradutor Anthropic (`POST /v1/messages` com `system`, `tools`, `tool_use`, `tool_result` e streaming SSE), injeção direta em 1 clique no **Claude Code** (`~/.claude/settings.json` preenchido diretamente com `infinite/coder`, `infinite/reasoning` e `infinite/fast` — com backup e restauração), **Hermes Agent** (`~/.hermes/config.yaml`, sem iniciar daemon) e, no nível `IC6-MAX` / BadClaude 3º nível+, **Escada Multi-CLI Total** auto-detectando e injetando em **OpenCode, Claude Code, Hermes Agent, Local Harness e Codex CLI**.
 
-O pacote reúne vitrine interativa Obsidian WCAG AA, calculadora de economia por milhão/bilhão de tokens (`#economia-tokens`), painel público de telemetria agregada 100% anônima (`#consumo-ao-vivo`), 3 instaladores oficiais com demo gratuita de 1 hora (`.exe`, `.dmg`, `.tar.gz`), integração oficial **Nous Research Hermes Agent** (`#ubuntu-hermes`), jornada de assinatura em 4 passos (`#step1Google` -> `#step2Pix` -> `#step3Receipt` -> `#step4Analysis` -> `#deliveredKeyBox`) e validador online com suporte a link de teste por e-mail (`#validador` + `?test_key=...`).
+Servido em `/openinfinite/` por [`../server.js`](../server.js) e integrado ao motor de autenticação Google, checkout PIX em 4 passos supervisionado pelo proprietário, disparo de e-mail transacional e licenciamento Ed25519 em [`../badclaude-superbad-api.js`](../badclaude-superbad-api.js).
 
 ## Interface
 
-### Rotas HTTP, Sessão Google e Distribuição Estática (`../server.js`)
+### Linguagem Visual Infinite Zone (`./index.html`)
 
-- `[../server.js:pathname === "/openinfinite"]` e `[../server.js:pathname.startsWith("/openinfinite/")]` — Redirecionamento `302` para `/openinfinite/` e entrega estática segura com guarda `oiRoot` e resolução para [`./index.html`](./index.html) (`Cache-Control: no-store`).
-- **Sessão Google & Auth Config (`../server.js`)**:
-  - `GET /api/auth/config`, `GET /api/auth/session`, `POST /api/auth/google` e `POST /api/auth/logout` — Autenticação OAuth/GIS compartilhada com [`../site-google-auth.js`](../site-google-auth.js), usando `SITE_AUTH_SESSION_SECRET` com fallback automático para `SUPERBAD_SESSION_SECRET` e resolução de Client ID via `getEffectiveGoogleClientId()` (`GOOGLE_AUTH_CLIENT_ID || PUBPAID_GOOGLE_CLIENT_ID || superbadSalesApi.getGoogleClientId()`).
-  - `readCatalogoAuthSession`, `isCatalogoGoogleAuthEnabled` e `notifyOwnerWhatsApp` são injetados diretamente em `createSuperbadSalesApi(...)`.
-- `[../server.js:pathname.startsWith("/api/openinfinite/")]` — Encaminha `/api/openinfinite/public-stats` para `superbadSalesApi.handleApi`.
-- `[../server.js:PUBLIC_STATIC_EXTENSIONS]` — Serve em `/downloads/` `.exe`, `.dmg` e `.gz`/`.tgz` (`Content-Type: application/gzip`, pacotes `> 2 MB` via stream fora de `staticFileResponseCache`):
-  - `/downloads/OpenInfinite-Client-Setup.exe` (`37,02 MB` — Windows 10/11 x64)
-  - `/downloads/OpenInfinite-Client-macOS.dmg` (`1,90 MB` — macOS Apple Silicon)
-  - `/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz` (`30,79 MB` — Ubuntu 22.04/24.04 `linux-x64`)
+- **Identidade Oficial**: fundo Preto Carbono (`#070709`), cards Carbono Fosco (`#0d0e13`) com filete prismático espectral fino (`#00B4FF -> #5B2EFF -> #FF00B8 -> #FF7A00 -> #19FF00`), botões Branco Puro (`.btn.ivory`) e Prata Escovada (`.btn.silver`), símbolos vetoriais SVG inline `#izHoodMark` (capuz geométrico branco + `∞` neon prismático) e `#izClaudeMark` (anel espectral + capuz), assinatura **`INFINITE ZONE · LABORATÓRIOS DE TECNOLOGIA`** e conformidade WCAG 2.1 AA.
+- **Seções e Símbolos DOM**:
+  - **Acessibilidade, Navegação e Modais**: `.skip-link` (`#conteudo`), `#topbar`, `#topHelpBtn`, `#topo`, `#hoverHudBtn`, `#hoverBarHint`, `.help-q`, `#shiftIModal`, `#zoomModal`.
+  - **Hero 3D & Simulador (`#painel-live`)**: `#livingStage`, `#particleCanvas`, `#cursorAura`, `#livingCore`, `#badge1`..`#badge3`, WAI-ARIA tabs `#cockpitTabs` (`#tab-shot-0`..`#tab-shot-3` + `#cockpitPanel`, `#featImg`, `#featTitle`, `#featDesc`), `#simEngineBtn`, `.lang-chip[data-lang="python"|"ts"|"go"|"rust"]`, `#langStatus`.
+  - **Vitrine Nativa (`#softwares-nativos`) & Matriz de Instalação (`#instalacao-rapida`)**: cards comparativos `OpenInfinite v6.2` (`OI6-INF`/`OI6-PRO`) e `InfiniteClaude v6.2` (`IC6-PRO`/`IC6-MAX`), 6 botões de download direto e 4 blocos copiáveis de instalação em 1 comando (`#cmdWinPs1`, `#cmdMacSh`, `#cmdUbuntuOi`, `#cmdUbuntuIc` via `[data-copy-cmd]`).
+  - **Economia (`#economia-tokens`), Telemetria Anônima (`#consumo-ao-vivo`) & Linux/Hermes (`#ubuntu-hermes`)**: calculadora 1M..3B tokens (`#tokenPresets`, `#calcMeteredBrl`, `#calcWinSaveBadge`, `#calcProSaveBadge`, `#calcClaudeSaveBadge`), painel `/api/openinfinite/public-stats` (`#liveProfilesGrid`), `#ubuntuInstallCmd`, `#copyUbuntuCmdBtn` e matriz da Escada Multi-CLI de 3 Degraus.
+  - **Planos & Comparador (`#planos`, `#comparador`)**: abas `#comp-tab-demo`, `#comp-tab-win`, `#comp-tab-mac`, `#comp-tab-claude` (`data-comp="infinite_claude"`), `#comp-tab-max` (`data-comp="infinite_max"`) e 4 cartões mensais (`R$ 99,00`, `R$ 159,00`, `R$ 199,00`, `R$ 249,00`).
+  - **Checkout PIX em 4 Passos (`#checkout`) & Validador (`#validador` / `#licenca`)**: `#step1Google` (`[data-google-auth-card]`, `#googleAuthBtnHost`, `#googleConnectedBox`, `#myOrdersRestoreNote`) -> `#step2Pix` (`#orderForm`, `#ordPlan` com `infinite_max`, `infinite_claude`, `infinite_pro`, `infinite`) -> `#step3Receipt` (`#receiptForm`, `#receiptFileInput`, `#receiptE2eInput`) -> `#step4Analysis` (`#analysisTargetEmail`, `#btnWhatsOrder`, `#slaOneHourNotice`) + `#deliveredKeyBox` -> `#validador` (`#verifyKeyInput` + `?test_key=...` aceitando `IC6-MAX-...`, `IC6-PRO-...`, `OI6-PRO-...`, `OI6-INF-...` e `BC5-...`).
 
-### Símbolos de UI, DOM e Fluxo de 4 Passos (`./index.html`)
+### Rotas HTTP, Scripts 1-Prompt e Downloads (`../server.js`)
 
-- **Acessibilidade, Navegação e Modais**: `.skip-link` (`#conteudo`), `#topbar`, `#topHelpBtn`, `#topo`, `#hoverHudBtn`, `#hoverBarHint`, `.help-q`, `#shiftIModal` (`#shiftITitle`, `#shiftIWhat`, `#shiftIHow`, `#shiftICloseTop`, `#shiftICloseBtn`), `#zoomModal` (`#zoomImg`, `#zoomCloseBtn`).
-- **Hero 3D & Simulador (`#painel-live`)**: `#livingStage`, `#particleCanvas`, `#cursorAura`, `#livingCore`, `#badge1`..`#badge3`, WAI-ARIA tabs `#cockpitTabs` (`#tab-shot-0`..`#tab-shot-3` + `#cockpitPanel`, `#stageZoomBtn`, `#featImg`, `#featTitle`, `#featDesc`, `#captionZoomBtn`), `#simEngineBtn`, `.lang-chip[data-lang="python"|"ts"|"go"|"rust"]`, `#langStatus`.
-- **Economia (`#economia-tokens`), Telemetria Anônima (`#consumo-ao-vivo`) & Ubuntu/Hermes (`#ubuntu-hermes`)**:
-  - Calculadora 1M..3B tokens (`R$ 52,20 / 1M` blended): `#tokenPresets`, `#calcRefRateLabel`, `#calcVolTitle`, `#calcMeteredBrl`, `#calcWinSaveBadge`, `#calcProSaveBadge`, `renderTokenCalc(...)`.
-  - Painel anônimo: `#liveStatsUpdated`, `#refreshStatsBtn`, `#liveTotalTokens`, `#liveCacheTokens`, `#liveSavedBrl`, `#liveClientsReq`, `#liveProfilesGrid`, `fetchPublicStats()`.
-  - Linux VPS & Hermes: `#ubuntuInstallCmd`, `#copyUbuntuCmdBtn`, `#ubuntuCmdFeedback`.
-- **Bento (`#recursos`), Fluxo (`#como-funciona`), Comparador (`#comparador`) e FAQ (`#faq`)**: `#cascadeSimBtn`, `#cascadeList`, `#cascadeStatusTxt`, `#scrubBars`, `#scrubVal`, `#scrubMeta`, `#miniThemePreview`, `#ramOptimizeBtn`, `#ramDemoVal`, `#comp-tab-demo` / `#comp-tab-win` / `#comp-tab-mac` (`#compPanel`), acordeão CSS Grid `0fr -> 1fr` (`#faq-btn-1`..`#faq-btn-4`, `#faq-panel-1`..`#faq-panel-4`).
-- **Checkout PIX em 4 Passos (`#checkout`) & Validador (`#validador`)**:
-  - **Passo 1 — Login Google (`#step1Google`)**: `[data-google-auth-card]`, `#step1StateTag`, `#googleAuthLead`, `#googleAuthBtnHost`, `#googleConnectedBox` (`#googleUserAvatar`, `#googleUserInitial`, `#googleUserName`, `#googleUserEmail`, `#googleLogoutBtn`), `#googleFallbackNotice`, `#myOrdersRestoreNote`, funções `initAuthCheck()`, `updateGoogleAuthUI(detail)` e `syncMyGoogleOrders()`.
-  - **Passo 2 — Geração do PIX (`#step2Pix`)**: `#copyPixBtn`, `#pixCopyFeedback`, `#orderForm` (`#ordPlan`, `#ordName`, `#ordContact`, `#orderSubmitBtn`), `#orderErrorBox` (`#retryOrderBtn`), `#orderResultBox` (`#orderLiveStatusBadge`, `#orderResultCode`, `#copyBrcodeBtn`, `#brcodeCopyFeedback`, `#orderPixQrWrap`), `submitOrder()`.
-  - **Passo 3 — Envio do Comprovante (`#step3Receipt`)**: `#receiptForm` (`#receiptFileInput`, `#receiptE2eInput`, `#receiptNoteInput`, `#receiptSubmitBtn`), `#receiptFeedbackBox`, funções `readFileAsBase64(file)` e `submitReceipt()`.
-  - **Passo 4 — Análise & Ativação pelo Proprietário (`#step4Analysis` + `#deliveredKeyBox`)**: `#step4SlaBadge`, `#step4Headline`, `#receiptAnalysisSummary`, `#analysisTargetEmail`, `#btnWhatsOrder` (ativação imediata via WhatsApp), `#slaOneHourNotice` (SLA de até 1h para ativação no `Dashboard Control` e envio por e-mail), `#checkOrderNowBtn`, `#pollHintTxt`, e `#deliveredKeyBox` (`#deliveredKeyValue`, `#copyDeliveredKeyBtn`, `#testDeliveredKeyBtn`, `#deliveredKeyFeedback`, controlado por `isKeyUnlockedStatus` e `syncAnalysisAndDeliveryUI`).
-  - **Validador Online (`#validador` / âncora `#licenca`)**: `#verifyForm` (`#verifyKeyInput`, `#verifySubmitBtn`), `#licResultBox` (botão dinâmico JS `retryVerifyBtn` em erro de rede), auto-preenchimento e validação ao abrir `?test_key=<CHAVE>#validador`, função `submitVerify()`.
+- `[../server.js:pathname === "/openinfinite"]` e `[../server.js:pathname.startsWith("/openinfinite/")]` — Redirecionamento `302` e entrega estática segura com guarda `oiRoot` para [`./index.html`](./index.html).
+- **4 Rotas Instaladoras 1-Comando (`text/plain; charset=utf-8`, `X-Content-Type-Options: nosniff`, com bootstrap silencioso do runtime `opencode` quando ausente, zero GUI aberta)**:
+  - `GET /install-openinfinite.sh` -> `curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-openinfinite.sh | bash` (garante `opencode` headless, baixa e instala `/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz`).
+  - `GET /install-infiniteclaude.sh` -> `curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-infiniteclaude.sh | bash` (garante `opencode` headless, baixa e instala `/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz`).
+  - `GET /install-mac.sh` -> `curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-mac.sh | bash` (garante `opencode` headless, monta via `hdiutil` `/downloads/OpenInfinite-Client-macOS.dmg` e `/downloads/InfiniteClaude-Client-macOS.dmg` em `/Applications`).
+  - `GET /install-win.ps1` -> `irm https://catalogo-cruzeiro-web.onrender.com/install-win.ps1 | iex` (garante `opencode` headless silenciosamente se faltar, baixa e executa `/downloads/OpenInfinite-Client-Setup.exe` e `/downloads/InfiniteClaude-Client-Setup.exe`).
+- **6 Pacotes Nativos em `/downloads/`**:
+  - Windows: `/downloads/OpenInfinite-Client-Setup.exe`, `/downloads/InfiniteClaude-Client-Setup.exe`
+  - macOS: `/downloads/OpenInfinite-Client-macOS.dmg`, `/downloads/InfiniteClaude-Client-macOS.dmg`
+  - Ubuntu VPS (`Content-Type: application/gzip`): `/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz`, `/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz`
+- **Sessão Google (`../site-google-auth.js`)**: `GET /api/auth/config`, `GET /api/auth/session`, `POST /api/auth/google`, `POST /api/auth/logout`.
 
 ### Fronteiras de API (`../badclaude-superbad-api.js`)
 
 | Método & Rota | Autenticação / Limite | Contrato de Entrada | Contrato de Saída / Comportamento |
 | :--- | :--- | :--- | :--- |
-| `GET/POST /api/superbad/admin/auth-config` | `requireAdminOrOwnerProof` | `POST`: `{ google_client_id: string }` | Lê ou persiste `store.auth_config.google_client_id` sincronizado pelo `Dashboard Control`. |
-| `GET /api/superbad/my-orders` | Sessão Google (`readCatalogoAuthSession`) | Cookie de sessão Google | Restaura pedidos vinculados ao `google_sub`/`google_email` autenticado (`license_key` retornada **apenas** quando `approved`/`delivered`). |
-| `POST /api/superbad/orders` | Sessão Google quando `isGoogleAuthEnabled()` ativo (`401 GOOGLE_AUTH_REQUIRED`) | `{ buyer_name, buyer_contact, requested_edition: "infinite" \| "infinite_pro" }` | Cria pedido `pending_pix` vinculado a `google_sub`/`google_email`/`google_name`/`buyer_email` e retorna `201` com BR Code EMV e QR Code Data URL. |
-| `POST /api/superbad/orders/:orderId/receipt` | `order_secret` / `x-order-secret` (`MAX_RECEIPT_JSON_BYTES = 4 MB` exclusivo na rota) | `{ order_secret, receipt_note?, e2e_id?, receipt_file_b64?, receipt_file_mime?, receipt_file_name? }` (`PNG`, `JPEG`, `WEBP`, `PDF` até `3 MB`) | Valida *magic bytes* reais (`parseReceiptAttachment`), executa `analyzeReceiptSubmission` (`SHA-256`, anti-duplicidade `is_duplicate`, padrão BACEN E2E `E`+31 chars e pistas de valor/recebedora), grava privado em `data/superbad-receipts/`, aciona `notifyOwnerWhatsApp` e **jamais auto-aprova**: retorna `status: "receipt_submitted"`, `auto_approved: false`, `awaiting_owner_activation: true`, `sla_minutes: 60` e `whatsapp_immediate_url`. |
-| `GET /api/superbad/orders/:orderId` | `?order_secret=...` ou `x-order-secret` | Query/Header `order_secret` | Retorna status público (`pending_pix`, `receipt_submitted`, `approved`, `delivered`), `receipt_analysis`, `has_receipt_file` e descriptografa `license_key` **somente** quando `status` é `"approved"` ou `"delivered"`. |
-| `GET /api/superbad/admin/orders/:orderId/receipt` | `requireAdminOrOwnerProof` | `?disposition=inline` opcional | Serve o arquivo privado do comprovante para inspeção no `Dashboard Control` com `X-Content-Type-Options: nosniff` e `Content-Security-Policy: ... sandbox`. |
-| `POST /api/superbad/admin/orders/:orderId/deliver-key` (e `/admin/licenses/register`) | `requireAdminOrOwnerProof` | `{ license_key \| raw_license_key, edition?, buyer_email?, email_delivery_override? }` | Cifra a chave Ed25519 assinada offline pelo `Dashboard Control` (`AES-256-GCM`), marca `status: "delivered"` e dispara `sendActivationEmail` (zero-dependência via `node:tls` SMTPS 465 Gmail / Resend / Brevo) com saudação Google, chave e link `?test_key=<CHAVE>#validador` (URLs com chave são redigidas antes de gravar no disco). |
-| `GET/POST /api/superbad/admin/key-pool(/stock)` e `POST /api/superbad/webhooks/pix` | Admin/Owner Proof (`key-pool`) e `PIX_WEBHOOK_SECRET` via `timingSafeEqual` (`webhooks/pix`) | Lote `{ edition, keys[] }` ou payload PIX `{ e2e_id, amount_centavos? }` | Estoque opcional cifrado `AES-256-GCM` em repouso (`encryptLicenseKeyAtRest`) e conciliação de webhook PIX. |
-| `POST /api/v1/licenses/verify` | Público (`256 KB`) | `{ key, hwid, email?, hostname?, version? }` | Verifica assinatura Ed25519 (`OI6-INF`, `OI6-PRO`, `BC5-*`) ou chave registrada, revogação, expiração, `max_hwids` e `includesOpenInfinite`. |
-| `POST /api/v1/telemetry/heartbeat` e `GET /api/openinfinite/public-stats` | Público (CORS `*`, cache `10s` em `public-stats`) | Heartbeat: `{ tokens_total?, cache_tokens?, requests?, profile? }` | Contabiliza telemetria sanitizada por perfil e expõe agregados **100% anônimos** e economia em R$ (`R$ 52,20/1M`), com zero vazamento de chaves, prefixos, e-mails, HWIDs, hostnames ou IPs. |
-
-### Clientes Nativos, Ubuntu Linux VPS e Hermes Agent
-
-- **Ubuntu Linux VPS (`OpenInfiniteLinux/`, `.NET 9` `linux-x64`)**: `/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz` (`30,79 MB`, single-file comprimido + `Microsoft.Data.Sqlite 9.0.0`, `install-ubuntu-vps.sh` Ubuntu 22.04/24.04 sem `root`, unit `systemd --user` opcional desativada por padrão, HWID `/etc/machine-id`, Painel `127.0.0.1:4115`, Motor `127.0.0.1:4114/v1`, rejeição estrita de `OI6-INF`).
-- **Nous Research Hermes Agent (CLI + Harness)**: governado por `HasProOrHigher()` — liberado apenas em **Pro Multi-OS** (`OI6-PRO`, `R$ 159,00`), **SuperBad / Cockpit Pro Nível 3** (`BC5-MID`), **Fundador VIP** (`BC5-FND`) e `editor` (bloqueado na Demo 1h e em `OI6-INF` `R$ 99,00`), gerando `infinite-hermes` / `infinite-hermes.cmd` (`127.0.0.1:4114/v1`) e `~/.hermes/openinfinite-endpoint.json` (`supportedHarnesses: ["opencode", "hermes"]`, `autoStartDaemon: false`), **sem jamais auto-iniciar processos/daemons do Hermes**.
+| `POST /api/superbad/orders` | Sessão Google quando `isGoogleAuthEnabled()` ativo (`401 GOOGLE_AUTH_REQUIRED`) | `{ buyer_name, buyer_contact, requested_edition: "infinite" \| "infinite_pro" \| "infinite_claude" \| "infinite_max" }` | Cria pedido `pending_pix` (`R$ 99,00`, `R$ 159,00`, `R$ 199,00` ou `R$ 249,00`) com BR Code EMV e QR Code Data URL. |
+| `POST /api/superbad/orders/:orderId/receipt` | `order_secret` / `x-order-secret` (`4 MB` JSON; anexo até `3 MB`) | `{ order_secret, receipt_note?, e2e_id?, receipt_file_b64?, receipt_file_mime? }` | Valida *magic bytes* (`PNG`, `JPEG`, `WEBP`, `PDF`), anti-duplicidade `SHA-256`, padrão BACEN E2E, alerta `notifyOwnerWhatsApp` e mantém `status: "receipt_submitted"` (`auto_approved: false`). |
+| `GET /api/superbad/orders/:orderId` e `GET /api/superbad/my-orders` | `order_secret` ou Sessão Google | Query/Header `order_secret` ou cookie Google | Descriptografa `license_key` (`OI6-*`, `IC6-PRO-*` ou `IC6-MAX-*`) **somente** quando `status` é `"approved"` ou `"delivered"`. |
+| `POST /api/superbad/admin/orders/:orderId/deliver-key` e `GET/POST /api/superbad/admin/key-pool(/stock)` | `requireAdminOrOwnerProof` | Lote/chave Ed25519 (`OI6-INF`, `OI6-PRO`, `IC6-PRO`, `IC6-MAX`, `BC5-*`) | Estoque e entrega cifrados com `AES-256-GCM` em repouso + disparo `sendActivationEmail` com link `?test_key=<CHAVE>#validador` (redigido em disco). |
+| `POST /api/v1/licenses/verify` | Público (`256 KB`) | `{ key, hwid, email?, hostname?, version? }` | Valida assinatura Ed25519 (`IC6-MAX`, `IC6-PRO`, `OI6-PRO`, `OI6-INF`, `BC5-*`), `max_hwids`, `includesOpenInfinite` e `includesInfiniteClaude`. |
+| `POST /api/v1/telemetry/heartbeat` e `GET /api/openinfinite/public-stats` | Público (CORS `*`, cache `10s`) | Heartbeat anônimo por perfil (`demo`, `infinito`, `pro`, `infinite_claude`, `infinite_max`, `superbad`, `founder`) | Agregados 100% anônimos e economia em R$ vs API tarifada (`R$ 52,20/1M`), zero PII/chaves/IPs. |
 
 ### Ativos Estáticos Locais (`assets/`)
 
@@ -62,23 +52,17 @@ O pacote reúne vitrine interativa Obsidian WCAG AA, calculadora de economia por
 
 ## Invariants
 
-- **Regra de Ouro de Ativação Humana**: Nenhum envio de comprovante em `POST /api/superbad/orders/:orderId/receipt` libera chave automaticamente (`auto_approved` é sempre `false` e `status` permanece `"receipt_submitted"`). A chave Ed25519 só é assinada e ativada pelo proprietário no `Dashboard Control` local (`master-license-private.pem` 100% offline), disparando o e-mail de ativação (`?test_key=<CHAVE>#validador`, SLA de até 1h ou imediato via WhatsApp) e liberando `#deliveredKeyBox` na página.
-- **Planos Comerciais & Elegibilidade (`[../badclaude-superbad-api.js:EDITION_PLANS]`)**:
-  - `infinite` (*Windows*): `R$ 99,00` (`OI6-INF`, `30 dias`, `max_hwids: 1`, Windows-only, sem Hermes).
-  - `infinite_pro` (*Pro Multi-OS*): `R$ 159,00` (`OI6-PRO`, `30 dias`, `max_hwids: 2`, Windows + macOS + Ubuntu VPS + Hermes Agent CLI/Harness).
-  - **Demo 1h & `BC5` Nível 3+**: Demo gratuita de 1h nos 3 instaladores; `BC5` 3º nível+ (`superbad` / **Cockpit Pro** e `founder` / **Fundador VIP**) tem `includesOpenInfinite: true` (`BC5` Nível 1/2 retorna `false`).
-- **Privacidade, Criptografia em Repouso & Higiene WCAG AA**:
-  - Zero chaves em texto puro em `data/superbad-orders.json` (`AES-256-GCM` via HKDF-SHA256 + redação de `?test_key=` nos metadados de e-mail); `data/superbad-receipts/` privado; zero PII em `GET /api/openinfinite/public-stats`.
-  - Zero `alert()`, zero `\uF8FF`, `#livingCore` 3D ativo mesmo sob `prefers-reduced-motion`, zero menção a `4114`, `demo_lock` ou `shift_i.png` no HTML público.
-
-## Side Effects
-
-- **Cliente Navegador (`./index.html`)**: chamadas a `/api/auth/{config,session,google,logout}`, `/api/superbad/my-orders`, `/api/openinfinite/public-stats`, `/api/superbad/orders`, `/api/superbad/orders/:orderId/receipt` (base64 até 3 MB), polling `/api/superbad/orders/:orderId?order_secret=...` e `/api/v1/licenses/verify`; estado local do pedido (`saveActiveOrder`), clipboard (`copyTextSafely`) e downloads `.exe`/`.dmg`/`.tar.gz`.
-- **Servidor (`../badclaude-superbad-api.js`)**: escrita atômica serializada em `data/superbad-orders.json`, armazenamento privado de comprovantes verificados por *magic bytes* em `data/superbad-receipts/`, notificação WhatsApp ao proprietário (`notifyOwnerWhatsApp`) e envio de e-mail transacional TLS (`sendActivationEmail`).
+- **Regra de Ouro de Ativação Humana**: Nenhum envio de comprovante libera chave sozinho (`auto_approved: false`). A ativação ocorre exclusivamente via `Dashboard Control` (com suporte nativo a geração, estoque no pool e entrega de `IC6-PRO` / `IC6-MAX`), enviando e-mail com `?test_key=<CHAVE>#validador`.
+- **Planos Comerciais (`EDITION_PLANS`) & Escada Multi-CLI**:
+  - `infinite`: `R$ 99,00` (`OI6-INF`, `30d`, `max_hwids: 1`, Windows, OpenCode).
+  - `infinite_pro`: `R$ 159,00` (`OI6-PRO`, `30d`, `max_hwids: 2`, Win + Mac + Ubuntu + OpenCode + Hermes).
+  - `infinite_claude`: `R$ 199,00` (`IC6-PRO`, `30d`, `max_hwids: 3`, Win + Mac + Ubuntu + Claude Code `~/.claude/settings.json` em `infinite/coder`/`reasoning`/`fast` + OpenCode + Hermes Pro+, `includesInfiniteClaude: true`).
+  - `infinite_max`: `R$ 249,00` (`IC6-MAX`, `30d`, `max_hwids: 5`, Win + Mac + Ubuntu + Escada Multi-CLI total auto-detectando OpenCode, Claude Code, Hermes Agent `~/.hermes/config.yaml` sem iniciar daemon, Local Harness e Codex CLI, `includesInfiniteClaude: true`).
+  - `superbad` (3º nível) e `founder` (VIP): `includesOpenInfinite: true` e `includesInfiniteClaude: true`.
+- **Segurança & Higiene**: zero chaves em texto puro no disco (`AES-256-GCM`), zero PII em `public-stats`, zero `alert()`, zero `\uF8FF`, zero modelo externo simulado e zero exposição da porta local no HTML público.
 
 ## Verification
 
-- Run (a partir de `C:\Users\junio\catalogo-cruzeiro`):
-  ```bash
-  node --test scripts/__tests__/openinfinite-subsite.test.js scripts/__tests__/openinfinite-automation.test.js scripts/__tests__/superbad-sales.test.js
-  ```
+```bash
+node --test scripts/__tests__/openinfinite-subsite.test.js scripts/__tests__/openinfinite-automation.test.js scripts/__tests__/superbad-sales.test.js
+```

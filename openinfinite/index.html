@@ -3,41 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenInfinite v6.1 — IA Contínua por Valor Fixo · Windows, macOS &amp; Ubuntu VPS</title>
-  <meta name="description" content="Pare de levar susto com fatura por token. OpenInfinite v6.1 entrega fluxo contínuo HY4 #1, Hermes Agent oficial no Pro, telemetria SQLite real, Login Google e entrega de chave no seu e-mail.">
+  <title>Infinite Zone · OpenInfinite v6.2 &amp; InfiniteClaude v6.2 — Software 100% Nativo Multi-OS</title>
+  <meta name="description" content="Infinite Zone · Laboratórios de Tecnologia. OpenInfinite v6.2 e InfiniteClaude v6.2 100% nativos (WinForms GDI+, SwiftUI Liquid Glass, TUI/Daemon Ubuntu VPS) com Motor Headless OpenCode Swap, Claude Code e Escada Multi-CLI (IC6-PRO / IC6-MAX).">
   <style>
     :root {
-      /* Surface & Obsidian Palette (Tracle-inspired high contrast) */
-      --bg: #05050a;
-      --surface: #0b0c14;
-      --surface-elevated: #121422;
-      --surface-soft: rgba(255, 255, 255, 0.035);
-      --surface-hover: rgba(255, 255, 255, 0.065);
+      /* Infinite Zone Carbon Black & Matte Surface Palette */
+      --bg: #070709;
+      --surface: #0d0e13;
+      --surface-elevated: #14161e;
+      --surface-soft: rgba(255, 255, 255, 0.04);
+      --surface-hover: rgba(255, 255, 255, 0.075);
+
+      /* Spectral Prismatic Identity (#00B4FF -> #5B2EFF -> #FF00B8 -> #FF7A00 -> #19FF00) */
+      --spec-cyan: #00B4FF;
+      --spec-violet: #5B2EFF;
+      --spec-magenta: #FF00B8;
+      --spec-orange: #FF7A00;
+      --spec-lime: #19FF00;
+      --prismatic-gradient: linear-gradient(90deg, #00B4FF 0%, #5B2EFF 25%, #FF00B8 50%, #FF7A00 75%, #19FF00 100%);
 
       /* Borders */
-      --border: rgba(255, 255, 255, 0.09);
-      --border-hi: rgba(255, 255, 255, 0.24);
-      --border-accent: rgba(129, 140, 248, 0.52);
+      --border: rgba(255, 255, 255, 0.10);
+      --border-hi: rgba(255, 255, 255, 0.26);
+      --border-accent: rgba(255, 255, 255, 0.42);
 
-      /* Typography & WCAG AA Ink Tokens */
-      --ink: #f5f7fb;
-      --ink-secondary: #d4d9e8;
-      --muted: #a1a8bd;
-      --dim: #8b93a9;
+      /* Typography & Strict WCAG 2.1 AA/AAA Contrast Tokens */
+      --ink: #ffffff;
+      --ink-secondary: #e2e6f0;
+      --silver: #d4d9e3;
+      --muted: #a6aebe;
+      --dim: #8f98ab;
 
-      /* Semantic Accents */
-      --accent: #818cf8;
-      --accent-solid: #4f57cc;
-      --accent-solid-hover: #5c64db;
-      --accent-soft: rgba(129, 140, 248, 0.14);
+      /* Semantic Status Tokens */
+      --accent: #38bdf8;
+      --accent-soft: rgba(0, 180, 255, 0.13);
       --emerald: #10b981;
       --emerald-ink: #6ee7b7;
-      --emerald-bg: #0b2920;
+      --emerald-bg: #09261d;
       --amber: #fbbf24;
       --amber-bg: rgba(245, 158, 11, 0.14);
       --danger: #fb7185;
-      --danger-bg: rgba(244, 63, 94, 0.12);
-      --danger-border: rgba(251, 113, 133, 0.45);
+      --danger-bg: rgba(244, 63, 94, 0.13);
+      --danger-border: rgba(251, 113, 133, 0.48);
 
       /* Spacing & Radius Scale */
       --space-1: 0.25rem;
@@ -49,8 +56,8 @@
       --space-8: 2rem;
       --radius-sm: 8px;
       --radius-md: 12px;
-      --radius-lg: 14px;
-      --radius-xl: 18px;
+      --radius-lg: 15px;
+      --radius-xl: 20px;
       --radius-pill: 999px;
 
       /* Type & Motion */
@@ -58,7 +65,7 @@
       --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
       --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-snap: cubic-bezier(0.4, 0, 0.2, 1);
-      --focus-ring: 2px solid #a5b4fc;
+      --focus-ring: 2px solid #00B4FF;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,7 +90,7 @@
     .skip-link {
       position: fixed; top: -100px; left: 16px; z-index: 1200;
       padding: 10px 16px; border-radius: var(--radius-sm);
-      background: var(--ink); color: var(--bg); font-weight: 700; text-decoration: none;
+      background: #ffffff; color: #070709; font-weight: 800; text-decoration: none;
       transition: top 160ms var(--ease-snap);
     }
     .skip-link:focus { top: 14px; outline: var(--focus-ring); outline-offset: 2px; }
@@ -93,54 +100,67 @@
 
     :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 
-    #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #validador, #licenca, #faq {
+    #topo, #conteudo, #softwares-nativos, #instalacao-rapida, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #validador, #licenca, #faq {
       scroll-margin-top: 96px;
     }
 
-    /* Single refined top-vault glow (Tracle obsidian architecture) */
+    /* Subtle Ambient Carbon + Spectral Vault Glow */
     .vault-light {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
-        radial-gradient(62% 38% at 50% -4%, rgba(129, 140, 248, 0.15), rgba(5, 5, 10, 0) 70%),
-        radial-gradient(40% 24% at 50% 42%, rgba(255, 255, 255, 0.025), transparent 72%);
+        radial-gradient(56% 32% at 50% -6%, rgba(0, 180, 255, 0.09), rgba(91, 46, 255, 0.05) 38%, rgba(7, 7, 9, 0) 74%),
+        radial-gradient(38% 22% at 50% 38%, rgba(255, 255, 255, 0.02), transparent 72%);
     }
 
-    /* Hairline grid texture fading cleanly to obsidian edges */
     .grid-backdrop {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.26;
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.22;
       background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
       background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 75% 48% at 50% 18%, #000 10%, transparent 78%);
-      -webkit-mask-image: radial-gradient(ellipse 75% 48% at 50% 18%, #000 10%, transparent 78%);
+      mask-image: radial-gradient(ellipse 75% 48% at 50% 16%, #000 10%, transparent 78%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 48% at 50% 16%, #000 10%, transparent 78%);
     }
 
-    /* FLOATING PILL NAVBAR */
+    /* FLOATING CARBON PILL NAVBAR */
     .topbar {
       position: sticky; top: 14px; z-index: 900; padding: 0 16px; pointer-events: none;
     }
     .topbar-inner {
       pointer-events: auto;
-      max-width: 1160px; margin: 0 auto; padding: 8px 12px 8px 16px;
-      background: rgba(11, 12, 20, 0.86);
-      backdrop-filter: blur(18px) saturate(160%);
-      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      max-width: 1180px; margin: 0 auto; padding: 8px 12px 8px 16px;
+      background: rgba(13, 14, 19, 0.90);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
       border: 1px solid var(--border);
       border-radius: var(--radius-pill);
       display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.68), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      position: relative; overflow: hidden;
       transition: border-color 180ms var(--ease-snap), background-color 180ms var(--ease-snap);
     }
-    .topbar.scrolled .topbar-inner {
-      background: rgba(8, 9, 15, 0.96);
-      border-color: rgba(255, 255, 255, 0.16);
+    .topbar-inner::after {
+      content: ""; position: absolute; left: 24px; right: 24px; bottom: 0; height: 1.5px;
+      background: var(--prismatic-gradient); opacity: 0.72; pointer-events: none;
     }
-    .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
-    .brand img { width: 28px; height: 28px; border-radius: var(--radius-sm); }
+    .topbar.scrolled .topbar-inner {
+      background: rgba(7, 7, 9, 0.97);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .brand-mark { width: 32px; height: 32px; flex-shrink: 0; display: block; }
+    .brand-lockup { display: flex; flex-direction: column; line-height: 1.05; }
+    .brand-wordmark {
+      font-weight: 900; font-size: 13.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #ffffff;
+    }
+    .brand-lab {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 2px;
+    }
     .brand-ver {
-      font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--muted);
-      padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--border); background: var(--surface-soft);
+      font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink-secondary);
+      padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--border-hi); background: var(--surface-soft);
     }
     .nav-links { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
     .nav-link {
@@ -151,71 +171,102 @@
     .nav-link:hover { color: var(--ink); background: var(--surface-hover); }
     .nav-actions { display: flex; align-items: center; gap: 8px; }
 
-    /* CRISP BUTTONS */
+    /* PURE WHITE & BRUSHED SILVER BUTTONS (INFINITE ZONE HARDWARE PALETTE) */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       font-family: var(--font); font-weight: 700; font-size: 13px; padding: 10px 18px;
       border-radius: var(--radius-md); cursor: pointer; text-decoration: none;
       border: 1px solid var(--border-hi);
       background: var(--surface-elevated); color: var(--ink);
-      transition: transform 180ms var(--ease-spring), background-color 160ms var(--ease-snap), border-color 160ms var(--ease-snap), opacity 160ms var(--ease-snap);
+      transition: transform 180ms var(--ease-spring), background-color 160ms var(--ease-snap), border-color 160ms var(--ease-snap), box-shadow 160ms var(--ease-snap), opacity 160ms var(--ease-snap);
     }
-    .btn:hover:not(:disabled) { background: #181c30; border-color: rgba(255, 255, 255, 0.36); transform: translateY(-1px); }
+    .btn:hover:not(:disabled) { background: #1d202b; border-color: rgba(255, 255, 255, 0.45); transform: translateY(-1px); }
     .btn:active:not(:disabled) { transform: scale(0.98); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .btn.ivory {
-      background: var(--ink); color: var(--bg); border-color: #ffffff;
+      background: #ffffff; color: #070709; border-color: #ffffff;
+      box-shadow: 0 8px 26px rgba(255, 255, 255, 0.12);
+    }
+    .btn.ivory:hover:not(:disabled) { background: #eef2f7; border-color: #ffffff; }
+    .btn.silver, .btn.accent {
+      background: linear-gradient(180deg, #f4f6fa 0%, #d5dae5 100%);
+      color: #070709; border-color: #ffffff;
       box-shadow: 0 8px 24px rgba(255, 255, 255, 0.10);
     }
-    .btn.ivory:hover:not(:disabled) { background: #ffffff; }
-    .btn.accent {
-      background: var(--accent-solid); color: #ffffff; border-color: rgba(165, 180, 252, 0.45);
-      box-shadow: 0 8px 26px rgba(79, 87, 204, 0.28);
+    .btn.silver:hover:not(:disabled), .btn.accent:hover:not(:disabled) {
+      background: linear-gradient(180deg, #ffffff 0%, #e4e8f0 100%);
     }
-    .btn.accent:hover:not(:disabled) { background: var(--accent-solid-hover); }
-    .btn.emerald { background: var(--emerald-bg); border-color: rgba(16, 185, 129, 0.58); color: var(--emerald-ink); }
-    .btn.emerald:hover:not(:disabled) { background: #10382c; }
-    .btn.ghost { background: transparent; border-color: var(--border); color: var(--muted); }
-    .btn.ghost:hover:not(:disabled) { color: var(--ink); background: var(--surface-hover); }
+    .btn.emerald { background: var(--emerald-bg); border-color: rgba(16, 185, 129, 0.62); color: var(--emerald-ink); }
+    .btn.emerald:hover:not(:disabled) { background: #0e382b; }
+    .btn.ghost { background: transparent; border-color: var(--border); color: var(--silver); }
+    .btn.ghost:hover:not(:disabled) { color: #ffffff; background: var(--surface-hover); border-color: var(--border-hi); }
     .btn.pill { border-radius: var(--radius-pill); }
     .btn.sm { padding: 7px 13px; font-size: 12px; border-radius: var(--radius-sm); }
 
     .help-q {
       display: inline-flex; align-items: center; justify-content: center;
       width: 24px; height: 24px; border-radius: 50%; cursor: help; flex-shrink: 0;
-      background: var(--surface-elevated); color: var(--muted); border: 1px solid var(--border-hi);
+      background: var(--surface-elevated); color: var(--silver); border: 1px solid var(--border-hi);
       font-weight: 800; font-size: 11.5px;
       transition: color 160ms, border-color 160ms, transform 160ms var(--ease-spring);
     }
-    .help-q:hover { color: var(--ink); border-color: var(--accent); transform: scale(1.06); }
+    .help-q:hover { color: #ffffff; border-color: #ffffff; transform: scale(1.06); }
 
     /* MAIN WRAP */
     .wrap {
       position: relative; z-index: 1;
-      max-width: 1160px; margin: 0 auto; padding: 48px 20px 104px;
-      display: flex; flex-direction: column; gap: 76px;
+      max-width: 1180px; margin: 0 auto; padding: 44px 20px 104px;
+      display: flex; flex-direction: column; gap: 72px;
     }
 
-    /* SPOTLIGHT SURFACE */
+    /* MATTE CARBON CARD WITH THIN PRISMATIC SPECTRAL FILLET */
     .spotlight-card {
       position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
       transition: border-color 200ms var(--ease-snap), transform 220ms var(--ease-spring), background-color 200ms var(--ease-snap);
     }
     .spotlight-card::before {
       content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(360px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.06), transparent 72%);
+      background: radial-gradient(380px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.055), transparent 72%);
+    }
+    .spotlight-card::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: var(--prismatic-gradient); opacity: 0.88; pointer-events: none;
     }
     .spotlight-card:hover { border-color: var(--border-hi); }
 
-    /* HERO */
+    /* INFINITE ZONE BRAND SIGNATURE HERO */
     .hero {
       display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;
     }
+    .iz-hero-lockup {
+      display: inline-flex; align-items: center; gap: 16px;
+      padding: 10px 20px 10px 14px; border-radius: var(--radius-xl);
+      background: #0b0c11; border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      position: relative; overflow: hidden;
+    }
+    .iz-hero-lockup::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: var(--prismatic-gradient);
+    }
+    .iz-hero-lockup-text { text-align: left; display: flex; flex-direction: column; gap: 2px; }
+    .iz-hero-title {
+      font-size: 17px; font-weight: 900; letter-spacing: 0.12em; color: #ffffff; text-transform: uppercase; line-height: 1.05;
+    }
+    .iz-hero-sub {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.22em; color: var(--silver); text-transform: uppercase;
+    }
+    .iz-hero-motto {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+    }
+    .spectral-dots { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; }
+    .spectral-dots i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
     .hero-kicker {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 5px 14px; border-radius: var(--radius-pill);
@@ -223,40 +274,87 @@
       font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--ink-secondary);
     }
-    .kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+    .kicker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--spec-lime); box-shadow: 0 0 10px var(--spec-lime); }
 
     .hero h1 {
       font-size: clamp(31px, 4.6vw, 54px);
       font-weight: 800; line-height: 1.08; letter-spacing: -0.035em;
-      color: var(--ink); max-width: 25ch;
+      color: var(--ink); max-width: 26ch;
     }
-    .hero h1 span { color: var(--muted); font-weight: 700; }
+    .hero h1 span { color: var(--silver); font-weight: 700; }
     .hero-sub {
-      font-size: 15.5px; color: var(--muted); max-width: 64ch; line-height: 1.62;
+      font-size: 15.5px; color: var(--ink-secondary); max-width: 68ch; line-height: 1.62;
     }
     .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .hero-meta-strip {
       display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
       font-size: 12.5px; color: var(--muted);
     }
-    .hero-meta-strip strong { color: var(--ink); font-weight: 700; }
+    .hero-meta-strip strong { color: #ffffff; font-weight: 700; }
+
+    /* TWO NATIVE SOFTWARES SHOWCASE (#softwares-nativos) */
+    .dual-software-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .software-card { padding: 26px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+    .software-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .software-id { display: flex; align-items: center; gap: 14px; }
+    .software-icon-shell {
+      width: 56px; height: 56px; border-radius: 14px; background: #070709;
+      border: 1px solid rgba(255, 255, 255, 0.16); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+    }
+    .software-card h3 { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: #ffffff; }
+    .software-sub { font-size: 12.5px; color: var(--silver); font-family: var(--mono); }
+    .native-arch-strip {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .arch-pill {
+      font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink-secondary);
+      padding: 4px 10px; border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .software-points { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-secondary); }
+    .software-points li::before { content: "✓ "; color: var(--emerald-ink); font-weight: 800; }
+
+    /* MULTI-OS DOWNLOADS & 1-PROMPT INSTALLER MATRIX (#instalacao-rapida) */
+    .os-download-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .os-card { padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; min-width: 0; }
+    .os-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .os-card h3 { font-size: 17px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; }
+    .os-dl-stack { display: flex; flex-direction: column; gap: 8px; }
+    .os-dl-stack .btn { width: 100%; justify-content: space-between; font-size: 12.5px; padding: 10px 14px; }
+    .prompt-block {
+      background: #050507; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px;
+      padding: 11px 12px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .prompt-label {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--silver); text-transform: uppercase; letter-spacing: 0.07em;
+    }
+    .prompt-cmd {
+      font-family: var(--mono); font-size: 11.5px; color: #f8fafc; word-break: break-all; line-height: 1.45;
+      user-select: all;
+    }
 
     /* HERO COCKPIT SHOWCASE WINDOW + LIVING 3D SYMBOL */
     .hero-stage {
-      width: 100%; margin-top: 8px;
-      background: #080910;
-      border: 1px solid rgba(255, 255, 255, 0.11);
+      width: 100%; margin-top: 4px;
+      background: #0a0b0f;
+      border: 1px solid rgba(255, 255, 255, 0.13);
       border-radius: var(--radius-xl);
       padding: 18px;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.82), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: stretch;
-      text-align: left;
+      text-align: left; position: relative; overflow: hidden;
+    }
+    .hero-stage::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: var(--prismatic-gradient);
     }
 
     /* Living Symbol Orbital Pod */
     .living-stage {
       position: relative; min-height: 390px; border-radius: var(--radius-lg);
-      background: radial-gradient(circle at 50% 48%, rgba(129, 140, 248, 0.11), #06070d 72%);
+      background: radial-gradient(circle at 50% 48%, rgba(0, 180, 255, 0.10), rgba(91, 46, 255, 0.06) 42%, #070709 74%);
       border: 1px solid var(--border);
       overflow: hidden; display: flex; align-items: center; justify-content: center;
       user-select: none;
@@ -265,7 +363,7 @@
     .cursor-aura {
       position: absolute; width: 220px; height: 220px; border-radius: 50%; pointer-events: none;
       left: 50%; top: 50%; transform: translate3d(-50%, -50%, 0);
-      background: radial-gradient(circle, rgba(165, 180, 252, 0.24) 0%, transparent 72%);
+      background: radial-gradient(circle, rgba(0, 180, 255, 0.20) 0%, rgba(255, 0, 184, 0.12) 45%, transparent 72%);
       filter: blur(18px); will-change: transform;
     }
     .orbit-ring {
@@ -273,32 +371,32 @@
       border: 1px solid rgba(255, 255, 255, 0.09);
     }
     .orbit-ring.r1 { width: 230px; height: 230px; border-style: dashed; animation: spinSlow 22s linear infinite; }
-    .orbit-ring.r2 { width: 300px; height: 300px; border-color: rgba(129, 140, 248, 0.18); animation: spinSlow 34s linear infinite reverse; }
+    .orbit-ring.r2 { width: 304px; height: 304px; border-color: rgba(0, 180, 255, 0.18); animation: spinSlow 34s linear infinite reverse; }
     @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     .living-core {
-      position: relative; width: 158px; height: 158px; border-radius: 34px;
+      position: relative; width: 162px; height: 162px; border-radius: 36px;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, #12141c 0%, #070709 100%);
       border: 1px solid rgba(255, 255, 255, 0.24);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 14px rgba(255, 255, 255, 0.18);
+      box-shadow: 0 26px 64px rgba(0, 0, 0, 0.8), inset 0 1px 12px rgba(255, 255, 255, 0.12);
       will-change: transform; transform-style: preserve-3d;
     }
-    .living-core img {
-      width: 124px; height: 124px; border-radius: 24px; pointer-events: none;
-      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+    .living-core svg {
+      width: 126px; height: 126px; pointer-events: none;
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.75));
       transform: translateZ(24px);
     }
     .float-badge {
       position: absolute; padding: 5px 11px; border-radius: var(--radius-pill);
       font-family: var(--mono); font-size: 11px; font-weight: 700;
-      background: rgba(8, 9, 16, 0.92); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.14); color: var(--ink);
+      background: rgba(7, 7, 9, 0.92); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18); color: var(--ink);
       will-change: transform; pointer-events: none;
     }
     .float-badge.b1 { top: 14px; left: 14px; }
-    .float-badge.b2 { top: 14px; right: 14px; color: var(--emerald-ink); border-color: rgba(16, 185, 129, 0.38); }
-    .float-badge.b3 { bottom: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--muted); font-family: var(--font); }
+    .float-badge.b2 { top: 14px; right: 14px; color: var(--emerald-ink); border-color: rgba(16, 185, 129, 0.45); }
+    .float-badge.b3 { bottom: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--silver); font-family: var(--font); }
 
     /* Interactive Preview Cockpit */
     .stage-cockpit {
@@ -312,15 +410,15 @@
     }
     .cockpit-pills { display: flex; gap: 6px; flex-wrap: wrap; }
     .sim-pill {
-      padding: 6px 12px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 600;
+      padding: 6px 12px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700;
       font-family: var(--font);
-      background: var(--surface-soft); border: 1px solid var(--border); color: var(--muted);
+      background: var(--surface-soft); border: 1px solid var(--border); color: var(--silver);
       cursor: pointer; transition: color 150ms var(--ease-snap), background-color 150ms var(--ease-snap), border-color 150ms var(--ease-snap), transform 150ms var(--ease-spring);
     }
-    .sim-pill:hover { color: var(--ink); border-color: var(--border-hi); }
+    .sim-pill:hover { color: #ffffff; border-color: var(--border-hi); }
     .sim-pill:active { transform: scale(0.97); }
     .sim-pill.active, .sim-pill[aria-selected="true"], .sim-pill[aria-pressed="true"] {
-      background: var(--ink); color: var(--bg); border-color: #ffffff;
+      background: #ffffff; color: #070709; border-color: #ffffff;
     }
     .sim-toggle {
       padding: 6px 13px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; cursor: pointer;
@@ -331,25 +429,24 @@
     .sim-toggle:active { transform: scale(0.97); }
     .sim-toggle.stopped { border-color: rgba(16, 185, 129, 0.48); background: rgba(16, 185, 129, 0.16); color: var(--emerald-ink); }
 
-    /* Language / Stack Focus Bar inside Simulator */
     .lang-strip {
       display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
       padding: 8px 10px; border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.025); border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .lang-pills { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
     .lang-chip {
       padding: 4px 10px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 11px; font-weight: 700;
-      background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+      background: transparent; border: 1px solid var(--border); color: var(--silver); cursor: pointer;
       transition: color 150ms, border-color 150ms, background-color 150ms;
     }
-    .lang-chip:hover { color: var(--ink); border-color: var(--border-hi); }
-    .lang-chip.active { background: var(--accent-soft); color: #c7d2fe; border-color: var(--border-accent); }
+    .lang-chip:hover { color: #ffffff; border-color: var(--border-hi); }
+    .lang-chip.active { background: #ffffff; color: #070709; border-color: #ffffff; }
     .lang-status { font-family: var(--mono); font-size: 11px; color: var(--emerald-ink); }
 
     .stage-screen-btn {
       display: block; width: 100%; padding: 0; border-radius: 10px; overflow: hidden;
-      border: 1px solid var(--border); background: #05060b; cursor: zoom-in;
+      border: 1px solid var(--border); background: #070709; cursor: zoom-in;
       view-transition-name: oi-hero-shot;
       transition: border-color 180ms var(--ease-snap), transform 200ms var(--ease-spring);
     }
@@ -371,16 +468,19 @@
     .trust-strip {
       display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
       padding: 16px 22px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      color: var(--dim); font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--silver); font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
     }
     .trust-strip span { display: inline-flex; align-items: center; gap: 8px; }
-    .trust-strip i { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); font-style: normal; }
+    .trust-strip i { width: 6px; height: 6px; border-radius: 50%; background: var(--spec-cyan); font-style: normal; }
 
     /* SECTION HEADERS */
     .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
     .sec-kicker {
-      font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 8px; display: block;
+      font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--silver); margin-bottom: 8px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .sec-kicker::before {
+      content: ""; width: 18px; height: 2px; background: var(--prismatic-gradient); display: inline-block;
     }
     .sec-head h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
     .sec-head p { color: var(--muted); font-size: 14px; max-width: 58ch; }
@@ -390,27 +490,28 @@
     .calc-presets { display: flex; gap: 8px; flex-wrap: wrap; }
     .calc-preset-btn {
       padding: 8px 14px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 12.5px; font-weight: 700;
-      background: var(--surface-soft); border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+      background: var(--surface-soft); border: 1px solid var(--border); color: var(--silver); cursor: pointer;
       transition: background-color 150ms, color 150ms, border-color 150ms, transform 150ms var(--ease-spring);
     }
-    .calc-preset-btn:hover { color: var(--ink); border-color: var(--border-hi); }
+    .calc-preset-btn:hover { color: #ffffff; border-color: var(--border-hi); }
     .calc-preset-btn.active, .calc-preset-btn[aria-selected="true"] {
-      background: var(--ink); color: var(--bg); border-color: #ffffff;
+      background: #ffffff; color: #070709; border-color: #ffffff;
     }
-    .calc-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .calc-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
     .calc-box {
-      padding: 18px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      padding: 18px; border-radius: var(--radius-md); background: #070709; border: 1px solid var(--border);
       display: flex; flex-direction: column; gap: 8px; min-width: 0;
     }
-    .calc-box.win-highlight { border-color: rgba(16, 185, 129, 0.38); }
-    .calc-box.pro-highlight { border-color: var(--border-accent); background: #0b0d19; }
-    .calc-lbl { font-family: var(--mono); font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
-    .calc-big { font-family: var(--mono); font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+    .calc-box.win-highlight { border-color: rgba(255, 255, 255, 0.20); }
+    .calc-box.pro-highlight { border-color: rgba(0, 180, 255, 0.42); background: #0a0c12; }
+    .calc-box.claude-highlight { border-color: rgba(255, 0, 184, 0.42); background: #0c0a12; }
+    .calc-lbl { font-family: var(--mono); font-size: 11px; color: var(--silver); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-big { font-family: var(--mono); font-size: clamp(20px, 2.3vw, 28px); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
     .calc-big.danger { color: var(--danger); }
     .calc-save-pill {
       display: inline-flex; align-items: center; align-self: flex-start; gap: 6px;
-      padding: 4px 10px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 11.5px; font-weight: 700;
-      background: rgba(16, 185, 129, 0.14); color: var(--emerald-ink); border: 1px solid rgba(16, 185, 129, 0.36);
+      padding: 4px 10px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 11px; font-weight: 700;
+      background: rgba(16, 185, 129, 0.14); color: var(--emerald-ink); border: 1px solid rgba(16, 185, 129, 0.38);
     }
     .calc-bar-track { height: 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.07); overflow: hidden; margin-top: 4px; }
     .calc-bar-fill {
@@ -422,19 +523,19 @@
     .live-shell { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
     .privacy-pill {
       display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--radius-pill);
-      background: rgba(16, 185, 129, 0.11); border: 1px solid rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.38);
       color: var(--emerald-ink); font-size: 12px; font-weight: 600;
     }
     .live-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
     .live-kpi {
-      padding: 15px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      padding: 15px; border-radius: var(--radius-md); background: #070709; border: 1px solid var(--border);
       display: flex; flex-direction: column; gap: 4px; min-width: 0;
     }
-    .live-kpi span { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .live-kpi span { font-family: var(--mono); font-size: 10.5px; color: var(--silver); text-transform: uppercase; letter-spacing: 0.08em; }
     .live-kpi strong { font-family: var(--mono); font-size: clamp(19px, 2.2vw, 25px); font-weight: 800; color: var(--ink); }
     .live-profiles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
     .profile-stat-card {
-      padding: 14px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      padding: 14px; border-radius: var(--radius-md); background: #070709; border: 1px solid var(--border);
       display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; min-width: 0;
     }
     .profile-stat-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); }
@@ -444,14 +545,14 @@
     /* UBUNTU VPS + HERMES AGENT (#ubuntu-hermes) */
     .os-hermes-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; }
     .code-snippet-box {
-      background: #040509; border: 1px solid var(--border-hi); border-radius: 10px;
-      padding: 12px 14px; font-family: var(--mono); font-size: 12px; color: #e2e8f0;
+      background: #050507; border: 1px solid var(--border-hi); border-radius: 10px;
+      padding: 12px 14px; font-family: var(--mono); font-size: 12px; color: #f8fafc;
       word-break: break-word; line-height: 1.5;
     }
     .tier-matrix { display: flex; flex-direction: column; gap: 8px; }
     .tier-row {
       display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-      padding: 9px 12px; border-radius: var(--radius-sm); background: #070810; border: 1px solid var(--border);
+      padding: 9px 12px; border-radius: var(--radius-sm); background: #070709; border: 1px solid var(--border);
       font-size: 12.5px;
     }
     .tier-row.unlocked { border-color: rgba(16, 185, 129, 0.42); background: rgba(16, 185, 129, 0.06); }
@@ -467,40 +568,37 @@
     .bento-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
     .bento-card p { font-size: 13.5px; color: var(--muted); }
     .bento-widget {
-      background: #07080f; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px;
+      background: #070709; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 10px; padding: 14px;
     }
 
-    /* Interactive Cascade Demo */
     .cascade-list { display: flex; flex-direction: column; gap: 8px; }
     .cascade-row {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
       padding: 8px 11px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.06); font-size: 12.5px;
+      border: 1px solid rgba(255, 255, 255, 0.07); font-size: 12.5px;
       transition: border-color 180ms, background-color 180ms, opacity 180ms;
     }
-    .cascade-row.active { border-color: rgba(16, 185, 129, 0.48); background: rgba(16, 185, 129, 0.09); }
+    .cascade-row.active { border-color: rgba(16, 185, 129, 0.5); background: rgba(16, 185, 129, 0.10); }
     .cascade-row.cooldown { border-color: rgba(245, 158, 11, 0.35); opacity: 0.72; }
-    .c-tag { font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.07); color: var(--muted); }
+    .c-tag { font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.07); color: var(--silver); }
     .cascade-row.active .c-tag { color: var(--emerald-ink); background: rgba(16, 185, 129, 0.18); }
 
-    /* Interactive SQLite Scrub Chart */
     .scrub-bars { display: flex; align-items: flex-end; gap: 8px; height: 104px; padding-top: 8px; }
     .scrub-col {
       flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;
       background: transparent; border: none; padding: 0; font-family: inherit;
     }
     .scrub-fill {
-      width: 100%; border-radius: 5px 5px 2px 2px; background: rgba(255, 255, 255, 0.16);
+      width: 100%; border-radius: 5px 5px 2px 2px; background: rgba(255, 255, 255, 0.18);
       transition: background-color 140ms, transform 160ms var(--ease-spring);
       transform-origin: bottom;
     }
     .scrub-col:hover .scrub-fill, .scrub-col:focus-visible .scrub-fill, .scrub-col.active .scrub-fill {
-      background: var(--accent); transform: scaleY(1.06);
+      background: #ffffff; transform: scaleY(1.06);
     }
-    .scrub-lbl { font-family: var(--mono); font-size: 11px; color: var(--dim); }
-    .scrub-col.active .scrub-lbl { color: var(--ink); font-weight: 700; }
+    .scrub-lbl { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .scrub-col.active .scrub-lbl { color: #ffffff; font-weight: 700; }
 
-    /* Interactive Theme Preview */
     .theme-preview-box {
       border-radius: 9px; padding: 12px; border: 1px solid var(--border);
       transition: background-color 200ms, color 200ms, border-color 200ms;
@@ -508,25 +606,23 @@
     .theme-preview-box[data-t="light"] { background: #eef3fa; color: #0f172a; border-color: rgba(15, 23, 42, 0.16); }
     .theme-preview-box[data-t="liquid"] { background: rgba(255, 255, 255, 0.09); backdrop-filter: blur(22px); border-color: rgba(255, 255, 255, 0.28); }
 
-    /* INTERACTIVE GALLERY (Semantic Buttons) */
     .shot-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
     .shot-card {
       padding: 10px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; text-align: left;
       font-family: inherit; color: inherit;
     }
-    .shot-card.active { border-color: var(--border-accent); background: #101322; }
+    .shot-card.active { border-color: #ffffff; background: #13151e; }
     .shot-card img { width: 100%; border-radius: var(--radius-sm); display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
     .shot-card strong { font-size: 13px; color: var(--ink); }
     .shot-card span { font-size: 12px; color: var(--muted); }
 
-    /* 3-STEP KINETIC FLOW */
     .steps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
     .step-card {
       padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; text-align: left;
       font-family: inherit; color: inherit;
     }
-    .step-card.active { border-color: var(--border-accent); background: #10121f; transform: translateY(-3px); }
-    .step-num { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 700; }
+    .step-card.active { border-color: #ffffff; background: #13151e; transform: translateY(-3px); }
+    .step-num { font-family: var(--mono); font-size: 11px; color: var(--silver); font-weight: 700; }
     .step-card h3 { font-size: 15.5px; font-weight: 700; }
     .step-card p { font-size: 13px; color: var(--muted); }
 
@@ -536,21 +632,23 @@
     .comp-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
     .comp-grid {
       display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
-      padding: 14px; border-radius: var(--radius-md); background: #070810; border: 1px solid var(--border);
+      padding: 14px; border-radius: var(--radius-md); background: #070709; border: 1px solid var(--border);
     }
     .comp-metric { display: flex; flex-direction: column; gap: 4px; }
-    .comp-metric span { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .comp-metric span { font-family: var(--mono); font-size: 10.5px; color: var(--silver); text-transform: uppercase; letter-spacing: 0.08em; }
     .comp-metric strong { font-size: 14px; color: var(--ink); }
     .comp-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
 
     /* PLANS & 4-STEP CHECKOUT */
-    .plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .plans-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    @media (max-width: 1220px) { .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     .plan-card { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
-    .plan-card.pro { border-color: var(--border-accent); background: #0d0f1b; }
-    .plan-price { font-size: 38px; font-weight: 800; font-family: var(--mono); color: var(--ink); margin: 6px 0; letter-spacing: -0.03em; }
-    .plan-price small { font-size: 12.5px; color: var(--muted); font-family: var(--font); font-weight: 500; }
-    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-secondary); }
-    .plan-list li::before { content: "✓ "; color: var(--emerald); font-weight: 800; }
+    .plan-card.pro { border-color: rgba(255, 255, 255, 0.24); background: #10121a; }
+    .plan-card.claude-tier { border-color: rgba(255, 255, 255, 0.42); background: #12141f; }
+    .plan-price { font-size: 34px; font-weight: 800; font-family: var(--mono); color: var(--ink); margin: 6px 0; letter-spacing: -0.03em; }
+    .plan-price small { font-size: 12px; color: var(--muted); font-family: var(--font); font-weight: 500; }
+    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-secondary); }
+    .plan-list li::before { content: "✓ "; color: var(--emerald-ink); font-weight: 800; }
     .plan-list li.dim-item { color: var(--muted); }
     .plan-list li.dim-item::before { content: "— "; color: var(--dim); }
 
@@ -558,27 +656,27 @@
     .panel { padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 
     .checkout-step {
-      background: #070911; border: 1px solid var(--border); border-radius: var(--radius-md);
+      background: #070709; border: 1px solid var(--border); border-radius: var(--radius-md);
       padding: 15px 16px; display: flex; flex-direction: column; gap: 10px;
       transition: border-color 180ms var(--ease-snap), box-shadow 180ms var(--ease-snap);
     }
     .checkout-step.google-auth-spotlight {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.24);
+      border-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.28);
     }
-    .checkout-step.is-signed { border-color: rgba(16, 185, 129, 0.42); }
+    .checkout-step.is-signed { border-color: rgba(16, 185, 129, 0.45); }
     .step-badge-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
     .step-tag {
       font-family: var(--mono); font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); padding: 2px 8px; border-radius: var(--radius-pill);
-      background: var(--accent-soft); border: 1px solid rgba(129, 140, 248, 0.3);
+      color: #ffffff; padding: 2px 9px; border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.22);
     }
     .checkout-step h3 { font-size: 15px; font-weight: 700; color: var(--ink); }
 
     .google-user-pill {
       display: none; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-      padding: 10px 12px; border-radius: 10px; background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 10px 12px; border-radius: 10px; background: rgba(16, 185, 129, 0.09);
+      border: 1px solid rgba(16, 185, 129, 0.38);
     }
     .google-user-pill.is-visible { display: flex; }
     .google-user-meta { display: flex; align-items: center; gap: 10px; min-width: 0; }
@@ -586,12 +684,12 @@
       width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-hi); flex-shrink: 0;
     }
     .google-initial {
-      width: 34px; height: 34px; border-radius: 50%; background: var(--accent-solid); color: #fff;
+      width: 34px; height: 34px; border-radius: 50%; background: #ffffff; color: #070709;
       display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0;
     }
 
     .pix-card {
-      background: #05060b; border: 1px solid var(--border); border-radius: 10px;
+      background: #0a0b10; border: 1px solid var(--border); border-radius: 10px;
       padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; font-size: 13px;
     }
     .pix-actions-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -603,50 +701,49 @@
     .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
     .field label { font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); }
     input[type="text"], input[type="email"], input[type="file"], select {
-      width: 100%; padding: 10px 12px; background: #05060b; color: var(--ink);
+      width: 100%; padding: 10px 12px; background: #050507; color: var(--ink);
       border: 1px solid var(--border-hi); border-radius: 9px; font-family: var(--font); font-size: 13.5px;
       transition: border-color 150ms, box-shadow 150ms;
     }
-    input[type="file"] { padding: 8px 10px; font-size: 12.5px; color: var(--muted); cursor: pointer; }
+    input[type="file"] { padding: 8px 10px; font-size: 12.5px; color: var(--silver); cursor: pointer; }
     input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus, select:focus {
-      border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22);
+      border-color: #00B4FF; outline: none; box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.22);
     }
     input[aria-invalid="true"] { border-color: var(--danger); }
 
     .result-box {
-      background: #05060b; border: 1px solid var(--border-hi); border-radius: 10px;
+      background: #050507; border: 1px solid var(--border-hi); border-radius: 10px;
       padding: 14px; font-size: 13px; display: none; flex-direction: column; gap: 10px;
     }
     .result-box.is-visible { display: flex; }
     .result-box.is-error { border-color: var(--danger-border); background: var(--danger-bg); }
-    .result-box.is-success { border-color: rgba(16, 185, 129, 0.45); }
-    .result-box.is-warn { border-color: rgba(245, 158, 11, 0.45); background: var(--amber-bg); }
+    .result-box.is-success { border-color: rgba(16, 185, 129, 0.48); }
+    .result-box.is-warn { border-color: rgba(245, 158, 11, 0.48); background: var(--amber-bg); }
 
     .analysis-stage-card {
       display: none; flex-direction: column; gap: 12px;
-      border-color: rgba(245, 158, 11, 0.45);
-      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(7, 9, 17, 0.96));
+      border-color: rgba(245, 158, 11, 0.48);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(7, 7, 9, 0.96));
     }
     .analysis-stage-card.is-visible { display: flex; }
     .sla-wait-box {
       padding: 12px 14px; border-radius: 10px;
-      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035); border: 1px solid var(--border);
       font-size: 13px; color: var(--ink-secondary); line-height: 1.55;
     }
 
     .delivered-key-card {
       padding: 15px; border-radius: 10px;
-      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.55);
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.58);
       display: none; flex-direction: column; gap: 10px;
     }
     .delivered-key-card.is-visible { display: flex; }
 
-    /* Subtle single-line BadClaude footnote */
     .bc-footnote {
       margin-top: 14px; padding: 12px 16px; border-radius: 10px;
-      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.03);
       display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      font-size: 13px; color: var(--muted);
+      font-size: 13px; color: var(--silver);
     }
 
     /* CSS GRID 0fr -> 1fr FAQ ACCORDION */
@@ -655,7 +752,7 @@
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
       overflow: hidden; transition: border-color 180ms var(--ease-snap);
     }
-    .faq-item.open { border-color: var(--border-accent); }
+    .faq-item.open { border-color: var(--border-hi); }
     .faq-trigger {
       width: 100%; padding: 16px 18px; background: transparent; border: none; color: var(--ink);
       font-family: var(--font); font-size: 14.5px; font-weight: 700; text-align: left;
@@ -668,10 +765,10 @@
       border-radius: calc(var(--radius-md) - 2px);
     }
     .faq-chevron {
-      font-family: var(--mono); font-size: 14px; color: var(--muted); flex-shrink: 0;
+      font-family: var(--mono); font-size: 14px; color: var(--silver); flex-shrink: 0;
       transition: transform 240ms var(--ease-spring);
     }
-    .faq-item.open .faq-chevron { transform: rotate(45deg); color: var(--accent); }
+    .faq-item.open .faq-chevron { transform: rotate(45deg); color: #ffffff; }
     .faq-panel {
       display: grid; grid-template-rows: 0fr;
       transition: grid-template-rows 280ms var(--ease-spring);
@@ -679,42 +776,41 @@
     .faq-item.open .faq-panel { grid-template-rows: 1fr; }
     .faq-panel-inner { overflow: hidden; }
     .faq-panel-body {
-      padding: 0 18px 16px; font-size: 13.5px; color: var(--muted); line-height: 1.6;
+      padding: 0 18px 16px; font-size: 13.5px; color: var(--ink-secondary); line-height: 1.6;
       opacity: 0; transform: translateY(-4px);
       transition: opacity 220ms var(--ease-snap), transform 220ms var(--ease-spring);
     }
     .faq-item.open .faq-panel-body { opacity: 1; transform: translateY(0); }
 
-    /* REVEAL ON SCROLL */
     .reveal { opacity: 0; transform: translate3d(0, 16px, 0); transition: opacity 520ms var(--ease-spring), transform 520ms var(--ease-spring); }
     .reveal.in { opacity: 1; transform: translate3d(0, 0, 0); }
 
     .hover-hud {
       position: fixed; right: 16px; bottom: 16px; z-index: 880; max-width: calc(100vw - 32px);
-      background: rgba(11, 12, 20, 0.94); backdrop-filter: blur(12px);
+      background: rgba(13, 14, 19, 0.94); backdrop-filter: blur(12px);
       border: 1px solid var(--border-hi); border-radius: var(--radius-pill); padding: 8px 14px;
-      font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; cursor: pointer;
+      font-size: 12px; color: var(--silver); display: flex; align-items: center; gap: 8px; cursor: pointer;
     }
-    .hover-hud strong { color: var(--ink); }
+    .hover-hud strong { color: #ffffff; }
 
     #shiftIModal, #zoomModal {
       display: none; position: fixed; inset: 0; z-index: 99999;
-      background: rgba(4, 5, 10, 0.88); backdrop-filter: blur(10px);
+      background: rgba(5, 5, 7, 0.90); backdrop-filter: blur(10px);
       align-items: center; justify-content: center; padding: 18px;
     }
     #shiftIModal.open, #zoomModal.open { display: flex; }
     .shift-box {
-      width: min(520px, 95vw); background: #0c0d16; color: var(--ink);
+      width: min(520px, 95vw); background: #0d0e13; color: var(--ink);
       border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden;
-      box-shadow: 0 32px 96px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 32px 96px rgba(0, 0, 0, 0.88);
     }
-    .shift-head { padding: 13px 18px; background: #07080f; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
+    .shift-head { padding: 13px 18px; background: #070709; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
     .shift-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; }
     .zoom-wrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 94vw; }
     .zoom-wrap img { max-width: 94vw; max-height: 84vh; border-radius: 12px; border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 32px 96px #000; }
 
-    @media (max-width: 960px) {
-      .hero-stage, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid, .comp-grid, .calc-cards, .live-kpis, .live-profiles-grid, .os-hermes-grid {
+    @media (max-width: 1040px) {
+      .hero-stage, .dual-software-grid, .os-download-grid, .bento-grid, .shot-grid, .steps-grid, .plans-grid, .dual-grid, .comp-grid, .calc-cards, .live-kpis, .live-profiles-grid, .os-hermes-grid {
         grid-template-columns: 1fr;
       }
       .living-stage { min-height: 310px; }
@@ -723,13 +819,12 @@
       .hover-hud { display: none !important; }
     }
     @media (max-width: 640px) {
-      #topo, #conteudo, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #validador, #licenca, #faq {
+      #topo, #conteudo, #softwares-nativos, #instalacao-rapida, #painel-live, #recursos, #economia-tokens, #consumo-ao-vivo, #ubuntu-hermes, #como-funciona, #planos, #comparador, #checkout, #validador, #licenca, #faq {
         scroll-margin-top: 112px;
       }
       .topbar { top: 6px; padding: 0 8px; }
       .topbar-inner { border-radius: 14px; padding: 8px 10px; gap: 6px; }
-      .brand { font-size: 14px; gap: 7px; }
-      .brand img { width: 24px; height: 24px; }
+      .brand-lab { display: none; }
       .nav-actions { gap: 6px; }
       .nav-actions .btn.sm { padding: 5px 10px; font-size: 11.5px; }
       .nav-links {
@@ -740,27 +835,69 @@
       .nav-link { padding: 4px 9px; font-size: 11.5px; white-space: nowrap; flex-shrink: 0; }
       .wrap { padding: 28px 14px 64px; gap: 52px; }
       .hero-stage { padding: 12px; gap: 12px; }
+      .iz-hero-lockup { padding: 10px 14px; gap: 12px; max-width: 100%; }
+      .iz-hero-title { font-size: 14.5px; }
+      .iz-hero-sub { font-size: 9px; letter-spacing: 0.14em; }
       .float-badge.b1, .float-badge.b2 { font-size: 10px; padding: 4px 8px; }
     }
   </style>
 </head>
 <body>
+  <!-- SHARED INLINE SVG DEFINITIONS FOR INFINITE ZONE PRISMATIC LOGO -->
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="izPrismaticGrad" x1="16%" y1="50%" x2="84%" y2="50%">
+        <stop offset="0%" stop-color="#00B4FF" />
+        <stop offset="25%" stop-color="#5B2EFF" />
+        <stop offset="50%" stop-color="#FF00B8" />
+        <stop offset="75%" stop-color="#FF7A00" />
+        <stop offset="100%" stop-color="#19FF00" />
+      </linearGradient>
+      <filter id="izNeonGlow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="3.2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <!-- Exact Infinite Zone Geometric Hood + Lower V-Chevron + Prismatic Infinity Symbol -->
+      <symbol id="izHoodMark" viewBox="0 0 120 120">
+        <!-- Upper Geometric Hood Peak & Tapered Wings -->
+        <path fill="#FFFFFF" d="M60 11 C67 11 86 24 106 66 C94 52 78 36 60 36 C42 36 26 52 14 66 C34 24 53 11 60 11 Z" />
+        <!-- Lower Geometric V-Collar Blade + Slash Notch -->
+        <path fill="#FFFFFF" d="M24 75 C36 78 48 84 60 93 C72 84 84 78 96 75 C90 85 77 96 60 107 C48 99 39 92 35 88 L41 88 L28 80 Z" />
+        <path fill="#FFFFFF" d="M89 87 L97 82 L75 104 L68 107 Z" opacity="0.92" />
+        <!-- Neon Prismatic Infinity Loop Inside Dark Hood Cavity -->
+        <path fill="none" stroke="url(#izPrismaticGrad)" stroke-width="6.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#izNeonGlow)"
+              d="M60 60 C52 50 35 50 35 60 C35 70 52 70 60 60 C68 50 85 50 85 60 C85 70 68 70 60 60 Z" />
+      </symbol>
+      <!-- InfiniteClaude Variant: Spectral Outer Ring + Geometric Hood + Prismatic Infinity -->
+      <symbol id="izClaudeMark" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="55" fill="none" stroke="url(#izPrismaticGrad)" stroke-width="3.6" />
+        <use href="#izHoodMark" x="8" y="8" width="104" height="104" />
+      </symbol>
+    </defs>
+  </svg>
+
   <a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
   <div class="vault-light" aria-hidden="true"></div>
   <div class="grid-backdrop" aria-hidden="true"></div>
 
   <header class="topbar" id="topbar">
     <div class="topbar-inner">
-      <a href="#topo" class="brand">
-        <img src="/openinfinite/assets/openinfinite_silver.png" alt="OpenInfinite" />
-        <span>OpenInfinite</span>
-        <span class="brand-ver">v6.1</span>
+      <a href="#topo" class="brand" aria-label="Infinite Zone · Laboratórios de Tecnologia">
+        <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
+        <span class="brand-lockup">
+          <span class="brand-wordmark">INFINITE ZONE</span>
+          <span class="brand-lab">LABORATÓRIOS DE TECNOLOGIA</span>
+        </span>
+        <span class="brand-ver">v6.2</span>
       </a>
-      <nav class="nav-links" aria-label="Navegação OpenInfinite">
-        <a href="#painel-live" class="nav-link">Painel Live</a>
-        <a href="#economia-tokens" class="nav-link">Economia por Token</a>
+      <nav class="nav-links" aria-label="Navegação Infinite Zone">
+        <a href="#softwares-nativos" class="nav-link">2 Softwares Nativos</a>
+        <a href="#instalacao-rapida" class="nav-link">Downloads &amp; 1-Comando</a>
+        <a href="#economia-tokens" class="nav-link">Economia M/B</a>
         <a href="#consumo-ao-vivo" class="nav-link">Consumo Real</a>
-        <a href="#ubuntu-hermes" class="nav-link">Linux &amp; Hermes</a>
         <a href="#planos" class="nav-link">Planos</a>
         <a href="#validador" class="nav-link">Validar Chave</a>
         <a href="#faq" class="nav-link">FAQ</a>
@@ -774,100 +911,116 @@
   </header>
 
   <main class="wrap" id="topo">
-    <!-- EDITORIAL HERO + INTERACTIVE LIVE STAGE -->
+    <!-- INFINITE ZONE HERO + INTERACTIVE LIVE STAGE -->
     <section class="hero" id="conteudo">
+      <div class="iz-hero-lockup" aria-label="Assinatura oficial Infinite Zone · Laboratórios de Tecnologia">
+        <svg width="46" height="46" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
+        <div class="iz-hero-lockup-text">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="iz-hero-title">INFINITE ZONE</span>
+            <span class="spectral-dots" aria-hidden="true">
+              <i style="background:#00B4FF;"></i>
+              <i style="background:#5B2EFF;"></i>
+              <i style="background:#FF00B8;"></i>
+              <i style="background:#FF7A00;"></i>
+              <i style="background:#19FF00;"></i>
+            </span>
+          </div>
+          <span class="iz-hero-sub">INFINITE ZONE · LABORATÓRIOS DE TECNOLOGIA</span>
+          <span class="iz-hero-motto">ACELERAÇÃO · IMPLEMENTAÇÃO · POSSIBILIDADES INFINITAS</span>
+        </div>
+      </div>
+
       <div class="hero-kicker">
         <span class="kicker-dot" aria-hidden="true"></span>
-        <span>OpenInfinite v6.1 · Windows, macOS Apple Silicon &amp; Ubuntu VPS</span>
+        <span>OpenInfinite v6.2 &amp; InfiniteClaude v6.2 · 100% Nativos (Zero HTML / Zero WebView)</span>
       </div>
 
       <h1>
-        Codifique horas a fio sem olhar o relógio.<br /><span>Nem levar susto com fatura por token.</span>
+        Engenharia contínua em código nativo.<br /><span>Sem WebView pesado e sem susto por token.</span>
       </h1>
 
       <p class="hero-sub">
-        Quem programa de verdade conhece a dor: você entra em estado de fluxo numa refatoração grande e, de repente, bate num bloqueio de cota ou vê a conta da API disparar em dólares. Com o <strong>OpenInfinite v6.1</strong>, seu custo mensal é fixo, a rota <strong>HY4 #1</strong> renova sozinha nos bastidores e você trabalha em paz.
+        Construídos do zero pelos laboratórios <strong>Infinite Zone</strong> em binários puros: <strong>WinForms GDI+</strong> no Windows, <strong>SwiftUI Liquid Glass</strong> no macOS e <strong>TUI/Daemon</strong> no Ubuntu VPS. Operam em silêncio com <strong>Motor Headless OpenCode Swap</strong> ("Só Clicar e Usar", sem abrir GUI do OpenCode) abastecendo os 4 perfis <code class="mono">infinite/*</code> — e o <strong>InfiniteClaude v6.2</strong> injeta direto no <strong>Claude Code</strong> e escala em toda a <strong>Escada Multi-CLI</strong>.
       </p>
 
       <div class="hero-ctas">
-        <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn ivory pill"
-           data-help-title="Download Windows (Demo 1h Grátis)"
-           data-help-what="Instalador oficial Windows 10/11 (64 bits) com 60 minutos grátis para testar todas as funções no seu código."
-           data-help-how="Baixe, instale e aperte Iniciar no painel. Depois da demo, assine Windows (R$ 99,00/mês) ou Pro Multi-OS (R$ 159,00/mês).">
-          <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M3 5.3l7.5-1v7.2H3V5.3zm8.5-1.1L21 3v8.5h-9.5V4.2zM3 12.5h7.5v7.2l-7.5-1v-6.2zm8.5 0H21V21l-9.5-1.2v-7.3z"/></svg>
-          <span>Baixar Grátis (1h) — Windows .exe</span>
+        <a href="/downloads/InfiniteClaude-Client-Setup.exe" download="InfiniteClaude-Client-Setup.exe" class="btn ivory pill"
+           data-help-title="InfiniteClaude v6.2 Windows (.exe GDI+ Nativo)"
+           data-help-what="Aplicativo nativo WinForms GDI+ com Motor Headless OpenCode Swap nos 4 perfis white-label + injeção direta no Claude Code (~/.claude/settings.json usando infinite/coder, infinite/reasoning e infinite/fast) + Escada Multi-CLI."
+           data-help-how="Baixe e instale em segundos ou use o comando PowerShell 1-linha abaixo.">
+          <span>Baixar InfiniteClaude v6.2 — Windows .exe</span>
         </a>
-        <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn pill"
-           data-help-title="Download macOS Apple Silicon (Demo 1h Grátis)"
-           data-help-what="Aplicativo nativo Apple Silicon com transparência Liquid Glass e zero janelas secundárias."
-           data-help-how="Baixe o .dmg, arraste para Aplicativos e teste 1 hora grátis. Plano Pro Multi-OS + Hermes: R$ 159,00/mês.">
-          <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
-          <span>Baixar Grátis (1h) — macOS .dmg</span>
+        <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn silver pill"
+           data-help-title="OpenInfinite v6.2 Windows (.exe GDI+ Nativo)"
+           data-help-what="Motor Headless OpenCode Swap white-label (4 perfis infinite/*) em WinForms GDI+ nativo: zero GUI do OpenCode aberta, zero exposição de IP/origem e zero falso positivo."
+           data-help-how="Baixe e teste por 1h grátis. Assinatura Windows R$ 99,00/mês ou Pro Multi-OS R$ 159,00/mês.">
+          <span>Baixar OpenInfinite v6.2 — Windows .exe</span>
         </a>
-        <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn pill"
-           data-help-title="Download Ubuntu Linux VPS (.tar.gz)"
-           data-help-what="Pacote self-contained .NET 9 linux-x64 com instalador rápido install-ubuntu-vps.sh para Ubuntu 22.04 e 24.04."
-           data-help-how="Extraia na sua VPS ou estação Linux e rode ./install-ubuntu-vps.sh. Requer chave Pro Multi-OS (R$ 159,00/mês) ou superior.">
-          <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-          <span>Ubuntu Linux VPS — .tar.gz</span>
+        <a href="#instalacao-rapida" class="btn pill"
+           data-help-title="Downloads & Instalação 1-Comando (Win, Mac, Ubuntu VPS)"
+           data-help-what="Acesso direto aos 6 pacotes nativos (.exe, .dmg, .tar.gz) e aos 4 scripts de instalação em 1 linha com bootstrap silencioso."
+           data-help-how="Clique para copiar o comando do seu sistema operacional.">
+          <span>macOS .dmg &amp; Ubuntu VPS (1-Comando) ↓</span>
         </a>
       </div>
 
       <div class="hero-meta-strip">
-        <span><strong>1h grátis</strong> sem cartão</span>
+        <span><strong>Zero HTML/WebView</strong> (100% Nativo)</span>
         <span aria-hidden="true">·</span>
-        <span>Windows fixo em <strong>R$ 99,00/mês</strong></span>
+        <span>OpenInfinite Win <strong>R$ 99</strong> · Pro <strong>R$ 159</strong></span>
         <span aria-hidden="true">·</span>
-        <span>Pro Multi-OS (Mac + Win + Ubuntu + Hermes) por <strong>R$ 159,00/mês</strong></span>
+        <span>InfiniteClaude Pro <strong>R$ 199</strong> (<code class="mono">IC6-PRO</code>) · Max <strong>R$ 249</strong> (<code class="mono">IC6-MAX</code>)</span>
       </div>
 
-      <!-- INTERACTIVE COCKPIT STAGE + LIVING 3D SYMBOL -->
+      <!-- INTERACTIVE COCKPIT STAGE + LIVING 3D INFINITE ZONE SYMBOL -->
       <div class="hero-stage" id="painel-live">
-        <div id="livingStage" class="living-stage" aria-label="Símbolo vivo 3D do OpenInfinite que reage ao cursor">
+        <div id="livingStage" class="living-stage" aria-label="Símbolo vetorial vivo Infinite Zone que reage ao cursor">
           <canvas id="particleCanvas" aria-hidden="true"></canvas>
           <div id="cursorAura" class="cursor-aura" aria-hidden="true"></div>
           <div class="orbit-ring r1 css-anim" aria-hidden="true"></div>
           <div class="orbit-ring r2 css-anim" aria-hidden="true"></div>
           <div id="livingCore" class="living-core">
-            <img src="/openinfinite/assets/openinfinite_silver.png" alt="Símbolo Vivo OpenInfinite" />
+            <svg viewBox="0 0 120 120" role="img" aria-label="Logo Infinite Zone Capuz Geométrico e Infinito Prismático">
+              <use href="#izHoodMark" />
+            </svg>
           </div>
-          <div id="badge1" class="float-badge b1">HY4 #1 · Prioridade</div>
-          <div id="badge2" class="float-badge b2" aria-live="polite">● Motor Pronto</div>
-          <div id="badge3" class="float-badge b3">Símbolo Vivo · Mova o mouse</div>
+          <div id="badge1" class="float-badge b1">infinite/* · White-Label</div>
+          <div id="badge2" class="float-badge b2" aria-live="polite">● HTTP 200 Real Verificado</div>
+          <div id="badge3" class="float-badge b3">INFINITE ZONE · Símbolo Vivo</div>
         </div>
 
         <div class="stage-cockpit">
           <div class="cockpit-bar">
-            <div class="cockpit-pills" id="cockpitTabs" role="tablist" aria-label="Visualizar telas do OpenInfinite">
-              <button type="button" role="tab" id="tab-shot-0" aria-selected="true" aria-controls="cockpitPanel" tabindex="0" class="sim-pill active" data-shot="0">Painel Real</button>
-              <button type="button" role="tab" id="tab-shot-1" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="1">Liquid Glass</button>
-              <button type="button" role="tab" id="tab-shot-2" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="2">Estatísticas</button>
-              <button type="button" role="tab" id="tab-shot-3" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="3">Tema Claro</button>
+            <div class="cockpit-pills" id="cockpitTabs" role="tablist" aria-label="Visualizar telas nativas Infinite Zone">
+              <button type="button" role="tab" id="tab-shot-0" aria-selected="true" aria-controls="cockpitPanel" tabindex="0" class="sim-pill active" data-shot="0">Painel Carbono</button>
+              <button type="button" role="tab" id="tab-shot-1" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="1">macOS Liquid Glass</button>
+              <button type="button" role="tab" id="tab-shot-2" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="2">Diagnóstico Real</button>
+              <button type="button" role="tab" id="tab-shot-3" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="3">Tema Daylight</button>
             </div>
             <button type="button" id="simEngineBtn" class="sim-toggle" aria-pressed="true">⏸ Motor Ativo · Pausar</button>
           </div>
 
-          <!-- Language / Stack Focus Switcher -->
-          <div class="lang-strip" aria-label="Simulador de foco por linguagem e idioma">
+          <div class="lang-strip" aria-label="Simulador de foco por linguagem e stack">
             <div class="lang-pills" role="group" aria-label="Selecionar linguagem do projeto">
               <button type="button" class="lang-chip active" data-lang="python" aria-pressed="true">Python</button>
               <button type="button" class="lang-chip" data-lang="ts" aria-pressed="false">TypeScript</button>
               <button type="button" class="lang-chip" data-lang="go" aria-pressed="false">Go</button>
               <button type="button" class="lang-chip" data-lang="rust" aria-pressed="false">Rust</button>
             </div>
-            <span id="langStatus" class="lang-status" aria-live="polite">Perfil: Python 3.12 · HY4 #1 (54 ms)</span>
+            <span id="langStatus" class="lang-status" aria-live="polite">Perfil: Python 3.12 · infinite/coder (48 ms)</span>
           </div>
 
           <div id="cockpitPanel" role="tabpanel" aria-labelledby="tab-shot-0">
-            <button type="button" class="stage-screen-btn" id="stageZoomBtn" aria-label="Ampliar captura de tela atual do OpenInfinite">
-              <img id="featImg" src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Interface real do aplicativo OpenInfinite v6.1" />
+            <button type="button" class="stage-screen-btn" id="stageZoomBtn" aria-label="Ampliar captura de tela atual">
+              <img id="featImg" src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Interface nativa escura OpenInfinite e InfiniteClaude v6.2" />
             </button>
           </div>
 
           <div class="cockpit-caption">
             <div>
-              <strong id="featTitle" style="color:var(--ink);">Painel Principal com Botão Iniciar / Pausar &amp; Dados Reais</strong>
-              <span id="featDesc" style="display:block;">Telemetria direta do banco local, status ao vivo das ferramentas e troca de motor sem popups.</span>
+              <strong id="featTitle" style="color:var(--ink);">Interface Nativa Preto Carbono &amp; Diagnóstico sem Falso Positivo</strong>
+              <span id="featDesc" style="display:block;">Status Verde só acende após resposta HTTP 200 real não vazia com latência medida.</span>
             </div>
             <button type="button" class="btn sm" id="captionZoomBtn">Ampliar Tela</button>
           </div>
@@ -875,23 +1028,235 @@
       </div>
     </section>
 
-    <!-- CLEAN MONOCHROME PLATFORM STRIP -->
+    <!-- PLATFORM ARCHITECTURE STRIP -->
     <div class="trust-strip reveal">
-      <span><i aria-hidden="true"></i>Windows 10 / 11 x64</span>
-      <span><i aria-hidden="true"></i>macOS Apple Silicon</span>
-      <span><i aria-hidden="true"></i>Ubuntu 22.04 / 24.04 VPS</span>
-      <span><i aria-hidden="true"></i>Hermes Agent CLI + Harness</span>
-      <span><i aria-hidden="true"></i>Login Google + Chave no E-mail</span>
+      <span><i aria-hidden="true"></i>Windows WinForms GDI+ Nativo</span>
+      <span><i aria-hidden="true"></i>macOS SwiftUI Liquid Glass</span>
+      <span><i aria-hidden="true"></i>Ubuntu VPS TUI &amp; Daemon</span>
+      <span><i aria-hidden="true"></i>Claude Code ~/.claude/settings.json</span>
+      <span><i aria-hidden="true"></i>Hermes Agent Pro+ Oficial</span>
     </div>
 
-    <!-- CALCULADORA DE ECONOMIA POR MILHÃO E BILHÃO DE TOKENS -->
+    <!-- DOIS SOFTWARES 100% NATIVOS: OPENINFINITE v6.2 & INFINITECLAUDE v6.2 -->
+    <section id="softwares-nativos" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Engenharia Nativa · Zero HTML / Zero WebView</span>
+          <h2>Dois softwares nativos para cada nível de operação.</h2>
+        </div>
+        <p>Eliminamos completamente WebView2, WKWebView e janelas híbridas pesadas. Ambos rodam com pegada mínima de RAM, cofre criptográfico Ed25519 e rotas decifradas apenas em memória.</p>
+      </div>
+
+      <div class="dual-software-grid">
+        <!-- Software 1: OpenInfinite v6.2 -->
+        <article class="spotlight-card software-card"
+                 data-help-title="OpenInfinite v6.2 (Motor White-Label Nativo)"
+                 data-help-what="Aplicativo nativo enxuto com modelos white-label infinite/auto, infinite/coder, infinite/fast e infinite/reasoning, zero exposição de origem e zero falso positivo."
+                 data-help-how="Disponível em Windows (.exe), macOS (.dmg) e Ubuntu VPS (.tar.gz). Chaves OI6-INF (R$ 99) ou OI6-PRO (R$ 159).">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="software-head">
+              <div class="software-id">
+                <div class="software-icon-shell">
+                  <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
+                </div>
+                <div>
+                  <h3>OpenInfinite v6.2</h3>
+                  <span class="software-sub">Motor White-Label infinite/* · Enxuto &amp; Direto</span>
+                </div>
+              </div>
+              <span class="brand-ver">OI6-INF / OI6-PRO</span>
+            </div>
+
+            <div class="native-arch-strip" aria-label="Arquitetura nativa OpenInfinite v6.2">
+              <span class="arch-pill">WinForms GDI+ (Win)</span>
+              <span class="arch-pill">SwiftUI Liquid Glass (Mac)</span>
+              <span class="arch-pill">TUI ANSI + Daemon (Ubuntu)</span>
+            </div>
+
+            <ul class="software-points">
+              <li>Modelos 100% white-label <code class="mono">infinite/auto</code>, <code class="mono">infinite/coder</code>, <code class="mono">infinite/fast</code> e <code class="mono">infinite/reasoning</code> (<code class="mono">owned_by: "infinite-zone"</code>).</li>
+              <li><strong>Zero exposição de origem e zero falso positivo:</strong> o indicador Verde só ativa após teste HTTP 200 real com resposta validada e latência medida em ms.</li>
+              <li>Injeção limpa em 1 clique no OpenCode sem poluir listas antigas e integração oficial <strong>Nous Research Hermes Agent</strong> nos planos Pro+.</li>
+            </ul>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn sm ivory">Windows .exe</a>
+            <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn sm silver">macOS .dmg</a>
+            <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn sm">Ubuntu .tar.gz</a>
+          </div>
+        </article>
+
+        <!-- Software 2: InfiniteClaude v6.2 -->
+        <article class="spotlight-card software-card"
+                 data-help-title="InfiniteClaude v6.2 (Claude Code + Escada Multi-CLI)"
+                 data-help-what="Motor Headless OpenCode Swap nos 4 perfis white-label + tradutor Anthropic /v1/messages completo (tools/SSE) + injeção no Claude Code (~/.claude/settings.json com infinite/coder, infinite/reasoning e infinite/fast) + Escada Multi-CLI IC6-PRO/IC6-MAX."
+                 data-help-how="Baixe para Windows, macOS ou Ubuntu VPS e ative com chave IC6-PRO (R$ 199,00), IC6-MAX (R$ 249,00) ou BadClaude 3º nível+.">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="software-head">
+              <div class="software-id">
+                <div class="software-icon-shell">
+                  <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true"><use href="#izClaudeMark" /></svg>
+                </div>
+                <div>
+                  <h3>InfiniteClaude v6.2</h3>
+                  <span class="software-sub">Claude Code Nativo + Escada Multi-CLI + Headless Swap</span>
+                </div>
+              </div>
+              <span class="brand-ver" style="border-color:#ffffff;color:#ffffff;">IC6-PRO / IC6-MAX</span>
+            </div>
+
+            <div class="native-arch-strip" aria-label="Recursos exclusivos InfiniteClaude v6.2">
+              <span class="arch-pill">~/.claude/settings.json</span>
+              <span class="arch-pill">POST /v1/messages + tools</span>
+              <span class="arch-pill">Só Clicar e Usar</span>
+            </div>
+
+            <ul class="software-points">
+              <li><strong>Motor Headless OpenCode Swap</strong> em segundo plano (zero GUI do OpenCode aberta, zero IP/upstream exposto): auto-teste contínuo abastece só os 4 perfis (<code class="mono">infinite/auto</code>, <code class="mono">infinite/coder</code>, <code class="mono">infinite/fast</code>, <code class="mono">infinite/reasoning</code>).</li>
+              <li><strong>Injeção direta no Claude Code</strong> (<code class="mono">~/.claude/settings.json</code> mapeando os slots diretamente para <code class="mono">infinite/coder</code>, <code class="mono">infinite/reasoning</code> e <code class="mono">infinite/fast</code> via tradutor <code class="mono">/v1/messages</code> + <code class="mono">tools</code> + SSE, auto-compact 45%, backup e botão Restaurar).</li>
+              <li><strong>Escada Multi-CLI de 3 Degraus:</strong> <code class="mono">IC6-PRO</code> libera Claude Code + OpenCode + Hermes; <strong><code class="mono">IC6-MAX</code></strong> (ou BadClaude 3º nível+) auto-detecta e injeta em 1 clique também em <strong>Hermes Agent</strong> (<code class="mono">~/.hermes/config.yaml</code> sem daemon), <strong>Local Harness</strong> e <strong>Codex CLI</strong>.</li>
+            </ul>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="/downloads/InfiniteClaude-Client-Setup.exe" download="InfiniteClaude-Client-Setup.exe" class="btn sm ivory">Windows .exe</a>
+            <a href="/downloads/InfiniteClaude-Client-macOS.dmg" download="InfiniteClaude-Client-macOS.dmg" class="btn sm silver">macOS .dmg</a>
+            <a href="/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz" download="InfiniteClaude-Client-Ubuntu-VPS.tar.gz" class="btn sm">Ubuntu .tar.gz</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- DOWNLOADS DIRETOS & INSTALAÇÃO EM 1 COMANDO / 1 PROMPT (#instalacao-rapida) -->
+    <section id="instalacao-rapida" class="reveal">
+      <div class="sec-head">
+        <div>
+          <span class="sec-kicker">Downloads &amp; Instalação 1-Prompt</span>
+          <h2>Instale em Windows, macOS ou Ubuntu VPS com 1 comando.</h2>
+        </div>
+        <p>Baixe o instalador nativo direto ou cole uma única linha no terminal — os scripts oficiais puxam de <code class="mono">/downloads/...</code> e configuram tudo sem exigir dependências prévias.</p>
+      </div>
+
+      <div class="os-download-grid">
+        <!-- COLUNA 1: WINDOWS -->
+        <div class="spotlight-card os-card">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="os-card-head">
+              <h3>
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.3l7.5-1v7.2H3V5.3zm8.5-1.1L21 3v8.5h-9.5V4.2zM3 12.5h7.5v7.2l-7.5-1v-6.2zm8.5 0H21V21l-9.5-1.2v-7.3z"/></svg>
+                <span>Windows 10 / 11</span>
+              </h3>
+              <span class="brand-ver">WinForms GDI+</span>
+            </div>
+
+            <div class="os-dl-stack">
+              <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn sm silver">
+                <span>OpenInfinite-Client-Setup.exe</span>
+                <span class="mono" style="font-size:11px;">↓ .exe</span>
+              </a>
+              <a href="/downloads/InfiniteClaude-Client-Setup.exe" download="InfiniteClaude-Client-Setup.exe" class="btn sm ivory">
+                <span>InfiniteClaude-Client-Setup.exe</span>
+                <span class="mono" style="font-size:11px;">↓ .exe</span>
+              </a>
+            </div>
+
+            <div class="prompt-block">
+              <div class="prompt-label">
+                <span>1-Comando PowerShell</span>
+                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="irm https://catalogo-cruzeiro-web.onrender.com/install-win.ps1 | iex" data-copy-target="fbWinCmd">Copiar</button>
+              </div>
+              <code class="prompt-cmd" id="cmdWinPs1">irm https://catalogo-cruzeiro-web.onrender.com/install-win.ps1 | iex</code>
+              <span id="fbWinCmd" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 2: macOS -->
+        <div class="spotlight-card os-card">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="os-card-head">
+              <h3>
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
+                <span>macOS Liquid Glass</span>
+              </h3>
+              <span class="brand-ver">SwiftUI Nativo</span>
+            </div>
+
+            <div class="os-dl-stack">
+              <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn sm silver">
+                <span>OpenInfinite-Client-macOS.dmg</span>
+                <span class="mono" style="font-size:11px;">↓ .dmg</span>
+              </a>
+              <a href="/downloads/InfiniteClaude-Client-macOS.dmg" download="InfiniteClaude-Client-macOS.dmg" class="btn sm ivory">
+                <span>InfiniteClaude-Client-macOS.dmg</span>
+                <span class="mono" style="font-size:11px;">↓ .dmg</span>
+              </a>
+            </div>
+
+            <div class="prompt-block">
+              <div class="prompt-label">
+                <span>1-Comando Terminal macOS</span>
+                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-mac.sh | bash" data-copy-target="fbMacCmd">Copiar</button>
+              </div>
+              <code class="prompt-cmd" id="cmdMacSh">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-mac.sh | bash</code>
+              <span id="fbMacCmd" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3: LINUX UBUNTU VPS -->
+        <div class="spotlight-card os-card">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="os-card-head">
+              <h3>
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                <span>Linux Ubuntu VPS</span>
+              </h3>
+              <span class="brand-ver">TUI + Daemon</span>
+            </div>
+
+            <div class="os-dl-stack">
+              <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn sm silver">
+                <span>OpenInfinite-Client-Ubuntu-VPS.tar.gz</span>
+                <span class="mono" style="font-size:11px;">↓ .tar.gz</span>
+              </a>
+              <a href="/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz" download="InfiniteClaude-Client-Ubuntu-VPS.tar.gz" class="btn sm ivory">
+                <span>InfiniteClaude-Client-Ubuntu-VPS.tar.gz</span>
+                <span class="mono" style="font-size:11px;">↓ .tar.gz</span>
+              </a>
+            </div>
+
+            <div class="prompt-block">
+              <div class="prompt-label">
+                <span>1-Comando OpenInfinite VPS</span>
+                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-openinfinite.sh | bash" data-copy-target="fbUbuOiCmd">Copiar</button>
+              </div>
+              <code class="prompt-cmd" id="cmdUbuntuOi">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-openinfinite.sh | bash</code>
+              <span id="fbUbuOiCmd" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
+
+            <div class="prompt-block">
+              <div class="prompt-label">
+                <span>1-Comando InfiniteClaude VPS</span>
+                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-infiniteclaude.sh | bash" data-copy-target="fbUbuIcCmd">Copiar</button>
+              </div>
+              <code class="prompt-cmd" id="cmdUbuntuIc">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-infiniteclaude.sh | bash</code>
+              <span id="fbUbuIcCmd" class="inline-feedback" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULADORA DE ECONOMIA POR MILHÃO E BILHÃO DE TOKENS (#economia-tokens) -->
     <section id="economia-tokens" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Fatura Aberta vs Paz de Espírito</span>
+          <span class="sec-kicker">Fatura Aberta vs Mensalidade Fixa</span>
           <h2>Quanto custaria seu ritmo em uma API tarifada?</h2>
         </div>
-        <p>Em projetos reais com contexto amplo e agentes rodando testes, 100 milhões de tokens evaporam rápido. Simule abaixo a diferença entre pagar por cada milhão consumido e ter mensalidade travada.</p>
+        <p>Em refatorações reais com agentes autônomos e Claude Code em múltiplos arquivos, 100 milhões de tokens passam rápido. Compare o custo variável por milhão com os planos fixos Infinite Zone.</p>
       </div>
 
       <div class="spotlight-card calc-shell">
@@ -914,29 +1279,39 @@
           <div class="calc-box">
             <span class="calc-lbl" id="calcVolTitle">API Tarifada · 100 Milhões</span>
             <div class="calc-big danger" id="calcMeteredBrl">R$ 5.220,00</div>
-            <span style="font-size:12.5px;color:var(--muted);">Cobrança variável no cartão a cada prompt, contexto longo ou retry de agente.</span>
+            <span style="font-size:12px;color:var(--muted);">Cobrança variável no cartão a cada prompt, contexto longo ou retry.</span>
             <div class="calc-bar-track" aria-hidden="true">
               <div class="calc-bar-fill" id="calcBarMetered" style="background:var(--danger);transform:scaleX(1);"></div>
             </div>
           </div>
 
           <div class="calc-box win-highlight">
-            <span class="calc-lbl">OpenInfinite Windows (1 PC)</span>
-            <div class="calc-big">R$ 99,00 <small style="font-size:12px;color:var(--muted);font-weight:500;">/mês fixo</small></div>
+            <span class="calc-lbl">OpenInfinite Win (OI6-INF)</span>
+            <div class="calc-big">R$ 99,00 <small style="font-size:11.5px;color:var(--muted);font-weight:500;">/mês</small></div>
             <div class="calc-save-pill" id="calcWinSaveBadge">Economia: R$ 5.121,00 (98,1%)</div>
-            <span style="font-size:12px;color:var(--muted);">Fluxo HY4 #1 contínuo no Windows sem surpresa no fim do mês.</span>
+            <span style="font-size:12px;color:var(--muted);">1 PC Windows nativo com motor white-label contínuo.</span>
             <div class="calc-bar-track" aria-hidden="true">
               <div class="calc-bar-fill" id="calcBarWin" style="background:var(--emerald);transform:scaleX(0.04);"></div>
             </div>
           </div>
 
           <div class="calc-box pro-highlight">
-            <span class="calc-lbl">Pro Multi-OS + Hermes Agent</span>
-            <div class="calc-big">R$ 159,00 <small style="font-size:12px;color:var(--muted);font-weight:500;">/mês fixo</small></div>
+            <span class="calc-lbl">OpenInfinite Pro (OI6-PRO)</span>
+            <div class="calc-big">R$ 159,00 <small style="font-size:11.5px;color:var(--muted);font-weight:500;">/mês</small></div>
             <div class="calc-save-pill" id="calcProSaveBadge">Economia: R$ 5.061,00 (97,0%)</div>
-            <span style="font-size:12px;color:var(--muted);">Mac + Windows + Ubuntu VPS (2 máquinas) com Hermes CLI &amp; Harness liberado.</span>
+            <span style="font-size:12px;color:var(--muted);">Win + Mac + Ubuntu VPS (2 máq.) + Hermes Agent.</span>
             <div class="calc-bar-track" aria-hidden="true">
-              <div class="calc-bar-fill" id="calcBarPro" style="background:var(--accent);transform:scaleX(0.06);"></div>
+              <div class="calc-bar-fill" id="calcBarPro" style="background:#00B4FF;transform:scaleX(0.06);"></div>
+            </div>
+          </div>
+
+          <div class="calc-box claude-highlight">
+            <span class="calc-lbl">InfiniteClaude (IC6-PRO)</span>
+            <div class="calc-big">R$ 199,00 <small style="font-size:11.5px;color:var(--muted);font-weight:500;">/mês</small></div>
+            <div class="calc-save-pill" id="calcClaudeSaveBadge">Economia: R$ 5.021,00 (96,2%)</div>
+            <span style="font-size:12px;color:var(--muted);">Multi-OS (3 máq.) + Claude Code + Swap Headless + Hermes Pro+ (ou Max R$ 249 p/ 5 máq.).</span>
+            <div class="calc-bar-track" aria-hidden="true">
+              <div class="calc-bar-fill" id="calcBarClaude" style="background:#FF00B8;transform:scaleX(0.07);"></div>
             </div>
           </div>
         </div>
@@ -950,7 +1325,7 @@
           <span class="sec-kicker">Transparência em Tempo Real</span>
           <h2>Consumo agregado e economia real da comunidade.</h2>
         </div>
-        <p>Números somados diretamente dos heartbeats voluntários das estações conectadas — zero estimativas fictícias e privacidade total.</p>
+        <p>Números somados diretamente dos heartbeats voluntários das estações conectadas — zero estimativas fictícias e privacidade absoluta.</p>
       </div>
 
       <div class="spotlight-card live-shell">
@@ -960,7 +1335,7 @@
             <span>100% Anônimo: zero chaves, prefixos, e-mails, HWIDs, nomes de máquina ou IPs expostos.</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span class="mono" style="font-size:11.5px;color:var(--dim);" id="liveStatsUpdated" aria-live="polite">Sincronizando telemetria...</span>
+            <span class="mono" style="font-size:11.5px;color:var(--silver);" id="liveStatsUpdated" aria-live="polite">Sincronizando telemetria...</span>
             <button type="button" class="btn sm ghost" id="refreshStatsBtn">↻ Atualizar agora</button>
           </div>
         </div>
@@ -999,10 +1374,10 @@
     <section id="ubuntu-hermes" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Servidores Linux &amp; Agentes Autônomos</span>
-          <h2>Agora em Ubuntu VPS e integrado ao Hermes Agent oficial.</h2>
+          <span class="sec-kicker">Servidores Linux, Claude Code &amp; Hermes Agent</span>
+          <h2>Operação 24/7 em Ubuntu VPS com Hermes Agent oficial.</h2>
         </div>
-        <p>Rode seus pipelines 24/7 numa VPS Linux enxuta e conecte o agente oficial da Nous Research diretamente ao Motor Infinite nos planos a partir do Pro.</p>
+        <p>Rode TUI ANSI ou <code class="mono">--daemon</code> nativo numa VPS Linux enxuta sem interface gráfica e conecte o agente oficial da Nous Research diretamente ao Motor Infinite.</p>
       </div>
 
       <div class="os-hermes-grid">
@@ -1012,12 +1387,13 @@
               <h3>Ubuntu Linux VPS (22.04 / 24.04 LTS)</h3>
               <span class="brand-ver">.NET 9 Self-Contained</span>
             </div>
-            <p>Binário nativo <code class="mono">linux-x64</code> com SQLite embarcado, cofre Ed25519 atrelado ao <code class="mono">/etc/machine-id</code> e script <code class="mono">install-ubuntu-vps.sh</code> sem exigir root obrigatório.</p>
+            <p>Binário nativo <code class="mono">linux-x64</code> com cofre Ed25519 atrelado ao <code class="mono">/etc/machine-id</code>, instalador offline <code class="mono">install-ubuntu-vps.sh</code> ou 1-comando via <code class="mono">curl | bash</code> sem exigir root.</p>
             <div class="code-snippet-box" id="ubuntuInstallCmd">tar -xzf OpenInfinite-Client-Ubuntu-VPS.tar.gz &amp;&amp; ./install-ubuntu-vps.sh</div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <div class="pix-actions-row">
-              <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn sm ivory">Baixar .tar.gz</a>
+              <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn sm silver">OpenInfinite .tar.gz</a>
+              <a href="/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz" download="InfiniteClaude-Client-Ubuntu-VPS.tar.gz" class="btn sm ivory">InfiniteClaude .tar.gz</a>
               <button type="button" class="btn sm" id="copyUbuntuCmdBtn">Copiar comando</button>
             </div>
             <span id="ubuntuCmdFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
@@ -1027,22 +1403,22 @@
         <div class="spotlight-card bento-card">
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <h3>Nous Research Hermes Agent (CLI + Harness)</h3>
-              <span class="brand-ver" style="color:#c7d2fe;border-color:var(--border-accent);">Pro R$ 159+</span>
+              <h3>Escada Multi-CLI · Hermes &amp; Claude Code</h3>
+              <span class="brand-ver">Pro R$ 159 / IC6-PRO / IC6-MAX</span>
             </div>
-            <p>Gera automaticamente o atalho <code class="mono">infinite-hermes</code> e registra o Harness oficial em <code class="mono">~/.hermes/openinfinite-endpoint.json</code>. Zero processos ocultos iniciados sem seu comando.</p>
-            <div class="tier-matrix" aria-label="Disponibilidade do Hermes Agent por plano">
+            <p>Registra <code class="mono">infinite-hermes</code>, <code class="mono">~/.hermes/openinfinite-endpoint.json</code> e <code class="mono">~/.hermes/config.yaml</code> (sem iniciar daemons em background), além de <code class="mono">~/.claude/settings.json</code> e Local/Codex no 3º degrau.</p>
+            <div class="tier-matrix" aria-label="Escada Multi-CLI de 3 Degraus">
               <div class="tier-row">
-                <span>Demo Grátis (1h) &amp; Windows Básico (<strong>R$ 99,00</strong>)</span>
-                <span class="tier-badge locked">Hermes Bloqueado</span>
+                <span>1º Degrau — <strong>OI6-INF</strong> (<strong>R$ 99</strong>) &amp; <strong>OI6-PRO</strong> (<strong>R$ 159</strong>)</span>
+                <span class="tier-badge locked">OpenCode (+ Hermes no Pro)</span>
               </div>
               <div class="tier-row unlocked">
-                <span><strong>OpenInfinite Pro Multi-OS</strong> (<strong>R$ 159,00/mês</strong> · Win/Mac/Ubuntu)</span>
-                <span class="tier-badge open">✓ Hermes CLI + Harness</span>
+                <span>2º Degrau — <strong>InfiniteClaude Pro</strong> (<strong>R$ 199/mês</strong> · <code class="mono">IC6-PRO</code>)</span>
+                <span class="tier-badge open">✓ Claude Code + OpenCode + Hermes</span>
               </div>
               <div class="tier-row unlocked">
-                <span>BadClaude <strong>SuperBad 3º Nível</strong> (R$ 350) &amp; <strong>Fundador VIP</strong> (R$ 690)</span>
-                <span class="tier-badge open">✓ Incluso Completo</span>
+                <span>3º Degrau — <strong>InfiniteClaude Max</strong> (<strong>R$ 249/mês</strong> · <code class="mono">IC6-MAX</code>) &amp; <strong>BadClaude 3º Nível+</strong></span>
+                <span class="tier-badge open">✓ OpenCode + Claude + Hermes + Harness + Codex</span>
               </div>
             </div>
           </div>
@@ -1054,111 +1430,111 @@
     <section id="recursos" class="reveal">
       <div class="sec-head">
         <div>
-          <span class="sec-kicker">Arquitetura do Painel</span>
-          <h2>Feito para aguentar rotina pesada de engenharia.</h2>
+          <span class="sec-kicker">Engenharia Infinite Zone</span>
+          <h2>Motor Headless OpenCode Swap e resposta verificada.</h2>
         </div>
-        <p>Teste os controles interativos abaixo e veja como o painel alterna rotas saturadas, lê seu histórico SQLite real e cuida da memória.</p>
+        <p>Experimente os controles interativos abaixo e veja como os 4 perfis white-label exclusivos alternam rotas saudáveis em segundo plano sem abrir janelas nem derrubar o fluxo.</p>
       </div>
 
       <div class="bento-grid">
-        <!-- Bento 1: Interactive HY4 Cascade -->
+        <!-- Bento 1: Interactive 4-Profile White-Label Swap -->
         <div class="spotlight-card bento-card">
           <div>
-            <h3>Cascata Inteligente com HY4 em 1º Lugar</h3>
-            <p>Bateu limite de requisição numa rota? O Motor Infinite troca na mesma fração de segundo sem derrubar o diff que seu editor estava escrevendo.</p>
+            <h3>4 Perfis White-Label <code class="mono">infinite/*</code></h3>
+            <p>O auto-teste contínuo em segundo plano prioriza rotas com HTTP 200 real não vazio — "Só Clicar e Usar", sem expor IP ou upstream.</p>
           </div>
           <div class="bento-widget">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-              <span class="mono" style="font-size:11.5px;color:var(--muted);" id="cascadeStatusTxt" aria-live="polite">Rota ativa: infinite/auto-turbo (HY4 #1)</span>
-              <button type="button" class="btn sm" id="cascadeSimBtn">⚡ Simular Limite</button>
+              <span class="mono" style="font-size:11.5px;color:var(--silver);" id="cascadeStatusTxt" aria-live="polite">Rota ativa: infinite/auto (HTTP 200 · 48 ms)</span>
+              <button type="button" class="btn sm" id="cascadeSimBtn">⚡ Alternar Perfil</button>
             </div>
             <div class="cascade-list" id="cascadeList">
-              <div class="cascade-row active" data-step="0"><span>1. hy4-flash-free (Principal)</span><span class="c-tag">Ativo · 54 ms</span></div>
-              <div class="cascade-row" data-step="1"><span>2. deepseek-v4.1-flash (Reserva #1)</span><span class="c-tag">Pronto</span></div>
-              <div class="cascade-row" data-step="2"><span>3. mimo-v2.6-flash (Reserva #2)</span><span class="c-tag">Pronto</span></div>
-              <div class="cascade-row" data-step="3"><span>4. Renovação de IP Silenciosa</span><span class="c-tag">Turbo Auto</span></div>
+              <div class="cascade-row active" data-step="0"><span>1. infinite/auto (Swap Headless #1)</span><span class="c-tag">Ativo · 48 ms</span></div>
+              <div class="cascade-row" data-step="1"><span>2. infinite/coder (Slot Código · /v1/messages)</span><span class="c-tag">Pronto</span></div>
+              <div class="cascade-row" data-step="2"><span>3. infinite/fast (Respostas Ágeis &amp; SSE)</span><span class="c-tag">Pronto</span></div>
+              <div class="cascade-row" data-step="3"><span>4. infinite/reasoning (Raciocínio &amp; Revisão)</span><span class="c-tag">Pronto</span></div>
             </div>
           </div>
         </div>
 
-        <!-- Bento 2: Real SQLite Scrubber -->
+        <!-- Bento 2: Real Session Diagnostics Scrubber -->
         <div class="spotlight-card bento-card">
           <div>
-            <h3>Leitura Real do Seu SQLite Local</h3>
-            <p>Sem contadores enfeitados: o painel consulta direto o banco SQLite das suas sessões por janela de 1h, 6h, 24h e 7 dias.</p>
+            <h3>Diagnóstico Real em Tempo de Execução</h3>
+            <p>Métricas exatas da sessão sem banco pesado: acompanhe requisições, cache reaproveitado e latência real medida em cada janela.</p>
           </div>
           <div class="bento-widget">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px;" aria-live="polite">
               <strong id="scrubVal" class="mono" style="font-size:18px;">291,7 K tokens</strong>
-              <span id="scrubMeta" class="mono" style="font-size:11.5px;color:var(--muted);">Janela 24h · Selecione uma barra</span>
+              <span id="scrubMeta" class="mono" style="font-size:11.5px;color:var(--silver);">Janela 24h · Selecione uma barra</span>
             </div>
             <div class="scrub-bars" id="scrubBars" role="group" aria-label="Consumo de tokens por janela de horário">
-              <button type="button" class="scrub-col" data-v="42,1 K tokens" data-m="00h — Entrada + Saída" aria-label="00h: 42,1 K tokens"><span class="scrub-fill" style="height:34px;"></span><span class="scrub-lbl">00h</span></button>
-              <button type="button" class="scrub-col" data-v="78,4 K tokens" data-m="04h — Pico em Python" aria-label="04h: 78,4 K tokens"><span class="scrub-fill" style="height:54px;"></span><span class="scrub-lbl">04h</span></button>
-              <button type="button" class="scrub-col" data-v="118,9 K tokens" data-m="08h — Prioridade HY4 #1" aria-label="08h: 118,9 K tokens"><span class="scrub-fill" style="height:74px;"></span><span class="scrub-lbl">08h</span></button>
-              <button type="button" class="scrub-col" data-v="94,2 K tokens" data-m="12h — OpenBot Modo Leve" aria-label="12h: 94,2 K tokens"><span class="scrub-fill" style="height:60px;"></span><span class="scrub-lbl">12h</span></button>
-              <button type="button" class="scrub-col" data-v="164,8 K tokens" data-m="16h — Projeto ativo" aria-label="16h: 164,8 K tokens"><span class="scrub-fill" style="height:88px;"></span><span class="scrub-lbl">16h</span></button>
-              <button type="button" class="scrub-col active" data-v="291,7 K tokens" data-m="Agora — Tempo real" aria-label="Hoje: 291,7 K tokens"><span class="scrub-fill" style="height:92px;"></span><span class="scrub-lbl">Hoje</span></button>
+              <button type="button" class="scrub-col" data-v="42,1 K tokens" data-m="00h — infinite/fast" aria-label="00h: 42,1 K tokens"><span class="scrub-fill" style="height:34px;"></span><span class="scrub-lbl">00h</span></button>
+              <button type="button" class="scrub-col" data-v="78,4 K tokens" data-m="04h — infinite/coder" aria-label="04h: 78,4 K tokens"><span class="scrub-fill" style="height:54px;"></span><span class="scrub-lbl">04h</span></button>
+              <button type="button" class="scrub-col" data-v="118,9 K tokens" data-m="08h — Claude Code /v1/messages" aria-label="08h: 118,9 K tokens"><span class="scrub-fill" style="height:74px;"></span><span class="scrub-lbl">08h</span></button>
+              <button type="button" class="scrub-col" data-v="94,2 K tokens" data-m="12h — Hermes Harness" aria-label="12h: 94,2 K tokens"><span class="scrub-fill" style="height:60px;"></span><span class="scrub-lbl">12h</span></button>
+              <button type="button" class="scrub-col" data-v="164,8 K tokens" data-m="16h — infinite/reasoning" aria-label="16h: 164,8 K tokens"><span class="scrub-fill" style="height:88px;"></span><span class="scrub-lbl">16h</span></button>
+              <button type="button" class="scrub-col active" data-v="291,7 K tokens" data-m="Agora — 100% HTTP 200 real" aria-label="Hoje: 291,7 K tokens"><span class="scrub-fill" style="height:92px;"></span><span class="scrub-lbl">Hoje</span></button>
             </div>
           </div>
         </div>
 
-        <!-- Bento 3: 3 Theme Live Switcher -->
+        <!-- Bento 3: Native UI Renderers -->
         <div class="spotlight-card bento-card">
           <div>
-            <h3>3 Temas Nativos Instantâneos</h3>
-            <p>Alterne entre Escuro OLED para madrugada, Liquid Glass translúcido ou Claro Daylight para escritórios iluminados.</p>
+            <h3>Renderização Nativa em Cada Sistema</h3>
+            <p>Preto Carbono DWM/GDI+ no Windows, vidro especular NSVisualEffectView no Mac e TUI ANSI limpa via SSH no Ubuntu VPS.</p>
           </div>
           <div class="bento-widget">
-            <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;" role="group" aria-label="Prévia dos 3 temas nativos">
-              <button type="button" class="sim-pill active" data-theme-opt="dark" aria-pressed="true">Escuro</button>
-              <button type="button" class="sim-pill" data-theme-opt="liquid" aria-pressed="false">Liquid Glass</button>
-              <button type="button" class="sim-pill" data-theme-opt="light" aria-pressed="false">Claro</button>
+            <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;" role="group" aria-label="Prévia dos acabamentos nativos">
+              <button type="button" class="sim-pill active" data-theme-opt="dark" aria-pressed="true">Carbono #070709</button>
+              <button type="button" class="sim-pill" data-theme-opt="liquid" aria-pressed="false">macOS Liquid Glass</button>
+              <button type="button" class="sim-pill" data-theme-opt="light" aria-pressed="false">Claro Daylight</button>
             </div>
             <div id="miniThemePreview" class="theme-preview-box" data-t="dark" aria-live="polite">
-              <div style="font-weight:700;font-size:13px;" id="miniThemeTitle">Painel OpenInfinite · Escuro OLED</div>
-              <div style="font-size:12px;opacity:0.82;margin-top:2px;" id="miniThemeDesc">Contrastes nativos adaptados ao sistema.</div>
+              <div style="font-weight:700;font-size:13px;" id="miniThemeTitle">Infinite Zone · Preto Carbono Fosco</div>
+              <div style="font-size:12px;opacity:0.86;margin-top:2px;" id="miniThemeDesc">Zero WebView: controles pintados direto na GPU/SO.</div>
             </div>
           </div>
         </div>
 
-        <!-- Bento 4: RAM Cleanup -->
+        <!-- Bento 4: Zero WebView Footprint -->
         <div class="spotlight-card bento-card">
           <div>
-            <h3>Modo Turbo Auto + Alívio de RAM</h3>
-            <p>Sincroniza seus terminais, enxuga processos órfãos em 1 clique e impede janelas intrusivas de roubarem o foco da IDE.</p>
+            <h3>Pegada Ultraleve Sem Browser Embutido</h3>
+            <p>Sem processos Chromium ocultos drenando gigabytes da sua estação enquanto você compila ou roda containers.</p>
           </div>
           <div class="bento-widget" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <div>
-              <div class="mono" style="font-size:11px;color:var(--muted);">MEMÓRIA LIVRE MONITORADA</div>
-              <div id="ramDemoVal" class="mono" style="font-size:20px;font-weight:800;margin-top:2px;" aria-live="polite">18,4 GB</div>
+              <div class="mono" style="font-size:11px;color:var(--silver);">MEMÓRIA LIVRE PRESERVADA</div>
+              <div id="ramDemoVal" class="mono" style="font-size:20px;font-weight:800;margin-top:2px;" aria-live="polite">21,4 GB</div>
             </div>
-            <button type="button" class="btn sm ivory" id="ramOptimizeBtn">⚡ Otimizar</button>
+            <button type="button" class="btn sm ivory" id="ramOptimizeBtn">⚡ Testar Pegada</button>
           </div>
         </div>
       </div>
 
-      <!-- 4 CLEAN REAL SCREENSHOT THUMBNAILS -->
+      <!-- 4 SCREENSHOT THUMBNAILS -->
       <div class="shot-grid" style="margin-top:16px;" role="group" aria-label="Galeria rápida de telas do painel">
         <button type="button" class="spotlight-card shot-card active" data-shot="0" aria-pressed="true">
-          <img src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Painel Principal Escuro" />
-          <strong>Painel Principal</strong>
-          <span>Botão Iniciar/Pausar e dados reais</span>
+          <img src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Painel Principal Carbono" />
+          <strong>Painel Carbono</strong>
+          <span>Iniciar/Pausar e latência real</span>
         </button>
         <button type="button" class="spotlight-card shot-card" data-shot="1" aria-pressed="false">
-          <img src="/openinfinite/assets/openinfinite_liquid_glass.png" alt="Visual Liquid Glass" />
-          <strong>Liquid Glass</strong>
-          <span>Transparência especular nativa</span>
+          <img src="/openinfinite/assets/openinfinite_liquid_glass.png" alt="Visual Liquid Glass Nativo" />
+          <strong>Liquid Glass macOS</strong>
+          <span>SwiftUI + NSVisualEffectView</span>
         </button>
         <button type="button" class="spotlight-card shot-card" data-shot="2" aria-pressed="false">
-          <img src="/openinfinite/assets/openinfinite_estatisticas.png" alt="Estatísticas Reais" />
-          <strong>Estatísticas SQLite</strong>
-          <span>Tokens, cache e linguagens</span>
+          <img src="/openinfinite/assets/openinfinite_estatisticas.png" alt="Diagnóstico de Requisições" />
+          <strong>Diagnóstico Real</strong>
+          <span>Tokens, cache e perfis ativos</span>
         </button>
         <button type="button" class="spotlight-card shot-card" data-shot="3" aria-pressed="false">
-          <img src="/openinfinite/assets/openinfinite_tema_claro.png" alt="Tema Claro Apple Daylight" />
-          <strong>Tema Claro Daylight</strong>
-          <span>Alto contraste para o dia</span>
+          <img src="/openinfinite/assets/openinfinite_tema_claro.png" alt="Tema Claro Daylight" />
+          <strong>Modo Daylight</strong>
+          <span>Alto contraste diurno</span>
         </button>
       </div>
     </section>
@@ -1168,24 +1544,24 @@
       <div class="sec-head">
         <div>
           <span class="sec-kicker">Fluxo Transparente</span>
-          <h2>Do teste gratuito à chave ativa no seu e-mail.</h2>
+          <h2>Da instalação em 1 comando à chave ativa no seu Gmail.</h2>
         </div>
       </div>
       <div class="steps-grid">
         <button type="button" class="spotlight-card step-card active" aria-pressed="true">
-          <span class="step-num">01 / 1 HORA LIVRE</span>
-          <h3>Teste antes no seu repositório</h3>
-          <p>Baixe para Windows (.exe), macOS (.dmg) ou Ubuntu VPS (.tar.gz) e rode 60 minutos grátis para sentir a estabilidade na prática.</p>
+          <span class="step-num">01 / INSTALE EM 1 COMANDO</span>
+          <h3>Rode nativo em segundos</h3>
+          <p>Baixe o instalador <code class="mono">.exe</code>, <code class="mono">.dmg</code> ou <code class="mono">.tar.gz</code> — ou execute o prompt de 1 linha no PowerShell, macOS ou Ubuntu VPS.</p>
         </button>
         <button type="button" class="spotlight-card step-card" aria-pressed="false">
           <span class="step-num">02 / CONTA GOOGLE &amp; PIX</span>
-          <h3>Entre com Google e envie o comprovante</h3>
-          <p>Faça login com seu Gmail, pague o PIX e envie o comprovante. Para urgência, chame no WhatsApp imediato ou aguarde até 1 hora.</p>
+          <h3>Entre com Google e anexe o comprovante</h3>
+          <p>Vincule seu Gmail, escolha OpenInfinite ou InfiniteClaude, pague o PIX e envie o recibo. Urgência? Chame no WhatsApp imediato ou aguarde até 1h.</p>
         </button>
         <button type="button" class="spotlight-card step-card" aria-pressed="false">
           <span class="step-num">03 / CHAVE NO E-MAIL</span>
-          <h3>Receba por e-mail e valide em 1 clique</h3>
-          <p>Assim que ativada no painel central, sua chave chega no seu e-mail Google com link direto para testar no validador e colar no app.</p>
+          <h3>Ativação Ed25519 e teste em 1 clique</h3>
+          <p>Assim que liberada no Dashboard Control, sua chave <code class="mono">OI6-...</code>, <code class="mono">IC6-PRO-...</code> ou <code class="mono">IC6-MAX-...</code> chega no seu e-mail com link direto do validador.</p>
         </button>
       </div>
     </section>
@@ -1195,9 +1571,9 @@
       <div class="sec-head">
         <div>
           <span class="sec-kicker">Mensalidade Fixa (30 Dias)</span>
-          <h2>Planos simples, sem cobrança por token extra.</h2>
+          <h2>Planos diretos para OpenInfinite v6.2 e InfiniteClaude v6.2.</h2>
         </div>
-        <p>Escolha Windows individual ou Pro Multi-OS com suporte a macOS, Ubuntu VPS e Hermes Agent. Sua chave oficial é entregue direto no seu e-mail Google.</p>
+        <p>Escolha OpenInfinite Windows, OpenInfinite Pro Multi-OS, InfiniteClaude Pro ou InfiniteClaude Max (Escada Multi-CLI Total).</p>
       </div>
 
       <!-- INTERACTIVE COMPARATOR -->
@@ -1205,73 +1581,105 @@
         <div class="comparator-head">
           <div>
             <span class="sec-kicker" style="margin-bottom:2px;">Comparador Rápido</span>
-            <strong style="font-size:16px;">Compare Demo 1h, Windows R$ 99,00 e Pro R$ 159,00</strong>
+            <strong style="font-size:16px;">Compare Demo 1h, Windows R$ 99, OpenInfinite Pro R$ 159, InfiniteClaude R$ 199 e Max R$ 249</strong>
           </div>
-          <div class="comp-tabs" role="tablist" aria-label="Comparar modalidades do OpenInfinite">
+          <div class="comp-tabs" role="tablist" aria-label="Comparar modalidades Infinite Zone">
             <button type="button" role="tab" class="sim-pill" id="comp-tab-demo" aria-selected="false" tabindex="-1" data-comp="demo">Demo Grátis (1h)</button>
             <button type="button" role="tab" class="sim-pill" id="comp-tab-win" aria-selected="false" tabindex="-1" data-comp="infinite">Windows · R$ 99,00</button>
-            <button type="button" role="tab" class="sim-pill active" id="comp-tab-mac" aria-selected="true" tabindex="0" data-comp="infinite_pro">Pro Multi-OS · R$ 159,00</button>
+            <button type="button" role="tab" class="sim-pill" id="comp-tab-mac" aria-selected="false" tabindex="-1" data-comp="infinite_pro">OpenInfinite Pro · R$ 159,00</button>
+            <button type="button" role="tab" class="sim-pill active" id="comp-tab-claude" aria-selected="true" tabindex="0" data-comp="infinite_claude">InfiniteClaude · R$ 199,00</button>
+            <button type="button" role="tab" class="sim-pill" id="comp-tab-max" aria-selected="false" tabindex="-1" data-comp="infinite_max">InfiniteClaude Max · R$ 249,00</button>
           </div>
         </div>
-        <div class="comp-grid" id="compPanel" role="tabpanel" aria-labelledby="comp-tab-mac" aria-live="polite">
-          <div class="comp-metric"><span>Investimento</span><strong id="compPrice" class="mono">R$ 159,00 / mês</strong></div>
-          <div class="comp-metric"><span>Sistemas &amp; Máquinas</span><strong id="compDevices">Win + Mac + Ubuntu VPS (2 máq.)</strong></div>
-          <div class="comp-metric"><span>Hermes Agent Oficial</span><strong id="compEngine">Liberado (CLI + Harness)</strong></div>
-          <div class="comp-metric"><span>Chave / Liberação</span><strong id="compKey" class="mono">OI6-PRO (30 dias)</strong></div>
+        <div class="comp-grid" id="compPanel" role="tabpanel" aria-labelledby="comp-tab-claude" aria-live="polite">
+          <div class="comp-metric"><span>Investimento</span><strong id="compPrice" class="mono">R$ 199,00 / mês</strong></div>
+          <div class="comp-metric"><span>Sistemas &amp; Máquinas</span><strong id="compDevices">Win + Mac + Ubuntu VPS (3 máq.)</strong></div>
+          <div class="comp-metric"><span>Escada Multi-CLI</span><strong id="compEngine">Claude Code + OpenCode + Hermes Pro+</strong></div>
+          <div class="comp-metric"><span>Chave / Liberação</span><strong id="compKey" class="mono">IC6-PRO (30 dias)</strong></div>
         </div>
         <div class="comp-actions">
-          <span id="compSummary" style="font-size:13px;color:var(--muted);">Nosso plano mais completo: roda em Mac Apple Silicon, Windows e Ubuntu Linux VPS com Hermes Agent oficial.</span>
-          <button type="button" class="btn sm ivory" id="compActionBtn">Selecionar Pro Multi-OS (R$ 159,00) no PIX</button>
+          <span id="compSummary" style="font-size:13px;color:var(--ink-secondary);">Injeta direto em ~/.claude/settings.json (infinite/coder, reasoning e fast), configura OpenCode e libera Hermes Pro+ em até 3 máquinas.</span>
+          <button type="button" class="btn sm ivory" id="compActionBtn">Selecionar InfiniteClaude (R$ 199,00) no PIX</button>
         </div>
       </div>
 
       <div class="plans-grid">
-        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias exclusiva para 1 computador Windows." data-help-how="Clique para selecionar R$ 99,00 no checkout em 4 passos abaixo.">
+        <!-- PLANO 1: OPENINFINITE WINDOWS R$ 99 -->
+        <div class="spotlight-card plan-card" data-help-title="OpenInfinite Windows — R$ 99,00 / mês" data-help-what="Licença oficial de 30 dias exclusiva para 1 computador Windows (chave OI6-INF)." data-help-how="Clique para selecionar R$ 99,00 no checkout em 4 passos abaixo.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
-                <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M3 5.3l7.5-1v7.2H3V5.3zm8.5-1.1L21 3v8.5h-9.5V4.2zM3 12.5h7.5v7.2l-7.5-1v-6.2zm8.5 0H21V21l-9.5-1.2v-7.3z"/></svg>
-                <span>OpenInfinite Windows</span>
-              </strong>
-              <span class="brand-ver">30 dias · 1 PC Windows</span>
+              <strong style="font-size:16px;">OpenInfinite Windows</strong>
+              <span class="brand-ver">1 PC Win · 30d</span>
             </div>
-            <div class="plan-price">R$ 99,00 <small>/ mês · chave OI6-INF</small></div>
+            <div class="plan-price">R$ 99,00 <small>/ mês · OI6-INF</small></div>
             <ul class="plan-list">
-              <li>1 computador Windows 10/11 liberado por 30 dias</li>
-              <li>Cascata Infinite AI com prioridade máxima HY4 #1</li>
-              <li>Modo Turbo Auto silencioso + otimização de memória RAM</li>
-              <li>Auto-configuração em 1 clique do OpenBot e editores locais</li>
-              <li class="dim-item">Não inclui macOS, Ubuntu VPS nem Hermes Agent</li>
+              <li>OpenInfinite v6.2 WinForms GDI+ nativo (1 PC Windows)</li>
+              <li>Motor Headless OpenCode Swap nos 4 perfis <code class="mono">infinite/*</code></li>
+              <li>Injeção limpa no OpenCode em 1 clique</li>
+              <li class="dim-item">Sem macOS, Ubuntu VPS, Hermes ou Claude Code</li>
             </ul>
           </div>
-          <button type="button" class="btn ivory" data-select-plan="infinite">Assinar Windows — R$ 99,00/mês</button>
+          <button type="button" class="btn silver" data-select-plan="infinite">Assinar Windows — R$ 99,00</button>
         </div>
 
-        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês" data-help-what="Licença de 30 dias para macOS Apple Silicon, Windows e Ubuntu Linux VPS (até 2 máquinas) + Nous Research Hermes Agent." data-help-how="Clique para selecionar R$ 159,00 no checkout em 4 passos abaixo.">
+        <!-- PLANO 2: OPENINFINITE PRO MULTI-OS R$ 159 -->
+        <div class="spotlight-card plan-card pro" data-help-title="OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês" data-help-what="Licença de 30 dias para macOS Liquid Glass, Windows e Ubuntu Linux VPS (até 2 máquinas) + Nous Research Hermes Agent (chave OI6-PRO)." data-help-how="Clique para selecionar R$ 159,00 no checkout em 4 passos abaixo.">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <strong style="font-size:17px;display:inline-flex;align-items:center;gap:7px;">
-                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/></svg>
-                <span>OpenInfinite macOS, Linux &amp; Multi</span>
-              </strong>
-              <span class="brand-ver" style="color:#c7d2fe;border-color:var(--border-accent);">30 dias · 2 Máquinas + Hermes</span>
+              <strong style="font-size:16px;">OpenInfinite Pro Multi-OS</strong>
+              <span class="brand-ver">2 Máq. + Hermes</span>
             </div>
-            <div class="plan-price">R$ 159,00 <small>/ mês · chave OI6-PRO</small></div>
+            <div class="plan-price">R$ 159,00 <small>/ mês · OI6-PRO</small></div>
             <ul class="plan-list">
-              <li>Nativo macOS Apple Silicon + Windows + Ubuntu Linux VPS</li>
-              <li>Use em até 2 máquinas simultâneas com uma única chave</li>
-              <li><strong>Nous Research Hermes Agent</strong> oficial (<code class="mono">infinite-hermes</code> + Harness)</li>
-              <li>Acabamento Liquid Glass real e foco inteligente por linguagem</li>
-              <li>Chave enviada ao seu e-mail Google + WhatsApp imediato disponível</li>
+              <li>Nativo macOS Liquid Glass + Windows + Ubuntu VPS</li>
+              <li>Até 2 máquinas simultâneas na mesma chave</li>
+              <li>OpenCode + <strong>Nous Research Hermes Agent</strong> (<code class="mono">infinite-hermes</code> + Harness)</li>
+              <li>Chave enviada ao seu Gmail + WhatsApp imediato</li>
             </ul>
           </div>
-          <button type="button" class="btn accent" data-select-plan="infinite_pro">Assinar Pro Multi-OS — R$ 159,00/mês</button>
+          <button type="button" class="btn silver" data-select-plan="infinite_pro">Assinar Pro Multi-OS — R$ 159,00</button>
+        </div>
+
+        <!-- PLANO 3: INFINITECLAUDE v6.2 PRO MULTI-OS + CLAUDE CODE R$ 199 -->
+        <div class="spotlight-card plan-card claude-tier" data-help-title="InfiniteClaude v6.2 Pro Multi-OS + Claude Code — R$ 199,00 / mês" data-help-what="Licença IC6-PRO de 30 dias (até 3 máquinas Win/Mac/Ubuntu) liberando InfiniteClaude v6.2: injeção ~/.claude/settings.json (infinite/coder, reasoning, fast) + OpenCode + Hermes Pro+." data-help-how="Clique para selecionar R$ 199,00 (IC6-PRO) no checkout em 4 passos abaixo.">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <strong style="font-size:16px;">InfiniteClaude v6.2 Pro</strong>
+              <span class="brand-ver" style="border-color:#ffffff;color:#ffffff;">3 Máq. · IC6-PRO</span>
+            </div>
+            <div class="plan-price">R$ 199,00 <small>/ mês · IC6-PRO</small></div>
+            <ul class="plan-list">
+              <li><strong>OpenInfinite + InfiniteClaude v6.2</strong> em Win, Mac e Ubuntu</li>
+              <li>Injeção direta no <strong>Claude Code</strong> (<code class="mono">infinite/coder</code>, <code class="mono">reasoning</code>, <code class="mono">fast</code>)</li>
+              <li>Tradutor Anthropic <code class="mono">/v1/messages</code> completo com <code class="mono">tools</code> e SSE</li>
+              <li>Configuração automática OpenCode + <strong>Hermes Pro+</strong> (até 3 máq.)</li>
+            </ul>
+          </div>
+          <button type="button" class="btn ivory" data-select-plan="infinite_claude">Assinar InfiniteClaude — R$ 199,00</button>
+        </div>
+
+        <!-- PLANO 4: INFINITECLAUDE v6.2 MAX MULTI-CLI TOTAL R$ 249 -->
+        <div class="spotlight-card plan-card claude-tier" data-help-title="InfiniteClaude v6.2 Max Multi-CLI Total — R$ 249,00 / mês" data-help-what="Licença IC6-MAX de 30 dias (até 5 máquinas Win/Mac/Ubuntu) com auto-detecção e injeção em 1 clique em todas as CLIs encontradas: OpenCode, Claude Code, Hermes Agent (~/.hermes/config.yaml sem daemon), Local Harness e Codex CLI." data-help-how="Clique para selecionar R$ 249,00 (IC6-MAX) no checkout em 4 passos abaixo.">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <strong style="font-size:16px;">InfiniteClaude v6.2 Max</strong>
+              <span class="brand-ver" style="border-color:#00B4FF;color:#ffffff;">5 Máq. · IC6-MAX</span>
+            </div>
+            <div class="plan-price">R$ 249,00 <small>/ mês · IC6-MAX</small></div>
+            <ul class="plan-list">
+              <li>Tudo do <code class="mono">IC6-PRO</code> para até <strong>5 máquinas</strong> Win/Mac/Ubuntu</li>
+              <li><strong>Escada Multi-CLI Total:</strong> auto-detecta e injeta em 1 clique</li>
+              <li>OpenCode + Claude Code + <strong>Hermes Agent</strong> (<code class="mono">~/.hermes/config.yaml</code>)</li>
+              <li><strong>Local Harness</strong> &amp; <strong>Codex CLI</strong> integrados com backup</li>
+            </ul>
+          </div>
+          <button type="button" class="btn ivory" data-select-plan="infinite_max">Assinar Max Multi-CLI — R$ 249,00</button>
         </div>
       </div>
 
       <div class="bc-footnote">
-        <span>Já assina <strong>BadClaude</strong> a partir do 3º nível — <strong>SuperBad / Cockpit Pro</strong> (R$ 350) ou <strong>Fundador VIP</strong> (R$ 690)? Sua chave <code class="mono">BC5-...</code> já libera o OpenInfinite Multi-OS + Hermes Agent sem pagar nada a mais.</span>
-        <a href="/badclaude/" style="color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap;">Ver BadClaude →</a>
+        <span>Já assina <strong>BadClaude</strong> a partir do 3º nível — <strong>SuperBad / Cockpit Pro</strong> (R$ 350) ou <strong>Fundador VIP</strong> (R$ 690)? Sua chave <code class="mono">BC5-...</code> já libera o <strong>OpenInfinite v6.2</strong>, o <strong>InfiniteClaude v6.2</strong> e toda a <strong>Escada Multi-CLI</strong> (nível Max) sem custo extra.</span>
+        <a href="/badclaude/" style="color:#ffffff;font-weight:800;text-decoration:none;white-space:nowrap;">Ver BadClaude →</a>
       </div>
 
       <div class="dual-grid">
@@ -1279,14 +1687,14 @@
         <div class="spotlight-card panel" id="checkout">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:19px;font-weight:800;">Assinatura PIX em 4 Passos</h2>
-            <button type="button" class="help-q" aria-label="Ajuda sobre Assinatura PIX" data-help-title="Assinatura em 4 Passos" data-help-what="Vincula sua conta Google, gera o PIX oficial, analisa seu comprovante e envia sua chave por e-mail assim que ativada." data-help-how="Entre com Google no Passo 1, pague o PIX no Passo 2, envie o comprovante no Passo 3 e chame no WhatsApp imediato ou aguarde até 1h no Passo 4.">?</button>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Assinatura PIX" data-help-title="Assinatura em 4 Passos" data-help-what="Vincula sua conta Google, gera o PIX oficial, analisa seu comprovante e envia sua chave OI6, IC6-PRO ou IC6-MAX por e-mail assim que ativada." data-help-how="Entre com Google no Passo 1, pague o PIX no Passo 2, envie o comprovante no Passo 3 e chame no WhatsApp imediato ou aguarde até 1h no Passo 4.">?</button>
           </div>
 
           <!-- PASSO 1: ENTRAR COM GOOGLE -->
           <div class="checkout-step" id="step1Google" data-google-auth-card>
             <div class="step-badge-row">
               <span class="step-tag">Passo 1 · Conta Google</span>
-              <span class="mono" style="font-size:11px;color:var(--muted);" id="step1StateTag">Identificação do e-mail</span>
+              <span class="mono" style="font-size:11px;color:var(--silver);" id="step1StateTag">Identificação do e-mail</span>
             </div>
             <h3>Entre com Google para receber sua chave no Gmail</h3>
             <p style="font-size:12.5px;color:var(--muted);" id="googleAuthLead">
@@ -1321,7 +1729,7 @@
           <div class="checkout-step" id="step2Pix">
             <div class="step-badge-row">
               <span class="step-tag">Passo 2 · Plano &amp; PIX</span>
-              <span class="mono" style="font-size:11px;color:var(--muted);">68 99226-9296 · Raiane Lenoncio</span>
+              <span class="mono" style="font-size:11px;color:var(--silver);">68 99226-9296 · Raiane Lenoncio</span>
             </div>
             <h3>Escolha o plano e gere o QR Code PIX</h3>
 
@@ -1338,8 +1746,10 @@
               <div class="field">
                 <label for="ordPlan">Plano Mensal (30 Dias)</label>
                 <select id="ordPlan">
-                  <option value="infinite_pro" selected>OpenInfinite Pro Multi-OS + Hermes — R$ 159,00 / mês (Mac + Win + Ubuntu)</option>
-                  <option value="infinite">OpenInfinite Windows — R$ 99,00 / mês (1 PC Windows)</option>
+                  <option value="infinite_max">InfiniteClaude v6.2 Max Multi-CLI Total (5 Máq.) — R$ 249,00 / mês (IC6-MAX)</option>
+                  <option value="infinite_claude" selected>InfiniteClaude v6.2 Multi-OS + Claude Code (3 Máq.) — R$ 199,00 / mês (IC6-PRO)</option>
+                  <option value="infinite_pro">OpenInfinite Pro Multi-OS + Hermes (2 Máq.) — R$ 159,00 / mês (OI6-PRO)</option>
+                  <option value="infinite">OpenInfinite Windows (1 PC) — R$ 99,00 / mês (OI6-INF)</option>
                 </select>
               </div>
               <div class="field">
@@ -1366,7 +1776,7 @@
                 <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
                 <span class="brand-ver" id="orderLiveStatusBadge">Aguardando comprovante</span>
               </div>
-              <div class="mono" id="orderResultCode" style="background:#040509;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
+              <div class="mono" id="orderResultCode" style="background:#050507;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
               <div class="pix-actions-row">
                 <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
                 <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
@@ -1379,7 +1789,7 @@
           <div class="checkout-step" id="step3Receipt">
             <div class="step-badge-row">
               <span class="step-tag">Passo 3 · Enviar Comprovante</span>
-              <span class="mono" style="font-size:11px;color:var(--muted);">PNG, JPG, WebP ou PDF · até 3 MB</span>
+              <span class="mono" style="font-size:11px;color:var(--silver);">PNG, JPG, WebP ou PDF · até 3 MB</span>
             </div>
             <h3>Anexe o comprovante PIX para análise de segurança</h3>
             <p style="font-size:12.5px;color:var(--muted);">
@@ -1398,7 +1808,7 @@
                 <label for="receiptNoteInput">Observação rápida (opcional)</label>
                 <input id="receiptNoteInput" type="text" placeholder="Ex.: Pago via Nubank" />
               </div>
-              <button type="submit" id="receiptSubmitBtn" class="btn accent" style="width:100%;">Enviar Comprovante para Análise</button>
+              <button type="submit" id="receiptSubmitBtn" class="btn silver" style="width:100%;">Enviar Comprovante para Análise</button>
             </form>
             <div id="receiptFeedbackBox" class="result-box" role="status" aria-live="polite"></div>
           </div>
@@ -1411,7 +1821,7 @@
             </div>
             <h3 id="step4Headline">Comprovante em análise — escolha como prefere ativar</h3>
 
-            <div style="background:#05060b;border:1px solid var(--border);border-radius:9px;padding:11px 13px;font-size:12.5px;display:flex;flex-direction:column;gap:5px;">
+            <div style="background:#050507;border:1px solid var(--border);border-radius:9px;padding:11px 13px;font-size:12.5px;display:flex;flex-direction:column;gap:5px;">
               <div><strong style="color:var(--ink);">Pré-análise do comprovante:</strong> <span id="receiptAnalysisSummary" style="color:var(--ink-secondary);">Comprovante registrado e encaminhado para conferência.</span></div>
               <div><strong style="color:var(--ink);">E-mail que receberá a chave:</strong> <span id="analysisTargetEmail" class="mono" style="color:var(--emerald-ink);">—</span></div>
             </div>
@@ -1426,14 +1836,14 @@
 
             <div class="pix-actions-row" style="justify-content:space-between;">
               <button type="button" id="checkOrderNowBtn" class="btn ghost sm">↻ Conferir se já foi ativada</button>
-              <span class="mono" style="font-size:11px;color:var(--dim);" id="pollHintTxt">Checagem automática ativa</span>
+              <span class="mono" style="font-size:11px;color:var(--silver);" id="pollHintTxt">Checagem automática ativa</span>
             </div>
           </div>
 
           <!-- DELIVERED KEY CARD (ONLY SHOWN WHEN status === "approved" || "delivered") -->
           <div id="deliveredKeyBox" class="delivered-key-card" role="region" aria-label="Chave de licença ativada">
             <strong style="color:var(--emerald-ink);font-size:14.5px;">🎉 Pedido ativado! Sua chave também foi enviada por e-mail:</strong>
-            <div class="mono" id="deliveredKeyValue" style="background:#040509;padding:10px;border:1px solid rgba(16,185,129,0.5);border-radius:8px;word-break:break-all;font-size:12.5px;color:#fff;font-weight:700;">—</div>
+            <div class="mono" id="deliveredKeyValue" style="background:#050507;padding:10px;border:1px solid rgba(16,185,129,0.5);border-radius:8px;word-break:break-all;font-size:12.5px;color:#fff;font-weight:700;">—</div>
             <div class="pix-actions-row">
               <button type="button" id="copyDeliveredKeyBtn" class="btn ivory sm">Copiar Minha Chave</button>
               <button type="button" id="testDeliveredKeyBtn" class="btn emerald sm">Testar Chave no Validador</button>
@@ -1447,20 +1857,20 @@
           <span id="licenca" aria-hidden="true" style="position:absolute;top:0;"></span>
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <h2 style="font-size:19px;font-weight:800;">Validador de Chave Online</h2>
-            <button type="button" class="help-q" aria-label="Ajuda sobre Validar Chave Online" data-help-title="Validar Chave Online" data-help-what="Confere sua chave OI6-INF, OI6-PRO ou BC5 compatível direto no servidor." data-help-how="Abra o link recebido no seu e-mail de ativação ou cole a chave abaixo.">?</button>
+            <button type="button" class="help-q" aria-label="Ajuda sobre Validar Chave Online" data-help-title="Validar Chave Online" data-help-what="Confere sua chave IC6-MAX, IC6-PRO, OI6-PRO, OI6-INF ou BC5 compatível direto no servidor." data-help-how="Abra o link recebido no seu e-mail de ativação ou cole a chave abaixo.">?</button>
           </div>
-          <p style="font-size:13.5px;color:var(--muted);">
-            Aceita chaves <code class="mono" style="color:var(--ink);">OI6-INF-...</code> (Windows), <code class="mono" style="color:var(--ink);">OI6-PRO-...</code> (Pro Multi-OS + Hermes) e BadClaude 3º Nível+ (<code class="mono" style="color:var(--ink);">BC5-...</code>).
+          <p style="font-size:13.5px;color:var(--ink-secondary);">
+            Aceita chaves <code class="mono" style="color:#ffffff;">IC6-MAX-...</code> (Multi-CLI Total), <code class="mono" style="color:#ffffff;">IC6-PRO-...</code> (InfiniteClaude v6.2), <code class="mono" style="color:#ffffff;">OI6-PRO-...</code> (OpenInfinite Pro), <code class="mono" style="color:#ffffff;">OI6-INF-...</code> (Windows) e BadClaude 3º Nível+ (<code class="mono" style="color:#ffffff;">BC5-...</code>).
           </p>
-          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-size:12.5px;color:var(--ink-secondary);">
+          <div style="background:rgba(255,255,255,0.035);border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-size:12.5px;color:var(--ink-secondary);">
             <strong>Importante:</strong> sua chave só passa neste teste depois de ativada pelo dono no painel central e enviada para o seu e-mail Google.
           </div>
           <form id="verifyForm" novalidate>
             <div class="field">
               <label for="verifyKeyInput">Sua Chave Recebida por E-mail</label>
-              <input id="verifyKeyInput" type="text" class="mono" placeholder="OI6-PRO-... ou OI6-INF-..." required autocomplete="off" spellcheck="false" />
+              <input id="verifyKeyInput" type="text" class="mono" placeholder="IC6-MAX-... · IC6-PRO-... · OI6-PRO-... · OI6-INF-..." required autocomplete="off" spellcheck="false" />
             </div>
-            <button type="submit" id="verifySubmitBtn" class="btn accent" style="width:100%;">Conferir Chave Online</button>
+            <button type="submit" id="verifySubmitBtn" class="btn ivory" style="width:100%;">Conferir Chave Online</button>
           </form>
           <div id="licResultBox" class="result-box" role="status" aria-live="polite"></div>
           <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
@@ -1476,16 +1886,30 @@
       <div class="sec-head">
         <div>
           <span class="sec-kicker">Dúvidas Diretas</span>
-          <h2>O que você precisa saber antes de assinar.</h2>
+          <h2>Como funciona o Motor Headless e a Escada Multi-CLI v6.2.</h2>
         </div>
       </div>
       <div class="faq-list">
         <div class="faq-item open">
           <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
-            <span>Como funciona a ativação após pagar o PIX e enviar o comprovante?</span>
+            <span>Qual é a diferença prática entre OpenInfinite v6.2 e InfiniteClaude v6.2?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+            <div class="faq-panel-inner">
+              <div class="faq-panel-body">
+                Ambos são aplicativos 100% nativos ("Só Clicar e Usar", zero HTML/WebView e sem abrir GUI do OpenCode) movidos pelo <strong>Motor Headless OpenCode Swap</strong> nos 4 perfis white-label (<code class="mono">infinite/auto</code>, <code class="mono">infinite/coder</code>, <code class="mono">infinite/fast</code>, <code class="mono">infinite/reasoning</code>). O <strong>OpenInfinite v6.2</strong> entrega esses perfis para OpenCode (e Hermes no Pro). Já o <strong>InfiniteClaude v6.2</strong> (<code class="mono">IC6-PRO</code>) traduz <code class="mono">/v1/messages</code> + <code class="mono">tools</code> + SSE e injeta direto em <code class="mono">~/.claude/settings.json</code> usando <code class="mono">infinite/coder</code>, <code class="mono">infinite/reasoning</code> e <code class="mono">infinite/fast</code>; e o <strong><code class="mono">IC6-MAX</code></strong> auto-detecta e injeta em todas as CLIs encontradas (OpenCode, Claude Code, Hermes <code class="mono">~/.hermes/config.yaml</code> sem daemon, Local Harness e Codex CLI).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+            <span>Como funciona a ativação após pagar o PIX e enviar o comprovante?</span>
+            <span class="faq-chevron" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
                 Você entra com sua conta Google, gera o PIX e anexa o comprovante aqui na página. O servidor faz a pré-análise de integridade e alerta o administrador, sem liberar chave no escuro. Em seguida você escolhe: clicar no botão de WhatsApp para <strong>ativação imediata</strong> ou <strong>aguardar até 1 hora</strong>. Assim que ativada no app central, sua chave chega no seu e-mail com link direto para testar no validador.
@@ -1495,28 +1919,14 @@
         </div>
 
         <div class="faq-item">
-          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
-            <span>Em quais planos o Ubuntu Linux VPS e o Nous Research Hermes Agent funcionam?</span>
-            <span class="faq-chevron" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
-            <div class="faq-panel-inner">
-              <div class="faq-panel-body">
-                Tanto o cliente Ubuntu Linux VPS (<code class="mono">install-ubuntu-vps.sh</code>) quanto a integração oficial com o Hermes Agent (<code class="mono">infinite-hermes</code> CLI + Harness <code class="mono">~/.hermes/openinfinite-endpoint.json</code>) são liberados a partir do plano <strong>OpenInfinite Pro Multi-OS (R$ 159,00/mês · chave OI6-PRO)</strong>, além do BadClaude 3º nível (SuperBad / Cockpit Pro R$ 350 e Fundador VIP R$ 690). Na Demo de 1h e no plano Windows de R$ 99,00 (<code class="mono">OI6-INF</code>), o Hermes Agent permanece bloqueado.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
-            <span>Meus dados ou chaves aparecem no painel público de consumo em tempo real?</span>
+            <span>Em quais planos o Ubuntu Linux VPS e o Nous Research Hermes Agent funcionam?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                Jamais. O endpoint <code class="mono">/api/openinfinite/public-stats</code> soma apenas contadores numéricos anônimos de tokens, cache e economia média por categoria de plano. Nenhuma chave, prefixo, e-mail, HWID, hostname ou endereço IP é retornado.
+                Tanto os clientes Ubuntu Linux VPS quanto a integração oficial com o Hermes Agent (<code class="mono">infinite-hermes</code> CLI, <code class="mono">~/.hermes/openinfinite-endpoint.json</code> e <code class="mono">~/.hermes/config.yaml</code> sem iniciar daemon) são liberados em <strong>OpenInfinite Pro Multi-OS (R$ 159/mês · OI6-PRO)</strong>, <strong>InfiniteClaude Pro (R$ 199/mês · IC6-PRO)</strong>, <strong>InfiniteClaude Max (R$ 249/mês · IC6-MAX)</strong> e <strong>BadClaude 3º nível+</strong> (SuperBad / Cockpit Pro R$ 350 e Fundador VIP R$ 690).
               </div>
             </div>
           </div>
@@ -1524,13 +1934,13 @@
 
         <div class="faq-item">
           <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
-            <span>Tenho BadClaude (Cockpit Pro / Fundador VIP, 3º nível+) — preciso pagar separado?</span>
+            <span>Meus dados ou chaves aparecem no painel público de consumo em tempo real?</span>
             <span class="faq-chevron" aria-hidden="true">+</span>
           </button>
           <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
             <div class="faq-panel-inner">
               <div class="faq-panel-body">
-                Não. Chaves BadClaude válidas a partir do 3º nível (<code class="mono">BC5-...</code> SuperBad / Cockpit Pro ou Fundador VIP) já destravam o OpenInfinite v6.1 completo em Windows, macOS e Ubuntu VPS, incluindo o Hermes Agent oficial.
+                Jamais. O endpoint <code class="mono">/api/openinfinite/public-stats</code> soma apenas contadores numéricos anônimos de tokens, cache e economia média por categoria de plano. Nenhuma chave, prefixo, e-mail, HWID, hostname ou endereço IP é retornado.
               </div>
             </div>
           </div>
@@ -1547,12 +1957,12 @@
   <div id="shiftIModal" role="dialog" aria-modal="true" aria-labelledby="shiftITitle">
     <div class="shift-box">
       <div class="shift-head">
-        <span>Ajuda OpenInfinite · Shift + I</span>
+        <span>INFINITE ZONE · Ajuda Rápida Shift + I</span>
         <button type="button" id="shiftICloseTop" class="btn sm" aria-label="Fechar janela de ajuda" style="padding:4px 10px;">✕</button>
       </div>
       <div class="shift-body">
         <h3 id="shiftITitle" style="color:var(--ink);font-size:16px;font-weight:800;">Entenda este item</h3>
-        <div><strong style="color:var(--accent);">O que é:</strong> <span id="shiftIWhat" style="color:var(--ink-secondary);">—</span></div>
+        <div><strong style="color:#ffffff;">O que é:</strong> <span id="shiftIWhat" style="color:var(--ink-secondary);">—</span></div>
         <div><strong style="color:var(--emerald-ink);">Como usar:</strong> <span id="shiftIHow" style="color:var(--ink-secondary);">—</span></div>
         <div style="display:flex;justify-content:flex-end;">
           <button type="button" id="shiftICloseBtn" class="btn ivory sm">Entendi [ESC]</button>
@@ -1641,13 +2051,27 @@
         }
       }
 
-      // Sticky topbar density change on scroll
+      // Generic handler for all 1-Prompt / 1-Command copy buttons
+      document.querySelectorAll('[data-copy-cmd]').forEach((btn) => {
+        const origText = btn.textContent;
+        btn.addEventListener('click', async () => {
+          const cmd = btn.getAttribute('data-copy-cmd') || '';
+          const fbId = btn.getAttribute('data-copy-target') || '';
+          const ok = await copyTextSafely(cmd);
+          showInlineCopyState(
+            btn,
+            fbId ? $(fbId) : null,
+            origText,
+            ok ? 'Prompt de 1 comando copiado!' : 'Selecione o comando acima para copiar.'
+          );
+        });
+      });
+
       const topbar = $('topbar');
       window.addEventListener('scroll', () => {
         if (topbar) topbar.classList.toggle('scrolled', window.scrollY > 24);
       }, { passive: true });
 
-      // IntersectionObserver reveal animations
       const revEls = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window && !reducedMotion) {
         const io = new IntersectionObserver((entries) => {
@@ -1660,7 +2084,6 @@
         revEls.forEach((el) => el.classList.add('in'));
       }
 
-      // SpotlightCard pointer glow
       document.querySelectorAll('.spotlight-card').forEach((card) => {
         card.addEventListener('pointermove', (e) => {
           const r = card.getBoundingClientRect();
@@ -1669,7 +2092,7 @@
         }, { passive: true });
       });
 
-      // Living 3D Symbol tracking mouse across Hero + LivingStage (never blocked by reduced-motion!)
+      // Living 3D Infinite Zone Symbol + Spectral Particles
       const stage = $('livingStage');
       const hero = document.querySelector('.hero');
       const core = $('livingCore');
@@ -1677,6 +2100,7 @@
       const b1 = $('badge1');
       const b2 = $('badge2');
       const canvas = $('particleCanvas');
+      const SPECTRAL_PALETTE = ['#00B4FF', '#5B2EFF', '#FF00B8', '#FF7A00', '#19FF00'];
 
       if (stage && core) {
         let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -1714,10 +2138,11 @@
 
         if (canvas && canvas.getContext) {
           const ctx = canvas.getContext('2d');
-          const pts = Array.from({ length: 24 }, (_, i) => ({
+          const pts = Array.from({ length: 25 }, (_, i) => ({
             x: (i * 53) % 360, y: (i * 79) % 380,
             vx: ((i % 2 === 0 ? 1 : -1) * (0.24 + (i % 4) * 0.07)),
             vy: ((i % 3 === 0 ? 1 : -1) * (0.20 + (i % 5) * 0.06)),
+            color: SPECTRAL_PALETTE[i % SPECTRAL_PALETTE.length],
           }));
           const drawParticles = () => {
             const w = stage.clientWidth || 360;
@@ -1734,14 +2159,14 @@
               }
               const dm = Math.hypot(mx - p.x, my - p.y);
               if (dm < 110) { p.x += (mx - p.x) * 0.01; p.y += (my - p.y) * 0.01; }
-              ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
-              ctx.fillStyle = dm < 100 ? 'rgba(165,180,252,0.85)' : 'rgba(255,255,255,0.28)';
+              ctx.beginPath(); ctx.arc(p.x, p.y, dm < 100 ? 2.1 : 1.5, 0, Math.PI * 2);
+              ctx.fillStyle = dm < 100 ? p.color : 'rgba(255,255,255,0.30)';
               ctx.fill();
               for (let j = i + 1; j < pts.length; j++) {
                 const q = pts[j];
                 const d = Math.hypot(p.x - q.x, p.y - q.y);
                 if (d < 84) {
-                  ctx.strokeStyle = `rgba(165,180,252,${(0.18 * (1 - d / 84)).toFixed(3)})`;
+                  ctx.strokeStyle = `rgba(255,255,255,${(0.14 * (1 - d / 84)).toFixed(3)})`;
                   ctx.lineWidth = 0.7;
                   ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
                 }
@@ -1753,12 +2178,11 @@
         }
       }
 
-      // Interactive Cockpit & Gallery Sync (WAI-ARIA Tabs + View Transitions)
       const SHOTS = [
-        { img: '/openinfinite/assets/openinfinite_tema_escuro.png', title: 'Painel Principal com Botão Iniciar / Pausar & Dados Reais', desc: 'Telemetria direta do banco local, status ao vivo das ferramentas e troca de motor sem popups.' },
-        { img: '/openinfinite/assets/openinfinite_liquid_glass.png', title: 'Visual Liquid Glass (macOS & Windows)', desc: 'Vidro translúcido com bordas especulares sem banners ou janelas secundárias interrompendo o foco.' },
-        { img: '/openinfinite/assets/openinfinite_estatisticas.png', title: 'Estatísticas Reais SQLite', desc: 'Acompanhe tokens de entrada, saída, cache reaproveitado e linguagens reais medidas nos seus projetos.' },
-        { img: '/openinfinite/assets/openinfinite_tema_claro.png', title: 'Tema Claro Apple Daylight', desc: 'Contraste alto e limpo para ambientes bem iluminados com leitura nítida dos gráficos.' },
+        { img: '/openinfinite/assets/openinfinite_tema_escuro.png', title: 'Interface Nativa Preto Carbono & Diagnóstico sem Falso Positivo', desc: 'Status Verde só acende após resposta HTTP 200 real não vazia com latência medida.' },
+        { img: '/openinfinite/assets/openinfinite_liquid_glass.png', title: 'macOS SwiftUI + AppKit Liquid Glass Nativo', desc: 'Transparência especular nativa sem WKWebView, com suporte a OpenInfinite e InfiniteClaude.' },
+        { img: '/openinfinite/assets/openinfinite_estatisticas.png', title: 'Diagnóstico Real de Requisições & Cache', desc: 'Acompanhe tokens processados, cache reaproveitado e latência das rotas white-label infinite/*.' },
+        { img: '/openinfinite/assets/openinfinite_tema_claro.png', title: 'Modo Daylight Alto Contraste', desc: 'Leitura nítida para estações em ambientes claros.' },
       ];
 
       const cockpitTabs = Array.from(document.querySelectorAll('#cockpitTabs [role="tab"]'));
@@ -1804,12 +2228,11 @@
         });
       });
 
-      // Language / Stack focus pills inside simulator
       const LANG_PROFILES = {
-        python: 'Perfil: Python 3.12 · HY4 #1 (54 ms)',
-        ts: 'Perfil: TypeScript 5 · HY4 #1 (48 ms)',
-        go: 'Perfil: Go 1.24 · HY4 #1 (42 ms)',
-        rust: 'Perfil: Rust Cargo · HY4 #1 (51 ms)',
+        python: 'Perfil: Python 3.12 · infinite/coder (48 ms)',
+        ts: 'Perfil: TypeScript 5 · infinite/coder (44 ms)',
+        go: 'Perfil: Go 1.24 · infinite/fast (39 ms)',
+        rust: 'Perfil: Rust Cargo · infinite/reasoning (51 ms)',
       };
       document.querySelectorAll('.lang-chip[data-lang]').forEach((chip) => {
         chip.addEventListener('click', () => {
@@ -1823,7 +2246,6 @@
         });
       });
 
-      // Engine toggle
       let simOn = true;
       $('simEngineBtn').addEventListener('click', () => {
         simOn = !simOn;
@@ -1832,7 +2254,7 @@
         btn.setAttribute('aria-pressed', String(simOn));
         btn.textContent = simOn ? '⏸ Motor Ativo · Pausar' : '▶ Motor Pausado · Iniciar';
         if (b2) {
-          b2.textContent = simOn ? '● Motor Pronto' : '○ Motor Pausado';
+          b2.textContent = simOn ? '● HTTP 200 Real Verificado' : '○ Motor em Espera';
           b2.style.color = simOn ? 'var(--emerald-ink)' : 'var(--amber)';
         }
       });
@@ -1849,6 +2271,7 @@
         const meteredBrl = millions * refBrlPerMillion;
         const winCost = 99;
         const proCost = 159;
+        const claudeCost = 199;
 
         $('calcVolTitle').textContent = `API Tarifada · ${label}`;
         $('calcMeteredBrl').textContent = brlFmt.format(meteredBrl);
@@ -1864,13 +2287,17 @@
 
         $('calcWinSaveBadge').textContent = formatSavings(winCost);
         $('calcProSaveBadge').textContent = formatSavings(proCost);
+        if ($('calcClaudeSaveBadge')) $('calcClaudeSaveBadge').textContent = formatSavings(claudeCost);
 
-        const winRatio = Math.max(0.03, Math.min(1, winCost / Math.max(meteredBrl, proCost)));
-        const proRatio = Math.max(0.05, Math.min(1, proCost / Math.max(meteredBrl, proCost)));
-        const metRatio = Math.max(0.08, Math.min(1, meteredBrl / Math.max(meteredBrl, proCost)));
+        const denom = Math.max(meteredBrl, claudeCost);
+        const winRatio = Math.max(0.03, Math.min(1, winCost / denom));
+        const proRatio = Math.max(0.05, Math.min(1, proCost / denom));
+        const claudeRatio = Math.max(0.06, Math.min(1, claudeCost / denom));
+        const metRatio = Math.max(0.08, Math.min(1, meteredBrl / denom));
         $('calcBarMetered').style.transform = `scaleX(${metRatio.toFixed(3)})`;
         $('calcBarWin').style.transform = `scaleX(${winRatio.toFixed(3)})`;
         $('calcBarPro').style.transform = `scaleX(${proRatio.toFixed(3)})`;
+        if ($('calcBarClaude')) $('calcBarClaude').style.transform = `scaleX(${claudeRatio.toFixed(3)})`;
 
         presetBtns.forEach((b) => {
           const on = Number(b.dataset.tokens) === tokens;
@@ -2001,7 +2428,6 @@
         if (document.visibilityState === 'visible') fetchPublicStats();
       }, 15000);
 
-      // Copy Ubuntu install command
       $('copyUbuntuCmdBtn').addEventListener('click', async () => {
         const cmd = 'tar -xzf OpenInfinite-Client-Ubuntu-VPS.tar.gz && ./install-ubuntu-vps.sh';
         const ok = await copyTextSafely(cmd);
@@ -2013,13 +2439,12 @@
         );
       });
 
-      // Interactive Bento 1: Cascade rotation simulator
       let casIdx = 0;
       const casLabels = [
-        'Rota ativa: infinite/auto-turbo (HY4 #1)',
-        'HY4 saturado → Alternou silenciosamente para DeepSeek v4.1',
-        'Rota #2 saturada → Assumiu MiMo v2.6 Flash sem fechar o editor',
-        'Conexão renovada! HY4 #1 restaurado como principal'
+        'Rota ativa: infinite/auto (HTTP 200 · 48 ms)',
+        'Claude Code ~/.claude/settings.json → infinite/coder com tool_use (44 ms)',
+        'Resposta rápida → infinite/fast via streaming SSE (39 ms)',
+        'Análise profunda → infinite/reasoning em segundo plano (51 ms)'
       ];
       $('cascadeSimBtn').addEventListener('click', () => {
         casIdx = (casIdx + 1) % 4;
@@ -2029,14 +2454,13 @@
           row.classList.toggle('cooldown', i < casIdx && casIdx < 3);
           const tag = row.querySelector('.c-tag');
           if (tag) {
-            if (i === casIdx) tag.textContent = i === 3 ? 'Renovando' : 'Ativo agora';
-            else if (i < casIdx && casIdx < 3) tag.textContent = 'Cooldown';
-            else tag.textContent = i === 3 ? 'Turbo Auto' : 'Pronto';
+            if (i === casIdx) tag.textContent = 'Ativo · 200 OK';
+            else if (i < casIdx && casIdx < 3) tag.textContent = 'Standby';
+            else tag.textContent = i === 3 ? 'Cascata' : 'Pronto';
           }
         });
       });
 
-      // Interactive Bento 2: Scrubber hover + focus + click
       function selectScrubCol(col) {
         document.querySelectorAll('#scrubBars .scrub-col').forEach((c) => c.classList.remove('active'));
         col.classList.add('active');
@@ -2049,11 +2473,10 @@
         col.addEventListener('click', () => selectScrubCol(col));
       });
 
-      // Interactive Bento 3: Theme swatch preview
       const THEME_COPY = {
-        dark: { title: 'Painel OpenInfinite · Escuro OLED', desc: 'Contrastes nativos adaptados ao sistema.' },
-        liquid: { title: 'Painel OpenInfinite · Liquid Glass', desc: 'Vidro translúcido especular para macOS e Windows.' },
-        light: { title: 'Painel OpenInfinite · Claro Daylight', desc: 'Leitura nítida em ambientes muito iluminados.' },
+        dark: { title: 'Infinite Zone · Preto Carbono Fosco', desc: 'Zero WebView: controles pintados direto na GPU/SO.' },
+        liquid: { title: 'Infinite Zone · macOS Liquid Glass', desc: 'SwiftUI + NSVisualEffectView nativo no Apple Silicon.' },
+        light: { title: 'Infinite Zone · Claro Daylight', desc: 'Leitura nítida em ambientes muito iluminados.' },
       };
       document.querySelectorAll('[data-theme-opt]').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -2071,16 +2494,14 @@
         });
       });
 
-      // Interactive Bento 4: RAM preview action
       $('ramOptimizeBtn').addEventListener('click', () => {
         const el = $('ramDemoVal');
         if (!el) return;
-        el.textContent = '19,8 GB (Otimizado)';
+        el.textContent = '22,1 GB (~19 MB RAM App)';
         clearTimeout(el._ramTimer);
-        el._ramTimer = setTimeout(() => { el.textContent = '19,6 GB'; }, 1400);
+        el._ramTimer = setTimeout(() => { el.textContent = '21,9 GB'; }, 1600);
       });
 
-      // 3-Step kinetic buttons
       document.querySelectorAll('.step-card').forEach((card) => {
         card.addEventListener('click', () => {
           document.querySelectorAll('.step-card').forEach((c) => {
@@ -2098,33 +2519,51 @@
           devices: 'Win, Mac ou Ubuntu (teste)',
           engine: 'Bloqueado na Demo',
           key: 'Sem chave · Teste imediato',
-          summary: 'Baixe o instalador oficial e valide o painel no seu projeto real durante 60 minutos.',
-          cta: 'Baixar Demo Windows (.exe)',
-          action: () => { window.location.href = '/downloads/OpenInfinite-Client-Setup.exe'; },
+          summary: 'Baixe o instalador nativo e valide a latência real no seu repositório durante 60 minutos.',
+          cta: 'Baixar InfiniteClaude Windows (.exe)',
+          action: () => { window.location.href = '/downloads/InfiniteClaude-Client-Setup.exe'; },
         },
         infinite: {
           price: 'R$ 99,00 / mês',
           devices: '1 PC Windows exclusivo',
-          engine: 'Bloqueado (só Windows)',
+          engine: 'Apenas OpenCode (Win)',
           key: 'OI6-INF (30 dias)',
-          summary: 'Plano econômico dedicado para 1 estação Windows com HY4 #1 e renovação silenciosa.',
+          summary: 'Plano econômico dedicado para 1 estação Windows com motor white-label infinite/* nativo.',
           cta: 'Selecionar Windows (R$ 99,00) no PIX',
           action: () => selectPlan('infinite'),
         },
         infinite_pro: {
           price: 'R$ 159,00 / mês',
           devices: 'Win + Mac + Ubuntu VPS (2 máq.)',
-          engine: 'Liberado (CLI + Harness)',
+          engine: 'Hermes Agent CLI + Harness',
           key: 'OI6-PRO (30 dias)',
-          summary: 'Nosso plano mais completo: roda em Mac Apple Silicon, Windows e Ubuntu Linux VPS com Hermes Agent oficial.',
-          cta: 'Selecionar Pro Multi-OS (R$ 159,00) no PIX',
+          summary: 'OpenInfinite v6.2 completo em Mac Apple Silicon, Windows e Ubuntu Linux VPS com Hermes Agent oficial.',
+          cta: 'Selecionar OpenInfinite Pro (R$ 159,00) no PIX',
           action: () => selectPlan('infinite_pro'),
         },
+        infinite_claude: {
+          price: 'R$ 199,00 / mês',
+          devices: 'Win + Mac + Ubuntu VPS (3 máq.)',
+          engine: 'Claude Code + OpenCode + Hermes Pro+',
+          key: 'IC6-PRO (30 dias)',
+          summary: 'Injeta direto em ~/.claude/settings.json (infinite/coder, reasoning e fast), configura OpenCode e libera Hermes Pro+ em até 3 máquinas.',
+          cta: 'Selecionar InfiniteClaude (R$ 199,00) no PIX',
+          action: () => selectPlan('infinite_claude'),
+        },
+        infinite_max: {
+          price: 'R$ 249,00 / mês',
+          devices: 'Win + Mac + Ubuntu VPS (5 máq.)',
+          engine: 'Todas CLIs (OpenCode, Claude, Hermes, Harness, Codex)',
+          key: 'IC6-MAX (30 dias)',
+          summary: 'Degrau máximo da Escada Multi-CLI: auto-detecta e injeta em 1 clique no OpenCode, Claude Code, Hermes (~/.hermes/config.yaml sem daemon), Local Harness e Codex CLI.',
+          cta: 'Selecionar InfiniteClaude Max (R$ 249,00) no PIX',
+          action: () => selectPlan('infinite_max'),
+        },
       };
-      let currentCompAction = COMP_DATA.infinite_pro.action;
+      let currentCompAction = COMP_DATA.infinite_claude.action;
       const compTabs = Array.from(document.querySelectorAll('#comparador [role="tab"]'));
       function activateComp(key, focusTab) {
-        const d = COMP_DATA[key] || COMP_DATA.infinite_pro;
+        const d = COMP_DATA[key] || COMP_DATA.infinite_claude;
         const apply = () => {
           $('compPrice').textContent = d.price;
           $('compDevices').textContent = d.devices;
@@ -2163,7 +2602,6 @@
       });
       $('compActionBtn').addEventListener('click', () => currentCompAction());
 
-      // FAQ Accordion (CSS Grid 0fr -> 1fr)
       document.querySelectorAll('.faq-trigger').forEach((btn) => {
         btn.addEventListener('click', () => {
           const item = btn.closest('.faq-item');
@@ -2173,7 +2611,6 @@
         });
       });
 
-      // Modals with focus management
       function openZoomModal(src) {
         lastFocusBeforeModal = document.activeElement;
         $('zoomImg').src = src;
@@ -2195,11 +2632,11 @@
         if (el && !el.dataset?.helpTitle) el = el.closest?.('[data-help-title]');
         if (el?.dataset?.helpTitle) {
           $('shiftITitle').textContent = el.dataset.helpTitle;
-          $('shiftIWhat').textContent = el.dataset.helpWhat || 'Recurso oficial OpenInfinite v6.1.';
-          $('shiftIHow').textContent = el.dataset.helpHow || 'Teste por 1h ou assine um dos planos mensais.';
+          $('shiftIWhat').textContent = el.dataset.helpWhat || 'Recurso oficial Infinite Zone v6.2.';
+          $('shiftIHow').textContent = el.dataset.helpHow || 'Instale em 1 comando ou escolha um dos planos mensais.';
         } else {
           $('shiftITitle').textContent = 'Ajuda Rápida Shift + I';
-          $('shiftIWhat').textContent = 'Explica qualquer bloco, botão de download ou plano mensal em linguagem simples.';
+          $('shiftIWhat').textContent = 'Explica qualquer bloco, comando de instalação ou plano mensal da Infinite Zone.';
           $('shiftIHow').textContent = 'Passe o mouse sobre qualquer área e aperte Shift + I.';
         }
         $('shiftIModal').classList.add('open');
@@ -2246,7 +2683,6 @@
         if (q) { ev.preventDefault(); openHelpModal(q); }
       });
 
-      // Plan selection -> Checkout
       function selectPlan(p) {
         $('ordPlan').value = p;
         $('checkout')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
@@ -2260,7 +2696,6 @@
         btn.addEventListener('click', () => selectPlan(btn.dataset.selectPlan));
       });
 
-      // Inline PIX Copy (sem bloqueio por popup nativo)
       $('copyPixBtn').addEventListener('click', async () => {
         const ok = await copyTextSafely('68 99226-9296');
         showInlineCopyState(
@@ -2296,8 +2731,10 @@
       function buildFallbackWhatsAppUrl(ord) {
         const id = ord?.order_id || 'NOVO';
         const email = ord?.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || '';
-        const amt = ord?.amount_display || ($('ordPlan').value === 'infinite' ? 'R$ 99,00' : 'R$ 159,00');
-        const msg = `Olá! Enviei o comprovante PIX do pedido ${id} (${amt}) vinculado ao e-mail ${email}. Pode ativar minha chave OpenInfinite?`;
+        const planVal = $('ordPlan').value;
+        const fallbackAmt = planVal === 'infinite' ? 'R$ 99,00' : planVal === 'infinite_pro' ? 'R$ 159,00' : planVal === 'infinite_max' ? 'R$ 249,00' : 'R$ 199,00';
+        const amt = ord?.amount_display || fallbackAmt;
+        const msg = `Olá! Enviei o comprovante PIX do pedido ${id} (${amt}) vinculado ao e-mail ${email}. Pode ativar minha chave Infinite Zone?`;
         return `https://wa.me/5568992269296?text=${encodeURIComponent(msg)}`;
       }
 
@@ -2376,7 +2813,6 @@
         }
       }
 
-      // Restore orders linked to authenticated Google account
       async function syncMyGoogleOrders() {
         try {
           const res = await fetch('/api/superbad/my-orders', {
@@ -2450,7 +2886,7 @@
             fallbackNote.style.display = 'none';
           } else {
             $('step1StateTag').textContent = 'Confirmação direta de Gmail';
-            $('step1StateTag').style.color = 'var(--muted)';
+            $('step1StateTag').style.color = 'var(--silver)';
             fallbackNote.style.display = 'block';
           }
         }
@@ -2460,7 +2896,6 @@
         updateGoogleAuthUI(ev.detail || {});
       });
 
-      // Direct session check in case event fired before listener or standalone test
       (async function initAuthCheck() {
         if (window.CatalogoGoogleAuth && window.CatalogoGoogleAuth.isReady()) {
           updateGoogleAuthUI({
@@ -2497,7 +2932,7 @@
           $('copyDeliveredKeyBtn'),
           $('deliveredKeyFeedback'),
           'Copiar Minha Chave',
-          ok ? 'Chave copiada! Cole no aplicativo OpenInfinite.' : 'Selecione a chave acima para copiar.'
+          ok ? 'Chave copiada! Cole no aplicativo OpenInfinite ou InfiniteClaude.' : 'Selecione a chave acima para copiar.'
         );
       });
 
@@ -2550,7 +2985,6 @@
 
       $('checkOrderNowBtn').addEventListener('click', () => pollOrderStatus(true));
 
-      // Restore active session order if present
       try {
         const rawSaved = sessionStorage.getItem(ORDER_STORAGE_KEY);
         if (rawSaved) {
@@ -2591,7 +3025,6 @@
         }
       }
 
-      // Passo 2: Checkout PIX Form (gates on Google Sign-In when enabled)
       async function submitOrder() {
         const nameEl = $('ordName');
         const contactEl = $('ordContact');
@@ -2703,7 +3136,6 @@
       });
       $('retryOrderBtn').addEventListener('click', () => submitOrder());
 
-      // Passo 3: Receipt Upload -> Pre-Analysis (NEVER auto-unlocks key; transitions to Passo 4)
       function readFileAsBase64(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -2847,6 +3279,8 @@
       }
 
       const PLAN_LABELS_BY_EDITION = {
+        infinite_max: 'InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)',
+        infinite_claude: 'InfiniteClaude v6.2 Multi-OS + Claude Code (1 Mês)',
         infinite: 'OpenInfinite Windows (1 Mês)',
         infinite_pro: 'OpenInfinite Pro Multi-OS + Hermes (1 Mês)',
         superbad: 'BadClaudio SuperBad (3º Nível)',
@@ -2856,6 +3290,9 @@
         beta: 'BadClaudio Beta',
       };
       const PLAN_LABELS_BY_TIER = {
+        'infinite-max': 'InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)',
+        'infinite-claude-max': 'InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)',
+        'infinite-claude': 'InfiniteClaude v6.2 Multi-OS + Claude Code (1 Mês)',
         'infinite-basic': 'OpenInfinite Windows (1 Mês)',
         'infinite-pro': 'OpenInfinite Pro Multi-OS + Hermes (1 Mês)',
         founder: 'BadClaude Fundador VIP',
@@ -2865,7 +3302,7 @@
       function resolveCanonicalPlanName(d) {
         const ed = String(d?.edition || '').trim().toLowerCase();
         const tr = String(d?.tier || '').trim().toLowerCase();
-        return PLAN_LABELS_BY_EDITION[ed] || PLAN_LABELS_BY_TIER[tr] || d?.planLabel || d?.tier || 'OpenInfinite';
+        return PLAN_LABELS_BY_EDITION[ed] || PLAN_LABELS_BY_TIER[tr] || d?.planLabel || d?.tier || 'Infinite Zone';
       }
 
       async function submitVerify() {
@@ -2876,7 +3313,7 @@
         keyInput.setAttribute('aria-invalid', 'false');
         if (!keyVal) {
           keyInput.setAttribute('aria-invalid', 'true');
-          renderLicenseMessage('is-error', 'Informe uma chave para validar', 'Cole a chave recebida no seu e-mail de ativação (OI6-INF, OI6-PRO ou BC5).', false);
+          renderLicenseMessage('is-error', 'Informe uma chave para validar', 'Cole a chave recebida no seu e-mail de ativação (IC6-MAX, IC6-PRO, OI6-PRO, OI6-INF ou BC5).', false);
           keyInput.focus();
           return;
         }
@@ -2889,7 +3326,7 @@
         submitBtn.disabled = true;
         submitBtn.setAttribute('aria-busy', 'true');
         submitBtn.textContent = 'Conferindo chave...';
-        renderLicenseMessage('', 'Validando assinatura online...', 'Consultando servidor de licenças OpenInfinite.', false);
+        renderLicenseMessage('', 'Validando assinatura Ed25519 online...', 'Consultando servidor de licenças Infinite Zone.', false);
 
         try {
           const res = await fetch('/api/v1/licenses/verify', {
@@ -2899,9 +3336,12 @@
           });
           const d = await res.json().catch(() => ({}));
           if (res.ok && d.ok && d.includesOpenInfinite !== false) {
+            const unlockedLabel = d.includesInfiniteClaude
+              ? 'Chave Ativa e Validada — InfiniteClaude & OpenInfinite Liberados!'
+              : 'Chave Ativa e Validada — OpenInfinite Liberado!';
             renderLicenseMessage(
               'is-success',
-              'Chave Ativa e Validada — OpenInfinite Liberado!',
+              unlockedLabel,
               `Plano: ${resolveCanonicalPlanName(d)} · Válida por ${d.daysLeft} dias. Já pode colar no aplicativo.`,
               false
             );
@@ -2939,7 +3379,7 @@
         submitVerify();
       });
 
-      // Auto-fill and auto-validate when arriving from activation email (?test_key=...)
+      // Auto-fill and auto-validate when arriving from activation email (?test_key=IC6-MAX-... / ?test_key=IC6-PRO-... / ?test_key=OI6-...)
       try {
         const params = new URLSearchParams(window.location.search);
         const testKey = (params.get('test_key') || '').trim();

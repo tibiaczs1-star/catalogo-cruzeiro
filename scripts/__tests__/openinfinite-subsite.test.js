@@ -17,6 +17,7 @@ const root = path.resolve(__dirname, "..", "..");
 test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, living hero, clean photos and BadClaude L3+ inclusion are configured", () => {
   const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
+  const oiReadme = fs.readFileSync(path.join(root, "openinfinite", "README.md"), "utf8");
   const bcHtml = fs.readFileSync(path.join(root, "badclaude", "index.html"), "utf8");
   const sbHtml = fs.readFileSync(path.join(root, "badclaude", "superbad-texte", "index.html"), "utf8");
   const apiJs = fs.readFileSync(path.join(root, "badclaude-superbad-api.js"), "utf8");
@@ -28,15 +29,47 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(server, /"\.dmg"/);
 
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
+  assert.match(oiHtml, /\/downloads\/InfiniteClaude-Client-Setup\.exe/);
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-macOS\.dmg/);
+  assert.match(oiHtml, /\/downloads\/InfiniteClaude-Client-macOS\.dmg/);
   assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Ubuntu-VPS\.tar\.gz/);
+  assert.match(oiHtml, /\/downloads\/InfiniteClaude-Client-Ubuntu-VPS\.tar\.gz/);
+  assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-openinfinite\.sh \| bash/);
+  assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-infiniteclaude\.sh \| bash/);
+  assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-mac\.sh \| bash/);
+  assert.match(oiHtml, /irm https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-win\.ps1 \| iex/);
   assert.match(oiHtml, /install-ubuntu-vps\.sh/);
   assert.match(oiHtml, /infinite-hermes/);
   assert.match(oiHtml, /~\/\.hermes\/openinfinite-endpoint\.json/);
+  assert.match(oiHtml, /~\/\.claude\/settings\.json/);
   assert.match(oiHtml, /Nous Research/);
+
+  // Infinite Zone Visual Language & Two Native Softwares (OpenInfinite v6.2 + InfiniteClaude v6.2)
+  assert.match(oiHtml, /--bg:\s*#070709/i);
+  assert.match(oiHtml, /#00B4FF/i);
+  assert.match(oiHtml, /#5B2EFF/i);
+  assert.match(oiHtml, /#FF00B8/i);
+  assert.match(oiHtml, /#FF7A00/i);
+  assert.match(oiHtml, /#19FF00/i);
+  assert.match(oiHtml, /id="izHoodMark"/);
+  assert.match(oiHtml, /id="izClaudeMark"/);
+  assert.match(oiHtml, /INFINITE ZONE · LABORATÓRIOS DE TECNOLOGIA/);
+  assert.match(oiHtml, /OpenInfinite v6\.2/);
+  assert.match(oiHtml, /InfiniteClaude v6\.2/);
+  assert.match(oiHtml, /WinForms GDI\+/);
+  assert.match(oiHtml, /SwiftUI Liquid Glass/);
+  assert.match(oiHtml, /IC6-PRO/);
+  assert.match(oiHtml, /IC6-MAX/);
+  assert.match(oiHtml, /Headless OpenCode Swap/);
+  assert.match(oiHtml, /infinite\/coder/);
+  assert.match(oiHtml, /infinite\/reasoning/);
+  assert.match(oiHtml, /infinite\/fast/);
+  assert.match(oiHtml, /~\/\.hermes\/config\.yaml/);
 
   assert.match(oiHtml, /R\$ 99,00/);
   assert.match(oiHtml, /R\$ 159,00/);
+  assert.match(oiHtml, /R\$ 199,00/);
+  assert.match(oiHtml, /R\$ 249,00/);
   assert.match(oiHtml, /id="livingStage"/);
   assert.match(oiHtml, /id="livingCore"/);
   assert.match(oiHtml, /id="checkout"/);
@@ -46,6 +79,10 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(oiHtml, /Fundador VIP/);
   assert.match(oiHtml, /href="\/badclaude\//);
   assert.doesNotMatch(oiHtml, /4114|demo_lock|shift_i\.png|NÃO é vendido separado|não é vendido avulso/i);
+  assert.doesNotMatch(oiHtml, /claude-sonnet|claude-opus|claude-haiku/i);
+  assert.doesNotMatch(oiHtml, /gerenciador de APIs \/v1 pr[oó]prias|endpoint \/v1 pr[oó]prio|Cascata APIs \/v1 Pr[oó]prias|Gateway \/v1 Pr[oó]prio/i);
+  assert.doesNotMatch(oiReadme, /claude-sonnet|claude-opus|claude-haiku/i);
+  assert.doesNotMatch(oiReadme, /gerenciador de APIs \/v1 pr[oó]prias|endpoint \/v1 pr[oó]prio/i);
 
   assert.ok(!fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_demo_lock.png")));
   assert.ok(!fs.existsSync(path.join(root, "openinfinite", "assets", "openinfinite_shift_i.png")));
@@ -57,8 +94,11 @@ test("OpenInfinite route, monthly R$99/R$159 checkout, Ubuntu VPS + Hermes, livi
   assert.match(sbHtml, /\/openinfinite\//);
 
   assert.match(apiJs, /includesOpenInfinite/);
+  assert.match(apiJs, /includesInfiniteClaude/);
+  assert.match(apiJs, /infinite_claude/);
   assert.match(apiJs, /R\$ 99,00/);
   assert.match(apiJs, /R\$ 159,00/);
+  assert.match(apiJs, /R\$ 199,00/);
 });
 
 test("OpenInfinite UI enforces 4-step Google Auth + PIX + Receipt Analysis (WhatsApp immediate or 1h + email) + ?test_key validator, M/B calculator and zero alert()", () => {
@@ -131,6 +171,8 @@ test("OpenInfinite UI enforces 4-step Google Auth + PIX + Receipt Analysis (What
   assert.match(oiHtml, /data-comp="demo"/);
   assert.match(oiHtml, /data-comp="infinite"/);
   assert.match(oiHtml, /data-comp="infinite_pro"/);
+  assert.match(oiHtml, /data-comp="infinite_claude"/);
+  assert.match(oiHtml, /data-comp="infinite_max"/);
   assert.match(oiHtml, /id="faq"/);
   assert.match(oiHtml, /grid-template-rows:\s*0fr/);
   assert.match(oiHtml, /grid-template-rows:\s*1fr/);
@@ -177,6 +219,9 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
 
   const infKey = mintEdKey("OI6-INF", "infinite-basic", "infinite", "OpenInfinite Windows (1 Mês)");
   const proKey = mintEdKey("OI6-PRO", "infinite-pro", "infinite_pro", "OpenInfinite macOS & Multi (1 Mês)");
+  const claudeKey = mintEdKey("IC6-PRO", "infinite-claude", "infinite_claude", "InfiniteClaude v6.2 Multi-OS + Claude Code (1 Mês)");
+  const maxKey = mintEdKey("IC6-MAX", "infinite-max", "infinite_max", "InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)");
+  const maxCompatKey = mintEdKey("IC6-MAX", "infinite-claude-max", "infinite_max", "InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)");
   const founderKey = mintEdKey("BC5-FND", "founder", "founder", "BadClaude Fundador");
   const basicKey = mintEdKey("BC5-BSC", "client-basic", "basic", "BadClaude Básico");
 
@@ -231,6 +276,42 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
   assert.equal(bodyMac.order.amount_centavos, 15900);
   assert.equal(bodyMac.order.amount_display, "R$ 159,00");
 
+  // 2b) Order InfiniteClaude v6.2 Multi-OS + Claude Code R$ 199,00 (infinite_claude / IC6-PRO)
+  const resClaude = await fetch(`${baseUrl}/api/superbad/orders`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      buyer_name: "Lucas Andrade",
+      buyer_email: "lucas@gmail.com",
+      buyer_contact: "lucas@gmail.com",
+      requested_edition: "infinite_claude",
+    }),
+  });
+  assert.equal(resClaude.status, 201);
+  const bodyClaude = await resClaude.json();
+  assert.equal(bodyClaude.ok, true);
+  assert.equal(bodyClaude.order.amount_centavos, 19900);
+  assert.equal(bodyClaude.order.amount_display, "R$ 199,00");
+  assert.equal(bodyClaude.order.requested_edition, "infinite_claude");
+
+  // 2c) Order InfiniteClaude v6.2 Max Multi-CLI Total R$ 249,00 (infinite_max / IC6-MAX)
+  const resMax = await fetch(`${baseUrl}/api/superbad/orders`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      buyer_name: "Marcos Max",
+      buyer_email: "marcos.max@gmail.com",
+      buyer_contact: "marcos.max@gmail.com",
+      requested_edition: "infinite_max",
+    }),
+  });
+  assert.equal(resMax.status, 201);
+  const bodyMax = await resMax.json();
+  assert.equal(bodyMax.ok, true);
+  assert.equal(bodyMax.order.amount_centavos, 24900);
+  assert.equal(bodyMax.order.amount_display, "R$ 249,00");
+  assert.equal(bodyMax.order.requested_edition, "infinite_max");
+
   // 3) Receipt upload transitions order to receipt_submitted without auto-unlocking license_key
   const tinyPngB64 =
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
@@ -261,8 +342,8 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
   const bodyBad = await resBad.json();
   assert.equal(bodyBad.ok, false);
 
-  // 5) Valid OpenInfinite keys (OI6-INF, OI6-PRO) and BadClaude L3+ (BC5-FND) -> includesOpenInfinite: true
-  for (const k of [infKey, proKey, founderKey]) {
+  // 5) Valid OpenInfinite/InfiniteClaude keys (OI6-INF, OI6-PRO, IC6-PRO, IC6-MAX) and BadClaude L3+ (BC5-FND) -> includesOpenInfinite: true
+  for (const k of [infKey, proKey, claudeKey, maxKey, maxCompatKey, founderKey]) {
     const resValid = await fetch(`${baseUrl}/api/v1/licenses/verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -272,6 +353,11 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
     const bodyValid = await resValid.json();
     assert.equal(bodyValid.ok, true);
     assert.equal(bodyValid.includesOpenInfinite, true);
+    if (k === claudeKey || k === maxKey || k === maxCompatKey || k === founderKey) {
+      assert.equal(bodyValid.includesInfiniteClaude, true);
+    } else {
+      assert.equal(bodyValid.includesInfiniteClaude, false);
+    }
   }
 
   // 6) BadClaude L1/L2 key -> includesOpenInfinite: false

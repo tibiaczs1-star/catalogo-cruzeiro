@@ -407,14 +407,167 @@ test("public-stats aggregates live heartbeats, computes savings accurately, and 
   assert.equal(stats.data.totals.saved_brl_total, 4893);
 
   const raw = stats.rawText;
-  assert.doesNotMatch(raw, /OI6-|BC5-|LIC-/i);
+  assert.doesNotMatch(raw, /OI6-|IC6-|BC5-|LIC-/i);
   assert.doesNotMatch(raw, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.doesNotMatch(raw, /\b(?:\d{1,3}\.){2,3}(?:\d{1,3}|x)\b/);
   assert.doesNotMatch(raw, /[a-f0-9]{64}/i);
   assert.doesNotMatch(raw, /HWID-SUPER-SECRET|MACBOOK-CONFIDENCIAL|PC-SECRETO|alice|roberto/i);
 });
 
-test("server.js configures Google Auth dynamic Client ID fallback, .tar.gz as application/gzip, and /api/openinfinite/", () => {
+test("IC6-PRO (infinite_claude) supports PIX order, key-pool stocking, owner deliver-key email and Ed25519 verification", async (t) => {
+  const { dataDir, signer, reqJson, sentEmails } = await startAutomationFixture(t);
+
+  const icKeyPool1 = signer.mintLicenseKey("IC6-PRO", "infinite-claude", "infinite_claude", "IC Pool #1");
+  const icKeyDeliver = signer.mintLicenseKey("IC6-PRO", "infinite-claude", "infinite_claude", "IC Deliver");
+  const oiKeyMismatch = signer.mintLicenseKey("OI6-PRO", "infinite-pro", "infinite_pro", "Wrong Tier");
+
+  // Reject stocking OI6-PRO into infinite_claude pool
+  const badStock = await reqJson("/api/superbad/admin/key-pool/stock", {
+    method: "POST",
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("POST", "/api/superbad/admin/key-pool/stock") },
+    body: JSON.stringify({ edition: "infinite_claude", keys: [oiKeyMismatch] }),
+  });
+  assert.equal(badStock.status, 400);
+
+  // Stock IC6-PRO encrypted AES-256-GCM at rest
+  const okStock = await reqJson("/api/superbad/admin/key-pool/stock", {
+    method: "POST",
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("POST", "/api/superbad/admin/key-pool/stock") },
+    body: JSON.stringify({ edition: "infinite_claude", keys: [icKeyPool1] }),
+  });
+  assert.equal(okStock.status, 200);
+  assert.equal(okStock.data.stocked_count, 1);
+
+  const poolRes = await reqJson("/api/superbad/admin/key-pool", {
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("GET", "/api/superbad/admin/key-pool") },
+  });
+  assert.equal(poolRes.status, 200);
+  assert.equal(poolRes.data.counts.infinite_claude, 1);
+
+  // Create PIX order for infinite_claude (R$ 199,00) + deliver IC6-PRO key
+  const createRes = await reqJson("/api/superbad/orders", {
+    method: "POST",
+    headers: {
+      "x-test-google-sub": "google-uid-clara-ic6",
+      "x-test-google-email": "clara.claude@gmail.com",
+      "x-test-google-name": "Clara Mendes",
+    },
+    body: JSON.stringify({ requested_edition: "infinite_claude" }),
+  });
+  assert.equal(createRes.status, 201);
+  assert.equal(createRes.data.order.amount_centavos, 19900);
+  assert.equal(createRes.data.order.amount_display, "R$ 199,00");
+  const { order_id: orderId, order_secret: orderSecret } = createRes.data.order;
+
+  const deliverPath = `/api/superbad/admin/orders/${orderId}/deliver-key`;
+  const deliverRes = await reqJson(deliverPath, {
+    method: "POST",
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("POST", deliverPath) },
+    body: JSON.stringify({ license_key: icKeyDeliver, edition: "infinite_claude" }),
+  });
+  assert.equal(deliverRes.status, 200);
+  assert.equal(deliverRes.data.status, "delivered");
+  assert.equal(sentEmails.length, 1);
+  assert.ok(sentEmails[0].testUrl.includes(`/openinfinite/?test_key=${encodeURIComponent(icKeyDeliver)}#validador`));
+
+  const orderAfter = await reqJson(`/api/superbad/orders/${orderId}?order_secret=${encodeURIComponent(orderSecret)}`);
+  assert.equal(orderAfter.status, 200);
+  assert.equal(orderAfter.data.order.license_key, icKeyDeliver);
+
+  const verifyIc = await reqJson("/api/v1/licenses/verify", {
+    method: "POST",
+    body: JSON.stringify({ key: icKeyDeliver, hwid: "CLARA-MAC-IC6-01" }),
+  });
+  assert.equal(verifyIc.status, 200);
+  assert.equal(verifyIc.data.ok, true);
+  assert.equal(verifyIc.data.edition, "infinite_claude");
+  assert.equal(verifyIc.data.tier, "infinite-claude");
+  assert.equal(verifyIc.data.includesOpenInfinite, true);
+  assert.equal(verifyIc.data.includesInfiniteClaude, true);
+  assert.equal(verifyIc.data.maxHwids, 3);
+  assert.equal(verifyIc.data.planLabel, "InfiniteClaude v6.2 Multi-OS + Claude Code (1 Mês)");
+
+  const rawDisk = await fsp.readFile(path.join(dataDir, "superbad-orders.json"), "utf8");
+  assert.equal(rawDisk.includes(icKeyPool1), false);
+  assert.equal(rawDisk.includes(icKeyDeliver), false);
+});
+
+test("IC6-MAX (infinite_max) supports PIX order (R$ 249), key-pool stocking, owner deliver-key email and Ed25519 verification", async (t) => {
+  const { dataDir, signer, reqJson, sentEmails } = await startAutomationFixture(t);
+
+  const maxKeyPool1 = signer.mintLicenseKey("IC6-MAX", "infinite-max", "infinite_max", "IC6-MAX Pool #1");
+  const maxKeyDeliver = signer.mintLicenseKey("IC6-MAX", "infinite-claude-max", "infinite_max", "IC6-MAX Deliver");
+  const icProMismatch = signer.mintLicenseKey("IC6-PRO", "infinite-claude", "infinite_claude", "Wrong Tier Pro");
+
+  const badStock = await reqJson("/api/superbad/admin/key-pool/stock", {
+    method: "POST",
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("POST", "/api/superbad/admin/key-pool/stock") },
+    body: JSON.stringify({ edition: "infinite_max", keys: [icProMismatch] }),
+  });
+  assert.equal(badStock.status, 400);
+
+  const okStock = await reqJson("/api/superbad/admin/key-pool/stock", {
+    method: "POST",
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("POST", "/api/superbad/admin/key-pool/stock") },
+    body: JSON.stringify({ edition: "infinite_max", keys: [maxKeyPool1] }),
+  });
+  assert.equal(okStock.status, 200);
+  assert.equal(okStock.data.stocked_count, 1);
+
+  const poolRes = await reqJson("/api/superbad/admin/key-pool", {
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("GET", "/api/superbad/admin/key-pool") },
+  });
+  assert.equal(poolRes.status, 200);
+  assert.equal(poolRes.data.counts.infinite_max, 1);
+
+  const createRes = await reqJson("/api/superbad/orders", {
+    method: "POST",
+    headers: {
+      "x-test-google-sub": "google-uid-max-ic6",
+      "x-test-google-email": "lucas.max@gmail.com",
+      "x-test-google-name": "Lucas Max",
+    },
+    body: JSON.stringify({ requested_edition: "infinite_max" }),
+  });
+  assert.equal(createRes.status, 201);
+  assert.equal(createRes.data.order.amount_centavos, 24900);
+  assert.equal(createRes.data.order.amount_display, "R$ 249,00");
+  const { order_id: orderId, order_secret: orderSecret } = createRes.data.order;
+
+  const deliverPath = `/api/superbad/admin/orders/${orderId}/deliver-key`;
+  const deliverRes = await reqJson(deliverPath, {
+    method: "POST",
+    headers: { "X-BadClaude-Owner-Proof": signer.signOwnerProof("POST", deliverPath) },
+    body: JSON.stringify({ license_key: maxKeyDeliver, edition: "infinite_max" }),
+  });
+  assert.equal(deliverRes.status, 200);
+  assert.equal(deliverRes.data.status, "delivered");
+  assert.equal(sentEmails.length, 1);
+  assert.ok(sentEmails[0].testUrl.includes(`/openinfinite/?test_key=${encodeURIComponent(maxKeyDeliver)}#validador`));
+
+  const orderAfter = await reqJson(`/api/superbad/orders/${orderId}?order_secret=${encodeURIComponent(orderSecret)}`);
+  assert.equal(orderAfter.status, 200);
+  assert.equal(orderAfter.data.order.license_key, maxKeyDeliver);
+
+  const verifyMax = await reqJson("/api/v1/licenses/verify", {
+    method: "POST",
+    body: JSON.stringify({ key: maxKeyDeliver, hwid: "MAX-WORKSTATION-01" }),
+  });
+  assert.equal(verifyMax.status, 200);
+  assert.equal(verifyMax.data.ok, true);
+  assert.equal(verifyMax.data.edition, "infinite_max");
+  assert.equal(verifyMax.data.tier, "infinite-max");
+  assert.equal(verifyMax.data.includesOpenInfinite, true);
+  assert.equal(verifyMax.data.includesInfiniteClaude, true);
+  assert.equal(verifyMax.data.maxHwids, 5);
+  assert.equal(verifyMax.data.planLabel, "InfiniteClaude v6.2 Max Multi-CLI Total (1 Mês)");
+
+  const rawDisk = await fsp.readFile(path.join(dataDir, "superbad-orders.json"), "utf8");
+  assert.equal(rawDisk.includes(maxKeyPool1), false);
+  assert.equal(rawDisk.includes(maxKeyDeliver), false);
+});
+
+test("server.js configures Google Auth dynamic Client ID fallback, 1-prompt installer routes, silent opencode bootstrap, .tar.gz as application/gzip, and /api/openinfinite/", () => {
   const serverSource = fs.readFileSync(path.join(repoRoot, "server.js"), "utf8");
   assert.match(serverSource, /process\.env\.SUPERBAD_SESSION_SECRET/);
   assert.match(serverSource, /function getEffectiveGoogleClientId\(\)/);
@@ -422,4 +575,19 @@ test("server.js configures Google Auth dynamic Client ID fallback, .tar.gz as ap
   assert.match(serverSource, /getAuthUser:\s*readCatalogoAuthSession/);
   assert.match(serverSource, /case "\.gz":[\s\S]{0,60}return "application\/gzip"/);
   assert.match(serverSource, /pathname\.startsWith\("\/api\/openinfinite\/"\)/);
+
+  // 4 lightweight 1-prompt installer routes in server.js (text/plain; charset=utf-8) + silent headless opencode bootstrap
+  assert.match(serverSource, /pathname === "\/install-openinfinite\.sh"/);
+  assert.match(serverSource, /pathname === "\/install-infiniteclaude\.sh"/);
+  assert.match(serverSource, /pathname === "\/install-mac\.sh"/);
+  assert.match(serverSource, /pathname === "\/install-win\.ps1"/);
+  assert.match(serverSource, /https:\/\/opencode\.ai\/install \| bash -s -- --no-modify-path/);
+  assert.match(serverSource, /https:\/\/opencode\.ai\/install\.ps1 \| iex/);
+  assert.match(serverSource, /opencode-cli\.exe/);
+  assert.match(serverSource, /\/downloads\/OpenInfinite-Client-Ubuntu-VPS\.tar\.gz/);
+  assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-Ubuntu-VPS\.tar\.gz/);
+  assert.match(serverSource, /\/downloads\/OpenInfinite-Client-macOS\.dmg/);
+  assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-macOS\.dmg/);
+  assert.match(serverSource, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
+  assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-Setup\.exe/);
 });
