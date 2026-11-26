@@ -663,3 +663,24 @@ test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/publ
     assert.ok(Number(headRes.headers.get("content-length")) > 100);
   }
 });
+
+test("/api/superbad/license/validate maps unstored Ed25519 keys accurately to each Infinite Zone edition", async (t) => {
+  const { reqJson, signer } = await startAutomationFixture(t);
+  const cases = [
+    [signer.mintLicenseKey("OI6-INF", "infinite-basic", "infinite", "Win Basic"), "infinite", "infinite-basic"],
+    [signer.mintLicenseKey("OI6-PRO", "infinite-pro", "infinite_pro", "Pro Multi"), "infinite_pro", "infinite-pro"],
+    [signer.mintLicenseKey("IC6-PRO", "infinite-claude", "infinite_claude", "IC Pro"), "infinite_claude", "infinite-claude"],
+    [signer.mintLicenseKey("IC6-MAX", "infinite-max", "infinite_max", "IC Max"), "infinite_max", "infinite-max"],
+    [signer.mintLicenseKey("BC5-FND", "founder", "founder", "Founder VIP"), "founder", "founder"],
+  ];
+  for (const [license_key, expectedEdition, expectedTier] of cases) {
+    const res = await reqJson("/api/superbad/license/validate", {
+      method: "POST",
+      body: JSON.stringify({ license_key }),
+    });
+    assert.equal(res.status, 200);
+    assert.equal(res.data.ok, true);
+    assert.equal(res.data.edition, expectedEdition);
+    assert.equal(res.data.tier, expectedTier);
+  }
+});

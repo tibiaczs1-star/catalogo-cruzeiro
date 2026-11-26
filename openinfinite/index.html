@@ -135,8 +135,8 @@
     }
 
     .wrap {
-      max-width: 1180px; margin: 0 auto; padding: 48px 20px 88px;
-      display: flex; flex-direction: column; gap: 68px;
+      max-width: 1180px; margin: 0 auto; padding: 20px 20px 80px;
+      display: flex; flex-direction: column; gap: 60px;
     }
 
     .card {
@@ -151,237 +151,739 @@
 
     /* CLEAN HERO — ONLY OFFICIAL INFINITE ZONE LOGO ON SOLID CARBON */
     .hero {
-      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 11px;
     }
     .hero-brand-pill {
       display: inline-flex; align-items: center; gap: 10px;
-      padding: 6px 14px; border-radius: var(--radius-pill);
+      padding: 5px 13px; border-radius: var(--radius-pill);
       background: var(--surface); border: 1px solid var(--border);
-      font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver);
     }
     .hero h1 {
-      font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; line-height: 1.09;
-      letter-spacing: -0.03em; color: var(--ink); max-width: 24ch;
+      font-size: clamp(28px, 3.6vw, 44px); font-weight: 800; line-height: 1.09;
+      letter-spacing: -0.03em; color: var(--ink); max-width: 28ch;
     }
     .hero h1 span { color: var(--silver); font-weight: 700; }
-    .hero-sub { font-size: 15.5px; color: var(--ink-secondary); max-width: 62ch; line-height: 1.6; }
+    .hero-sub { font-size: 14.5px; color: var(--ink-secondary); max-width: 68ch; line-height: 1.5; }
     .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
-    /* 3D INTERACTIVE HARDWARE SHOWCASE (MAC -> PC MONITOR WINDOWS -> NOTEBOOK LINUX VPS) */
+    /* OPEN-SPACE 3D ORBITAL STAGE (MAC · PC MONITOR WINDOWS · NOTEBOOK LINUX VPS) */
     .hero-stage {
-      width: 100%; margin-top: 8px; background: #0a0b0f;
-      border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 18px 20px;
-      display: flex; flex-direction: column; gap: 16px; text-align: left;
-      position: relative; overflow: hidden;
-    }
-    .hero-stage::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-      background: var(--prismatic-gradient);
+      width: 100%;
+      margin-top: 2px;
+      padding: 2px 0 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      position: relative;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      overflow-x: clip;
     }
     .stage-toolbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 8px 14px;
+      border-radius: var(--radius-lg);
+      background: rgba(13, 14, 19, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.14);
     }
     .stage-brand-badge {
-      display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700; color: var(--ink-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink-secondary);
     }
     .cockpit-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .stage-actions { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
     .sim-pill {
-      padding: 6px 13px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700;
-      font-family: var(--font); background: var(--surface-soft); border: 1px solid var(--border);
-      color: var(--silver); cursor: pointer;
-      transition: transform 150ms var(--ease-spring), background-color 150ms var(--ease-snap), color 150ms var(--ease-snap);
+      padding: 6px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font);
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--border);
+      color: var(--silver);
+      cursor: pointer;
+      transition: transform 150ms var(--ease-spring), background-color 150ms var(--ease-snap), color 150ms var(--ease-snap), border-color 150ms var(--ease-snap);
     }
     .sim-pill:hover { color: #ffffff; border-color: var(--border-hi); }
-    .sim-pill.active, .sim-pill[aria-selected="true"] { background: #ffffff; color: #070709; border-color: #ffffff; }
-
-    /* 3D STUDIO CANVAS */
-    .stage-3d-theater {
-      position: relative; min-height: 390px; padding: 16px 22px 26px;
-      background: #070709; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-lg);
-      display: flex; align-items: center; justify-content: center;
-      perspective: 1450px; perspective-origin: 50% 44%; overflow: hidden;
+    .sim-pill.active, .sim-pill[aria-selected="true"] {
+      background: #ffffff;
+      color: #070709;
+      border-color: #ffffff;
+      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.18);
     }
-    .stage-3d-theater::before {
-      content: ""; position: absolute; left: 50%; bottom: 14px; width: 68%; height: 24px;
+
+    /* OPEN-SPACE ARCHITECTURAL ARENA + 3D PERSPECTIVE FLOOR + VOLUMETRIC PRISMATIC LIGHT */
+    .stage-3d-theater {
+      position: relative;
+      min-height: 398px;
+      padding: 14px 10px 58px;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1480px;
+      perspective-origin: 50% 44%;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .stage-3d-theater.is-dragging { cursor: grabbing; }
+
+    .arena-architecture {
+      position: absolute;
+      inset: -14px -24px 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+      -webkit-mask-image: radial-gradient(ellipse 84% 86% at 50% 48%, #000 50%, transparent 100%);
+      mask-image: radial-gradient(ellipse 84% 86% at 50% 48%, #000 50%, transparent 100%);
+    }
+    /* Architectural hairline grid inspired by open editorial 3D layouts */
+    .arena-hairlines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 25% 100%, 100% 96px;
+      opacity: 0.72;
+    }
+    .arena-hairlines::before,
+    .arena-hairlines::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      bottom: 46px;
+      width: 1px;
+      border-left: 1px dashed rgba(255, 255, 255, 0.12);
+    }
+    .arena-hairlines::before { left: 12.5%; }
+    .arena-hairlines::after { right: 12.5%; }
+
+    .arena-ticks {
+      position: absolute;
+      inset: 14px 28px 46px;
+      border-top: 1px solid rgba(255, 255, 255, 0.075);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .arena-ticks::before,
+    .arena-ticks::after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      width: 18px;
+      height: 18px;
+      border-top: 1.5px solid rgba(0, 180, 255, 0.45);
+    }
+    .arena-ticks::before { left: 0; border-left: 1.5px solid rgba(0, 180, 255, 0.45); }
+    .arena-ticks::after { right: 0; border-right: 1.5px solid rgba(255, 0, 184, 0.45); }
+
+    /* Volumetric prismatic aurora glow behind focal hardware */
+    .arena-volumetric-light {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      width: min(760px, 94vw);
+      height: 360px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .vol-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(62px);
+      will-change: transform, opacity;
+      mix-blend-mode: screen;
+    }
+    .vol-orb-a {
+      left: 14%;
+      top: 18%;
+      width: 340px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(0, 180, 255, 0.34) 0%, rgba(91, 46, 255, 0.18) 52%, transparent 74%);
+      animation: volDriftA 9s ease-in-out infinite alternate;
+    }
+    .vol-orb-b {
+      right: 12%;
+      top: 14%;
+      width: 340px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255, 0, 184, 0.28) 0%, rgba(255, 122, 0, 0.15) 54%, transparent 76%);
+      animation: volDriftB 11s ease-in-out infinite alternate;
+    }
+    .vol-orb-c {
+      left: 34%;
+      bottom: 4%;
+      width: 280px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(25, 255, 0, 0.18) 0%, rgba(0, 180, 255, 0.14) 55%, transparent 75%);
+      animation: volPulseC 7s ease-in-out infinite alternate;
+    }
+    @keyframes volDriftA {
+      0% { transform: translate3d(-18px, 6px, 0) scale(0.95); opacity: 0.72; }
+      100% { transform: translate3d(24px, -12px, 0) scale(1.08); opacity: 0.96; }
+    }
+    @keyframes volDriftB {
+      0% { transform: translate3d(16px, -8px, 0) scale(1.04); opacity: 0.68; }
+      100% { transform: translate3d(-22px, 12px, 0) scale(0.94); opacity: 0.92; }
+    }
+    @keyframes volPulseC {
+      0% { transform: translate3d(0, 8px, 0) scale(0.92); opacity: 0.55; }
+      100% { transform: translate3d(0, -6px, 0) scale(1.1); opacity: 0.85; }
+    }
+
+    /* 3D perspective architectural floor grid receding into carbon void */
+    .arena-floor-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: min(1160px, 145vw);
+      height: 210px;
       transform: translateX(-50%);
-      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.92) 0%, transparent 72%);
+      perspective: 640px;
+      overflow: hidden;
+      -webkit-mask-image: radial-gradient(ellipse 64% 84% at 50% 72%, rgba(0, 0, 0, 0.95) 18%, transparent 76%);
+      mask-image: radial-gradient(ellipse 64% 84% at 50% 72%, rgba(0, 0, 0, 0.95) 18%, transparent 76%);
+    }
+    .arena-floor-grid {
+      position: absolute;
+      inset: -40px 0 0;
+      transform-origin: center bottom;
+      transform: rotateX(70deg);
+      background-image:
+        linear-gradient(to right, rgba(0, 180, 255, 0.18) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+      background-size: 46px 46px;
+    }
+    .arena-floor-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: 34px;
+      width: min(540px, 76vw);
+      height: 46px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.92) 0%, rgba(0, 180, 255, 0.14) 44%, transparent 74%);
+      filter: blur(8px);
       pointer-events: none;
     }
 
+    /* SIMULTANEOUS 3D ORBITAL CAROUSEL */
     .device-rig {
-      position: relative; width: min(560px, 100%);
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 320px;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .orbital-panel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .orbital-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .orbit-slot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 396px;
+      margin-left: -198px;
+      margin-top: -144px;
       transform-style: preserve-3d;
       will-change: transform, opacity;
-      transition: transform 520ms var(--ease-spring), opacity 180ms var(--ease-snap);
+      transform-origin: center center;
+      transition: opacity 260ms var(--ease-snap);
+      pointer-events: auto;
     }
-    .device-rig[data-device="mac"] { transform: rotateY(-7deg) rotateX(4deg); }
-    .device-rig[data-device="windows"] { transform: rotateY(7deg) rotateX(3deg); width: min(670px, 100%); }
-    .device-rig[data-device="linux"] { transform: rotateY(-6deg) rotateX(4.5deg); width: min(575px, 100%); }
-    .device-rig.is-switching { opacity: 0.78; transform: rotateY(0deg) rotateX(2deg) scale(0.96); }
+    .orbit-slot[data-device="windows"] {
+      width: 454px;
+      margin-left: -227px;
+      margin-top: -148px;
+    }
+    .orbit-slot[data-orbit-pos="front"] {
+      z-index: 30;
+      opacity: 1;
+    }
+    .orbit-slot[data-orbit-pos="left"],
+    .orbit-slot[data-orbit-pos="right"] {
+      z-index: 15;
+      opacity: 0.82;
+      cursor: pointer;
+    }
+    .orbit-slot[data-orbit-pos="left"]:hover,
+    .orbit-slot[data-orbit-pos="right"]:hover {
+      opacity: 0.96;
+    }
+
+    .orbit-gyro {
+      width: 100%;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
 
     .hw-cluster {
-      display: flex; align-items: flex-end; justify-content: center; gap: 20px; width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 18px;
+      width: 100%;
       transform-style: preserve-3d;
     }
     .hw-main {
-      flex: 1; min-width: 0; max-width: 550px;
-      display: flex; flex-direction: column; align-items: center;
+      flex: 1;
+      min-width: 0;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       transform-style: preserve-3d;
+      position: relative;
     }
 
-    /* HARDWARE DISPLAY LID / MONITOR BEZEL */
+    /* EXTRUDED 3D GLASSMORPHISM HARDWARE BEZEL + IRIDESCENT RIM LIGHT */
     .hw-bezel {
-      position: relative; width: 100%; background: #14161e;
-      padding: 12px 12px 10px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-      transition: border-radius 320ms var(--ease-spring), padding 320ms var(--ease-spring);
+      position: relative;
+      width: 100%;
+      padding: 11px 11px 10px;
+      background: linear-gradient(155deg, rgba(35, 39, 54, 0.90) 0%, rgba(12, 13, 19, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow:
+        0 28px 64px rgba(0, 0, 0, 0.88),
+        inset 0 1px 0 rgba(255, 255, 255, 0.36),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+      transform-style: preserve-3d;
     }
-    .device-rig[data-device="mac"] .hw-bezel {
-      border-radius: 16px 16px 5px 5px;
-      background: linear-gradient(180deg, #1b1d26 0%, #0e0f14 100%);
-      border-color: rgba(212, 217, 227, 0.34);
+    .hw-bezel-slice {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(180deg, rgba(28, 32, 46, 0.86) 0%, rgba(8, 9, 13, 0.96) 100%);
     }
-    .device-rig[data-device="windows"] .hw-bezel {
-      border-radius: 7px;
-      padding: 8px 8px 18px;
-      background: linear-gradient(180deg, #181a21 0%, #0d0e13 100%);
-      border-color: rgba(255, 255, 255, 0.24);
+    .hw-bezel-slice-1 { transform: translateZ(-5px); }
+    .hw-bezel-slice-2 { transform: translateZ(-11px); border-color: rgba(0, 180, 255, 0.22); }
+
+    .hw-iridescent-rim {
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      padding: 1.5px;
+      overflow: hidden;
+      pointer-events: none;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.38;
+      transition: opacity 280ms var(--ease-snap);
     }
-    .device-rig[data-device="linux"] .hw-bezel {
-      border-radius: 9px 9px 3px 3px;
-      padding: 13px 11px 10px;
-      background: #101217;
-      border-color: rgba(148, 163, 184, 0.30);
+    .orbit-slot[data-orbit-pos="front"] .hw-iridescent-rim { opacity: 0.96; }
+    .hw-iridescent-rim::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 170%;
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%) rotate(0deg);
+      background: conic-gradient(from 0deg, #00B4FF, #5B2EFF, #FF00B8, #FF7A00, #19FF00, rgba(255, 255, 255, 0.85), #00B4FF);
+      animation: rimSpin 7s linear infinite;
+      will-change: transform;
+    }
+    @keyframes rimSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .orbit-slot[data-device="mac"] .hw-bezel {
+      border-radius: 16px 16px 6px 6px;
+      background: linear-gradient(160deg, rgba(44, 48, 62, 0.88) 0%, rgba(14, 15, 21, 0.95) 100%);
+      border-color: rgba(226, 232, 240, 0.38);
+    }
+    .orbit-slot[data-device="windows"] .hw-bezel {
+      border-radius: 9px;
+      padding: 8px 8px 17px;
+      background: linear-gradient(160deg, rgba(30, 34, 46, 0.92) 0%, rgba(11, 12, 17, 0.96) 100%);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+    .orbit-slot[data-device="linux"] .hw-bezel {
+      border-radius: 10px 10px 4px 4px;
+      padding: 12px 10px 9px;
+      background: linear-gradient(160deg, rgba(25, 29, 39, 0.92) 0%, rgba(10, 11, 16, 0.96) 100%);
+      border-color: rgba(148, 163, 184, 0.34);
+    }
+
+    /* 3D FLOATING GLASS HUD PILLS (translateZ +34px, backdrop-filter blur) */
+    .hud-glass-pill {
+      position: absolute;
+      top: -15px;
+      right: 12px;
+      z-index: 8;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      background: rgba(16, 19, 30, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      backdrop-filter: blur(16px) saturate(145%);
+      -webkit-backdrop-filter: blur(16px) saturate(145%);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+      transform: translateZ(34px);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .orbit-slot[data-orbit-pos="left"] .hud-glass-pill {
+      left: 10px;
+      right: auto;
+    }
+    .orbit-slot[data-orbit-pos="right"] .hud-glass-pill {
+      right: 10px;
+      left: auto;
+    }
+    .hud-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.92);
+      flex-shrink: 0;
+    }
+    .hud-dot-amber {
+      background: #fbbf24;
+      box-shadow: 0 0 8px rgba(251, 191, 36, 0.9);
     }
 
     /* Mac Notch vs Monitor Chin vs Linux Camera Shutter */
     .hw-top-camera {
-      display: none; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); z-index: 4;
+      display: none;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(4px);
+      z-index: 4;
       pointer-events: none;
     }
-    .device-rig[data-device="mac"] .hw-top-camera {
-      display: flex; align-items: center; justify-content: center;
-      width: 68px; height: 14px; background: #070709;
-      border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+    .orbit-slot[data-device="mac"] .hw-top-camera {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 62px;
+      height: 13px;
+      background: #070709;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
-    .device-rig[data-device="mac"] .hw-top-camera::after {
-      content: ""; width: 5px; height: 5px; border-radius: 50%;
+    .orbit-slot[data-device="mac"] .hw-top-camera::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
       background: radial-gradient(circle, #38bdf8 0%, #0f172a 75%);
     }
-    .device-rig[data-device="linux"] .hw-top-camera {
-      display: flex; align-items: center; justify-content: center;
-      top: 4px; width: 22px; height: 5px; border-radius: 99px; background: rgba(255, 255, 255, 0.16);
-    }
-    .hw-monitor-chin-led {
-      display: none; position: absolute; right: 16px; bottom: 7px;
-      width: 14px; height: 3px; border-radius: 99px; background: #38bdf8;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7); pointer-events: none;
-    }
-    .device-rig[data-device="windows"] .hw-monitor-chin-led { display: block; }
-
-    .stage-screen-btn {
-      display: block; position: relative; width: 100%; padding: 0; border-radius: 6px; overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.10); background: #070709; cursor: zoom-in;
-      view-transition-name: oi-hero-screen;
-    }
-    .device-rig[data-device="mac"] .stage-screen-btn { border-radius: 8px 8px 3px 3px; }
-    .stage-screen-btn::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(128deg, rgba(255, 255, 255, 0.08) 0%, transparent 36%);
-    }
-    .stage-screen-btn img {
-      width: 100%; display: block; object-fit: cover; object-position: top;
-      aspect-ratio: 2080 / 1380;
-    }
-    .device-rig[data-device="windows"] .stage-screen-btn img { aspect-ratio: 1098 / 795; }
-    .device-rig[data-device="linux"] .stage-screen-btn img { aspect-ratio: 1280 / 800; }
-
-    /* LOWER PHYSICAL BASES: MAC DECK vs MONITOR STAND vs LINUX WORKSTATION DECK */
-    .hw-base-mac, .hw-base-win, .hw-base-linux, .pc-tower { display: none; }
-
-    .device-rig[data-device="mac"] .hw-base-mac {
-      display: block; position: relative; width: 108%; height: 22px; margin-top: -1px;
-      background: linear-gradient(180deg, #adb5bd 0%, #64748b 38%, #1e293b 100%);
-      border-radius: 2px 2px 13px 13px;
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
-      transform-origin: top center; transform: rotateX(48deg);
-      box-shadow: 0 20px 38px rgba(0, 0, 0, 0.9);
-    }
-    .hw-base-mac::before {
-      content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 78px; height: 6px; background: #1e293b; border-radius: 0 0 6px 6px;
-    }
-
-    .device-rig[data-device="windows"] .hw-base-win {
-      display: flex; flex-direction: column; align-items: center; width: 100%;
-    }
-    .win-neck {
-      width: 56px; height: 34px;
-      background: linear-gradient(90deg, #1f2430 0%, #4b5563 50%, #1f2430 100%);
-      border-left: 1px solid rgba(255, 255, 255, 0.14);
-      border-right: 1px solid rgba(255, 255, 255, 0.14);
-    }
-    .win-foot {
-      width: 210px; height: 11px;
-      background: linear-gradient(180deg, #64748b 0%, #1e293b 100%);
-      border-radius: 3px 3px 6px 6px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.85);
-    }
-
-    /* COMPACT PC TOWER BESIDE MONITOR WHEN WINDOWS ACTIVE */
-    .device-rig[data-device="windows"] .pc-tower {
-      display: flex; flex-direction: column; justify-content: space-between;
-      width: 96px; height: 230px; flex-shrink: 0; padding: 14px 12px;
-      background: linear-gradient(160deg, #171923 0%, #090a0e 100%);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 8px;
-      box-shadow: -14px 20px 44px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      position: relative;
-    }
-    .pc-tower-strip {
-      position: absolute; left: 8px; top: 18px; bottom: 18px; width: 3px; border-radius: 99px;
-      background: var(--prismatic-gradient); opacity: 0.92;
-    }
-    .pc-tower-vents {
-      display: flex; flex-direction: column; gap: 6px; padding-left: 12px; margin-top: 8px;
-    }
-    .pc-tower-vents span {
-      display: block; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.14);
-    }
-    .pc-tower-footer {
-      display: flex; align-items: center; justify-content: space-between; padding-left: 12px;
-      font-family: var(--mono); font-size: 9px; color: var(--silver); letter-spacing: 0.08em;
-    }
-    .pc-power-led {
-      width: 7px; height: 7px; border-radius: 50%; background: #10b981;
-      box-shadow: 0 0 8px rgba(16, 185, 129, 0.85);
-    }
-
-    .device-rig[data-device="linux"] .hw-base-linux {
-      display: flex; align-items: center; justify-content: center;
-      position: relative; width: 106%; height: 24px; margin-top: -1px;
-      background: linear-gradient(180deg, #272b36 0%, #14161c 48%, #090a0e 100%);
-      border-radius: 2px 2px 9px 9px;
-      border-top: 1px solid rgba(148, 163, 184, 0.35);
-      transform-origin: top center; transform: rotateX(46deg);
-      box-shadow: 0 20px 38px rgba(0, 0, 0, 0.9);
-    }
-    .hw-base-linux::after {
-      content: ""; width: 58px; height: 5px; border-radius: 99px;
+    .orbit-slot[data-device="linux"] .hw-top-camera {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 4px;
+      width: 22px;
+      height: 5px;
+      border-radius: 99px;
       background: rgba(255, 255, 255, 0.18);
     }
+    .hw-monitor-chin-led {
+      display: none;
+      position: absolute;
+      right: 16px;
+      bottom: 6px;
+      width: 14px;
+      height: 3px;
+      border-radius: 99px;
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.78);
+      pointer-events: none;
+    }
+    .orbit-slot[data-device="windows"] .hw-monitor-chin-led { display: block; }
 
-    ::view-transition-old(oi-hero-screen),
-    ::view-transition-new(oi-hero-screen) {
-      animation-duration: 240ms;
-      animation-timing-function: var(--ease-spring);
+    .slot-screen-btn {
+      display: block;
+      position: relative;
+      width: 100%;
+      padding: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #070709;
+      cursor: pointer;
+      transform: translateZ(2px);
+    }
+    .orbit-slot[data-orbit-pos="front"] .slot-screen-btn { cursor: zoom-in; }
+    .orbit-slot[data-device="mac"] .slot-screen-btn { border-radius: 8px 8px 3px 3px; }
+    .slot-screen-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(128deg, rgba(255, 255, 255, 0.11) 0%, transparent 38%);
+    }
+    .slot-screen-btn img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+      aspect-ratio: 2080 / 1380;
+    }
+    .orbit-slot[data-device="windows"] .slot-screen-btn img { aspect-ratio: 1098 / 795; }
+    .orbit-slot[data-device="linux"] .slot-screen-btn img { aspect-ratio: 1280 / 800; }
+
+    /* LOWER PHYSICAL BASES: MAC DECK vs MONITOR STAND vs LINUX WORKSTATION DECK */
+    .hw-base-mac {
+      display: block;
+      position: relative;
+      width: 108%;
+      height: 22px;
+      margin-top: -1px;
+      background: linear-gradient(180deg, #cfd6df 0%, #7c8799 36%, #1e293b 100%);
+      border-radius: 2px 2px 13px 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.52);
+      transform-origin: top center;
+      transform: rotateX(48deg);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.92);
+    }
+    .hw-base-mac::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 74px;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .hw-base-win {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .win-neck {
+      width: 48px;
+      height: 24px;
+      background: linear-gradient(90deg, #1f2430 0%, #525d70 50%, #1f2430 100%);
+      border-left: 1px solid rgba(255, 255, 255, 0.16);
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .win-foot {
+      width: 178px;
+      height: 10px;
+      background: linear-gradient(180deg, #748094 0%, #1e293b 100%);
+      border-radius: 3px 3px 6px 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.88);
+    }
+
+    /* COMPACT PC TOWER BESIDE MONITOR W/ LIVE PRISMATIC STRIP */
+    .pc-tower {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 74px;
+      height: 186px;
+      flex-shrink: 0;
+      padding: 12px 9px;
+      background: linear-gradient(160deg, rgba(28, 32, 46, 0.94) 0%, rgba(9, 10, 14, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 9px;
+      box-shadow: -14px 22px 44px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      position: relative;
+      transform: translateZ(16px) rotateY(-10deg);
+    }
+    .pc-tower-strip {
+      position: absolute;
+      left: 7px;
+      top: 16px;
+      bottom: 16px;
+      width: 3.5px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 12px rgba(0, 180, 255, 0.45);
+    }
+    .pc-tower-strip::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -100%;
+      height: 300%;
+      background: linear-gradient(180deg, #00B4FF 0%, #5B2EFF 20%, #FF00B8 40%, #FF7A00 60%, #19FF00 80%, #00B4FF 100%);
+      animation: stripSlide 3.4s linear infinite;
+      will-change: transform;
+    }
+    @keyframes stripSlide {
+      from { transform: translateY(0%); }
+      to { transform: translateY(33.333%); }
+    }
+    .pc-tower-vents {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-left: 11px;
+      margin-top: 8px;
+    }
+    .pc-tower-vents span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+    .pc-tower-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 11px;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--silver);
+      letter-spacing: 0.06em;
+    }
+    .pc-power-led {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 9px rgba(16, 185, 129, 0.92);
+    }
+
+    .hw-base-linux {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 106%;
+      height: 23px;
+      margin-top: -1px;
+      background: linear-gradient(180deg, #2d3240 0%, #14161c 48%, #090a0e 100%);
+      border-radius: 2px 2px 9px 9px;
+      border-top: 1px solid rgba(148, 163, 184, 0.42);
+      transform-origin: top center;
+      transform: rotateX(46deg);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.92);
+    }
+    .hw-base-linux::after {
+      content: "";
+      width: 56px;
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.20);
+    }
+
+    /* FLOATING GLASS BOTTOM DOCK INSIDE THE ARENA (LIVE PROGRESS + ZOOM PILL) */
+    .stage-arena-dock {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      z-index: 45;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 8px 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(13, 15, 23, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+      max-width: calc(100% - 16px);
+    }
+    .orbit-progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .orbit-progress-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--silver);
+      white-space: nowrap;
+    }
+    .orbit-progress-track {
+      position: relative;
+      width: 78px;
+      height: 3px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.14);
+      overflow: hidden;
+    }
+    .orbit-progress-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: 99px;
+      background: var(--prismatic-gradient);
+      transform-origin: left center;
+      transform: scaleX(0);
+      will-change: transform;
     }
 
     .cockpit-caption {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      font-size: 13px; color: var(--muted);
+      position: relative;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(13, 14, 19, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     /* SECTION HEADERS */
@@ -481,8 +983,12 @@
 
     @media (max-width: 960px) {
       .dual-grid, .os-grid { grid-template-columns: 1fr; }
-      .stage-3d-theater { min-height: 360px; padding: 16px 14px 24px; }
-      .device-rig[data-device="windows"] .pc-tower { width: 76px; height: 196px; }
+      .stage-3d-theater { min-height: 390px; padding: 24px 8px 58px; perspective: 1260px; }
+      .device-rig { height: 315px; }
+      .orbit-slot { width: 340px; margin-left: -170px; margin-top: -130px; }
+      .orbit-slot[data-device="windows"] { width: 388px; margin-left: -194px; margin-top: -134px; }
+      .pc-tower { width: 66px; height: 170px; padding: 10px 8px; }
+      .win-foot { width: 150px; }
     }
     @media (max-width: 720px) {
       .topbar-inner { flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
@@ -493,13 +999,30 @@
       .nav-links::-webkit-scrollbar { display: none; }
       .plans-grid { grid-template-columns: 1fr; }
       .wrap { padding: 28px 14px 64px; gap: 48px; }
-      .stage-3d-theater { min-height: 250px; padding: 14px 10px 22px; }
-      .device-rig[data-device="mac"],
-      .device-rig[data-device="windows"],
-      .device-rig[data-device="linux"] { transform: rotateY(0deg) rotateX(2deg); }
-      .device-rig[data-device="windows"] .pc-tower { display: none; }
-      .hw-bezel { padding: 8px 8px 7px; }
-      .win-foot { width: 140px; }
+      .stage-toolbar { padding: 10px; gap: 8px; }
+      .sim-pill { padding: 5px 10px; font-size: 11px; }
+      .stage-3d-theater { min-height: 288px; padding: 18px 4px 56px; perspective: 1080px; }
+      .device-rig { height: 214px; }
+      .orbit-slot { width: 198px; margin-left: -99px; margin-top: -78px; }
+      .orbit-slot[data-device="windows"] { width: 222px; margin-left: -111px; margin-top: -82px; }
+      .hw-cluster { gap: 8px; }
+      .hw-bezel { padding: 7px 7px 6px; }
+      .orbit-slot[data-device="windows"] .hw-bezel { padding: 6px 6px 11px; }
+      .pc-tower { width: 38px; height: 100px; padding: 6px 5px; border-radius: 6px; }
+      .pc-tower-strip { left: 4px; top: 10px; bottom: 10px; width: 2.5px; }
+      .pc-tower-vents { padding-left: 7px; gap: 4px; margin-top: 4px; }
+      .pc-tower-footer { padding-left: 7px; font-size: 6px; }
+      .pc-power-led { width: 5px; height: 5px; }
+      .hud-glass-pill { top: -11px; right: 6px; padding: 3px 8px; font-size: 9px; gap: 5px; transform: translateZ(26px); }
+      .orbit-slot[data-orbit-pos="left"] .hud-glass-pill { left: 6px; right: auto; }
+      .orbit-slot[data-orbit-pos="right"] .hud-glass-pill { right: 6px; left: auto; }
+      .win-neck { width: 32px; height: 16px; }
+      .win-foot { width: 108px; height: 7px; }
+      .hw-base-mac, .hw-base-linux { height: 14px; }
+      .stage-arena-dock { gap: 8px; padding: 5px 6px 5px 10px; white-space: nowrap; }
+      .stage-arena-dock .btn { white-space: nowrap; flex-shrink: 0; }
+      .orbit-progress-label { display: none; }
+      .orbit-progress-track { width: 56px; }
     }
   </style>
 </head>
@@ -640,39 +1163,127 @@
             <button type="button" role="tab" id="tab-dev-linux" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-device="linux">Notebook (Linux VPS)</button>
           </div>
 
-          <button type="button" id="nextDeviceBtn" class="btn ivory pill sm">Trocar Computador →</button>
+          <div class="stage-actions">
+            <button type="button" id="orbitToggleBtn" class="btn ghost pill sm" aria-pressed="false">Pausar Giro</button>
+            <button type="button" id="nextDeviceBtn" class="btn ivory pill sm">Trocar Computador →</button>
+          </div>
         </div>
 
         <div class="stage-3d-theater" id="stage3dTheater">
-          <div class="device-rig" id="deviceRig" data-device="mac">
-            <div class="hw-cluster" id="cockpitPanel" role="tabpanel" aria-labelledby="tab-dev-mac">
-              <div class="hw-main">
-                <div class="hw-bezel">
-                  <span class="hw-top-camera" aria-hidden="true"></span>
-                  <button type="button" class="stage-screen-btn" id="stageZoomBtn" aria-label="Ampliar interface exibida">
-                    <img id="featImg" src="/openinfinite/assets/hero_mac_liquid_glass.png" alt="Interface nova do InfiniteClaude no macOS Liquid Glass" />
-                  </button>
-                  <span class="hw-monitor-chin-led" aria-hidden="true"></span>
-                </div>
-                <div class="hw-base-mac" aria-hidden="true"></div>
-                <div class="hw-base-win" aria-hidden="true">
-                  <div class="win-neck"></div>
-                  <div class="win-foot"></div>
-                </div>
-                <div class="hw-base-linux" aria-hidden="true"></div>
-              </div>
+          <div class="arena-architecture" aria-hidden="true">
+            <div class="arena-hairlines"></div>
+            <div class="arena-ticks"></div>
+            <div class="arena-volumetric-light">
+              <span class="vol-orb vol-orb-a"></span>
+              <span class="vol-orb vol-orb-b"></span>
+              <span class="vol-orb vol-orb-c"></span>
+            </div>
+            <div class="arena-floor-wrap">
+              <div class="arena-floor-grid"></div>
+            </div>
+            <div class="arena-floor-shadow"></div>
+          </div>
 
-              <div class="pc-tower" aria-hidden="true">
-                <div class="pc-tower-strip"></div>
-                <div class="pc-tower-vents">
-                  <span></span><span></span><span></span><span></span><span></span>
+          <div class="device-rig" id="deviceRig" data-device="mac">
+            <div class="orbital-panel" id="cockpitPanel" role="tabpanel" aria-labelledby="tab-dev-mac">
+              <div class="orbital-carousel" id="orbitalCarousel">
+                <!-- SLOT 1: MACBOOK (macOS LIQUID GLASS) -->
+                <div class="orbit-slot" data-device="mac" data-orbit-pos="front">
+                  <div class="orbit-gyro">
+                    <div class="hw-cluster">
+                      <div class="hw-main">
+                        <div class="hw-bezel">
+                          <span class="hw-bezel-slice hw-bezel-slice-1" aria-hidden="true"></span>
+                          <span class="hw-bezel-slice hw-bezel-slice-2" aria-hidden="true"></span>
+                          <span class="hw-iridescent-rim" aria-hidden="true"></span>
+                          <div class="hud-glass-pill" aria-hidden="true">
+                            <span class="hud-dot"></span>
+                            <span>macOS · Liquid Glass</span>
+                          </div>
+                          <span class="hw-top-camera" aria-hidden="true"></span>
+                          <button type="button" class="slot-screen-btn" data-slot-device="mac" aria-label="MacBook macOS Liquid Glass — focar ou ampliar interface">
+                            <img id="macSlotImg" src="/openinfinite/assets/hero_mac_liquid_glass.png" alt="Interface do InfiniteClaude no macOS Liquid Glass" />
+                          </button>
+                        </div>
+                        <div class="hw-base-mac" aria-hidden="true"></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="pc-tower-footer">
-                  <span>PC WIN</span>
-                  <span class="pc-power-led"></span>
+
+                <!-- SLOT 2: PC MONITOR WINDOWS + PC WIN TOWER -->
+                <div class="orbit-slot" data-device="windows" data-orbit-pos="right">
+                  <div class="orbit-gyro">
+                    <div class="hw-cluster">
+                      <div class="hw-main">
+                        <div class="hw-bezel">
+                          <span class="hw-bezel-slice hw-bezel-slice-1" aria-hidden="true"></span>
+                          <span class="hw-bezel-slice hw-bezel-slice-2" aria-hidden="true"></span>
+                          <span class="hw-iridescent-rim" aria-hidden="true"></span>
+                          <div class="hud-glass-pill" aria-hidden="true">
+                            <span class="hud-dot"></span>
+                            <span id="winHudLabel">Win 10/11 · InfiniteClaude</span>
+                          </div>
+                          <button type="button" class="slot-screen-btn" data-slot-device="windows" aria-label="PC Monitor Windows — focar ou ampliar interface">
+                            <img id="winSlotImg" src="/openinfinite/assets/hero_win_infiniteclaude.png" alt="InfiniteClaude no PC Windows" />
+                          </button>
+                          <span class="hw-monitor-chin-led" aria-hidden="true"></span>
+                        </div>
+                        <div class="hw-base-win" aria-hidden="true">
+                          <div class="win-neck"></div>
+                          <div class="win-foot"></div>
+                        </div>
+                      </div>
+
+                      <div class="pc-tower" aria-hidden="true">
+                        <div class="pc-tower-strip"></div>
+                        <div class="pc-tower-vents">
+                          <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="pc-tower-footer">
+                          <span>PC WIN</span>
+                          <span class="pc-power-led"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SLOT 3: NOTEBOOK LINUX UBUNTU VPS -->
+                <div class="orbit-slot" data-device="linux" data-orbit-pos="left">
+                  <div class="orbit-gyro">
+                    <div class="hw-cluster">
+                      <div class="hw-main">
+                        <div class="hw-bezel">
+                          <span class="hw-bezel-slice hw-bezel-slice-1" aria-hidden="true"></span>
+                          <span class="hw-bezel-slice hw-bezel-slice-2" aria-hidden="true"></span>
+                          <span class="hw-iridescent-rim" aria-hidden="true"></span>
+                          <div class="hud-glass-pill" aria-hidden="true">
+                            <span class="hud-dot hud-dot-amber"></span>
+                            <span>Ubuntu VPS · SSH TUI</span>
+                          </div>
+                          <span class="hw-top-camera" aria-hidden="true"></span>
+                          <button type="button" class="slot-screen-btn" data-slot-device="linux" aria-label="Notebook Linux Ubuntu VPS — focar ou ampliar interface">
+                            <img id="linuxSlotImg" src="/openinfinite/assets/hero_linux_vps_tui.png" alt="Infinite Zone no Linux Ubuntu VPS" />
+                          </button>
+                        </div>
+                        <div class="hw-base-linux" aria-hidden="true"></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="stage-arena-dock">
+            <div class="orbit-progress-wrap">
+              <span class="orbit-progress-label" id="orbitProgressLabel">Órbita 3D</span>
+              <div class="orbit-progress-track" aria-hidden="true">
+                <span class="orbit-progress-fill" id="orbitProgressFill"></span>
+              </div>
+            </div>
+            <button type="button" class="btn sm ghost pill" id="stageZoomBtn" aria-label="Ampliar interface exibida">Ampliar 3D</button>
           </div>
         </div>
 
@@ -822,6 +1433,9 @@
                 <span>InfiniteClaude macOS</span><span class="mono">.dmg ↓</span>
               </a>
             </div>
+            <p style="font-size:11.5px;color:var(--muted);line-height:1.45;">
+              <strong>1ª abertura no Mac (Gatekeeper):</strong> arraste para <em>Aplicativos</em>, clique com o <strong>botão direito → Abrir</strong> (assinatura direta sem notarização Apple — <a href="#faq-btn-5" style="text-decoration:underline;color:var(--silver);">veja o passo a passo no FAQ</a>).
+            </p>
             <div class="prompt-block">
               <div class="prompt-label">
                 <span>Terminal do Mac (1 linha)</span>
@@ -1028,6 +1642,20 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
+            <span>Como abrir no macOS pela 1ª vez se aparecer aviso do Gatekeeper?</span>
+            <span class="faq-chevron" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5">
+            <div class="faq-panel-inner">
+              <div class="faq-panel-body">
+                Os apps macOS (<code class="mono">.dmg</code>) usam assinatura direta local (<code class="mono">adhoc</code>) sem notarização Apple Developer ID, então o <strong>macOS Gatekeeper</strong> exibe uma confirmação na primeira abertura. Para abrir sem bloqueio: <strong>1)</strong> arraste o app para a pasta <strong>Aplicativos</strong>; <strong>2)</strong> dê <strong>clique direito (ou Control + clique) → Abrir</strong> e confirme em <strong>Abrir</strong> (ou vá em <em>Ajustes do Sistema → Privacidade e Segurança → Abrir Mesmo Assim</em>). Se preferir via Terminal: <code class="mono">xattr -cr /Applications/OpenInfinite.app</code> ou <code class="mono">/Applications/InfiniteClaude.app</code>.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -1120,12 +1748,41 @@
       };
 
       const DEVICE_ORDER = ['mac', 'windows', 'linux'];
+      const AUTO_ORBIT_MS = 3800;
       let currentDevice = 'mac';
       let useAltWinApp = false;
-      const rigEl = $('deviceRig');
-      const tabs = Array.from(document.querySelectorAll('#deviceTabs [role="tab"]'));
+      let isReducedMotion = reducedMotion;
+      let motionEnabled = !isReducedMotion;
+      let autoOrbitPaused = isReducedMotion;
+      let orbitElapsed = 0;
 
-      // Preload all device screenshots so 3D clicks swap immediately without waiting for network
+      const rigEl = $('deviceRig');
+      const theater = $('stage3dTheater');
+      const orbitToggleBtn = $('orbitToggleBtn');
+      const orbitProgressFill = $('orbitProgressFill');
+      const orbitProgressLabel = $('orbitProgressLabel');
+      const winSlotImg = $('winSlotImg');
+      const winHudLabel = $('winHudLabel');
+      const tabs = Array.from(document.querySelectorAll('#deviceTabs [role="tab"]'));
+      const slots = Array.from(document.querySelectorAll('#orbitalCarousel .orbit-slot'));
+
+      function syncOrbitToggleUi() {
+        if (orbitToggleBtn) {
+          orbitToggleBtn.setAttribute('aria-pressed', String(autoOrbitPaused));
+          if (!motionEnabled) {
+            orbitToggleBtn.textContent = 'Ativar Giro 3D';
+          } else {
+            orbitToggleBtn.textContent = autoOrbitPaused ? 'Retomar Giro' : 'Pausar Giro';
+          }
+        }
+        if (orbitProgressLabel) {
+          if (!motionEnabled) orbitProgressLabel.textContent = 'Modo Reduzido';
+          else orbitProgressLabel.textContent = autoOrbitPaused ? 'Pausado' : 'Órbita 3D';
+        }
+        $('painel-live')?.classList.toggle('is-paused', autoOrbitPaused || !motionEnabled);
+      }
+
+      // Preload all device screenshots so 3D clicks & app toggles swap immediately
       [
         '/openinfinite/assets/hero_mac_liquid_glass.png',
         '/openinfinite/assets/hero_win_infiniteclaude.png',
@@ -1133,91 +1790,251 @@
         '/openinfinite/assets/hero_linux_vps_tui.png',
       ].forEach((src) => { const p = new Image(); p.src = src; });
 
-      function renderDeviceState(devKey, focusTab) {
+      function readLayoutMetrics() {
+        const w = window.innerWidth || 1440;
+        if (w <= 720) return { isMobile: true, flankX: 120, flankY: 16, flankZ: -170, flankScale: 0.48, flankRy: 38 };
+        if (w <= 960) return { isMobile: false, flankX: 235, flankY: 18, flankZ: -165, flankScale: 0.64, flankRy: 34 };
+        return { isMobile: false, flankX: 350, flankY: 18, flankZ: -175, flankScale: 0.72, flankRy: 34 };
+      }
+      let metrics = readLayoutMetrics();
+
+      function getOrbitPos(devKey) {
+        const activeIdx = DEVICE_ORDER.indexOf(currentDevice);
+        const idx = DEVICE_ORDER.indexOf(devKey);
+        const rel = (idx - activeIdx + DEVICE_ORDER.length) % DEVICE_ORDER.length;
+        if (rel === 0) return 'front';
+        return rel === 1 ? 'right' : 'left';
+      }
+
+      function computeTarget(posKey, tSec, pX, pY, dragDeg) {
+        if (posKey === 'front') {
+          return {
+            x: 0,
+            y: !motionEnabled ? 0 : Math.sin(tSec * 1.25) * (metrics.isMobile ? 4.5 : 7.5),
+            z: 90,
+            ry: !motionEnabled ? 0 : Math.sin(tSec * 0.92) * 9.2 + pX * 5.8 + dragDeg,
+            rx: !motionEnabled ? 3.2 : 3.8 + Math.cos(tSec * 0.72) * 2.1 - pY * 4.0,
+            scale: 1,
+            opacity: 1,
+          };
+        }
+        const side = posKey === 'left' ? -1 : 1;
+        const phase = side * 1.9;
+        return {
+          x: side * metrics.flankX,
+          y: metrics.flankY + (!motionEnabled ? 0 : Math.sin(tSec * 1.05 + phase) * 4.5),
+          z: metrics.flankZ,
+          ry: -side * metrics.flankRy + (!motionEnabled ? 0 : Math.cos(tSec * 0.8 + phase) * 2.8 + dragDeg * 0.4),
+          rx: 4.0 + (!motionEnabled ? 0 : Math.sin(tSec * 0.65 + phase) * 1.2),
+          scale: metrics.flankScale,
+          opacity: 0.84,
+        };
+      }
+
+      const slotStates = {};
+      slots.forEach((slot) => {
+        const dev = slot.dataset.device;
+        const t = computeTarget(getOrbitPos(dev), 0, 0, 0, 0);
+        slotStates[dev] = { el: slot, ...t };
+      });
+
+      function applySlotTransform(st) {
+        st.el.style.transform = `translate3d(${st.x.toFixed(2)}px, ${st.y.toFixed(2)}px, ${st.z.toFixed(2)}px) rotateY(${st.ry.toFixed(3)}deg) rotateX(${st.rx.toFixed(3)}deg) scale(${st.scale.toFixed(4)})`;
+        st.el.style.opacity = st.opacity.toFixed(3);
+      }
+
+      function snapStaticOrbit() {
+        slots.forEach((slot) => {
+          const dev = slot.dataset.device;
+          const t = computeTarget(getOrbitPos(dev), 0, 0, 0, 0);
+          Object.assign(slotStates[dev], t);
+          applySlotTransform(slotStates[dev]);
+        });
+        if (rigEl) rigEl.style.transform = '';
+      }
+
+      function getActiveDeviceImageSrc() {
+        const d = DEVICES[currentDevice] || DEVICES.mac;
+        if (currentDevice === 'windows' && useAltWinApp) return d.altImg;
+        return d.img;
+      }
+
+      function renderDeviceState(devKey, focusTab, resetTimer) {
         if (!DEVICES[devKey]) devKey = 'mac';
         currentDevice = devKey;
         const d = DEVICES[devKey];
         const useAlt = devKey === 'windows' && useAltWinApp;
 
-        const applyDom = () => {
-          rigEl.style.transform = '';
-          rigEl.setAttribute('data-device', devKey);
-          $('activeHardwareBadge').textContent = d.badge;
-          $('featImg').src = useAlt ? d.altImg : d.img;
-          $('featImg').alt = useAlt ? d.altTitle : d.title;
-          $('featTitle').textContent = useAlt ? d.altTitle : d.title;
-          $('featDesc').textContent = useAlt ? d.altDesc : d.desc;
-          $('cockpitPanel').setAttribute('aria-labelledby', d.tabId);
-
-          const toggleBtn = $('toggleAppBtn');
-          if (d.hasVariant) {
-            toggleBtn.style.display = 'inline-flex';
-            toggleBtn.textContent = useAltWinApp ? 'Alternar para InfiniteClaude' : 'Alternar para OpenInfinite';
-          } else {
-            toggleBtn.style.display = 'none';
-          }
-
-          tabs.forEach((t) => {
-            const on = t.dataset.device === devKey;
-            t.classList.toggle('active', on);
-            t.setAttribute('aria-selected', String(on));
-            t.setAttribute('tabindex', on ? '0' : '-1');
-          });
-        };
-
-        if (!reducedMotion) {
-          rigEl.classList.add('is-switching');
-          applyDom();
-          setTimeout(() => rigEl.classList.remove('is-switching'), 160);
-        } else {
-          applyDom();
+        if (resetTimer) {
+          orbitElapsed = 0;
+          if (orbitProgressFill) orbitProgressFill.style.transform = 'scaleX(0)';
         }
+
+        rigEl.setAttribute('data-device', devKey);
+        $('activeHardwareBadge').textContent = d.badge;
+        $('featTitle').textContent = useAlt ? d.altTitle : d.title;
+        $('featDesc').textContent = useAlt ? d.altDesc : d.desc;
+        $('cockpitPanel').setAttribute('aria-labelledby', d.tabId);
+
+        if (winSlotImg) {
+          winSlotImg.src = useAltWinApp ? DEVICES.windows.altImg : DEVICES.windows.img;
+          winSlotImg.alt = useAltWinApp ? DEVICES.windows.altTitle : DEVICES.windows.title;
+        }
+        if (winHudLabel) {
+          winHudLabel.textContent = useAltWinApp ? 'Win 10/11 · OpenInfinite' : 'Win 10/11 · InfiniteClaude';
+        }
+
+        const toggleBtn = $('toggleAppBtn');
+        if (d.hasVariant) {
+          toggleBtn.style.display = 'inline-flex';
+          toggleBtn.textContent = useAltWinApp ? 'Alternar para InfiniteClaude' : 'Alternar para OpenInfinite';
+        } else {
+          toggleBtn.style.display = 'none';
+        }
+
+        tabs.forEach((t) => {
+          const on = t.dataset.device === devKey;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', String(on));
+          t.setAttribute('tabindex', on ? '0' : '-1');
+        });
+
+        slots.forEach((slot) => {
+          const pos = getOrbitPos(slot.dataset.device);
+          slot.setAttribute('data-orbit-pos', pos);
+        });
+
+        if (!motionEnabled) snapStaticOrbit();
         if (focusTab) $(d.tabId)?.focus();
       }
 
       tabs.forEach((tab, idx) => {
-        tab.addEventListener('click', () => renderDeviceState(tab.dataset.device, false));
+        tab.addEventListener('click', () => renderDeviceState(tab.dataset.device, false, true));
         tab.addEventListener('keydown', (ev) => {
           if (ev.key === 'ArrowRight') {
             ev.preventDefault();
-            renderDeviceState(DEVICE_ORDER[(idx + 1) % DEVICE_ORDER.length], true);
+            renderDeviceState(DEVICE_ORDER[(idx + 1) % DEVICE_ORDER.length], true, true);
           } else if (ev.key === 'ArrowLeft') {
             ev.preventDefault();
-            renderDeviceState(DEVICE_ORDER[(idx - 1 + DEVICE_ORDER.length) % DEVICE_ORDER.length], true);
+            renderDeviceState(DEVICE_ORDER[(idx - 1 + DEVICE_ORDER.length) % DEVICE_ORDER.length], true, true);
           }
         });
       });
 
       $('nextDeviceBtn').addEventListener('click', () => {
         const nextIdx = (DEVICE_ORDER.indexOf(currentDevice) + 1) % DEVICE_ORDER.length;
-        renderDeviceState(DEVICE_ORDER[nextIdx], false);
+        renderDeviceState(DEVICE_ORDER[nextIdx], false, true);
       });
 
       $('toggleAppBtn').addEventListener('click', () => {
         useAltWinApp = !useAltWinApp;
-        renderDeviceState('windows', false);
+        renderDeviceState('windows', false, true);
       });
 
-      const theater = $('stage3dTheater');
-      if (theater && !reducedMotion && window.matchMedia && window.matchMedia('(hover: hover)').matches) {
-        theater.addEventListener('pointermove', (ev) => {
-          if (rigEl.classList.contains('is-switching')) return;
-          const r = theater.getBoundingClientRect();
-          const nx = ((ev.clientX - r.left) / r.width - 0.5) * 2;
-          const ny = ((ev.clientY - r.top) / r.height - 0.5) * 2;
-          const baseY = currentDevice === 'windows' ? 7 : currentDevice === 'linux' ? -6 : -7;
-          const baseX = currentDevice === 'windows' ? 3 : 4;
-          rigEl.style.transform = `rotateY(${(baseY + nx * 4).toFixed(2)}deg) rotateX(${(baseX - ny * 3).toFixed(2)}deg)`;
-        }, { passive: true });
-        theater.addEventListener('pointerleave', () => {
-          rigEl.style.transform = '';
-        }, { passive: true });
+      if (orbitToggleBtn) {
+        orbitToggleBtn.addEventListener('click', () => {
+          if (!motionEnabled) {
+            motionEnabled = true;
+            autoOrbitPaused = false;
+            syncOrbitToggleUi();
+            if (!rafId && window.requestAnimationFrame) {
+              startTs = 0;
+              lastTs = 0;
+              rafId = window.requestAnimationFrame(tick);
+            }
+            return;
+          }
+          autoOrbitPaused = !autoOrbitPaused;
+          syncOrbitToggleUi();
+        });
       }
+
+      let pointerTargetX = 0;
+      let pointerTargetY = 0;
+      let pointerX = 0;
+      let pointerY = 0;
+      let dragActive = false;
+      let dragMoved = false;
+      let dragStartX = 0;
+      let dragSpinDeg = 0;
+      let suppressClickUntil = 0;
+
+      slots.forEach((slot) => {
+        slot.addEventListener('click', (ev) => {
+          if (performance.now() < suppressClickUntil) {
+            ev.preventDefault();
+            return;
+          }
+          const dev = slot.dataset.device;
+          if (dev !== currentDevice) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            renderDeviceState(dev, false, true);
+          } else if (ev.target.closest('.slot-screen-btn')) {
+            openZoom();
+          }
+        });
+      });
+
+      if (theater) {
+        theater.addEventListener('pointermove', (ev) => {
+          if (!motionEnabled) return;
+          const r = theater.getBoundingClientRect();
+          if (r.width > 0 && r.height > 0) {
+            pointerTargetX = Math.max(-1, Math.min(1, ((ev.clientX - r.left) / r.width - 0.5) * 2));
+            pointerTargetY = Math.max(-1, Math.min(1, ((ev.clientY - r.top) / r.height - 0.5) * 2));
+          }
+        }, { passive: true });
+
+        theater.addEventListener('pointerleave', () => {
+          pointerTargetX = 0;
+          pointerTargetY = 0;
+        }, { passive: true });
+
+        theater.addEventListener('pointerdown', (ev) => {
+          if (ev.button !== 0 && ev.pointerType === 'mouse') return;
+          if (ev.target.closest('.stage-arena-dock')) return;
+          dragActive = true;
+          dragMoved = false;
+          dragStartX = ev.clientX;
+          dragSpinDeg = 0;
+        });
+      }
+
+      window.addEventListener('pointermove', (ev) => {
+        if (!dragActive) return;
+        const dx = ev.clientX - dragStartX;
+        if (Math.abs(dx) > 7) {
+          dragMoved = true;
+          if (theater) theater.classList.add('is-dragging');
+          dragSpinDeg = Math.max(-28, Math.min(28, dx * 0.24));
+        }
+      }, { passive: true });
+
+      function endDrag(ev) {
+        if (!dragActive) return;
+        const dx = (ev && typeof ev.clientX === 'number' ? ev.clientX : dragStartX) - dragStartX;
+        dragActive = false;
+        if (theater) theater.classList.remove('is-dragging');
+        if (dragMoved) {
+          suppressClickUntil = performance.now() + 180;
+          if (dx < -60) {
+            const nextIdx = (DEVICE_ORDER.indexOf(currentDevice) + 1) % DEVICE_ORDER.length;
+            renderDeviceState(DEVICE_ORDER[nextIdx], false, true);
+          } else if (dx > 60) {
+            const prevIdx = (DEVICE_ORDER.indexOf(currentDevice) - 1 + DEVICE_ORDER.length) % DEVICE_ORDER.length;
+            renderDeviceState(DEVICE_ORDER[prevIdx], false, true);
+          }
+        }
+        dragSpinDeg = 0;
+      }
+      window.addEventListener('pointerup', endDrag, { passive: true });
+      window.addEventListener('pointercancel', endDrag, { passive: true });
 
       let lastFocus = null;
       function openZoom() {
         lastFocus = document.activeElement;
-        $('zoomImg').src = $('featImg').src;
+        $('zoomImg').src = getActiveDeviceImageSrc();
         $('zoomModal').classList.add('open');
         $('zoomCloseBtn').focus();
       }
@@ -1232,6 +2049,100 @@
       window.addEventListener('keydown', (ev) => {
         if (ev.key === 'Escape' && $('zoomModal').classList.contains('open')) closeZoom();
       });
+
+      window.addEventListener('resize', () => {
+        metrics = readLayoutMetrics();
+        if (!motionEnabled) snapStaticOrbit();
+      }, { passive: true });
+
+      let rafId = 0;
+      let startTs = 0;
+      let lastTs = 0;
+
+      function tick(now) {
+        if (!motionEnabled) {
+          rafId = 0;
+          snapStaticOrbit();
+          return;
+        }
+        if (!startTs) startTs = now;
+        if (!lastTs) lastTs = now;
+        const dt = Math.min(0.05, Math.max(0.001, (now - lastTs) / 1000));
+        lastTs = now;
+        const elapsedSec = (now - startTs) / 1000;
+
+        const isZoomOpen = $('zoomModal').classList.contains('open');
+        if (!autoOrbitPaused && !dragActive && !isZoomOpen && !document.hidden) {
+          orbitElapsed += dt * 1000;
+          if (orbitElapsed >= AUTO_ORBIT_MS) {
+            orbitElapsed = 0;
+            const nextIdx = (DEVICE_ORDER.indexOf(currentDevice) + 1) % DEVICE_ORDER.length;
+            renderDeviceState(DEVICE_ORDER[nextIdx], false, false);
+          }
+        }
+        if (orbitProgressFill) {
+          const pct = Math.max(0, Math.min(1, orbitElapsed / AUTO_ORBIT_MS));
+          orbitProgressFill.style.transform = `scaleX(${pct.toFixed(4)})`;
+        }
+
+        const kPtr = 1 - Math.exp(-8 * dt);
+        pointerX += (pointerTargetX - pointerX) * kPtr;
+        pointerY += (pointerTargetY - pointerY) * kPtr;
+
+        if (rigEl) {
+          const macroY = Math.sin(elapsedSec * 1.15) * (metrics.isMobile ? 1.0 : 1.6);
+          const macroRy = Math.sin(elapsedSec * 0.92) * 1.8 + dragSpinDeg * 0.18;
+          const macroRx = Math.cos(elapsedSec * 0.72) * 0.7;
+          rigEl.style.transform = `translate3d(0px, ${macroY.toFixed(2)}px, 0px) rotateY(${macroRy.toFixed(3)}deg) rotateX(${macroRx.toFixed(3)}deg)`;
+        }
+
+        const kSlot = 1 - Math.exp(-9.5 * dt);
+        for (let i = 0; i < slots.length; i += 1) {
+          const dev = slots[i].dataset.device;
+          const st = slotStates[dev];
+          const target = computeTarget(getOrbitPos(dev), elapsedSec, pointerX, pointerY, dragSpinDeg);
+          st.x += (target.x - st.x) * kSlot;
+          st.y += (target.y - st.y) * kSlot;
+          st.z += (target.z - st.z) * kSlot;
+          st.ry += (target.ry - st.ry) * kSlot;
+          st.rx += (target.rx - st.rx) * kSlot;
+          st.scale += (target.scale - st.scale) * kSlot;
+          st.opacity += (target.opacity - st.opacity) * kSlot;
+          applySlotTransform(st);
+        }
+
+        rafId = window.requestAnimationFrame(tick);
+      }
+
+      syncOrbitToggleUi();
+      renderDeviceState('mac', false, true);
+      snapStaticOrbit();
+      if (motionEnabled && window.requestAnimationFrame) {
+        rafId = window.requestAnimationFrame(tick);
+      }
+
+      const motionMedia = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+      if (motionMedia && typeof motionMedia.addEventListener === 'function') {
+        motionMedia.addEventListener('change', (ev) => {
+          isReducedMotion = Boolean(ev.matches);
+          if (isReducedMotion) {
+            motionEnabled = false;
+            autoOrbitPaused = true;
+            if (rafId) { window.cancelAnimationFrame(rafId); rafId = 0; }
+            snapStaticOrbit();
+            syncOrbitToggleUi();
+          } else {
+            motionEnabled = true;
+            autoOrbitPaused = false;
+            syncOrbitToggleUi();
+            if (!rafId && window.requestAnimationFrame) {
+              startTs = 0;
+              lastTs = 0;
+              rafId = window.requestAnimationFrame(tick);
+            }
+          }
+        });
+      }
 
       document.querySelectorAll('.faq-trigger').forEach((btn) => {
         btn.addEventListener('click', () => {

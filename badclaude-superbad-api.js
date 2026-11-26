@@ -3706,7 +3706,20 @@ function createSuperbadSalesApi(options = {}) {
         const store = await readStore();
         let license = findLicenseByKey(store.licenses, rawKey);
         if (!license && edCheck.ok) {
-          const edEdition = edCheck.tier === "founder" ? "founder" : edCheck.tier === "client-basic" ? "basic" : "superbad";
+          const TIER_TO_EDITION = {
+            founder: "founder",
+            "client-basic": "basic",
+            "client-mid": /^studio$/i.test(String(edCheck.edition || "")) ? "mid" : "superbad",
+            "infinite-basic": "infinite",
+            "infinite-pro": "infinite_pro",
+            "infinite-claude": "infinite_claude",
+            "infinite-max": "infinite_max",
+            "infinite-claude-max": "infinite_max",
+          };
+          const edEdition =
+            (edCheck.edition && VALID_EDITIONS.has(edCheck.edition) ? edCheck.edition : null) ||
+            TIER_TO_EDITION[edCheck.tier] ||
+            "superbad";
           const token = signToken(
             { lid: `ED-${edCheck.keyPrefix}`, ed: edEdition, exp: Date.now() + DOWNLOAD_TOKEN_TTL_MS, jti: crypto.randomBytes(8).toString("hex") },
             downloadSecret

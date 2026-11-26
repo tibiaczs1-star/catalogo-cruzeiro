@@ -57,6 +57,9 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(oiHtml, /InfiniteClaude/);
   assert.match(oiHtml, /Mac Normal/i);
   assert.match(oiHtml, /não é VPS/i);
+  assert.match(oiHtml, /Gatekeeper/i);
+  assert.match(oiHtml, /faq-btn-5/);
+  assert.match(oiHtml, /xattr -cr \/Applications\/OpenInfinite\.app/);
   assert.match(oiHtml, /Requer Pedido Pago/i);
   assert.match(oiHtml, /href="\/openinfinite\/checkout\/"/);
   assert.match(oiHtml, /R\$ 99,00/);
@@ -64,17 +67,58 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(oiHtml, /R\$ 199,00/);
   assert.match(oiHtml, /R\$ 249,00/);
 
-  // Ensure new 3D multi-device hero showcase & updated v6.2/v6.3 real UI captures are present (NOT old v6.1 mockups)
+  // Ensure open-space 3D orbital multi-device hero showcase & updated v6.2/v6.3 real UI captures are present (NOT old v6.1 mockups)
+  assert.match(oiHtml, /id="painel-live"/);
+  assert.match(oiHtml, /id="stage3dTheater"/);
   assert.match(oiHtml, /id="deviceRig"/);
+  assert.match(oiHtml, /id="cockpitPanel"/);
+  assert.match(oiHtml, /id="orbitalCarousel"/);
+  assert.match(oiHtml, /id="orbitToggleBtn"/);
+  assert.match(oiHtml, /id="orbitProgressLabel"/);
+  assert.match(oiHtml, /id="orbitProgressFill"/);
   assert.match(oiHtml, /id="tab-dev-mac"/);
   assert.match(oiHtml, /id="tab-dev-win"/);
   assert.match(oiHtml, /id="tab-dev-linux"/);
   assert.match(oiHtml, /id="nextDeviceBtn"/);
   assert.match(oiHtml, /id="toggleAppBtn"/);
+  assert.match(oiHtml, /id="zoomModal"/);
+  assert.match(oiHtml, /id="stageZoomBtn"/);
+  assert.match(oiHtml, /id="captionZoomBtn"/);
+  assert.match(oiHtml, /class="arena-architecture"/);
+  assert.match(oiHtml, /class="arena-hairlines"/);
+  assert.match(oiHtml, /class="arena-volumetric-light"/);
+  assert.match(oiHtml, /class="arena-floor-grid"/);
+  assert.match(oiHtml, /hw-bezel-slice-1/);
+  assert.match(oiHtml, /hw-bezel-slice-2/);
+  assert.match(oiHtml, /hw-iridescent-rim/);
+  assert.match(oiHtml, /hud-glass-pill/);
+  assert.match(oiHtml, /class="pc-tower"/);
+  assert.match(oiHtml, /class="pc-tower-strip"/);
+  assert.match(oiHtml, /id="winHudLabel"/);
+
+  const orbitSlots = [...oiHtml.matchAll(/<div\s+class="orbit-slot"\s+data-device="(mac|windows|linux)"/g)];
+  assert.deepEqual(
+    orbitSlots.map((m) => m[1]),
+    ["mac", "windows", "linux"]
+  );
+  assert.equal((oiHtml.match(/class="orbit-slot"/g) || []).length, 3);
+  assert.match(oiHtml, /id="macSlotImg"[^>]*src="\/openinfinite\/assets\/hero_mac_liquid_glass\.png"/);
+  assert.match(oiHtml, /id="winSlotImg"[^>]*src="\/openinfinite\/assets\/hero_win_infiniteclaude\.png"/);
+  assert.match(oiHtml, /id="linuxSlotImg"[^>]*src="\/openinfinite\/assets\/hero_linux_vps_tui\.png"/);
   assert.match(oiHtml, /\/openinfinite\/assets\/hero_mac_liquid_glass\.png/);
   assert.match(oiHtml, /\/openinfinite\/assets\/hero_win_infiniteclaude\.png/);
   assert.match(oiHtml, /\/openinfinite\/assets\/hero_win_openinfinite\.png/);
   assert.match(oiHtml, /\/openinfinite\/assets\/hero_linux_vps_tui\.png/);
+  assert.match(oiHtml, /transform-style:\s*preserve-3d/);
+  assert.match(oiHtml, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(oiHtml, /overflow-x:\s*hidden/);
+  assert.match(oiHtml, /overflow-x:\s*clip/);
+  assert.match(oiHtml, /requestAnimationFrame/);
+  assert.match(oiHtml, /AUTO_ORBIT_MS/);
+  assert.match(oiHtml, /Pausar Giro/);
+  assert.match(oiHtml, /Retomar Giro/);
+  assert.match(oiHtml, /Ativar Giro 3D/);
+  assert.match(oiHtml, /Modo Reduzido/);
   assert.doesNotMatch(oiHtml, /openinfinite_tema_escuro\.png/);
   for (const assetName of [
     "hero_mac_liquid_glass.png",
@@ -357,4 +401,223 @@ test("OpenInfinite PIX checkout (infinite R$99 / infinite_pro R$159) and license
   const bodyL1 = await resL1.json();
   assert.equal(bodyL1.ok, true);
   assert.equal(bodyL1.includesOpenInfinite, false);
+});
+
+test("OpenInfinite 3D orbital hero stage drives continuous rAF motion, auto-orbit, pause/resume toggle, reduced-motion opt-in, slot focus, and Windows app swap", () => {
+  const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
+  const scriptMatch = oiHtml.match(/<script>([\s\S]*?)<\/script>/);
+  assert.ok(scriptMatch, "Expected inline <script> in openinfinite/index.html");
+
+  function makeStubEl(dataset = {}) {
+    const attrs = {};
+    const classes = new Set();
+    const listeners = {};
+    return {
+      dataset: { ...dataset },
+      style: {},
+      textContent: "",
+      src: "",
+      alt: "",
+      classList: {
+        add: (c) => classes.add(c),
+        remove: (c) => classes.delete(c),
+        contains: (c) => classes.has(c),
+        toggle: (c, force) => {
+          const next = force === undefined ? !classes.has(c) : Boolean(force);
+          if (next) classes.add(c);
+          else classes.delete(c);
+          return next;
+        },
+      },
+      setAttribute: (k, v) => {
+        attrs[k] = String(v);
+      },
+      getAttribute: (k) => (Object.prototype.hasOwnProperty.call(attrs, k) ? attrs[k] : null),
+      addEventListener: (ev, fn) => {
+        (listeners[ev] ||= []).push(fn);
+      },
+      click: (ev = {}) => {
+        const event = {
+          preventDefault() {},
+          stopPropagation() {},
+          target: { closest: () => null },
+          ...ev,
+        };
+        for (const fn of listeners.click || []) fn(event);
+      },
+      focus() {},
+      closest: () => null,
+      getBoundingClientRect: () => ({ left: 0, top: 0, width: 1180, height: 478 }),
+    };
+  }
+
+  function mountHero3dScript({ reducedMotion }) {
+    const byId = new Map();
+    const getEl = (id) => {
+      if (!byId.has(id)) byId.set(id, makeStubEl());
+      return byId.get(id);
+    };
+    const tabs = [
+      ["tab-dev-mac", "mac"],
+      ["tab-dev-win", "windows"],
+      ["tab-dev-linux", "linux"],
+    ].map(([id, device]) => {
+      const el = makeStubEl({ device });
+      byId.set(id, el);
+      return el;
+    });
+    const slots = ["mac", "windows", "linux"].map((device) => makeStubEl({ device }));
+
+    let nextRafId = 1;
+    const rafQueue = new Map();
+    const cancelledRafs = [];
+    const mediaListeners = [];
+    let nowMs = 0;
+
+    vm.runInNewContext(scriptMatch[1], {
+      window: {
+        location: { search: "", hash: "", replace() {} },
+        innerWidth: 1440,
+        isSecureContext: true,
+        matchMedia: () => ({
+          matches: reducedMotion,
+          addEventListener: (ev, fn) => {
+            if (ev === "change") mediaListeners.push(fn);
+          },
+        }),
+        requestAnimationFrame: (fn) => {
+          const id = nextRafId++;
+          rafQueue.set(id, fn);
+          return id;
+        },
+        cancelAnimationFrame: (id) => {
+          cancelledRafs.push(id);
+          rafQueue.delete(id);
+        },
+        addEventListener() {},
+      },
+      document: {
+        hidden: false,
+        activeElement: null,
+        getElementById: getEl,
+        querySelectorAll: (sel) => {
+          if (sel === '#deviceTabs [role="tab"]') return tabs;
+          if (sel === "#orbitalCarousel .orbit-slot") return slots;
+          return [];
+        },
+        createElement: () => makeStubEl(),
+        body: makeStubEl(),
+      },
+      URLSearchParams,
+      Image: function Image() {
+        this.src = "";
+      },
+      performance: { now: () => nowMs },
+      setTimeout,
+    });
+
+    function stepFrames(count, stepMs) {
+      for (let i = 0; i < count; i += 1) {
+        nowMs += stepMs;
+        const pending = [...rafQueue.entries()];
+        rafQueue.clear();
+        for (const [, fn] of pending) fn(nowMs);
+      }
+    }
+
+    return { getEl, tabs, slots, rafQueue, cancelledRafs, mediaListeners, stepFrames };
+  }
+
+  // 1) Default prefers-reduced-motion: no-preference
+  const live = mountHero3dScript({ reducedMotion: false });
+  const [slotMac, slotWin, slotLinux] = live.slots;
+  const rig = live.getEl("deviceRig");
+  const orbitToggleBtn = live.getEl("orbitToggleBtn");
+  const orbitProgressLabel = live.getEl("orbitProgressLabel");
+  const toggleAppBtn = live.getEl("toggleAppBtn");
+  const winSlotImg = live.getEl("winSlotImg");
+  const winHudLabel = live.getEl("winHudLabel");
+
+  assert.equal(rig.getAttribute("data-device"), "mac");
+  assert.equal(slotMac.getAttribute("data-orbit-pos"), "front");
+  assert.equal(slotWin.getAttribute("data-orbit-pos"), "right");
+  assert.equal(slotLinux.getAttribute("data-orbit-pos"), "left");
+  assert.match(slotMac.style.transform, /90\.00px\)/);
+  assert.equal(orbitToggleBtn.getAttribute("aria-pressed"), "false");
+  assert.equal(orbitToggleBtn.textContent, "Pausar Giro");
+  assert.equal(orbitProgressLabel.textContent, "Órbita 3D");
+
+  // Two rAF frames (t=0 -> t=900ms) produce continuous 3D transform motion without user clicks
+  live.stepFrames(1, 16);
+  const t0Mac = slotMac.style.transform;
+  const t0Rig = rig.style.transform;
+  live.stepFrames(20, 45);
+  assert.notEqual(slotMac.style.transform, t0Mac);
+  assert.notEqual(rig.style.transform, t0Rig);
+
+  // Waiting past ~3.8s auto-orbit interval advances the carousel automatically to windows
+  live.stepFrames(90, 40);
+  assert.equal(rig.getAttribute("data-device"), "windows");
+  assert.equal(slotWin.getAttribute("data-orbit-pos"), "front");
+  assert.equal(toggleAppBtn.style.display, "inline-flex");
+
+  // #orbitToggleBtn pauses auto-orbit cleanly and resumes when clicked again
+  orbitToggleBtn.click();
+  assert.equal(orbitToggleBtn.getAttribute("aria-pressed"), "true");
+  assert.equal(orbitToggleBtn.textContent, "Retomar Giro");
+  assert.equal(orbitProgressLabel.textContent, "Pausado");
+  live.stepFrames(110, 40);
+  assert.equal(rig.getAttribute("data-device"), "windows");
+
+  orbitToggleBtn.click();
+  assert.equal(orbitToggleBtn.getAttribute("aria-pressed"), "false");
+  assert.equal(orbitToggleBtn.textContent, "Pausar Giro");
+  assert.equal(orbitProgressLabel.textContent, "Órbita 3D");
+
+  // Clicking flanking linux slot focuses linux immediately
+  slotLinux.click();
+  assert.equal(rig.getAttribute("data-device"), "linux");
+  assert.equal(slotLinux.getAttribute("data-orbit-pos"), "front");
+  assert.equal(toggleAppBtn.style.display, "none");
+
+  // Focusing windows tab + toggling OpenInfinite / InfiniteClaude swaps winSlotImg & HUD label
+  live.tabs[1].click();
+  assert.equal(rig.getAttribute("data-device"), "windows");
+  assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_infiniteclaude.png");
+  toggleAppBtn.click();
+  assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_openinfinite.png");
+  assert.equal(winHudLabel.textContent, "Win 10/11 · OpenInfinite");
+  toggleAppBtn.click();
+  assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_infiniteclaude.png");
+
+  // #nextDeviceBtn advances windows -> linux, and runtime reduce media change cancels rAF & syncs UI
+  live.getEl("nextDeviceBtn").click();
+  assert.equal(rig.getAttribute("data-device"), "linux");
+  assert.equal(live.mediaListeners.length, 1);
+  live.mediaListeners[0]({ matches: true });
+  assert.ok(live.cancelledRafs.length >= 1);
+  assert.equal(orbitToggleBtn.textContent, "Ativar Giro 3D");
+  assert.equal(orbitToggleBtn.getAttribute("aria-pressed"), "true");
+  assert.equal(orbitProgressLabel.textContent, "Modo Reduzido");
+
+  // 2) Initial prefers-reduced-motion: reduce starts static (0 unprompted rAF), with explicit opt-in via #orbitToggleBtn
+  const reduced = mountHero3dScript({ reducedMotion: true });
+  const redToggle = reduced.getEl("orbitToggleBtn");
+  const redLabel = reduced.getEl("orbitProgressLabel");
+  assert.equal(reduced.rafQueue.size, 0);
+  assert.equal(redToggle.textContent, "Ativar Giro 3D");
+  assert.equal(redToggle.getAttribute("aria-pressed"), "true");
+  assert.equal(redLabel.textContent, "Modo Reduzido");
+
+  redToggle.click();
+  assert.equal(redToggle.textContent, "Pausar Giro");
+  assert.equal(redToggle.getAttribute("aria-pressed"), "false");
+  assert.equal(redLabel.textContent, "Órbita 3D");
+  assert.equal(reduced.rafQueue.size, 1);
+
+  const [redMac] = reduced.slots;
+  reduced.stepFrames(1, 16);
+  const redT0 = redMac.style.transform;
+  reduced.stepFrames(20, 45);
+  assert.notEqual(redMac.style.transform, redT0);
 });
