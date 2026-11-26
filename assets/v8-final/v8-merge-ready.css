@@ -14028,40 +14028,52 @@ body.v8-merge-ready #breakingTicker.dragging #tickerTrack {
 body.v8-merge-ready #tickerTrack .ticker-item,
 body.v8-merge-ready .ticker-item {
   flex: 0 0 auto !important;
-  width: clamp(330px, 25vw, 540px) !important;
-  min-width: clamp(330px, 25vw, 540px) !important;
+  width: max-content !important;
+  min-width: max-content !important;
   max-width: none !important;
-  min-height: 56px !important;
-  display: flex !important;
+  min-height: 52px !important;
+  display: inline-flex !important;
   align-items: center !important;
   gap: 10px !important;
-  padding: 10px 16px !important;
+  padding: 10px 18px !important;
   overflow: visible !important;
-  white-space: normal !important;
+  white-space: nowrap !important;
 }
 
 body.v8-merge-ready #tickerTrack .ticker-item b,
-body.v8-merge-ready .ticker-item b {
+body.v8-merge-ready .ticker-item b,
+body.v8-merge-ready #tickerTrack .ticker-item .badge,
+body.v8-merge-ready .ticker-item .badge {
   flex: 0 0 auto !important;
   width: auto !important;
-  min-width: 0 !important;
-  max-width: 98px !important;
+  min-width: max-content !important;
+  max-width: none !important;
   overflow: visible !important;
-  white-space: normal !important;
+  white-space: nowrap !important;
   text-overflow: clip !important;
-  font-size: clamp(10px, 0.68vw, 12px) !important;
-  line-height: 1.08 !important;
+  font-size: 11px !important;
+  line-height: 1.1 !important;
 }
 
-body.v8-merge-ready #tickerTrack .ticker-item span,
-body.v8-merge-ready .ticker-item span {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
+body.v8-merge-ready #tickerTrack .ticker-item b.v8-ticker-urgent {
+  background: var(--v8-urgent, #c81e2b) !important;
+  color: #ffffff !important;
+  padding: 4px 9px !important;
+  border-radius: 6px !important;
+  letter-spacing: 0.04em !important;
+}
+
+body.v8-merge-ready #tickerTrack .ticker-item span:not(.badge),
+body.v8-merge-ready .ticker-item span:not(.badge) {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+  max-width: none !important;
   overflow: visible !important;
-  white-space: normal !important;
+  white-space: nowrap !important;
   text-overflow: clip !important;
-  font-size: clamp(12px, 0.86vw, 15px) !important;
-  line-height: 1.13 !important;
+  font-size: clamp(13px, 0.9vw, 15px) !important;
+  line-height: 1.2 !important;
   letter-spacing: -0.015em !important;
 }
 
@@ -14086,23 +14098,36 @@ body.v8-merge-ready .ticker-item span {
 
   body.v8-merge-ready #tickerTrack .ticker-item,
   body.v8-merge-ready .ticker-item {
-    width: min(82vw, 370px) !important;
-    min-width: min(82vw, 370px) !important;
-    min-height: 52px !important;
-    padding: 9px 12px !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    min-height: 48px !important;
+    padding: 9px 14px !important;
     gap: 8px !important;
+    white-space: nowrap !important;
   }
 
   body.v8-merge-ready #tickerTrack .ticker-item b,
-  body.v8-merge-ready .ticker-item b {
-    max-width: 76px !important;
-    font-size: 10px !important;
+  body.v8-merge-ready .ticker-item b,
+  body.v8-merge-ready #tickerTrack .ticker-item .badge,
+  body.v8-merge-ready .ticker-item .badge {
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    font-size: 10.5px !important;
+    white-space: nowrap !important;
   }
 
-  body.v8-merge-ready #tickerTrack .ticker-item span,
-  body.v8-merge-ready .ticker-item span {
-    font-size: 12px !important;
-    line-height: 1.12 !important;
+  body.v8-merge-ready #tickerTrack .ticker-item span:not(.badge),
+  body.v8-merge-ready .ticker-item span:not(.badge) {
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    font-size: 12.5px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
   }
 }
 

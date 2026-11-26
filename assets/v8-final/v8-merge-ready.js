@@ -1405,11 +1405,24 @@
     const legacyTrack = $("#tickerTrack");
     if (legacyTrack && legacyTrack.dataset.v8TickerFilled !== "1") {
       legacyTrack.dataset.v8TickerFilled = "1";
-      const legacyItems = source.map((story) => `
-        <a class="ticker-item" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
-          <b>${esc(story.category || "Plantão")}</b>
+      const pool = [...allStories.filter(isUrgent).slice(0, 8), ...source].filter(Boolean);
+      const seenSlug = new Set();
+      const tickerStories = [];
+      for (const st of pool) {
+        const key = String(st.slug || st.title || "");
+        if (!key || seenSlug.has(key)) continue;
+        seenSlug.add(key);
+        tickerStories.push(st);
+        if (tickerStories.length >= 16) break;
+      }
+      const legacyItems = tickerStories.map((story) => {
+        const urgent = isUrgent(story);
+        return `
+        <a class="ticker-item ${urgent ? "is-urgent" : ""}" href="${esc(v8Url(story))}" data-v8-slug="${esc(story.slug || "")}">
+          <b class="${urgent ? "v8-ticker-urgent" : ""}">${esc(urgent ? "URGENTE" : story.category || "Plantão")}</b>
           <span>${esc(story.title || "Notícia do Vale do Juruá")}</span>
-        </a>`).join("");
+        </a>`;
+      }).join("");
       legacyTrack.innerHTML = legacyItems + legacyItems;
     }
     startLegacyTickerMarquee(legacyTrack);
@@ -3327,7 +3340,7 @@
       <div class="v8-gallery-grid">
         ${items.map((item, itemIndex) => `
           <button class="v8-gallery-tile" type="button" data-v8-gallery-open="${itemIndex}">
-            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="eager" decoding="async" fetchpriority="low">
+            <img src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy" decoding="async" fetchpriority="low">
             <span><i>${esc(item.kind === "video" ? "Vídeo" : "Foto")}</i><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span>
           </button>`).join("")}
       </div>
