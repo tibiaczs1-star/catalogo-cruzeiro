@@ -500,10 +500,10 @@
       let googleAuthState = { enabled: false, signedIn: false, user: null, checked: false };
 
       const PLAN_HINTS = {
-        infinite: 'Válido somente para 1 PC Windows (não inclui macOS nem Linux Ubuntu VPS).',
-        infinite_pro: 'OpenInfinite Pro: libera Windows, Mac (computador normal) e servidor Linux Ubuntu VPS (até 2 máquinas).',
-        infinite_claude: 'InfiniteClaude Pro: libera Windows, Mac (computador normal), Linux Ubuntu VPS e Claude Code (até 3 máquinas).',
-        infinite_max: 'InfiniteClaude Max: libera Windows, Mac (computador normal), Linux Ubuntu VPS e Multi-CLI total (até 5 máquinas).',
+        infinite: 'OpenInfinite Windows (OpenBot, Hermes & OpenCode): válido para 1 PC Windows com Shell Ao Vivo e seletor manual de LLMs.',
+        infinite_pro: 'OpenInfinite Pro (OpenBot, Hermes & OpenCode): libera Windows, Mac desktop e Linux Ubuntu VPS (até 2 máquinas) com Shell Ao Vivo e seletor de LLMs.',
+        infinite_claude: 'InfiniteClaude Pro: libera Windows, Mac desktop, Linux Ubuntu VPS, Claude Code, OpenCode, Hermes e OpenBot (até 3 máquinas) com Procurar & Injetar.',
+        infinite_max: 'InfiniteClaude Max: libera Windows, Mac desktop, Linux Ubuntu VPS e Procurar & Injetar Multi-CLI total (Claude Code, Codex CLI, OpenCode, Hermes, OpenBot e Local Harness · até 5 máquinas).',
       };
 
       function updatePlanHint() {

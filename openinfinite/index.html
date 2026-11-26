@@ -49,8 +49,18 @@
       -webkit-font-smoothing: antialiased;
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
+      body > *:not(main) *,
+      #produtos *, #downloads *, #planos *, #faq * {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .hero-stage.is-paused .vol-orb,
+    .hero-stage.is-paused .hw-iridescent-rim::before,
+    .hero-stage.is-paused .pc-tower-strip::before,
+    .hero-stage.is-paused .pc-fan-ring {
+      animation-play-state: paused !important;
     }
     .skip-link {
       position: fixed; top: -100px; left: 16px; z-index: 1200;
@@ -389,7 +399,7 @@
       position: relative;
       z-index: 10;
       width: 100%;
-      height: 320px;
+      height: 344px;
       transform-style: preserve-3d;
       display: flex;
       align-items: center;
@@ -417,36 +427,39 @@
       pointer-events: none;
     }
     .orbit-slot {
+      --glare-x: 50%;
+      --glare-y: 32%;
+      --rim-alpha: 0.55;
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 396px;
-      margin-left: -198px;
-      margin-top: -144px;
+      width: 404px;
+      margin-left: -202px;
+      margin-top: -154px;
       transform-style: preserve-3d;
       will-change: transform, opacity;
       transform-origin: center center;
-      transition: opacity 260ms var(--ease-snap);
       pointer-events: auto;
     }
     .orbit-slot[data-device="windows"] {
-      width: 454px;
-      margin-left: -227px;
-      margin-top: -148px;
+      width: 468px;
+      margin-left: -234px;
+      margin-top: -158px;
     }
     .orbit-slot[data-orbit-pos="front"] {
-      z-index: 30;
+      z-index: 35;
       opacity: 1;
+      --rim-alpha: 0.98;
     }
     .orbit-slot[data-orbit-pos="left"],
     .orbit-slot[data-orbit-pos="right"] {
       z-index: 15;
-      opacity: 0.82;
+      opacity: 0.86;
       cursor: pointer;
     }
     .orbit-slot[data-orbit-pos="left"]:hover,
     .orbit-slot[data-orbit-pos="right"]:hover {
-      opacity: 0.96;
+      opacity: 0.98;
     }
 
     .orbit-gyro {
@@ -466,7 +479,7 @@
     .hw-main {
       flex: 1;
       min-width: 0;
-      max-width: 440px;
+      max-width: 446px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -474,17 +487,35 @@
       position: relative;
     }
 
-    /* EXTRUDED 3D GLASSMORPHISM HARDWARE BEZEL + IRIDESCENT RIM LIGHT */
+    /* GROUND CONTACT & AMBIENT OCCLUSION SHADOW FOR REAL PHYSICAL WEIGHT */
+    .hw-contact-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      width: 104%;
+      height: 44px;
+      transform: translateX(-50%) rotateX(82deg) translateZ(-14px);
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.95) 14%, rgba(0, 180, 255, 0.16) 52%, transparent 76%);
+      filter: blur(7px);
+      pointer-events: none;
+    }
+
+    /* EXTRUDED 3D METALLIC / CARBON CHASSIS BEZEL + TRUE 3D SIDE WALLS */
     .hw-bezel {
       position: relative;
       width: 100%;
       padding: 11px 11px 10px;
-      background: linear-gradient(155deg, rgba(35, 39, 54, 0.90) 0%, rgba(12, 13, 19, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      background:
+        radial-gradient(120% 90% at var(--glare-x) 0%, rgba(255, 255, 255, 0.18) 0%, transparent 52%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 3px),
+        linear-gradient(160deg, #2d3344 0%, #141722 48%, #0a0c12 100%);
+      border: 1px solid rgba(226, 232, 240, 0.38);
       box-shadow:
-        0 28px 64px rgba(0, 0, 0, 0.88),
-        inset 0 1px 0 rgba(255, 255, 255, 0.36),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+        0 30px 64px rgba(0, 0, 0, 0.90),
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.48),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+        inset 1px 0 0 rgba(255, 255, 255, 0.22),
+        inset -1px 0 0 rgba(255, 255, 255, 0.22);
       transform-style: preserve-3d;
     }
     .hw-bezel-slice {
@@ -492,11 +523,57 @@
       inset: 0;
       border-radius: inherit;
       pointer-events: none;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: linear-gradient(180deg, rgba(28, 32, 46, 0.86) 0%, rgba(8, 9, 13, 0.96) 100%);
+      border: 1px solid rgba(203, 213, 225, 0.22);
+      background: linear-gradient(175deg, #3a4256 0%, #151924 55%, #090b10 100%);
     }
-    .hw-bezel-slice-1 { transform: translateZ(-5px); }
-    .hw-bezel-slice-2 { transform: translateZ(-11px); border-color: rgba(0, 180, 255, 0.22); }
+    .hw-bezel-slice-1 { transform: translateZ(-4px); }
+    .hw-bezel-slice-2 { transform: translateZ(-9px); border-color: rgba(148, 163, 184, 0.28); }
+    .hw-bezel-slice-3 {
+      transform: translateZ(-14px);
+      border-color: rgba(0, 180, 255, 0.30);
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.14) 0%, transparent 58%),
+        linear-gradient(165deg, #465068 0%, #171b26 62%, #08090e 100%);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    /* REAL 3D EXTRUDED ALUMINUM / MAGNESIUM SIDE & TOP WALLS */
+    .hw-edge-left,
+    .hw-edge-right {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      width: 14px;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0px, rgba(255, 255, 255, 0.06) 1px, transparent 1px, transparent 4px),
+        linear-gradient(180deg, #9aa5b8 0%, #4b5568 38%, #1e2433 78%, #64748b 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    }
+    .hw-edge-left {
+      left: 0;
+      transform-origin: left center;
+      transform: rotateY(-90deg);
+    }
+    .hw-edge-right {
+      right: 0;
+      transform-origin: right center;
+      transform: rotateY(90deg);
+    }
+    .hw-edge-top {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: 0;
+      height: 14px;
+      pointer-events: none;
+      transform-origin: center top;
+      transform: rotateX(90deg);
+      background: linear-gradient(90deg, #475569 0%, #cbd5e1 50%, #475569 100%);
+      border-left: 1px solid rgba(255, 255, 255, 0.35);
+      border-right: 1px solid rgba(255, 255, 255, 0.35);
+    }
 
     .hw-iridescent-rim {
       position: absolute;
@@ -509,10 +586,9 @@
       mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
-      opacity: 0.38;
+      opacity: var(--rim-alpha);
       transition: opacity 280ms var(--ease-snap);
     }
-    .orbit-slot[data-orbit-pos="front"] .hw-iridescent-rim { opacity: 0.96; }
     .hw-iridescent-rim::before {
       content: "";
       position: absolute;
@@ -530,25 +606,42 @@
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
+    /* MATERIAL TEXTURES PER HARDWARE ARCHETYPE */
     .orbit-slot[data-device="mac"] .hw-bezel {
-      border-radius: 16px 16px 6px 6px;
-      background: linear-gradient(160deg, rgba(44, 48, 62, 0.88) 0%, rgba(14, 15, 21, 0.95) 100%);
-      border-color: rgba(226, 232, 240, 0.38);
+      border-radius: 16px 16px 5px 5px;
+      padding: 10px 10px 9px;
+      background:
+        radial-gradient(110% 85% at var(--glare-x) 0%, rgba(255, 255, 255, 0.24) 0%, transparent 50%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0px, rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 2px),
+        linear-gradient(165deg, #3f4659 0%, #161923 36%, #0b0d13 100%);
+      border-color: rgba(226, 232, 240, 0.56);
     }
     .orbit-slot[data-device="windows"] .hw-bezel {
       border-radius: 9px;
-      padding: 8px 8px 17px;
-      background: linear-gradient(160deg, rgba(30, 34, 46, 0.92) 0%, rgba(11, 12, 17, 0.96) 100%);
-      border-color: rgba(255, 255, 255, 0.28);
+      padding: 8px 8px 20px;
+      background:
+        radial-gradient(110% 80% at var(--glare-x) 0%, rgba(56, 189, 248, 0.16) 0%, transparent 52%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.016) 0px, rgba(255, 255, 255, 0.016) 1px, transparent 1px, transparent 3px),
+        linear-gradient(165deg, #2a3040 0%, #12151e 52%, #090a0f 100%);
+      border-color: rgba(148, 163, 184, 0.44);
     }
     .orbit-slot[data-device="linux"] .hw-bezel {
       border-radius: 10px 10px 4px 4px;
-      padding: 12px 10px 9px;
-      background: linear-gradient(160deg, rgba(25, 29, 39, 0.92) 0%, rgba(10, 11, 16, 0.96) 100%);
-      border-color: rgba(148, 163, 184, 0.34);
+      padding: 13px 10px 10px;
+      background:
+        radial-gradient(100% 80% at var(--glare-x) 0%, rgba(255, 255, 255, 0.12) 0%, transparent 48%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.028) 0px, rgba(255, 255, 255, 0.028) 2px, transparent 2px, transparent 5px),
+        repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.36) 0px, rgba(0, 0, 0, 0.36) 2px, transparent 2px, transparent 5px),
+        linear-gradient(165deg, #232733 0%, #11131a 55%, #08090d 100%);
+      border-color: rgba(148, 163, 184, 0.42);
+    }
+    .orbit-slot[data-device="linux"] .hw-edge-left,
+    .orbit-slot[data-device="linux"] .hw-edge-right,
+    .orbit-slot[data-device="linux"] .hw-edge-top {
+      background: linear-gradient(180deg, #475569 0%, #1e2430 50%, #0f131a 100%);
     }
 
-    /* 3D FLOATING GLASS HUD PILLS (translateZ +34px, backdrop-filter blur) */
+    /* 3D FLOATING GLASS HUD PILLS (translateZ +36px, backdrop-filter blur) */
     .hud-glass-pill {
       position: absolute;
       top: -15px;
@@ -564,12 +657,12 @@
       font-weight: 700;
       letter-spacing: 0.04em;
       color: #ffffff;
-      background: rgba(16, 19, 30, 0.62);
-      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(16, 19, 30, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.34);
       backdrop-filter: blur(16px) saturate(145%);
       -webkit-backdrop-filter: blur(16px) saturate(145%);
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.42);
-      transform: translateZ(34px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.44);
+      transform: translateZ(36px);
       pointer-events: none;
       white-space: nowrap;
     }
@@ -594,57 +687,108 @@
       box-shadow: 0 0 8px rgba(251, 191, 36, 0.9);
     }
 
-    /* Mac Notch vs Monitor Chin vs Linux Camera Shutter */
+    /* Mac Notch w/ Sapphire Lens & Active Sensor vs Monitor Chin vs ThinkShutter */
     .hw-top-camera {
       display: none;
       position: absolute;
-      top: 8px;
+      top: 9px;
       left: 50%;
-      transform: translateX(-50%) translateZ(4px);
-      z-index: 4;
+      transform: translateX(-50%) translateZ(5px);
+      z-index: 6;
       pointer-events: none;
     }
     .orbit-slot[data-device="mac"] .hw-top-camera {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 62px;
+      gap: 5px;
+      width: 66px;
       height: 13px;
-      background: #070709;
+      background: #040507;
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    .orbit-slot[data-device="mac"] .hw-top-camera::before {
+      content: "";
+      width: 5.5px;
+      height: 5.5px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #1e3a8a 48%, #020617 85%);
+      box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.65);
     }
     .orbit-slot[data-device="mac"] .hw-top-camera::after {
       content: "";
-      width: 5px;
-      height: 5px;
+      width: 3px;
+      height: 3px;
       border-radius: 50%;
-      background: radial-gradient(circle, #38bdf8 0%, #0f172a 75%);
+      background: #34d399;
+      box-shadow: 0 0 5px #34d399;
     }
     .orbit-slot[data-device="linux"] .hw-top-camera {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
       top: 4px;
-      width: 22px;
-      height: 5px;
+      width: 36px;
+      height: 6px;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(5, 6, 10, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .orbit-slot[data-device="linux"] .hw-top-camera::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #38bdf8 0%, #0f172a 80%);
+    }
+    .orbit-slot[data-device="linux"] .hw-top-camera::after {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ef4444;
+      opacity: 0.85;
+    }
+
+    .hw-chin-bar {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 3px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.03) 100%);
+      border-radius: 0 0 5px 5px;
+    }
+    .hw-chin-logo {
+      font-family: var(--mono);
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      color: rgba(226, 232, 240, 0.62);
+      text-transform: uppercase;
     }
     .hw-monitor-chin-led {
       display: none;
       position: absolute;
-      right: 16px;
-      bottom: 6px;
+      right: 14px;
+      bottom: 7px;
       width: 14px;
       height: 3px;
       border-radius: 99px;
       background: #38bdf8;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.78);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.9);
       pointer-events: none;
     }
     .orbit-slot[data-device="windows"] .hw-monitor-chin-led { display: block; }
 
+    /* RECESSED OPTICAL GLASS DISPLAY + DYNAMIC SPECULAR STUDIO REFLECTION */
     .slot-screen-btn {
       display: block;
       position: relative;
@@ -652,19 +796,34 @@
       padding: 0;
       border-radius: 6px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: #070709;
+      border: 1px solid rgba(0, 0, 0, 0.92);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.14),
+        inset 0 2px 8px rgba(0, 0, 0, 0.92);
+      background: #050608;
       cursor: pointer;
-      transform: translateZ(2px);
+      transform: translateZ(3px);
     }
     .orbit-slot[data-orbit-pos="front"] .slot-screen-btn { cursor: zoom-in; }
-    .orbit-slot[data-device="mac"] .slot-screen-btn { border-radius: 8px 8px 3px 3px; }
+    .orbit-slot[data-device="mac"] .slot-screen-btn { border-radius: 9px 9px 3px 3px; }
+    .slot-screen-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(95% 75% at var(--glare-x) var(--glare-y), rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 32%, transparent 64%);
+      mix-blend-mode: screen;
+    }
     .slot-screen-btn::after {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 3;
       pointer-events: none;
-      background: linear-gradient(128deg, rgba(255, 255, 255, 0.11) 0%, transparent 38%);
+      background: linear-gradient(122deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 26%, transparent 42%, rgba(0, 180, 255, 0.05) 100%);
+      box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.42);
     }
     .slot-screen-btn img {
       width: 100%;
@@ -672,83 +831,212 @@
       object-fit: cover;
       object-position: top;
       aspect-ratio: 2080 / 1380;
+      filter: contrast(1.04) saturate(1.06);
     }
     .orbit-slot[data-device="windows"] .slot-screen-btn img { aspect-ratio: 1098 / 795; }
     .orbit-slot[data-device="linux"] .slot-screen-btn img { aspect-ratio: 1280 / 800; }
 
-    /* LOWER PHYSICAL BASES: MAC DECK vs MONITOR STAND vs LINUX WORKSTATION DECK */
-    .hw-base-mac {
-      display: block;
-      position: relative;
-      width: 108%;
-      height: 22px;
+    /* LOWER PHYSICAL 3D BASES: CNC MACBOOK UNIBODY DECK · 3D MONITOR STAND · CARBON THINKPAD DECK */
+    .hw-hinge-mac {
+      width: 78%;
+      height: 5px;
       margin-top: -1px;
-      background: linear-gradient(180deg, #cfd6df 0%, #7c8799 36%, #1e293b 100%);
-      border-radius: 2px 2px 13px 13px;
-      border-top: 1px solid rgba(255, 255, 255, 0.52);
-      transform-origin: top center;
-      transform: rotateX(48deg);
-      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.92);
+      background: linear-gradient(180deg, #050608 0%, #272c3a 55%, #090a0f 100%);
+      border-radius: 2px;
+      transform: translateZ(1px);
     }
-    .hw-base-mac::before {
+    .hw-base-mac {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      width: 112%;
+      height: 58px;
+      margin-top: -1px;
+      padding: 5px 12px 4px;
+      background:
+        radial-gradient(90% 80% at var(--glare-x) 10%, rgba(255, 255, 255, 0.55) 0%, transparent 58%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
+        linear-gradient(180deg, #dce2ec 0%, #aeb8c8 44%, #7c879b 86%, #4b5568 100%);
+      border-radius: 3px 3px 14px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+      transform-origin: top center;
+      transform: rotateX(68deg);
+      transform-style: preserve-3d;
+      box-shadow:
+        0 24px 36px rgba(0, 0, 0, 0.92),
+        inset 0 -2px 3px rgba(15, 23, 42, 0.55);
+    }
+    .mac-deck-body {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 6px;
+      width: 100%;
+      height: 31px;
+    }
+    .mac-speaker-grille {
+      width: 16px;
+      flex-shrink: 0;
+      border-radius: 2px;
+      opacity: 0.55;
+      background-image: radial-gradient(rgba(15, 23, 42, 0.82) 0.75px, transparent 0.75px);
+      background-size: 3px 3px;
+    }
+    .kb-well-mac {
+      flex: 1;
+      border-radius: 4px;
+      padding: 2px 3px;
+      background: #0b0d13;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.95), 0 1px 0 rgba(255, 255, 255, 0.45);
+      background-image:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0px, rgba(255, 255, 255, 0.14) 1px, transparent 1px, transparent 14px),
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0px, rgba(255, 255, 255, 0.16) 1px, #141824 1px, #141824 5px);
+    }
+    .trackpad-mac {
+      width: 32%;
+      height: 15px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, rgba(203, 213, 225, 0.65) 0%, rgba(148, 163, 184, 0.55) 100%);
+      border: 1px solid rgba(51, 65, 85, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+    .deck-front-lip {
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      bottom: 0;
+      height: 8px;
+      border-radius: 0 0 12px 12px;
+      transform-origin: center bottom;
+      transform: rotateX(-86deg);
+      background: linear-gradient(90deg, #475569 0%, #e2e8f0 28%, #94a3b8 50%, #e2e8f0 72%, #475569 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.85);
+    }
+    .deck-front-lip::after {
       content: "";
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 74px;
-      height: 6px;
+      width: 54px;
+      height: 4px;
       background: #1e293b;
-      border-radius: 0 0 6px 6px;
+      border-radius: 0 0 5px 5px;
     }
 
+    /* 3D SCULPTED CAST-ALUMINUM MONITOR STAND (WINDOWS) */
     .hw-base-win {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
+      transform-style: preserve-3d;
     }
     .win-neck {
-      width: 48px;
-      height: 24px;
-      background: linear-gradient(90deg, #1f2430 0%, #525d70 50%, #1f2430 100%);
-      border-left: 1px solid rgba(255, 255, 255, 0.16);
-      border-right: 1px solid rgba(255, 255, 255, 0.16);
+      position: relative;
+      width: 46px;
+      height: 28px;
+      margin-top: -1px;
+      background: linear-gradient(90deg, #151923 0%, #64748b 36%, #cbd5e1 52%, #475569 72%, #11151d 100%);
+      border-left: 1px solid rgba(255, 255, 255, 0.28);
+      border-right: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 5px 8px rgba(0, 0, 0, 0.65);
+      transform: rotateX(-8deg) translateZ(-2px);
+    }
+    .win-neck::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 4px;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 12px;
+      border-radius: 99px;
+      background: #07080c;
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
     .win-foot {
-      width: 178px;
-      height: 10px;
-      background: linear-gradient(180deg, #748094 0%, #1e293b 100%);
-      border-radius: 3px 3px 6px 6px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.88);
+      position: relative;
+      width: 186px;
+      height: 36px;
+      margin-top: -8px;
+      background:
+        radial-gradient(80% 90% at var(--glare-x) 20%, rgba(255, 255, 255, 0.42) 0%, transparent 62%),
+        linear-gradient(180deg, #94a3b8 0%, #475569 52%, #1e293b 100%);
+      border-radius: 4px 4px 9px 9px;
+      border-top: 1px solid rgba(255, 255, 255, 0.62);
+      border-bottom: 3px solid #cbd5e1;
+      transform-origin: top center;
+      transform: rotateX(68deg);
+      box-shadow: 0 20px 32px rgba(0, 0, 0, 0.92);
     }
 
-    /* COMPACT PC TOWER BESIDE MONITOR W/ LIVE PRISMATIC STRIP */
+    /* TRUE 3D WORKSTATION PC TOWER: FRONT AIRFLOW MESH + SMOKED TEMPERED-GLASS SIDE CHAMBER */
     .pc-tower {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 74px;
-      height: 186px;
+      width: 88px;
+      height: 196px;
       flex-shrink: 0;
-      padding: 12px 9px;
-      background: linear-gradient(160deg, rgba(28, 32, 46, 0.94) 0%, rgba(9, 10, 14, 0.98) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 10px 8px 9px;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(0, 180, 255, 0.16), transparent 55%),
+        linear-gradient(160deg, #252b3b 0%, #10131c 52%, #07080d 100%);
+      border: 1px solid rgba(203, 213, 225, 0.36);
       border-radius: 9px;
-      box-shadow: -14px 22px 44px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      box-shadow:
+        -18px 26px 46px rgba(0, 0, 0, 0.92),
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.34);
       position: relative;
-      transform: translateZ(16px) rotateY(-10deg);
+      transform-style: preserve-3d;
+      transform: translateZ(20px) rotateY(-18deg);
+    }
+    /* Extruded 3D Front Mesh Panel on Right Edge of angled Tower */
+    .pc-tower-front-mesh {
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      right: -24px;
+      width: 24px;
+      transform-origin: left center;
+      transform: rotateY(76deg);
+      border-radius: 0 5px 5px 0;
+      border: 1px solid rgba(148, 163, 184, 0.34);
+      background-color: #0b0e15;
+      background-image:
+        radial-gradient(rgba(255, 255, 255, 0.16) 0.8px, transparent 0.8px),
+        linear-gradient(180deg, rgba(56, 189, 248, 0.18) 0%, rgba(255, 0, 184, 0.14) 55%, rgba(16, 185, 129, 0.16) 100%);
+      background-size: 3px 3px, 100% 100%;
+      box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.85);
+      pointer-events: none;
+    }
+    .pc-tower-top-deck {
+      position: absolute;
+      left: 3px;
+      right: 3px;
+      top: 0;
+      height: 20px;
+      transform-origin: center top;
+      transform: rotateX(82deg);
+      background: linear-gradient(90deg, #334155 0%, #64748b 50%, #1e293b 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      pointer-events: none;
     }
     .pc-tower-strip {
       position: absolute;
-      left: 7px;
-      top: 16px;
-      bottom: 16px;
+      left: 6px;
+      top: 12px;
+      bottom: 12px;
       width: 3.5px;
       border-radius: 99px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 0 12px rgba(0, 180, 255, 0.45);
+      background: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 0 12px rgba(0, 180, 255, 0.58);
+      z-index: 3;
     }
     .pc-tower-strip::before {
       content: "";
@@ -765,59 +1053,161 @@
       from { transform: translateY(0%); }
       to { transform: translateY(33.333%); }
     }
-    .pc-tower-vents {
+    /* Smoked Tempered Glass Window w/ Internal 3D AIO Cooler + GPU + Dual ARGB Fans */
+    .pc-chamber {
+      position: relative;
+      margin-left: 8px;
+      flex: 1;
+      margin-bottom: 7px;
+      border-radius: 6px;
+      padding: 6px 5px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, transparent 38%),
+        radial-gradient(circle at 50% 34%, rgba(0, 180, 255, 0.24) 0%, rgba(91, 46, 255, 0.14) 48%, #05060a 86%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.92);
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding-left: 11px;
-      margin-top: 8px;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
     }
-    .pc-tower-vents span {
-      display: block;
-      height: 2px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.16);
+    .pc-aio-pump {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #38bdf8;
+      background: radial-gradient(circle, #e0f2fe 0%, #0284c7 45%, #090d16 80%);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.72), inset 0 0 4px #ffffff;
+      margin-top: 2px;
+    }
+    .pc-gpu-bar {
+      width: 94%;
+      height: 11px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #1e293b 0%, #334155 60%, #0f172a 100%);
+      border-top: 1.5px solid #00B4FF;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 0 8px rgba(0, 180, 255, 0.42);
+    }
+    .pc-fans-stack {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+    }
+    .pc-fan-ring {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 0, 184, 0.65);
+      background: conic-gradient(from 0deg, rgba(0, 180, 255, 0.45), transparent 25%, rgba(255, 0, 184, 0.45) 50%, transparent 75%, rgba(0, 180, 255, 0.45));
+      box-shadow: 0 0 8px rgba(255, 0, 184, 0.35);
+      animation: rimSpin 2.6s linear infinite;
+    }
+    .pc-tower-vents {
+      display: none;
     }
     .pc-tower-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-left: 11px;
+      padding-left: 9px;
       font-family: var(--mono);
       font-size: 8.5px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--silver);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
     }
     .pc-power-led {
       width: 7px;
       height: 7px;
       border-radius: 50%;
       background: #10b981;
-      box-shadow: 0 0 9px rgba(16, 185, 129, 0.92);
+      box-shadow: 0 0 9px rgba(16, 185, 129, 0.95);
     }
 
+    /* 3D CARBON-WEAVE LINUX WORKSTATION PALMREST + TRACKPOINT + STEEL HINGES */
+    .hw-hinges-linux {
+      display: flex;
+      justify-content: space-between;
+      width: 82%;
+      height: 5px;
+      margin-top: -1px;
+      padding: 0 18px;
+      pointer-events: none;
+    }
+    .hw-hinges-linux span {
+      display: block;
+      width: 26px;
+      height: 5px;
+      border-radius: 1px;
+      background: linear-gradient(90deg, #334155 0%, #cbd5e1 48%, #1e293b 100%);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
     .hw-base-linux {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       position: relative;
-      width: 106%;
-      height: 23px;
+      width: 110%;
+      height: 58px;
       margin-top: -1px;
-      background: linear-gradient(180deg, #2d3240 0%, #14161c 48%, #090a0e 100%);
-      border-radius: 2px 2px 9px 9px;
-      border-top: 1px solid rgba(148, 163, 184, 0.42);
+      padding: 5px 14px 4px;
+      background:
+        radial-gradient(90% 80% at var(--glare-x) 10%, rgba(255, 255, 255, 0.16) 0%, transparent 58%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.032) 0px, rgba(255, 255, 255, 0.032) 2px, transparent 2px, transparent 5px),
+        repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.42) 0px, rgba(0, 0, 0, 0.42) 2px, transparent 2px, transparent 5px),
+        linear-gradient(180deg, #2a2f3d 0%, #151821 55%, #0a0c11 100%);
+      border-radius: 3px 3px 10px 10px;
+      border-top: 1px solid rgba(148, 163, 184, 0.52);
       transform-origin: top center;
-      transform: rotateX(46deg);
-      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.92);
+      transform: rotateX(68deg);
+      transform-style: preserve-3d;
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.94);
     }
-    .hw-base-linux::after {
-      content: "";
-      width: 56px;
-      height: 5px;
-      border-radius: 99px;
-      background: rgba(255, 255, 255, 0.20);
+    .kb-well-linux {
+      position: relative;
+      width: 94%;
+      height: 30px;
+      border-radius: 3px;
+      background-color: #08090d;
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.96), 0 1px 0 rgba(255, 255, 255, 0.14);
+      background-image:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0px, rgba(255, 255, 255, 0.12) 1px, transparent 1px, transparent 13px),
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0px, rgba(255, 255, 255, 0.14) 1px, #12151f 1px, #12151f 5px);
+    }
+    .trackpoint-dot {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 35% 35%, #ff6b6b 0%, #e11d48 65%, #881337 100%);
+      box-shadow: 0 0 6px rgba(244, 63, 94, 0.88);
+    }
+    .trackpad-linux {
+      width: 30%;
+      height: 15px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, #1b1f2b 0%, #10131b 100%);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-top: 2px solid #e11d48;
+    }
+    .linux-front-lip {
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      bottom: 0;
+      height: 7px;
+      border-radius: 0 0 9px 9px;
+      transform-origin: center bottom;
+      transform: rotateX(-86deg);
+      background: linear-gradient(90deg, #0f172a 0%, #334155 50%, #0f172a 100%);
+      border-top: 1px solid rgba(148, 163, 184, 0.42);
     }
 
     /* FLOATING GLASS BOTTOM DOCK INSIDE THE ARENA (LIVE PROGRESS + ZOOM PILL) */
@@ -983,12 +1373,13 @@
 
     @media (max-width: 960px) {
       .dual-grid, .os-grid { grid-template-columns: 1fr; }
-      .stage-3d-theater { min-height: 390px; padding: 24px 8px 58px; perspective: 1260px; }
-      .device-rig { height: 315px; }
-      .orbit-slot { width: 340px; margin-left: -170px; margin-top: -130px; }
-      .orbit-slot[data-device="windows"] { width: 388px; margin-left: -194px; margin-top: -134px; }
-      .pc-tower { width: 66px; height: 170px; padding: 10px 8px; }
-      .win-foot { width: 150px; }
+      .stage-3d-theater { min-height: 404px; padding: 24px 8px 58px; perspective: 1260px; }
+      .device-rig { height: 328px; }
+      .orbit-slot { width: 344px; margin-left: -172px; margin-top: -136px; }
+      .orbit-slot[data-device="windows"] { width: 396px; margin-left: -198px; margin-top: -140px; }
+      .pc-tower { width: 74px; height: 174px; padding: 9px 7px; }
+      .win-foot { width: 154px; height: 30px; }
+      .hw-base-mac, .hw-base-linux { height: 50px; }
     }
     @media (max-width: 720px) {
       .topbar-inner { flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
@@ -1001,24 +1392,34 @@
       .wrap { padding: 28px 14px 64px; gap: 48px; }
       .stage-toolbar { padding: 10px; gap: 8px; }
       .sim-pill { padding: 5px 10px; font-size: 11px; }
-      .stage-3d-theater { min-height: 288px; padding: 18px 4px 56px; perspective: 1080px; }
-      .device-rig { height: 214px; }
-      .orbit-slot { width: 198px; margin-left: -99px; margin-top: -78px; }
-      .orbit-slot[data-device="windows"] { width: 222px; margin-left: -111px; margin-top: -82px; }
+      .stage-3d-theater { min-height: 300px; padding: 18px 4px 56px; perspective: 1080px; }
+      .device-rig { height: 224px; }
+      .orbit-slot { width: 198px; margin-left: -99px; margin-top: -82px; }
+      .orbit-slot[data-device="windows"] { width: 224px; margin-left: -112px; margin-top: -86px; }
       .hw-cluster { gap: 8px; }
       .hw-bezel { padding: 7px 7px 6px; }
-      .orbit-slot[data-device="windows"] .hw-bezel { padding: 6px 6px 11px; }
-      .pc-tower { width: 38px; height: 100px; padding: 6px 5px; border-radius: 6px; }
-      .pc-tower-strip { left: 4px; top: 10px; bottom: 10px; width: 2.5px; }
-      .pc-tower-vents { padding-left: 7px; gap: 4px; margin-top: 4px; }
-      .pc-tower-footer { padding-left: 7px; font-size: 6px; }
-      .pc-power-led { width: 5px; height: 5px; }
+      .orbit-slot[data-device="windows"] .hw-bezel { padding: 6px 6px 14px; }
+      .hw-chin-bar { height: 10px; bottom: 2px; }
+      .hw-chin-logo { font-size: 5.5px; }
+      .pc-tower { width: 46px; height: 106px; padding: 6px 5px; border-radius: 6px; }
+      .pc-tower-front-mesh { width: 14px; right: -14px; }
+      .pc-tower-strip { left: 4px; top: 8px; bottom: 8px; width: 2.5px; }
+      .pc-chamber { margin-left: 5px; padding: 4px 3px; margin-bottom: 4px; }
+      .pc-aio-pump { width: 13px; height: 13px; }
+      .pc-gpu-bar { height: 6px; }
+      .pc-fan-ring { width: 12px; height: 12px; }
+      .pc-tower-footer { padding-left: 6px; font-size: 5.5px; }
+      .pc-power-led { width: 4.5px; height: 4.5px; }
       .hud-glass-pill { top: -11px; right: 6px; padding: 3px 8px; font-size: 9px; gap: 5px; transform: translateZ(26px); }
       .orbit-slot[data-orbit-pos="left"] .hud-glass-pill { left: 6px; right: auto; }
       .orbit-slot[data-orbit-pos="right"] .hud-glass-pill { right: 6px; left: auto; }
-      .win-neck { width: 32px; height: 16px; }
-      .win-foot { width: 108px; height: 7px; }
-      .hw-base-mac, .hw-base-linux { height: 14px; }
+      .win-neck { width: 30px; height: 18px; }
+      .win-foot { width: 112px; height: 22px; }
+      .hw-base-mac, .hw-base-linux { height: 34px; padding: 3px 7px 2px; }
+      .mac-deck-body { height: 18px; gap: 3px; }
+      .mac-speaker-grille { width: 8px; }
+      .kb-well-linux { height: 17px; }
+      .trackpad-mac, .trackpad-linux { height: 8px; }
       .stage-arena-dock { gap: 8px; padding: 5px 6px 5px 10px; white-space: nowrap; }
       .stage-arena-dock .btn { white-space: nowrap; flex-shrink: 0; }
       .orbit-progress-label { display: none; }
@@ -1187,7 +1588,7 @@
           <div class="device-rig" id="deviceRig" data-device="mac">
             <div class="orbital-panel" id="cockpitPanel" role="tabpanel" aria-labelledby="tab-dev-mac">
               <div class="orbital-carousel" id="orbitalCarousel">
-                <!-- SLOT 1: MACBOOK (macOS LIQUID GLASS) -->
+                <!-- SLOT 1: MACBOOK PRO UNIBODY (macOS LIQUID GLASS) -->
                 <div class="orbit-slot" data-device="mac" data-orbit-pos="front">
                   <div class="orbit-gyro">
                     <div class="hw-cluster">
@@ -1195,6 +1596,10 @@
                         <div class="hw-bezel">
                           <span class="hw-bezel-slice hw-bezel-slice-1" aria-hidden="true"></span>
                           <span class="hw-bezel-slice hw-bezel-slice-2" aria-hidden="true"></span>
+                          <span class="hw-bezel-slice hw-bezel-slice-3" aria-hidden="true"></span>
+                          <span class="hw-edge-left" aria-hidden="true"></span>
+                          <span class="hw-edge-right" aria-hidden="true"></span>
+                          <span class="hw-edge-top" aria-hidden="true"></span>
                           <span class="hw-iridescent-rim" aria-hidden="true"></span>
                           <div class="hud-glass-pill" aria-hidden="true">
                             <span class="hud-dot"></span>
@@ -1205,13 +1610,23 @@
                             <img id="macSlotImg" src="/openinfinite/assets/hero_mac_liquid_glass.png" alt="Interface do InfiniteClaude no macOS Liquid Glass" />
                           </button>
                         </div>
-                        <div class="hw-base-mac" aria-hidden="true"></div>
+                        <div class="hw-hinge-mac" aria-hidden="true"></div>
+                        <div class="hw-base-mac" aria-hidden="true">
+                          <div class="mac-deck-body">
+                            <span class="mac-speaker-grille"></span>
+                            <span class="kb-well-mac"></span>
+                            <span class="mac-speaker-grille"></span>
+                          </div>
+                          <span class="trackpad-mac"></span>
+                          <span class="deck-front-lip"></span>
+                        </div>
+                        <span class="hw-contact-shadow" aria-hidden="true"></span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- SLOT 2: PC MONITOR WINDOWS + PC WIN TOWER -->
+                <!-- SLOT 2: PC MONITOR WINDOWS + 3D TEMPERED-GLASS WORKSTATION TOWER -->
                 <div class="orbit-slot" data-device="windows" data-orbit-pos="right">
                   <div class="orbit-gyro">
                     <div class="hw-cluster">
@@ -1219,6 +1634,10 @@
                         <div class="hw-bezel">
                           <span class="hw-bezel-slice hw-bezel-slice-1" aria-hidden="true"></span>
                           <span class="hw-bezel-slice hw-bezel-slice-2" aria-hidden="true"></span>
+                          <span class="hw-bezel-slice hw-bezel-slice-3" aria-hidden="true"></span>
+                          <span class="hw-edge-left" aria-hidden="true"></span>
+                          <span class="hw-edge-right" aria-hidden="true"></span>
+                          <span class="hw-edge-top" aria-hidden="true"></span>
                           <span class="hw-iridescent-rim" aria-hidden="true"></span>
                           <div class="hud-glass-pill" aria-hidden="true">
                             <span class="hud-dot"></span>
@@ -1227,21 +1646,33 @@
                           <button type="button" class="slot-screen-btn" data-slot-device="windows" aria-label="PC Monitor Windows — focar ou ampliar interface">
                             <img id="winSlotImg" src="/openinfinite/assets/hero_win_infiniteclaude.png" alt="InfiniteClaude no PC Windows" />
                           </button>
+                          <div class="hw-chin-bar" aria-hidden="true"><span class="hw-chin-logo">INFINITE STUDIO</span></div>
                           <span class="hw-monitor-chin-led" aria-hidden="true"></span>
                         </div>
                         <div class="hw-base-win" aria-hidden="true">
                           <div class="win-neck"></div>
                           <div class="win-foot"></div>
                         </div>
+                        <span class="hw-contact-shadow" aria-hidden="true"></span>
                       </div>
 
                       <div class="pc-tower" aria-hidden="true">
+                        <span class="pc-tower-top-deck"></span>
+                        <span class="pc-tower-front-mesh"></span>
                         <div class="pc-tower-strip"></div>
+                        <div class="pc-chamber">
+                          <span class="pc-aio-pump"></span>
+                          <span class="pc-gpu-bar"></span>
+                          <div class="pc-fans-stack">
+                            <span class="pc-fan-ring"></span>
+                            <span class="pc-fan-ring"></span>
+                          </div>
+                        </div>
                         <div class="pc-tower-vents">
                           <span></span><span></span><span></span><span></span><span></span>
                         </div>
                         <div class="pc-tower-footer">
-                          <span>PC WIN</span>
+                          <span>RTX · WIN</span>
                           <span class="pc-power-led"></span>
                         </div>
                       </div>
@@ -1249,7 +1680,7 @@
                   </div>
                 </div>
 
-                <!-- SLOT 3: NOTEBOOK LINUX UBUNTU VPS -->
+                <!-- SLOT 3: NOTEBOOK LINUX UBUNTU VPS (CARBON WORKSTATION) -->
                 <div class="orbit-slot" data-device="linux" data-orbit-pos="left">
                   <div class="orbit-gyro">
                     <div class="hw-cluster">
@@ -1257,6 +1688,10 @@
                         <div class="hw-bezel">
                           <span class="hw-bezel-slice hw-bezel-slice-1" aria-hidden="true"></span>
                           <span class="hw-bezel-slice hw-bezel-slice-2" aria-hidden="true"></span>
+                          <span class="hw-bezel-slice hw-bezel-slice-3" aria-hidden="true"></span>
+                          <span class="hw-edge-left" aria-hidden="true"></span>
+                          <span class="hw-edge-right" aria-hidden="true"></span>
+                          <span class="hw-edge-top" aria-hidden="true"></span>
                           <span class="hw-iridescent-rim" aria-hidden="true"></span>
                           <div class="hud-glass-pill" aria-hidden="true">
                             <span class="hud-dot hud-dot-amber"></span>
@@ -1267,7 +1702,13 @@
                             <img id="linuxSlotImg" src="/openinfinite/assets/hero_linux_vps_tui.png" alt="Infinite Zone no Linux Ubuntu VPS" />
                           </button>
                         </div>
-                        <div class="hw-base-linux" aria-hidden="true"></div>
+                        <div class="hw-hinges-linux" aria-hidden="true"><span></span><span></span></div>
+                        <div class="hw-base-linux" aria-hidden="true">
+                          <div class="kb-well-linux"><span class="trackpoint-dot"></span></div>
+                          <span class="trackpad-linux"></span>
+                          <span class="linux-front-lip"></span>
+                        </div>
+                        <span class="hw-contact-shadow" aria-hidden="true"></span>
                       </div>
                     </div>
                   </div>
@@ -1320,15 +1761,15 @@
                 </div>
                 <div>
                   <h3>OpenInfinite</h3>
-                  <span class="product-sub">Infinite Zone · Uso direto e leve</span>
+                  <span class="product-sub">Infinite Zone · OpenBot, Hermes &amp; OpenCode</span>
                 </div>
               </div>
               <span class="brand-ver">A partir de R$ 99/mês</span>
             </div>
             <ul class="clean-list">
-              <li>Configura seu ambiente com poucos cliques para trabalhar sem dor de cabeça.</li>
-              <li><strong>1 hora grátis</strong> para testar no Windows ou no Mac antes de ativar a chave.</li>
-              <li>Disponível para Windows PC, Mac desktop (MacBook/iMac/Mac mini) e Linux VPS.</li>
+              <li>Exclusivo para <strong>OpenBot / OpenClaw, Hermes Agent e OpenCode</strong> — enxuto e sem recursos de Claude/Codex.</li>
+              <li><strong>Shell Ao Vivo</strong> com status de conexão, desconexão, restauração de túnel WARP e <strong>seletor manual de LLMs</strong>.</li>
+              <li><strong>1 hora grátis</strong> no Windows ou Mac desktop (MacBook/iMac/Mac mini), além de suporte a Linux VPS.</li>
             </ul>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -1346,15 +1787,15 @@
                 </div>
                 <div>
                   <h3>InfiniteClaude</h3>
-                  <span class="product-sub">Infinite Zone · Integração Claude Code &amp; Multi-CLI</span>
+                  <span class="product-sub">Infinite Zone · Claude Code, Codex CLI &amp; Multi-CLI</span>
                 </div>
               </div>
               <span class="brand-ver">A partir de R$ 199/mês</span>
             </div>
             <ul class="clean-list">
-              <li>Conecta diretamente ao <strong>Claude Code</strong> e acompanha seus projetos em várias máquinas.</li>
-              <li>Suporte completo para Windows, Mac desktop e servidor Linux Ubuntu VPS (Pro e Max).</li>
-              <li>Inclui opções Multi-CLI para Hermes, Local Harness e Codex CLI no plano Max.</li>
+              <li>Aba <strong>Procurar &amp; Injetar</strong> com detecção e injeção direta em <strong>Claude Code</strong>, <strong>Codex CLI</strong> (<code>wire_api=responses</code>), OpenCode, Hermes, OpenBot e Local Harness.</li>
+              <li><strong>Shell Ao Vivo</strong> em tempo real + <strong>seletor manual de LLMs</strong> com latência e modo automático.</li>
+              <li>Suporte completo para Windows, Mac desktop (Liquid Glass) e servidor Linux Ubuntu VPS (Pro e Max).</li>
             </ul>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -1512,7 +1953,8 @@
             <div class="plan-price">R$ 99,00 <small>/ mês</small></div>
             <ul class="clean-list">
               <li>1 computador Windows PC</li>
-              <li>OpenInfinite completo por 30 dias</li>
+              <li>OpenInfinite completo (OpenBot, Hermes &amp; OpenCode) por 30 dias</li>
+              <li>Shell Ao Vivo + seletor manual de LLMs</li>
               <li class="dim">Sem macOS nem Linux VPS</li>
             </ul>
           </div>
@@ -1528,8 +1970,8 @@
             <div class="plan-price">R$ 159,00 <small>/ mês</small></div>
             <ul class="clean-list">
               <li>Até 2 máquinas (Windows, Mac normal e Linux VPS)</li>
-              <li>Inclui Hermes Agent oficial</li>
-              <li>Ideal para quem usa Mac + VPS</li>
+              <li>OpenBot / OpenClaw, Hermes Agent e OpenCode</li>
+              <li>Shell Ao Vivo + seletor manual de LLMs</li>
             </ul>
           </div>
           <a href="/openinfinite/checkout/?plan=infinite_pro" class="btn silver sm" style="width:100%;">Ir para Check-in →</a>
@@ -1544,7 +1986,7 @@
             <div class="plan-price">R$ 199,00 <small>/ mês</small></div>
             <ul class="clean-list">
               <li>Até 3 máquinas (Windows, Mac normal e Linux VPS)</li>
-              <li>OpenInfinite + InfiniteClaude (Claude Code + OpenCode + Hermes)</li>
+              <li>Claude Code + OpenCode + Hermes + OpenBot + Shell Ao Vivo e seletor de LLMs</li>
             </ul>
           </div>
           <a href="/openinfinite/checkout/?plan=infinite_claude" class="btn ivory sm" style="width:100%;">Ir para Check-in →</a>
@@ -1559,7 +2001,7 @@
             <div class="plan-price">R$ 249,00 <small>/ mês</small></div>
             <ul class="clean-list">
               <li>Até 5 máquinas (Windows, Mac normal e Linux VPS)</li>
-              <li>Multi-CLI completo (Claude Code, OpenCode, Hermes, Harness e Codex CLI)</li>
+              <li>Procurar &amp; Injetar Multi-CLI total (Claude Code, Codex CLI, OpenCode, Hermes, OpenBot e Local Harness)</li>
             </ul>
           </div>
           <a href="/openinfinite/checkout/?plan=infinite_max" class="btn ivory sm" style="width:100%;">Ir para Check-in →</a>
@@ -1721,7 +2163,7 @@
           badge: 'Mac · macOS Liquid Glass',
           img: '/openinfinite/assets/hero_mac_liquid_glass.png',
           title: 'InfiniteClaude no Mac (Liquid Glass)',
-          desc: 'Aplicativo nativo para MacBook, iMac e Mac mini — baixe em .dmg e teste por 1 hora grátis.',
+          desc: 'App nativo Apple Silicon com Shell Ao Vivo, seletor manual de LLMs, Procurar & Injetar e 1h grátis.',
           hasVariant: false,
         },
         windows: {
@@ -1732,8 +2174,8 @@
           altImg: '/openinfinite/assets/hero_win_openinfinite.png',
           title: 'InfiniteClaude no PC Windows',
           altTitle: 'OpenInfinite no PC Windows',
-          desc: 'Rodando no PC desktop Windows com motor direto e 1 hora grátis para testar.',
-          altDesc: 'OpenInfinite leve no PC Windows — baixe o .exe e teste por 1 hora grátis.',
+          desc: 'InfiniteClaude no Windows com Shell Ao Vivo, seletor manual de LLMs e Procurar & Injetar (Claude, Codex, OpenCode, Hermes e OpenBot).',
+          altDesc: 'OpenInfinite enxuto no Windows (exclusivo OpenBot, Hermes e OpenCode) com Shell Ao Vivo e seletor manual de LLMs.',
           hasVariant: true,
         },
         linux: {
@@ -1749,12 +2191,15 @@
 
       const DEVICE_ORDER = ['mac', 'windows', 'linux'];
       const AUTO_ORBIT_MS = 3800;
+      const SIN_120 = Math.sqrt(3) / 2;
+      const TWO_PI = Math.PI * 2;
       let currentDevice = 'mac';
       let useAltWinApp = false;
-      let isReducedMotion = reducedMotion;
-      let motionEnabled = !isReducedMotion;
-      let autoOrbitPaused = isReducedMotion;
+      // Start 3D orbital rotation automatically on load (even on Windows rigs where SPI_GETCLIENTAREAANIMATION sets prefers-reduced-motion)
+      let motionEnabled = true;
+      let autoOrbitPaused = false;
       let orbitElapsed = 0;
+      let orbitStepPos = 0;
 
       const rigEl = $('deviceRig');
       const theater = $('stage3dTheater');
@@ -1768,7 +2213,7 @@
 
       function syncOrbitToggleUi() {
         if (orbitToggleBtn) {
-          orbitToggleBtn.setAttribute('aria-pressed', String(autoOrbitPaused));
+          orbitToggleBtn.setAttribute('aria-pressed', String(autoOrbitPaused || !motionEnabled));
           if (!motionEnabled) {
             orbitToggleBtn.textContent = 'Ativar Giro 3D';
           } else {
@@ -1792,9 +2237,9 @@
 
       function readLayoutMetrics() {
         const w = window.innerWidth || 1440;
-        if (w <= 720) return { isMobile: true, flankX: 120, flankY: 16, flankZ: -170, flankScale: 0.48, flankRy: 38 };
-        if (w <= 960) return { isMobile: false, flankX: 235, flankY: 18, flankZ: -165, flankScale: 0.64, flankRy: 34 };
-        return { isMobile: false, flankX: 350, flankY: 18, flankZ: -175, flankScale: 0.72, flankRy: 34 };
+        if (w <= 720) return { isMobile: true, flankX: 122, flankY: 16, flankZ: -175, flankScale: 0.48, flankRy: 38 };
+        if (w <= 960) return { isMobile: false, flankX: 238, flankY: 18, flankZ: -170, flankScale: 0.64, flankRy: 35 };
+        return { isMobile: false, flankX: 354, flankY: 18, flankZ: -180, flankScale: 0.72, flankRy: 35 };
       }
       let metrics = readLayoutMetrics();
 
@@ -1806,47 +2251,84 @@
         return rel === 1 ? 'right' : 'left';
       }
 
-      function computeTarget(posKey, tSec, pX, pY, dragDeg) {
-        if (posKey === 'front') {
-          return {
-            x: 0,
-            y: !motionEnabled ? 0 : Math.sin(tSec * 1.25) * (metrics.isMobile ? 4.5 : 7.5),
-            z: 90,
-            ry: !motionEnabled ? 0 : Math.sin(tSec * 0.92) * 9.2 + pX * 5.8 + dragDeg,
-            rx: !motionEnabled ? 3.2 : 3.8 + Math.cos(tSec * 0.72) * 2.1 - pY * 4.0,
-            scale: 1,
-            opacity: 1,
-          };
-        }
-        const side = posKey === 'left' ? -1 : 1;
-        const phase = side * 1.9;
-        return {
-          x: side * metrics.flankX,
-          y: metrics.flankY + (!motionEnabled ? 0 : Math.sin(tSec * 1.05 + phase) * 4.5),
-          z: metrics.flankZ,
-          ry: -side * metrics.flankRy + (!motionEnabled ? 0 : Math.cos(tSec * 0.8 + phase) * 2.8 + dragDeg * 0.4),
-          rx: 4.0 + (!motionEnabled ? 0 : Math.sin(tSec * 0.65 + phase) * 1.2),
-          scale: metrics.flankScale,
-          opacity: 0.84,
-        };
+      // Continuous C1-smooth orbital step fraction: glides through front showcase [0..0.62], then sweeps 120deg to next workstation
+      function computeAutoStepFraction(u) {
+        const clamped = Math.max(0, Math.min(1, u));
+        if (clamped <= 0.62) return (clamped / 0.62) * 0.18;
+        const s = (clamped - 0.62) / 0.38;
+        const s2 = s * s;
+        const s3 = s2 * s;
+        const h00 = 2 * s3 - 3 * s2 + 1;
+        const h10 = s3 - 2 * s2 + s;
+        const h01 = -2 * s3 + 3 * s2;
+        const h11 = s3 - s2;
+        return 0.18 * h00 + 0.11 * h10 + 1.0 * h01 + 0.11 * h11;
+      }
+
+      function shortestRingDelta(fromStep, toStep) {
+        const n = DEVICE_ORDER.length;
+        let d = ((toStep - fromStep) % n + n) % n;
+        if (d > n * 0.5) d -= n;
+        return d;
+      }
+
+      function computeOrbitalSlot(devKey, ringStep, tSec, pX, pY, dragDeg) {
+        const idx = DEVICE_ORDER.indexOf(devKey);
+        const dragSteps = -dragDeg / 72;
+        let theta = ((idx - (ringStep + dragSteps)) / DEVICE_ORDER.length) * TWO_PI;
+        theta = Math.atan2(Math.sin(theta), Math.cos(theta));
+
+        const sinT = Math.sin(theta);
+        const cosT = Math.cos(theta);
+        const frontMix = Math.max(0, Math.min(1, (cosT + 0.5) / 1.5));
+        const focusPeak = Math.pow(Math.max(0, cosT), 3);
+
+        const radiusX = metrics.flankX / SIN_120;
+        const x = sinT * radiusX;
+        const z = metrics.flankZ + ((cosT + 0.5) / 1.5) * (90 - metrics.flankZ);
+        const floatAmp = !motionEnabled ? 0 : (metrics.isMobile ? 4.2 : 7.0) * (0.55 + 0.45 * frontMix);
+        const y = (1 - frontMix) * metrics.flankY + Math.sin(tSec * 1.3 + idx * 2.094) * floatAmp;
+
+        const baseTurnRy = -sinT * (metrics.flankRy / SIN_120);
+        const studioYaw = !motionEnabled ? 0 : Math.sin(tSec * 1.15) * 9.5 * focusPeak;
+        const ry = baseTurnRy + studioYaw + pX * 6.8 * focusPeak + dragDeg * (0.35 + 0.65 * focusPeak);
+        const rx = (!motionEnabled ? 3.4 : 4.2 + Math.cos(tSec * 0.85 + idx) * 2.2) - pY * 4.2 * focusPeak;
+
+        const scale = cosT >= -0.5
+          ? metrics.flankScale + frontMix * (1 - metrics.flankScale)
+          : metrics.flankScale - ((-0.5 - cosT) / 0.5) * 0.08;
+        const opacity = cosT >= -0.5
+          ? 0.85 + frontMix * 0.15
+          : 0.62 + ((cosT + 1.0) / 0.5) * 0.23;
+        const zIndex = Math.round(22 + cosT * 14);
+        const glareX = Math.max(8, Math.min(92, 50 - ry * 1.15));
+        const glareY = Math.max(12, Math.min(72, 30 + rx * 2.4));
+
+        return { x, y, z, ry, rx, scale, opacity, zIndex, glareX, glareY };
       }
 
       const slotStates = {};
       slots.forEach((slot) => {
         const dev = slot.dataset.device;
-        const t = computeTarget(getOrbitPos(dev), 0, 0, 0, 0);
+        const t = computeOrbitalSlot(dev, 0, 0, 0, 0, 0);
         slotStates[dev] = { el: slot, ...t };
       });
 
       function applySlotTransform(st) {
         st.el.style.transform = `translate3d(${st.x.toFixed(2)}px, ${st.y.toFixed(2)}px, ${st.z.toFixed(2)}px) rotateY(${st.ry.toFixed(3)}deg) rotateX(${st.rx.toFixed(3)}deg) scale(${st.scale.toFixed(4)})`;
         st.el.style.opacity = st.opacity.toFixed(3);
+        st.el.style.zIndex = String(st.zIndex);
+        if (typeof st.el.style.setProperty === 'function') {
+          st.el.style.setProperty('--glare-x', `${st.glareX.toFixed(1)}%`);
+          st.el.style.setProperty('--glare-y', `${st.glareY.toFixed(1)}%`);
+        }
       }
 
       function snapStaticOrbit() {
+        orbitStepPos = DEVICE_ORDER.indexOf(currentDevice);
         slots.forEach((slot) => {
           const dev = slot.dataset.device;
-          const t = computeTarget(getOrbitPos(dev), 0, 0, 0, 0);
+          const t = computeOrbitalSlot(dev, orbitStepPos, 0, 0, 0, 0);
           Object.assign(slotStates[dev], t);
           applySlotTransform(slotStates[dev]);
         });
@@ -2072,10 +2554,11 @@
         const elapsedSec = (now - startTs) / 1000;
 
         const isZoomOpen = $('zoomModal').classList.contains('open');
-        if (!autoOrbitPaused && !dragActive && !isZoomOpen && !document.hidden) {
+        const activeRunning = !autoOrbitPaused && !dragActive && !isZoomOpen && !document.hidden;
+        if (activeRunning) {
           orbitElapsed += dt * 1000;
-          if (orbitElapsed >= AUTO_ORBIT_MS) {
-            orbitElapsed = 0;
+          while (orbitElapsed >= AUTO_ORBIT_MS) {
+            orbitElapsed -= AUTO_ORBIT_MS;
             const nextIdx = (DEVICE_ORDER.indexOf(currentDevice) + 1) % DEVICE_ORDER.length;
             renderDeviceState(DEVICE_ORDER[nextIdx], false, false);
           }
@@ -2085,29 +2568,30 @@
           orbitProgressFill.style.transform = `scaleX(${pct.toFixed(4)})`;
         }
 
+        const baseIdx = DEVICE_ORDER.indexOf(currentDevice);
+        const desiredStep = activeRunning
+          ? baseIdx + computeAutoStepFraction(orbitElapsed / AUTO_ORBIT_MS)
+          : baseIdx;
+        const stepDelta = shortestRingDelta(orbitStepPos, desiredStep);
+        const kRing = activeRunning ? (1 - Math.exp(-12 * dt)) : (1 - Math.exp(-8.5 * dt));
+        orbitStepPos = (orbitStepPos + stepDelta * kRing + DEVICE_ORDER.length) % DEVICE_ORDER.length;
+
         const kPtr = 1 - Math.exp(-8 * dt);
         pointerX += (pointerTargetX - pointerX) * kPtr;
         pointerY += (pointerTargetY - pointerY) * kPtr;
 
         if (rigEl) {
-          const macroY = Math.sin(elapsedSec * 1.15) * (metrics.isMobile ? 1.0 : 1.6);
-          const macroRy = Math.sin(elapsedSec * 0.92) * 1.8 + dragSpinDeg * 0.18;
-          const macroRx = Math.cos(elapsedSec * 0.72) * 0.7;
+          const macroY = Math.sin(elapsedSec * 1.15) * (metrics.isMobile ? 1.2 : 2.0);
+          const macroRy = Math.sin(elapsedSec * 0.92) * 2.6 + dragSpinDeg * 0.22;
+          const macroRx = Math.cos(elapsedSec * 0.72) * 0.9;
           rigEl.style.transform = `translate3d(0px, ${macroY.toFixed(2)}px, 0px) rotateY(${macroRy.toFixed(3)}deg) rotateX(${macroRx.toFixed(3)}deg)`;
         }
 
-        const kSlot = 1 - Math.exp(-9.5 * dt);
         for (let i = 0; i < slots.length; i += 1) {
           const dev = slots[i].dataset.device;
           const st = slotStates[dev];
-          const target = computeTarget(getOrbitPos(dev), elapsedSec, pointerX, pointerY, dragSpinDeg);
-          st.x += (target.x - st.x) * kSlot;
-          st.y += (target.y - st.y) * kSlot;
-          st.z += (target.z - st.z) * kSlot;
-          st.ry += (target.ry - st.ry) * kSlot;
-          st.rx += (target.rx - st.rx) * kSlot;
-          st.scale += (target.scale - st.scale) * kSlot;
-          st.opacity += (target.opacity - st.opacity) * kSlot;
+          const target = computeOrbitalSlot(dev, orbitStepPos, elapsedSec, pointerX, pointerY, dragSpinDeg);
+          Object.assign(st, target);
           applySlotTransform(st);
         }
 
@@ -2124,8 +2608,7 @@
       const motionMedia = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
       if (motionMedia && typeof motionMedia.addEventListener === 'function') {
         motionMedia.addEventListener('change', (ev) => {
-          isReducedMotion = Boolean(ev.matches);
-          if (isReducedMotion) {
+          if (ev.matches) {
             motionEnabled = false;
             autoOrbitPaused = true;
             if (rafId) { window.cancelAnimationFrame(rafId); rafId = 0; }

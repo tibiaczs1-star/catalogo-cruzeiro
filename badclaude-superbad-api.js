@@ -134,7 +134,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 1,
     unlockedModes: ["essential"],
     freeProvidersIncluded: ["infinite-gateway"],
-    summary: "Painel completo para Windows (1 PC · 30 dias), Motor Infinite AI com prioridade HY4 #1, renovação automática, auto-configuração e 3 temas.",
+    summary: "OpenInfinite para Windows (1 PC · 30 dias): exclusivo para OpenBot / OpenClaw, Hermes Agent e OpenCode, com Shell Ao Vivo e seletor manual de LLMs.",
   },
   infinite_pro: {
     edition: "infinite_pro",
@@ -148,7 +148,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 2,
     unlockedModes: ["essential", "cockpit-pro"],
     freeProvidersIncluded: ["infinite-gateway", "turbo-auto"],
-    summary: "OpenInfinite para macOS (MacBook/iMac/Mac mini), Windows e Ubuntu Linux VPS (até 2 máquinas · 30 dias), com Hermes Agent.",
+    summary: "OpenInfinite para macOS (MacBook/iMac/Mac mini), Windows e Ubuntu Linux VPS (até 2 máquinas · 30 dias): exclusivo para OpenBot / OpenClaw, Hermes Agent e OpenCode, com Shell Ao Vivo e seletor manual de LLMs.",
   },
   infinite_claude: {
     edition: "infinite_claude",
@@ -162,7 +162,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 3,
     unlockedModes: ["essential", "cockpit-pro", "claude-code-v1", "hermes-pro"],
     freeProvidersIncluded: ["infinite-gateway", "turbo-auto", "claude-code-bridge"],
-    summary: "InfiniteClaude v6.2 nativo Windows, macOS Liquid Glass & Ubuntu VPS (até 3 máquinas · 30 dias), Motor Headless OpenCode Swap nos 4 perfis white-label, injeção direta no Claude Code (~/.claude/settings.json com infinite/coder, infinite/reasoning e infinite/fast) + OpenCode + Hermes Pro+.",
+    summary: "InfiniteClaude v6.2 nativo Windows, macOS Liquid Glass & Ubuntu VPS (até 3 máquinas · 30 dias): Shell Ao Vivo, seletor manual de LLMs, Procurar & Injetar no Claude Code (~/.claude/settings.json), OpenCode, Hermes Agent e OpenBot.",
   },
   infinite_max: {
     edition: "infinite_max",
@@ -176,7 +176,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 5,
     unlockedModes: ["essential", "cockpit-pro", "claude-code-v1", "hermes-pro", "multi-cli-max"],
     freeProvidersIncluded: ["infinite-gateway", "turbo-auto", "claude-code-bridge", "multi-cli-total"],
-    summary: "InfiniteClaude v6.2 Max Multi-OS (até 5 máquinas · 30 dias): Escada Multi-CLI total com auto-detecção e injeção em 1 clique no OpenCode, Claude Code, Hermes Agent (~/.hermes/config.yaml sem iniciar daemon), Local Harness e Codex CLI sobre Motor Headless OpenCode Swap.",
+    summary: "InfiniteClaude v6.2 Max Multi-OS (até 5 máquinas · 30 dias): Shell Ao Vivo, seletor manual de LLMs e Procurar & Injetar Multi-CLI total (Claude Code, Codex CLI via wire_api=responses, OpenCode, Hermes Agent, OpenBot / OpenClaw e Local Harness).",
   },
 });
 

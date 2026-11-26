@@ -90,6 +90,16 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(oiHtml, /class="arena-floor-grid"/);
   assert.match(oiHtml, /hw-bezel-slice-1/);
   assert.match(oiHtml, /hw-bezel-slice-2/);
+  assert.match(oiHtml, /hw-bezel-slice-3/);
+  assert.match(oiHtml, /hw-edge-left/);
+  assert.match(oiHtml, /hw-edge-right/);
+  assert.match(oiHtml, /hw-edge-top/);
+  assert.match(oiHtml, /kb-well-mac/);
+  assert.match(oiHtml, /trackpad-mac/);
+  assert.match(oiHtml, /pc-chamber/);
+  assert.match(oiHtml, /pc-tower-front-mesh/);
+  assert.match(oiHtml, /kb-well-linux/);
+  assert.match(oiHtml, /trackpoint-dot/);
   assert.match(oiHtml, /hw-iridescent-rim/);
   assert.match(oiHtml, /hud-glass-pill/);
   assert.match(oiHtml, /class="pc-tower"/);
@@ -600,24 +610,26 @@ test("OpenInfinite 3D orbital hero stage drives continuous rAF motion, auto-orbi
   assert.equal(orbitToggleBtn.getAttribute("aria-pressed"), "true");
   assert.equal(orbitProgressLabel.textContent, "Modo Reduzido");
 
-  // 2) Initial prefers-reduced-motion: reduce starts static (0 unprompted rAF), with explicit opt-in via #orbitToggleBtn
-  const reduced = mountHero3dScript({ reducedMotion: true });
-  const redToggle = reduced.getEl("orbitToggleBtn");
-  const redLabel = reduced.getEl("orbitProgressLabel");
-  assert.equal(reduced.rafQueue.size, 0);
-  assert.equal(redToggle.textContent, "Ativar Giro 3D");
-  assert.equal(redToggle.getAttribute("aria-pressed"), "true");
-  assert.equal(redLabel.textContent, "Modo Reduzido");
+  // 2) Initial prefers-reduced-motion: reduce (common on Windows performance rigs) STILL starts 3D orbital spin automatically, while allowing manual pause/resume
+  const winPerf = mountHero3dScript({ reducedMotion: true });
+  const winToggle = winPerf.getEl("orbitToggleBtn");
+  const winLabel = winPerf.getEl("orbitProgressLabel");
+  assert.equal(winPerf.rafQueue.size, 1);
+  assert.equal(winToggle.textContent, "Pausar Giro");
+  assert.equal(winToggle.getAttribute("aria-pressed"), "false");
+  assert.equal(winLabel.textContent, "Órbita 3D");
 
-  redToggle.click();
-  assert.equal(redToggle.textContent, "Pausar Giro");
-  assert.equal(redToggle.getAttribute("aria-pressed"), "false");
-  assert.equal(redLabel.textContent, "Órbita 3D");
-  assert.equal(reduced.rafQueue.size, 1);
+  const [winPerfMac] = winPerf.slots;
+  winPerf.stepFrames(1, 16);
+  const wpT0 = winPerfMac.style.transform;
+  winPerf.stepFrames(20, 45);
+  assert.notEqual(winPerfMac.style.transform, wpT0);
 
-  const [redMac] = reduced.slots;
-  reduced.stepFrames(1, 16);
-  const redT0 = redMac.style.transform;
-  reduced.stepFrames(20, 45);
-  assert.notEqual(redMac.style.transform, redT0);
+  // Runtime reduced-motion toggle still allows explicit opt-back-in via #orbitToggleBtn
+  winPerf.mediaListeners[0]({ matches: true });
+  assert.equal(winToggle.textContent, "Ativar Giro 3D");
+  winToggle.click();
+  assert.equal(winToggle.textContent, "Pausar Giro");
+  assert.equal(winToggle.getAttribute("aria-pressed"), "false");
+  assert.equal(winLabel.textContent, "Órbita 3D");
 });
