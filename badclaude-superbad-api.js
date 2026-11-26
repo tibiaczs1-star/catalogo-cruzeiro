@@ -189,6 +189,8 @@ const PRIVATE_RELEASE_LIST_EDITIONS = Object.freeze([
   "founder",
   "infinite",
   "infinite_pro",
+  "infinite_claude",
+  "infinite_max",
 ]);
 const ALLOWED_UPDATE_CHANNELS = new Set(["founder", "client-mid", "client-basic"]);
 const ALLOWED_ZIP_CONTENT_TYPES = new Set([
@@ -253,14 +255,32 @@ function mapEditionToUpdateChannel(rawEdition) {
   if (["editor", "admin", "owner", "owner-master", "enterprise", "enterprise-full"].includes(clean)) {
     return null;
   }
-  if (clean === "founder" || clean === "fundador" || clean === "fnd") return "founder";
-  if (["superbad", "mid", "client-mid", "studio"].includes(clean)) return "client-mid";
-  if (["basic", "client-basic", "beta", "client"].includes(clean)) return "client-basic";
+  if (["founder", "fundador", "fnd", "infinite_max", "infinite-max", "infinite-claude-max"].includes(clean)) return "founder";
+  if (["superbad", "mid", "client-mid", "studio", "infinite_pro", "infinite-pro", "infinite_claude", "infinite-claude"].includes(clean)) return "client-mid";
+  if (["basic", "client-basic", "beta", "client", "infinite", "infinite-basic"].includes(clean)) return "client-basic";
   return "client-mid";
 }
 
 function tierCanAccessUpdateChannel(tier, channel) {
-  const rankMap = { "client-basic": 1, basic: 1, beta: 1, "client-mid": 2, mid: 2, superbad: 2, founder: 3, fundador: 3 };
+  const rankMap = {
+    "client-basic": 1,
+    basic: 1,
+    beta: 1,
+    infinite: 1,
+    "infinite-basic": 1,
+    "client-mid": 2,
+    mid: 2,
+    superbad: 2,
+    infinite_pro: 2,
+    "infinite-pro": 2,
+    infinite_claude: 2,
+    "infinite-claude": 2,
+    infinite_max: 3,
+    "infinite-max": 3,
+    "infinite-claude-max": 3,
+    founder: 3,
+    fundador: 3,
+  };
   const channelMinRank = channel === "founder" ? 3 : channel === "client-mid" ? 2 : 1;
   const userRank = rankMap[String(tier || "").trim().toLowerCase()] || 0;
   return userRank >= channelMinRank;
@@ -563,13 +583,21 @@ function sendSmtpsMail({ host, port = 465, user, pass, from, to, subject, text, 
 
     const timer = setTimeout(() => finish(new Error("Timeout na conexão SMTPS.")), timeoutMs);
     socket.on("error", (err) => finish(err));
+    socket.on("close", () => finish(new Error("Conexão SMTPS encerrada antes da confirmação.")));
 
+    const wrapB64 = (str) =>
+      Buffer.from(String(str || ""), "utf8")
+        .toString("base64")
+        .replace(/.{1,76}/g, "$&\r\n")
+        .replace(/\r\n$/, "");
+    const safeHdr = (val) => String(val || "").replace(/[\r\n]+/g, " ").trim();
+    const safeTo = safeHdr(to);
     const boundary = `b_${crypto.randomBytes(8).toString("hex")}`;
-    const encodedSubject = `=?UTF-8?B?${Buffer.from(String(subject), "utf8").toString("base64")}?=`;
-    const fromHeader = from && from.includes("<") ? from : `OpenInfinite Oficial <${user}>`;
+    const encodedSubject = `=?UTF-8?B?${Buffer.from(safeHdr(subject), "utf8").toString("base64")}?=`;
+    const fromHeader = from && from.includes("<") ? safeHdr(from) : `OpenInfinite Oficial <${safeHdr(user)}>`;
     const mimeMsg = [
       `From: ${fromHeader}`,
-      `To: <${to}>`,
+      `To: <${safeTo}>`,
       `Subject: ${encodedSubject}`,
       `Date: ${new Date().toUTCString()}`,
       `MIME-Version: 1.0`,
@@ -579,12 +607,12 @@ function sendSmtpsMail({ host, port = 465, user, pass, from, to, subject, text, 
       `Content-Type: text/plain; charset=UTF-8`,
       `Content-Transfer-Encoding: base64`,
       ``,
-      Buffer.from(String(text || ""), "utf8").toString("base64"),
+      wrapB64(text || ""),
       `--${boundary}`,
       `Content-Type: text/html; charset=UTF-8`,
       `Content-Transfer-Encoding: base64`,
       ``,
-      Buffer.from(String(html || text || ""), "utf8").toString("base64"),
+      wrapB64(html || text || ""),
       `--${boundary}--`,
       ``,
     ]
@@ -1216,14 +1244,31 @@ function createSuperbadSalesApi(options = {}) {
 
   const adminPasswordPlain = String(environment.SUPERBAD_ADMIN_PASSWORD || "");
   const adminPasswordHash = String(environment.SUPERBAD_ADMIN_PASSWORD_HASH || "").trim();
+  function loadOrCreatePersistedSecret(fileName) {
+    const filePath = path.join(dataDir, fileName);
+    try {
+      if (fs.existsSync(filePath)) {
+        const existing = fs.readFileSync(filePath, "utf8").trim();
+        if (existing.length >= 32) return existing;
+      }
+      fs.mkdirSync(dataDir, { recursive: true });
+      const generated = crypto.randomBytes(32).toString("hex");
+      fs.writeFileSync(filePath, generated + "\n", { encoding: "utf8", mode: 0o600 });
+      return generated;
+    } catch {
+      return crypto.randomBytes(32).toString("hex");
+    }
+  }
+
   const sessionSecret =
     String(options.sessionSecret || environment.SUPERBAD_SESSION_SECRET || "").trim() ||
-    crypto.randomBytes(32).toString("hex");
+    loadOrCreatePersistedSecret(".superbad-session-secret");
   const downloadSecret =
     String(options.downloadSecret || environment.SUPERBAD_DOWNLOAD_SECRET || "").trim() ||
-    crypto.randomBytes(32).toString("hex");
+    loadOrCreatePersistedSecret(".superbad-download-secret");
   const keyPoolSecret =
-    String(options.keyPoolSecret || environment.KEY_POOL_SECRET || downloadSecret).trim() || downloadSecret;
+    String(options.keyPoolSecret || environment.KEY_POOL_SECRET || options.downloadSecret || environment.SUPERBAD_DOWNLOAD_SECRET || "").trim() ||
+    downloadSecret;
   const keyPoolAesKey = deriveKeyPoolAesKey(keyPoolSecret);
   const pixWebhookSecret = String(options.pixWebhookSecret || environment.PIX_WEBHOOK_SECRET || "").trim();
   const receiptsDir = path.join(dataDir, "superbad-receipts");
@@ -1546,7 +1591,6 @@ function createSuperbadSalesApi(options = {}) {
       buyer_contact: order.buyer_contact,
       buyer_whatsapp: order.buyer_whatsapp || null,
       buyer_email: order.buyer_email || order.google_email || null,
-      buyer_whatsapp: order.buyer_whatsapp || null,
       google_name: order.google_name || null,
       google_picture: order.google_picture || null,
       payment_provider: order.payment_provider,
@@ -1977,7 +2021,7 @@ function createSuperbadSalesApi(options = {}) {
         if (!VALID_EDITIONS.has(requestedEdition)) {
           return sendJson(res, 400, {
             ok: false,
-            error: "Edição solicitada inválida. Escolha basic, mid, beta, superbad ou founder.",
+            error: `Edição solicitada inválida. Escolha uma de: ${Array.from(VALID_EDITIONS).join(", ")}.`,
           });
         }
 
@@ -2490,7 +2534,7 @@ function createSuperbadSalesApi(options = {}) {
             totalNodes: nodes.length,
             activeLicenses: licenses.filter((l) => !l.revoked && Date.parse(l.expires_at) > now).length,
             revokedLicenses: licenses.filter((l) => l.revoked).length,
-            pendingOrders: orders.filter((o) => o.status !== "approved").length,
+            pendingOrders: orders.filter((o) => !["approved", "delivered", "cancelled", "rejected"].includes(o.status)).length,
             watchdogAlerts: nodes.filter((n) => n.watchdog_ok === false).length,
           },
           network_nodes: nodes,
@@ -2698,6 +2742,15 @@ function createSuperbadSalesApi(options = {}) {
           }
           const edition = cleanText(body.edition || edCheck.edition || ord.requested_edition, 32).toLowerCase();
           const plan = EDITION_PLANS[edition] || EDITION_PLANS[ord.requested_edition] || EDITION_PLANS.superbad;
+          if (EDITION_PLANS[edition] && edCheck.tier && EDITION_PLANS[edition].tier !== edCheck.tier) {
+            return {
+              status: 400,
+              payload: {
+                ok: false,
+                error: `Tier da chave (${edCheck.tier}) não corresponde à edição solicitada (${edition} / ${EDITION_PLANS[edition].tier}).`,
+              },
+            };
+          }
           const explicitEmail = cleanEmailAddress(body.buyer_email || "");
           if (explicitEmail) ord.buyer_email = explicitEmail;
 
@@ -2957,7 +3010,7 @@ function createSuperbadSalesApi(options = {}) {
         if (!VALID_EDITIONS.has(edition)) {
           return sendJson(res, 400, {
             ok: false,
-            error: "Escolha uma edição válida (basic, mid, beta, superbad ou founder).",
+            error: `Escolha uma edição válida (${Array.from(VALID_EDITIONS).join(", ")}).`,
           });
         }
 
@@ -3299,6 +3352,7 @@ function createSuperbadSalesApi(options = {}) {
         const rawKey = String(body.key || body.license_key || "").trim();
         const email = cleanText(body.email || "", 120);
         const hwid = cleanText(body.hwid || "", 96);
+        const isProbeOnly = Boolean(body.check_only === true || body.probe === true || !hwid || /^web-/i.test(hwid));
         const hostname = cleanText(body.hostname || "", 80);
         const version = cleanText(body.version || "6.4.0", 24);
         if (!rawKey) {
@@ -3361,7 +3415,7 @@ function createSuperbadSalesApi(options = {}) {
 
           if (!Array.isArray(license.bound_hwids)) license.bound_hwids = [];
           const maxHwids = Math.max(1, Number(license.max_hwids || 1));
-          if (hwid && !license.bound_hwids.includes(hwid)) {
+          if (!isProbeOnly && hwid && !license.bound_hwids.includes(hwid)) {
             if (license.bound_hwids.length >= maxHwids) {
               return {
                 status: 403,
@@ -3378,31 +3432,37 @@ function createSuperbadSalesApi(options = {}) {
           }
 
           const nowIso = new Date().toISOString();
-          license.last_seen_at = nowIso;
+          if (!isProbeOnly) {
+            license.last_seen_at = nowIso;
+          }
           if (email && !license.email) license.email = email;
 
           const tier = license.tier || EDITION_PLANS[license.edition]?.tier || "client-mid";
           const expMs = Date.parse(license.expires_at);
           const daysLeft = Math.max(1, Math.ceil((expMs - Date.now()) / 86400000));
 
-          upsertNetworkNode(store, {
-            license_id: license.license_id,
-            key_sha256: keySha,
-            hwid,
-            hostname,
-            user_label: email || license.label,
-            edition: license.edition,
-            tier,
-            version,
-            ip_masked: clientIpMasked,
-            revoked: false,
-          });
+          if (!isProbeOnly) {
+            upsertNetworkNode(store, {
+              license_id: license.license_id,
+              key_sha256: keySha,
+              hwid,
+              hostname,
+              user_label: email || license.label,
+              edition: license.edition,
+              tier,
+              version,
+              ip_masked: clientIpMasked,
+              revoked: false,
+            });
+          }
           await writeStore(store);
 
-          const sessionToken = signToken(
-            { sub: license.license_id, tier, hwid: hwid || "", exp: Date.now() + 24 * 60 * 60 * 1000 },
-            sessionSecret
-          );
+          const sessionToken = isProbeOnly
+            ? null
+            : signToken(
+                { sub: license.license_id, tier, hwid: hwid || "", exp: Date.now() + 24 * 60 * 60 * 1000 },
+                sessionSecret
+              );
 
           const includesOpenInfinite = Boolean(
             license.edition === "founder"
@@ -3703,66 +3763,51 @@ function createSuperbadSalesApi(options = {}) {
           return sendJson(res, edCheck.code === "LICENSE_EXPIRED" ? 403 : 401, { ok: false, error: edCheck.error });
         }
 
-        const store = await readStore();
-        let license = findLicenseByKey(store.licenses, rawKey);
-        if (!license && edCheck.ok) {
-          const TIER_TO_EDITION = {
-            founder: "founder",
-            "client-basic": "basic",
-            "client-mid": /^studio$/i.test(String(edCheck.edition || "")) ? "mid" : "superbad",
-            "infinite-basic": "infinite",
-            "infinite-pro": "infinite_pro",
-            "infinite-claude": "infinite_claude",
-            "infinite-max": "infinite_max",
-            "infinite-claude-max": "infinite_max",
-          };
-          const edEdition =
-            (edCheck.edition && VALID_EDITIONS.has(edCheck.edition) ? edCheck.edition : null) ||
-            TIER_TO_EDITION[edCheck.tier] ||
-            "superbad";
+        const validateOutcome = await withStoreLock(async () => {
+          const store = await readStore();
+          let license = findLicenseByKey(store.licenses, rawKey);
+          if (!license && edCheck.ok) {
+            const keySha = hashSecretSha256(rawKey);
+            license = buildAutoEnrolledEd25519License(edCheck, keySha, {});
+            store.licenses.push(license);
+            await writeStore(store);
+          }
+          if (!license) {
+            return { status: 401, payload: { ok: false, error: "Chave de licença inválida." } };
+          }
+          if (license.revoked) {
+            return { status: 403, payload: { ok: false, error: "Licença revogada." } };
+          }
+          if (Date.parse(license.expires_at) <= Date.now()) {
+            return { status: 403, payload: { ok: false, error: "Licença expirada." } };
+          }
+          if (license.downloads_used >= license.max_downloads) {
+            return { status: 403, payload: { ok: false, error: "Limite de downloads atingido." } };
+          }
+
           const token = signToken(
-            { lid: `ED-${edCheck.keyPrefix}`, ed: edEdition, exp: Date.now() + DOWNLOAD_TOKEN_TTL_MS, jti: crypto.randomBytes(8).toString("hex") },
+            {
+              lid: license.license_id,
+              ed: license.edition,
+              exp: Date.now() + DOWNLOAD_TOKEN_TTL_MS,
+              jti: crypto.randomBytes(8).toString("hex"),
+            },
             downloadSecret
           );
-          return sendJson(res, 200, {
-            ok: true,
-            edition: edEdition,
-            tier: edCheck.tier,
-            expires_at: edCheck.expiresAt,
-            downloads_remaining: 10,
-            download_url: `/api/superbad/download?token=${encodeURIComponent(token)}`,
-          });
-        }
-        if (!license) {
-          return sendJson(res, 401, { ok: false, error: "Chave de licença inválida." });
-        }
-        if (license.revoked) {
-          return sendJson(res, 403, { ok: false, error: "Licença revogada." });
-        }
-        if (Date.parse(license.expires_at) <= Date.now()) {
-          return sendJson(res, 403, { ok: false, error: "Licença expirada." });
-        }
-        if (license.downloads_used >= license.max_downloads) {
-          return sendJson(res, 403, { ok: false, error: "Limite de downloads atingido." });
-        }
 
-        const token = signToken(
-          {
-            lid: license.license_id,
-            ed: license.edition,
-            exp: Date.now() + DOWNLOAD_TOKEN_TTL_MS,
-            jti: crypto.randomBytes(8).toString("hex"),
-          },
-          downloadSecret
-        );
-
-        return sendJson(res, 200, {
-          ok: true,
-          edition: license.edition,
-          expires_at: license.expires_at,
-          downloads_remaining: license.max_downloads - license.downloads_used,
-          download_url: `/api/superbad/download?token=${encodeURIComponent(token)}`,
+          return {
+            status: 200,
+            payload: {
+              ok: true,
+              edition: license.edition,
+              tier: license.tier || (edCheck.ok ? edCheck.tier : undefined),
+              expires_at: license.expires_at,
+              downloads_remaining: license.max_downloads - license.downloads_used,
+              download_url: `/api/superbad/download?token=${encodeURIComponent(token)}`,
+            },
+          };
         });
+        return sendJson(res, validateOutcome.status, validateOutcome.payload);
       }
 
       // 10) GET /api/superbad/download?token=...

@@ -682,5 +682,44 @@ test("/api/superbad/license/validate maps unstored Ed25519 keys accurately to ea
     assert.equal(res.data.ok, true);
     assert.equal(res.data.edition, expectedEdition);
     assert.equal(res.data.tier, expectedTier);
+    // Validate that auto-enrolled download token is recognized by /api/superbad/download (404 missing zip, NOT 403 license not found)
+    const dlRes = await reqJson(res.data.download_url);
+    assert.notEqual(dlRes.status, 403, `Auto-enrolled license for ${expectedEdition} should not return 403`);
   }
+});
+
+test("web validator check_only / web-* probe NEVER consumes bound_hwids slots on 1-machine plans", async (t) => {
+  const { reqJson, signer } = await startAutomationFixture(t);
+  const winKey = signer.mintLicenseKey("OI6-INF", "infinite-basic", "infinite", "Win 1-PC");
+
+  const webProbe1 = await reqJson("/api/v1/licenses/verify", {
+    method: "POST",
+    body: JSON.stringify({ key: winKey, hwid: "", check_only: true }),
+  });
+  assert.equal(webProbe1.status, 200);
+  assert.equal(webProbe1.data.ok, true);
+  assert.equal(webProbe1.data.boundHwidsCount, 0);
+  assert.equal(webProbe1.data.sessionToken, null);
+
+  const webProbe2 = await reqJson("/api/v1/licenses/verify", {
+    method: "POST",
+    body: JSON.stringify({ key: winKey, hwid: "web-Win32" }),
+  });
+  assert.equal(webProbe2.status, 200);
+  assert.equal(webProbe2.data.boundHwidsCount, 0);
+
+  // Real desktop machine activates cleanly (1/1), then second desktop machine gets 403 HWID_MISMATCH
+  const pc1 = await reqJson("/api/v1/licenses/verify", {
+    method: "POST",
+    body: JSON.stringify({ key: winKey, hwid: "OI-WIN-REAL-PC-01" }),
+  });
+  assert.equal(pc1.status, 200);
+  assert.equal(pc1.data.boundHwidsCount, 1);
+
+  const pc2 = await reqJson("/api/v1/licenses/verify", {
+    method: "POST",
+    body: JSON.stringify({ key: winKey, hwid: "OI-WIN-REAL-PC-02" }),
+  });
+  assert.equal(pc2.status, 403);
+  assert.equal(pc2.data.code, "HWID_MISMATCH");
 });

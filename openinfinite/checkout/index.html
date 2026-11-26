@@ -291,11 +291,11 @@
         <!-- PASSO 1: ENTRAR COM GOOGLE -->
         <div class="checkout-step" id="step1Google" data-google-auth-card>
           <div class="step-badge-row">
-            <span class="step-tag">Passo 1 · Conta Google</span>
+            <span class="step-tag">Passo 1 · Identificação</span>
             <span class="mono" style="font-size:11px;color:var(--silver);" id="step1StateTag">Identificação do e-mail</span>
           </div>
-          <h2>Entre com Google para vincular seu pedido</h2>
-          <p style="font-size:12.5px;color:var(--muted);">
+          <h2 id="step1Heading">Entre com Google para vincular seu pedido</h2>
+          <p id="step1Desc" style="font-size:12.5px;color:var(--muted);">
             Seu login Google garante que a chave fique vinculada ao e-mail certo e permite restaurar o pedido automaticamente se você recarregar a página.
           </p>
           <div style="display:none;" aria-hidden="true">
@@ -730,19 +730,31 @@
           }
 
           if (user.name && !$('ordName').value.trim()) $('ordName').value = user.name;
-          if (user.email) $('ordContact').value = user.email;
+          if (user.email) {
+            $('ordContact').value = user.email;
+            $('ordContact').readOnly = true;
+          }
+          if ($('step1Heading')) $('step1Heading').textContent = 'Conta Google conectada ao seu pedido';
+          if ($('step1Desc')) $('step1Desc').textContent = 'Sua chave será vinculada automaticamente a este e-mail Google.';
           void syncMyGoogleOrders();
         } else {
           connectedBox.classList.remove('is-visible');
           logoutBtn.hidden = true;
           $('myOrdersRestoreNote').style.display = 'none';
+          $('ordContact').readOnly = false;
           if (enabled) {
             $('step1StateTag').textContent = 'Login Google obrigatório';
             $('step1StateTag').style.color = 'var(--amber)';
+            if ($('step1Heading')) $('step1Heading').textContent = 'Entre com Google para vincular seu pedido';
+            if ($('step1Desc')) $('step1Desc').textContent = 'Seu login Google garante que a chave fique vinculada ao e-mail certo e permite restaurar o pedido automaticamente se você recarregar a página.';
+            if ($('googleAuthBtnHost')) $('googleAuthBtnHost').style.display = '';
             fallbackNote.style.display = 'none';
           } else {
-            $('step1StateTag').textContent = 'Confirmação direta de Gmail';
-            $('step1StateTag').style.color = 'var(--silver)';
+            $('step1StateTag').textContent = 'Modo direto por e-mail';
+            $('step1StateTag').style.color = 'var(--emerald-ink)';
+            if ($('step1Heading')) $('step1Heading').textContent = 'Identificação direta pelo e-mail no Passo 2';
+            if ($('step1Desc')) $('step1Desc').textContent = 'Informe seu nome, WhatsApp e Gmail no Passo 2 abaixo para gerar seu PIX e receber a chave oficial.';
+            if ($('googleAuthBtnHost')) $('googleAuthBtnHost').style.display = 'none';
             fallbackNote.style.display = 'block';
           }
         }
@@ -996,7 +1008,8 @@
       async function submitReceipt() {
         const fb = $('receiptFeedbackBox');
         const btn = $('receiptSubmitBtn');
-        if (!activeOrder || !activeOrder.order_id || !activeOrder.order_secret) {
+        const canAuthReceipt = Boolean(activeOrder && activeOrder.order_id && (activeOrder.order_secret || googleAuthState.signedIn));
+        if (!canAuthReceipt) {
           renderBoxMessage(fb, 'is-error', 'Gere primeiro o pedido PIX no Passo 2', 'Preencha seus dados acima e gere o pedido antes de anexar o comprovante.', null);
           return;
         }
@@ -1031,9 +1044,9 @@
 
         try {
           const payload = {
-            order_secret: activeOrder.order_secret,
             receipt_note: rawNote || (e2eId ? `E2E: ${e2eId}` : `Arquivo: ${file.name}`),
           };
+          if (activeOrder.order_secret) payload.order_secret = activeOrder.order_secret;
           if (waNow) payload.buyer_whatsapp = waNow;
           if (e2eId) payload.e2e_id = e2eId;
           if (file) {
@@ -1042,10 +1055,13 @@
             payload.receipt_file_name = file.name.slice(0, 120);
           }
 
+          const reqHeaders = { 'Content-Type': 'application/json' };
+          if (activeOrder.order_secret) reqHeaders['x-order-secret'] = activeOrder.order_secret;
+
           const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
             method: 'POST',
             credentials: 'same-origin',
-            headers: { 'Content-Type': 'application/json', 'x-order-secret': activeOrder.order_secret },
+            headers: reqHeaders,
             body: JSON.stringify(payload),
           });
           const data = await res.json().catch(() => ({}));
@@ -1165,7 +1181,7 @@
           const res = await fetch('/api/v1/licenses/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ key: keyVal, hwid: 'web-' + (navigator.platform || 'browser') })
+            body: JSON.stringify({ key: keyVal, hwid: '', check_only: true })
           });
           const d = await res.json().catch(() => ({}));
           if (res.ok && d.ok && d.includesOpenInfinite !== false) {

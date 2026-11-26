@@ -2152,6 +2152,21 @@
           btn.setAttribute('aria-expanded', String(willOpen));
         });
       });
+
+      function openFaqByHash(rawHash) {
+        const id = String(rawHash || '').replace(/^#/, '');
+        if (!/^faq-btn-\d+$/.test(id)) return;
+        const btn = document.getElementById(id);
+        const item = btn && btn.closest('.faq-item');
+        if (!btn || !item) return;
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+      document.querySelectorAll('a[href^="#faq-btn-"]').forEach((link) => {
+        link.addEventListener('click', () => openFaqByHash(link.getAttribute('href')));
+      });
+      window.addEventListener('hashchange', () => openFaqByHash(window.location.hash));
+      if (window.location.hash) openFaqByHash(window.location.hash);
     })();
   </script>
 </body>

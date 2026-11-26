@@ -465,7 +465,7 @@ test("admin release upload and listing require session, validate PK ZIP signatur
   });
   assert.equal(listEmpty.status, 200);
   assert.equal(listEmpty.data.releases_dir_configured, true);
-  assert.equal(listEmpty.data.releases.length, 7);
+  assert.equal(listEmpty.data.releases.length, 9);
   assert.ok(listEmpty.data.releases.every((r) => r.exists === false));
 
   // Reject invalid edition, bad content-type, non-ZIP body, and oversized upload.

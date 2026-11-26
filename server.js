@@ -114,12 +114,13 @@ const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "");
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();
-const SITE_AUTH_SESSION_SECRET = String(
+const ENV_SITE_AUTH_SESSION_SECRET = String(
   process.env.SITE_AUTH_SESSION_SECRET ||
     process.env.PUBPAID_SESSION_SECRET ||
     process.env.SUPERBAD_SESSION_SECRET ||
-    (IS_PRODUCTION ? "" : "catalogo-local-google-auth-session")
+    ""
 ).trim();
+let SITE_AUTH_SESSION_SECRET = ENV_SITE_AUTH_SESSION_SECRET || (IS_PRODUCTION ? "" : "catalogo-local-google-auth-session");
 const SITE_AUTH_COOKIE = "catalogo_google_session";
 const SITE_AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 const GOOGLE_ID_TOKEN_CERTS_URL = "https://www.googleapis.com/oauth2/v1/certs";
@@ -133,6 +134,23 @@ const DEFAULT_DATA_DIR = path.join(ROOT_DIR, "data");
 const DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
   : DEFAULT_DATA_DIR;
+if (!SITE_AUTH_SESSION_SECRET) {
+  try {
+    const secretFile = path.join(DATA_DIR, ".site-auth-session-secret");
+    if (fs.existsSync(secretFile)) {
+      const stored = fs.readFileSync(secretFile, "utf8").trim();
+      if (stored.length >= 32) SITE_AUTH_SESSION_SECRET = stored;
+    }
+    if (!SITE_AUTH_SESSION_SECRET) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+      const generated = crypto.randomBytes(32).toString("hex");
+      fs.writeFileSync(secretFile, generated + "\n", { encoding: "utf8", mode: 0o600 });
+      SITE_AUTH_SESSION_SECRET = generated;
+    }
+  } catch {
+    SITE_AUTH_SESSION_SECRET = crypto.randomBytes(32).toString("hex");
+  }
+}
 ashotelariaIntegration = createASHotelariaServerIntegration({
   rootDir: ROOT_DIR,
   sendFile,
@@ -3107,10 +3125,10 @@ function safeTimingCompare(left, right) {
 
 function getEffectiveGoogleClientId() {
   return String(
-    GOOGLE_AUTH_CLIENT_ID ||
+    superbadSalesApi?.getGoogleClientId?.() ||
+      GOOGLE_AUTH_CLIENT_ID ||
       process.env.GOOGLE_AUTH_CLIENT_ID ||
       process.env.PUBPAID_GOOGLE_CLIENT_ID ||
-      superbadSalesApi?.getGoogleClientId?.() ||
       ""
   ).trim();
 }
@@ -22442,7 +22460,13 @@ async function handleStatic(req, res, pathname, requestUrl) {
       }
 
       if (pathname.startsWith("/openinfinite/")) {
-        let filePath = path.join(ROOT_DIR, "openinfinite", pathname.slice("/openinfinite/".length));
+        let relOi = pathname.slice("/openinfinite/".length);
+        try {
+          relOi = decodeURIComponent(relOi);
+        } catch {
+          return sendText(res, 400, "Caminho inválido.");
+        }
+        let filePath = path.join(ROOT_DIR, "openinfinite", relOi);
         const oiRoot = path.join(ROOT_DIR, "openinfinite");
         if (filePath !== oiRoot && !filePath.startsWith(`${oiRoot}${path.sep}`)) {
           return sendText(res, 403, "Acesso negado.");
@@ -22454,8 +22478,9 @@ async function handleStatic(req, res, pathname, requestUrl) {
         if (!["", ".html", ".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".json"].includes(oiExt)) {
           return sendText(res, 403, "Acesso negado.");
         }
+        const hasVersionParam = /[?&]v=/.test(oiQuerySuffix);
         return sendFile(req, res, filePath, {
-          cacheControl: oiExt === ".html" ? "no-store" : VERSIONED_STATIC_CACHE_CONTROL
+          cacheControl: oiExt === ".html" ? "no-store" : (hasVersionParam ? VERSIONED_STATIC_CACHE_CONTROL : "public, max-age=3600")
         });
       }
 
