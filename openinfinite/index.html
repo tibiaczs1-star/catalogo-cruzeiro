@@ -167,47 +167,221 @@
     .hero-sub { font-size: 15.5px; color: var(--ink-secondary); max-width: 62ch; line-height: 1.6; }
     .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
+    /* 3D INTERACTIVE HARDWARE SHOWCASE (MAC -> PC MONITOR WINDOWS -> NOTEBOOK LINUX VPS) */
     .hero-stage {
       width: 100%; margin-top: 8px; background: #0a0b0f;
-      border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 18px;
-      display: grid; grid-template-columns: 330px 1fr; gap: 18px; align-items: stretch; text-align: left;
+      border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 18px 20px;
+      display: flex; flex-direction: column; gap: 16px; text-align: left;
       position: relative; overflow: hidden;
     }
     .hero-stage::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
       background: var(--prismatic-gradient);
     }
-    /* PURE LOGO STAGE: ONLY THE LOGO ON #070709 CARBON, NO GLOW OR FLOATING STICKERS */
-    .logo-pod {
-      min-height: 320px; border-radius: var(--radius-lg); background: #070709;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px;
+    .stage-toolbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
     }
-    .logo-pod svg { width: 156px; height: 156px; display: block; }
-    .logo-pod-wordmark {
-      font-size: 13px; font-weight: 900; letter-spacing: 0.18em; color: #ffffff; text-transform: uppercase;
-    }
-
-    .stage-cockpit {
-      display: flex; flex-direction: column; gap: 12px;
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px;
-      min-width: 0;
+    .stage-brand-badge {
+      display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700; color: var(--ink-secondary);
     }
     .cockpit-pills { display: flex; gap: 6px; flex-wrap: wrap; }
     .sim-pill {
-      padding: 6px 12px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700;
+      padding: 6px 13px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700;
       font-family: var(--font); background: var(--surface-soft); border: 1px solid var(--border);
       color: var(--silver); cursor: pointer;
+      transition: transform 150ms var(--ease-spring), background-color 150ms var(--ease-snap), color 150ms var(--ease-snap);
     }
+    .sim-pill:hover { color: #ffffff; border-color: var(--border-hi); }
     .sim-pill.active, .sim-pill[aria-selected="true"] { background: #ffffff; color: #070709; border-color: #ffffff; }
-    .stage-screen-btn {
-      display: block; width: 100%; padding: 0; border-radius: 10px; overflow: hidden;
-      border: 1px solid var(--border); background: #070709; cursor: zoom-in;
+
+    /* 3D STUDIO CANVAS */
+    .stage-3d-theater {
+      position: relative; min-height: 390px; padding: 16px 22px 26px;
+      background: #070709; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      perspective: 1450px; perspective-origin: 50% 44%; overflow: hidden;
     }
-    .stage-screen-btn img { width: 100%; display: block; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+    .stage-3d-theater::before {
+      content: ""; position: absolute; left: 50%; bottom: 14px; width: 68%; height: 24px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.92) 0%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .device-rig {
+      position: relative; width: min(560px, 100%);
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      transition: transform 520ms var(--ease-spring), opacity 180ms var(--ease-snap);
+    }
+    .device-rig[data-device="mac"] { transform: rotateY(-7deg) rotateX(4deg); }
+    .device-rig[data-device="windows"] { transform: rotateY(7deg) rotateX(3deg); width: min(670px, 100%); }
+    .device-rig[data-device="linux"] { transform: rotateY(-6deg) rotateX(4.5deg); width: min(575px, 100%); }
+    .device-rig.is-switching { opacity: 0.78; transform: rotateY(0deg) rotateX(2deg) scale(0.96); }
+
+    .hw-cluster {
+      display: flex; align-items: flex-end; justify-content: center; gap: 20px; width: 100%;
+      transform-style: preserve-3d;
+    }
+    .hw-main {
+      flex: 1; min-width: 0; max-width: 550px;
+      display: flex; flex-direction: column; align-items: center;
+      transform-style: preserve-3d;
+    }
+
+    /* HARDWARE DISPLAY LID / MONITOR BEZEL */
+    .hw-bezel {
+      position: relative; width: 100%; background: #14161e;
+      padding: 12px 12px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      transition: border-radius 320ms var(--ease-spring), padding 320ms var(--ease-spring);
+    }
+    .device-rig[data-device="mac"] .hw-bezel {
+      border-radius: 16px 16px 5px 5px;
+      background: linear-gradient(180deg, #1b1d26 0%, #0e0f14 100%);
+      border-color: rgba(212, 217, 227, 0.34);
+    }
+    .device-rig[data-device="windows"] .hw-bezel {
+      border-radius: 7px;
+      padding: 8px 8px 18px;
+      background: linear-gradient(180deg, #181a21 0%, #0d0e13 100%);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+    .device-rig[data-device="linux"] .hw-bezel {
+      border-radius: 9px 9px 3px 3px;
+      padding: 13px 11px 10px;
+      background: #101217;
+      border-color: rgba(148, 163, 184, 0.30);
+    }
+
+    /* Mac Notch vs Monitor Chin vs Linux Camera Shutter */
+    .hw-top-camera {
+      display: none; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); z-index: 4;
+      pointer-events: none;
+    }
+    .device-rig[data-device="mac"] .hw-top-camera {
+      display: flex; align-items: center; justify-content: center;
+      width: 68px; height: 14px; background: #070709;
+      border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+    }
+    .device-rig[data-device="mac"] .hw-top-camera::after {
+      content: ""; width: 5px; height: 5px; border-radius: 50%;
+      background: radial-gradient(circle, #38bdf8 0%, #0f172a 75%);
+    }
+    .device-rig[data-device="linux"] .hw-top-camera {
+      display: flex; align-items: center; justify-content: center;
+      top: 4px; width: 22px; height: 5px; border-radius: 99px; background: rgba(255, 255, 255, 0.16);
+    }
+    .hw-monitor-chin-led {
+      display: none; position: absolute; right: 16px; bottom: 7px;
+      width: 14px; height: 3px; border-radius: 99px; background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7); pointer-events: none;
+    }
+    .device-rig[data-device="windows"] .hw-monitor-chin-led { display: block; }
+
+    .stage-screen-btn {
+      display: block; position: relative; width: 100%; padding: 0; border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.10); background: #070709; cursor: zoom-in;
+      view-transition-name: oi-hero-screen;
+    }
+    .device-rig[data-device="mac"] .stage-screen-btn { border-radius: 8px 8px 3px 3px; }
+    .stage-screen-btn::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(128deg, rgba(255, 255, 255, 0.08) 0%, transparent 36%);
+    }
+    .stage-screen-btn img {
+      width: 100%; display: block; object-fit: cover; object-position: top;
+      aspect-ratio: 2080 / 1380;
+    }
+    .device-rig[data-device="windows"] .stage-screen-btn img { aspect-ratio: 1098 / 795; }
+    .device-rig[data-device="linux"] .stage-screen-btn img { aspect-ratio: 1280 / 800; }
+
+    /* LOWER PHYSICAL BASES: MAC DECK vs MONITOR STAND vs LINUX WORKSTATION DECK */
+    .hw-base-mac, .hw-base-win, .hw-base-linux, .pc-tower { display: none; }
+
+    .device-rig[data-device="mac"] .hw-base-mac {
+      display: block; position: relative; width: 108%; height: 22px; margin-top: -1px;
+      background: linear-gradient(180deg, #adb5bd 0%, #64748b 38%, #1e293b 100%);
+      border-radius: 2px 2px 13px 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      transform-origin: top center; transform: rotateX(48deg);
+      box-shadow: 0 20px 38px rgba(0, 0, 0, 0.9);
+    }
+    .hw-base-mac::before {
+      content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 78px; height: 6px; background: #1e293b; border-radius: 0 0 6px 6px;
+    }
+
+    .device-rig[data-device="windows"] .hw-base-win {
+      display: flex; flex-direction: column; align-items: center; width: 100%;
+    }
+    .win-neck {
+      width: 56px; height: 34px;
+      background: linear-gradient(90deg, #1f2430 0%, #4b5563 50%, #1f2430 100%);
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .win-foot {
+      width: 210px; height: 11px;
+      background: linear-gradient(180deg, #64748b 0%, #1e293b 100%);
+      border-radius: 3px 3px 6px 6px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.85);
+    }
+
+    /* COMPACT PC TOWER BESIDE MONITOR WHEN WINDOWS ACTIVE */
+    .device-rig[data-device="windows"] .pc-tower {
+      display: flex; flex-direction: column; justify-content: space-between;
+      width: 96px; height: 230px; flex-shrink: 0; padding: 14px 12px;
+      background: linear-gradient(160deg, #171923 0%, #090a0e 100%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      box-shadow: -14px 20px 44px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      position: relative;
+    }
+    .pc-tower-strip {
+      position: absolute; left: 8px; top: 18px; bottom: 18px; width: 3px; border-radius: 99px;
+      background: var(--prismatic-gradient); opacity: 0.92;
+    }
+    .pc-tower-vents {
+      display: flex; flex-direction: column; gap: 6px; padding-left: 12px; margin-top: 8px;
+    }
+    .pc-tower-vents span {
+      display: block; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.14);
+    }
+    .pc-tower-footer {
+      display: flex; align-items: center; justify-content: space-between; padding-left: 12px;
+      font-family: var(--mono); font-size: 9px; color: var(--silver); letter-spacing: 0.08em;
+    }
+    .pc-power-led {
+      width: 7px; height: 7px; border-radius: 50%; background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.85);
+    }
+
+    .device-rig[data-device="linux"] .hw-base-linux {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; width: 106%; height: 24px; margin-top: -1px;
+      background: linear-gradient(180deg, #272b36 0%, #14161c 48%, #090a0e 100%);
+      border-radius: 2px 2px 9px 9px;
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      transform-origin: top center; transform: rotateX(46deg);
+      box-shadow: 0 20px 38px rgba(0, 0, 0, 0.9);
+    }
+    .hw-base-linux::after {
+      content: ""; width: 58px; height: 5px; border-radius: 99px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    ::view-transition-old(oi-hero-screen),
+    ::view-transition-new(oi-hero-screen) {
+      animation-duration: 240ms;
+      animation-timing-function: var(--ease-spring);
+    }
+
     .cockpit-caption {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-      font-size: 12.5px; color: var(--muted);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted);
     }
 
     /* SECTION HEADERS */
@@ -306,8 +480,9 @@
     .zoom-wrap img { max-width: 94vw; max-height: 84vh; border-radius: 12px; border: 1px solid var(--border-hi); }
 
     @media (max-width: 960px) {
-      .hero-stage, .dual-grid, .os-grid { grid-template-columns: 1fr; }
-      .logo-pod { min-height: 220px; }
+      .dual-grid, .os-grid { grid-template-columns: 1fr; }
+      .stage-3d-theater { min-height: 360px; padding: 16px 14px 24px; }
+      .device-rig[data-device="windows"] .pc-tower { width: 76px; height: 196px; }
     }
     @media (max-width: 720px) {
       .topbar-inner { flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
@@ -318,6 +493,13 @@
       .nav-links::-webkit-scrollbar { display: none; }
       .plans-grid { grid-template-columns: 1fr; }
       .wrap { padding: 28px 14px 64px; gap: 48px; }
+      .stage-3d-theater { min-height: 250px; padding: 14px 10px 22px; }
+      .device-rig[data-device="mac"],
+      .device-rig[data-device="windows"],
+      .device-rig[data-device="linux"] { transform: rotateY(0deg) rotateX(2deg); }
+      .device-rig[data-device="windows"] .pc-tower { display: none; }
+      .hw-bezel { padding: 8px 8px 7px; }
+      .win-foot { width: 140px; }
     }
   </style>
 </head>
@@ -446,32 +628,61 @@
       </div>
 
       <div class="hero-stage" id="painel-live">
-        <div class="logo-pod" aria-label="Logo oficial Infinite Zone">
-          <svg viewBox="0 0 120 120" role="img" aria-label="Logo Infinite Zone">
-            <use href="#izHoodMark" />
-          </svg>
-          <span class="logo-pod-wordmark">INFINITE ZONE</span>
+        <div class="stage-toolbar">
+          <div class="stage-brand-badge">
+            <svg width="24" height="24" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
+            <span id="activeHardwareBadge" class="brand-ver">Mac · macOS Liquid Glass</span>
+          </div>
+
+          <div class="cockpit-pills" id="deviceTabs" role="tablist" aria-label="Escolher computador em exibição 3D">
+            <button type="button" role="tab" id="tab-dev-mac" aria-selected="true" aria-controls="cockpitPanel" tabindex="0" class="sim-pill active" data-device="mac">Mac (macOS)</button>
+            <button type="button" role="tab" id="tab-dev-win" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-device="windows">PC Monitor (Windows)</button>
+            <button type="button" role="tab" id="tab-dev-linux" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-device="linux">Notebook (Linux VPS)</button>
+          </div>
+
+          <button type="button" id="nextDeviceBtn" class="btn ivory pill sm">Trocar Computador →</button>
         </div>
 
-        <div class="stage-cockpit">
-          <div class="cockpit-pills" id="cockpitTabs" role="tablist" aria-label="Telas dos aplicativos Infinite Zone">
-            <button type="button" role="tab" id="tab-shot-0" aria-selected="true" aria-controls="cockpitPanel" tabindex="0" class="sim-pill active" data-shot="0">OpenInfinite Escuro</button>
-            <button type="button" role="tab" id="tab-shot-1" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="1">Mac Liquid Glass</button>
-            <button type="button" role="tab" id="tab-shot-2" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="2">Estatísticas</button>
-            <button type="button" role="tab" id="tab-shot-3" aria-selected="false" aria-controls="cockpitPanel" tabindex="-1" class="sim-pill" data-shot="3">Tema Claro</button>
-          </div>
+        <div class="stage-3d-theater" id="stage3dTheater">
+          <div class="device-rig" id="deviceRig" data-device="mac">
+            <div class="hw-cluster" id="cockpitPanel" role="tabpanel" aria-labelledby="tab-dev-mac">
+              <div class="hw-main">
+                <div class="hw-bezel">
+                  <span class="hw-top-camera" aria-hidden="true"></span>
+                  <button type="button" class="stage-screen-btn" id="stageZoomBtn" aria-label="Ampliar interface exibida">
+                    <img id="featImg" src="/openinfinite/assets/hero_mac_liquid_glass.png" alt="Interface nova do InfiniteClaude no macOS Liquid Glass" />
+                  </button>
+                  <span class="hw-monitor-chin-led" aria-hidden="true"></span>
+                </div>
+                <div class="hw-base-mac" aria-hidden="true"></div>
+                <div class="hw-base-win" aria-hidden="true">
+                  <div class="win-neck"></div>
+                  <div class="win-foot"></div>
+                </div>
+                <div class="hw-base-linux" aria-hidden="true"></div>
+              </div>
 
-          <div id="cockpitPanel" role="tabpanel" aria-labelledby="tab-shot-0">
-            <button type="button" class="stage-screen-btn" id="stageZoomBtn" aria-label="Ampliar tela">
-              <img id="featImg" src="/openinfinite/assets/openinfinite_tema_escuro.png" alt="Interface OpenInfinite e InfiniteClaude da Infinite Zone" />
-            </button>
-          </div>
-
-          <div class="cockpit-caption">
-            <div>
-              <strong id="featTitle" style="color:var(--ink);">OpenInfinite &amp; InfiniteClaude</strong>
-              <span id="featDesc" style="display:block;">Interface limpa da Infinite Zone para Windows, Mac e Linux Ubuntu VPS.</span>
+              <div class="pc-tower" aria-hidden="true">
+                <div class="pc-tower-strip"></div>
+                <div class="pc-tower-vents">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="pc-tower-footer">
+                  <span>PC WIN</span>
+                  <span class="pc-power-led"></span>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div class="cockpit-caption">
+          <div>
+            <strong id="featTitle" style="color:var(--ink);">InfiniteClaude no Mac (Liquid Glass)</strong>
+            <span id="featDesc" style="display:block;">Aplicativo nativo para MacBook, iMac e Mac mini — baixe em .dmg e teste por 1 hora grátis.</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="btn sm ghost" id="toggleAppBtn" style="display:none;">Alternar para OpenInfinite</button>
             <button type="button" class="btn sm" id="captionZoomBtn">Ampliar Tela</button>
           </div>
         </div>
@@ -875,41 +1086,133 @@
         });
       });
 
-      const SHOTS = [
-        { img: '/openinfinite/assets/openinfinite_tema_escuro.png', title: 'OpenInfinite & InfiniteClaude', desc: 'Interface limpa da Infinite Zone para Windows, Mac e Linux Ubuntu VPS.' },
-        { img: '/openinfinite/assets/openinfinite_liquid_glass.png', title: 'macOS Liquid Glass', desc: 'Versão desktop para MacBook, iMac e Mac mini.' },
-        { img: '/openinfinite/assets/openinfinite_estatisticas.png', title: 'Estatísticas de Uso', desc: 'Acompanhe requisições e desempenho direto no painel.' },
-        { img: '/openinfinite/assets/openinfinite_tema_claro.png', title: 'Tema Claro Daylight', desc: 'Visual de alto contraste para uso diurno.' }
-      ];
+      const DEVICES = {
+        mac: {
+          order: 0,
+          tabId: 'tab-dev-mac',
+          badge: 'Mac · macOS Liquid Glass',
+          img: '/openinfinite/assets/hero_mac_liquid_glass.png',
+          title: 'InfiniteClaude no Mac (Liquid Glass)',
+          desc: 'Aplicativo nativo para MacBook, iMac e Mac mini — baixe em .dmg e teste por 1 hora grátis.',
+          hasVariant: false,
+        },
+        windows: {
+          order: 1,
+          tabId: 'tab-dev-win',
+          badge: 'PC Monitor · Windows 10/11',
+          img: '/openinfinite/assets/hero_win_infiniteclaude.png',
+          altImg: '/openinfinite/assets/hero_win_openinfinite.png',
+          title: 'InfiniteClaude no PC Windows',
+          altTitle: 'OpenInfinite no PC Windows',
+          desc: 'Rodando no PC desktop Windows com motor direto e 1 hora grátis para testar.',
+          altDesc: 'OpenInfinite leve no PC Windows — baixe o .exe e teste por 1 hora grátis.',
+          hasVariant: true,
+        },
+        linux: {
+          order: 2,
+          tabId: 'tab-dev-linux',
+          badge: 'Notebook · Linux Ubuntu VPS',
+          img: '/openinfinite/assets/hero_linux_vps_tui.png',
+          title: 'Infinite Zone no Linux Ubuntu VPS',
+          desc: 'Operação em notebook ou servidor Linux via terminal SSH — requer pedido pago e chave ativa.',
+          hasVariant: false,
+        },
+      };
 
-      const tabs = Array.from(document.querySelectorAll('#cockpitTabs [role="tab"]'));
-      function showShot(idx, focusTab) {
-        const safeIdx = Math.max(0, Math.min(SHOTS.length - 1, idx));
-        const s = SHOTS[safeIdx];
-        const apply = () => {
-          $('featImg').src = s.img;
-          $('featImg').alt = s.title;
-          $('featTitle').textContent = s.title;
-          $('featDesc').textContent = s.desc;
-          $('cockpitPanel').setAttribute('aria-labelledby', 'tab-shot-' + safeIdx);
-          tabs.forEach((t, i) => {
-            const on = i === safeIdx;
+      const DEVICE_ORDER = ['mac', 'windows', 'linux'];
+      let currentDevice = 'mac';
+      let useAltWinApp = false;
+      const rigEl = $('deviceRig');
+      const tabs = Array.from(document.querySelectorAll('#deviceTabs [role="tab"]'));
+
+      // Preload all device screenshots so 3D clicks swap immediately without waiting for network
+      [
+        '/openinfinite/assets/hero_mac_liquid_glass.png',
+        '/openinfinite/assets/hero_win_infiniteclaude.png',
+        '/openinfinite/assets/hero_win_openinfinite.png',
+        '/openinfinite/assets/hero_linux_vps_tui.png',
+      ].forEach((src) => { const p = new Image(); p.src = src; });
+
+      function renderDeviceState(devKey, focusTab) {
+        if (!DEVICES[devKey]) devKey = 'mac';
+        currentDevice = devKey;
+        const d = DEVICES[devKey];
+        const useAlt = devKey === 'windows' && useAltWinApp;
+
+        const applyDom = () => {
+          rigEl.style.transform = '';
+          rigEl.setAttribute('data-device', devKey);
+          $('activeHardwareBadge').textContent = d.badge;
+          $('featImg').src = useAlt ? d.altImg : d.img;
+          $('featImg').alt = useAlt ? d.altTitle : d.title;
+          $('featTitle').textContent = useAlt ? d.altTitle : d.title;
+          $('featDesc').textContent = useAlt ? d.altDesc : d.desc;
+          $('cockpitPanel').setAttribute('aria-labelledby', d.tabId);
+
+          const toggleBtn = $('toggleAppBtn');
+          if (d.hasVariant) {
+            toggleBtn.style.display = 'inline-flex';
+            toggleBtn.textContent = useAltWinApp ? 'Alternar para InfiniteClaude' : 'Alternar para OpenInfinite';
+          } else {
+            toggleBtn.style.display = 'none';
+          }
+
+          tabs.forEach((t) => {
+            const on = t.dataset.device === devKey;
             t.classList.toggle('active', on);
             t.setAttribute('aria-selected', String(on));
             t.setAttribute('tabindex', on ? '0' : '-1');
           });
         };
-        if (document.startViewTransition && !reducedMotion) document.startViewTransition(apply);
-        else apply();
-        if (focusTab && tabs[safeIdx]) tabs[safeIdx].focus();
+
+        if (!reducedMotion) {
+          rigEl.classList.add('is-switching');
+          applyDom();
+          setTimeout(() => rigEl.classList.remove('is-switching'), 160);
+        } else {
+          applyDom();
+        }
+        if (focusTab) $(d.tabId)?.focus();
       }
+
       tabs.forEach((tab, idx) => {
-        tab.addEventListener('click', () => showShot(idx, false));
+        tab.addEventListener('click', () => renderDeviceState(tab.dataset.device, false));
         tab.addEventListener('keydown', (ev) => {
-          if (ev.key === 'ArrowRight') { ev.preventDefault(); showShot((idx + 1) % tabs.length, true); }
-          else if (ev.key === 'ArrowLeft') { ev.preventDefault(); showShot((idx - 1 + tabs.length) % tabs.length, true); }
+          if (ev.key === 'ArrowRight') {
+            ev.preventDefault();
+            renderDeviceState(DEVICE_ORDER[(idx + 1) % DEVICE_ORDER.length], true);
+          } else if (ev.key === 'ArrowLeft') {
+            ev.preventDefault();
+            renderDeviceState(DEVICE_ORDER[(idx - 1 + DEVICE_ORDER.length) % DEVICE_ORDER.length], true);
+          }
         });
       });
+
+      $('nextDeviceBtn').addEventListener('click', () => {
+        const nextIdx = (DEVICE_ORDER.indexOf(currentDevice) + 1) % DEVICE_ORDER.length;
+        renderDeviceState(DEVICE_ORDER[nextIdx], false);
+      });
+
+      $('toggleAppBtn').addEventListener('click', () => {
+        useAltWinApp = !useAltWinApp;
+        renderDeviceState('windows', false);
+      });
+
+      const theater = $('stage3dTheater');
+      if (theater && !reducedMotion && window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+        theater.addEventListener('pointermove', (ev) => {
+          if (rigEl.classList.contains('is-switching')) return;
+          const r = theater.getBoundingClientRect();
+          const nx = ((ev.clientX - r.left) / r.width - 0.5) * 2;
+          const ny = ((ev.clientY - r.top) / r.height - 0.5) * 2;
+          const baseY = currentDevice === 'windows' ? 7 : currentDevice === 'linux' ? -6 : -7;
+          const baseX = currentDevice === 'windows' ? 3 : 4;
+          rigEl.style.transform = `rotateY(${(baseY + nx * 4).toFixed(2)}deg) rotateX(${(baseX - ny * 3).toFixed(2)}deg)`;
+        }, { passive: true });
+        theater.addEventListener('pointerleave', () => {
+          rigEl.style.transform = '';
+        }, { passive: true });
+      }
 
       let lastFocus = null;
       function openZoom() {

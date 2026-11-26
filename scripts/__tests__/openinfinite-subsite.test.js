@@ -64,6 +64,27 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(oiHtml, /R\$ 199,00/);
   assert.match(oiHtml, /R\$ 249,00/);
 
+  // Ensure new 3D multi-device hero showcase & updated v6.2/v6.3 real UI captures are present (NOT old v6.1 mockups)
+  assert.match(oiHtml, /id="deviceRig"/);
+  assert.match(oiHtml, /id="tab-dev-mac"/);
+  assert.match(oiHtml, /id="tab-dev-win"/);
+  assert.match(oiHtml, /id="tab-dev-linux"/);
+  assert.match(oiHtml, /id="nextDeviceBtn"/);
+  assert.match(oiHtml, /id="toggleAppBtn"/);
+  assert.match(oiHtml, /\/openinfinite\/assets\/hero_mac_liquid_glass\.png/);
+  assert.match(oiHtml, /\/openinfinite\/assets\/hero_win_infiniteclaude\.png/);
+  assert.match(oiHtml, /\/openinfinite\/assets\/hero_win_openinfinite\.png/);
+  assert.match(oiHtml, /\/openinfinite\/assets\/hero_linux_vps_tui\.png/);
+  assert.doesNotMatch(oiHtml, /openinfinite_tema_escuro\.png/);
+  for (const assetName of [
+    "hero_mac_liquid_glass.png",
+    "hero_win_infiniteclaude.png",
+    "hero_win_openinfinite.png",
+    "hero_linux_vps_tui.png",
+  ]) {
+    assert.ok(fs.existsSync(path.join(root, "openinfinite", "assets", assetName)), `Expected ${assetName}`);
+  }
+
   // Ensure removed clutter, internal jargon, and inline checkout are NOT on landing page
   assert.doesNotMatch(oiHtml, /2 softwares nativos|White-Label|Símbolo Vivo|HTTP 200 Real Verificado|WinForms GDI\+|SwiftUI NSVisualEffectView/i);
   assert.doesNotMatch(oiHtml, /id="particleCanvas"|id="cursorAura"|orbit-ring|float-badge/);
