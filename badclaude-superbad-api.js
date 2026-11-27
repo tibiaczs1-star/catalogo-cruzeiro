@@ -69,7 +69,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
     freeProvidersIncluded: ["openrouter"],
-    summary: "Núcleo BYOK + OpenRouter (:free) guiado no instalador e troca livre em 1 máquina.",
+    summary: "BadClaude v6.9.0 Essencial: Harness CLI leve + BYOK + OpenRouter (:free) guiado, 5 temas sincronizados e troca livre em 1 máquina.",
   },
   mid: {
     edition: "mid",
@@ -82,7 +82,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
     freeProvidersIncluded: ["openrouter", "google", "omnirouter"],
-    summary: "OpenRouter (:free) + Google AI Studio Grátis (AIza) + OmniRouter (:20128) com tutoriais + Super Poderes.",
+    summary: "BadClaude v6.9.0 Studio (9 Estações + Composer SVG + Create/Voz PT-BR + 229 Modelos Locais) + OpenRouter (:free) + Google AI Studio + OmniRouter (:20128).",
   },
   beta: {
     edition: "beta",
@@ -95,7 +95,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
     freeProvidersIncluded: ["openrouter"],
-    summary: "Código limpo, DPAPI local + OpenRouter (:free) e download privado dedicado.",
+    summary: "Código limpo v6.9.0, DPAPI local + OpenRouter (:free) e download privado dedicado.",
   },
   superbad: {
     edition: "superbad",
@@ -108,7 +108,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 2,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
     freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-chat-21"],
-    summary: "Studio + 9Router (:20129) + 21 modelos NVIDIA Free Chat/Embeddings + OpenInfinite v6.1 Win/Mac grátis + até 2 máquinas vinculadas.",
+    summary: "Cockpit Pro SuperBad v6.9.0: 9 Estações + BadBot Desktop 3 Colunas (FIFO) + OpenInfinite + Trim Omni 2.4.1 + 9Router (:20129) + 21 modelos NVIDIA Free + até 2 máquinas (Win/Mac).",
   },
   founder: {
     edition: "founder",
@@ -121,7 +121,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 1,
     unlockedModes: ["essential", "badcode", "cockpit-pro", "founder-vip"],
     freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-full-38", "nvidia-bio-rest-grpc"],
-    summary: "TUDO LIBERADO: todos os 38 modelos NVIDIA Free (+ REST, gRPC NVCF e Bio/NIM), Google, OpenRouter, OmniRouter, 9Router, OpenInfinite v6.1 Win/Mac grátis e atualizações imediatas em nuvem.",
+    summary: "BadClaude v6.9.0 TUDO LIBERADO: 9 Estações + BadBot + OpenInfinite VIP + todos os 38 modelos NVIDIA Free (+ 14 Bio/NIM), Google, OpenRouter, OmniRouter, 9Router, 229 locais e cascata imediata Win/Mac.",
   },
   infinite: {
     edition: "infinite",

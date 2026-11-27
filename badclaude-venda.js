@@ -22,10 +22,10 @@ const path = require("path");
 const crypto = require("crypto");
 
 const PLANOS = {
-  basic: { id: "basic", tier: "client-basic", nome: "Cliente Básico", preco: 79, duracao: "7 dias (BYOK)", horas: 168 },
-  mid: { id: "mid", tier: "client-mid", nome: "Cliente Studio", preco: 179, duracao: "30 dias (APIs Grátis + Super Poderes)", horas: 720 },
-  superbad: { id: "superbad", tier: "client-mid", nome: "BadClaude SuperBad", preco: 350, duracao: "30 dias (Portal + Releases)", horas: 720 },
-  founder: { id: "founder", tier: "founder", nome: "Edição Fundador", preco: 690, duracao: "30 dias (Nuvem + 3 Camadas Blindado)", horas: 720 },
+  basic: { id: "basic", tier: "client-basic", nome: "Cliente Básico", preco: 79, duracao: "7 dias (Harness CLI + BYOK)", horas: 168 },
+  mid: { id: "mid", tier: "client-mid", nome: "Cliente Studio", preco: 179, duracao: "30 dias (9 Estações + Create/Voz + APIs Grátis)", horas: 720 },
+  superbad: { id: "superbad", tier: "client-mid", nome: "BadClaude SuperBad", preco: 350, duracao: "30 dias (2 PCs + OpenInfinite + BadBot)", horas: 720 },
+  founder: { id: "founder", tier: "founder", nome: "Edição Fundador", preco: 690, duracao: "30 dias (VIP Total + 38 NVIDIA + OpenInfinite)", horas: 720 },
   // Aliases legados redirecionados para os mesmos planos ativos no PIX oficial
   dez: { id: "dez", tier: "client-basic", nome: "Passe Rápido", preco: 10, duracao: "8 horas", horas: 8 },
   dia: { id: "dia", tier: "client-basic", nome: "1 Dia", preco: 20, duracao: "24 horas", horas: 24 },

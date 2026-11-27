@@ -1,535 +1,1453 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BadClaude v6.8.0 — Sua Fábrica Autônoma de Código, IA, Vídeo 2D e Voz R$ 0,00</title>
-  <meta name="description" content="Pare de gastar com mensalidades caras de IA. Escolha Harness Visual ou CLI Multi-IA, use até 38 modelos gratuitos NVIDIA Build + Vídeo 2D e Voz PT-BR no Windows e macOS Nativo.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BadClaude v6.9.0 — Harness Desktop &amp; CLI Cyber-Mecha · Vídeo 2D + Voz PT-BR R$ 0,00</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/badclaude/assets/vendor/three/build/three.module.js"
+      }
+    }
+  </script>
   <style>
     :root {
-      --bg: #05070d;
-      --bg-card: #0b101b;
-      --bg-well: #101726;
-      --bg-hover: #151f33;
-      --border: #1d283d;
-      --border-hi: #2b3c5c;
-      --ink: #f8fafc;
+      --bg-void: #04050a;
+      --bg-deck: #080910;
+      --bg-card: rgba(11, 13, 21, 0.92);
+      --bg-card-solid: #0b0d15;
+      --bg-glass: rgba(18, 21, 40, 0.72);
+      --border-soft: rgba(255, 255, 255, 0.11);
+      --border-strong: rgba(225, 29, 46, 0.58);
+      --text: #f8fafc;
       --muted: #94a3b8;
-      --dim: #64748b;
-      --cyan: #30b9d1;
-      --emerald: #0fb981;
-      --orange: #fa913c;
-      --gold: #facc15;
-      --mac-blue: #0a84ff;
-      --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-      --mono: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+      --muted-readable: #8b9cb5;
+      --crimson: #e11d2e;
+      --hermes: #d91e36;
+      --violet: #f5c518;
+      --magenta: #e11d2e;
+      --cyan: #22d3ee;
+      --emerald: #10b981;
+      --gold: #f5c518;
+      --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+      --radius-deck: 16px;
+      --radius-card: 14px;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background:
-        radial-gradient(ellipse 75% 45% at 50% -10%, rgba(48, 185, 209, 0.12), transparent 70%),
-        var(--bg);
-      color: var(--ink);
-      font-family: var(--font);
+      font-family: var(--font-sans);
+      background: var(--bg-void);
+      color: var(--text);
       line-height: 1.55;
-      font-size: 14px;
       min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
-    .mono { font-family: var(--mono); }
-    a { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: var(--font-mono); }
 
-    /* Top Sticky Navbar */
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -64px;
+      z-index: 200;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #04050a;
+      font-weight: 800;
+      font-size: 13px;
+      transition: top 0.16s ease;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* ============================================================
+       FORTALEZA BADCLAUDE DINÂMICA CONTÍNUA (ZERO BOLAS / ZERO CORTE!)
+    ============================================================ */
+    .cosmos-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: var(--bg-void);
+    }
+    #fortressBgCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    /* ============================================================
+       TOP BAR COMPACTA DE APRESENTAÇÃO
+    ============================================================ */
     .topbar {
-      position: sticky; top: 0; z-index: 900;
-      background: rgba(5, 7, 13, 0.88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 95;
+      background: rgba(5, 5, 11, 0.84);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .topbar-inner {
-      max-width: 1220px; margin: 0 auto; padding: 10px 18px;
-      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: nowrap;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
     .brand {
-      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
-      text-decoration: none; font-weight: 800; font-size: 15px; letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
     }
+    .brand-avatar {
+      width: 34px; height: 34px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 1.5px solid rgba(255, 30, 66, 0.72);
+      box-shadow: 0 0 18px rgba(255, 30, 66, 0.35);
+    }
+    .brand-title { font-family: var(--font-display); font-size: 16px; color: #fff; }
+    .brand-sub { font-size: 10.5px; color: var(--muted); display: block; font-weight: 500; line-height: 1.2; }
     .brand-tag {
-      font-family: var(--mono); font-size: 10.5px; font-weight: 700;
-      padding: 2px 7px; border-radius: 999px;
-      background: #0f1c2e; border: 1px solid #22446e; color: #7dd3fc;
+      font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 30, 66, 0.22), rgba(225, 29, 46, 0.22));
+      color: #fda4af; border: 1px solid rgba(255, 30, 66, 0.48);
+      letter-spacing: 0.04em;
     }
-    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: nowrap; }
+
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
     .nav-link {
-      text-decoration: none; font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap;
-      padding: 6px 9px; border-radius: 8px; border: 1px solid transparent; transition: 0.15s;
+      padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      color: #cbd5e1; border: 1px solid transparent; transition: 0.16s ease; white-space: nowrap;
+      flex-shrink: 0;
     }
-    .nav-link:hover { color: var(--ink); background: var(--bg-well); border-color: var(--border); }
+    .nav-link:hover { color: #fff; background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.1); }
     .nav-link.cta {
-      background: #0284c7; color: #ffffff; border-color: #38bdf8;
+      background: linear-gradient(135deg, #e11d2e, #9f1239);
+      color: #fff; font-weight: 800;
+      box-shadow: 0 6px 20px rgba(225, 29, 46, 0.34);
     }
-    .nav-link.cta:hover { background: #0ea5e9; }
 
-    .shift-pill {
-      display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap;
-      padding: 6px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
-      background: #171a26; color: #fde68a; border: 1px solid rgba(250, 204, 21, 0.35);
-      transition: 0.15s;
+    /* ============================================================
+       CONTAINER & PLACAS BENTO (PRESENTATION DECK)
+    ============================================================ */
+    .wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 22px 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
-    @media (max-width: 1080px) {
-      .topbar-inner, .nav-links { flex-wrap: wrap; }
+
+    .bento-plate {
+      position: relative;
+      background:
+        linear-gradient(160deg, rgba(20, 22, 42, 0.88) 0%, rgba(8, 9, 20, 0.94) 100%);
+      border: 1px solid rgba(225, 29, 46, 0.26);
+      border-radius: var(--radius-deck);
+      padding: 26px;
+      overflow: hidden;
+      box-shadow:
+        0 26px 70px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
-    .shift-pill:hover { background: #1e2334; border-color: var(--gold); }
+    .bento-plate::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 30, 66, 0.38), rgba(225, 29, 46, 0.28), rgba(34, 211, 238, 0.16));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .plate-corner-tag {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #cbd5e1;
+      opacity: 0.86;
+    }
 
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; display: flex; flex-direction: column; gap: 48px; }
+    .bento-duo {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
 
-    /* Buttons & Badges */
+    /* ============================================================
+       HERO 3D FULL-BLEED INTEGRADO NATURALMENTE AO SITE (ZERO CAIXA!)
+    ============================================================ */
+    .hero-3d-fullbleed {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: min(86vh, 740px);
+      background: transparent;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+    }
+    #hero3dCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+      outline: none;
+      cursor: pointer;
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 84%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 0%, #000 84%, transparent 100%);
+    }
+    .intro-poster-fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: 72% center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 0;
+    }
+    .hero-3d-fullbleed.reduced-static .intro-poster-fallback {
+      opacity: 0.94;
+      z-index: 2;
+    }
+    .hero-3d-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 52% 68% at 24% 48%, rgba(4, 5, 10, 0.80) 0%, rgba(4, 5, 10, 0.35) 62%, transparent 100%);
+    }
+    .pet-tricks-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 2px;
+    }
+    .pet-pill {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(8, 11, 20, 0.78);
+      color: #e2e8f0;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: 0.16s ease;
+    }
+    .pet-pill:hover {
+      border-color: rgba(245, 197, 24, 0.65);
+      color: #fde047;
+      transform: translateY(-1px);
+    }
+    .sound-unlock-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(225, 29, 46, 0.24), rgba(245, 197, 24, 0.14));
+      border: 1px solid rgba(245, 197, 24, 0.52);
+      color: #fef08a;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      animation: soundPulse 2.2s ease-in-out infinite;
+    }
+    .sound-unlock-pill.unlocked {
+      animation: none;
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #a7f3d0;
+    }
+    @keyframes soundPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 197, 24, 0.32); }
+      50% { box-shadow: 0 0 0 8px rgba(245, 197, 24, 0); }
+    }
+    .hero-3d-inner {
+      position: relative;
+      z-index: 4;
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 42px 22px 54px;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-3d-copy {
+      pointer-events: auto;
+      max-width: 550px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .hero-3d-status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .intro-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(4, 5, 10, 0.72);
+      border: 1px solid rgba(225, 29, 46, 0.52);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fda4af;
+    }
+    .intro-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--crimson);
+      box-shadow: 0 0 12px var(--crimson);
+    }
+    .intro-phase-badge {
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(4, 5, 10, 0.72);
+      border: 1px solid rgba(245, 197, 24, 0.42);
+      backdrop-filter: blur(8px);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #fde047;
+    }
+    .hero-brand-kicker {
+      font-family: var(--font-display);
+      font-size: clamp(13px, 1.3vw, 15px);
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.62);
+    }
+    .hero-3d-copy h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4.1vw, 52px);
+      line-height: 1.04;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      color: #ffffff;
+      text-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
+    }
+    .hero-3d-copy .hero-sub {
+      font-size: 15px;
+      color: #d6dfec;
+      line-height: 1.58;
+      max-width: 48ch;
+    }
+    .btn-roar {
+      background: linear-gradient(135deg, #e11d2e 0%, #9f1239 100%);
+      border-color: rgba(255, 130, 155, 0.62);
+      box-shadow: 0 10px 28px rgba(225, 29, 46, 0.36);
+      color: #fff;
+    }
+    .btn-roar[aria-pressed="true"] {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      border-color: #34d399;
+      box-shadow: 0 0 26px rgba(16, 185, 129, 0.45);
+    }
+    .hero-audio-hint {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    @media (max-width: 900px) {
+      .hero-3d-fullbleed {
+        min-height: 740px;
+        align-items: flex-end;
+      }
+      .hero-3d-scrim {
+        background:
+          linear-gradient(180deg, rgba(4, 5, 10, 0.22) 0%, rgba(4, 5, 10, 0.08) 38%, rgba(4, 5, 10, 0.86) 64%, #04050a 100%);
+      }
+      .hero-3d-inner {
+        padding: 280px 16px 28px;
+      }
+      .hero-3d-copy { max-width: 100%; }
+    }
+
+    /* ============================================================
+       BLOCO 1 (TOPO ESQ): EM NÚMEROS + LOBO CYBER
+    ============================================================ */
+    .plate-title {
+      font-family: var(--font-display);
+      font-size: clamp(19px, 2vw, 24px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin-bottom: 18px;
+      max-width: 78%;
+      text-wrap: balance;
+    }
+    .stats-grid-stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+      align-items: end;
+    }
+    .stats-numbers {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 16px;
+      position: relative;
+      z-index: 3;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 3px; }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      background: linear-gradient(125deg, #ffffff 10%, #fda4af 55%, #f5c518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-lbl { font-size: 12px; color: #cbd5e1; line-height: 1.35; }
+    .stat-dog-stage {
+      position: relative;
+      height: 245px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      pointer-events: none;
+    }
+    .stat-dog-stage img {
+      width: 100%;
+      max-width: 245px;
+      height: 250px;
+      object-fit: contain;
+      object-position: center bottom;
+      filter: drop-shadow(0 12px 26px rgba(245, 197, 24, 0.28)) drop-shadow(0 0 18px rgba(225, 29, 46, 0.25));
+    }
+
+    /* ============================================================
+       BLOCO 2 (TOPO DIR): PILARES COM CRISTAIS NEON (2x2 LEGÍVEL)
+    ============================================================ */
+    .pillars-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .pillar-card {
+      position: relative;
+      border-radius: 14px;
+      padding: 16px 14px 14px;
+      background: linear-gradient(180deg, rgba(16, 18, 36, 0.92), rgba(7, 8, 16, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pillar-card:hover { transform: translateY(-3px); }
+    .pillar-card.c-cyan { border-color: rgba(34, 211, 238, 0.55); box-shadow: inset 0 -18px 34px rgba(34, 211, 238, 0.12), 0 10px 24px rgba(34, 211, 238, 0.10); }
+    .pillar-card.c-emerald { border-color: rgba(16, 185, 129, 0.55); box-shadow: inset 0 -18px 34px rgba(16, 185, 129, 0.12), 0 10px 24px rgba(16, 185, 129, 0.10); }
+    .pillar-card.c-crimson { border-color: rgba(255, 30, 66, 0.65); box-shadow: inset 0 -18px 36px rgba(255, 30, 66, 0.16), 0 10px 26px rgba(255, 30, 66, 0.14); }
+    .pillar-card.c-gold { border-color: rgba(250, 204, 21, 0.62); box-shadow: inset 0 -18px 34px rgba(250, 204, 21, 0.13), 0 10px 24px rgba(250, 204, 21, 0.12); }
+
+    .pillar-head-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+    .pillar-gem {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      display: grid; place-items: center;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .pillar-card h3 { font-size: 13.5px; font-weight: 800; color: #fff; line-height: 1.25; }
+    .pillar-card p { font-size: 12px; color: #b8c5d9; line-height: 1.45; }
+    .pillar-badge {
+      margin-top: auto;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #cbd5e1;
+      padding-top: 6px;
+    }
+
+    /* ============================================================
+       BLOCO 3 (CENTRO): HERO DECK GIGANTE — GRID MATEMÁTICO ZERO OVERLAP
+    ============================================================ */
+    .hero-deck {
+      min-height: 460px;
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-rows: auto 1fr;
+      column-gap: 20px;
+      row-gap: 18px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 74% 52%, rgba(255, 30, 66, 0.24) 0%, rgba(225, 29, 46, 0.22) 34%, transparent 66%),
+        radial-gradient(circle at 12% 20%, rgba(34, 211, 238, 0.10) 0%, transparent 45%),
+        linear-gradient(155deg, #0b0c18 0%, #04050a 100%);
+    }
+    .hero-watermark {
+      position: relative;
+      grid-column: 1 / -1;
+      grid-row: 1;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-size: clamp(38px, 9.2vw, 138px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: transparent;
+      -webkit-text-stroke: 1.6px rgba(255, 255, 255, 0.24);
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .hero-watermark .solid {
+      -webkit-text-stroke: 0;
+      color: rgba(255, 255, 255, 0.94);
+      text-shadow: 0 0 42px rgba(255, 30, 66, 0.35);
+    }
+    .hero-content {
+      position: relative;
+      grid-column: 1;
+      grid-row: 2;
+      z-index: 3;
+      padding-top: 6px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+      padding: 6px 13px; border-radius: 999px;
+      background: rgba(255, 30, 66, 0.14); border: 1px solid rgba(255, 30, 66, 0.48);
+      color: #fda4af; font-size: 11.5px; font-weight: 800; letter-spacing: 0.03em;
+      max-width: 100%;
+    }
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(27px, 3.2vw, 42px);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      max-width: 18ch;
+    }
+    .hero-sub {
+      font-size: 14.5px;
+      color: #cbd5e1;
+      max-width: 54ch;
+      line-height: 1.55;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    .hero-meta-strip {
+      display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px;
+      font-size: 12px; color: #94a3b8;
+    }
+    .hero-meta-strip span strong { color: #f8fafc; }
+
+    .hero-dog-wrap {
+      position: relative;
+      grid-column: 2;
+      grid-row: 1 / 3;
+      z-index: 2;
+      height: 420px;
+      align-self: end;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .hero-dog-glow {
+      position: absolute;
+      width: 340px; height: 340px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 30, 66, 0.34) 0%, rgba(225, 29, 46, 0.25) 45%, transparent 72%);
+      filter: blur(22px);
+      bottom: 24px;
+    }
+    .hero-dog-wrap img {
+      position: relative;
+      z-index: 2;
+      max-height: 410px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 36px rgba(225, 29, 46, 0.38)) drop-shadow(0 0 24px rgba(34, 211, 238, 0.20));
+    }
+
+    /* Botões Reutilizáveis */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      font-family: var(--font); font-weight: 700; font-size: 13.5px; padding: 11px 18px;
-      border-radius: 10px; cursor: pointer; text-decoration: none;
-      border: 1px solid var(--border-hi); background: var(--bg-well); color: var(--ink);
-      transition: border-color .15s, background .15s, transform .12s;
+      padding: 11px 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(18, 22, 42, 0.92); color: #fff; font-weight: 700; font-size: 13.5px;
+      cursor: pointer; transition: 0.16s ease; font-family: inherit;
     }
-    .btn:hover { background: var(--bg-hover); border-color: #425a85; }
-    .btn.primary { background: #0284c7; border-color: #38bdf8; color: #ffffff; }
-    .btn.primary:hover { background: #0ea5e9; }
-    .btn.gold { background: var(--gold); border-color: #fef08a; color: #0b0f17; }
-    .btn.gold:hover { background: #fde047; }
-    .btn.emerald { background: #065f46; border-color: #10b981; color: #ecfdf5; }
-    .btn.emerald:hover { background: #047857; }
-    .btn.sm { padding: 7px 12px; font-size: 12px; border-radius: 8px; }
-
-    .help-q {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px; border-radius: 50%; cursor: help; flex-shrink: 0;
-      background: #172034; color: #fde047; border: 1px solid rgba(250, 204, 21, 0.4);
-      font-weight: 800; font-size: 11.5px;
+    .btn:hover:not(:disabled) { transform: translateY(-1px); border-color: rgba(255, 255, 255, 0.32); }
+    .btn:disabled { opacity: 0.62; cursor: wait; transform: none; }
+    .btn.crimson {
+      background: linear-gradient(135deg, #ff1e42 0%, #9f1239 100%);
+      border-color: rgba(255, 110, 140, 0.55);
+      box-shadow: 0 10px 26px rgba(255, 30, 66, 0.32);
     }
-    .help-q:hover { background: #1f2b45; border-color: var(--gold); }
+    .btn.primary { background: linear-gradient(135deg, #0284c7, #0891b2); border-color: #38bdf8; }
+    .btn.gold { background: linear-gradient(135deg, #facc15, #f59e0b); color: #090d16; border-color: #fde047; font-weight: 900; }
+    .btn.emerald { background: linear-gradient(135deg, #059669, #10b981); border-color: #34d399; }
+    .btn.sm { padding: 7px 12px; font-size: 12px; border-radius: 9px; }
 
-    /* Hero Section */
-    .hero { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 26px; align-items: stretch; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 5px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em;
-      background: rgba(48, 185, 209, 0.11); border: 1px solid rgba(48, 185, 209, 0.35); color: #67e8f9;
+    /* ============================================================
+       BLOCO 4 & 5 (INFERIOR DUPLO): 4 NÚMEROS + SIMULADOR | ESCADA 4 DEGRAUS
+    ============================================================ */
+    .num-grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
       margin-bottom: 14px;
     }
-    .hero h1 {
-      font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; line-height: 1.13; letter-spacing: -0.028em;
-      margin-bottom: 14px; color: #ffffff;
+    .num-box {
+      position: relative;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 13px 12px;
+      border-radius: 14px;
+      background: rgba(8, 10, 20, 0.78);
+      border: 1px solid rgba(225, 29, 46, 0.32);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
-    .hero-sub { font-size: 15px; color: #cbd5e1; margin-bottom: 20px; max-width: 60ch; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
-    .proof-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-    .proof-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 13px;
-      cursor: default; transition: border-color .15s;
+    .num-hollow {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 0.9;
+      color: transparent;
+      -webkit-text-stroke: 1.5px #e11d2e;
+      text-shadow: 0 0 18px rgba(225, 29, 46, 0.35);
+      flex-shrink: 0;
     }
-    .proof-card:hover { border-color: var(--cyan); }
-    .proof-card strong { display: block; font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 2px; }
-    .proof-card span { font-size: 12px; color: var(--muted); }
+    .num-box h4 { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .num-box p { font-size: 11.5px; color: #a8b7cc; line-height: 1.4; }
 
-    /* Simulator Panel */
-    .sim-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-      padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    /* Simulador Integrado dentro do Deck Bento */
+    .sim-box {
+      background: rgba(6, 7, 15, 0.9);
+      border: 1px solid rgba(255, 30, 66, 0.30);
+      border-radius: 14px;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .sim-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .sim-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
     .sim-tab {
-      background: var(--bg-well); color: var(--muted); border: 1px solid var(--border);
-      padding: 6px 11px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;
+      border: 1px solid #26314c; background: #0d1222; color: #cbd5e1;
+      border-radius: 8px; padding: 6px 10px; font-size: 11.5px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: 0.14s;
     }
-    .sim-tab.active { background: #0f243a; color: #7dd3fc; border-color: #38bdf8; }
-    .sim-screen {
-      background: #04060b; border: 1px solid #1e293b; border-radius: 12px; padding: 16px;
-      min-height: 245px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
+    .sim-tab:hover { border-color: rgba(255, 30, 66, 0.55); color: #fff; }
+    .sim-tab.active {
+      background: linear-gradient(135deg, rgba(255, 30, 66, 0.25), rgba(225, 29, 46, 0.25));
+      border-color: var(--crimson); color: #fff;
     }
-    .sim-screen h3 { font-size: 15px; font-weight: 800; color: #fde047; margin-bottom: 8px; }
-    .sim-list { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #dbeafe; }
-    .sim-list li::before { content: "▸ "; color: var(--cyan); font-weight: 900; }
+    .sim-screen h3 { font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 6px; }
+    .sim-list { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #cbd5e1; }
+    .sim-list li { display: block; position: relative; padding-left: 14px; line-height: 1.45; }
+    .sim-list li::before { content: "▸"; position: absolute; left: 0; top: 0; color: var(--crimson); font-weight: 900; }
 
-    /* Section Headings */
-    .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
-    .sec-head h2 { font-size: clamp(22px, 2.5vw, 30px); font-weight: 900; letter-spacing: -0.02em; }
-    .sec-head p { color: var(--muted); font-size: 14px; max-width: 68ch; margin-top: 4px; }
+    /* Pirâmide de Evolução (Gráfico 4 Degraus + 3 Ícones Laterais) */
+    .ladder-layout {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .pyramid-stage {
+      background: rgba(6, 7, 15, 0.85);
+      border: 1px solid rgba(225, 29, 46, 0.28);
+      border-radius: 14px;
+      padding: 16px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pyramid-caption { font-size: 11.5px; color: #cbd5e1; font-weight: 700; }
+    .pyramid-bars {
+      height: 192px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      align-items: end;
+      padding-top: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .p-col { display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+    .p-val { font-size: 10.5px; font-weight: 800; color: #fff; font-family: var(--font-mono); }
+    .p-bar {
+      width: 100%;
+      border-radius: 10px 10px 2px 2px;
+      background: linear-gradient(180deg, #ff1e42 0%, #e11d2e 62%, rgba(34, 211, 238, 0.18) 100%);
+      box-shadow: 0 0 22px rgba(225, 29, 46, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .p-col.b1 .p-bar { height: 28%; background: linear-gradient(180deg, #38bdf8, #1e3a8a); }
+    .p-col.b2 .p-bar { height: 48%; background: linear-gradient(180deg, #10b981, #064e3b); }
+    .p-col.b3 .p-bar { height: 74%; background: linear-gradient(180deg, #ff1e42, #7f1d1d); }
+    .p-col.b4 .p-bar { height: 98%; background: linear-gradient(180deg, #facc15, #b45309); }
+    .p-lbl { font-size: 11px; color: #cbd5e1; font-weight: 700; padding-bottom: 4px; text-align: center; line-height: 1.25; }
 
-    /* Windows Themes vs macOS Native */
-    .os-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .ladder-notes { display: flex; flex-direction: column; gap: 12px; }
+    .note-row { display: flex; align-items: flex-start; gap: 11px; }
+    .note-ico {
+      width: 34px; height: 34px; border-radius: 999px; flex-shrink: 0;
+      display: grid; place-items: center; font-size: 15px;
+      background: radial-gradient(circle at 30% 30%, rgba(225, 29, 46, 0.32), rgba(245, 197, 24, 0.16));
+      border: 1px solid rgba(255, 30, 66, 0.45);
+      box-shadow: 0 0 18px rgba(225, 29, 46, 0.25);
+    }
+    .note-row h4 { font-size: 12.5px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .note-row p { font-size: 11.5px; color: #a8b7cc; line-height: 1.45; }
+
+    /* ============================================================
+       SEÇÕES DE CONVERSÃO: WINDOWS VS MAC, 4 PLANOS, COMPARATIVO, PIX
+    ============================================================ */
+    .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .sec-head h2 { font-family: var(--font-display); font-size: clamp(22px, 2.5vw, 29px); font-weight: 800; letter-spacing: -0.02em; }
+    .sec-head p { color: var(--muted); font-size: 13.5px; }
+
+    .os-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .os-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
-      display: flex; flex-direction: column; gap: 12px;
+      background: rgba(8, 10, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .os-card.mac { border-color: rgba(10, 132, 255, 0.45); background: #0c101b; }
-    .os-preview {
-      background: #060911; border: 1px solid #1f2b42; border-radius: 12px; padding: 12px;
-      font-size: 12px; display: flex; flex-direction: column; gap: 9px;
+    .os-card.win { border-color: rgba(255, 30, 66, 0.42); }
+    .os-card.mac { border-color: rgba(225, 29, 46, 0.45); }
+    .os-pill {
+      align-self: flex-start; font-size: 11px; font-weight: 800; padding: 4px 10px;
+      border-radius: 999px; letter-spacing: 0.04em;
     }
-    .mac-dots { display: inline-flex; gap: 6px; align-items: center; }
-    .mac-dots span { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-    .theme-chips { display: flex; gap: 6px; flex-wrap: wrap; }
-    .theme-chip {
-      font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 7px;
-      background: var(--bg-well); border: 1px solid var(--border-hi); color: #e2e8f0;
+    .os-card.win .os-pill { background: rgba(255, 30, 66, 0.15); color: #fda4af; border: 1px solid rgba(255, 30, 66, 0.4); }
+    .os-card.mac .os-pill { background: rgba(225, 29, 46, 0.18); color: #cbd5e1; border: 1px solid rgba(225, 29, 46, 0.4); }
+    .os-card h3 { font-size: 17px; font-weight: 800; }
+    .os-card p { font-size: 13px; color: #cbd5e1; }
+    .win-mini-light {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      border-radius: 11px; background: #fcfbfb; color: #0f172a;
+      border: 1px solid #ebdce0; font-size: 12px; font-weight: 700; margin-top: 2px;
+    }
+    .mac-mini-glass {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      border-radius: 12px; background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18); font-size: 12px; color: #f5f5f7; margin-top: 2px;
+    }
+    .mac-dots { display: inline-flex; gap: 5px; }
+    .mac-dots i { width: 9px; height: 9px; border-radius: 999px; display: block; }
+
+    /* Aviso obrigatório */
+    .dep-notice {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255, 30, 66, 0.09);
+      border: 1px solid rgba(255, 30, 66, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .dep-notice-copy {
+      flex: 1;
+      min-width: 260px;
+      font-size: 13px;
+      color: #ffe4e6;
+      line-height: 1.45;
+    }
+    .dep-notice-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fda4af;
+      background: rgba(255, 30, 66, 0.16);
+      border: 1px solid rgba(255, 30, 66, 0.45);
+      padding: 5px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* 4 Progressive Plan Cards */
-    .callout-box {
-      background: #0c1424; border: 1px solid #24406b; border-left: 4px solid var(--gold);
-      border-radius: 12px; padding: 14px 16px; font-size: 13.5px; color: #e2e8f0; margin-bottom: 18px;
-    }
+    /* 4 Cards de Preço */
     .plans-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
     .plan-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
-      display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
-      transition: transform .15s, border-color .15s;
+      background: rgba(8, 10, 20, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: transform 0.18s ease, border-color 0.18s ease;
     }
-    .plan-card:hover { transform: translateY(-2px); border-color: var(--border-hi); }
+    .plan-card:hover { transform: translateY(-3px); border-color: rgba(225, 29, 46, 0.55); }
+    .plan-card.pro-hermes { border-color: rgba(255, 30, 66, 0.58); box-shadow: 0 12px 34px rgba(255, 30, 66, 0.14); }
     .plan-card.founder {
-      background: #0e1320; border: 1.5px solid rgba(250, 204, 21, 0.72);
-      box-shadow: 0 20px 60px rgba(250, 204, 21, 0.10);
+      background: linear-gradient(165deg, #191208 0%, #16090c 55%, #090b12 100%);
+      border-color: rgba(250, 204, 21, 0.65);
+      box-shadow: 0 18px 46px rgba(250, 204, 21, 0.14);
     }
-    .plan-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .plan-name-wrap { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 800; }
+    .plan-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .plan-name-wrap { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 15.5px; }
+    .plan-dog-mini { width: 28px; height: 28px; border-radius: 999px; object-fit: cover; border: 1.5px solid rgba(255, 255, 255, 0.25); }
     .plan-meta {
-      font-family: var(--mono); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
-      background: var(--bg-well); border: 1px solid var(--border); color: var(--muted);
+      font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08); color: #cbd5e1; white-space: nowrap;
     }
-    .plan-card.founder .plan-meta { background: rgba(250, 204, 21, 0.16); color: #fde047; border-color: rgba(250, 204, 21, 0.45); }
-    .plan-price { font-size: 31px; font-weight: 900; font-family: var(--mono); color: #ffffff; letter-spacing: -0.02em; margin-top: 8px; }
-    .plan-price small { font-size: 12px; font-weight: 600; color: var(--muted); font-family: var(--font); }
-    .plan-desc { font-size: 12.5px; color: var(--muted); margin: 6px 0 10px; }
-    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; }
-    .plan-list li.ok { color: #e2e8f0; }
+    .plan-card.founder .plan-meta { background: rgba(250, 204, 21, 0.16); color: #fde047; border: 1px solid rgba(250, 204, 21, 0.45); }
+    .plan-price { font-family: var(--font-display); font-size: 29px; font-weight: 900; letter-spacing: -0.02em; margin-top: 8px; }
+    .plan-price small { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .plan-desc { font-size: 12px; color: #a8b7cc; min-height: 36px; margin-top: 4px; }
+    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 12px; margin-top: 10px; }
     .plan-list li.ok::before { content: "✓ "; color: var(--emerald); font-weight: 900; }
-    .plan-list li.no { color: var(--dim); }
-    .plan-list li.no::before { content: "— "; color: #475569; font-weight: 900; }
+    .plan-list li.no { color: var(--muted-readable); }
+    .plan-list li.no::before { content: "— "; color: #64748b; font-weight: 900; }
 
-    /* Comparison Matrix */
-    .table-wrap {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow-x: auto;
-    }
+    /* Tabela Comparativa */
+    .table-wrap { background: rgba(8, 10, 20, 0.88); border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 16px; overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; }
-    th { background: #0d1424; font-weight: 800; font-size: 12.5px; color: #cbd5e1; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.07); text-align: left; }
+    th { background: rgba(19, 22, 42, 0.9); font-weight: 800; font-size: 12.5px; color: #e2e8f0; }
     tr:last-child td { border-bottom: 0; }
     .col-vip { color: #fde047; font-weight: 800; }
 
-    /* Checkout + Online Key Login */
-    .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-    .panel {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
+    /* Checkout + Área do Cliente */
+    .dual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
     .pix-card {
-      background: #081523; border: 1px solid #1d4ed8; border-radius: 12px; padding: 14px;
-      display: flex; flex-direction: column; gap: 8px; font-size: 13px;
+      background: rgba(255, 30, 66, 0.08);
+      border: 1px solid rgba(255, 30, 66, 0.38);
+      border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 13px;
     }
     .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
-    .field label { font-size: 12px; font-weight: 700; color: #cbd5e1; display: flex; align-items: center; justify-content: space-between; }
+    .field label { font-size: 12px; font-weight: 700; color: #cbd5e1; }
     input[type="text"], input[type="email"], select {
-      width: 100%; padding: 10px 12px; background: #050810; color: #f8fafc;
-      border: 1px solid #283652; border-radius: 9px; font-family: var(--font); font-size: 13px; outline: none;
+      width: 100%; padding: 10px 12px; background: #05060e; color: #f8fafc;
+      border: 1px solid rgba(225, 29, 46, 0.34); border-radius: 10px;
+      font-family: var(--font-sans); font-size: 13px; outline: none;
     }
-    input:focus, select:focus { border-color: var(--cyan); }
+    input:focus, select:focus { border-color: var(--crimson); }
     .save-chk {
       display: flex; align-items: center; gap: 9px; padding: 10px 12px; border-radius: 10px;
-      background: rgba(15, 185, 129, 0.10); border: 1px solid rgba(15, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.10); border: 1px solid rgba(16, 185, 129, 0.38);
       color: #a7f3d0; font-size: 12.5px; font-weight: 600; cursor: pointer; margin-bottom: 12px;
     }
     .result-box {
-      background: #080d18; border: 1px solid #283652; border-radius: 12px; padding: 14px;
-      font-size: 12.5px; display: none; flex-direction: column; gap: 8px;
+      background: #060812; border: 1px solid rgba(225, 29, 46, 0.35); border-radius: 12px;
+      padding: 14px; font-size: 12.5px; display: none; flex-direction: column; gap: 8px; margin-top: 10px;
+    }
+    .inline-feedback {
+      font-size: 12px;
+      font-weight: 700;
+      min-height: 18px;
+      margin-top: 6px;
     }
 
-    /* Floating Hover Hint Bar */
-    .hover-hud {
-      position: fixed; right: 16px; bottom: 16px; z-index: 880;
-      background: rgba(11, 16, 27, 0.92); backdrop-filter: blur(12px);
-      border: 1px solid #2a3a57; border-radius: 999px; padding: 7px 14px;
-      font-size: 12px; color: #cbd5e1; display: flex; align-items: center; gap: 8px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55); cursor: pointer;
+    /* Faixa Clara Contrastada Estilo Slide Final */
+    .bottom-cta-dock {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 14px 22px;
+      border-radius: 16px;
+      background: #f4f4f6;
+      color: #090d16;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.65);
     }
-    .hover-hud strong { color: var(--gold); }
+    .bottom-cta-text { font-size: 13.5px; font-weight: 800; color: #0f172a; }
+    .bottom-cta-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .dock-pix-btn {
+      padding: 9px 16px; border-radius: 11px; font-size: 12.5px; font-weight: 800;
+      background: #090d16; color: #ffffff;
+    }
 
-    /* Dark Tech Shift + I Quick-Help Modal */
-    #shiftIModal {
-      display: none; position: fixed; inset: 0; z-index: 99999;
-      background: rgba(3, 5, 10, 0.78); backdrop-filter: blur(8px);
-      align-items: center; justify-content: center; padding: 18px;
+    .site-footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 8px 0 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .shift-box {
-      width: min(520px, 95vw); background: #0c1220; color: #f8fafc;
-      border: 1px solid rgba(250, 204, 21, 0.45); border-radius: 16px;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.85); overflow: hidden;
-    }
-    .shift-head {
-      padding: 13px 18px; background: #080c16; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 13px; color: var(--gold);
-    }
-    .shift-body { padding: 18px; display: flex; flex-direction: column; gap: 11px; font-size: 13.5px; }
 
-    @media (max-width: 980px) {
-      .hero, .os-grid, .plans-grid, .dual-grid { grid-template-columns: 1fr; }
-      .proof-row { grid-template-columns: 1fr; }
+    /* ============================================================
+       RESPONSIVIDADE MOBILE & TABLET
+    ============================================================ */
+    @media (max-width: 1040px) {
+      .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-deck {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        row-gap: 16px;
+        padding: 26px 22px;
+      }
+      .hero-watermark {
+        grid-column: 1;
+        grid-row: 1;
+        font-size: clamp(34px, 10.2vw, 84px);
+      }
+      .hero-content {
+        grid-column: 1;
+        grid-row: 2;
+        padding-top: 2px;
+      }
+      .hero-dog-wrap {
+        grid-column: 1;
+        grid-row: 3;
+        height: 290px;
+      }
+    }
+    @media (max-width: 780px) {
+      .hero-3d-fullbleed {
+        min-height: auto;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #hero3dCanvas {
+        position: relative;
+        height: 390px;
+        width: 100%;
+        flex-shrink: 0;
+      }
+      .hero-3d-scrim { display: none; }
+      .hero-3d-inner { padding: 4px 16px 26px; }
+      .topbar-inner { padding: 8px 14px; gap: 8px; }
+      .nav-links {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .bento-duo, .os-grid, .dual-grid, .ladder-layout, .stats-grid-stage, .num-grid-2x2, .plans-grid, .pillars-row {
+        grid-template-columns: 1fr;
+      }
+      .intro-viewport {
+        aspect-ratio: 4 / 3;
+        min-height: 280px;
+        max-height: 420px;
+      }
+      .intro-top-hud { top: 10px; left: 10px; right: 10px; gap: 6px; }
+      .intro-live-pill, .intro-phase-badge { font-size: 9.5px; padding: 3px 8px; }
+      .intro-bottom-bar { padding: 12px 14px; }
+      .plate-corner-tag { position: static; margin-bottom: 8px; display: inline-flex; }
+      .plate-title { max-width: 100%; }
+      .stat-dog-stage { height: 210px; justify-content: center; }
+      .bento-plate { padding: 18px; }
+      .bento-plate.intro-stage { padding: 0; }
+      .hero-deck { padding: 20px 18px; }
+      .hero-watermark { font-size: clamp(30px, 10vw, 56px); }
+      .wrap { padding: 16px 14px 36px; gap: 18px; }
     }
   </style>
 </head>
 <body>
+  <a href="#topo" class="skip-link">Pular para o conteúdo principal</a>
+
+  <div class="cosmos-bg" aria-hidden="true">
+    <canvas id="fortressBgCanvas"></canvas>
+  </div>
+
   <header class="topbar">
     <div class="topbar-inner">
       <a href="#topo" class="brand">
-        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 1L14.2 8.8L21.5 4.2L15.6 10.7L23 12L15.6 13.3L21.5 19.8L14.2 15.2L12 23L9.8 15.2L2.5 19.8L8.4 13.3L1 12L8.4 10.7L2.5 4.2L9.8 8.8Z" fill="#facc15"/></svg>
-        <span>BadClaude</span>
-        <span class="brand-tag">v6.8.0 Unificado</span>
+        <img src="/badclaude/assets/3d/renders/guardian-opus-3d.png" alt="BadClaude Cyber-Mecha" class="brand-avatar" />
+        <div>
+          <span class="brand-title">BadClaude <span class="brand-tag">v6.9.0 Cyber-Mecha</span></span>
+          <span class="brand-sub">Junior Play · Harness Desktop &amp; Harness CLI</span>
+        </div>
       </a>
       <nav class="nav-links" aria-label="Navegação da loja">
-        <a href="#demonstra" class="nav-link">O que Ele Faz</a>
-        <a href="#plataformas" class="nav-link">Windows vs Mac</a>
+        <a href="#introStage" class="nav-link">Intro 3D</a>
+        <a href="#pilares" class="nav-link">Pilares</a>
+        <a href="#demonstra" class="nav-link">Simulador</a>
+        <a href="#plataformas" class="nav-link">Win vs Mac</a>
         <a href="#planos" class="nav-link">Planos</a>
         <a href="#comparativo" class="nav-link">Comparar</a>
         <a href="#licenca" class="nav-link">🔑 Já Tenho Chave</a>
-        <a href="#checkout" class="nav-link cta">Comprar via PIX</a>
+        <a href="#checkout" class="nav-link cta">💸 Comprar PIX</a>
         <a href="/" class="nav-link" title="Voltar ao Portal Catálogo CZS">← Portal CZS</a>
       </nav>
-      <button type="button" class="shift-pill" onclick="openHelpModal(null)">ⓘ Dúvida? Mouse + Shift + I</button>
     </div>
   </header>
 
-  <main class="wrap" id="topo">
-    <!-- HERO DE VENDAS + SIMULADOR AO VIVO -->
-    <section class="hero">
-      <div style="display:flex;flex-direction:column;justify-content:center;">
-        <div class="eyebrow">Estúdio Autônomo · Código + Vídeo 2D + Voz PT-BR a R$ 0,00</div>
-        <h1>Seu próprio cockpit de IA para programar, criar vídeos e trabalhar sem queimar dinheiro em assinaturas.</h1>
-        <p class="hero-sub">
-          Logo na primeira linha de abertura você escolhe: <strong>Harness</strong> (bancada visual com botões prontos) ou <strong>CLI</strong> (terminal direto ultrarrápido). Configura tudo <strong>uma única vez</strong>, assiste à introdução de cinema e nas próximas aberturas já cai direto trabalhando — sem telas chatas no caminho.
-        </p>
-        <div class="hero-actions">
-          <a href="#planos" class="btn gold">✳ Ver Planos &amp; Comprar Agora</a>
-          <a href="#licenca" class="btn primary">🔑 Entrar Online com Chave BC5</a>
-          <a href="#demonstra" class="btn">▶ Ver por Dentro</a>
-        </div>
-        <div class="proof-row">
-          <div class="proof-card" data-help-title="38 Modelos Gratuitos NVIDIA Build" data-help-what="Acesso escalonado a modelos gratuitos de código, raciocínio, visão e Bio/NIM da NVIDIA sem custo por token." data-help-how="Os planos liberam em degraus e o Fundador VIP desbloqueia todos os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM.">
-            <strong>Até 38 NVIDIA Free</strong>
-            <span>+ 14 modelos Bio/NIM no VIP</span>
-          </div>
-          <div class="proof-card" data-help-title="Liberdade Para Trocar Chaves e Fazer Upgrade" data-help-what="Você nunca fica engessado: pode inserir suas próprias chaves gratuitas (Google AI Studio, OpenRouter, NVIDIA) e pode trocar qualquer chave depois." data-help-how="Basta ir em Chaves & APIs ou repetir o setup sem precisar assistir à intro de novo.">
-            <strong>100% Flexível</strong>
-            <span>Pode trocar qualquer chave depois</span>
-          </div>
-          <div class="proof-card" data-help-title="Windows e macOS Nativo" data-help-what="Um programa só, otimizado para cada máquina: no Windows roda com os temas oficiais do BadClaude; no Mac assume desenho nativo da Apple." data-help-how="A nuvem envia atualizações assinadas em Ed25519 para as duas plataformas.">
-            <strong>Win + 🍎 macOS</strong>
-            <span>Desenho próprio no Mac</span>
-          </div>
-        </div>
-      </div>
+  <!-- HERO 3D FULL-BLEED INTEGRADO NATURALMENTE AO SITE (ZERO CAIXA / ZERO MOLDURA) -->
+  <section class="hero-3d-fullbleed" id="introStage" aria-label="BadClaude — Cyber-Doberman 3D Interativo">
+    <img src="/badclaude/assets/3d/renders/guardian-opus-3d.png" alt="Cyber-Doberman BadClaude Opus 3D" class="intro-poster-fallback" id="introPosterImg" />
+    <canvas id="hero3dCanvas" aria-label="Cena 3D WebGL 2: Cyber-Doberman Opus esmaga Claude e Astra, ruge, gira atrás do rabo e estende a pata dourada"></canvas>
+    <div class="hero-3d-scrim" aria-hidden="true"></div>
 
-      <div class="sim-card" id="demonstra">
-        <div class="sim-head">
-          <strong style="font-size:14.5px;color:#ffffff;">▶ Veja o BadClaude em Ação (Clique nas Abas)</strong>
-          <button type="button" class="help-q" data-help-title="Simulador Interativo do Produto" data-help-what="Mostra os 5 pilares reais que vêm dentro do BadClaude Desktop v6.7.1." data-help-how="Clique nas abas abaixo para alternar entre Harness, CLI, Vídeo 2D, 38 NVIDIA e macOS/Temas.">?</button>
+    <div class="hero-3d-inner" id="topo">
+      <div class="hero-3d-copy">
+        <div class="hero-3d-status-row">
+          <span class="intro-live-pill">
+            <span class="intro-pulse-dot" aria-hidden="true"></span>
+            <span>BadClaude 3D · Ao Vivo</span>
+          </span>
+          <span class="intro-phase-badge" id="introPhaseBadge">⚡ CARREGANDO PALCO 3D...</span>
         </div>
-        <div class="sim-tabs">
-          <button type="button" class="sim-tab active" data-demo="harness">🧪 Harness</button>
-          <button type="button" class="sim-tab" data-demo="cli">⚡ CLI Multi-IA</button>
-          <button type="button" class="sim-tab" data-demo="video">🎬 Vídeo 2D &amp; Voz</button>
-          <button type="button" class="sim-tab" data-demo="nvidia">🟢 38 NVIDIA</button>
-          <button type="button" class="sim-tab" data-demo="mac">🍎 Mac &amp; Temas</button>
+
+        <span class="hero-brand-kicker">🖥️ Harness Desktop (9 Estações) &amp; ⌨️ Harness CLI · Win Claro + ⌘ macOS Nativo</span>
+        <h1>Comande IAs sem pagar caro em API.</h1>
+        <p class="hero-sub">
+          A CLI e o Desktop são o <strong>mesmo Harness inteligente BadClaude v6.9.0</strong>: opere pelas <strong>9 estações minimalistas com SVGs (Chat, Create, Voice, BadBot, Compare, Benchmark, 229 Models, OpenInfinite e Settings)</strong> ou pelo <strong>terminal multi-motor</strong>. Configura uma vez e pode <strong>trocar qualquer chave depois</strong>.
+        </p>
+
+        <div class="hero-actions">
+          <button type="button" class="btn btn-roar" id="btnIntroRoar" aria-pressed="false">💻 Rever Saída do MacBook &amp; Som</button>
+          <a href="#planos" class="btn gold">✳ Escolher Plano via PIX</a>
+          <a href="#licenca" class="btn primary">🔑 Entrar com Chave BC5</a>
         </div>
-        <div class="sim-screen" id="demoScreen">
-          <div>
-            <h3 id="demoTitle">🧪 Modo Harness — Bancada Visual Guiada (Sem Complicação)</h3>
-            <ul class="sim-list" id="demoList">
-              <li>Na primeira linha de abertura você escolhe Harness (visual guiado) ou CLI (linha de comando).</li>
-              <li>Assiste à intro de cinema uma vez, define edição/tema/chaves e salva como seu padrão fixo.</li>
-              <li>Quando quiser mudar, clique em "Repetir Setup" para editar escolhas sem repetir a introdução.</li>
-              <li>Cofre automático de Skills ativa especialistas de código, vídeo, áudio e UI em 1 clique.</li>
-            </ul>
-          </div>
-          <div style="border-top:1px solid #1e293b;padding-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span id="demoFooter" style="font-size:12px;color:#7dd3fc;">Liberado a partir do BadCode Studio · 100% no Fundador VIP</span>
-            <a href="#checkout" class="btn gold sm">Garantir Minha Licença →</a>
-          </div>
+
+        <button type="button" class="sound-unlock-pill" id="introAudioHint">🔇 Som Bloqueado pelo Chrome — Clique em Qualquer Lugar p/ Ativar Rugido, Latido &amp; MacBook</button>
+
+        <div class="pet-tricks-bar">
+          <button type="button" class="pet-pill" data-pet-trick="paw">🐾 Dar a Pata</button>
+          <button type="button" class="pet-pill" data-pet-trick="bark">🔊 Latir &amp; Grunhir</button>
+          <button type="button" class="pet-pill" data-pet-trick="tail">🌀 Rodar no Rabo</button>
+          <button type="button" class="pet-pill" id="btnPetMute">🔊 Som</button>
+        </div>
+
+        <div class="hero-meta-strip">
+          <span><strong>3D Real:</strong> Sai do MacBook → Destrói Astra &amp; Claude → Senta e Segue o Mouse</span>
+          <span><strong>Portátil:</strong> Roda em qualquer pasta</span>
+          <span><strong>Updates:</strong> Mantenha dependências atualizadas</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <!-- DECK PARTE 1: BENTO SUPERIOR (EM NÚMEROS + PILARES NEON) -->
+    <section class="bento-duo" id="pilares">
+      <!-- TOPO ESQUERDO: EM NÚMEROS + LOBO CYBER -->
+      <article class="bento-plate">
+        <span class="plate-corner-tag">🐾 BadClaude Suite</span>
+        <h2 class="plate-title">BadClaude em números reais</h2>
+        <div class="stats-grid-stage">
+          <div class="stats-numbers">
+            <div class="stat-item">
+              <span class="stat-val">9</span>
+              <span class="stat-lbl"><strong>Estações no Harness Desktop</strong><br/>Chat · Create · Voice · BadBot · Models · Infinite</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">38+14</span>
+              <span class="stat-lbl"><strong>NVIDIA Build Free</strong><br/>+ 14 modelos Bio/NIM no VIP</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">229</span>
+              <span class="stat-lbl"><strong>Modelos Locais R$ 0</strong><br/>BadClaude Local + Advisor VRAM</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">256</span>
+              <span class="stat-lbl"><strong>Cofre de Skills</strong><br/>Zero "/" com seleção automática</span>
+            </div>
+            <div class="stat-item" style="grid-column:span 2;">
+              <span class="stat-val">R$ 0,00</span>
+              <span class="stat-lbl"><strong>BadClaude + OpenInfinite + BadBot</strong> — OpenRouter, OmniRouter, 9Router, Fila FIFO Crash-Safe &amp; 5 Temas em 2 sistemas (Win + macOS)</span>
+            </div>
+          </div>
+          <div class="stat-dog-stage">
+            <img src="/badclaude/assets/3d/renders/guardian-swarmlord-3d.png" alt="Lobo Cyber-Mecha BadClaude" />
+          </div>
+        </div>
+      </article>
+
+      <!-- TOPO DIREITO: 4 PILARES COM CRISTAIS NEON -->
+      <article class="bento-plate">
+        <span class="plate-corner-tag">✦ Arquitetura Unificada</span>
+        <h2 class="plate-title">Pilares do cockpit único</h2>
+        <div class="pillars-row">
+          <div class="pillar-card c-cyan">
+            <div class="pillar-head-row">
+              <div class="pillar-gem">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polygon points="12,2 21,8 17,21 7,21 3,8" fill="#38bdf8" opacity="0.85"/><polygon points="12,2 17,8 12,15 7,8" fill="#bae6fd"/></svg>
+              </div>
+              <h3>Check-Lock Real</h3>
+            </div>
+            <p>Na 1ª instalação verifica Node, Git, Python e CLIs. Só libera quando tudo estiver OK.</p>
+            <span class="pillar-badge" style="color:#7dd3fc;">Zero PC quebrado</span>
+          </div>
+
+          <div class="pillar-card c-emerald">
+            <div class="pillar-head-row">
+              <div class="pillar-gem">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polygon points="12,2 21,8 17,21 7,21 3,8" fill="#10b981" opacity="0.85"/><polygon points="12,2 17,8 12,15 7,8" fill="#a7f3d0"/></svg>
+              </div>
+              <h3>9 Estações + BadBot</h3>
+            </div>
+            <p>Chat SVG, Create, Voice, BadBot 3 colunas (FIFO), Compare, Benchmark, 229 Models e Infinite.</p>
+            <span class="pillar-badge" style="color:#6ee7b7;">Harness Desktop</span>
+          </div>
+
+          <div class="pillar-card c-crimson">
+            <div class="pillar-head-row">
+              <div class="pillar-gem">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polygon points="12,2 21,8 17,21 7,21 3,8" fill="#ff1e42" opacity="0.9"/><polygon points="12,2 17,8 12,15 7,8" fill="#fda4af"/></svg>
+              </div>
+              <h3>5 Temas + OpenInfinite</h3>
+            </div>
+            <p>Claro Vermelhinho, Escuro Pro, macOS Nativo, RGB e Retrô Win98 + OpenInfinite no 3º/4º preço.</p>
+            <span class="pillar-badge" style="color:#fda4af;">5 Temas Oficiais</span>
+          </div>
+
+          <div class="pillar-card c-gold">
+            <div class="pillar-head-row">
+              <div class="pillar-gem">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polygon points="12,2 21,8 17,21 7,21 3,8" fill="#facc15" opacity="0.9"/><polygon points="12,2 17,8 12,15 7,8" fill="#fef08a"/></svg>
+              </div>
+              <h3>Poder Sem Travas</h3>
+            </div>
+            <p>Todos os 38 NVIDIA Free + 14 Bio/NIM, Swarm multi-agente e cascata Ed25519.</p>
+            <span class="pillar-badge" style="color:#fde047;">Fundador VIP</span>
+          </div>
+        </div>
+      </article>
     </section>
 
-    <!-- WINDOWS TEMAS VS MACOS NATIVO -->
-    <section id="plataformas">
+    <!-- DECK PARTE 3: BENTO INFERIOR (4 SUPERPODERES + SIMULADOR | ESCADA DE PODER) -->
+    <section class="bento-duo">
+      <!-- INFERIOR ESQUERDO: 4 CAIXAS NUMERADAS + SIMULADOR INTEGRADO -->
+      <article class="bento-plate" id="demonstra">
+        <span class="plate-corner-tag">⚡ Interactive Deck</span>
+        <h2 class="plate-title">Nossas estações &amp; simulador ao vivo</h2>
+
+        <div class="num-grid-2x2">
+          <div class="num-box">
+            <span class="num-hollow">1</span>
+            <div>
+              <h4>BadBot Desktop 3 Colunas</h4>
+              <p>Teammates dedicados, fila FIFO crash-safe, automações (/automation) e entregas persistidas.</p>
+            </div>
+          </div>
+          <div class="num-box">
+            <span class="num-hollow">2</span>
+            <div>
+              <h4>OpenInfinite + Jailbreaks</h4>
+              <p>Gateway HY4 + modo sem censura + Trim Omni 2.4.1 liberados do 3º preço ao VIP.</p>
+            </div>
+          </div>
+          <div class="num-box">
+            <span class="num-hollow">3</span>
+            <div>
+              <h4>Create, Vídeo 2D &amp; Voz PT-BR</h4>
+              <p>Roteiros, Scene to Video, vetores SVG, personagens e voz neural a R$ 0,00 no Studio.</p>
+            </div>
+          </div>
+          <div class="num-box">
+            <span class="num-hollow">4</span>
+            <div>
+              <h4>Instalação 100% Portátil</h4>
+              <p>Check obrigatório na 1ª abertura, updates Ed25519 em cascata e paridade Windows/Mac.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-box">
+          <div class="sim-tabs" role="tablist" aria-label="Simulador de Modos BadClaude">
+            <button type="button" class="sim-tab active" role="tab" aria-selected="true" aria-controls="demoScreen" data-demo="harness">🖥️ Harness Desktop</button>
+            <button type="button" class="sim-tab" role="tab" aria-selected="false" aria-controls="demoScreen" data-demo="cli">⌨️ Harness CLI &amp; BadBot</button>
+            <button type="button" class="sim-tab" role="tab" aria-selected="false" aria-controls="demoScreen" data-demo="video">🎬 Create + Voz</button>
+            <button type="button" class="sim-tab" role="tab" aria-selected="false" aria-controls="demoScreen" data-demo="nvidia">🟢 38 NVIDIA Free</button>
+            <button type="button" class="sim-tab" role="tab" aria-selected="false" aria-controls="demoScreen" data-demo="mac">🍎 Win Claro + Mac</button>
+          </div>
+          <div class="sim-screen" id="demoScreen" role="tabpanel">
+            <h3 id="demoTitle">🖥️ Harness Desktop v6.9.0 — 9 Estações Segmentadas &amp; Composer SVG</h3>
+            <ul class="sim-list" id="demoList">
+              <li>Barra minimalista com 9 estações: Chat, Create, Voice, BadBot, Compare, Benchmark, Models (229), Infinite e Settings.</li>
+              <li>Composer clean com ícones SVG lineares, Agente CWD/Git, Neuron sem censura, contexto até 128K e sessões SQLite.</li>
+              <li>5 temas sincronizados em todos os subsistemas: Claro Vermelhinho, Escuro Pro, macOS Nativo, RGB e Retrô Win98.</li>
+              <li>Cofre automático aciona 256 skills sem precisar digitar comandos com barra "/".</li>
+            </ul>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;font-size:11.5px;color:#fda4af;">
+              <span id="demoFooter">Liberado a partir do BadCode Studio · 100% no Fundador VIP</span>
+              <span class="mono" style="color:#94a3b8;">v6.9.0</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- INFERIOR DIREITO: GRÁFICO ESCADA DE PODER + 3 REGRAS CHAVE -->
+      <article class="bento-plate">
+        <span class="plate-corner-tag">📈 Escala Progressiva</span>
+        <h2 class="plate-title">Escala ×5 em automação sem queimar sua cota</h2>
+
+        <div class="ladder-layout">
+          <div class="pyramid-stage">
+            <div class="pyramid-caption">Capacidade liberada por nível (v6.9.0)</div>
+            <div class="pyramid-bars" aria-label="Gráfico de evolução por plano">
+              <div class="p-col b1">
+                <span class="p-val">R$ 79</span>
+                <div class="p-bar"></div>
+                <span class="p-lbl">Essencial<br/>CLI Leve</span>
+              </div>
+              <div class="p-col b2">
+                <span class="p-val">R$ 179</span>
+                <div class="p-bar"></div>
+                <span class="p-lbl">Studio<br/>9 Estações</span>
+              </div>
+              <div class="p-col b3">
+                <span class="p-val">R$ 350</span>
+                <div class="p-bar"></div>
+                <span class="p-lbl">Cockpit Pro<br/>+Infinite</span>
+              </div>
+              <div class="p-col b4">
+                <span class="p-val">R$ 690</span>
+                <div class="p-bar"></div>
+                <span class="p-lbl">VIP<br/>52 NVIDIA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ladder-notes">
+            <div class="note-row">
+              <div class="note-ico" aria-hidden="true">🛠️</div>
+              <div>
+                <h4>Dependências Atualizadas (Obrigatório)</h4>
+                <p>Para o bom uso do app e recebimento contínuo das atualizações, mantenha Node.js, Git, Python e CLIs sempre atualizados no Check de abertura.</p>
+              </div>
+            </div>
+            <div class="note-row">
+              <div class="note-ico" aria-hidden="true">🔑</div>
+              <div>
+                <h4>Liberdade Total Para Trocar Chaves</h4>
+                <p>Use o Smart Pool grátis ou conecte suas chaves (OpenRouter, Google AI Studio, NVIDIA) — troque ou faça upgrade quando quiser.</p>
+              </div>
+            </div>
+            <div class="note-row">
+              <div class="note-ico" aria-hidden="true">🍎</div>
+              <div>
+                <h4>OpenInfinite Nativizado (3º Preço → VIP)</h4>
+                <p>Quem assina <b>Cockpit Pro (R$ 350)</b> ou <b>Fundador VIP (R$ 690)</b> ganha OpenInfinite + Infinite Code nativos na aba Jailbreaks.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- WINDOWS VS MACOS -->
+    <section class="bento-plate" id="plataformas">
       <div class="sec-head">
         <div>
-          <h2>Um Programa Unificado. Cada Sistema com Sua Própria Alma.</h2>
-          <p>O BadClaude mantém seus temas oficiais completos no Windows/PC e se adapta no Mac com visual nativo pensado exclusivamente para macOS.</p>
+          <h2>Um Programa Só. Alma Própria no Windows e no Mac.</h2>
+          <p>Visual limpo e minimalista com alternância instantânea entre os 5 temas oficiais sincronizados em todos os subsistemas.</p>
         </div>
-        <button type="button" class="help-q" data-help-title="Diferenciação Windows vs macOS" data-help-what="O painel de vendas usa identidade própria Dark Tech. Dentro do programa BadClaude, você escolhe o tema no Windows; já no Mac ele ativa design Apple nativo automaticamente." data-help-how="Não há mistura: cada sistema recebe o acabamento visual correto e mesma versão v6.7.1.">?</button>
       </div>
       <div class="os-grid">
-        <div class="os-card" data-help-title="BadClaude no Windows — Temas Próprios (Padrão Claro)" data-help-what="No Windows, tanto o BadClaude quanto o Harness abrem por padrão no tema Claro Limpo e permitem alternar para Escuro Pro, Clássico RGB, macOS ou Retrô Win98." data-help-how="Escolha seu tema favorito na configuração única ou no seletor superior.">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <strong style="font-size:16px;">🪟 Windows &amp; PC — Temas do BadClaude &amp; Harness</strong>
-            <span class="mono" style="font-size:11px;color:var(--cyan);">v6.8.0 Portátil</span>
-          </div>
-          <p style="font-size:13px;color:var(--muted);">Acomoda-se em qualquer pasta do Windows com padrão <strong>Claro Limpo</strong>, 5 temas sincronizados no BadClaude e no Harness, e zero processos duplicados.</p>
-          <div class="os-preview">
-            <div style="display:flex;justify-content:space-between;align-items:center;color:#7dd3fc;">
-              <span>BADCLAUDE v6.8.0 · HARNESS &amp; CLI</span>
-              <span>Padrão Claro · R$ 0 Smart Pool</span>
-            </div>
-            <div class="theme-chips">
-              <span class="theme-chip" style="background:#f1f5f9;color:#0f172a;border-color:#94a3b8;">☀️ Claro Limpo (Padrão)</span>
-              <span class="theme-chip">🌙 Escuro Pro</span>
-              <span class="theme-chip">🌈 Clássico RGB</span>
-              <span class="theme-chip">🪟 Retrô Win98</span>
-            </div>
+        <div class="os-card win">
+          <span class="os-pill">🪟 Windows 10 / 11 · PC 1 &amp; PC 2</span>
+          <h3>Padrão Claro Vermelhinho + Escuro Pro + Retrô Win98</h3>
+          <p>Nasce leve e nítido em modo claro carmesim; com 1 clique muda todos os painéis e menus para <strong>Escuro Pro</strong>, <strong>macOS</strong>, <strong>Retrô Win98</strong> ou <strong>RGB</strong>.</p>
+          <div class="win-mini-light">
+            <span style="width:10px;height:10px;border-radius:999px;background:#d91e36;display:inline-block;"></span>
+            <span>❤️ BadClaude Harness Desktop · Claro Clean · OpenInfinite + BadBot</span>
           </div>
         </div>
-
-        <div class="os-card mac" data-help-title="BadClaude no macOS — Desenho Nativo para Mac" data-help-what="No MacBook (Apple Silicon / Intel), o BadClaude não parece programa portado: usa janela hiddenInset com semáforos Apple, barras translúcidas, controles segmentados #0a84ff, fonte SF Pro e atalhos ⌘K / ⌥Z." data-help-how="Cada atualização publicada na nuvem atualiza automaticamente o /Applications/BadClaude.app.">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <strong style="font-size:16px;">🍎 macOS — Desenho Nativo Cupertino</strong>
-            <span class="mono" style="font-size:11px;color:#60a5fa;">Metal 3 / Apple Silicon</span>
-          </div>
-          <p style="font-size:13px;color:var(--muted);">Recursos visuais exclusivos do Mac: semáforos Apple integrados na barra, vibrância translúcida, menus nativos no topo da tela e atalhos <code class="mono">⌘</code>.</p>
-          <div class="os-preview" style="background:rgba(24,26,35,0.92);border-color:rgba(255,255,255,0.14);">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div class="mac-dots">
-                <span style="background:#ff5f57;"></span>
-                <span style="background:#febc2e;"></span>
-                <span style="background:#28c840;"></span>
-                <span style="margin-left:6px;color:#e5e7eb;font-weight:700;">BadClaude.app</span>
-              </div>
-              <span style="background:rgba(10,132,255,0.22);border:1px solid rgba(10,132,255,0.5);color:#9cd0ff;padding:2px 8px;border-radius:999px;font-size:11px;">⌘K · ⌥Z · Native Menu</span>
-            </div>
-            <div class="theme-chips">
-              <span class="theme-chip" style="background:#0a84ff;border-color:#3b9eff;color:#fff;">🍎 macOS Nativo</span>
-              <span class="theme-chip">Vibrância Sequoia</span>
-              <span class="theme-chip">Auto-sync /Applications</span>
-            </div>
+        <div class="os-card mac">
+          <span class="os-pill">⌘ macOS Apple Silicon &amp; Intel</span>
+          <h3>Interface Nativa Apple · Semáforo &amp; Vidro Crimson</h3>
+          <p>Quando aberto no MacBook, assume visual Cupertino nativo com fonte SF Pro, blur translúcido, atalhos <span class="mono">⌘K</span>/<span class="mono">⌥Z</span> e acento carmesim.</p>
+          <div class="mac-mini-glass">
+            <span class="mac-dots"><i style="background:#ff5f57;"></i><i style="background:#febc2e;"></i><i style="background:#28c840;"></i></span>
+            <span>🍎 Harness Desktop macOS · Nativo Crimson · ⌘K Paleta</span>
           </div>
         </div>
-      </div>
-      <div class="callout-box" style="margin-top:16px;margin-bottom:0;border-left-color:var(--cyan);"
-        data-help-title="Dependências Atualizadas (Obrigatório para Atualizações)"
-        data-help-what="Manter Node.js, Python, Git, FFmpeg e o runtime do sistema atualizados garante compatibilidade com os novos motores de IA, vídeo 2D, voz e com o atualizador automático assinado em nuvem."
-        data-help-how="Sempre aceite as atualizações de dependências e mantenha o sistema em dia para receber todas as versões novas sem falhas.">
-        <strong>⚠️ Requisito Obrigatório para Bom Uso e Atualizações:</strong> Para o bom uso do BadClaude e para continuar <strong>recebendo todas as atualizações automáticas</strong> (Windows e macOS), é <strong>obrigatório manter todas as dependências atualizadas</strong> no computador (Node.js, Python, Git, FFmpeg e runtime/drivers do sistema).
       </div>
     </section>
 
-    <!-- 4 PLANOS PROGRESSIVOS COM EMBLEMAS LUMINOSOS -->
+    <!-- 4 PLANOS OFICIAIS + AVISO OBRIGATÓRIO -->
     <section id="planos">
       <div class="sec-head">
         <div>
           <h2>Escolha Seu Nível de Poder</h2>
-          <p>Você começa pagando só pelo que precisa hoje e escala no seu ritmo — com total liberdade de trocar provedores e chaves.</p>
+          <p>Matriz transparente com separação real por plano. Você nunca fica preso e pode trocar qualquer chave depois.</p>
         </div>
-        <button type="button" class="help-q" data-help-title="Como Funciona a Escada de Planos" data-help-what="Nem todo recurso vem no plano 1, 2 ou 3: apenas o Fundador VIP libera 100% de tudo. Mas em qualquer plano você pode trocar qualquer chave depois e pedir upgrade." data-help-how="Clique em Escolher em qualquer card para preencher o checkout PIX abaixo.">?</button>
       </div>
 
-      <div class="callout-box">
-        <strong>Transparência Real:</strong> Cada edição desbloqueia mais motores e estações — e <strong>somente o Fundador VIP libera 100% de tudo (todos os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM)</strong>. Se começar em um plano menor, você pode evoluir pagando a diferença e pode <strong>trocar qualquer chave depois</strong> a qualquer hora.
+      <!-- AVISO OBRIGATÓRIO DE DEPENDÊNCIAS ATUALIZADAS -->
+      <div class="dep-notice" role="note" aria-label="Aviso obrigatório de dependências atualizadas">
+        <div class="dep-notice-copy">
+          <strong style="color:#fda4af;">⚠ REQUISITO OBRIGATÓRIO:</strong> Para o <strong>bom uso</strong> do BadClaude e para <strong>continuar recebendo atualizações automáticas (v6.9.0+)</strong>, é obrigatório manter <strong>todas as dependências do sistema atualizadas</strong> (Node.js, Git, Python e CLIs nativos).
+        </div>
+        <span class="dep-notice-badge">Check-Lock no 1º Boot ✓</span>
       </div>
 
       <div class="plans-grid">
         <!-- 1. ESSENCIAL -->
-        <article class="plan-card" data-help-title="Plano 1: Essencial (R$ 79)" data-help-what="Entrada enxuta para usar CLI e Chat limpo com OpenRouter (:free) e chave Google AI Studio opcional em 1 computador." data-help-how="Ideal para testar em notebook leve. Clique para gerar pedido PIX de R$ 79.">
+        <article class="plan-card">
           <div>
             <div class="plan-top">
               <div class="plan-name-wrap">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 1.5 C12 7.2 7.2 12 1.5 12 C7.2 12 12 16.8 12 22.5 C12 16.8 16.8 12 22.5 12 C16.8 12 12 7.2 12 1.5 Z" fill="#30b9d1"/></svg>
+                <img src="/badclaude/assets/3d/renders/guardian-caramelo-3d.png" alt="Caramelo" class="plan-dog-mini" />
                 <span>Essencial</span>
               </div>
               <span class="plan-meta">7d · 1 PC</span>
             </div>
             <div class="plan-price">R$ 79 <small>/ licença</small></div>
-            <p class="plan-desc">Chat e código direto sem distrações, leve em qualquer máquina.</p>
+            <p class="plan-desc">Harness CLI + Chat limpo para notebooks básicos, zero peso.</p>
             <ul class="plan-list">
-              <li class="ok">Terminal CLI + Chat limpo</li>
+              <li class="ok">Harness CLI + Chat direto</li>
               <li class="ok">OpenRouter (:free) guiado</li>
+              <li class="ok">6 Temas (Claro Win / Nativo Mac)</li>
               <li class="ok">Pode trocar qualquer chave depois</li>
-              <li class="no">Sem Fábrica Vídeo 2D &amp; Voz</li>
-              <li class="no">Sem modelos NVIDIA Build</li>
-              <li class="no">Sem Equipe IA / 2º PC</li>
+              <li class="no">Sem Vídeo 2D &amp; Voz PT-BR</li>
+              <li class="no">Sem OpenInfinite nativo / NVIDIA</li>
             </ul>
           </div>
           <button type="button" class="btn" onclick="selectPlanOrder('basic')">Escolher Essencial</button>
         </article>
 
         <!-- 2. BADCODE STUDIO -->
-        <article class="plan-card" data-help-title="Plano 2: BadCode Studio (R$ 179)" data-help-what="Libera o estúdio visual Harness, Fábrica de Vídeo 2D, voz em português grátis, Google AI Studio e OmniRouter (:20128)." data-help-how="Clique para selecionar o BadCode Studio (R$ 179 · 30 dias).">
+        <article class="plan-card">
           <div>
             <div class="plan-top">
               <div class="plan-name-wrap">
-                <svg viewBox="0 0 24 24" width="24" height="24"><rect x="10" y="3" width="4" height="4" transform="rotate(45 12 5)" fill="#0fb981"/><rect x="17" y="10" width="4" height="4" transform="rotate(45 19 12)" fill="#0fb981"/><rect x="10" y="17" width="4" height="4" transform="rotate(45 12 19)" fill="#0fb981"/><rect x="3" y="10" width="4" height="4" transform="rotate(45 5 12)" fill="#0fb981"/></svg>
+                <img src="/badclaude/assets/3d/renders/guardian-astra-3d.png" alt="Astra" class="plan-dog-mini" />
                 <span>BadCode Studio</span>
               </div>
               <span class="plan-meta">30d · 1 PC</span>
             </div>
             <div class="plan-price">R$ 179 <small>/ 30 dias</small></div>
-            <p class="plan-desc">5 estações visuais + vídeo 2D e narração em português R$ 0,00.</p>
+            <p class="plan-desc">9 estações no Harness Desktop, BadBot integrado, Vídeo 2D e Voz PT-BR R$ 0,00.</p>
             <ul class="plan-list">
-              <li class="ok">Harness Visual + CLI Multi-IA</li>
-              <li class="ok">Fábrica Vídeo 2D &amp; Voz PT-BR</li>
+              <li class="ok">Harness Desktop (9 Estações + Composer SVG)</li>
+              <li class="ok">Create Studio, Vídeo 2D &amp; Voz PT-BR</li>
               <li class="ok">OpenRouter + Google AI Studio</li>
-              <li class="ok">OmniRouter (:20128) guiado</li>
-              <li class="no">Sem 21–38 modelos NVIDIA Free</li>
-              <li class="no">Sem 2 máquinas simultâneas</li>
+              <li class="ok">OmniRouter (:20128) + 229 Locais</li>
+              <li class="no">Sem OpenInfinite nativo (só 3º+ preço)</li>
+              <li class="no">Sem NVIDIA Free / 2º PC</li>
             </ul>
           </div>
           <button type="button" class="btn emerald" onclick="selectPlanOrder('mid')">Escolher Studio</button>
         </article>
 
         <!-- 3. COCKPIT PRO (SUPERBAD) -->
-        <article class="plan-card" data-help-title="Plano 3: Cockpit Pro SuperBad (R$ 350)" data-help-what="Libera 21 modelos NVIDIA Build Free Chat/Embeddings, 9Router (:20129), Equipe de Agentes IA e uso em até 2 computadores (Win + Mac)." data-help-how="Clique para escolher o Cockpit Pro por R$ 350.">
+        <article class="plan-card pro-hermes">
           <div>
             <div class="plan-top">
               <div class="plan-name-wrap">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2L13.5 9.2L19 5L14.8 10.5L22 12L14.8 13.5L19 19L13.5 14.8L12 22L10.5 14.8L5 19L9.2 13.5L2 12L9.2 10.5L5 5L10.5 9.2Z" fill="#fa913c"/></svg>
+                <img src="/badclaude/assets/3d/renders/guardian-opus-3d.png" alt="Opus" class="plan-dog-mini" style="border-color:#e11d2e;" />
                 <span>Cockpit Pro</span>
               </div>
-              <span class="plan-meta">30d · 2 PCs</span>
+              <span class="plan-meta" style="background:rgba(255,30,66,0.18);color:#fda4af;">30d · 2 PCs</span>
             </div>
             <div class="plan-price">R$ 350 <small>/ 30 dias</small></div>
-            <p class="plan-desc">Produção pesada com Swarm de Agentes, 9Router e até 2 PCs.</p>
+            <p class="plan-desc">Produção pesada: Swarm + 21 NVIDIA + OpenInfinite nativo em 2 PCs.</p>
             <ul class="plan-list">
-              <li class="ok">Tudo do Studio em até 2 PCs</li>
+              <li class="ok">Tudo do Studio em <strong>até 2 PCs</strong></li>
+              <li class="ok"><strong>OpenInfinite + Infinite Code Nativos</strong></li>
+              <li class="ok">Jailbreaks + Trim Omni 2.4.1</li>
+              <li class="ok">21 NVIDIA Free + 9Router (:20129)</li>
               <li class="ok">Equipe IA &amp; Automação Swarm</li>
-              <li class="ok">OmniRouter + 9Router (:20129)</li>
-              <li class="ok">21 modelos NVIDIA Free</li>
-              <li class="ok"><strong>OpenInfinite v6.1 Incluso Grátis (Win + Mac)</strong></li>
-              <li class="no">Sem todos os 38 NVIDIA Build</li>
-              <li class="no">Sem 14 Bio/NIM &amp; VIP Cascata</li>
+              <li class="no">Sem todos os 38 NVIDIA + 14 Bio/NIM</li>
             </ul>
           </div>
-          <button type="button" class="btn primary" onclick="selectPlanOrder('superbad')">Escolher Cockpit Pro</button>
+          <button type="button" class="btn crimson" onclick="selectPlanOrder('superbad')">Escolher Cockpit Pro</button>
         </article>
 
         <!-- 4. FUNDADOR VIP -->
-        <article class="plan-card founder" data-help-title="Plano 4: Fundador VIP — 100% Liberado (R$ 690)" data-help-what="Único plano sem limitações: todos os 38 modelos gratuitos NVIDIA Build + 14 modelos Bio/NIM, todas as estações e atualização imediata Win + macOS." data-help-how="Clique para selecionar Fundador VIP no PIX e desbloquear 100% do ecossistema.">
+        <article class="plan-card founder">
           <div>
             <div class="plan-top">
               <div class="plan-name-wrap" style="color:#fde047;">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 1L14.2 8.8L21.5 4.2L15.6 10.7L23 12L15.6 13.3L21.5 19.8L14.2 15.2L12 23L9.8 15.2L2.5 19.8L8.4 13.3L1 12L8.4 10.7L2.5 4.2L9.8 8.8Z" fill="#facc15"/></svg>
+                <img src="/badclaude/assets/3d/renders/guardian-swarmlord-3d.png" alt="Lobo" class="plan-dog-mini" style="border-color:#f5c518;" />
                 <span>Fundador VIP</span>
               </div>
               <span class="plan-meta">TUDO ON</span>
             </div>
             <div class="plan-price" style="color:#fde047;">R$ 690 <small>/ VIP</small></div>
-            <p class="plan-desc" style="color:#e2e8f0;"><strong>Acesso absoluto sem travas.</strong> Todos os motores, modelos e updates na frente.</p>
+            <p class="plan-desc" style="color:#e2e8f0;"><strong>Acesso absoluto sem travas.</strong> Todos os motores e updates na frente.</p>
             <ul class="plan-list">
               <li class="ok"><strong>Todos os 38 modelos gratuitos NVIDIA Build</strong></li>
-              <li class="ok"><strong>+ 14 modelos Bio/NIM (52 NVIDIA total)</strong></li>
-              <li class="ok">Google, OpenRouter, OmniRouter, 9Router, Ollama</li>
-              <li class="ok">Todas as estações + macOS Nativo VIP</li>
-              <li class="ok"><strong>OpenInfinite v6.1 Pro Incluso Grátis (Win + Mac)</strong></li>
-              <li class="ok">Atualização imediata em nuvem (Win + Mac)</li>
-              <li class="ok">Suporte VIP para troca de chaves/dispositivos</li>
+              <li class="ok"><strong>+ 14 Bio/NIM (52 NVIDIA total)</strong></li>
+              <li class="ok"><strong>OpenInfinite + Infinite Code VIP</strong></li>
+              <li class="ok">Google, OpenRouter, Omni, 9Router, Ollama</li>
+              <li class="ok">Cascata Nuvem VIP Imediata (Win + Mac)</li>
+              <li class="ok">Suporte VIP p/ troca de chaves/PCs</li>
             </ul>
           </div>
           <button type="button" class="btn gold" onclick="selectPlanOrder('founder')">✳ Escolher Fundador VIP</button>
@@ -537,20 +1455,19 @@
       </div>
     </section>
 
-    <!-- COMPARATIVO DETALHADO -->
-    <section id="comparativo">
+    <!-- COMPARATIVO TRANSPARENTE -->
+    <section class="bento-plate" id="comparativo">
       <div class="sec-head">
         <div>
           <h2>Comparativo Transparente de Recursos</h2>
-          <p>Veja exatamente o que muda entre cada edição antes de gerar o seu PIX.</p>
+          <p>O que realmente vai em cada pacote antes de você gerar seu pedido PIX.</p>
         </div>
-        <button type="button" class="help-q" data-help-title="Tabela Comparativa" data-help-what="Compara recurso por recurso para você comprovar que só o Fundador VIP entrega o pacote 100% irrestrito." data-help-how="Passe o mouse + Shift+I em qualquer plano acima se quiser detalhes extras.">?</button>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Recurso / Poder do Programa</th>
+              <th>Recurso / Poder Real</th>
               <th>✦ Essencial</th>
               <th>❖ BadCode Studio</th>
               <th>✴ Cockpit Pro</th>
@@ -558,205 +1475,290 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Escolha na Abertura: Harness Visual ou CLI</td><td>CLI Limpo</td><td>✓ Harness + CLI</td><td>✓ Harness + CLI</td><td class="col-vip">✓ Total + Skills Pro</td></tr>
-            <tr><td>Fábrica de Vídeos 2D + Voz PT-BR R$ 0,00</td><td>—</td><td>✓ Incluso</td><td>✓ Incluso</td><td class="col-vip">✓ Prioridade Máxima</td></tr>
-            <tr><td>OpenRouter (:free) &amp; Google AI Studio</td><td>OpenRouter</td><td>OR + Google</td><td>OR + Google</td><td class="col-vip">✓ Todos os Motores</td></tr>
-            <tr><td>Roteadores OmniRouter (:20128) &amp; 9Router (:20129)</td><td>—</td><td>OmniRouter</td><td>Omni + 9Router</td><td class="col-vip">✓ Cascata Completa</td></tr>
+            <tr><td>Harness Desktop (9 Estações + Composer SVG) + Harness CLI + BadBot</td><td>CLI Leve</td><td>✓ Completo (9 Estações)</td><td>✓ Completo + BadBot Swarm</td><td class="col-vip">✓ Máximo + Skills VIP</td></tr>
+            <tr><td>Intro 3D Doberman Opus + Check Obrigatório Dependências</td><td>✓ Incluso</td><td>✓ Incluso</td><td>✓ Incluso</td><td class="col-vip">✓ Prioridade VIP</td></tr>
+            <tr><td>Create Studio, Vídeo 2D + Voz PT-BR R$ 0,00</td><td>—</td><td>✓ Incluso</td><td>✓ Incluso</td><td class="col-vip">✓ Prioridade Máxima</td></tr>
+            <tr><td><strong>OpenInfinite + Infinite Code Embutidos (Jailbreaks + HY4 + Trim)</strong></td><td>🔒 Só app avulso</td><td>🔒 Só app avulso</td><td><strong>✓ Desbloqueado (Win + Mac)</strong></td><td class="col-vip"><strong>✓ Desbloqueado VIP</strong></td></tr>
             <tr><td>38 modelos gratuitos NVIDIA Build + 14 Bio/NIM</td><td>—</td><td>—</td><td>21 NVIDIA Chat</td><td class="col-vip">✓ Todos os 38 + 14 Bio</td></tr>
-            <tr><td>OpenInfinite v6.1 Win + macOS (Gateway :4114 HY4 #1)</td><td>— (1h Demo)</td><td>— (1h Demo)</td><td><strong>✓ Grátis Incluso</strong></td><td class="col-vip"><strong>✓ Grátis Incluso VIP</strong></td></tr>
-            <tr><td>Pode trocar qualquer chave depois + Upgrade</td><td>✓ Sim</td><td>✓ Sim</td><td>✓ Sim</td><td class="col-vip">✓ Ilimitado</td></tr>
-            <tr><td>Temas Windows + Desenho Nativo 🍎 macOS</td><td>1 PC</td><td>1 PC</td><td>Até 2 PCs</td><td class="col-vip">✓ Cascata Nuvem VIP</td></tr>
+            <tr><td>Roteadores OpenRouter, Google, OmniRouter &amp; 9Router</td><td>OpenRouter</td><td>OR + Google + Omni</td><td>Omni + 9Router</td><td class="col-vip">✓ Cascata Completa</td></tr>
+            <tr><td>Pode trocar qualquer chave depois + 5 Temas Sincronizados (Win/Mac)</td><td>1 PC</td><td>1 PC</td><td>Até 2 PCs (Win+Mac)</td><td class="col-vip">✓ Ilimitado VIP</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- CHECKOUT PIX + ÁREA DO CLIENTE (LOGIN ONLINE + SALVAR CHAVE) -->
+    <!-- CHECKOUT PIX + ÁREA DO CLIENTE ONLINE -->
     <section class="dual-grid">
-      <div class="panel" id="checkout">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-          <h2 style="font-size:20px;font-weight:900;">💸 Comprar Licença via PIX Direto</h2>
-          <button type="button" class="help-q" data-help-title="Checkout PIX Instantâneo" data-help-what="Gera seu pedido oficial com QR Code PIX para 68 99226-9296 (Raiane Leoncio). Após enviar o comprovante, aprovamos no Dashboard Control e sua chave BC5 é liberada." data-help-how="Escolha o plano, preencha nome e WhatsApp e clique em Gerar Pedido PIX.">?</button>
+      <div class="bento-plate" id="checkout">
+        <div style="margin-bottom:14px;">
+          <h2 style="font-family:var(--font-display);font-size:20px;font-weight:800;">💸 Comprar Licença via PIX Direto</h2>
+          <p style="font-size:12.5px;color:var(--muted);margin-top:3px;">Gera seu pedido oficial com QR Code PIX e validação rápida via Dashboard Control.</p>
         </div>
 
-        <div class="pix-card">
-          <div style="font-weight:800;color:#7dd3fc;">Dados Oficiais do Recebedor PIX:</div>
+        <div class="pix-card" style="margin-bottom:14px;">
+          <div style="font-weight:800;color:#fda4af;">Dados Oficiais do Recebedor PIX:</div>
           <div>Chave Telefone: <span class="mono" style="font-weight:800;color:#ffffff;">68 99226-9296</span> &nbsp;|&nbsp; Titular: <strong>Raiane Leoncio</strong></div>
-          <button type="button" class="btn sm" style="align-self:flex-start;" onclick="copyPixKey()">📋 Copiar Chave PIX (68 99226-9296)</button>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="btn sm" id="btnCopyPixKey" onclick="copyPixKey()">📋 Copiar Chave PIX (68 99226-9296)</button>
+            <span id="pixCopyStatus" role="status" aria-live="polite" style="font-size:12px;font-weight:700;color:#10b981;"></span>
+          </div>
         </div>
 
         <form id="orderForm">
           <div class="field">
-            <label for="ordPlan">Plano Escolhido</label>
+            <label for="ordPlan">Plano Desejado</label>
             <select id="ordPlan">
-              <option value="founder">✳ Fundador VIP — R$ 690,00 (100% Tudo Liberado)</option>
-              <option value="superbad" selected>✴ Cockpit Pro (SuperBad) — R$ 350,00 (Até 2 PCs)</option>
-              <option value="mid">❖ BadCode Studio — R$ 179,00 (5 Estações)</option>
-              <option value="basic">✦ Essencial (Básico) — R$ 79,00 (Entrada Leve)</option>
+              <option value="founder">✳ Fundador VIP — R$ 690,00 (38 NVIDIA + OpenInfinite VIP)</option>
+              <option value="superbad" selected>✴ Cockpit Pro (SuperBad) — R$ 350,00 (2 PCs + OpenInfinite + BadBot)</option>
+              <option value="mid">❖ BadCode Studio — R$ 179,00 (9 Estações + Create + Vídeo 2D)</option>
+              <option value="basic">✦ Essencial (Básico) — R$ 79,00 (Harness CLI Leve)</option>
             </select>
           </div>
           <div class="field">
             <label for="ordName">Seu Nome Completo</label>
-            <input id="ordName" type="text" required placeholder="Ex.: João da Silva">
+            <input id="ordName" type="text" required placeholder="Ex.: João da Silva" />
           </div>
           <div class="field">
-            <label for="ordContact">Seu WhatsApp ou E-mail (entrega da chave)</label>
-            <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999">
+            <label for="ordContact">Seu WhatsApp (para envio da chave BC5)</label>
+            <input id="ordContact" type="text" required placeholder="Ex.: (68) 99999-9999" />
           </div>
-          <button type="submit" class="btn gold" style="width:100%;">💸 Gerar Pedido PIX Agora</button>
+          <button type="submit" class="btn gold" id="btnOrderSubmit" style="width:100%;">⚡ Gerar Pedido &amp; QR Code PIX</button>
+          <div id="orderErrorStatus" class="inline-feedback" role="alert" style="color:#f43f5e;"></div>
         </form>
 
         <div id="orderResultBox" class="result-box">
           <strong style="color:#10b981;" id="orderResultHead">Pedido Gerado!</strong>
           <div class="mono" id="orderResultCode" style="background:#04060b;padding:8px;border:1px solid #1e293b;border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
           <div id="orderPixQrWrap" style="text-align:center;"></div>
-          <div class="field" style="margin-bottom:2px;">
-            <label for="ordReceiptNote">Enviar Nota ou Código E2E do Comprovante PIX:</label>
-            <input id="ordReceiptNote" type="text" placeholder="Ex.: PIX enviado agora por João - R$ 350">
+          <div class="field" style="margin:6px 0 0;">
+            <label for="ordReceiptNote">Enviar Comprovante / Identificador do PIX</label>
+            <input id="ordReceiptNote" type="text" placeholder="Ex.: PIX enviado agora por João - R$ 350" />
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <button type="button" class="btn emerald sm" id="btnSendReceipt">✓ Enviar Comprovante</button>
             <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn sm">📱 Abrir WhatsApp</a>
           </div>
-          <div id="orderReceiptStatus" style="font-size:12px;font-weight:700;"></div>
+          <div id="orderReceiptStatus" role="status" aria-live="polite" style="font-size:12px;font-weight:700;"></div>
         </div>
       </div>
 
-      <div class="panel" id="licenca">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-          <h2 style="font-size:20px;font-weight:900;">🔑 Área do Cliente — Entrar Online</h2>
-          <button type="button" class="help-q" data-help-title="Login Online com Sua Chave BC5" data-help-what="Conecta no servidor de licenças em nuvem (Ed25519 + HWID), confirma seu plano ativo e permite deixar a chave salva no navegador para não precisar digitar novamente." data-help-how="Cole sua chave BC5-... abaixo, deixe a opção Salvar marcada e clique em Logar Online.">?</button>
+      <div class="bento-plate" id="licenca" style="display:flex;flex-direction:column;">
+        <div style="margin-bottom:10px;">
+          <h2 style="font-family:var(--font-display);font-size:20px;font-weight:800;">🔑 Área do Cliente — Entrar Online</h2>
         </div>
-        <p style="font-size:13px;color:var(--muted);">Já comprou sua licença? Cole sua chave (<code class="mono">BC5-FND-...</code>, <code class="mono">BC5-MID-...</code> ou <code class="mono">BC5-BSC-...</code>) para validar online na hora:</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">Já comprou sua licença? Cole sua chave (<code class="mono">BC5-FND-...</code>, <code class="mono">BC5-MID-...</code> ou <code class="mono">BC5-BSC-...</code>) para validar na hora:</p>
 
         <form id="verifyForm">
           <div class="field">
             <label for="licKeyInput">Sua Chave BadClaude</label>
-            <input id="licKeyInput" type="text" placeholder="BC5-FND-..." class="mono" required>
+            <input id="licKeyInput" type="text" placeholder="BC5-FND-..." class="mono" required />
           </div>
           <label class="save-chk">
-            <input type="checkbox" id="chkSaveWebKey" checked style="width:16px;height:16px;accent-color:#10b981;">
+            <input type="checkbox" id="chkSaveWebKey" checked style="width:16px;height:16px;accent-color:#10b981;" />
             <span>Salvar minha chave neste computador (entrar automático sem digitar de novo)</span>
           </label>
-          <button type="submit" class="btn primary" style="width:100%;">🔓 Logar Online Agora</button>
+          <button type="submit" class="btn crimson" id="btnVerifySubmit" style="width:100%;">🔓 Logar Online Agora</button>
         </form>
 
-        <div id="licResultBox" class="result-box"></div>
-        <div id="licSavedActions" style="display:none;gap:8px;flex-wrap:wrap;">
+        <div id="licResultBox" class="result-box" role="status" aria-live="polite"></div>
+        <div id="licSavedActions" style="display:none;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center;">
           <button type="button" class="btn sm" id="btnCopySavedWebKey">📋 Copiar Chave Salva</button>
           <button type="button" class="btn sm" id="btnForgetWebKey">🗑️ Trocar / Esquecer Chave</button>
+          <span id="licCopyFeedback" role="status" aria-live="polite" style="font-size:12px;font-weight:700;color:#10b981;"></span>
         </div>
 
-        <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);">
-          Precisa fazer upgrade ou liberar troca de máquina (Windows ↔ macOS)?<br>
+        <div style="margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,0.09);font-size:12.5px;color:var(--muted);">
+          Precisa fazer upgrade ou liberar troca de máquina (Windows ↔ macOS)?<br />
           <a href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald sm" style="margin-top:9px;">📱 WhatsApp Suporte: (68) 99226-9296</a>
         </div>
       </div>
     </section>
 
-    <!-- PROPAGANDA RECÍPROCA OPENINFINITE v6.1 -->
-    <section aria-label="Conheça também o OpenInfinite" style="background:linear-gradient(135deg,#091224 0%,#0e1934 55%,#121a35 100%);border:1px solid rgba(56,189,248,0.45);border-radius:18px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;box-shadow:0 18px 46px rgba(2,132,199,0.14);">
+    <!-- BANNER RECÍPROCO APP SEPARADO OPENINFINITE (TEXTO 3º/4º PREÇO) -->
+    <section class="bento-plate" aria-label="Conheça também o app separado OpenInfinite" style="background:linear-gradient(135deg,rgba(14,18,38,0.94) 0%,rgba(28,12,28,0.94) 100%);border-color:rgba(56,189,248,0.42);padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:16px;flex:1;min-width:260px;">
-        <img src="/openinfinite/assets/openinfinite_silver.png" alt="OpenInfinite" style="width:60px;height:60px;border-radius:14px;flex-shrink:0;box-shadow:0 8px 24px rgba(56,189,248,0.28);" onerror="this.style.display='none'">
+        <img src="/openinfinite/assets/openinfinite_silver.png" alt="OpenInfinite" style="width:58px;height:58px;border-radius:14px;flex-shrink:0;box-shadow:0 8px 24px rgba(56,189,248,0.28);" onerror="this.style.display='none'" />
         <div>
           <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;color:#7dd3fc;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.35);padding:3px 9px;border-radius:999px;margin-bottom:6px;">
-            ∞ NOVO LANÇAMENTO · DEMONSTRAÇÃO GRÁTIS 1 HORA (WIN &amp;  MAC)
+            ∞ PRODUTO AVULSO SEPARADO · DEMO 1 HORA (WIN &amp; macOS)
           </div>
-          <h3 style="font-size:20px;font-weight:900;color:#ffffff;margin-bottom:4px;">Quer só o Roteador Infinite Model + Painel Apple Liquid Glass?</h3>
-          <p style="font-size:13.5px;color:#cbd5e1;max-width:68ch;">
-            Conheça o <strong>OpenInfinite v6.1</strong>: conexão protegida anti-limite, troca invisível de modelos grátis (HY4 #1), auto-configuração em 1 clique e temas Escuro, Claro e Liquid Glass. <em>Nota: qualquer plano do BadClaude já inclui o OpenInfinite completo e destravado dentro dele!</em>
+          <h3 style="font-size:18px;font-weight:800;color:#ffffff;margin-bottom:4px;">Quer apenas o App OpenInfinite + Gateway HY4 isolado?</h3>
+          <p style="font-size:13px;color:#cbd5e1;max-width:68ch;">
+            O <strong>OpenInfinite v6.1</strong> também é vendido separadamente para quem quer só o roteador HY4 e Jailbreaks enxutos. <em>Dentro do BadClaude, o pacote nativo completo (OpenInfinite + Infinite Code) já vai destravado a partir do <strong>3º preço (Cockpit Pro R$ 350)</strong> até o <strong>Fundador VIP (R$ 690)</strong>.</em>
           </p>
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="/openinfinite/" class="btn primary" style="white-space:nowrap;">∞ Testar OpenInfinite Grátis (1h) →</a>
+        <a href="/openinfinite/" class="btn primary" style="white-space:nowrap;">∞ Ver App OpenInfinite Avulso →</a>
       </div>
     </section>
-  </main>
 
-  <button type="button" class="hover-hud" id="hoverHudBtn" onclick="openHelpModal(null)">
-    <span>💡</span>
-    <span id="hoverBarHint">Passe o mouse + <strong>Shift + I</strong> para explicar qualquer recurso</span>
-  </button>
-
-  <!-- MODAL DARK TECH SHIFT + I -->
-  <div id="shiftIModal" role="dialog" aria-modal="true" aria-label="Explicação Rápida Shift+I">
-    <div class="shift-box">
-      <div class="shift-head">
-        <span>ⓘ Ajuda Rápida BadClaude · Shift + I</span>
-        <button type="button" class="btn sm" id="btnCloseShiftI" style="padding:3px 9px;">✕</button>
-      </div>
-      <div class="shift-body">
-        <h3 id="shiftITitle" style="color:#ffffff;font-size:16px;font-weight:800;">Entenda este item</h3>
-        <div><strong style="color:var(--cyan);">O que significa:</strong> <span id="shiftIWhat" style="color:#e2e8f0;">—</span></div>
-        <div><strong style="color:var(--emerald);">Como funciona para você:</strong> <span id="shiftIHow" style="color:#e2e8f0;">—</span></div>
-        <div style="display:flex;justify-content:flex-end;margin-top:6px;">
-          <button type="button" class="btn primary sm" id="btnOkShiftI">Entendi [ESC]</button>
-        </div>
+    <!-- FAIXA CLARA CONTRASTADA NA BASE DO DECK -->
+    <div class="bottom-cta-dock">
+      <span class="bottom-cta-text">Para ativar sua licença ou gerar o pedido PIX, clique ao lado →</span>
+      <div class="bottom-cta-actions">
+        <a href="#licenca" class="dock-pix-btn" style="background:#e2e8f0;color:#0f172a;">🔑 Já tenho Chave</a>
+        <a href="#checkout" class="dock-pix-btn">💸 Ir para Checkout PIX</a>
       </div>
     </div>
-  </div>
+
+    <footer class="site-footer">
+      BadClaude v6.9.0 Cyber-Mecha · Junior Play Studio · Suporte PIX &amp; Licenças: (68) 99226-9296 (Raiane Leoncio) · Windows 10/11 &amp; macOS
+    </footer>
+  </main>
+
+  <script type="module">
+    import { mountFortressBackground } from '/badclaude/assets/js/fortress-bg.mjs';
+    import { Hero3DStage } from '/badclaude/assets/js/hero-3d-stage.mjs';
+
+    const stageEl = document.getElementById('introStage');
+    const canvasEl = document.getElementById('hero3dCanvas');
+    const phaseBadge = document.getElementById('introPhaseBadge');
+    const audioHint = document.getElementById('introAudioHint');
+    const btnRoar = document.getElementById('btnIntroRoar');
+    const btnMute = document.getElementById('btnPetMute');
+
+    try {
+      mountFortressBackground('#fortressBgCanvas');
+    } catch (err) {
+      console.warn('[BadClaude Fortress] fallback:', err);
+    }
+
+    let heroStage = null;
+    try {
+      heroStage = new Hero3DStage(canvasEl, {
+        onPhaseChange(label) {
+          if (phaseBadge) phaseBadge.textContent = label;
+        },
+        onAudioState(unlocked, muted) {
+          if (unlocked && btnRoar) {
+            btnRoar.setAttribute('aria-pressed', 'true');
+          }
+          if (audioHint) {
+            audioHint.classList.toggle('unlocked', Boolean(unlocked && !muted));
+            if (muted) {
+              audioHint.textContent = '🔇 Som Silenciado — Clique aqui para ligar novamente.';
+            } else if (unlocked) {
+              audioHint.textContent = '🔊 Som 3D Ativo — Doberman interativo seguindo seu mouse com latido, pata e giro!';
+            }
+          }
+          if (btnMute) {
+            btnMute.textContent = muted ? '🔇 Mudo' : '🔊 Som';
+          }
+        },
+        onContextLost(lost) {
+          if (stageEl) stageEl.classList.toggle('reduced-static', Boolean(lost));
+          if (phaseBadge) {
+            phaseBadge.textContent = lost ? 'PREVIEW ESTÁTICO 3D' : 'WEBGL RESTAURADO ✓';
+          }
+        },
+      });
+    } catch (err) {
+      console.error('[BadClaude 3D] Fallback ativado:', err);
+      if (stageEl) stageEl.classList.add('reduced-static');
+    }
+
+    if (btnRoar) {
+      btnRoar.addEventListener('click', () => {
+        heroStage?.restartChoreography(true);
+      });
+    }
+    if (audioHint) {
+      audioHint.addEventListener('click', () => {
+        heroStage?.restartChoreography(true);
+      });
+    }
+    if (btnMute) {
+      btnMute.addEventListener('click', () => {
+        heroStage?.toggleMute();
+      });
+    }
+    document.querySelectorAll('[data-pet-trick]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        heroStage?.triggerTrick(btn.dataset.petTrick || 'paw');
+      });
+    });
+
+    if (canvasEl) {
+      canvasEl.addEventListener('click', () => {
+        if (!heroStage) return;
+        if (!heroStage.soundUnlocked) {
+          heroStage.restartChoreography(true);
+        } else {
+          heroStage.triggerTrick('paw');
+        }
+      });
+    }
+  </script>
 
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
+
+      /* ============================================================
+         2. SIMULADOR AO VIVO (COM ARIA TABS)
+      ============================================================ */
       const DEMOS = {
         harness: {
-          title: '🧪 Modo Harness — Bancada Visual Guiada (Sem Complicação)',
+          title: '🖥️ Harness Desktop v6.9.0 — 9 Estações Segmentadas & Composer SVG',
           bullets: [
-            'Na primeira linha de abertura você escolhe Harness (visual guiado) ou CLI (linha de comando).',
-            'Assiste à intro de cinema uma vez, define edição/tema/chaves e salva como seu padrão fixo.',
-            'Quando quiser mudar, clique em "Repetir Setup" para editar escolhas sem repetir a introdução.',
-            'Cofre automático de Skills ativa especialistas de código, vídeo, áudio e UI em 1 clique.'
+            'Barra minimalista com 9 estações: Chat, Create, Voice, BadBot, Compare, Benchmark, Models (229), Infinite e Settings.',
+            'Composer clean com ícones SVG lineares, Agente CWD/Git, Neuron sem censura, contexto até 128K e sessões SQLite.',
+            '5 temas sincronizados em todos os subsistemas: Claro Vermelhinho, Escuro Pro, macOS Nativo, RGB e Retrô Win98.',
+            'Cofre automático aciona 256 skills sem precisar digitar comandos com barra "/".'
           ],
           footer: 'Liberado a partir do BadCode Studio · 100% no Fundador VIP'
         },
         cli: {
-          title: '⚡ Modo CLI — Terminal Multi-IA Direto de Alta Velocidade',
+          title: '⌨️ Harness CLI & BadBot Desktop — Fila FIFO Crash-Safe',
           bullets: [
-            'Conecta Pool Gratuito (R$ 0,00), Claude Opus/Sonnet/Fable, Astra e Super Powers num lugar só.',
-            'Nas aberturas seguintes entra direto no seu terminal sem perder tempo.',
-            'Barra lateral limpa com monitoramento ao vivo de hardware, VRAM e economia de tokens.',
-            'Pode trocar qualquer chave depois ou alternar provedores em segundos.'
+            'BadBot integrado em 3 colunas: Teammates dedicados, Thread + Fila FIFO crash-safe e Inspector de automações (/automation).',
+            'Trim Omni 2.4.1 economiza tokens em saídas longas sem gastar cota paga.',
+            'Conecta Pool Gratuito (R$ 0,00), OpenInfinite, Astra e Super Powers com monitoramento ao vivo.',
+            'Você pode trocar qualquer chave depois ou alternar motores sem reiniciar o app.'
           ],
-          footer: 'Leve até em notebooks básicos a partir do Essencial'
+          footer: 'CLI leve incluso desde o plano Essencial (R$ 79)'
         },
         video: {
-          title: '🎬 Fábrica de Vídeos 2D + Voz em Português a R$ 0,00',
+          title: '🎬 BadClaude Create Studio + Voz em Português a R$ 0,00',
           bullets: [
-            'Gera roteiro, storyboard, personagem 2D e narração em português sem API paga.',
-            'Exporta vídeo pronto para YouTube Shorts, TikTok, Reels e Kwai em 9:16.',
-            'Motor local + pool gratuito economiza centenas de reais por mês em ferramentas externas.',
-            'Integrado diretamente no painel de trabalho sem precisar abrir vários apps.'
+            'Scene to Video, geração de arte vetorial SVG, ficha de personagem LoRA e narração em português sem pagar API externa.',
+            'Exporta vídeo pronto em 9:16 para YouTube Shorts, TikTok, Reels e Kwai.',
+            'Motor local + Smart Pool gratuito economiza centenas de reais todo mês.',
+            'Tudo dentro das 9 estações do Harness Desktop BadClaude.'
           ],
-          footer: 'Liberado a partir do BadCode Studio'
+          footer: 'Liberado a partir do BadCode Studio (R$ 179)'
         },
         nvidia: {
-          title: '🟢 38 Modelos NVIDIA Build + Economia Real de Tokens',
+          title: '🟢 38 Modelos NVIDIA Build + OpenInfinite Nativo',
           bullets: [
-            'Essencial: OpenRouter (:free) guiado + sua chave Google opcional.',
-            'BadCode Studio: soma Google AI Studio + OmniRouter (:20128) + estações de vídeo e voz.',
-            'Cockpit Pro: 21 modelos NVIDIA Free + 9Router (:20129) + Equipe IA em até 2 PCs.',
-            'Fundador VIP: TODOS os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM liberados!'
+            'Essencial (R$ 79): Harness CLI leve + OpenRouter (:free).',
+            'BadCode Studio (R$ 179): 9 Estações + BadBot + Create/Vídeo 2D + Google AI Studio + OmniRouter + 229 Locais.',
+            'Cockpit Pro (R$ 350): 21 NVIDIA Free + 9Router + Swarm em 2 PCs + OpenInfinite embutido.',
+            'Fundador VIP (R$ 690): TODOS os 38 modelos gratuitos NVIDIA Build + 14 Bio/NIM destravados!'
           ],
-          footer: 'Só o Fundador VIP libera 100% — e você pode trocar qualquer chave depois'
+          footer: 'OpenInfinite nativo entra do 3º preço (Cockpit Pro) ao Fundador VIP'
         },
         mac: {
-          title: '🍎 Desenho Nativo macOS & Temas Oficiais no Windows',
+          title: '🍎 Desenho Nativo macOS & 5 Temas Coerentes no Windows',
           bullets: [
-            'No MacBook (Apple Silicon / Intel): visual Cupertino próprio, semáforos, vibrância, SF Pro e atalhos Cmd.',
-            'No Windows: você escolhe livremente entre Dark Studio Pro (padrão), Claro Limpo, RGB ou Win98.',
-            'Toda atualização em cascata publicada vai pronta e otimizada automaticamente para Win e Mac.',
-            'Sistema único unificado v6.7.1 protegido por assinatura Ed25519.'
+            'No MacBook (Apple Silicon / Intel): visual Cupertino próprio, semáforos, SF Pro e atalhos ⌘.',
+            'No Windows (PC 1 e PC 2): padrão Claro Vermelhinho limpo, com troca ao vivo para Escuro Pro, macOS, Retrô Win98 e RGB.',
+            'Updates em cascata assinados em Ed25519 desde que todas as dependências estejam atualizadas.',
+            'Sistema único unificado v6.9.0 para Windows e macOS.'
           ],
-          footer: 'Versão Unificada v6.7.1 em todos os computadores'
+          footer: 'Versão Unificada v6.9.0 em todos os computadores'
         }
       };
 
       document.querySelectorAll('[data-demo]').forEach((btn) => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('[data-demo]').forEach((b) => b.classList.remove('active'));
+          document.querySelectorAll('[data-demo]').forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
           btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
           const d = DEMOS[btn.dataset.demo] || DEMOS.harness;
           $('demoTitle').textContent = d.title;
           $('demoList').innerHTML = d.bullets.map((x) => `<li>${x}</li>`).join('');
@@ -764,106 +1766,100 @@
         });
       });
 
-      // Mouse Hover + Shift + I
-      let lastHoverEl = null;
-      function openHelpModal(rawEl) {
-        let el = rawEl && rawEl.nodeType === 1 ? rawEl : lastHoverEl;
-        if (el && !el.dataset?.helpTitle) el = el.closest?.('[data-help-title]');
-        if (el?.dataset?.helpTitle) {
-          $('shiftITitle').textContent = el.dataset.helpTitle;
-          $('shiftIWhat').textContent = el.dataset.helpWhat || 'Recurso oficial BadClaude v6.7.1.';
-          $('shiftIHow').textContent = el.dataset.helpHow || 'Selecione um plano via PIX ou valide sua chave BC5.';
-        } else {
-          $('shiftITitle').textContent = 'Como funciona a Ajuda Rápida Shift + I';
-          $('shiftIWhat').textContent = 'Qualquer termo técnico ou bloco da página pode ser explicado em português direto na hora.';
-          $('shiftIHow').textContent = 'Aponte o mouse para qualquer plano, recurso ou botão e aperte Shift + I (ou clique em ?).';
-        }
-        $('shiftIModal').style.display = 'flex';
-      }
-      window.openHelpModal = openHelpModal;
-      function closeHelpModal() { $('shiftIModal').style.display = 'none'; }
-
-      document.addEventListener('pointerover', (ev) => {
-        const hit = ev.target?.closest?.('[data-help-title]');
-        if (hit) {
-          lastHoverEl = hit;
-          $('hoverBarHint').innerHTML = '<strong>Shift + I:</strong> ' + hit.dataset.helpTitle;
-        }
-      }, { passive: true });
-      window.addEventListener('keydown', (ev) => {
-        if (ev.key === 'Escape') closeHelpModal();
-        if (ev.shiftKey && !ev.ctrlKey && !ev.altKey && !ev.metaKey && ev.key.toLowerCase() === 'i') {
-          const ae = document.activeElement;
-          if (ae && ['INPUT', 'TEXTAREA', 'SELECT'].includes(ae.tagName)) return;
-          ev.preventDefault();
-          openHelpModal(lastHoverEl);
-        }
-      });
-      document.body.addEventListener('click', (ev) => {
-        const q = ev.target.closest?.('.help-q');
-        if (q) {
-          ev.preventDefault();
-          openHelpModal(q);
-        }
-      });
-      $('btnCloseShiftI').addEventListener('click', closeHelpModal);
-      $('btnOkShiftI').addEventListener('click', closeHelpModal);
-      $('shiftIModal').addEventListener('click', (ev) => { if (ev.target === $('shiftIModal')) closeHelpModal(); });
-
+      /* ============================================================
+         3. CHECKOUT PIX & LOGIN ONLINE BC5 (RESILIENTE, SEM ALERT)
+      ============================================================ */
       window.selectPlanOrder = function (plan) {
         $('ordPlan').value = plan;
         document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' });
       };
+
       window.copyPixKey = function () {
-        navigator.clipboard?.writeText('68 99226-9296');
-        alert('Chave PIX 68 99226-9296 (Raiane Leoncio) copiada!');
+        const statusEl = $('pixCopyStatus');
+        const btn = $('btnCopyPixKey');
+        const markCopied = () => {
+          if (statusEl) statusEl.textContent = '✓ Chave PIX copiada (Raiane Leoncio)';
+          if (btn) btn.textContent = '✓ Copiado: 68 99226-9296';
+          setTimeout(() => {
+            if (statusEl) statusEl.textContent = '';
+            if (btn) btn.textContent = '📋 Copiar Chave PIX (68 99226-9296)';
+          }, 3200);
+        };
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard.writeText('68 99226-9296').then(markCopied).catch(markCopied);
+        } else {
+          markCopied();
+        }
       };
 
       // Checkout PIX
       let activeOrder = null;
       $('orderForm').addEventListener('submit', async (ev) => {
         ev.preventDefault();
-        const res = await fetch('/api/superbad/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            buyer_name: $('ordName').value.trim(),
-            buyer_contact: $('ordContact').value.trim(),
-            requested_edition: $('ordPlan').value,
-          }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.ok || !data.order) {
-          alert(data.error || 'Erro ao gerar pedido PIX. Confira os campos.');
-          return;
+        const errEl = $('orderErrorStatus');
+        const submitBtn = $('btnOrderSubmit');
+        if (errEl) errEl.textContent = '';
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '⏳ Gerando pedido PIX...'; }
+        try {
+          const res = await fetch('/api/superbad/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              buyer_name: $('ordName').value.trim(),
+              buyer_contact: $('ordContact').value.trim(),
+              requested_edition: $('ordPlan').value,
+            }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok || !data.order) {
+            if (errEl) errEl.textContent = data.error || 'Erro ao gerar pedido PIX. Confira os campos e tente novamente.';
+            return;
+          }
+          activeOrder = data.order;
+          $('orderResultBox').style.display = 'flex';
+          $('orderResultHead').textContent = `Pedido ${activeOrder.order_id} (${activeOrder.amount_display}) pronto!`;
+          $('orderResultCode').textContent = `PIX Copia e Cola: ${activeOrder.pix?.brcode || 'Chave: 68 99226-9296'}`;
+          $('orderPixQrWrap').innerHTML = activeOrder.pix?.qr_data_url
+            ? `<img src="${activeOrder.pix.qr_data_url}" alt="QR Code PIX" style="width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;">`
+            : '';
+          if (activeOrder.whatsapp_url) $('btnWhatsOrder').href = activeOrder.whatsapp_url;
+        } catch {
+          if (errEl) errEl.textContent = 'Não foi possível conectar ao servidor PIX agora. Verifique sua conexão ou chame no WhatsApp (68) 99226-9296.';
+        } finally {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '⚡ Gerar Pedido & QR Code PIX'; }
         }
-        activeOrder = data.order;
-        $('orderResultBox').style.display = 'flex';
-        $('orderResultHead').textContent = `Pedido ${activeOrder.order_id} (${activeOrder.amount_display}) pronto!`;
-        $('orderResultCode').textContent = `PIX Copia e Cola: ${activeOrder.pix?.brcode || 'Chave: 68 99226-9296'}`;
-        $('orderPixQrWrap').innerHTML = activeOrder.pix?.qr_data_url
-          ? `<img src="${activeOrder.pix.qr_data_url}" alt="QR Code PIX" style="width:160px;height:160px;border-radius:10px;background:#fff;padding:6px;">`
-          : '';
-        if (activeOrder.whatsapp_url) $('btnWhatsOrder').href = activeOrder.whatsapp_url;
       });
 
       $('btnSendReceipt').addEventListener('click', async () => {
         if (!activeOrder) return;
         const note = $('ordReceiptNote').value.trim();
+        const statusEl = $('orderReceiptStatus');
         if (!note) {
-          $('orderReceiptStatus').textContent = 'Digite uma observação ou código do comprovante.';
+          statusEl.style.color = '#facc15';
+          statusEl.textContent = 'Digite uma observação ou código do comprovante.';
           return;
         }
-        const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ order_secret: activeOrder.order_secret, receipt_note: note }),
-        });
-        const d = await res.json().catch(() => ({}));
-        $('orderReceiptStatus').style.color = res.ok ? '#10b981' : '#f43f5e';
-        $('orderReceiptStatus').textContent = res.ok
-          ? '✓ Comprovante enviado! Assim que validado no Dashboard Control, sua chave BC5 é liberada.'
-          : (d.error || 'Erro ao enviar comprovante.');
+        const btn = $('btnSendReceipt');
+        btn.disabled = true;
+        btn.textContent = '⏳ Enviando...';
+        try {
+          const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ order_secret: activeOrder.order_secret, receipt_note: note }),
+          });
+          const d = await res.json().catch(() => ({}));
+          statusEl.style.color = res.ok ? '#10b981' : '#f43f5e';
+          statusEl.textContent = res.ok
+            ? '✓ Comprovante enviado! Assim que validado no Dashboard Control, sua chave BC5 é liberada.'
+            : (d.error || 'Erro ao enviar comprovante.');
+        } catch {
+          statusEl.style.color = '#f43f5e';
+          statusEl.textContent = 'Falha de rede ao enviar comprovante. Envie direto pelo botão do WhatsApp acima.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = '✓ Enviar Comprovante';
+        }
       });
 
       // Login online por chave BC5 com opção de salvar no computador
@@ -871,23 +1867,32 @@
       async function verifyOnlineKey(key, saveIt) {
         const box = $('licResultBox');
         const actions = $('licSavedActions');
+        const submitBtn = $('btnVerifySubmit');
         box.style.display = 'flex';
         box.textContent = 'Autenticando online no servidor de licenças...';
-        const res = await fetch('/api/v1/licenses/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key, hwid: 'web-' + (navigator.platform || 'browser') }),
-        });
-        const d = await res.json().catch(() => ({}));
-        if (res.ok && d.ok) {
-          if (saveIt) {
-            try { localStorage.setItem(WEB_KEY_STORE, key); } catch {}
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '⏳ Validando chave...'; }
+        try {
+          const res = await fetch('/api/v1/licenses/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key, hwid: 'web-' + (navigator.platform || 'browser') }),
+          });
+          const d = await res.json().catch(() => ({}));
+          if (res.ok && d.ok) {
+            if (saveIt) {
+              try { localStorage.setItem(WEB_KEY_STORE, key); } catch {}
+            }
+            box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + ⌘ macOS v6.9.0 incluídas (mantenha todas as dependências atualizadas para receber updates).</span>`;
+            if (actions) actions.style.display = saveIt ? 'flex' : 'none';
+          } else {
+            if (actions) actions.style.display = 'none';
+            box.innerHTML = `<strong style="color:#f43f5e;">⚠ ${d.error || 'Chave não reconhecida, expirada ou sem internet.'}</strong>`;
           }
-          box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + 🍎 macOS v6.8.0 incluídas (mantenha todas as dependências atualizadas para receber updates).</span>`;
-          if (actions) actions.style.display = saveIt ? 'flex' : 'none';
-        } else {
+        } catch {
           if (actions) actions.style.display = 'none';
-          box.innerHTML = `<strong style="color:#f43f5e;">⚠ ${d.error || 'Chave não reconhecida, expirada ou sem internet.'}</strong>`;
+          box.innerHTML = `<strong style="color:#f43f5e;">⚠ Falha ao conectar ao servidor de licenças. Verifique sua internet e tente novamente.</strong>`;
+        } finally {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🔓 Logar Online Agora'; }
         }
       }
 
@@ -901,8 +1906,12 @@
       $('btnCopySavedWebKey')?.addEventListener('click', () => {
         try {
           const saved = localStorage.getItem(WEB_KEY_STORE) || $('licKeyInput').value.trim();
-          if (saved) navigator.clipboard?.writeText(saved);
-          alert('Chave copiada!');
+          const fb = $('licCopyFeedback');
+          if (saved && navigator.clipboard?.writeText) navigator.clipboard.writeText(saved);
+          if (fb) {
+            fb.textContent = '✓ Chave copiada!';
+            setTimeout(() => { fb.textContent = ''; }, 2600);
+          }
         } catch {}
       });
 
