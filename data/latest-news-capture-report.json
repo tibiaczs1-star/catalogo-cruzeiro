@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "startedAt": "2026-11-26T15:58:45.441Z",
-  "finishedAt": "2026-11-26T15:59:00.010Z",
-  "capturedItems": 834,
-  "capturedToday": 528,
+  "startedAt": "2026-11-27T15:26:45.115Z",
+  "finishedAt": "2026-11-27T15:27:01.049Z",
+  "capturedItems": 824,
+  "capturedToday": 489,
   "activeWindowItems": 500,
   "archiveItems": 2000,
   "reports": [
@@ -408,9 +408,10 @@
     },
     {
       "source": "oriobranco",
-      "ok": false,
-      "count": 0,
-      "error": "This operation was aborted"
+      "ok": true,
+      "count": 10,
+      "blocked": 0,
+      "mode": "rss"
     },
     {
       "source": "pcac",

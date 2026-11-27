@@ -1,163 +1,163 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-11-26T16:01:33.900Z
+Gerado em: 2026-11-27T15:31:16.405Z
 Escopo: 360/2023 itens recentes.
 
 ## Resumo
-- Gates: P0 93, P1 164, P2 103
-- Aprovacao humana exigida: 93
+- Gates: P0 81, P1 189, P2 90
+- Aprovacao humana exigida: 81
 - Decisoes humanas registradas: 0
-- Pendencias de fonte: 93
-- Pendencias visuais: 292
-- Titulos alternativos gerados: 240
+- Pendencias de fonte: 81
+- Pendencias visuais: 281
+- Titulos alternativos gerados: 239
 - Especiais seguros sugeridos: 60
 
 ## Pendencias tecnicas ativas para IDE
-- P0 human-approval: PF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões
+- P0 human-approval: Homem invade casa para fugir da PM, tenta desarmar policial e acaba baleado em Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: PF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões
+- P0 ide-fix: Homem invade casa para fugir da PM, tenta desarmar policial e acaba baleado em Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: PF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: MPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos
+- P0 human-approval: Vereador condenado por agressão à mulher é eleito presidente da Câmara de Porto Walter
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: MPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos
+- P0 ide-fix: Vereador condenado por agressão à mulher é eleito presidente da Câmara de Porto Walter
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: MPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão contra mulheres em 2026
+- P0 human-approval: Cruzeiro do Sul cria comissão para acompanhar Bolsa Família e comitê para fiscalizar políticas para idosos
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão contra mulheres em 2026
+- P0 ide-fix: Cruzeiro do Sul cria comissão para acompanhar Bolsa Família e comitê para fiscalizar políticas para idosos
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão contra mulheres em 2026
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre durante feriadão
+- P0 human-approval: Criminosos rendem clientes e assaltam distribuidora no bairro João Alves em Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre durante feriadão
+- P0 ide-fix: Criminosos rendem clientes e assaltam distribuidora no bairro João Alves em Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre durante feriadão
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: BOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco
+- P0 human-approval: Acre tem a terceira gasolina mais cara do Brasil, com litro médio a R$ 7,40, aponta ANP
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: BOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco
+- P0 ide-fix: Acre tem a terceira gasolina mais cara do Brasil, com litro médio a R$ 7,40, aponta ANP
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: BOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Polícia prende dupla suspeita de ameaçar e expulsar moradores em comunidade no Acre
+- P0 human-approval: Governo do Acre paga parcela atrasada há 3 meses a escolas conveniadas em Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Polícia prende dupla suspeita de ameaçar e expulsar moradores em comunidade no Acre
+- P0 ide-fix: Governo do Acre paga parcela atrasada há 3 meses a escolas conveniadas em Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Polícia prende dupla suspeita de ameaçar e expulsar moradores em comunidade no Acre
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Polícia Civil convoca usuários de aparelhos com registro de roubo ou furto no Acre
+- P0 human-approval: Suspeito de tentativa de feminicídio é preso após ataque com faca em Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Polícia Civil convoca usuários de aparelhos com registro de roubo ou furto no Acre
+- P0 ide-fix: Suspeito de tentativa de feminicídio é preso após ataque com faca em Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Polícia Civil convoca usuários de aparelhos com registro de roubo ou furto no Acre
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Acre está entre estados com menor oferta de coleta seletiva de lixo; apenas 4 municípios possuem o serviço
+- P0 human-approval: Seleção do Ifac para cursos técnicos em Cruzeiro do Sul entra em nova etapa; veja o calendário
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Acre está entre estados com menor oferta de coleta seletiva de lixo; apenas 4 municípios possuem o serviço
+- P0 ide-fix: Seleção do Ifac para cursos técnicos em Cruzeiro do Sul entra em nova etapa; veja o calendário
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acre está entre estados com menor oferta de coleta seletiva de lixo; apenas 4 municípios possuem o serviço
+- P0 ide-fix: Seleção do Ifac para cursos técnicos em Cruzeiro do Sul entra em nova etapa; veja o calendário
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Sul do país tem alerta de perigo de chuvas intensas
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Sul do país tem alerta de perigo de chuvas intensas
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Sul do país tem alerta de perigo de chuvas intensas
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Mudanças climáticas: nível do mar está subindo e ameaça a vida cotidiana
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Mudanças climáticas: nível do mar está subindo e ameaça a vida cotidiana
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Mudanças climáticas: nível do mar está subindo e ameaça a vida cotidiana
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Criminoso armado assalta alunos e funcionária na frente de escola em Rio Branco
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
 
 ## Titulos alternativos
-- PF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões
-  - PF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões: veja os pontos principais
-  - O que se sabe sobre pF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões
-  - Folha do Acre informa: PF deflagra operação contra lavagem de dinheiro no Acre e bloqueia R$ 5 milhões
-- Rio Tarauacá registra apenas 20 centímetros no canal mais profundo em Jordão
-  - Rio Tarauacá registra apenas 20 centímetros no canal mais profundo em Jordão: veja os pontos principais
-  - Entenda rio Tarauacá registra apenas 20 centímetros no canal mais profundo em Jordão
-  - Folha do Acre informa: Rio Tarauacá registra apenas 20 centímetros no canal mais profundo em Jordão
-- MPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos
-  - MPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos: veja os pontos princi
-  - O que se sabe sobre mPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos
-  - Folha do Acre informa: MPAC investiga concurso da Câmara de Rio Branco e dá 10 dias úteis para esclarecimentos
-- Acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão contra mulheres em 2026
-  - Acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão contra mulheres em 2026: ve
-  - O que se sabe sobre acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão contra 
-  - Folha do Acre informa: Acre registra seis feminicídios, 36 tentativas e mais de 7 mil relatos de agressão cont
-- Motociclista sofre fratura exposta após colidir contra meio-fio na Avenida Ceará, em Rio Branco
-  - Motociclista sofre fratura exposta após colidir contra meio-fio na Avenida Ceará, em Rio Branco: veja os ponto
-  - Entenda motociclista sofre fratura exposta após colidir contra meio-fio na Avenida Ceará, em Rio Branco
-  - Folha do Acre informa: Motociclista sofre fratura exposta após colidir contra meio-fio na Avenida Ceará, em Ri
-- “Raízes do Juruá”: fotolivro viabilizado pela Aldir Blanc leva vivências da Amazônia acreana à França
-  - “Raízes do Juruá”: fotolivro viabilizado pela Aldir Blanc leva vivências da Amazônia acreana à França: veja os
-  - Entenda “Raízes do Juruá”: fotolivro viabilizado pela Aldir Blanc leva vivências da Amazônia acreana à França
-  - Folha do Acre informa: “Raízes do Juruá”: fotolivro viabilizado pela Aldir Blanc leva vivências da Amazônia ac
-- Vitaminas na veia: biomédica alerta para riscos de misturas no soro
-  - Vitaminas na veia: biomédica alerta para riscos de misturas no soro: veja os pontos principais
-  - Entenda vitaminas na veia: biomédica alerta para riscos de misturas no soro
-  - Folha do Acre informa: Vitaminas na veia: biomédica alerta para riscos de misturas no soro
-- Espetáculo “Pretinha Ponciá” leva ancestralidade negra e educação antirracista às escolas públicas de Rio Branco
-  - Espetáculo “Pretinha Ponciá” leva ancestralidade negra e educação antirracista às escolas públicas de Rio Bran
-  - Entenda espetáculo “Pretinha Ponciá” leva ancestralidade negra e educação antirracista às escolas públicas de 
-  - Folha do Acre informa: Espetáculo “Pretinha Ponciá” leva ancestralidade negra e educação antirracista às escol
-- Motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre durante feriadão
-  - Motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre durante feriadão: veja
-  - O que se sabe sobre motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre du
-  - Folha do Acre informa: Motocicletas estiveram envolvidas em 2 dos 3 acidentes registrados nas rodovias do Acre
-- Acre está entre os quatro piores estados em liquidez no Ranking de Competitividade 2026, com índice de 133%
-  - Acre está entre os quatro piores estados em liquidez no Ranking de Competitividade 2026, com índice de 133%: v
-  - Entenda acre está entre os quatro piores estados em liquidez no Ranking de Competitividade 2026, com índice de
-  - Folha do Acre informa: Acre está entre os quatro piores estados em liquidez no Ranking de Competitividade 2026
-- Black Friday: acreanos devem ficar atentos a falsos descontos e golpes nas compras pela internet
-  - Black Friday: acreanos devem ficar atentos a falsos descontos e golpes nas compras pela internet: veja os pont
-  - Entenda black Friday: acreanos devem ficar atentos a falsos descontos e golpes nas compras pela internet
-  - Folha do Acre informa: Black Friday: acreanos devem ficar atentos a falsos descontos e golpes nas compras pela
-- BOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco
-  - BOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco: veja os pontos principais
-  - O que se sabe sobre bOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco
-  - Folha do Acre informa: BOPE apreende 7 kg de maconha e prende quatro homens em residência em Rio Branco
+- Homem invade casa para fugir da PM, tenta desarmar policial e acaba baleado em Cruzeiro do Sul
+  - Homem invade casa para fugir da PM, tenta desarmar policial e acaba baleado em Cruzeiro do Sul: veja os pontos
+  - O que se sabe sobre homem invade casa para fugir da PM, tenta desarmar policial e acaba baleado em Cruzeiro do
+  - Juruá Informativo informa: Homem invade casa para fugir da PM, tenta desarmar policial e acaba baleado em Cruz
+- Vereador condenado por agressão à mulher é eleito presidente da Câmara de Porto Walter
+  - Vereador condenado por agressão à mulher é eleito presidente da Câmara de Porto Walter: veja os pontos princip
+  - O que se sabe sobre vereador condenado por agressão à mulher é eleito presidente da Câmara de Porto Walter
+  - Juruá em Tempo informa: Vereador condenado por agressão à mulher é eleito presidente da Câmara de Porto Walter
+- Rios do Acre estão abaixo de 2 metros e chuvas podem demorar até fevereiro, alerta Defesa Civil
+  - Rios do Acre estão abaixo de 2 metros e chuvas podem demorar até fevereiro, alerta Defesa Civil: veja os ponto
+  - Entenda rios do Acre estão abaixo de 2 metros e chuvas podem demorar até fevereiro, alerta Defesa Civil
+  - ac24horas informa: Rios do Acre estão abaixo de 2 metros e chuvas podem demorar até fevereiro, alerta Defesa C
+- Cruzeiro do Sul cria comissão para acompanhar Bolsa Família e comitê para fiscalizar políticas para idosos
+  - Cruzeiro do Sul cria comissão para acompanhar Bolsa Família e comitê para fiscalizar políticas para idosos: ve
+  - O que se sabe sobre cruzeiro do Sul cria comissão para acompanhar Bolsa Família e comitê para fiscalizar polít
+  - ac24horas informa: Cruzeiro do Sul cria comissão para acompanhar Bolsa Família e comitê para fiscalizar políti
+- Criminosos rendem clientes e assaltam distribuidora no bairro João Alves em Cruzeiro do Sul
+  - Criminosos rendem clientes e assaltam distribuidora no bairro João Alves em Cruzeiro do Sul: veja os pontos pr
+  - O que se sabe sobre criminosos rendem clientes e assaltam distribuidora no bairro João Alves em Cruzeiro do Su
+  - ContilNet informa: Criminosos rendem clientes e assaltam distribuidora no bairro João Alves em Cruzeiro do Sul
+- Justiça visita ocupação de casa em casa e discute solução para 20 famílias em Cruzeiro do Sul
+  - Justiça visita ocupação de casa em casa e discute solução para 20 famílias em Cruzeiro do Sul: veja os pontos 
+  - Entenda justiça visita ocupação de casa em casa e discute solução para 20 famílias em Cruzeiro do Sul
+  - Juruá Online informa: Justiça visita ocupação de casa em casa e discute solução para 20 famílias em Cruzeiro d
+- Acre tem a terceira gasolina mais cara do Brasil, com litro médio a R$ 7,40, aponta ANP
+  - Acre tem a terceira gasolina mais cara do Brasil, com litro médio a R$ 7,40, aponta ANP: veja os pontos princi
+  - O que se sabe sobre acre tem a terceira gasolina mais cara do Brasil, com litro médio a R$ 7,40, aponta ANP
+  - Juruá Online informa: Acre tem a terceira gasolina mais cara do Brasil, com litro médio a R$ 7,40, aponta ANP
+- Governo do Acre paga parcela atrasada há 3 meses a escolas conveniadas em Cruzeiro do Sul
+  - Governo do Acre paga parcela atrasada há 3 meses a escolas conveniadas em Cruzeiro do Sul: veja os pontos prin
+  - O que se sabe sobre governo do Acre paga parcela atrasada há 3 meses a escolas conveniadas em Cruzeiro do Sul
+  - Juruá Online informa: Governo do Acre paga parcela atrasada há 3 meses a escolas conveniadas em Cruzeiro do Su
+- Governo anuncia prêmio de R$ 27,3 milhões para mais de 12 mil profissionais da educação no Acre
+  - Governo anuncia prêmio de R$ 27,3 milhões para mais de 12 mil profissionais da educação no Acre: veja os ponto
+  - Entenda governo anuncia prêmio de R$ 27,3 milhões para mais de 12 mil profissionais da educação no Acre
+  - Juruá Informativo informa: Governo anuncia prêmio de R$ 27,3 milhões para mais de 12 mil profissionais da educ
+- TCE recomenda ao Governo do Acre ampliar controle e transparência sobre cargos comissionados
+  - TCE recomenda ao Governo do Acre ampliar controle e transparência sobre cargos comissionados: veja os pontos p
+  - Entenda tCE recomenda ao Governo do Acre ampliar controle e transparência sobre cargos comissionados
+  - Folha do Acre informa: TCE recomenda ao Governo do Acre ampliar controle e transparência sobre cargos comissio
+- Suspeito de tentativa de feminicídio é preso após ataque com faca em Cruzeiro do Sul
+  - Suspeito de tentativa de feminicídio é preso após ataque com faca em Cruzeiro do Sul: veja os pontos principai
+  - O que se sabe sobre suspeito de tentativa de feminicídio é preso após ataque com faca em Cruzeiro do Sul
+  - Juruá Online informa: Suspeito de tentativa de feminicídio é preso após ataque com faca em Cruzeiro do Sul
+- Servidores do Acre recebem salário de novembro antecipado nesta sexta-feira e já podem sacar
+  - Servidores do Acre recebem salário de novembro antecipado nesta sexta-feira e já podem sacar: veja os pontos p
+  - Entenda servidores do Acre recebem salário de novembro antecipado nesta sexta-feira e já podem sacar
+  - Juruá Informativo informa: Servidores do Acre recebem salário de novembro antecipado nesta sexta-feira e já po
 
 ## Formatos especiais seguros
-- agenda visual: Rio Tarauacá registra apenas 20 centímetros no canal mais profundo em Jordão
+- guia de servico: Governo anuncia prêmio de R$ 27,3 milhões para mais de 12 mil profissionais da educação no Acre
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: “Raízes do Juruá”: fotolivro viabilizado pela Aldir Blanc leva vivências da Amazônia acreana à França
+- guia de impacto no bolso: Servidores do Acre recebem salário de novembro antecipado nesta sexta-feira e já podem sacar
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Espetáculo “Pretinha Ponciá” leva ancestralidade negra e educação antirracista às escolas públicas de Rio Branco
+- linha do tempo curta: Taxa de desemprego fica em 5,1% no trimestre encerrado em outubro
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Prefeito de Rio Branco exonera secretária de Educação; diretor de Ensino assume a pasta interinamente
+- agenda visual: Rádio Nacional transmite Fluminense e Cruzeiro pelo Brasileirão
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Onda polar traz queda de temperatura e risco de temporais ao Acre nesta quinta, prevê Friale
+- linha do tempo curta: Receita Federal no Rio apreende encomendas com drogas nos Correios
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Governo do Acre abre quase R$ 380 milhões em créditos suplementares para Saúde, Educação, Segurança e outras áreas
+- linha do tempo curta: Disputa por terras raras gera angústia e impacto ambiental na Bahia
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Boas práticas: TCE-AC apresenta fiscalização sobre dignidade menstrual nas escolas em encontro nacional
+- linha do tempo curta: Quem é Luislo, cantor venezuelano flagrado aos beijos com Marina Sena
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Restauração de biomas no Brasil mais do que triplica em cinco anos
+- guia de servico: Estrangeiros controlam principais projetos de terras raras do Brasil, revela estudo
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Rio Tarauacá tem trechos com apenas 5 centímetros de água e dificulta navegação em Jordão
+- guia de impacto no bolso: ‘Trabuco’ na cara da economia: a serviço da oligarquia financeira, Luiz Inácio entrega a Fazenda a banqueiro do Bradesco
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: China: questões comerciais com EUA devem ser resolvidas com diálogo
+- guia de servico: Mailza anuncia pagamento de prêmio de valorização a mais de 12 mil servidores da educação do Acre
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Em meio a polêmicas, Neymar surge dançando Sandy e Junior com Biancardi
+- agenda visual: Rafinha comenta declaração de Crespo sobre os 45 pontos no São Paulo
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Vacina contra o câncer será testada no Brasil em 2027 e mira linfomas e tumores de estômago
+- agenda visual: Vila Nova e Atlético-GO fazem clássico pelo acesso à Série A do Brasileirão
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
