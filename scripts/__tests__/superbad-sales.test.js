@@ -324,6 +324,13 @@ test("license validation, private download streaming, missing archive 404, downl
   assert.equal(validRes.data.downloads_remaining, 2);
   assert.match(validRes.data.download_url, /^\/api\/superbad\/download\?token=/);
 
+  assert.equal(validRes.data.macos_download_url, undefined);
+  for (const platform of ["mac", "macos", "darwin"]) {
+    const withdrawn = await reqJson(validRes.data.download_url + "&platform=" + platform);
+    assert.equal(withdrawn.status, 410);
+    assert.equal(withdrawn.data.code, "RELEASE_WITHDRAWN");
+  }
+
   // Tampered token is rejected.
   const tamperedDl = await fetch(`${baseUrl}${validRes.data.download_url}tampered`);
   assert.equal(tamperedDl.status, 403);
@@ -635,4 +642,11 @@ test(".gitignore and render.yaml protect private releases and declare SuperBad e
     /key:\s*BADCLAUDE_RELEASES_DIR\r?\n\s*value:\s*\/opt\/render\/project\/src\/render-data\/private_releases/
   );
   assert.match(serverSource, /isAdmin:\s*requireAdmin/);
+});
+
+test("a paused store rejects new orders before payment generation", async (t) => {
+  const { reqJson } = await startFixture(t, { options: { acceptNewOrders: false } });
+  const result = await reqJson("/api/superbad/orders", { method: "POST", body: "{}" });
+  assert.equal(result.status, 503);
+  assert.equal(result.data.code, "SALES_PAUSED");
 });

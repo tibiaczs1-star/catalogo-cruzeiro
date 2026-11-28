@@ -1657,24 +1657,7 @@ function createSuperbadSalesApi(options = {}) {
     if (!VALID_EDITIONS.has(edition)) return { filePath: null, expectedFiles: [] };
     const cleanPlatform = String(platform || "windows").trim().toLowerCase();
     const isMacPlatform = cleanPlatform === "mac" || cleanPlatform === "macos" || cleanPlatform === "darwin";
-    if (isMacPlatform) {
-      const macFilename = "BadClaude-Plano3-Mac-Instalador.zip";
-      const macRoots = [releasesDir, path.join(rootDir, "downloads")];
-      for (const dirCandidate of macRoots) {
-        try {
-          const realRoot = fs.realpathSync(dirCandidate);
-          const target = path.resolve(realRoot, macFilename);
-          if (!target.startsWith(`${realRoot}${path.sep}`)) continue;
-          const realTarget = fs.realpathSync(target);
-          if (!realTarget.startsWith(`${realRoot}${path.sep}`)) continue;
-          const stat = fs.statSync(realTarget);
-          if (stat.isFile()) {
-            return { filePath: realTarget, fileName: macFilename, stat, expectedFiles: [macFilename] };
-          }
-        } catch (_err) {}
-      }
-      return { filePath: null, expectedFiles: [macFilename] };
-    }
+    if (isMacPlatform) return { withdrawn: true, filePath: null, expectedFiles: [] };
     const candidates = getCandidateReleaseFilenames(edition);
     let realReleasesRoot;
     try {
@@ -1997,6 +1980,9 @@ function createSuperbadSalesApi(options = {}) {
 
       // 1) POST /api/superbad/orders
       if (method === "POST" && pathname === "/api/superbad/orders") {
+        if (options.acceptNewOrders === false) {
+          return sendJson(res, 503, { ok: false, code: "SALES_PAUSED", error: "Novas vendas estão pausadas enquanto revisamos os instaladores." });
+        }
         const body = await readJsonBody(req);
         const authUser = getAuthUserFn(req);
         const googleEnabled = Boolean(isGoogleAuthEnabledFn(req));
@@ -3832,7 +3818,6 @@ function createSuperbadSalesApi(options = {}) {
               expires_at: license.expires_at,
               downloads_remaining: license.max_downloads - license.downloads_used,
               download_url: `/api/superbad/download?token=${encodeURIComponent(token)}`,
-              macos_download_url: `/api/superbad/download?token=${encodeURIComponent(token)}&platform=macos`,
             },
           };
         });
@@ -3868,6 +3853,9 @@ function createSuperbadSalesApi(options = {}) {
 
           const dlPlatform = String(searchParams.get("platform") || "windows").trim().toLowerCase();
           const resolved = resolveReleaseFile(license.edition, dlPlatform);
+          if (resolved.withdrawn) {
+            return { status: 410, payload: { ok: false, code: "RELEASE_WITHDRAWN", error: "Instalador retirado para revisão." } };
+          }
           if (!resolved.filePath) {
             return {
               status: 404,

@@ -583,7 +583,7 @@ test("IC6-MAX (infinite_max) supports PIX order (R$ 249), key-pool stocking, own
   assert.equal(rawDisk.includes(maxKeyDeliver), false);
 });
 
-test("server.js configures Google Auth dynamic Client ID fallback, 1-prompt installer routes, silent opencode bootstrap, .tar.gz as application/gzip, and /api/openinfinite/", () => {
+test("server.js configures Google Auth dynamic Client ID fallback, .tar.gz as application/gzip, and /api/openinfinite/", () => {
   const serverSource = fs.readFileSync(path.join(repoRoot, "server.js"), "utf8");
   assert.match(serverSource, /process\.env\.SUPERBAD_SESSION_SECRET/);
   assert.match(serverSource, /function getEffectiveGoogleClientId\(\)/);
@@ -592,24 +592,10 @@ test("server.js configures Google Auth dynamic Client ID fallback, 1-prompt inst
   assert.match(serverSource, /case "\.gz":[\s\S]{0,60}return "application\/gzip"/);
   assert.match(serverSource, /pathname\.startsWith\("\/api\/openinfinite\/"\)/);
 
-  // 4 lightweight 1-prompt installer routes in server.js (text/plain; charset=utf-8) + silent headless opencode bootstrap
-  assert.match(serverSource, /pathname === "\/install-openinfinite\.sh"/);
-  assert.match(serverSource, /pathname === "\/install-infiniteclaude\.sh"/);
-  assert.match(serverSource, /pathname === "\/install-mac\.sh"/);
-  assert.match(serverSource, /pathname === "\/install-win\.ps1"/);
-  assert.match(serverSource, /https:\/\/opencode\.ai\/install \| bash -s -- --no-modify-path/);
-  assert.match(serverSource, /https:\/\/opencode\.ai\/install\.ps1 \| iex/);
-  assert.match(serverSource, /opencode-cli\.exe/);
-  assert.match(serverSource, /\/downloads\/OpenInfinite-Client-Ubuntu-VPS\.tar\.gz/);
-  assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-Ubuntu-VPS\.tar\.gz/);
-  assert.match(serverSource, /\/downloads\/OpenInfinite-Client-macOS\.dmg/);
-  assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-macOS\.dmg/);
-  assert.match(serverSource, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
-  assert.match(serverSource, /\/downloads\/InfiniteClaude-Client-Setup\.exe/);
-  assert.doesNotMatch(serverSource, /const appParam = String\(searchParams\./);
+
 });
 
-test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/public-stats, and /downloads/* live with HTTP 200", async (t) => {
+test("public pages remain available and retired downloads and bootstraps return HTTP 410", async (t) => {
   const { spawn } = require("node:child_process");
   const tmpData = await fsp.mkdtemp(path.join(os.tmpdir(), "oi-server-live-"));
   const port = 15497;
@@ -632,25 +618,24 @@ test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/publ
     await new Promise((r) => setTimeout(r, 150));
   }
 
-  for (const [p, expected] of [
-    ["/install-openinfinite.sh", "/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz"],
-    ["/install-infiniteclaude.sh", "/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz"],
-    ["/install-mac.sh?app=openinfinite", 'TARGET_APP="${INFINITE_APP:-openinfinite}"'],
-    ["/install-win.ps1?app=infiniteclaude", "$TargetApp = if ($env:INFINITE_APP) { $env:INFINITE_APP.ToLower() } else { 'infiniteclaude' }"],
-    ["/openinfinite/", "INFINITE ZONE"],
-    ["/openinfinite/checkout/", "Raiane Leoncio"],
-    ["/openinfinite/checkout/", "IC6-MAX"],
-  ]) {
-    const res = await fetch(`http://127.0.0.1:${port}${p}`);
-    const body = await res.text();
-    assert.equal(res.status, 200, `Expected 200 for ${p}, got ${res.status}`);
-    assert.ok(body.includes(expected), `Expected ${expected} in ${p}`);
+  for (const pathname of ["/openinfinite/", "/openinfinite/checkout/", "/badclaude/"]) {
+    const response = await fetch(`http://127.0.0.1:${port}${pathname}`);
+    assert.equal(response.status, 200, pathname);
+    assert.match(await response.text(), /<title>.+?<\/title>/i);
   }
+  const sums = await fetch(`http://127.0.0.1:${port}/downloads/SHA256SUMS.txt`);
+  assert.equal(sums.status, 200);
+  assert.doesNotMatch(await sums.text(), /BadClaude-Plano3|(?:OpenInfinite|InfiniteClaude)-Client/);
   const checkinRedir = await fetch(`http://127.0.0.1:${port}/openinfinite/checkin?plan=infinite_pro`, { redirect: "manual" });
   assert.equal(checkinRedir.status, 302);
   assert.equal(checkinRedir.headers.get("location"), "/openinfinite/checkout/?plan=infinite_pro");
   for (const dl of [
-    "/downloads/SHA256SUMS.txt",
+    "/install-openinfinite.sh",
+    "/install-infiniteclaude.sh",
+    "/install-badclaude-mac.sh",
+    "/install-mac.sh?app=openinfinite",
+    "/install-win.ps1?app=infiniteclaude",
+    "/downloads/BadClaude-Plano3-Mac-Instalador.zip",
     "/downloads/OpenInfinite-Client-Setup.exe",
     "/downloads/InfiniteClaude-Client-Setup.exe",
     "/downloads/OpenInfinite-Client-macOS.dmg",
@@ -659,8 +644,11 @@ test("server.js serves /install-* routes, /openinfinite/, /api/openinfinite/publ
     "/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz",
   ]) {
     const headRes = await fetch(`http://127.0.0.1:${port}${dl}`, { method: "HEAD" });
-    assert.equal(headRes.status, 200, `Expected 200 HEAD for ${dl}`);
-    assert.ok(Number(headRes.headers.get("content-length")) > 100);
+    assert.equal(headRes.status, 410, dl);
+    assert.equal(headRes.headers.get("cache-control"), "no-store");
+    const response = await fetch(`http://127.0.0.1:${port}${dl}`);
+    assert.equal(response.status, 410, dl);
+    assert.match(await response.text(), /Instalador retirado/);
   }
 });
 
