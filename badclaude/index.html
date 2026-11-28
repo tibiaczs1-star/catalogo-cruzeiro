@@ -1328,13 +1328,18 @@
           </div>
         </div>
         <div class="os-card mac">
-          <span class="os-pill">⌘ macOS Apple Silicon &amp; Intel</span>
-          <h3>Interface Nativa Apple · Semáforo &amp; Vidro Crimson</h3>
-          <p>Quando aberto no MacBook, assume visual Cupertino nativo com fonte SF Pro, blur translúcido, atalhos <span class="mono">⌘K</span>/<span class="mono">⌥Z</span> e acento carmesim.</p>
-          <div class="mac-mini-glass">
+          <span class="os-pill">⌘ macOS Apple Silicon (M1–M5) &amp; Intel</span>
+          <h3>Interface Nativa Apple · OpenInfinite Puro + Mídia Real</h3>
+          <p>Instalação em 1 clique do <span class="mono">/Applications/BadClaude.app</span> com Electron nativo, Node.js, OpenCode, <strong>FFmpeg/FFprobe</strong> e voz PT-BR já integrados (sem erro 403 no browser).</p>
+          <div class="mac-mini-glass" style="margin-bottom:12px;">
             <span class="mac-dots"><i style="background:#ff5f57;"></i><i style="background:#febc2e;"></i><i style="background:#28c840;"></i></span>
-            <span>🍎 Harness Desktop macOS · Nativo Crimson · ⌘K Paleta</span>
+            <span>🍎 BadClaude.app macOS · OpenInfinite Puro · ⌘K Paleta</span>
           </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <a href="/downloads/BadClaude-Plano3-Mac-Instalador.zip" download="BadClaude-Plano3-Mac-Instalador.zip" class="btn crimson sm">🍎 Baixar Instalador Mac (.zip)</a>
+            <button type="button" class="btn sm" id="btnCopyMacCurl" onclick="copyMacInstallCmd()">📋 Copiar Comando Terminal (1 linha)</button>
+          </div>
+          <code id="macInstallCmdPreview" class="mono" style="display:block;margin-top:8px;padding:7px 9px;background:rgba(4,6,14,0.85);border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:11px;color:#cbd5e1;word-break:break-all;">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-badclaude-mac.sh | bash</code>
         </div>
       </div>
     </section>
@@ -1416,12 +1421,12 @@
               <span class="plan-meta" style="background:rgba(255,30,66,0.18);color:#fda4af;">30d · 2 PCs</span>
             </div>
             <div class="plan-price">R$ 350 <small>/ 30 dias</small></div>
-            <p class="plan-desc">Produção pesada: Swarm + 21 NVIDIA + OpenInfinite nativo em 2 PCs.</p>
+            <p class="plan-desc">Produção pesada: OpenInfinite Puro (11 modelos 200K–1M ctx) + Create PNG/MP4 no Win e Mac.</p>
             <ul class="plan-list">
-              <li class="ok">Tudo do Studio em <strong>até 2 PCs</strong></li>
-              <li class="ok"><strong>OpenInfinite + Infinite Code Nativos</strong></li>
-              <li class="ok">Jailbreaks + Trim Omni 2.4.1</li>
-              <li class="ok">21 NVIDIA Free + 9Router (:20129)</li>
+              <li class="ok">Tudo do Studio em <strong>até 2 PCs (Win + Mac)</strong></li>
+              <li class="ok"><strong>OpenInfinite Puro (11 modelos · R$ 0,00)</strong></li>
+              <li class="ok">Create Studio PNG real + MP4 H.264 c/ Voz PT-BR</li>
+              <li class="ok">Suporte opcional à sua chave NVIDIA Build</li>
               <li class="ok">Equipe IA &amp; Automação Swarm</li>
               <li class="no">Sem todos os 38 NVIDIA + 14 Bio/NIM</li>
             </ul>
@@ -1774,6 +1779,19 @@
         document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' });
       };
 
+      window.copyMacInstallCmd = function () {
+        const cmd = document.getElementById('macInstallCmdPreview')?.textContent?.trim() || 'curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-badclaude-mac.sh | bash';
+        const btn = document.getElementById('btnCopyMacCurl');
+        const done = () => {
+          if (btn) {
+            btn.textContent = '✓ Comando copiado!';
+            setTimeout(() => { btn.textContent = '📋 Copiar Comando Terminal (1 linha)'; }, 2800);
+          }
+        };
+        if (navigator.clipboard?.writeText) navigator.clipboard.writeText(cmd).then(done).catch(done);
+        else done();
+      };
+
       window.copyPixKey = function () {
         const statusEl = $('pixCopyStatus');
         const btn = $('btnCopyPixKey');
@@ -1882,7 +1900,7 @@
             if (saveIt) {
               try { localStorage.setItem(WEB_KEY_STORE, key); } catch {}
             }
-            box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + ⌘ macOS v6.9.0 incluídas (mantenha todas as dependências atualizadas para receber updates).</span>`;
+            box.innerHTML = `<strong style="color:#10b981;">🟢 Logado Online${saveIt ? ' · Chave Salva neste PC!' : '!'}</strong><span>Plano ativo: <b>${d.edition}</b> (${d.tier}) · Atualizações Win + ⌘ macOS v6.9.0 incluídas.</span><div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;"><a href="/downloads/BadClaude-Plano3-Mac-Instalador.zip" download="BadClaude-Plano3-Mac-Instalador.zip" class="btn crimson sm">🍎 Baixar Instalador macOS (.zip)</a></div>`;
             if (actions) actions.style.display = saveIt ? 'flex' : 'none';
           } else {
             if (actions) actions.style.display = 'none';

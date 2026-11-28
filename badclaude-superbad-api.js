@@ -17,7 +17,7 @@ const DOWNLOAD_TOKEN_TTL_MS = 15 * 60 * 1000;
 const MAX_JSON_BYTES = 256 * 1024;
 const MAX_RECEIPT_JSON_BYTES = 4 * 1024 * 1024;
 const MAX_RECEIPT_FILE_BYTES = 3 * 1024 * 1024;
-const DEFAULT_MAX_RELEASE_BYTES = 15 * 1024 * 1024;
+const DEFAULT_MAX_RELEASE_BYTES = 120 * 1024 * 1024;
 const MAX_HEARTBEAT_TOKENS = 50_000_000_000;
 const MAX_HEARTBEAT_REQUESTS = 100_000_000;
 const DEFAULT_PUBLIC_STATS_CACHE_TTL_MS = 10 * 1000;
@@ -108,7 +108,7 @@ const EDITION_PLANS = Object.freeze({
     defaultMaxHwids: 2,
     unlockedModes: ["essential", "badcode", "cockpit-pro"],
     freeProvidersIncluded: ["openrouter", "google", "omnirouter", "ninerouter", "nvidia-chat-21"],
-    summary: "Cockpit Pro SuperBad v6.9.0: 9 Estações + BadBot Desktop 3 Colunas (FIFO) + OpenInfinite + Trim Omni 2.4.1 + 9Router (:20129) + 21 modelos NVIDIA Free + até 2 máquinas (Win/Mac).",
+    summary: "Cockpit Pro SuperBad v6.9.0: 9 Estações + BadBot Desktop 3 Colunas (FIFO) + OpenInfinite Puro (11 modelos 200K–1M ctx · R$ 0,00) + NVIDIA Build opcional + Create Studio PNG/MP4 + Voz PT-BR + até 2 máquinas (Win/Mac).",
   },
   founder: {
     edition: "founder",
@@ -1653,8 +1653,28 @@ function createSuperbadSalesApi(options = {}) {
     return baseList;
   }
 
-  function resolveReleaseFile(edition) {
+  function resolveReleaseFile(edition, platform = "windows") {
     if (!VALID_EDITIONS.has(edition)) return { filePath: null, expectedFiles: [] };
+    const cleanPlatform = String(platform || "windows").trim().toLowerCase();
+    const isMacPlatform = cleanPlatform === "mac" || cleanPlatform === "macos" || cleanPlatform === "darwin";
+    if (isMacPlatform) {
+      const macFilename = "BadClaude-Plano3-Mac-Instalador.zip";
+      const macRoots = [releasesDir, path.join(rootDir, "downloads")];
+      for (const dirCandidate of macRoots) {
+        try {
+          const realRoot = fs.realpathSync(dirCandidate);
+          const target = path.resolve(realRoot, macFilename);
+          if (!target.startsWith(`${realRoot}${path.sep}`)) continue;
+          const realTarget = fs.realpathSync(target);
+          if (!realTarget.startsWith(`${realRoot}${path.sep}`)) continue;
+          const stat = fs.statSync(realTarget);
+          if (stat.isFile()) {
+            return { filePath: realTarget, fileName: macFilename, stat, expectedFiles: [macFilename] };
+          }
+        } catch (_err) {}
+      }
+      return { filePath: null, expectedFiles: [macFilename] };
+    }
     const candidates = getCandidateReleaseFilenames(edition);
     let realReleasesRoot;
     try {
@@ -3812,6 +3832,7 @@ function createSuperbadSalesApi(options = {}) {
               expires_at: license.expires_at,
               downloads_remaining: license.max_downloads - license.downloads_used,
               download_url: `/api/superbad/download?token=${encodeURIComponent(token)}`,
+              macos_download_url: `/api/superbad/download?token=${encodeURIComponent(token)}&platform=macos`,
             },
           };
         });
@@ -3845,7 +3866,8 @@ function createSuperbadSalesApi(options = {}) {
             return { status: 403, payload: { ok: false, error: "Limite de downloads atingido." } };
           }
 
-          const resolved = resolveReleaseFile(license.edition);
+          const dlPlatform = String(searchParams.get("platform") || "windows").trim().toLowerCase();
+          const resolved = resolveReleaseFile(license.edition, dlPlatform);
           if (!resolved.filePath) {
             return {
               status: 404,

@@ -22254,6 +22254,7 @@ async function handleStatic(req, res, pathname, requestUrl) {
         (req.method === "GET" || req.method === "HEAD") &&
         (pathname === "/install-openinfinite.sh" ||
           pathname === "/install-infiniteclaude.sh" ||
+          pathname === "/install-badclaude-mac.sh" ||
           pathname === "/install-mac.sh" ||
           pathname === "/install-win.ps1")
       ) {
@@ -22342,6 +22343,25 @@ async function handleStatic(req, res, pathname, requestUrl) {
             'echo "==> [Infinite Zone] InfiniteClaude v6.2 instalado com sucesso!"',
             'echo "==> Atencao VPS: o modo Linux VPS exige pedido pago e chave ativa (sem hora gratis)."',
             'echo "==> Checkout PIX (68 99226-9296 - Raiane Leoncio): $ORIGIN/openinfinite/checkout/"',
+            "",
+          ].join("\n");
+        } else if (pathname === "/install-badclaude-mac.sh") {
+          scriptBody = [
+            "#!/usr/bin/env bash",
+            "# BadClaude Plano 3 (SuperBad + OpenInfinite) — Instalador Automatico macOS (Apple Silicon & Intel)",
+            "set -euo pipefail",
+            'if [ "$(uname -s)" != "Darwin" ]; then',
+            '  echo "[ERRO] Este instalador e exclusivo para macOS." >&2; exit 1',
+            "fi",
+            `ORIGIN="\${BADCLAUDE_ORIGIN:-${baseOrigin}}"`,
+            'ZIP_URL="$ORIGIN/downloads/BadClaude-Plano3-Mac-Instalador.zip"',
+            'TMP_DIR="$(mktemp -d /tmp/badclaude-mac-install.XXXXXX)"',
+            'trap \'rm -rf "$TMP_DIR"\' EXIT',
+            'echo "==> [BadClaude Plano 3] Baixando instalador macOS verificado..."',
+            'curl -fSL "$ZIP_URL" -o "$TMP_DIR/BadClaude-Plano3-Mac-Instalador.zip"',
+            'unzip -oq "$TMP_DIR/BadClaude-Plano3-Mac-Instalador.zip" -d "$TMP_DIR/pkg"',
+            'chmod +x "$TMP_DIR/pkg/montar-badclaude-app.sh"',
+            'exec bash "$TMP_DIR/pkg/montar-badclaude-app.sh" "$@"',
             "",
           ].join("\n");
         } else if (pathname === "/install-mac.sh") {
