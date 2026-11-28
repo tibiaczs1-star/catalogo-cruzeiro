@@ -296,8 +296,8 @@ export class Hero3DStage {
 
   setupRenderer() {
     const rect = this.canvas.getBoundingClientRect();
-    const w = Math.max(320, Math.round(rect.width || this.canvas.parentElement?.clientWidth || window.innerWidth));
-    const h = Math.max(320, Math.round(rect.height || this.canvas.parentElement?.clientHeight || 680));
+    const w = Math.max(1, Math.round(rect.width || this.canvas.parentElement?.clientWidth || window.innerWidth));
+    const h = Math.max(1, Math.round(rect.height || this.canvas.parentElement?.clientHeight || 680));
     const lowHw = (navigator.deviceMemory && navigator.deviceMemory <= 8) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
 
     // ALPHA: TRUE REAL -> Zero retângulo preto opaco, zero linha divisória em monitores Ultrawide!
@@ -330,8 +330,8 @@ export class Hero3DStage {
     this.scene.background = null;
     this.scene.fog = null;
 
-    const w = Math.max(320, this.canvas.clientWidth || window.innerWidth);
-    const h = Math.max(320, this.canvas.clientHeight || 680);
+    const w = this.canvas.clientWidth || window.innerWidth;
+    const h = this.canvas.clientHeight || 680;
     this.camera = new THREE.PerspectiveCamera(41, w / h, 0.1, 60);
 
     if (!this.isLowSpecGpu) {
@@ -1252,10 +1252,12 @@ export class Hero3DStage {
 
     const isMobile = this.camera.aspect < 1.15;
     const centered = isMobile || this.options.centerFraming;
-    const lookX = centered ? 0.08 : -1.35;
-    const lookY = isMobile ? 1.02 : 1.00;
-    const camX = centered ? 0.55 : 1.52;
-    const camZ = isMobile ? 7.55 * (1.10 / Math.max(0.75, this.camera.aspect)) : (centered ? 6.15 : 6.35);
+    const lookX = this.options.fitShowcase ? 0.40 : (centered ? 0.08 : -1.35);
+    const lookY = this.options.fitShowcase ? 1.95 : (isMobile ? 1.02 : 1.00);
+    const camX = this.options.fitShowcase ? 0.75 : (centered ? 0.55 : 1.52);
+    const camZ = this.options.fitShowcase
+      ? 8.4 * Math.max(1, 1.25 / this.camera.aspect)
+      : (isMobile ? 7.55 * (1.10 / Math.max(0.75, this.camera.aspect)) : (centered ? 6.15 : 6.35));
     const camY = isMobile ? 2.18 : 2.32;
 
     this.camera.position.set(
@@ -1296,8 +1298,8 @@ export class Hero3DStage {
     this._onResize = () => {
       if (!this.renderer || this.contextLost) return;
       const rect = this.canvas.getBoundingClientRect();
-      const w = Math.max(300, Math.round(rect.width || this.canvas.parentElement?.clientWidth || window.innerWidth));
-      const h = Math.max(280, Math.round(rect.height || this.canvas.parentElement?.clientHeight || 680));
+      const w = Math.max(1, Math.round(rect.width || this.canvas.parentElement?.clientWidth || window.innerWidth));
+      const h = Math.max(1, Math.round(rect.height || this.canvas.parentElement?.clientHeight || 680));
       this.camera.aspect = w / h;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(w, h, false);

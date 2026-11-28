@@ -43,7 +43,7 @@
     .nav-links a:hover,.text-link:hover { color:var(--gold); }
     .hero-3d-fullbleed { position:relative; isolation:isolate; display:grid; align-items:center; min-height:clamp(500px,65vh,720px); overflow:hidden; border-bottom:1px solid var(--rim); background:radial-gradient(ellipse at 77% 53%,#35303a 0,transparent 61%),#131316; }
     #hero3dCanvas,.intro-poster-fallback { position:absolute; inset:0; width:100%; height:100%; }
-    #hero3dCanvas { display:block; }
+    #hero3dCanvas { display:block; width:53%; left:auto; }
     .intro-poster-fallback { width:60%; left:40%; object-fit:contain; opacity:0; pointer-events:none; }
     .reduced-static .intro-poster-fallback { opacity:1; }
     .reduced-static #hero3dCanvas,.reduced-static .pet-controls { visibility:hidden; }
@@ -91,15 +91,17 @@
     .site-footer { border-top:1px solid var(--rim); color:var(--muted); display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; padding-top:20px; font-size:.86rem; }
     .site-footer nav { display:flex; gap:20px; }
     @media (max-width:1000px) { .plan-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:720px) {
+    @media (max-width:840px) {
       .topbar-inner { min-height:64px; gap:8px; } .nav-links { gap:4px; } .nav-links a { font-size:.8rem; }
       .nav-links a:first-child { display:none; }
       .hero-3d-fullbleed { display:flex; flex-direction:column; min-height:0; }
       .hero-3d-inner { padding-block:32px 8px; order:0; }
       .hero-copy { max-width:none; } .hero-copy p { margin:15px 0 20px; }
-      #hero3dCanvas { position:relative; height:clamp(245px,63vw,365px); order:1; }
-      .intro-poster-fallback { width:100%; height:clamp(245px,63vw,365px); left:0; top:auto; bottom:0; padding-bottom:15px; }
-      .pet-controls { right:auto; bottom:6px; gap:5px; } .pet-controls button { padding:5px 7px; }
+      #hero3dCanvas { position:relative; width:100%; height:clamp(250px,66vw,365px); order:1; }
+      .intro-poster-fallback { width:100%; height:clamp(250px,66vw,365px); left:0; top:auto; bottom:0; }
+      .pet-controls { position:static; order:2; flex-wrap:wrap; justify-content:center; margin:0 8px 10px; gap:5px; }
+      .pet-controls button { padding:5px 7px; }
+      .reduced-static .pet-controls { display:none; }
       .workspace-pair,.dual-grid { grid-template-columns:1fr; }
     }
     @media (max-width:510px) { .plan-grid { grid-template-columns:1fr; } .price { font-size:2rem; } }
@@ -192,6 +194,7 @@
       catch (error) { console.warn('Animação de fundo indisponível.', error); }
       try {
         const heroStage = new Hero3DStage(canvasEl, {
+          fitShowcase: true,
           onReady() { stageEl.classList.remove('reduced-static'); },
           onAudioState(unlocked, muted) { btnMute.textContent = muted ? 'Ativar som' : 'Silenciar'; },
           onContextLost(lost) { stageEl.classList.toggle('reduced-static', lost); },
