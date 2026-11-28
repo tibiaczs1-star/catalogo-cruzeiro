@@ -286,11 +286,17 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
   ".html",
   ".css",
   ".js",
+  ".mjs",
   ".svg",
   ".png",
   ".jpg",
   ".jpeg",
   ".webp",
+  ".glb",
+  ".gltf",
+  ".bin",
+  ".woff",
+  ".woff2",
   ".mp3",
   ".ogg",
   ".wav",
@@ -7114,6 +7120,7 @@ function mimeFor(filePath) {
     case ".css":
       return "text/css; charset=utf-8";
     case ".js":
+    case ".mjs":
       return "application/javascript; charset=utf-8";
     case ".json":
       return "application/json; charset=utf-8";
@@ -22529,7 +22536,7 @@ async function handleStatic(req, res, pathname, requestUrl) {
          filePath = path.join(filePath, "index.html");
        }
        const badclaudeExt = path.extname(filePath).toLowerCase();
-       if (!["", ".html", ".css", ".js", ".mjs", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".json", ".woff", ".woff2", ".txt"].includes(badclaudeExt)) {
+       if (!["", ".html", ".css", ".js", ".mjs", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".json", ".woff", ".woff2", ".txt", ".glb", ".gltf", ".bin", ".mp3", ".wav", ".ogg"].includes(badclaudeExt)) {
          return sendText(res, 403, "Acesso negado.");
        }
        return sendFile(req, res, filePath, {

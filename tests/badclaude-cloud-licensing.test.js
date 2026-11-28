@@ -437,4 +437,12 @@ describe("BadClaude Cloud Licensing, PIX 68 99226-9296 & Dashboard Control Sync"
       fs.rmSync(tmpDir, { recursive: true, force: true });
     }
   });
+
+  it("permits .glb 3D hound, .mp3 cues and application/javascript .mjs modules in server.js", () => {
+    const serverSrc = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
+    assert.match(serverSrc, /"\.glb"/);
+    assert.match(serverSrc, /"\.mjs"/);
+    assert.match(serverSrc, /case "\.mjs":\s*return "application\/javascript; charset=utf-8";/);
+    assert.match(serverSrc, /badclaudeExt[\s\S]{0,180}"\.glb"[\s\S]{0,80}"\.mp3"/);
+  });
 });
