@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinite Zone · OpenInfinite &amp; InfiniteClaude</title>
-  <meta name="description" content="Infinite Zone · Laboratórios de Tecnologia. Conheça o OpenInfinite e o InfiniteClaude para Windows, macOS (Mac desktop) e Linux Ubuntu VPS.">
+  <title>Infinite Zone · OpenInfinite</title>
+  <meta name="description" content="Conheça a edição unificada do OpenInfinite em desenvolvimento e consulte seus pedidos e licenças anteriores.">
   <style>
     :root {
       --bg: #070709;
@@ -1425,6 +1425,26 @@
       .orbit-progress-label { display: none; }
       .orbit-progress-track { width: 56px; }
     }
+
+    #produtos .dual-grid {grid-template-columns:minmax(0,1fr)}
+    .hw-base-win,.hw-base-mac,.hw-base-linux {
+      background-image:repeating-linear-gradient(2deg,transparent 0 2px,#ffffff12 2px 3px),linear-gradient(112deg,#414651,#b6bcc3 28%,#747b84 47%,#c3c8ca 68%,#515761);
+      box-shadow:inset 0 1px 1px #ffffff9c,inset 0 -3px 5px #10131885,0 5px 12px #0006;
+    }
+    .hw-bezel {background-image:repeating-linear-gradient(115deg,#ffffff04 0 1px,transparent 1px 3px),linear-gradient(125deg,#303236,#151519 40%,#24252a 82%,#44464b)}
+  </style>
+<style>
+    body {background-color:#0b0c10;background-image:radial-gradient(ellipse at 48% 0%,#252530 0,transparent 42rem)}
+    .topbar {background:rgba(13,14,18,.94);border-bottom:1px solid #ffffff1f}
+    .hero h1 {letter-spacing:-.052em;text-wrap:balance}
+    .hero-sub {max-width:64ch;margin-inline:auto;line-height:1.65}
+    .hero-stage {border:1px solid #aaa9b445;border-radius:24px;background:radial-gradient(ellipse at 50% 20%,#34343e,#17181e 57%,#0c0d11);box-shadow:inset 0 1px #ffffff1f,0 18px 52px #0005}
+    .product-card,.plans-grid article,.checkout-step {border:1px solid #c1b6a635;background:linear-gradient(145deg,#25252b,#15161b 72%);box-shadow:inset 0 1px #ffffff0e}
+    .plan-price {font-variant-numeric:tabular-nums;letter-spacing:-.045em}
+    .plan-price small {letter-spacing:normal}
+    .btn.ivory {background:linear-gradient(170deg,#fff4df,#d5c4a7);color:#25201a;border-color:#e6d5b5}
+    .btn:focus-visible,input:focus-visible,select:focus-visible {outline:3px solid #f7dba7;outline-offset:3px}
+    @media(max-width:600px){.hero-stage{border-radius:14px}.hero-ctas .btn{min-height:44px}}
   </style>
 </head>
 <body>
@@ -1500,7 +1520,7 @@
               d="M60 59 C54 51 40 51 40 59 C40 67 54 67 60 59 C66 51 80 51 80 59 C80 67 66 67 60 59 Z" />
       </symbol>
 
-      <!-- 7. InfiniteClaude Max -->
+      <!-- 7. OpenInfinite Max -->
       <symbol id="izMaxMark" viewBox="0 0 120 120">
         <circle cx="60" cy="60" r="55" fill="#070709" stroke="url(#izPrismaticGrad)" stroke-width="3.6" />
         <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.4" />
@@ -1517,17 +1537,17 @@
         <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
         <span class="brand-lockup">
           <span class="brand-wordmark">INFINITE ZONE</span>
-          <span class="brand-lab">OPENINFINITE · INFINITECLAUDE</span>
+          <span class="brand-lab">OPENINFINITE</span>
         </span>
       </a>
       <nav class="nav-links" aria-label="Navegação principal">
-        <a href="#produtos" class="nav-link">Produtos</a>
+        <a href="#produtos" class="nav-link">Aplicativo</a>
         <a href="#downloads" class="nav-link">Downloads</a>
         <a href="#planos" class="nav-link">Planos</a>
         <a href="/openinfinite/checkout/#validador" class="nav-link">Validar Chave</a>
       </nav>
       <div class="nav-actions">
-        <a href="/openinfinite/checkout/" class="btn ivory pill sm">Check-in / Comprar →</a>
+        <a href="/openinfinite/checkout/" class="btn ivory pill sm">Meus pedidos</a>
       </div>
     </div>
   </header>
@@ -1537,18 +1557,18 @@
     <section class="hero" id="conteudo">
       <div class="hero-brand-pill">
         <svg width="20" height="20" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
-        <span>INFINITE ZONE · OPENINFINITE &amp; INFINITECLAUDE</span>
+        <span>INFINITE ZONE · OPENINFINITE</span>
       </div>
 
-      <h1>OpenInfinite e InfiniteClaude.<br /><span>Produtividade com IA no seu computador ou VPS.</span></h1>
+      <h1>OpenInfinite.<br /><span>Um aplicativo para suas ferramentas de IA.</span></h1>
 
       <p class="hero-sub">
-        Desenvolvido pela <strong>Infinite Zone</strong> para quem usa assistentes de programação todos os dias com mensalidade fixa. Baixe e teste por <strong>1 hora grátis no Windows ou no Mac</strong>, ou contrate para sua <strong>Linux VPS</strong> no check-in dedicado.
+        A <strong>Infinite Zone</strong> está reunindo OpenInfinite e InfiniteCode em uma edição unificada. Os instaladores estão em validação. Clientes das edições anteriores já podem consultar pedidos e chaves.
       </p>
 
       <div class="hero-ctas">
-        <a href="#downloads" class="btn ivory pill">Baixar para Windows / Mac</a>
-        <a href="/openinfinite/checkout/" class="btn silver pill">Check-in / Assinar PIX →</a>
+        <a href="#downloads" class="btn ivory pill">Disponibilidade</a>
+        <a href="/openinfinite/checkout/" class="btn silver pill">Consultar meu pedido</a>
       </div>
 
       <div class="hero-stage" id="painel-live">
@@ -1644,7 +1664,7 @@
                             <span id="winHudLabel">Win 10/11 · InfiniteClaude</span>
                           </div>
                           <button type="button" class="slot-screen-btn" data-slot-device="windows" aria-label="PC Monitor Windows — focar ou ampliar interface">
-                            <img id="winSlotImg" src="/openinfinite/assets/hero_win_infiniteclaude.png" alt="InfiniteClaude no PC Windows" />
+                            <img id="winSlotImg" src="/openinfinite/assets/hero_win_openinfinite.png" alt="Arquivo · OpenInfinite no Windows" />
                           </button>
                           <div class="hw-chin-bar" aria-hidden="true"><span class="hw-chin-logo">INFINITE STUDIO</span></div>
                           <span class="hw-monitor-chin-led" aria-hidden="true"></span>
@@ -1699,7 +1719,7 @@
                           </div>
                           <span class="hw-top-camera" aria-hidden="true"></span>
                           <button type="button" class="slot-screen-btn" data-slot-device="linux" aria-label="Notebook Linux Ubuntu VPS — focar ou ampliar interface">
-                            <img id="linuxSlotImg" src="/openinfinite/assets/hero_linux_vps_tui.png" alt="Infinite Zone no Linux Ubuntu VPS" />
+                            <img id="linuxSlotImg" src="/openinfinite/assets/hero_linux_vps_tui.png" alt="Arquivo · Interface no Linux VPS" />
                           </button>
                         </div>
                         <div class="hw-hinges-linux" aria-hidden="true"><span></span><span></span></div>
@@ -1730,374 +1750,37 @@
 
         <div class="cockpit-caption">
           <div>
-            <strong id="featTitle" style="color:var(--ink);">InfiniteClaude no Mac (Liquid Glass)</strong>
-            <span id="featDesc" style="display:block;">Aplicativo nativo para MacBook, iMac e Mac mini — baixe em .dmg e teste por 1 hora grátis.</span>
+            <strong id="featTitle" style="color:var(--ink);">Arquivo · Interface no Mac</strong>
+            <span id="featDesc" style="display:block;">Captura de uma edição anterior. A interface unificada está em desenvolvimento.</span>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button type="button" class="btn sm ghost" id="toggleAppBtn" style="display:none;">Alternar para OpenInfinite</button>
+            <button type="button" class="btn sm ghost" id="toggleAppBtn" style="display:none;">Ver OpenInfinite</button>
             <button type="button" class="btn sm" id="captionZoomBtn">Ampliar Tela</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. OS PRODUTOS DA INFINITE ZONE (COM VARIAÇÃO DE LOGO) -->
     <section id="produtos">
-      <div class="sec-head">
-        <div>
-          <span class="sec-kicker">Produtos Infinite Zone</span>
-          <h2>OpenInfinite e InfiniteClaude</h2>
-        </div>
-        <p>Cada aplicativo tem sua identidade visual própria para o seu estilo de trabalho.</p>
-      </div>
-
+      <div class="sec-head"><div><span class="sec-kicker">Aplicativo</span><h2>O que muda no OpenInfinite</h2></div></div>
       <div class="dual-grid">
-        <article class="card product-card">
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div class="product-head">
-              <div class="product-id">
-                <div class="logo-shell">
-                  <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true"><use href="#izOpenInfiniteMark" /></svg>
-                </div>
-                <div>
-                  <h3>OpenInfinite</h3>
-                  <span class="product-sub">Infinite Zone · OpenBot, Hermes &amp; OpenCode</span>
-                </div>
-              </div>
-              <span class="brand-ver">A partir de R$ 99/mês</span>
-            </div>
-            <ul class="clean-list">
-              <li>Exclusivo para <strong>OpenBot / OpenClaw, Hermes Agent e OpenCode</strong> — enxuto e sem recursos de Claude/Codex.</li>
-              <li><strong>Shell Ao Vivo</strong> com status de conexão, desconexão, restauração de túnel WARP e <strong>seletor manual de LLMs</strong>.</li>
-              <li><strong>1 hora grátis</strong> no Windows ou Mac desktop (MacBook/iMac/Mac mini), além de suporte a Linux VPS.</li>
-            </ul>
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="#downloads" class="btn sm silver">Ver Downloads</a>
-            <a href="/openinfinite/checkout/?plan=infinite_pro" class="btn sm ivory">Assinar OpenInfinite →</a>
-          </div>
-        </article>
-
-        <article class="card product-card">
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div class="product-head">
-              <div class="product-id">
-                <div class="logo-shell">
-                  <svg width="44" height="44" viewBox="0 0 120 120" aria-hidden="true"><use href="#izClaudeMark" /></svg>
-                </div>
-                <div>
-                  <h3>InfiniteClaude</h3>
-                  <span class="product-sub">Infinite Zone · Claude Code, Codex CLI &amp; Multi-CLI</span>
-                </div>
-              </div>
-              <span class="brand-ver">A partir de R$ 199/mês</span>
-            </div>
-            <ul class="clean-list">
-              <li>Aba <strong>Procurar &amp; Injetar</strong> com detecção e injeção direta em <strong>Claude Code</strong>, <strong>Codex CLI</strong> (<code>wire_api=responses</code>), OpenCode, Hermes, OpenBot e Local Harness.</li>
-              <li><strong>Shell Ao Vivo</strong> em tempo real + <strong>seletor manual de LLMs</strong> com latência e modo automático.</li>
-              <li>Suporte completo para Windows, Mac desktop (Liquid Glass) e servidor Linux Ubuntu VPS (Pro e Max).</li>
-            </ul>
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="#downloads" class="btn sm silver">Ver Downloads</a>
-            <a href="/openinfinite/checkout/?plan=infinite_claude" class="btn sm ivory">Assinar InfiniteClaude →</a>
-          </div>
-        </article>
+        <article class="card product-card"><h3>Ferramentas de terminal</h3><p>A nova edição reúne as integrações do OpenInfinite e do InfiniteCode. O acesso a cada ferramenta será indicado no plano antes da contratação.</p></article>
+        <article class="card product-card"><h3>Claude no desktop</h3><p>A integração com o aplicativo gráfico terá sua própria configuração. Ela poderá ser ativada separadamente da integração com o Claude Code no terminal.</p></article>
       </div>
     </section>
-
-    <!-- 3. DOWNLOADS POR SISTEMA: WINDOWS vs MAC NORMAL vs LINUX VPS PAGO -->
     <section id="downloads">
-      <div class="sec-head">
-        <div>
-          <span class="sec-kicker">Escolha seu Sistema</span>
-          <h2>Windows, Mac (computador normal) ou Linux VPS</h2>
-        </div>
-        <p>Cada sistema exibe sua variação oficial de logo da Infinite Zone. No Windows e Mac normal você testa 1 hora grátis; o modo Linux é para servidor VPS com pedido pago.</p>
-      </div>
-
+      <div class="sec-head"><div><span class="sec-kicker">Disponibilidade</span><h2>Instaladores em validação</h2></div></div>
       <div class="os-grid">
-        <!-- WINDOWS -->
-        <article class="card os-card">
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div class="os-card-head">
-              <div class="os-logo-badge">
-                <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true"><use href="#izWinMark" /></svg>
-              </div>
-              <div>
-                <h3>Windows 10 / 11</h3>
-                <span class="brand-ver tag-emerald">1 hora grátis no PC</span>
-              </div>
-            </div>
-            <div class="os-note">
-              Baixe o instalador normal para PC ou notebook Windows e teste por <strong>1 hora grátis</strong> antes de precisar da chave.
-            </div>
-            <div class="dl-stack">
-              <a href="/downloads/OpenInfinite-Client-Setup.exe" download="OpenInfinite-Client-Setup.exe" class="btn sm silver">
-                <span>OpenInfinite Windows</span><span class="mono">.exe ↓</span>
-              </a>
-              <a href="/downloads/InfiniteClaude-Client-Setup.exe" download="InfiniteClaude-Client-Setup.exe" class="btn sm ivory">
-                <span>InfiniteClaude Windows</span><span class="mono">.exe ↓</span>
-              </a>
-            </div>
-            <div class="prompt-block">
-              <div class="prompt-label">
-                <span>PowerShell (1 linha)</span>
-                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="irm https://catalogo-cruzeiro-web.onrender.com/install-win.ps1 | iex" data-copy-target="fbWinCmd">Copiar</button>
-              </div>
-              <code class="prompt-cmd">irm https://catalogo-cruzeiro-web.onrender.com/install-win.ps1 | iex</code>
-              <span id="fbWinCmd" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-          </div>
-        </article>
-
-        <!-- MAC NORMAL (COMPUTADOR APPLE, NÃO É VPS) -->
-        <article class="card os-card">
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div class="os-card-head">
-              <div class="os-logo-badge" style="background:#f5f5f7;">
-                <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true"><use href="#izMacMark" /></svg>
-              </div>
-              <div>
-                <h3>macOS (Mac Normal)</h3>
-                <span class="brand-ver tag-emerald">1 hora grátis no Mac</span>
-              </div>
-            </div>
-            <div class="os-note">
-              Para <strong>MacBook, iMac, Mac mini e Mac Studio</strong> (uso no seu computador normal — <strong>não é VPS</strong>). Teste 1 hora grátis.
-            </div>
-            <div class="dl-stack">
-              <a href="/downloads/OpenInfinite-Client-macOS.dmg" download="OpenInfinite-Client-macOS.dmg" class="btn sm silver">
-                <span>OpenInfinite macOS</span><span class="mono">.dmg ↓</span>
-              </a>
-              <a href="/downloads/InfiniteClaude-Client-macOS.dmg" download="InfiniteClaude-Client-macOS.dmg" class="btn sm ivory">
-                <span>InfiniteClaude macOS</span><span class="mono">.dmg ↓</span>
-              </a>
-            </div>
-            <p style="font-size:11.5px;color:var(--muted);line-height:1.45;">
-              <strong>1ª abertura no Mac (Gatekeeper):</strong> arraste para <em>Aplicativos</em>, clique com o <strong>botão direito → Abrir</strong> (assinatura direta sem notarização Apple — <a href="#faq-btn-5" style="text-decoration:underline;color:var(--silver);">veja o passo a passo no FAQ</a>).
-            </p>
-            <div class="prompt-block">
-              <div class="prompt-label">
-                <span>Terminal do Mac (1 linha)</span>
-                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-mac.sh | bash" data-copy-target="fbMacCmd">Copiar</button>
-              </div>
-              <code class="prompt-cmd">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-mac.sh | bash</code>
-              <span id="fbMacCmd" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-          </div>
-        </article>
-
-        <!-- LINUX UBUNTU VPS (SOMENTE PEDIDO PAGO + WHATSAPP) -->
-        <article class="card os-card">
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div class="os-card-head">
-              <div class="os-logo-badge">
-                <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true"><use href="#izLinuxMark" /></svg>
-              </div>
-              <div>
-                <h3>Linux Ubuntu VPS</h3>
-                <span class="brand-ver tag-amber">Requer Pedido Pago</span>
-              </div>
-            </div>
-            <div class="os-note vps-paid">
-              <strong>Modo Servidor VPS:</strong> exige pedido pago antes de liberar o acesso. Gere o PIX, anexe o comprovante e confirme via WhatsApp para receber sua chave.
-            </div>
-            <a href="/openinfinite/checkout/?plan=infinite_pro" class="btn sm ivory" style="width:100%;">Contratar Plano VPS no Check-in →</a>
-            <div class="dl-stack">
-              <a href="/downloads/OpenInfinite-Client-Ubuntu-VPS.tar.gz" download="OpenInfinite-Client-Ubuntu-VPS.tar.gz" class="btn sm silver">
-                <span>OpenInfinite Linux VPS</span><span class="mono">.tar.gz ↓</span>
-              </a>
-              <a href="/downloads/InfiniteClaude-Client-Ubuntu-VPS.tar.gz" download="InfiniteClaude-Client-Ubuntu-VPS.tar.gz" class="btn sm">
-                <span>InfiniteClaude Linux VPS</span><span class="mono">.tar.gz ↓</span>
-              </a>
-            </div>
-            <div class="prompt-block">
-              <div class="prompt-label">
-                <span>SSH OpenInfinite VPS</span>
-                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-openinfinite.sh | bash" data-copy-target="fbUbuOiCmd">Copiar</button>
-              </div>
-              <code class="prompt-cmd">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-openinfinite.sh | bash</code>
-              <span id="fbUbuOiCmd" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-            <div class="prompt-block">
-              <div class="prompt-label">
-                <span>SSH InfiniteClaude VPS</span>
-                <button type="button" class="btn sm ghost" style="padding:3px 9px;font-size:11px;" data-copy-cmd="curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-infiniteclaude.sh | bash" data-copy-target="fbUbuIcCmd">Copiar</button>
-              </div>
-              <code class="prompt-cmd">curl -fsSL https://catalogo-cruzeiro-web.onrender.com/install-infiniteclaude.sh | bash</code>
-              <span id="fbUbuIcCmd" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-          </div>
-        </article>
+        <article class="os-card"><h3>Windows 10 e 11</h3><p>Aguardando validação do instalador unificado em cada versão do Windows.</p></article>
+        <article class="os-card"><h3>macOS</h3><p>Aguardando validação do instalador unificado no Mac.</p></article>
+        <article class="os-card"><h3>Linux VPS</h3><p>O pacote unificado para servidor ainda está em preparação.</p></article>
       </div>
     </section>
-
-    <!-- 4. PLANOS MENSAIS ENXUTOS (DIRECIONA AO CHECKOUT SEPARADO) -->
     <section id="planos">
-      <div class="sec-head">
-        <div>
-          <span class="sec-kicker">Planos Mensais (30 dias)</span>
-          <h2>Escolha seu plano e finalize no Check-in PIX</h2>
-        </div>
-        <p>Toda a parte de pagamento, anexo de comprovante e validação de chave fica em uma página separada e organizada.</p>
-      </div>
-
-      <div class="plans-grid">
-        <article class="card plan-card">
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="30" height="30" viewBox="0 0 120 120" aria-hidden="true"><use href="#izWinMark" /></svg>
-              <strong>OpenInfinite Windows</strong>
-            </div>
-            <div class="plan-price">R$ 99,00 <small>/ mês</small></div>
-            <ul class="clean-list">
-              <li>1 computador Windows PC</li>
-              <li>OpenInfinite completo (OpenBot, Hermes &amp; OpenCode) por 30 dias</li>
-              <li>Shell Ao Vivo + seletor manual de LLMs</li>
-              <li class="dim">Sem macOS nem Linux VPS</li>
-            </ul>
-          </div>
-          <a href="/openinfinite/checkout/?plan=infinite" class="btn silver sm" style="width:100%;">Ir para Check-in →</a>
-        </article>
-
-        <article class="card plan-card">
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="30" height="30" viewBox="0 0 120 120" aria-hidden="true"><use href="#izOpenInfiniteMark" /></svg>
-              <strong>OpenInfinite Pro</strong>
-            </div>
-            <div class="plan-price">R$ 159,00 <small>/ mês</small></div>
-            <ul class="clean-list">
-              <li>Até 2 máquinas (Windows, Mac normal e Linux VPS)</li>
-              <li>OpenBot / OpenClaw, Hermes Agent e OpenCode</li>
-              <li>Shell Ao Vivo + seletor manual de LLMs</li>
-            </ul>
-          </div>
-          <a href="/openinfinite/checkout/?plan=infinite_pro" class="btn silver sm" style="width:100%;">Ir para Check-in →</a>
-        </article>
-
-        <article class="card plan-card highlight">
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="30" height="30" viewBox="0 0 120 120" aria-hidden="true"><use href="#izClaudeMark" /></svg>
-              <strong>InfiniteClaude Pro</strong>
-            </div>
-            <div class="plan-price">R$ 199,00 <small>/ mês</small></div>
-            <ul class="clean-list">
-              <li>Até 3 máquinas (Windows, Mac normal e Linux VPS)</li>
-              <li>Claude Code + OpenCode + Hermes + OpenBot + Shell Ao Vivo e seletor de LLMs</li>
-            </ul>
-          </div>
-          <a href="/openinfinite/checkout/?plan=infinite_claude" class="btn ivory sm" style="width:100%;">Ir para Check-in →</a>
-        </article>
-
-        <article class="card plan-card highlight">
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="30" height="30" viewBox="0 0 120 120" aria-hidden="true"><use href="#izMaxMark" /></svg>
-              <strong>InfiniteClaude Max</strong>
-            </div>
-            <div class="plan-price">R$ 249,00 <small>/ mês</small></div>
-            <ul class="clean-list">
-              <li>Até 5 máquinas (Windows, Mac normal e Linux VPS)</li>
-              <li>Procurar &amp; Injetar Multi-CLI total (Claude Code, Codex CLI, OpenCode, Hermes, OpenBot e Local Harness)</li>
-            </ul>
-          </div>
-          <a href="/openinfinite/checkout/?plan=infinite_max" class="btn ivory sm" style="width:100%;">Ir para Check-in →</a>
-        </article>
-      </div>
-
-      <div class="cta-banner">
-        <div>
-          <strong style="font-size:15px;">Já tem pedido ou recebeu sua chave?</strong>
-          <div style="font-size:13px;color:var(--muted);">Anexe seu comprovante PIX, confirme pelo WhatsApp <strong class="mono">(68) 99226-9296</strong> ou valide sua chave no Check-in.</div>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <a href="/openinfinite/checkout/" class="btn ivory sm">Abrir Check-in e Pagamento →</a>
-          <a href="/openinfinite/checkout/#validador" class="btn ghost sm">Validar Chave</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. FAQ ENXUTO -->
-    <section id="faq">
-      <div class="sec-head">
-        <div>
-          <span class="sec-kicker">Perguntas Frequentes</span>
-          <h2>Dúvidas rápidas antes de baixar</h2>
-        </div>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item open">
-          <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
-            <span>Quando baixo no Windows ou no Mac, tem 1 hora grátis antes de pedir a chave?</span>
-            <span class="faq-chevron" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
-            <div class="faq-panel-inner">
-              <div class="faq-panel-body">
-                Sim. Tanto no <strong>Windows (.exe)</strong> quanto no <strong>Mac normal (.dmg)</strong> você tem <strong>1 hora gratuita</strong> para testar na sua máquina. Ao encerrar esse tempo, o app solicita a chave oficial obtida no Check-in.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
-            <span>Por que o modo Linux Ubuntu VPS exige pedido pago?</span>
-            <span class="faq-chevron" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
-            <div class="faq-panel-inner">
-              <div class="faq-panel-body">
-                O <strong>macOS</strong> é para instalação comum no computador (MacBook/iMac/Mac mini). Já o modo <strong>Linux</strong> é voltado para servidores <strong>VPS</strong> e exige plano pago ativo (OpenInfinite Pro, InfiniteClaude Pro ou Max) com chave liberada após o pagamento PIX e conferência via WhatsApp.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
-            <span>Como funciona o pagamento PIX, a conferência e a ativação da chave?</span>
-            <span class="faq-chevron" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
-            <div class="faq-panel-inner">
-              <div class="faq-panel-body">
-                No <a href="/openinfinite/checkout/" style="text-decoration:underline;">Check-in / Pagamento</a>, você informa seu <strong>WhatsApp com DDD</strong>, gera o PIX para <strong>68 99226-9296 (Raiane Leoncio)</strong> e anexa o comprovante. Após nossa <strong>conferência manual</strong>, enviamos sua chave oficial diretamente no seu <strong>WhatsApp</strong> (e no painel do pedido). Para ativar: no <strong>Windows/Mac</strong>, cole a chave em <strong>Ativar Licença / Master Key</strong> (ou aba <strong>Licença &amp; Chave</strong>) e depois use <strong>Procurar &amp; Injetar</strong>; no <strong>Linux VPS</strong>, rode <code class="mono">--activate SUA-CHAVE</code>.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
-            <span>Onde valido minha chave ou solicito troca de computador?</span>
-            <span class="faq-chevron" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
-            <div class="faq-panel-inner">
-              <div class="faq-panel-body">
-                No <a href="/openinfinite/checkout/#validador" style="text-decoration:underline;">Validador de Chave Online</a> você consulta sua chave em segundos. Caso troque de PC, Mac ou VPS, chame no WhatsApp <strong>(68) 99226-9296</strong>.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
-            <span>Como abrir no macOS pela 1ª vez se aparecer aviso do Gatekeeper?</span>
-            <span class="faq-chevron" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5">
-            <div class="faq-panel-inner">
-              <div class="faq-panel-body">
-                Os apps macOS (<code class="mono">.dmg</code>) usam assinatura direta local (<code class="mono">adhoc</code>) sem notarização Apple Developer ID, então o <strong>macOS Gatekeeper</strong> exibe uma confirmação na primeira abertura. Para abrir sem bloqueio: <strong>1)</strong> arraste o app para a pasta <strong>Aplicativos</strong>; <strong>2)</strong> dê <strong>clique direito (ou Control + clique) → Abrir</strong> e confirme em <strong>Abrir</strong> (ou vá em <em>Ajustes do Sistema → Privacidade e Segurança → Abrir Mesmo Assim</em>). Se preferir via Terminal: <code class="mono">xattr -cr /Applications/OpenInfinite.app</code> ou <code class="mono">/Applications/InfiniteClaude.app</code>.
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="sec-head"><div><span class="sec-kicker">Licenças</span><h2>Três planos em preparação</h2></div></div>
+      <div class="card product-card">
+        <p>Os preços, os limites de dispositivos e as ferramentas de cada plano serão publicados após a validação da edição unificada. Novas compras estão pausadas.</p>
+        <div class="hero-ctas"><a href="/openinfinite/checkout/" class="btn ivory pill">Consultar pedido anterior</a><a href="/openinfinite/checkout/#validador" class="btn silver pill">Validar minha chave</a></div>
       </div>
     </section>
   </main>
@@ -2125,45 +1808,14 @@
       const $ = (id) => document.getElementById(id);
       const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      async function copyTextSafely(text) {
-        if (navigator.clipboard && window.isSecureContext !== false) {
-          try { await navigator.clipboard.writeText(text); return true; } catch (_e) {}
-        }
-        try {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          ta.setAttribute('readonly', '');
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          const ok = document.execCommand('copy');
-          document.body.removeChild(ta);
-          return ok;
-        } catch (_e2) {
-          return false;
-        }
-      }
-
-      document.querySelectorAll('[data-copy-cmd]').forEach((btn) => {
-        const orig = btn.textContent;
-        btn.addEventListener('click', async () => {
-          const ok = await copyTextSafely(btn.getAttribute('data-copy-cmd') || '');
-          const fb = $(btn.getAttribute('data-copy-target') || '');
-          if (fb) fb.textContent = ok ? 'Comando copiado!' : 'Selecione o comando acima para copiar.';
-          btn.textContent = ok ? '✓ Copiado' : orig;
-          setTimeout(() => { btn.textContent = orig; }, 2200);
-        });
-      });
-
       const DEVICES = {
         mac: {
           order: 0,
           tabId: 'tab-dev-mac',
           badge: 'Mac · macOS Liquid Glass',
           img: '/openinfinite/assets/hero_mac_liquid_glass.png',
-          title: 'InfiniteClaude no Mac (Liquid Glass)',
-          desc: 'App nativo Apple Silicon com Shell Ao Vivo, seletor manual de LLMs, Procurar & Injetar e 1h grátis.',
+          title: 'Arquivo · Interface no Mac',
+          desc: 'Captura de uma edição anterior. A interface unificada está em desenvolvimento.',
           hasVariant: false,
         },
         windows: {
@@ -2172,10 +1824,10 @@
           badge: 'PC Monitor · Windows 10/11',
           img: '/openinfinite/assets/hero_win_infiniteclaude.png',
           altImg: '/openinfinite/assets/hero_win_openinfinite.png',
-          title: 'InfiniteClaude no PC Windows',
-          altTitle: 'OpenInfinite no PC Windows',
-          desc: 'InfiniteClaude no Windows com Shell Ao Vivo, seletor manual de LLMs e Procurar & Injetar (Claude, Codex, OpenCode, Hermes e OpenBot).',
-          altDesc: 'OpenInfinite enxuto no Windows (exclusivo OpenBot, Hermes e OpenCode) com Shell Ao Vivo e seletor manual de LLMs.',
+          title: 'Arquivo · InfiniteClaude no Windows',
+          altTitle: 'Arquivo · OpenInfinite no Windows',
+          desc: 'Captura de uma edição anterior. A interface unificada está em desenvolvimento.',
+          altDesc: 'Captura de uma edição anterior. A interface unificada está em desenvolvimento.',
           hasVariant: true,
         },
         linux: {
@@ -2183,8 +1835,8 @@
           tabId: 'tab-dev-linux',
           badge: 'Notebook · Linux Ubuntu VPS',
           img: '/openinfinite/assets/hero_linux_vps_tui.png',
-          title: 'Infinite Zone no Linux Ubuntu VPS',
-          desc: 'Operação em notebook ou servidor Linux via terminal SSH — requer pedido pago e chave ativa.',
+          title: 'Arquivo · Interface no Linux VPS',
+          desc: 'Captura de uma edição anterior. A interface unificada está em desenvolvimento.',
           hasVariant: false,
         },
       };
@@ -2194,10 +1846,9 @@
       const SIN_120 = Math.sqrt(3) / 2;
       const TWO_PI = Math.PI * 2;
       let currentDevice = 'mac';
-      let useAltWinApp = false;
-      // Start 3D orbital rotation automatically on load (even on Windows rigs where SPI_GETCLIENTAREAANIMATION sets prefers-reduced-motion)
-      let motionEnabled = true;
-      let autoOrbitPaused = false;
+      let useAltWinApp = true;
+      let motionEnabled = !reducedMotion;
+      let autoOrbitPaused = Boolean(reducedMotion);
       let orbitElapsed = 0;
       let orbitStepPos = 0;
 
@@ -2369,7 +2020,7 @@
         const toggleBtn = $('toggleAppBtn');
         if (d.hasVariant) {
           toggleBtn.style.display = 'inline-flex';
-          toggleBtn.textContent = useAltWinApp ? 'Alternar para InfiniteClaude' : 'Alternar para OpenInfinite';
+          toggleBtn.textContent = useAltWinApp ? 'Ver edição anterior' : 'Ver OpenInfinite';
         } else {
           toggleBtn.style.display = 'none';
         }

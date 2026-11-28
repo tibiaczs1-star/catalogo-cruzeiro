@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinite Zone · Check-in, Pagamento PIX e Validação de Chave</title>
-  <meta name="description" content="Check-in oficial Infinite Zone (OpenInfinite & InfiniteClaude). Pagamento PIX 68 99226-9296 (Raiane Leoncio), anexo de comprovante ao pedido, confirmação via WhatsApp e validador de chave.">
+  <title>Meus pedidos e licenças · OpenInfinite</title>
+  <meta name="description" content="Consulte pedidos anteriores do OpenInfinite e valide sua licença. As novas compras da edição unificada estão pausadas.">
   <style>
     :root {
       --bg: #070709;
@@ -221,6 +221,21 @@
       .nav-links::-webkit-scrollbar { display: none; }
       .wrap { padding: 24px 14px 64px; }
     }
+      #step3Receipt[hidden] { display: none; }
+  </style>
+<style>
+    body {background-color:#0b0c10;background-image:radial-gradient(ellipse at 48% 0%,#252530 0,transparent 42rem)}
+    .topbar {background:rgba(13,14,18,.94);border-bottom:1px solid #ffffff1f}
+    .hero h1 {letter-spacing:-.052em;text-wrap:balance}
+    .hero-sub {max-width:64ch;margin-inline:auto;line-height:1.65}
+    .hero-stage {border:1px solid #aaa9b445;border-radius:24px;background:radial-gradient(ellipse at 50% 20%,#34343e,#17181e 57%,#0c0d11);box-shadow:inset 0 1px #ffffff1f,0 18px 52px #0005}
+    .product-card,.plans-grid article,.checkout-step {border:1px solid #c1b6a635;background:linear-gradient(145deg,#25252b,#15161b 72%);box-shadow:inset 0 1px #ffffff0e}
+    .plan-price {font-variant-numeric:tabular-nums;letter-spacing:-.045em}
+    .plan-price small {letter-spacing:normal}
+    .btn.ivory {background:linear-gradient(170deg,#fff4df,#d5c4a7);color:#25201a;border-color:#e6d5b5}
+    .btn:focus-visible,input:focus-visible,select:focus-visible {outline:3px solid #f7dba7;outline-offset:3px}
+    @media(max-width:600px){.hero-stage{border-radius:14px}.hero-ctas .btn{min-height:44px}}
+      #step3Receipt[hidden] { display: none; }
   </style>
 </head>
 <body>
@@ -243,7 +258,7 @@
     </defs>
   </svg>
 
-  <a href="#checkout" class="skip-link">Pular para o Check-in PIX</a>
+  <a href="#checkout" class="skip-link">Pular para meus pedidos</a>
 
   <header class="topbar" id="topbar">
     <div class="topbar-inner">
@@ -251,12 +266,12 @@
         <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
         <span class="brand-lockup">
           <span class="brand-wordmark">INFINITE ZONE</span>
-          <span class="brand-lab">CHECK-IN &amp; ATIVAÇÃO</span>
+          <span class="brand-lab">PEDIDOS E LICENÇAS</span>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Navegação Check-in">
+      <nav class="nav-links" aria-label="Navegação da área do cliente">
         <a href="/openinfinite/" class="nav-link">← Voltar ao site</a>
-        <a href="#checkout" class="nav-link">Check-in PIX</a>
+        <a href="#checkout" class="nav-link">Meus pedidos</a>
         <a href="#validador" class="nav-link">Validar Chave</a>
       </nav>
       <div class="nav-actions">
@@ -270,12 +285,8 @@
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
         <svg width="48" height="48" style="flex-shrink:0;" viewBox="0 0 120 120" aria-hidden="true"><use href="#izHoodMark" /></svg>
         <div style="flex:1;min-width:240px;">
-          <h1>Check-in PIX e Ativação de Chave — Infinite Zone</h1>
-          <p>Gere seu pedido PIX para <strong>68 99226-9296 · Raiane Leoncio</strong>, anexe seu comprovante diretamente ao pedido e confirme via WhatsApp para liberação da chave.</p>
-          <div class="rule-chips">
-            <span class="rule-chip">Windows &amp; Mac normal: 1h grátis antes da chave</span>
-            <span class="rule-chip">Linux Ubuntu VPS: pedido pago obrigatório</span>
-          </div>
+          <h1>Área do cliente OpenInfinite</h1>
+          <p>Novas compras da edição unificada estão pausadas. Aqui você pode acompanhar um pedido anterior, enviar o comprovante de um pagamento já realizado ou consultar sua licença.</p>
         </div>
       </div>
     </section>
@@ -284,19 +295,18 @@
       <!-- CHECKOUT PIX + ANEXO DE COMPROVANTE + WHATSAPP -->
       <div class="panel" id="checkout">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-          <h2 style="font-size:19px;font-weight:800;">Assinatura PIX em 4 Passos</h2>
-          <span class="brand-ver">68 99226-9296 · Raiane Leoncio</span>
+          <h2 style="font-size:19px;font-weight:800;">Pedidos anteriores</h2>
         </div>
 
         <!-- PASSO 1: ENTRAR COM GOOGLE -->
         <div class="checkout-step" id="step1Google" data-google-auth-card>
           <div class="step-badge-row">
-            <span class="step-tag">Passo 1 · Identificação</span>
+            <span class="step-tag">Histórico de pedidos</span>
             <span class="mono" style="font-size:11px;color:var(--silver);" id="step1StateTag">Identificação do e-mail</span>
           </div>
-          <h2 id="step1Heading">Entre com Google para vincular seu pedido</h2>
+          <h2 id="step1Heading">Entre com a conta usada no pedido</h2>
           <p id="step1Desc" style="font-size:12.5px;color:var(--muted);">
-            Seu login Google garante que a chave fique vinculada ao e-mail certo e permite restaurar o pedido automaticamente se você recarregar a página.
+            Use a mesma conta Google da compra para recuperar seu pedido anterior.
           </p>
           <div style="display:none;" aria-hidden="true">
             <span data-google-auth-status></span>
@@ -317,89 +327,28 @@
           </div>
 
           <div id="googleFallbackNotice" style="display:none;font-size:12.5px;color:var(--amber);background:var(--amber-bg);border:1px solid rgba(245,158,11,0.38);padding:9px 12px;border-radius:9px;">
-            Preencha seu e-mail Gmail válido abaixo no Passo 2 para vincular o recebimento da chave.
+            Se você não consegue recuperar o pedido neste navegador, entre em contato pelo WhatsApp de atendimento.
           </div>
           <div id="myOrdersRestoreNote" style="display:none;font-size:12px;color:var(--emerald-ink);"></div>
         </div>
 
-        <!-- PASSO 2: ESCOLHA DO PLANO, WHATSAPP DO CLIENTE E PIX OFICIAL -->
-        <div class="checkout-step" id="step2Pix">
-          <div class="step-badge-row">
-            <span class="step-tag">Passo 2 · Dados &amp; PIX Oficial</span>
-            <span class="mono" style="font-size:11px;color:var(--silver);">68 99226-9296 · Raiane Leoncio</span>
-          </div>
-          <h2>Escolha o plano, informe seu WhatsApp e gere o PIX</h2>
-
-          <div class="pix-card">
-            <div style="font-weight:700;color:var(--ink);">Recebedor Oficial PIX Infinite Zone</div>
-            <div style="color:var(--muted);">Chave Telefone: <strong class="mono" style="color:var(--ink);">68 99226-9296</strong> · Titular: <strong style="color:var(--ink);">Raiane Leoncio</strong></div>
-            <div class="pix-actions-row">
-              <button type="button" id="copyPixBtn" class="btn sm">Copiar Chave PIX (68 99226-9296)</button>
-              <span id="pixCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-          </div>
-
-          <form id="orderForm" novalidate>
-            <div class="field">
-              <label for="ordPlan">Plano Mensal (30 Dias)</label>
-              <select id="ordPlan">
-                <option value="infinite_max">InfiniteClaude Max — 5 Máq. (Win + Mac normal + Linux VPS) — R$ 249,00 / mês</option>
-                <option value="infinite_claude" selected>InfiniteClaude Pro — 3 Máq. (Win + Mac normal + Linux VPS) — R$ 199,00 / mês</option>
-                <option value="infinite_pro">OpenInfinite Pro — 2 Máq. (Win + Mac normal + Linux VPS) — R$ 159,00 / mês</option>
-                <option value="infinite">OpenInfinite Windows — 1 PC Windows (somente Windows) — R$ 99,00 / mês</option>
-              </select>
-            </div>
-            <div id="planPlatformHint" class="plan-hint-box" style="margin-bottom:10px;">
-              Inclui Windows, Mac (computador normal) e servidor Linux Ubuntu VPS.
-            </div>
-            <div class="field">
-              <label for="ordName">Seu Nome Completo</label>
-              <input id="ordName" type="text" required autocomplete="name" placeholder="Ex.: Maria Oliveira" />
-            </div>
-            <div class="field">
-              <label for="ordWhatsapp">Seu WhatsApp com DDD (para envio e confirmação)</label>
-              <input id="ordWhatsapp" type="tel" required autocomplete="tel" placeholder="Ex.: (68) 99999-9999" />
-            </div>
-            <div class="field">
-              <label for="ordContact">Seu E-mail Google para receber a chave</label>
-              <input id="ordContact" type="email" required autocomplete="email" placeholder="seuemail@gmail.com" />
-            </div>
-            <button type="submit" id="orderSubmitBtn" class="btn ivory" style="width:100%;">Gerar Pedido e QR Code PIX</button>
-          </form>
-
-          <div id="orderErrorBox" class="result-box is-error" role="alert" aria-live="assertive">
-            <strong style="color:var(--danger);" id="orderErrorHead">Não foi possível gerar o PIX</strong>
-            <span id="orderErrorMsg" style="color:var(--ink-secondary);">Verifique os dados informados.</span>
-            <div class="pix-actions-row">
-              <button type="button" id="retryOrderBtn" class="btn sm">↻ Tentar novamente</button>
-            </div>
-          </div>
-
-          <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <strong style="color:var(--emerald-ink);" id="orderResultHead">Pedido Pronto!</strong>
-              <span class="brand-ver" id="orderLiveStatusBadge">Aguardando comprovante</span>
-            </div>
-            <div class="mono" id="orderResultCode" style="background:#050507;padding:9px;border:1px solid var(--border);border-radius:8px;word-break:break-all;font-size:11.5px;">—</div>
-            <div class="pix-actions-row">
-              <button type="button" id="copyBrcodeBtn" class="btn sm">Copiar PIX Copia e Cola</button>
-              <span id="brcodeCopyFeedback" class="inline-feedback" role="status" aria-live="polite"></span>
-            </div>
-            <div id="orderPixQrWrap" style="text-align:center;"></div>
-          </div>
+        <div id="orderResultBox" class="result-box is-success" role="status" aria-live="polite">
+          <strong id="orderResultHead">Pedido recuperado</strong>
+          <span class="brand-ver" id="orderLiveStatusBadge"></span>
         </div>
 
         <!-- PASSO 3: ANEXAR COMPROVANTE AO PEDIDO -->
-        <div class="checkout-step" id="step3Receipt">
+        <div class="checkout-step" id="step3Receipt" hidden>
           <div class="step-badge-row">
-            <span class="step-tag">Passo 3 · Anexar Comprovante</span>
-            <span class="mono" style="font-size:11px;color:var(--silver);" id="receiptOrderTargetTag">Gere o pedido acima primeiro</span>
+            <span class="step-tag">Enviar comprovante</span>
+            <span class="mono" style="font-size:11px;color:var(--silver);" id="receiptOrderTargetTag">Aguardando recuperação do pedido</span>
           </div>
           <h2>Anexe a imagem ou PDF do comprovante no pedido</h2>
           <p style="font-size:12.5px;color:var(--muted);">
             O comprovante fica salvo e vinculado ao seu pedido para conferência segura. Após anexar, clique no botão do WhatsApp para confirmação e ativação da chave.
           </p>
           <form id="receiptForm" novalidate>
+            <div class="field" style="margin-bottom:8px;"><label for="ordWhatsapp">WhatsApp para contato</label><input id="ordWhatsapp" type="tel" autocomplete="tel" /></div>
             <div class="field" style="margin-bottom:8px;">
               <label for="receiptFileInput">Comprovante PIX (PNG, JPG, WebP ou PDF · até 3 MB)</label>
               <input id="receiptFileInput" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" />
@@ -421,8 +370,8 @@
         <!-- PASSO 4: COMPROVANTE ANEXADO + CONFIRMAÇÃO WHATSAPP -->
         <div class="checkout-step analysis-stage-card" id="step4Analysis" role="region" aria-label="Confirmação e andamento do pedido">
           <div class="step-badge-row">
-            <span class="step-tag" style="color:var(--amber);border-color:rgba(245,158,11,0.45);background:var(--amber-bg);">Passo 4 · Comprovante Anexado</span>
-            <span class="mono" style="font-size:11px;color:var(--amber);" id="step4SlaBadge">Conferência via WhatsApp ou até 1h</span>
+            <span class="step-tag" style="color:var(--amber);border-color:rgba(245,158,11,0.45);background:var(--amber-bg);">Comprovante recebido</span>
+            <span class="mono" style="font-size:11px;color:var(--amber);" id="step4SlaBadge">Aguardando conferência</span>
           </div>
           <h3>Agora envie sua confirmação no WhatsApp (68 99226-9296)</h3>
 
@@ -433,11 +382,11 @@
           </div>
 
           <a id="btnWhatsOrder" href="https://wa.me/5568992269296" target="_blank" rel="noopener" class="btn emerald" style="width:100%;font-size:13.5px;">
-            📲 Falar no WhatsApp para Ativação Imediata (68 99226-9296)
+            Falar com o atendimento no WhatsApp
           </a>
 
           <div class="sla-wait-box">
-            <strong>Ou aguarde até 1 hora:</strong> assim que confirmarmos o recebimento na chave PIX de Raiane Leoncio, sua chave será liberada aqui e enviada no seu e-mail.
+            Você pode acompanhar a análise nesta página. Quando o pedido for aprovado, sua chave aparecerá aqui.
           </div>
 
           <div class="pix-actions-row" style="justify-content:space-between;">
@@ -466,7 +415,7 @@
           Cole sua chave do <strong>OpenInfinite</strong> (<code class="mono">OI6-...</code>) ou do <strong>InfiniteClaude</strong> (<code class="mono">IC6-...</code>) para conferir se está ativa antes de colar no programa.
         </p>
         <div class="plan-hint-box">
-          <strong>Lembrete:</strong> no Windows e Mac normal você usa 1h grátis antes de inserir a chave. No Linux Ubuntu VPS, cole sua chave paga imediatamente ao abrir o terminal ou rodar <code class="mono">--activate SUA-CHAVE</code>.
+          A consulta mostra a situação das chaves emitidas para as edições anteriores.
         </div>
         <form id="verifyForm" novalidate>
           <div class="field">
@@ -484,31 +433,6 @@
       </div>
     </section>
 
-    <!-- GUIA CLARO: COMO FUNCIONA A CONFERÊNCIA MANUAL E A ATIVAÇÃO DA CHAVE -->
-    <section class="panel" id="como-ativar" style="margin-top:20px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-        <h2 style="font-size:19px;font-weight:800;">Como funciona a liberação e ativação da sua chave</h2>
-        <span class="mono" style="font-size:11.5px;color:var(--emerald-ink);">Conferência humana · Envio direto no seu WhatsApp</span>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:6px;">
-        <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px;">
-          <strong style="color:#fff;font-size:13.5px;">1. Informe seu WhatsApp e faça o PIX</strong>
-          <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">Preencha seu <strong>WhatsApp com DDD</strong> no Passo 2 acima, faça o PIX para <strong>68 99226-9296 (Raiane Leoncio)</strong> e anexe o comprovante no pedido.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px;">
-          <strong style="color:#fff;font-size:13.5px;">2. Conferência manual e envio no WhatsApp</strong>
-          <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">Conferimos o comprovante manualmente (nada é liberado sem conferência) e enviamos sua chave oficial (<code class="mono">OI6-...</code> ou <code class="mono">IC6-...</code>) direto no seu WhatsApp e no painel do pedido.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px;">
-          <strong style="color:#fff;font-size:13.5px;">3. Ative no Windows ou Mac</strong>
-          <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">Abra o <strong>OpenInfinite</strong> ou <strong>InfiniteClaude</strong>, cole a chave em <strong>Ativar Licença / Master Key</strong> (ou aba <strong>Licença &amp; Chave</strong> no Mac) e clique em <strong>Ativar Chave</strong>. Depois use a aba <strong>Procurar &amp; Injetar</strong> para conectar suas CLIs.</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px;">
-          <strong style="color:#fff;font-size:13.5px;">4. Ative no Linux Ubuntu VPS</strong>
-          <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">No terminal SSH, rode <code class="mono">OpenInfinite --activate SUA-CHAVE</code> (ou <code class="mono">InfiniteClaude --activate SUA-CHAVE</code>) ou pressione <strong>[K]</strong> dentro do painel TUI.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <script src="/site-google-auth.js"></script>
@@ -520,30 +444,10 @@
       const ALLOWED_RECEIPT_MIMES = new Set(['image/png', 'image/jpeg', 'image/webp', 'application/pdf']);
       const MAX_RECEIPT_BYTES = 3 * 1024 * 1024;
 
-      let lastBrcode = '';
+      const previousEditions = new Set(['infinite', 'infinite_pro', 'infinite_claude', 'infinite_max']);
       let activeOrder = null;
       let orderPollTimer = null;
       let googleAuthState = { enabled: false, signedIn: false, user: null, checked: false };
-
-      const PLAN_HINTS = {
-        infinite: 'OpenInfinite Windows (OpenBot, Hermes & OpenCode): válido para 1 PC Windows com Shell Ao Vivo e seletor manual de LLMs.',
-        infinite_pro: 'OpenInfinite Pro (OpenBot, Hermes & OpenCode): libera Windows, Mac desktop e Linux Ubuntu VPS (até 2 máquinas) com Shell Ao Vivo e seletor de LLMs.',
-        infinite_claude: 'InfiniteClaude Pro: libera Windows, Mac desktop, Linux Ubuntu VPS, Claude Code, OpenCode, Hermes e OpenBot (até 3 máquinas) com Procurar & Injetar.',
-        infinite_max: 'InfiniteClaude Max: libera Windows, Mac desktop, Linux Ubuntu VPS e Procurar & Injetar Multi-CLI total (Claude Code, Codex CLI, OpenCode, Hermes, OpenBot e Local Harness · até 5 máquinas).',
-      };
-
-      function updatePlanHint() {
-        const val = $('ordPlan').value;
-        $('planPlatformHint').textContent = PLAN_HINTS[val] || PLAN_HINTS.infinite_claude;
-      }
-      $('ordPlan').addEventListener('change', updatePlanHint);
-
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const requestedPlan = (params.get('plan') || '').trim().toLowerCase();
-        if (PLAN_HINTS[requestedPlan]) $('ordPlan').value = requestedPlan;
-      } catch (_e) {}
-      updatePlanHint();
 
       async function copyTextSafely(text) {
         if (navigator.clipboard && window.isSecureContext !== false) {
@@ -574,27 +478,6 @@
         }
       }
 
-      $('copyPixBtn').addEventListener('click', async () => {
-        const ok = await copyTextSafely('68 99226-9296');
-        showInlineCopyState(
-          $('copyPixBtn'),
-          $('pixCopyFeedback'),
-          'Copiar Chave PIX (68 99226-9296)',
-          ok ? 'Chave PIX 68 99226-9296 (Raiane Leoncio) copiada!' : 'Chave: 68 99226-9296 (copie manualmente)'
-        );
-      });
-
-      $('copyBrcodeBtn').addEventListener('click', async () => {
-        const code = lastBrcode || '68 99226-9296';
-        const ok = await copyTextSafely(code);
-        showInlineCopyState(
-          $('copyBrcodeBtn'),
-          $('brcodeCopyFeedback'),
-          'Copiar PIX Copia e Cola',
-          ok ? 'Código PIX Copia e Cola copiado!' : 'Selecione o código acima para copiar.'
-        );
-      });
-
       $('receiptFileInput').addEventListener('change', () => {
         const f = $('receiptFileInput').files && $('receiptFileInput').files[0];
         $('receiptFilePreviewName').textContent = f
@@ -605,19 +488,16 @@
       const STATUS_LABELS = {
         pending_pix: 'Aguardando pagamento PIX',
         awaiting_receipt: 'Aguardando envio do comprovante',
-        receipt_submitted: 'Comprovante anexado · chame no WhatsApp ou aguarde até 1h',
+        receipt_submitted: 'Comprovante anexado · aguardando conferência',
         approved: 'Ativado · Chave enviada por e-mail!',
         delivered: 'Chave ativa e enviada por e-mail!',
       };
 
       function buildFallbackWhatsAppUrl(ord) {
         const id = ord?.order_id || 'NOVO';
-        const email = ord?.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || '';
+        const email = ord?.buyer_email || googleAuthState.user?.email || '';
         const wa = ord?.buyer_whatsapp || $('ordWhatsapp').value.trim() || '';
-        const planVal = $('ordPlan').value;
-        const fallbackAmt = planVal === 'infinite' ? 'R$ 99,00' : planVal === 'infinite_pro' ? 'R$ 159,00' : planVal === 'infinite_max' ? 'R$ 249,00' : 'R$ 199,00';
-        const amt = ord?.amount_display || fallbackAmt;
-        const msg = `Olá! Anexei o comprovante PIX do pedido ${id} (${amt}) no site Infinite Zone.${email ? ' E-mail: ' + email + '.' : ''}${wa ? ' WhatsApp: ' + wa + '.' : ''} Pode confirmar para liberar minha chave?`;
+        const msg = 'Olá! Anexei o comprovante do pedido ' + id + '.' + (email ? ' E-mail: ' + email + '.' : '') + (wa ? ' WhatsApp: ' + wa + '.' : '');
         return `https://wa.me/5568992269296?text=${encodeURIComponent(msg)}`;
       }
 
@@ -636,10 +516,11 @@
       function syncAnalysisAndDeliveryUI(ord) {
         if (!ord) return;
         const st = String(ord.status || 'pending_pix');
+        $('step3Receipt').hidden = !['pending_pix', 'awaiting_receipt'].includes(st);
         $('orderLiveStatusBadge').textContent = STATUS_LABELS[st] || st;
         $('receiptOrderTargetTag').textContent = `Pedido vinculado: ${ord.order_id}`;
 
-        const targetEmail = ord.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim() || 'seu e-mail cadastrado';
+        const targetEmail = ord.buyer_email || googleAuthState.user?.email || 'seu e-mail cadastrado';
         const targetWa = ord.buyer_whatsapp || $('ordWhatsapp').value.trim() || 'informado no WhatsApp';
         $('analysisTargetEmail').textContent = targetEmail;
         $('analysisTargetWhatsapp').textContent = targetWa;
@@ -672,23 +553,8 @@
 
       function hydrateOrderUI(o) {
         if (!o || !o.order_id) return;
-        lastBrcode = o.brcode || o.pix?.brcode || '68 99226-9296';
-        $('orderResultHead').textContent = `Pedido ${o.order_id} (${o.amount_display || ''}) gerado!`;
-        $('orderResultCode').textContent = `PIX Copia e Cola: ${lastBrcode}`;
-        $('brcodeCopyFeedback').textContent = '';
-
-        if (o.buyer_whatsapp && !$('ordWhatsapp').value.trim()) $('ordWhatsapp').value = o.buyer_whatsapp;
-
-        const qrWrap = $('orderPixQrWrap');
-        qrWrap.textContent = '';
-        const qrUrl = o.qr_data_url || o.pix?.qr_data_url;
-        if (qrUrl) {
-          const img = document.createElement('img');
-          img.src = qrUrl;
-          img.alt = `QR Code PIX para o pedido ${o.order_id}`;
-          img.style.cssText = 'width:168px;height:168px;border-radius:10px;background:#fff;padding:6px;';
-          qrWrap.appendChild(img);
-        }
+        $('orderResultHead').textContent = 'Pedido ' + o.order_id + (o.amount_display ? ' · ' + o.amount_display : '');
+        $('ordWhatsapp').value = o.buyer_whatsapp || '';
         $('orderResultBox').classList.add('is-visible');
         syncAnalysisAndDeliveryUI(o);
 
@@ -697,23 +563,53 @@
         }
       }
 
+      function clearOrderUI() {
+        if ($('verifyKeyInput').value.trim() === $('deliveredKeyValue').textContent.trim()) {
+          $('verifyKeyInput').value = '';
+        }
+        saveActiveOrder(null);
+        clearInterval(orderPollTimer);
+        orderPollTimer = null;
+        $('orderResultBox').classList.remove('is-visible');
+        $('step3Receipt').hidden = true;
+        $('step4Analysis').classList.remove('is-visible');
+        $('deliveredKeyBox').classList.remove('is-visible');
+        $('deliveredKeyValue').textContent = '—';
+        $('deliveredKeyFeedback').textContent = '';
+        $('licResultBox').textContent = '';
+        $('licResultBox').classList.remove('is-visible');
+        $('receiptForm').reset();
+        $('receiptFilePreviewName').textContent = 'Nenhum arquivo selecionado';
+        $('analysisTargetEmail').textContent = '—';
+        $('analysisTargetWhatsapp').textContent = '—';
+        $('receiptAnalysisSummary').textContent = 'Comprovante salvo no pedido.';
+        $('btnWhatsOrder').href = 'https://wa.me/5568992269296';
+        $('receiptFeedbackBox').classList.remove('is-visible');
+        $('myOrdersRestoreNote').textContent = '';
+        $('ordWhatsapp').value = '';
+      }
+
       async function syncMyGoogleOrders() {
+        const owner = googleAuthState.user?.email;
+        if (!owner) return;
         try {
           const res = await fetch('/api/superbad/my-orders', {
             credentials: 'same-origin',
             headers: { 'Accept': 'application/json' },
           });
           const data = await res.json().catch(() => ({}));
-          if (!res.ok || !data.ok || !Array.isArray(data.orders) || data.orders.length === 0) return;
+          if (owner !== googleAuthState.user?.email || !res.ok || !data.ok || !Array.isArray(data.orders)) return;
 
-          const latest = data.orders[0];
-          if (!latest || !latest.order_id) return;
+          const latest = data.orders.find(order => previousEditions.has(order.requested_edition));
+          if (!latest || !latest.order_id) {
+            $('myOrdersRestoreNote').style.display = 'block';
+            $('myOrdersRestoreNote').textContent = 'Nenhum pedido anterior de OpenInfinite encontrado nesta conta.';
+            return;
+          }
 
           const merged = {
             ...(activeOrder && activeOrder.order_id === latest.order_id ? activeOrder : {}),
             ...latest,
-            brcode: latest.pix?.brcode || activeOrder?.brcode || '68 99226-9296',
-            qr_data_url: latest.pix?.qr_data_url || activeOrder?.qr_data_url || '',
           };
           saveActiveOrder(merged);
           hydrateOrderUI(merged);
@@ -728,6 +624,11 @@
         const enabled = Boolean(detail?.enabled);
         const user = detail?.user || null;
         const signedIn = Boolean(user);
+        const previousEmail = googleAuthState.user?.email;
+        if ((previousEmail && previousEmail !== user?.email) ||
+            (signedIn && activeOrder?.buyer_email && activeOrder.buyer_email.toLowerCase() !== user.email.toLowerCase())) {
+          clearOrderUI();
+        }
         googleAuthState = { enabled, signedIn, user, checked: true };
 
         const connectedBox = $('googleConnectedBox');
@@ -755,31 +656,25 @@
             initialBadge.textContent = String(user.name || user.email || 'G').trim().charAt(0).toUpperCase();
           }
 
-          if (user.name && !$('ordName').value.trim()) $('ordName').value = user.name;
-          if (user.email) {
-            $('ordContact').value = user.email;
-            $('ordContact').readOnly = true;
-          }
           if ($('step1Heading')) $('step1Heading').textContent = 'Conta Google conectada ao seu pedido';
-          if ($('step1Desc')) $('step1Desc').textContent = 'Sua chave será vinculada automaticamente a este e-mail Google.';
+          if ($('step1Desc')) $('step1Desc').textContent = 'Seu pedido anterior será recuperado quando estiver vinculado a esta conta.';
           void syncMyGoogleOrders();
         } else {
           connectedBox.classList.remove('is-visible');
           logoutBtn.hidden = true;
           $('myOrdersRestoreNote').style.display = 'none';
-          $('ordContact').readOnly = false;
           if (enabled) {
-            $('step1StateTag').textContent = 'Login Google obrigatório';
+            $('step1StateTag').textContent = 'Recuperação pela conta Google';
             $('step1StateTag').style.color = 'var(--amber)';
-            if ($('step1Heading')) $('step1Heading').textContent = 'Entre com Google para vincular seu pedido';
-            if ($('step1Desc')) $('step1Desc').textContent = 'Seu login Google garante que a chave fique vinculada ao e-mail certo e permite restaurar o pedido automaticamente se você recarregar a página.';
+            if ($('step1Heading')) $('step1Heading').textContent = 'Entre com a conta usada no pedido';
+            if ($('step1Desc')) $('step1Desc').textContent = 'Use a mesma conta Google da compra para recuperar seu pedido anterior.';
             if ($('googleAuthBtnHost')) $('googleAuthBtnHost').style.display = '';
             fallbackNote.style.display = 'none';
           } else {
-            $('step1StateTag').textContent = 'Modo direto por e-mail';
+            $('step1StateTag').textContent = 'Atendimento disponível';
             $('step1StateTag').style.color = 'var(--emerald-ink)';
-            if ($('step1Heading')) $('step1Heading').textContent = 'Identificação direta pelo e-mail no Passo 2';
-            if ($('step1Desc')) $('step1Desc').textContent = 'Informe seu nome, WhatsApp e Gmail no Passo 2 abaixo para gerar seu PIX e receber a chave oficial.';
+            if ($('step1Heading')) $('step1Heading').textContent = 'Recuperação do pedido';
+            if ($('step1Desc')) $('step1Desc').textContent = 'O login Google está indisponível. Pedidos salvos nesta sessão ainda podem ser consultados.';
             if ($('googleAuthBtnHost')) $('googleAuthBtnHost').style.display = 'none';
             fallbackNote.style.display = 'block';
           }
@@ -833,13 +728,14 @@
 
       async function pollOrderStatus(manualFeedback) {
         if (!activeOrder || !activeOrder.order_id) return;
+        const expectedId = activeOrder.order_id;
         try {
           if (!activeOrder.order_secret && googleAuthState.signedIn) { await syncMyGoogleOrders(); return; }
           if (!activeOrder.order_secret) return;
           const url = `/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}?order_secret=${encodeURIComponent(activeOrder.order_secret)}`;
           const res = await fetch(url, { credentials: 'same-origin', headers: { 'Accept': 'application/json', 'x-order-secret': activeOrder.order_secret } });
           const data = await res.json().catch(() => ({}));
-          if (!res.ok || !data.ok || !data.order) return;
+          if (activeOrder?.order_id !== expectedId || !res.ok || !data.ok || !data.order) return;
           activeOrder = { ...activeOrder, ...data.order };
           saveActiveOrder(activeOrder);
           syncAnalysisAndDeliveryUI(activeOrder);
@@ -866,7 +762,7 @@
         const rawSaved = sessionStorage.getItem(ORDER_STORAGE_KEY);
         if (rawSaved) {
           const parsed = JSON.parse(rawSaved);
-          if (parsed && parsed.order_id) {
+          if (parsed?.order_id && parsed.order_secret && (!parsed.requested_edition || previousEditions.has(parsed.requested_edition))) {
             activeOrder = parsed;
             hydrateOrderUI(parsed);
             if (!isKeyUnlockedStatus(parsed.status, parsed.license_key)) pollOrderStatus(false);
@@ -898,126 +794,6 @@
         }
       }
 
-      async function submitOrder() {
-        const nameEl = $('ordName');
-        const waEl = $('ordWhatsapp');
-        const contactEl = $('ordContact');
-        const errBox = $('orderErrorBox');
-        const resBox = $('orderResultBox');
-        const submitBtn = $('orderSubmitBtn');
-
-        nameEl.setAttribute('aria-invalid', 'false');
-        waEl.setAttribute('aria-invalid', 'false');
-        contactEl.setAttribute('aria-invalid', 'false');
-        errBox.classList.remove('is-visible');
-
-        if (googleAuthState.enabled && !googleAuthState.signedIn) {
-          $('orderErrorHead').textContent = 'Entre com sua conta Google primeiro (Passo 1)';
-          $('orderErrorMsg').textContent = 'Conecte sua conta Google acima antes de gerar o QR Code PIX.';
-          errBox.classList.add('is-visible');
-          $('step1Google')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
-          $('step1Google')?.classList.add('google-auth-spotlight');
-          setTimeout(() => $('step1Google')?.classList.remove('google-auth-spotlight'), 1800);
-          return;
-        }
-
-        const buyerName = (nameEl.value || googleAuthState.user?.name || '').trim();
-        const buyerWhatsapp = (waEl.value || '').trim();
-        const buyerWaDigits = buyerWhatsapp.replace(/\D/g, '');
-        const buyerEmail = (googleAuthState.user?.email || contactEl.value || '').trim();
-
-        if (!buyerName) {
-          nameEl.setAttribute('aria-invalid', 'true');
-          $('orderErrorHead').textContent = 'Nome obrigatório';
-          $('orderErrorMsg').textContent = 'Informe seu nome completo para gerar o PIX.';
-          errBox.classList.add('is-visible');
-          nameEl.focus();
-          return;
-        }
-        if (buyerWaDigits.length < 10) {
-          waEl.setAttribute('aria-invalid', 'true');
-          $('orderErrorHead').textContent = 'WhatsApp com DDD obrigatório';
-          $('orderErrorMsg').textContent = 'Informe seu WhatsApp (DDD + número) para vincular ao pedido e agilizar o atendimento.';
-          errBox.classList.add('is-visible');
-          waEl.focus();
-          return;
-        }
-        if (!buyerEmail || !buyerEmail.includes('@')) {
-          contactEl.setAttribute('aria-invalid', 'true');
-          $('orderErrorHead').textContent = 'E-mail válido obrigatório';
-          $('orderErrorMsg').textContent = 'Informe o Gmail ou e-mail que receberá sua chave.';
-          errBox.classList.add('is-visible');
-          contactEl.focus();
-          return;
-        }
-
-        if (navigator.onLine === false) {
-          $('orderErrorHead').textContent = 'Sem conexão com a internet';
-          $('orderErrorMsg').textContent = 'Reconecte e clique em tentar novamente.';
-          errBox.classList.add('is-visible');
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.setAttribute('aria-busy', 'true');
-        submitBtn.textContent = 'Gerando PIX oficial...';
-
-        try {
-          const res = await fetch('/api/superbad/orders', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              buyer_name: buyerName,
-              buyer_email: buyerEmail,
-              buyer_whatsapp: buyerWhatsapp,
-              buyer_contact: buyerWhatsapp,
-              requested_edition: $('ordPlan').value
-            })
-          });
-          const data = await res.json().catch(() => ({}));
-          if (!res.ok || !data.ok || !data.order) {
-            resBox.classList.remove('is-visible');
-            $('orderErrorHead').textContent = res.status === 401 ? 'Conta Google necessária' : 'Não foi possível gerar o pedido PIX';
-            $('orderErrorMsg').textContent = data.error || `Erro HTTP ${res.status}.`;
-            errBox.classList.add('is-visible');
-            return;
-          }
-
-          const o = data.order;
-          const stored = {
-            order_id: o.order_id,
-            order_secret: o.order_secret,
-            status: o.status || 'pending_pix',
-            amount_display: o.amount_display,
-            requested_edition: o.requested_edition,
-            buyer_email: o.buyer_email || buyerEmail,
-            buyer_whatsapp: o.buyer_whatsapp || buyerWhatsapp,
-            brcode: o.pix?.brcode || '68 99226-9296',
-            qr_data_url: o.pix?.qr_data_url || '',
-            whatsapp_url: o.whatsapp_url || '',
-            whatsapp_immediate_url: o.whatsapp_immediate_url || '',
-            license_key: null,
-          };
-          $('receiptFeedbackBox').classList.remove('is-visible');
-          saveActiveOrder(stored);
-          hydrateOrderUI(stored);
-          $('step3Receipt')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
-        } catch (_err) {
-          resBox.classList.remove('is-visible');
-          $('orderErrorHead').textContent = 'Falha de conexão com o servidor';
-          $('orderErrorMsg').textContent = 'Seus dados foram mantidos. Tente novamente.';
-          errBox.classList.add('is-visible');
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.removeAttribute('aria-busy');
-          submitBtn.textContent = 'Gerar Pedido e QR Code PIX';
-        }
-      }
-
-      $('orderForm').addEventListener('submit', (ev) => { ev.preventDefault(); submitOrder(); });
-      $('retryOrderBtn').addEventListener('click', () => submitOrder());
-
       function readFileAsBase64(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -1036,10 +812,11 @@
         const btn = $('receiptSubmitBtn');
         const canAuthReceipt = Boolean(activeOrder && activeOrder.order_id && (activeOrder.order_secret || googleAuthState.signedIn));
         if (!canAuthReceipt) {
-          renderBoxMessage(fb, 'is-error', 'Gere primeiro o pedido PIX no Passo 2', 'Preencha seus dados acima e gere o pedido antes de anexar o comprovante.', null);
+          renderBoxMessage(fb, 'is-error', 'Recupere seu pedido anterior', 'Entre com a conta usada na compra para localizar o pedido.', null);
           return;
         }
 
+        const { order_id: orderId, order_secret: orderSecret } = activeOrder;
         const file = $('receiptFileInput').files && $('receiptFileInput').files[0];
         const e2eId = $('receiptE2eInput').value.trim();
         const rawNote = $('receiptNoteInput').value.trim();
@@ -1072,7 +849,7 @@
           const payload = {
             receipt_note: rawNote || (e2eId ? `E2E: ${e2eId}` : `Arquivo: ${file.name}`),
           };
-          if (activeOrder.order_secret) payload.order_secret = activeOrder.order_secret;
+          if (orderSecret) payload.order_secret = orderSecret;
           if (waNow) payload.buyer_whatsapp = waNow;
           if (e2eId) payload.e2e_id = e2eId;
           if (file) {
@@ -1082,15 +859,17 @@
           }
 
           const reqHeaders = { 'Content-Type': 'application/json' };
-          if (activeOrder.order_secret) reqHeaders['x-order-secret'] = activeOrder.order_secret;
+          if (activeOrder?.order_id !== orderId) return;
+          if (orderSecret) reqHeaders['x-order-secret'] = orderSecret;
 
-          const res = await fetch(`/api/superbad/orders/${encodeURIComponent(activeOrder.order_id)}/receipt`, {
+          const res = await fetch(`/api/superbad/orders/${encodeURIComponent(orderId)}/receipt`, {
             method: 'POST',
             credentials: 'same-origin',
             headers: reqHeaders,
             body: JSON.stringify(payload),
           });
           const data = await res.json().catch(() => ({}));
+          if (activeOrder?.order_id !== orderId) return;
           if (!res.ok || !data.ok) {
             renderBoxMessage(fb, 'is-error', 'Comprovante não aceito', data.error || `Erro HTTP ${res.status}.`, submitReceipt);
             return;
@@ -1099,7 +878,7 @@
           activeOrder = {
             ...activeOrder,
             status: data.status || 'receipt_submitted',
-            buyer_email: data.buyer_email || activeOrder.buyer_email || googleAuthState.user?.email || $('ordContact').value.trim(),
+            buyer_email: data.buyer_email || activeOrder.buyer_email || googleAuthState.user?.email,
             buyer_whatsapp: data.buyer_whatsapp || activeOrder.buyer_whatsapp || waNow,
             receipt_analysis: data.receipt_analysis || activeOrder.receipt_analysis || null,
             whatsapp_immediate_url: data.whatsapp_immediate_url || activeOrder.whatsapp_immediate_url || '',
@@ -1118,6 +897,7 @@
           $('step4Analysis')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
           startOrderPolling();
         } catch (_err) {
+          if (activeOrder?.order_id !== orderId) return;
           renderBoxMessage(fb, 'is-error', 'Erro de rede ao enviar comprovante', 'Tente novamente.', submitReceipt);
         } finally {
           btn.disabled = false;
@@ -1129,8 +909,8 @@
       $('receiptForm').addEventListener('submit', (ev) => { ev.preventDefault(); submitReceipt(); });
 
       const PLAN_LABELS_BY_EDITION = {
-        infinite_max: 'InfiniteClaude Max (5 Máq.)',
-        infinite_claude: 'InfiniteClaude Pro (3 Máq.)',
+        infinite_max: 'OpenInfinite Max (5 Máq.)',
+        infinite_claude: 'OpenInfinite Pro com Claude (3 Máq.)',
         infinite: 'OpenInfinite Windows (1 PC)',
         infinite_pro: 'OpenInfinite Pro (2 Máq. · Win/Mac/VPS)',
         superbad: 'BadClaudio SuperBad',
@@ -1140,9 +920,9 @@
         beta: 'BadClaudio Beta',
       };
       const PLAN_LABELS_BY_TIER = {
-        'infinite-max': 'InfiniteClaude Max (5 Máq.)',
-        'infinite-claude-max': 'InfiniteClaude Max (5 Máq.)',
-        'infinite-claude': 'InfiniteClaude Pro (3 Máq.)',
+        'infinite-max': 'OpenInfinite Max (5 Máq.)',
+        'infinite-claude-max': 'OpenInfinite Max (5 Máq.)',
+        'infinite-claude': 'OpenInfinite Pro com Claude (3 Máq.)',
         'infinite-basic': 'OpenInfinite Windows (1 PC)',
         'infinite-pro': 'OpenInfinite Pro (2 Máq.)',
         founder: 'BadClaude Fundador',
@@ -1210,9 +990,10 @@
             body: JSON.stringify({ key: keyVal, hwid: '', check_only: true })
           });
           const d = await res.json().catch(() => ({}));
+          if (keyInput.value.trim() !== keyVal) return;
           if (res.ok && d.ok && d.includesOpenInfinite !== false) {
             const msgTitle = d.includesInfiniteClaude
-              ? 'Chave Ativa — InfiniteClaude & OpenInfinite Liberados!'
+              ? 'Chave Ativa — OpenInfinite com Claude liberado!'
               : 'Chave Ativa — OpenInfinite Liberado!';
             renderLicenseMessage(
               'is-success',
@@ -1224,7 +1005,7 @@
             renderLicenseMessage(
               'is-warn',
               'Plano sem acesso ao OpenInfinite',
-              'Assine um plano OpenInfinite ou InfiniteClaude ao lado para ativar sua máquina.',
+              'Assine um plano OpenInfinite ao lado para ativar sua máquina.',
               false
             );
           } else {

@@ -14,7 +14,7 @@ const { createSuperbadSalesApi } = require("../../badclaude-superbad-api");
 
 const root = path.resolve(__dirname, "..", "..");
 
-test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, logo variations and BadClaude L3+ inclusion are configured", () => {
+test("OpenInfinite announces pending unified installers and directs existing customers to order support", () => {
   const server = fs.readFileSync(path.join(root, "server.js"), "utf8");
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
   const checkoutHtml = fs.readFileSync(path.join(root, "openinfinite", "checkout", "index.html"), "utf8");
@@ -32,17 +32,9 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(server, /"\.exe"/);
   assert.match(server, /"\.dmg"/);
 
-  assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Setup\.exe/);
-  assert.match(oiHtml, /\/downloads\/InfiniteClaude-Client-Setup\.exe/);
-  assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-macOS\.dmg/);
-  assert.match(oiHtml, /\/downloads\/InfiniteClaude-Client-macOS\.dmg/);
-  assert.match(oiHtml, /\/downloads\/OpenInfinite-Client-Ubuntu-VPS\.tar\.gz/);
-  assert.match(oiHtml, /\/downloads\/InfiniteClaude-Client-Ubuntu-VPS\.tar\.gz/);
-  assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-openinfinite\.sh \| bash/);
-  assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-infiniteclaude\.sh \| bash/);
-  assert.match(oiHtml, /curl -fsSL https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-mac\.sh \| bash/);
-  assert.match(oiHtml, /irm https:\/\/catalogo-cruzeiro-web\.onrender\.com\/install-win\.ps1 \| iex/);
-
+  assert.doesNotMatch(oiHtml, /href="\/downloads\/|href="[^"]*checkout\/\?plan=|curl -fsSL|irm https:/);
+  assert.match(oiHtml, /Três planos em preparação/);
+  assert.match(oiHtml, /Novas compras estão pausadas/);
   // Lean Customer Landing Page: company + product names only, logo variations per OS/product, no internal dev jargon
   assert.match(oiHtml, /--bg:\s*#070709/i);
   assert.match(oiHtml, /id="izHoodMark"/);
@@ -55,19 +47,9 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(oiHtml, /INFINITE ZONE/);
   assert.match(oiHtml, /OpenInfinite/);
   assert.match(oiHtml, /InfiniteClaude/);
-  assert.match(oiHtml, /Mac Normal/i);
-  assert.match(oiHtml, /não é VPS/i);
-  assert.match(oiHtml, /Gatekeeper/i);
-  assert.match(oiHtml, /faq-btn-5/);
-  assert.match(oiHtml, /xattr -cr \/Applications\/OpenInfinite\.app/);
-  assert.match(oiHtml, /Requer Pedido Pago/i);
   assert.match(oiHtml, /href="\/openinfinite\/checkout\/"/);
-  assert.match(oiHtml, /R\$ 99,00/);
-  assert.match(oiHtml, /R\$ 159,00/);
-  assert.match(oiHtml, /R\$ 199,00/);
-  assert.match(oiHtml, /R\$ 249,00/);
-
-  // Ensure open-space 3D orbital multi-device hero showcase & updated v6.2/v6.3 real UI captures are present (NOT old v6.1 mockups)
+  assert.match(oiHtml, /Instaladores em validação/);
+  assert.match(oiHtml, /Claude no desktop/);
   assert.match(oiHtml, /id="painel-live"/);
   assert.match(oiHtml, /id="stage3dTheater"/);
   assert.match(oiHtml, /id="deviceRig"/);
@@ -113,7 +95,7 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   );
   assert.equal((oiHtml.match(/class="orbit-slot"/g) || []).length, 3);
   assert.match(oiHtml, /id="macSlotImg"[^>]*src="\/openinfinite\/assets\/hero_mac_liquid_glass\.png"/);
-  assert.match(oiHtml, /id="winSlotImg"[^>]*src="\/openinfinite\/assets\/hero_win_infiniteclaude\.png"/);
+  assert.match(oiHtml, /id="winSlotImg"[^>]*src="\/openinfinite\/assets\/hero_win_openinfinite\.png"/);
   assert.match(oiHtml, /id="linuxSlotImg"[^>]*src="\/openinfinite\/assets\/hero_linux_vps_tui\.png"/);
   assert.match(oiHtml, /\/openinfinite\/assets\/hero_mac_liquid_glass\.png/);
   assert.match(oiHtml, /\/openinfinite\/assets\/hero_win_infiniteclaude\.png/);
@@ -158,7 +140,7 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
 
   assert.match(checkoutHtml, /id="checkout"/);
   assert.match(checkoutHtml, /id="validador"/);
-  assert.match(checkoutHtml, /Raiane Leoncio/);
+  assert.doesNotMatch(checkoutHtml, /Raiane Leoncio/);
   assert.match(checkoutHtml, /68 99226-9296/);
   assert.doesNotMatch(checkoutHtml, /Lenoncio/i);
   assert.doesNotMatch(oiHtml, /Lenoncio/i);
@@ -171,7 +153,7 @@ test("OpenInfinite route, dedicated checkout page, Linux VPS paid distinction, l
   assert.match(apiJs, /R\$ 199,00/);
 });
 
-test("OpenInfinite separate checkout (/openinfinite/checkout/) enforces Google Auth, Buyer WhatsApp, PIX Raiane Leoncio, Receipt attachment & Key Validator with zero alert()", () => {
+test("OpenInfinite customer area restores previous orders and validates keys without offering new payments", () => {
   const oiHtml = fs.readFileSync(path.join(root, "openinfinite", "index.html"), "utf8");
   const checkoutHtml = fs.readFileSync(path.join(root, "openinfinite", "checkout", "index.html"), "utf8");
 
@@ -180,8 +162,10 @@ test("OpenInfinite separate checkout (/openinfinite/checkout/) enforces Google A
     assert.doesNotMatch(doc, /\uF8FF/);
     assert.match(doc, /class="skip-link"/);
     assert.match(doc, /:focus-visible/);
-    assert.match(doc, /navigator\.clipboard/);
   }
+
+  assert.match(checkoutHtml, /navigator\.clipboard/);
+  assert.doesNotMatch(checkoutHtml, /id="orderForm"|fetch\([\x27"]\/api\/superbad\/orders[\x27"]/);
 
   // Google Auth integration + Buyer WhatsApp field + Orders auto-restore on /openinfinite/checkout/
   assert.match(checkoutHtml, /<script src="\/site-google-auth\.js"><\/script>/);
@@ -195,8 +179,8 @@ test("OpenInfinite separate checkout (/openinfinite/checkout/) enforces Google A
   assert.match(checkoutHtml, /\/api\/auth\/config/);
   assert.match(checkoutHtml, /\/api\/auth\/session/);
 
-  // 4-Step Checkout: Step 2 PIX -> Step 3 Receipt attachment -> Step 4 WhatsApp immediate + Key release
-  assert.match(checkoutHtml, /id="step2Pix"/);
+  // Previous orders retain receipt review, contact and license delivery.
+  assert.doesNotMatch(checkoutHtml, /id="step2Pix"/);
   assert.match(checkoutHtml, /id="step3Receipt"/);
   assert.match(checkoutHtml, /id="step4Analysis"/);
   assert.match(checkoutHtml, /id="receiptForm"/);
@@ -206,7 +190,7 @@ test("OpenInfinite separate checkout (/openinfinite/checkout/) enforces Google A
   assert.match(checkoutHtml, /receipt_file_mime/);
   assert.match(checkoutHtml, /receipt_analysis/);
   assert.match(checkoutHtml, /whatsapp_immediate_url/);
-  assert.match(checkoutHtml, /Falar no WhatsApp para Ativação Imediata/);
+  assert.match(checkoutHtml, /Falar com o atendimento no WhatsApp/);
   assert.match(checkoutHtml, /id="deliveredKeyBox"/);
   assert.match(checkoutHtml, /isKeyUnlockedStatus/);
 
@@ -217,12 +201,12 @@ test("OpenInfinite separate checkout (/openinfinite/checkout/) enforces Google A
   assert.match(checkoutHtml, /Testar Chave no Validador/);
   assert.match(checkoutHtml, /resolveCanonicalPlanName/);
 
-  // Inline PIX copy + inline error/offline/retry UX
-  assert.match(checkoutHtml, /id="copyPixBtn"/);
-  assert.match(checkoutHtml, /id="pixCopyFeedback"/);
-  assert.match(checkoutHtml, /id="copyBrcodeBtn"/);
-  assert.match(checkoutHtml, /id="orderErrorBox"/);
-  assert.match(checkoutHtml, /id="retryOrderBtn"/);
+  // New payment controls are gone; validation errors still allow a retry.
+  assert.doesNotMatch(checkoutHtml, /id="copyPixBtn"/);
+  assert.doesNotMatch(checkoutHtml, /id="pixCopyFeedback"/);
+  assert.doesNotMatch(checkoutHtml, /id="copyBrcodeBtn"/);
+  assert.doesNotMatch(checkoutHtml, /id="orderErrorBox"/);
+  assert.doesNotMatch(checkoutHtml, /id="retryOrderBtn"/);
   assert.match(checkoutHtml, /retryVerifyBtn/);
   assert.match(checkoutHtml, /navigator\.onLine === false/);
 
@@ -593,12 +577,12 @@ test("OpenInfinite 3D orbital hero stage drives continuous rAF motion, auto-orbi
   // Focusing windows tab + toggling OpenInfinite / InfiniteClaude swaps winSlotImg & HUD label
   live.tabs[1].click();
   assert.equal(rig.getAttribute("data-device"), "windows");
+  assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_openinfinite.png");
+  toggleAppBtn.click();
   assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_infiniteclaude.png");
+  assert.equal(winHudLabel.textContent, "Win 10/11 · InfiniteClaude");
   toggleAppBtn.click();
   assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_openinfinite.png");
-  assert.equal(winHudLabel.textContent, "Win 10/11 · OpenInfinite");
-  toggleAppBtn.click();
-  assert.equal(winSlotImg.src, "/openinfinite/assets/hero_win_infiniteclaude.png");
 
   // #nextDeviceBtn advances windows -> linux, and runtime reduce media change cancels rAF & syncs UI
   live.getEl("nextDeviceBtn").click();
@@ -610,24 +594,18 @@ test("OpenInfinite 3D orbital hero stage drives continuous rAF motion, auto-orbi
   assert.equal(orbitToggleBtn.getAttribute("aria-pressed"), "true");
   assert.equal(orbitProgressLabel.textContent, "Modo Reduzido");
 
-  // 2) Initial prefers-reduced-motion: reduce (common on Windows performance rigs) STILL starts 3D orbital spin automatically, while allowing manual pause/resume
+  // An initial reduced-motion preference keeps the stage still until enabled manually.
   const winPerf = mountHero3dScript({ reducedMotion: true });
   const winToggle = winPerf.getEl("orbitToggleBtn");
   const winLabel = winPerf.getEl("orbitProgressLabel");
-  assert.equal(winPerf.rafQueue.size, 1);
-  assert.equal(winToggle.textContent, "Pausar Giro");
-  assert.equal(winToggle.getAttribute("aria-pressed"), "false");
-  assert.equal(winLabel.textContent, "Órbita 3D");
-
-  const [winPerfMac] = winPerf.slots;
-  winPerf.stepFrames(1, 16);
-  const wpT0 = winPerfMac.style.transform;
-  winPerf.stepFrames(20, 45);
-  assert.notEqual(winPerfMac.style.transform, wpT0);
-
-  // Runtime reduced-motion toggle still allows explicit opt-back-in via #orbitToggleBtn
-  winPerf.mediaListeners[0]({ matches: true });
+  assert.equal(winPerf.rafQueue.size, 0);
   assert.equal(winToggle.textContent, "Ativar Giro 3D");
+  assert.equal(winToggle.getAttribute("aria-pressed"), "true");
+  assert.equal(winLabel.textContent, "Modo Reduzido");
+  const initialTransform = winPerf.slots[0].style.transform;
+  winPerf.stepFrames(20, 45);
+  assert.equal(winPerf.slots[0].style.transform, initialTransform);
+
   winToggle.click();
   assert.equal(winToggle.textContent, "Pausar Giro");
   assert.equal(winToggle.getAttribute("aria-pressed"), "false");
