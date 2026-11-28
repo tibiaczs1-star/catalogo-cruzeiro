@@ -157,6 +157,8 @@ export class Hero3DStage {
       bark: this.options.audioBarkUrl,
       paw: this.options.audioPawUrl,
     };
+    this.audioUrlMap = map;
+    this.activeHtmlAudios = this.activeHtmlAudios || new Set();
     for (const [key, url] of Object.entries(map)) {
       if (!url) continue;
       this.audioRawMap[key] = fetch(url)
@@ -208,19 +210,34 @@ export class Hero3DStage {
   async playCue(cueName, offsetSec = 0, volume = 1.0) {
     if (this.soundMuted || this.disposed) return false;
     const ok = await this.ensureAudioUnlocked();
-    if (!ok || !this.audioCtx || !this.audioBuffers[cueName]) return false;
+    if (ok && this.audioCtx && this.audioBuffers[cueName]) {
+      try {
+        const buf = this.audioBuffers[cueName];
+        const src = this.audioCtx.createBufferSource();
+        src.buffer = buf;
+        const gain = this.audioCtx.createGain();
+        gain.gain.value = volume;
+        src.connect(gain);
+        gain.connect(this.analyser);
+        const startOff = clamp(offsetSec, 0, Math.max(0, buf.duration - 0.05));
+        src.onended = () => this.activeSources.delete(src);
+        this.activeSources.add(src);
+        src.start(0, startOff);
+        return true;
+      } catch {}
+    }
+    const url = this.audioUrlMap?.[cueName];
+    if (!url || typeof Audio !== 'function') return false;
     try {
-      const buf = this.audioBuffers[cueName];
-      const src = this.audioCtx.createBufferSource();
-      src.buffer = buf;
-      const gain = this.audioCtx.createGain();
-      gain.gain.value = volume;
-      src.connect(gain);
-      gain.connect(this.analyser);
-      const startOff = clamp(offsetSec, 0, Math.max(0, buf.duration - 0.05));
-      src.onended = () => this.activeSources.delete(src);
-      this.activeSources.add(src);
-      src.start(0, startOff);
+      const el = new Audio(url);
+      el.volume = clamp(volume, 0, 1);
+      if (offsetSec > 0.02) {
+        try { el.currentTime = offsetSec; } catch {}
+      }
+      this.activeHtmlAudios = this.activeHtmlAudios || new Set();
+      this.activeHtmlAudios.add(el);
+      el.onended = () => this.activeHtmlAudios.delete(el);
+      await el.play();
       return true;
     } catch {
       return false;
@@ -233,6 +250,12 @@ export class Hero3DStage {
       try { src.disconnect(); } catch {}
     }
     this.activeSources.clear();
+    if (this.activeHtmlAudios) {
+      for (const el of this.activeHtmlAudios) {
+        try { el.pause(); el.src = ''; } catch {}
+      }
+      this.activeHtmlAudios.clear();
+    }
   }
 
   toggleMute() {
@@ -275,22 +298,30 @@ export class Hero3DStage {
     const rect = this.canvas.getBoundingClientRect();
     const w = Math.max(320, Math.round(rect.width || this.canvas.parentElement?.clientWidth || window.innerWidth));
     const h = Math.max(320, Math.round(rect.height || this.canvas.parentElement?.clientHeight || 680));
+    const lowHw = (navigator.deviceMemory && navigator.deviceMemory <= 8) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
 
     // ALPHA: TRUE REAL -> Zero retângulo preto opaco, zero linha divisória em monitores Ultrawide!
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
-      antialias: true,
-      powerPreference: 'high-performance',
+      antialias: !lowHw,
+      powerPreference: lowHw ? 'default' : 'high-performance',
       alpha: true,
       premultipliedAlpha: true,
     });
+    const gl = this.renderer.getContext();
+    const dbg = gl?.getExtension('WEBGL_debug_renderer_info');
+    const gpuName = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '') : String(gl?.getParameter(gl.RENDERER) || '');
+    this.isLowSpecGpu = Boolean(lowHw || /Intel|UHD|HD Graphics|SwiftShader|llvmpipe|Microsoft Basic|Software|ANGLE \(Google/i.test(gpuName));
+
     this.renderer.setClearColor(0x000000, 0);
     this.renderer.setSize(w, h, false);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    this.renderer.setPixelRatio(this.isLowSpecGpu ? 1 : Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.renderer.shadowMap.enabled = !this.isLowSpecGpu;
+    if (!this.isLowSpecGpu) {
+      this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    }
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
   }
 
@@ -303,26 +334,35 @@ export class Hero3DStage {
     const h = Math.max(320, this.canvas.clientHeight || 680);
     this.camera = new THREE.PerspectiveCamera(41, w / h, 0.1, 60);
 
-    this.pmrem = new THREE.PMREMGenerator(this.renderer);
-    this.envRT = this.pmrem.fromScene(new RoomEnvironment(), 0.04);
-    this.scene.environment = this.envRT.texture;
-    this.scene.environmentIntensity = 0.62;
+    if (!this.isLowSpecGpu) {
+      this.pmrem = new THREE.PMREMGenerator(this.renderer);
+      this.envRT = this.pmrem.fromScene(new RoomEnvironment(), 0.04);
+      this.scene.environment = this.envRT.texture;
+      this.scene.environmentIntensity = 0.62;
+    }
 
-    const keyLight = new THREE.DirectionalLight(0xfff5ee, 2.35);
+    const keyLight = new THREE.DirectionalLight(0xfff5ee, this.isLowSpecGpu ? 2.75 : 2.35);
     keyLight.position.set(3.8, 6.4, 4.8);
-    keyLight.castShadow = true;
-    keyLight.shadow.mapSize.set(2048, 2048);
-    keyLight.shadow.camera.near = 1.0;
-    keyLight.shadow.camera.far = 20.0;
-    keyLight.shadow.camera.left = -4.8;
-    keyLight.shadow.camera.right = 4.8;
-    keyLight.shadow.camera.top = 4.8;
-    keyLight.shadow.camera.bottom = -4.8;
-    keyLight.shadow.bias = -0.0005;
+    if (!this.isLowSpecGpu) {
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.set(1024, 1024);
+      keyLight.shadow.camera.near = 1.0;
+      keyLight.shadow.camera.far = 20.0;
+      keyLight.shadow.camera.left = -4.8;
+      keyLight.shadow.camera.right = 4.8;
+      keyLight.shadow.camera.top = 4.8;
+      keyLight.shadow.camera.bottom = -4.8;
+      keyLight.shadow.bias = -0.0005;
+    }
     this.scene.add(keyLight);
 
-    const softFill = new THREE.HemisphereLight(0xdbeafe, 0x1e1014, 0.72);
+    const softFill = new THREE.HemisphereLight(0xdbeafe, 0x1e1014, this.isLowSpecGpu ? 1.15 : 0.72);
     this.scene.add(softFill);
+    if (this.isLowSpecGpu) {
+      const rimFast = new THREE.DirectionalLight(0xf97316, 0.95);
+      rimFast.position.set(-3.2, 4.0, -3.5);
+      this.scene.add(rimFast);
+    }
 
     const crimsonRim = new THREE.DirectionalLight(0xe11d2e, 2.15);
     crimsonRim.position.set(-4.6, 2.9, -2.4);
@@ -1324,7 +1364,7 @@ export class Hero3DStage {
             this.warmupFrames++;
             this.updateSceneAt(0.001, true);
             this.renderFrame();
-            if (this.warmupFrames >= 3) {
+            if (this.warmupFrames >= (this.isLowSpecGpu ? 1 : 3)) {
               this.entranceStarted = true;
             }
           } else {
